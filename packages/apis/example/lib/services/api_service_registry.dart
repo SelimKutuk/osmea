@@ -81,6 +81,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/lis
 import 'package:example/services/handlers/products_handlers/product_handlers/single_product_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/count_products_collection_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_options_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_base_image_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
@@ -1918,6 +1919,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product',
       handler: CreateProductMultiVariantsOptionsHandler(),
+    ),
+
+    // 🔄 CREATE PRODUCT WITH MULTI VARIANTS HANDLER
+    ApiService(
+      name: 'Create Product Multi Variants',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductMultiVariantsHandler(),
     ),
 
     // 🖼️ CREATE PRODUCT WITH BASE IMAGE HANDLER
