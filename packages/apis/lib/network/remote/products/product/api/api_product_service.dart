@@ -1,7 +1,9 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/products/product/abstract/product_service.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/create_product_multi_variants_options_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:dio/dio.dart';
@@ -70,5 +72,14 @@ abstract class ProductServiceClient implements ProductService {
     @Query('published_at_min') String? publishedAtMin,
     @Query('published_at_max') String? publishedAtMax,
     @Query('published_status') String? publishedStatus,
+  });
+
+  /// ➕ Create product with multiple variants and options
+  @override
+  @POST('/api/{api_version}/products.json')
+  Future<CreateProductMultiVariantsOptionsResponse>
+      createProductMultiVariantsOptions({
+    @Path('api_version') required String apiVersion,
+    @Body() required CreateProductMultiVariantsOptionsRequest request,
   });
 }
