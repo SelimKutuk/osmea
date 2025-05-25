@@ -83,6 +83,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/cou
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_options_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_base_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_product_with_metafield_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -1937,6 +1938,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product',
       handler: CreateProductBaseImageHandler(),
+    ),
+
+    // 🏷️ CREATE PRODUCT WITH METAFIELD HANDLER
+    ApiService(
+      name: 'Create Product With Metafield',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateProductWithMetafieldHandler(),
     ),
 
     // 🔔 Webhooks APIs
