@@ -1,4 +1,5 @@
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/add_collect_to_collection_by_product_id_request.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/request/add_metafield_to_custom_collection_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_collection_with_collect_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_base_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_request.dart';
@@ -11,6 +12,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/req
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_new_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_remove_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/add_collect_to_collection_by_product_id_response.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/response/add_metafield_to_custom_collection_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/count_custom_collections_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_collection_with_collect_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_custom_collection_base_image_response.dart';
@@ -140,5 +142,13 @@ abstract class CustomCollectionsService {
     required String apiVersion,
     required int customCollectionId,
     required AddCollectToCollectionByProductIdRequest model,
+  });
+
+  // 🏷️ Add Metafield to Custom Collection
+  Future<AddMetafieldToCustomCollectionResponse>
+      addMetafieldToCustomCollection({
+    required String apiVersion,
+    required int customCollectionId,
+    required AddMetafieldToCustomCollectionRequest model,
   });
 }

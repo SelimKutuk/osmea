@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/products/custom_collection/abstract/custom_collections_service.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/add_collect_to_collection_by_product_id_request.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/request/add_metafield_to_custom_collection_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_collection_with_collect_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_base_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/create_custom_collection_request.dart';
@@ -14,6 +15,7 @@ import 'package:apis/network/remote/products/custom_collection/freezed_model/req
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_custom_collection_new_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/request/update_remove_image_request.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/add_collect_to_collection_by_product_id_response.dart';
+import 'package:apis/network/remote/products/custom_collection/freezed_model/response/add_metafield_to_custom_collection_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/count_custom_collections_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_collection_with_collect_response.dart';
 import 'package:apis/network/remote/products/custom_collection/freezed_model/response/create_custom_collection_base_image_response.dart';
@@ -182,5 +184,14 @@ abstract class CustomCollectionsServiceClient
     @Path('api_version') required String apiVersion,
     @Path('custom_collection_id') required int customCollectionId,
     @Body() required AddCollectToCollectionByProductIdRequest model,
+  });
+
+  // 🏷️ Add Metafield to Custom Collection
+  @PUT('/api/{api_version}/custom_collections/{custom_collection_id}.json')
+  Future<AddMetafieldToCustomCollectionResponse>
+      addMetafieldToCustomCollection({
+    @Path('api_version') required String apiVersion,
+    @Path('custom_collection_id') required int customCollectionId,
+    @Body() required AddMetafieldToCustomCollectionRequest model,
   });
 }
