@@ -81,6 +81,8 @@ import 'package:example/services/handlers/orders/refund/get_list_refunds_handler
 import 'package:example/services/handlers/orders/refund/refund_handler.dart';
 import 'package:example/services/handlers/orders/transaction/create_transaction_handler.dart';
 import 'package:example/services/handlers/orders/transaction/get_transaction_count_handler.dart';
+import 'package:example/services/handlers/orders/transaction/get_transaction_list_handler.dart';
+import 'package:example/services/handlers/orders/transaction/get_transaction_single_handler.dart';
 
 import 'package:example/services/index.dart';
 import 'handlers/customers_handlers/customer/retrieves_list_of_customers_handler.dart';
@@ -862,6 +864,20 @@ class ApiServiceRegistry {
       subcategory: 'Transaction',
       handler: GetTransactionCountHandler(),
     ),
+    ApiService(
+      name: 'Get Transaction List',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id/transactions',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: GetTransactionListHandler(),
+    ),
+    ApiService(
+        name: 'Get Transaction Single',
+        endpoint:
+            '/orders/order/:order_id/refunds/:refund_id/transactions/count',
+        category: ApiCategory.orders,
+        subcategory: 'Transaction',
+        handler: GetTransactionSingleHandler()),
   ];
 
   static void initialize() {}
