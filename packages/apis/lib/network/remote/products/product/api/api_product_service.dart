@@ -10,6 +10,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/creat
 import 'package:apis/network/remote/products/product/freezed_model/request/create_unpublished_product_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/add_metafield_to_product_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_add_image_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/update_product_reorder_image_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
@@ -20,6 +21,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/crea
 import 'package:apis/network/remote/products/product/freezed_model/response/create_unpublished_product_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/add_metafield_to_product_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_add_image_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/update_product_reorder_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:dio/dio.dart';
@@ -163,5 +165,14 @@ abstract class ProductServiceClient implements ProductService {
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Body() required UpdateProductAddImageRequest request,
+  });
+
+  /// 🔄 Update product reorder image
+  @override
+  @PUT('/api/{api_version}/products/{product_id}.json')
+  Future<UpdateProductReorderImageResponse> updateProductReorderImage({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required UpdateProductReorderImageRequest request,
   });
 }
