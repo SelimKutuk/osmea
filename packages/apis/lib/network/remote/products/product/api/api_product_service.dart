@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/products/product/abstract/product_service.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -42,5 +43,14 @@ abstract class ProductServiceClient implements ProductService {
     @Query('fields') String? fields,
     @Query('collection_id') String? collectionId,
     @Query('presentment_currencies') String? presentmentCurrencies,
+  });
+
+  /// 📄 Get a single product by ID
+  @override
+  @GET('/api/{api_version}/products/{product_id}.json')
+  Future<SingleProductResponse> getProduct({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Query('fields') String? fields,
   });
 }

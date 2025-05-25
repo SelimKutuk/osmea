@@ -1,4 +1,5 @@
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 
 /// 📦 Abstract Product Service
 /// Defines the contract for all product-related API operations
@@ -25,4 +26,10 @@ abstract class ProductService {
     String? presentmentCurrencies,
   });
 
+  /// 📄 Get a single product by ID
+  Future<SingleProductResponse> getProduct({
+    required String apiVersion,
+    required String productId,
+    String? fields,
+  });
 }
