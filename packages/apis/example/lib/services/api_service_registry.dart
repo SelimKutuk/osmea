@@ -85,6 +85,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/cre
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_multi_variants_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_base_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/create_product_with_metafield_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/create_default_product_variant_handler.dart';
 import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
@@ -379,8 +380,7 @@ class ApiServiceRegistry {
       category: ApiCategory.customer,
       subcategory: 'Customers',
       handler: CustomerUrlHandler(),
-    )
-    ,
+    ),
     ApiService(
       name: 'Customer Count',
       endpoint: '/customers/count',
@@ -1762,7 +1762,7 @@ class ApiServiceRegistry {
       subcategory: 'Collects',
       handler: GetCollectsByProductHandler(),
     ),
-    
+
     ApiService(
       name: 'Get Single Collect',
       endpoint: '/collects/:id',
@@ -2046,7 +2046,16 @@ class ApiServiceRegistry {
       subcategory: 'Product',
       handler: CreateProductWithMetafieldHandler(),
     ),
-    // 📋 GET SINGLE COLLECTION HANDLER  
+
+    // 🔧 CREATE DEFAULT PRODUCT VARIANT HANDLER
+    ApiService(
+      name: 'Create Default Product Variant',
+      endpoint: '/products',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: CreateDefaultProductVariantHandler(),
+    ),
+    // 📋 GET SINGLE COLLECTION HANDLER
     ApiService(
       name: 'Get Single Collection',
       endpoint: '/collections/:collection_id',
@@ -2109,59 +2118,59 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
-  name: 'List Smart Collections',
-  endpoint: '/smart_collections',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: RetrievesAllSmartCollectionsHandler(),
-),
+      name: 'List Smart Collections',
+      endpoint: '/smart_collections',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrievesAllSmartCollectionsHandler(),
+    ),
 
-ApiService(
-  name: 'Get Single Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection', 
-  handler: RetrievesSingleSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Get Single Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrievesSingleSmartCollectionHandler(),
+    ),
 
-ApiService(
-  name: 'Count Smart Collections',
-  endpoint: '/smart_collections/count',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: RetrieveCountOfSmartCollectionsHandler(),
-),
+    ApiService(
+      name: 'Count Smart Collections',
+      endpoint: '/smart_collections/count',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: RetrieveCountOfSmartCollectionsHandler(),
+    ),
 
-ApiService(
-  name: 'Update Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: UpdatesSmartCollectionHandler(),
-),
-ApiService(
-  name: 'Update Product Order in Smart Collection',
-  endpoint: '/smart_collections/:id/order',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: UpdateProductOrderHandler(),
-),
+    ApiService(
+      name: 'Update Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: UpdatesSmartCollectionHandler(),
+    ),
+    ApiService(
+      name: 'Update Product Order in Smart Collection',
+      endpoint: '/smart_collections/:id/order',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: UpdateProductOrderHandler(),
+    ),
 
-ApiService(
-  name: 'Delete Smart Collection',
-  endpoint: '/smart_collections/:id',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',
-  handler: DeletesSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Delete Smart Collection',
+      endpoint: '/smart_collections/:id',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: DeletesSmartCollectionHandler(),
+    ),
 
-ApiService(
-  name: 'Create Smart Collection',
-  endpoint: '/smart_collections',
-  category: ApiCategory.Products,
-  subcategory: 'Smart Collection',  
-  handler: CreatesSmartCollectionHandler(),
-),
+    ApiService(
+      name: 'Create Smart Collection',
+      endpoint: '/smart_collections',
+      category: ApiCategory.Products,
+      subcategory: 'Smart Collection',
+      handler: CreatesSmartCollectionHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -2224,7 +2233,7 @@ ApiService(
         return 'Tender Transaction';
       case ApiCategory.webhooks:
         return 'Webhooks';
-        case ApiCategory.Products:
+      case ApiCategory.Products:
         return 'Smart Collection';
     }
   }

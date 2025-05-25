@@ -89,7 +89,7 @@ class CreateProductMultiVariantsOptionsHandler implements ApiRequestHandler {
           for (final pair in variantPairs) {
             if (pair.trim().isNotEmpty) {
               final parts = pair.split(':');
-              if (parts.length >= 1) {
+              if (parts.isNotEmpty) {
                 final optionsPart = parts[0].split(',');
                 final option1 =
                     optionsPart.isNotEmpty ? optionsPart[0].trim() : null;
