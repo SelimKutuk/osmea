@@ -8,6 +8,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/creat
 import 'package:apis/network/remote/products/product/freezed_model/request/add_metafield_to_product_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_add_image_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_reorder_image_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/update_product_title_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
@@ -19,6 +20,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/crea
 import 'package:apis/network/remote/products/product/freezed_model/response/add_metafield_to_product_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_add_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_reorder_image_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/update_product_title_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 
@@ -131,5 +133,12 @@ abstract class ProductService {
     required String apiVersion,
     required String productId,
     required UpdateProductReorderImageRequest request,
+  });
+
+  /// 📝 Update product title
+  Future<UpdateProductTitleResponse> updateProductTitle({
+    required String apiVersion,
+    required String productId,
+    required UpdateProductTitleRequest request,
   });
 }
