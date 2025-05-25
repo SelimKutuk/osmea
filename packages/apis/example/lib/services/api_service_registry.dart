@@ -178,7 +178,8 @@ import 'package:example/services/handlers/webhooks_handlers/webhook_handlers/del
 import 'package:example/services/handlers/smart_collection_handlers/retrieves_list_of_smart_collections_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/retrieves_single_smart_collection_handler.dart';
 import 'package:example/services/handlers/smart_collection_handlers/retrieves_count_of_smart_collections_handler.dart';
-
+import 'package:example/services/handlers/smart_collection_handlers/updates_existing_smart_collection_handler.dart';
+import 'package:example/services/handlers/smart_collection_handlers/updates_ordering_type_of_products_smart_collection_handler.dart';
 
 enum ApiCategory {
   access,
@@ -1770,6 +1771,21 @@ ApiService(
   category: ApiCategory.Products,
   subcategory: 'Smart Collection',
   handler: RetrieveCountOfSmartCollectionsHandler(),
+),
+
+ApiService(
+  name: 'Update Smart Collection',
+  endpoint: '/smart_collections/:id',
+  category: ApiCategory.Products,
+  subcategory: 'Smart Collection',
+  handler: UpdatesSmartCollectionHandler(),
+),
+ApiService(
+  name: 'Update Product Order in Smart Collection',
+  endpoint: '/smart_collections/:id/order',
+  category: ApiCategory.Products,
+  subcategory: 'Smart Collection',
+  handler: UpdateProductOrderHandler(),
 ),
   ];
 
