@@ -78,6 +78,7 @@ import 'package:example/services/handlers/products_handlers/custom_collections_h
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_custom_collection_new_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/custom_collections_handlers/update_remove_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/list_of_products_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/single_product_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -1887,6 +1888,15 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product',
       handler: ListOfProductsHandler(),
+    ),
+
+    // 📄 SINGLE PRODUCT HANDLER
+    ApiService(
+      name: 'Get Single Product',
+      endpoint: '/products/:id',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: SingleProductHandler(),
     ),
 
     // 🔔 Webhooks APIs
