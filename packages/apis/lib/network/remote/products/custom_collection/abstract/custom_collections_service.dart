@@ -160,4 +160,10 @@ abstract class CustomCollectionsService {
     required int customCollectionId,
     required AddMetafieldToCustomCollectionRequest model,
   });
+
+  // 🗑️ Delete Custom Collection
+  Future<void> deleteCustomCollection({
+    required String apiVersion,
+    required int customCollectionId,
+  });
 }

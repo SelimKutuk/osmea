@@ -204,4 +204,11 @@ abstract class CustomCollectionsServiceClient
     @Path('custom_collection_id') required int customCollectionId,
     @Body() required AddMetafieldToCustomCollectionRequest model,
   });
+
+  // 🗑️ Delete Custom Collection
+  @DELETE('/api/{api_version}/custom_collections/{custom_collection_id}.json')
+  Future<void> deleteCustomCollection({
+    @Path('api_version') required String apiVersion,
+    @Path('custom_collection_id') required int customCollectionId,
+  });
 }
