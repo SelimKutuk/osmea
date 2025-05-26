@@ -335,7 +335,27 @@ abstract class OrderServiceClient implements OrderService {
     @Path('api_version') required String apiVersion,
     @Query('created_at_min') String? createdAtMin,
     @Query('created_at_max') String? createdAtMax,
-    @Query('limit') int? limit,
+    @Query('updated_at_min') String? updatedAtMin,
+    @Query('updated_at_max') String? updatedAtMax,
+    @Query('processed_at_min') String? processedAtMin,
+    @Query('processed_at_max') String? processedAtMax,
+    @Query('attribution_app_id') String? attributionAppId,
+    @Query('status') String? status,
+    @Query('financial_status') String? financialStatus,
+    @Query('fulfillment_status') String? fulfillmentStatus,
+    @Query('fields') String? fields,
+  });
+
+  @override
+  @GET('/api/{api_version}/orders.json')
+  Future<GetOrdersWithPropertiesResponse> getOrdersAuthorized({
+    @Path('api_version') required String apiVersion,
+    @Query('created_at_min') String? createdAtMin,
+    @Query('created_at_max') String? createdAtMax,
+    @Query('updated_at_min') String? updatedAtMin,
+    @Query('updated_at_max') String? updatedAtMax,
+    @Query('processed_at_min') String? processedAtMin,
+    @Query('processed_at_max') String? processedAtMax,
     @Query('fields') String? fields,
   });
 }

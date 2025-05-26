@@ -7,6 +7,7 @@ import 'package:example/services/handlers/orders/order/update_note_attributes_ha
 import 'package:example/services/handlers/orders/order/update_remove_customer_handler.dart';
 import 'package:example/services/handlers/orders/order/update_change_whether_handler.dart';
 import 'package:example/services/handlers/orders/order/get_orders_with_properties_handler.dart';
+import 'package:example/services/handlers/orders/order/get_orders_authorized_handler.dart';
 import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
 import 'package:example/services/handlers/orders/order/update_phone_number_handler.dart';
 import 'package:example/services/handlers/orders/order/update_shipping_address_handler.dart';
@@ -944,18 +945,25 @@ class ApiServiceRegistry {
       handler: UpdateRemoveCustomerHandler(),
     ),
     ApiService(
-      name: 'Update Marketing Preferences',
-      endpoint: '/orders/:order_id',
+      name: 'Update Order Marketing Preferences',
+      endpoint: '/api/{api_version}/orders/{order_id}',
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: UpdateChangeWhetherHandler(),
     ),
     ApiService(
-      name: 'Get Orders with Properties',
-      endpoint: '/orders',
+      name: 'Get Orders With Properties',
+      endpoint: '/api/{api_version}/orders',
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: GetOrdersWithPropertiesHandler(),
+    ),
+    ApiService(
+      name: 'Get Authorized Orders',
+      endpoint: '/api/{api_version}/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: GetOrdersAuthorizedHandler(),
     ),
   ];
 

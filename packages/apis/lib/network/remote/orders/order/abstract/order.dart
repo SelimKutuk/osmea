@@ -253,7 +253,25 @@ abstract class OrderService {
     required String apiVersion,
     String? createdAtMin,
     String? createdAtMax,
-    int? limit,
+    String? updatedAtMin,
+    String? updatedAtMax,
+    String? processedAtMin,
+    String? processedAtMax,
+    String? attributionAppId,
+    String? status,
+    String? financialStatus,
+    String? fulfillmentStatus,
+    String? fields,
+  });
+
+  Future<GetOrdersWithPropertiesResponse> getOrdersAuthorized({
+    required String apiVersion,
+    String? createdAtMin,
+    String? createdAtMax,
+    String? updatedAtMin,
+    String? updatedAtMax,
+    String? processedAtMin,
+    String? processedAtMax,
     String? fields,
   });
 }
