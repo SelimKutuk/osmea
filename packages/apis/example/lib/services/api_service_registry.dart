@@ -93,6 +93,7 @@ import 'package:example/services/handlers/products_handlers/product_handlers/upd
 import 'package:example/services/handlers/products_handlers/product_handlers/update_product_reorder_image_handler.dart';
 import 'package:example/services/handlers/products_handlers/collection_handlers/single_collection_handler.dart';
 import 'package:example/services/handlers/products_handlers/product_handlers/update_product_title_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_handlers/update_product_clear_images_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/receive_list_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/retrieves_count_of_countries_handler.dart';
 import 'package:example/services/handlers/store_properties_handlers/country_handlers/creates_new_country_handler.dart';
@@ -2110,6 +2111,16 @@ class ApiServiceRegistry {
       subcategory: 'Product',
       handler: UpdateProductTitleHandler(),
     ),
+
+    // 🗑️ UPDATE PRODUCT CLEAR IMAGES HANDLER
+    ApiService(
+      name: 'Update Product Clear Images',
+      endpoint: '/products/:product_id/clear_images',
+      category: ApiCategory.products,
+      subcategory: 'Product',
+      handler: UpdateProductClearImagesHandler(),
+    ),
+
     // 📋 GET SINGLE COLLECTION HANDLER
     ApiService(
       name: 'Get Single Collection',
