@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/orders/draft_order_handlers/update_add_note_draft_order_handler.dart';
 import 'package:example/services/handlers/orders/order/get_order_after_timestamp_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_metafield_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
@@ -994,6 +995,13 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Draft Order',
       handler: UpdateSetDiscountOnDraftOrderHandler(),
+    ),
+    ApiService(
+      name: 'Update Add Note on Draft Order',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateAddNoteDraftOrderHandler(),
     ),
   ];
 
