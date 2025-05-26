@@ -15,6 +15,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/create_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_order_without_order_receipt_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_reopen_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_add_metafield_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_change_whether_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_email_address_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_risk_request.dart';
@@ -41,6 +42,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/get_list
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_risks_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_change_whether_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_risk_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_note_attributes_response.dart';
@@ -316,5 +318,13 @@ abstract class OrderServiceClient implements OrderService {
     @Path('api_version') required String apiVersion,
     @Path('order_id') required String orderId,
     @Body() required UpdateRemoveCustomerOrderRequest model,
+  });
+
+  @override
+  @PUT('/api/{api_version}/orders/{order_id}.json')
+  Future<UpdateChangeWhetherResponse> updateChangeWhether({
+    @Path('api_version') required String apiVersion,
+    @Path('order_id') required String orderId,
+    @Body() required UpdateChangeWhetherRequest model,
   });
 }

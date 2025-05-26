@@ -11,6 +11,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/create_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_order_with_tax_lines_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_order_without_order_receipt_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_reopen_order_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_change_whether_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_risk_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_note_attributes_request.dart';
@@ -38,6 +39,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/get_list
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_risks_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_change_whether_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_order_risk_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_note_attributes_response.dart';
@@ -238,5 +240,11 @@ abstract class OrderService {
     required String apiVersion,
     required String orderId,
     required UpdateRemoveCustomerOrderRequest model,
+  });
+
+  Future<UpdateChangeWhetherResponse> updateChangeWhether({
+    required String apiVersion,
+    required String orderId,
+    required UpdateChangeWhetherRequest model,
   });
 }

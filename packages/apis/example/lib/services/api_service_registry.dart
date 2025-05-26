@@ -5,6 +5,7 @@ import 'package:example/services/handlers/orders/order/update_add_note_handler.d
 import 'package:example/services/handlers/orders/order/update_email_address_handler.dart';
 import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
 import 'package:example/services/handlers/orders/order/update_remove_customer_handler.dart';
+import 'package:example/services/handlers/orders/order/update_change_whether_handler.dart';
 import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
 import 'package:example/services/handlers/orders/order/update_phone_number_handler.dart';
 import 'package:example/services/handlers/orders/order/update_shipping_address_handler.dart';
@@ -942,11 +943,11 @@ class ApiServiceRegistry {
       handler: UpdateRemoveCustomerHandler(),
     ),
     ApiService(
-      name: 'Remove Customer from Order',
-      endpoint: '/orders/:id/remove_customer',
+      name: 'Update Marketing Preferences',
+      endpoint: '/orders/:order_id',
       category: ApiCategory.orders,
       subcategory: 'Order',
-      handler: UpdateRemoveCustomerHandler(),
+      handler: UpdateChangeWhetherHandler(),
     ),
   ];
 
