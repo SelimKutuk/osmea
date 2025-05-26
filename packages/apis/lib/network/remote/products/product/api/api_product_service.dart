@@ -14,6 +14,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/updat
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_title_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_clear_images_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_seo_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/update_product_with_variant_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
@@ -28,6 +29,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/upda
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_title_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_clear_images_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_seo_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/update_product_with_variant_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:dio/dio.dart';
@@ -207,5 +209,14 @@ abstract class ProductServiceClient implements ProductService {
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Body() required UpdateProductSeoRequest request,
+  });
+
+  /// 🔄 Update product with variant
+  @override
+  @PUT('/api/{api_version}/products/{product_id}.json')
+  Future<UpdateProductWithVariantResponse> updateProductWithVariant({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required UpdateProductWithVariantRequest request,
   });
 }

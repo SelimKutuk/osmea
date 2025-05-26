@@ -11,6 +11,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/updat
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_title_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_clear_images_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_seo_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/update_product_with_variant_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_multi_variants_options_response.dart';
@@ -27,6 +28,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/upda
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_seo_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/list_of_products_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/update_product_with_variant_response.dart';
 
 /// 📦 Abstract Product Service
 /// Defines the contract for all product-related API operations
@@ -158,5 +160,12 @@ abstract class ProductService {
     required String apiVersion,
     required String productId,
     required UpdateProductSeoRequest request,
+  });
+
+  /// 🔄 Update product with variant
+  Future<UpdateProductWithVariantResponse> updateProductWithVariant({
+    required String apiVersion,
+    required String productId,
+    required UpdateProductWithVariantRequest request,
   });
 }
