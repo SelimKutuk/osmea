@@ -13,6 +13,7 @@ import 'package:apis/network/remote/products/product/freezed_model/request/updat
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_seo_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_with_variant_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/update_product_reorder_variants_request.dart';
+import 'package:apis/network/remote/products/product/freezed_model/request/update_product_tags_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/request/show_hidden_product_request.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/count_products_collection_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/create_product_base_image_response.dart';
@@ -32,6 +33,7 @@ import 'package:apis/network/remote/products/product/freezed_model/response/list
 import 'package:apis/network/remote/products/product/freezed_model/response/single_product_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_with_variant_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/update_product_reorder_variants_response.dart';
+import 'package:apis/network/remote/products/product/freezed_model/response/update_product_tags_response.dart';
 import 'package:apis/network/remote/products/product/freezed_model/response/show_hidden_product_response.dart';
 
 /// 📦 Abstract Product Service
@@ -185,5 +187,12 @@ abstract class ProductService {
     required String apiVersion,
     required String productId,
     required ShowHiddenProductRequest request,
+  });
+
+  /// 🏷️ Update product tags
+  Future<UpdateProductTagsResponse> updateProductTags({
+    required String apiVersion,
+    required String productId,
+    required UpdateProductTagsRequest request,
   });
 }
