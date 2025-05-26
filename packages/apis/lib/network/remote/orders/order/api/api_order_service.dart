@@ -14,6 +14,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/request/create_or
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_order_with_tax_lines_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_order_without_order_receipt_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/create_reopen_order_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_add_metafield_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_order_risk_request.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/request/update_note_attributes_request.dart';
@@ -46,6 +47,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/update_o
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_shipping_address_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_add_note_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_phone_number_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_add_metafield_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -286,5 +288,13 @@ abstract class OrderServiceClient implements OrderService {
     @Path('api_version') required String apiVersion,
     @Path('order_id') required String orderId,
     @Body() required UpdatePhoneNumberRequest model,
+  });
+
+  @override
+  @PUT('/api/{api_version}/orders/{order_id}.json')
+  Future<UpdateAddMetafieldResponse> updateAddMetafield({
+    @Path('api_version') required String apiVersion,
+    @Path('order_id') required String orderId,
+    @Body() required UpdateAddMetafieldRequest model,
   });
 }

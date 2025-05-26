@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/orders/order/update_add_metafield_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
 import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
 import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
@@ -916,6 +917,13 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: UpdatePhoneNumberHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Add Metafield',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateAddMetafieldHandler(),
     ),
   ];
 
