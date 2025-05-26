@@ -37,6 +37,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/create_r
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_count_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_risks_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/get_order_after_timestamp_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_orders_with_properties_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
@@ -272,6 +273,23 @@ abstract class OrderService {
     String? updatedAtMax,
     String? processedAtMin,
     String? processedAtMax,
+    String? fields,
+  });
+  Future<GetOrderAfterTimestampResponse> getOrderAfterTimestamp({
+    required String apiVersion,
+    String? ids,
+    int? limit,
+    String? sinceId,
+    String? createdAtMin,
+    String? createdAtMax,
+    String? updatedAtMin,
+    String? updatedAtMax,
+    String? processedAtMin,
+    String? processedAtMax,
+    String? attributionAppId,
+    String? status,
+    String? financialStatus,
+    String? fulfillmentStatus,
     String? fields,
   });
 }

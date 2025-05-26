@@ -40,6 +40,7 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/create_r
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_count_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_list_order_risks_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/get_order_after_timestamp_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_orders_with_properties_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/get_single_order_risk_response.dart';
@@ -356,6 +357,26 @@ abstract class OrderServiceClient implements OrderService {
     @Query('updated_at_max') String? updatedAtMax,
     @Query('processed_at_min') String? processedAtMin,
     @Query('processed_at_max') String? processedAtMax,
+    @Query('fields') String? fields,
+  });
+
+  @override
+  @GET('/api/{api_version}/orders.json')
+  Future<GetOrderAfterTimestampResponse> getOrderAfterTimestamp({
+    @Path('api_version') required String apiVersion,
+    @Query('ids') String? ids,
+    @Query('limit') int? limit,
+    @Query('since_id') String? sinceId,
+    @Query('created_at_min') String? createdAtMin,
+    @Query('created_at_max') String? createdAtMax,
+    @Query('updated_at_min') String? updatedAtMin,
+    @Query('updated_at_max') String? updatedAtMax,
+    @Query('processed_at_min') String? processedAtMin,
+    @Query('processed_at_max') String? processedAtMax,
+    @Query('attribution_app_id') String? attributionAppId,
+    @Query('status') String? status,
+    @Query('financial_status') String? financialStatus,
+    @Query('fulfillment_status') String? fulfillmentStatus,
     @Query('fields') String? fields,
   });
 }

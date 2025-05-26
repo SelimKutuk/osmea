@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/orders/order/get_order_after_timestamp_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_metafield_handler.dart';
 import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
 import 'package:example/services/handlers/orders/order/update_email_address_handler.dart';
@@ -964,6 +965,13 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: GetOrdersAuthorizedHandler(),
+    ),
+    ApiService(
+      name: 'Get Unfulfilled Orders',
+      endpoint: '/api/{api_version}/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: GetOrderAfterTimestampHandler(),
     ),
   ];
 
