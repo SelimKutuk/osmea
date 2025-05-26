@@ -4,6 +4,7 @@ import 'package:example/services/handlers/orders/order/update_add_metafield_hand
 import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
 import 'package:example/services/handlers/orders/order/update_email_address_handler.dart';
 import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
+import 'package:example/services/handlers/orders/order/update_remove_customer_handler.dart';
 import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
 import 'package:example/services/handlers/orders/order/update_phone_number_handler.dart';
 import 'package:example/services/handlers/orders/order/update_shipping_address_handler.dart';
@@ -932,6 +933,20 @@ class ApiServiceRegistry {
       category: ApiCategory.orders,
       subcategory: 'Order',
       handler: UpdateAddMetafieldHandler(),
+    ),
+    ApiService(
+      name: 'Remove Customer from Order',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateRemoveCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Remove Customer from Order',
+      endpoint: '/orders/:id/remove_customer',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateRemoveCustomerHandler(),
     ),
   ];
 

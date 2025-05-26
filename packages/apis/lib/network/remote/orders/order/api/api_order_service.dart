@@ -50,6 +50,8 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/update_a
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_phone_number_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_add_metafield_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_email_address_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_remove_customer_order_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_remove_customer_order_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -306,5 +308,13 @@ abstract class OrderServiceClient implements OrderService {
     @Path('api_version') required String apiVersion,
     @Path('order_id') required String orderId,
     @Body() required UpdateEmailAddressRequest model,
+  });
+
+  @override
+  @PUT('/api/{api_version}/orders/{order_id}.json')
+  Future<UpdateRemoveCustomerOrderResponse> updateRemoveCustomer({
+    @Path('api_version') required String apiVersion,
+    @Path('order_id') required String orderId,
+    @Body() required UpdateRemoveCustomerOrderRequest model,
   });
 }

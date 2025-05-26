@@ -47,6 +47,8 @@ import 'package:apis/network/remote/orders/order/freezed_model/response/update_a
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_phone_number_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_add_metafield_response.dart';
 import 'package:apis/network/remote/orders/order/freezed_model/response/update_email_address_response.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/request/update_remove_customer_order_request.dart';
+import 'package:apis/network/remote/orders/order/freezed_model/response/update_remove_customer_order_response.dart';
 
 abstract class OrderService {
   Future<CreateOrderResponse> createOrder({
@@ -230,5 +232,11 @@ abstract class OrderService {
     required String apiVersion,
     required String orderId,
     required UpdateEmailAddressRequest model,
+  });
+
+  Future<UpdateRemoveCustomerOrderResponse> updateRemoveCustomer({
+    required String apiVersion,
+    required String orderId,
+    required UpdateRemoveCustomerOrderRequest model,
   });
 }
