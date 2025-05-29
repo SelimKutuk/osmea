@@ -5,11 +5,13 @@ import 'package:apis/network/remote/gift_card/freezed_model/request/create_new_g
 import 'package:apis/network/remote/gift_card/freezed_model/request/disable_gift_card_request.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/request/updates_gift_card_request.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/request/automatically_create_gift_card_request.dart';
+import 'package:apis/network/remote/gift_card/freezed_model/request/create_gift_card_with_custom_code_request.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/retrieves_count_of_gift_card_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/retrieves_list_of_gift_cards_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/retrieves_single_gift_card_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/searches_for_gift_cards_response.dart';
 import 'package:apis/network/remote/gift_card/freezed_model/response/updates_gift_card_response.dart';
+import 'package:apis/network/remote/gift_card/freezed_model/response/create_gift_card_with_custom_code_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
@@ -31,6 +33,14 @@ abstract class GiftCardServiceClient implements GiftCardService {
   Future<void> createNewGiftCard({
     @Path('api_version') required String apiVersion,
     @Body() required CreateNewGiftCardRequest model,
+  });
+
+  /// 🎫 Create a gift card with custom code
+  @override
+  @POST('/api/{api_version}/gift_cards.json')
+  Future<CreateGiftCardWithCustomCodeResponse> createGiftCardWithCustomCode({
+    @Path('api_version') required String apiVersion,
+    @Body() required CreateGiftCardWithCustomCodeRequest model,
   });
 
   /// ❌ Disable a gift card
