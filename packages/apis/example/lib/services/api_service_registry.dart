@@ -1,5 +1,19 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:example/services/handlers/orders/draft_order_handlers/update_add_note_draft_order_handler.dart';
+import 'package:example/services/handlers/orders/order/get_order_after_timestamp_handler.dart';
+import 'package:example/services/handlers/orders/order/update_add_metafield_handler.dart';
+import 'package:example/services/handlers/orders/order/update_add_note_handler.dart';
+import 'package:example/services/handlers/orders/order/update_email_address_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/update_set_discount_on_draft_order_handler.dart';
+import 'package:example/services/handlers/orders/order/update_note_attributes_handler.dart';
+import 'package:example/services/handlers/orders/order/update_remove_customer_handler.dart';
+import 'package:example/services/handlers/orders/order/update_change_whether_handler.dart';
+import 'package:example/services/handlers/orders/order/get_orders_with_properties_handler.dart';
+import 'package:example/services/handlers/orders/order/get_orders_authorized_handler.dart';
+import 'package:example/services/handlers/orders/order/update_order_tag_handler.dart';
+import 'package:example/services/handlers/orders/order/update_phone_number_handler.dart';
+import 'package:example/services/handlers/orders/order/update_shipping_address_handler.dart';
 import 'package:example/services/handlers/products_handlers/collection_handlers/products_belonging_to_collection_handler.dart';
 import 'package:example/services/handlers/customers_handlers/customer/searches_for_customers_that_match_supplied_query_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/create_article_base_image_handler.dart';
@@ -140,7 +154,6 @@ import 'package:example/services/handlers/discount_handlers/price_rule_handler/c
 import 'package:example/services/handlers/discount_handlers/price_rule_handler/get_count_of_price_rules_handler.dart';
 import 'package:example/services/handlers/discount_handlers/price_rule_handler/get_list_of_price_rules_handler.dart';
 import 'package:example/services/handlers/discount_handlers/price_rule_handler/price_rule_handler.dart';
-
 import 'package:example/services/handlers/events_handlers/retrieves_list_of_events_handler.dart';
 import 'package:example/services/handlers/events_handlers/retrieves_single_event_handler.dart';
 import 'package:example/services/handlers/events_handlers/retrieves_count_events_handler.dart';
@@ -155,6 +168,18 @@ import 'package:example/services/handlers/inventory/inventory_level_handlers/set
 import 'package:example/services/handlers/inventory/location/count_all_locations_handler.dart';
 import 'package:example/services/handlers/inventory/location/list_inventory_by_location_id_handler.dart';
 import 'package:example/services/handlers/inventory/location/single_location_by_id_handler.dart';
+import 'package:example/services/handlers/orders/abandoned_checkouts_handlers/retrieves_count_of_checkouts_handler.dart';
+import 'package:example/services/handlers/orders/abandoned_checkouts_handlers/retrieves_list_abandoned_checkouts_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_draft_order_custom_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_draft_order_discounted_item_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_draft_order_percent_discount_item_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_draft_order_simple_product_variant_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_draft_order_with_discount_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_invoice_customized_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/create_invoice_default_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/draft_order_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/get_draft_order_count_handler.dart';
+import 'package:example/services/handlers/orders/draft_order_handlers/update_draft_order_complete_handler.dart';
 import 'package:example/services/handlers/marketing_event_handlers/creates_marketing_engagements_handler.dart';
 import 'package:example/services/handlers/marketing_event_handlers/creates_marketing_event_handler.dart';
 import 'package:example/services/handlers/marketing_event_handlers/deletes_a_marketing_event_handler.dart';
@@ -169,6 +194,33 @@ import 'package:example/services/handlers/metafield_handlers/get_specific_metafi
 import 'package:example/services/handlers/metafield_handlers/list_metafields_handler.dart';
 import 'package:example/services/handlers/metafield_handlers/list_metafields_query_parameters_handler.dart';
 import 'package:example/services/handlers/metafield_handlers/update_metafield_handler.dart';
+import 'package:example/services/handlers/orders/order/create_cancel_order_handler.dart';
+import 'package:example/services/handlers/orders/order/create_close_order_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_comprehensive_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_fulfill_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_partially_paid_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_sending_order_confirmation_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_with_pending_customer_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_with_product_id_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_with_tax_lines_handler.dart';
+import 'package:example/services/handlers/orders/order/create_order_without_order_receipt_handler.dart';
+import 'package:example/services/handlers/orders/order/create_reopen_order_handler.dart';
+import 'package:example/services/handlers/orders/order/get_order_count_handler.dart';
+import 'package:example/services/handlers/orders/order/get_order_list_handler.dart';
+import 'package:example/services/handlers/orders/order/order_handler.dart';
+
+import 'package:example/services/handlers/orders/order_risk/get_list_order_risks_handler.dart';
+
+import 'package:example/services/handlers/orders/order_risk/order_risk_handler.dart';
+import 'package:example/services/handlers/orders/refund/create_refund_calculate_handler.dart';
+import 'package:example/services/handlers/orders/refund/create_refund_handler.dart';
+
+import 'package:example/services/handlers/orders/refund/get_list_refunds_handler.dart';
+import 'package:example/services/handlers/orders/refund/refund_handler.dart';
+import 'package:example/services/handlers/orders/transaction/create_transaction_handler.dart';
+import 'package:example/services/handlers/orders/transaction/get_transaction_count_handler.dart';
+import 'package:example/services/handlers/orders/transaction/get_transaction_list_handler.dart';
+import 'package:example/services/handlers/orders/transaction/get_transaction_single_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/count_blog_articles_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/delete_article_from_blog_handler.dart';
 import 'package:example/services/handlers/online_store_handlers/article_handlers/get_single_article_handler.dart';
@@ -247,6 +299,16 @@ import 'handlers/products_handlers/product_image_handlers/delete_product_image_h
 import 'handlers/products_handlers/product_image_handlers/create_product_image_variant_handler.dart';
 import 'handlers/products_handlers/product_image_handlers/create_product_image_source_url_handler.dart';
 
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/retrieves_list_of_product_variants_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/retrieves_single_product_variant_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/retrieves_count_of_product_variants_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/create_product_variant_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/create_product_variant_with_metafield_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/create_product_variant_with_image_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/add_metafield_to_product_variant_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/add_image_to_product_variant_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/update_variant_title_and_price_handler.dart';
+import 'package:example/services/handlers/products_handlers/product_variant_handlers/delete_product_variant_handler.dart';
 
 enum ApiCategory {
   access,
@@ -258,6 +320,7 @@ enum ApiCategory {
   discounts,
   events,
   inventory,
+  orders,
   marketingEvent,
   giftCard,
   metafield,
@@ -290,6 +353,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Events APIs';
       case ApiCategory.inventory:
         return 'Inventory APIs';
+      case ApiCategory.orders:
+        return 'Orders APIs';
       case ApiCategory.marketingEvent:
         return 'Marketing Event APIs';
       case ApiCategory.giftCard:
@@ -828,6 +893,53 @@ class ApiServiceRegistry {
       handler: ListInventoryLevelsSingleItemHandler(),
     ),
 
+    ApiService(
+      name: 'Abandoned Checkouts List',
+      endpoint: '/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Abandoned Checkouts',
+      handler: GetAbandonedCheckoutsListHandler(),
+    ),
+    ApiService(
+      name: 'Abandoned Checkouts Count',
+      endpoint: '/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Abandoned Checkouts',
+      handler: GetAbandonedCheckoutsCountHandler(),
+    ),
+    ApiService(
+        name: 'draft order with percent discount',
+        endpoint: '/draft_orders',
+        category: ApiCategory.orders,
+        subcategory: 'Draft Order',
+        handler: CreateDraftOrderPercentDiscountItemHandler()),
+
+    ApiService(
+        name: 'draft order with simple product variant',
+        endpoint: '/draft_orders',
+        category: ApiCategory.orders,
+        subcategory: 'Draft Order',
+        handler: CreateDraftOrderSimpleProductVariantHandler()),
+
+    ApiService(
+        name: 'draft order with discount',
+        endpoint: '/draft_orders',
+        category: ApiCategory.orders,
+        subcategory: 'Draft Order',
+        handler: CreateDraftOrderWithDiscountHandler()),
+
+    ApiService(
+        name: 'draft order discounted item',
+        endpoint: '/draft_orders',
+        category: ApiCategory.orders,
+        subcategory: 'Draft Order',
+        handler: CreateDraftOrderDiscountedItemHandler()),
+    ApiService(
+        name: 'draft order custom',
+        endpoint: '/draft_orders',
+        category: ApiCategory.orders,
+        subcategory: 'Draft Order',
+        handler: CreateDraftOrderCustomHandler()),
     // 📈 Marketing Events APIs - Retrieves A List Of All Marketing Events
     ApiService(
         name: 'Retrieves A List Of All',
@@ -994,7 +1106,321 @@ class ApiServiceRegistry {
       subcategory: 'Metafield',
       handler: DeleteMetafieldHandler(),
     ),
+    ApiService(
+      name: 'send invoice customized',
+      endpoint: '/draft_orders/:draft_order_id/invoice',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: CreateInvoiceCustomizedHandler(),
+    ),
+    ApiService(
+      name: 'send invoice default',
+      endpoint: '/draft_orders/:draft_order_id/invoice',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: CreateInvoiceDefaultHandler(),
+    ),
+    ApiService(
+      name: 'Update Draft Order Modify Existing',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateDraftOrderCompleteHandler(),
+    ),
+    ApiService(
+      name: 'Update Set Discount on Draft Order',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateSetDiscountOnDraftOrderHandler(),
+    ),
+    ApiService(
+      name: 'Update Draft Order Complete',
+      endpoint: '/draft_orders/:draft_order_id/complete',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: GetDraftOrderCountHandler(),
+    ),
+    ApiService(
+      name: 'Update Set Discount on Draft Order',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateSetDiscountOnDraftOrderHandler(),
+    ),
+    ApiService(
+      name: 'Get Draft Order Count',
+      endpoint: '/draft_orders/count',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: CreateDraftOrderHandler(),
+    ),
 
+    ApiService(
+        name: 'Order',
+        endpoint: '/orders',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: OrderHandler()),
+
+    ApiService(
+        name: 'Get Order List',
+        endpoint: '/orders/count',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: GetOrderListHandler()),
+    ApiService(
+        name: 'Get Order Count',
+        endpoint: '/orders/count',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: GetOrderCountHandler()),
+
+    ApiService(
+        name: 'Create Cancel Order',
+        endpoint: '/orders/:order_id/cancel',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: CreateCancelOrderHandler()),
+    ApiService(
+        name: 'Create Close Order',
+        endpoint: '/orders/:order_id/close',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: CreateCloseOrderHandler()),
+    ApiService(
+        name: 'Create Reopen Order',
+        endpoint: '/orders/:order_id/reopen',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: CreateReopenOrderHandler()),
+
+    ApiService(
+        name: 'Create Order with Tax Lines',
+        endpoint: '/orders',
+        category: ApiCategory.orders,
+        subcategory: 'Order',
+        handler: CreateOrderWithTaxLinesHandler()),
+    ApiService(
+      name: 'Create Order Partially Paid',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderPartiallyPaidHandler(),
+    ),
+
+    ApiService(
+      name: 'Create Order Comprehensive',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderComprehensiveHandler(),
+    ),
+    ApiService(
+      name: 'Create Order with Product ID',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderWithProductIdHandler(),
+    ),
+    ApiService(
+      name: 'Create Order without Order Receipt',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderWithoutOrderReceiptHandler(),
+    ),
+    ApiService(
+      name: 'Create Order Sending Order Confirmation',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderSendingOrderConfirmationHandler(),
+    ),
+    ApiService(
+      name: 'Create Order with Pending Customer',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderWithPendingCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Create Order Fulfill',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: CreateOrderFulfillHandler(),
+    ),
+
+    ApiService(
+      name: 'Get List Order Risks',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order Risk',
+      handler: GetListOrderRisksHandler(),
+    ),
+
+    ApiService(
+      name: 'Order Risk',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Order Risk',
+      handler: OrderRiskHandler(),
+    ),
+    ApiService(
+      name: 'Get Single Refund',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Refund',
+      handler: RefundHandler(),
+    ),
+    ApiService(
+      name: 'Get List Refund',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Refund',
+      handler: GetListRefundHandler(),
+    ),
+    ApiService(
+      name: 'Create Calculate Refund',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Refund',
+      handler: CreateRefundCalculateHandler(),
+    ),
+    ApiService(
+      name: 'Create Refund',
+      endpoint: '/orders/order',
+      category: ApiCategory.orders,
+      subcategory: 'Refund',
+      handler: CreateRefundHandler(),
+    ),
+    ApiService(
+      name: 'Create Transaction',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: CreateTransactionHandler(),
+    ),
+    ApiService(
+      name: 'Get Count Transactions',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: GetTransactionCountHandler(),
+    ),
+    ApiService(
+      name: 'Get Transaction List',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id/transactions',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: GetTransactionListHandler(),
+    ),
+    ApiService(
+      name: 'Get Transaction Single',
+      endpoint: '/orders/order/:order_id/refunds/:refund_id/transactions/count',
+      category: ApiCategory.orders,
+      subcategory: 'Transaction',
+      handler: GetTransactionSingleHandler(),
+    ),
+    ApiService(
+      name: 'Update Note Attributes',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateNoteAttributesHandler(),
+    ),
+    ApiService(
+      name: 'Update Shipping Address',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateShippingAddressHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Tags',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateOrderTagHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Add Note',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateAddNoteHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Phone Number',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdatePhoneNumberHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Email Address',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateEmailAddressHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Add Metafield',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateAddMetafieldHandler(),
+    ),
+    ApiService(
+      name: 'Remove Customer from Order',
+      endpoint: '/orders/:order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateRemoveCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Update Order Marketing Preferences',
+      endpoint: '/api/{api_version}/orders/{order_id}',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: UpdateChangeWhetherHandler(),
+    ),
+    ApiService(
+      name: 'Get Orders With Properties',
+      endpoint: '/api/{api_version}/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: GetOrdersWithPropertiesHandler(),
+    ),
+    ApiService(
+      name: 'Get Authorized Orders',
+      endpoint: '/api/{api_version}/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: GetOrdersAuthorizedHandler(),
+    ),
+    ApiService(
+      name: 'Get Unfulfilled Orders',
+      endpoint: '/api/{api_version}/orders',
+      category: ApiCategory.orders,
+      subcategory: 'Order',
+      handler: GetOrderAfterTimestampHandler(),
+    ),
+    ApiService(
+      name: 'Update Set Discount on Draft Order',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateSetDiscountOnDraftOrderHandler(),
+    ),
+    ApiService(
+      name: 'Update Add Note on Draft Order',
+      endpoint: '/draft_orders/:draft_order_id',
+      category: ApiCategory.orders,
+      subcategory: 'Draft Order',
+      handler: UpdateAddNoteDraftOrderHandler(),
+    ),
     ApiService(
       name: 'Countries List',
       endpoint: '/countries',
@@ -1843,6 +2269,91 @@ class ApiServiceRegistry {
       handler: DeleteCollectHandler(),
     ),
 
+    // 📦 Products - Product Variant APIs
+    // GET Operations
+    ApiService(
+      name: 'List Product Variants',
+      endpoint: '/products/:product_id/variants',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: RetrievesListOfProductVariantsHandler(),
+    ),
+
+    ApiService(
+      name: 'Get Single Product Variant',
+      endpoint: '/variants/:variant_id',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: RetrievesSingleProductVariantHandler(),
+    ),
+
+    ApiService(
+      name: 'Count Product Variants',
+      endpoint: '/products/:product_id/variants/count',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: RetrievesCountOfProductVariantsHandler(),
+    ),
+
+    // POST Operations
+    ApiService(
+      name: 'Create Product Variant',
+      endpoint: '/products/:product_id/variants',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: CreateProductVariantHandler(),
+    ),
+
+    ApiService(
+      name: 'Create Product Variant with Metafield',
+      endpoint: '/products/:product_id/variants',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: CreateProductVariantWithMetafieldHandler(),
+    ),
+
+    ApiService(
+      name: 'Create Product Variant with Image',
+      endpoint: '/products/:product_id/variants',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: CreateProductVariantWithImageHandler(),
+    ),
+
+    ApiService(
+      name: 'Add Metafield to Product Variant',
+      endpoint: '/variants/:variant_id',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: AddMetafieldToProductVariantHandler(),
+    ),
+
+    ApiService(
+      name: 'Add Image to Product Variant',
+      endpoint: '/variants/:variant_id',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: AddImageToProductVariantHandler(),
+    ),
+
+    // PUT Operations
+    ApiService(
+      name: 'Update Variant Title and Price',
+      endpoint: '/variants/:variant_id',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: UpdateVariantTitleAndPriceHandler(),
+    ),
+
+    // DELETE Operations
+    ApiService(
+      name: 'Delete Product Variant',
+      endpoint: '/variants/:variant_id',
+      category: ApiCategory.products,
+      subcategory: 'Product Variants',
+      handler: DeleteProductVariantHandler(),
+    ),
+
     // 💰 Tender Transaction APIs
     ApiService(
       name: 'List Tender Transactions',
@@ -2479,6 +2990,8 @@ ApiService(
         return 'Events';
       case ApiCategory.inventory:
         return 'Inventory';
+      case ApiCategory.orders:
+        return 'Orders';
       case ApiCategory.marketingEvent:
         return 'Marketing Event';
       case ApiCategory.giftCard:
