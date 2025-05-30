@@ -20,8 +20,7 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
           final initialValueStr = params['initial_value'] ?? '';
           final currency = params['currency'] ?? '';
 
-          // ✅ Convert initialValue to double
-          final initialValue = double.tryParse(initialValueStr);
+          final initialValue = int.tryParse(initialValueStr);
 
           if (initialValue == null || currency.isEmpty) {
             return {
@@ -34,34 +33,36 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
 
           // 📋 Optional fields
           final note = params['note'];
-          final code = params['code'];
-          final expiresOn = params['expires_on'];
 
           final giftCardModel = GiftCard(
             initialValue: initialValue,
             currency: currency.toUpperCase(),
             note: note,
-            code: code,
-            expiresOn: expiresOn,
           );
 
           debugPrint(
               '🎯 JSON being sent: ${CreateNewGiftCardRequest(giftCard: giftCardModel).toJson()}');
 
-          await GetIt.I.get<GiftCardService>().createNewGiftCard(
-                apiVersion: ApiNetwork.apiVersion,
-                model: CreateNewGiftCardRequest(giftCard: giftCardModel),
-              );
+          final response =
+              await GetIt.I.get<GiftCardService>().createNewGiftCard(
+                    apiVersion: ApiNetwork.apiVersion,
+                    model: CreateNewGiftCardRequest(giftCard: giftCardModel),
+                  );
 
           return {
             "status": "success",
             "message": "Gift card created successfully",
             "giftCard": {
-              "initial_value": initialValue,
-              "currency": currency,
-              "note": note,
-              "code": code ?? 'Auto-generated',
-              "expires_on": expiresOn,
+              "id": response.giftCard?.id,
+              "initial_value": response.giftCard?.initialValue,
+              "currency": response.giftCard?.currency,
+              "balance": response.giftCard?.balance,
+              "note": response.giftCard?.note,
+              "code": response.giftCard?.code,
+              "created_at": response.giftCard?.createdAt,
+              "updated_at": response.giftCard?.updatedAt,
+              "last_characters": response.giftCard?.lastCharacters,
+              "expires_on": response.giftCard?.expiresOn,
             },
             "timestamp": DateTime.now().toIso8601String(),
           };
@@ -100,7 +101,7 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
           const ApiField(
             name: 'initial_value',
             label: 'Initial Value',
-            hint: 'Gift card value (e.g. 100.00)',
+            hint: 'Gift card value (e.g. 100)',
             type: ApiFieldType.number,
             isRequired: true,
           ),
@@ -114,17 +115,6 @@ class CreateNewGiftCardHandler implements ApiRequestHandler {
             name: 'note',
             label: 'Note',
             hint: 'Optional note about this card',
-          ),
-          const ApiField(
-            name: 'code',
-            label: 'Code',
-            hint: 'Add custom gift card code',
-          ),
-          const ApiField(
-            name: 'expires_on',
-            label: 'Expires On',
-            hint: 'Optional expiration date (YYYY-MM-DD)',
-            type: ApiFieldType.date,
           ),
         ],
       };
