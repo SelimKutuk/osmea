@@ -29,7 +29,7 @@ class ApplicationCharge with _$ApplicationCharge {
     @JsonKey(name: "currency") required String currency,
     @JsonKey(name: "charge_type") String? chargeType,
     @JsonKey(name: "decorated_return_url") required String decoratedReturnUrl,
-    @JsonKey(name: "confirmation_url") String? confirmationUrl, // Made nullable/optional
+    @JsonKey(name: "confirmation_url") String? confirmationUrl,
   }) = _ApplicationCharge;
 
   factory ApplicationCharge.fromJson(Map<String, dynamic> json) =>

@@ -60,7 +60,7 @@ class CustomizeRecurringApplicationChargeHandler implements ApiRequestHandler {
         );
         
         // Call the API service
-        final service = GetIt.I.get<CustomizeRecurringApplicationChargeService>();
+        final service = GetIt.I.get<RecurringApplicationChargeService>();
         final response = await service.customizeRecurringApplicationCharge(
           apiVersion: ApiNetwork.apiVersion,
           id: id,
