@@ -5,7 +5,6 @@ import 'package:example/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
 import '../../../api_request_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 /// ******************************************************************
 /// ************* ✏️ UPDATE WEBHOOK HANDLER ✏️ **********************
@@ -81,7 +80,7 @@ class UpdateWebhookHandler implements ApiRequestHandler {
     debugPrint('✏️ Updating webhook with ID: $id to address: ${request.webhook.address}');
     
     try {
-      final service = GetIt.I.get<UpdateWebhookService>();
+      final service = GetIt.I.get<WebhookService>();
       final response = await service.updateWebhook(
         apiVersion: ApiNetwork.apiVersion,
         id: id,
@@ -110,50 +109,12 @@ class UpdateWebhookHandler implements ApiRequestHandler {
     } catch (e) {
       debugPrint('❌ Error updating webhook: $e');
       
-      if (e is DioException && e.response != null && e.response?.data != null) {
-        final responseData = e.response!.data;
-        final statusCode = e.response!.statusCode;
-        
-        // Try to parse Shopify error messages
-        if (responseData is Map && responseData.containsKey('errors')) {
-          return {
-            "status": "error",
-            "statusCode": statusCode,
-            "shopifyErrors": responseData['errors'],
-            "message": "Shopify API Error: ${_formatShopifyErrors(responseData['errors'])}",
-            "timestamp": DateTime.now().toIso8601String(),
-          };
-        }
-        
-        // Generic response error
-        return {
-          "status": "error",
-          "statusCode": statusCode,
-          "message": "API Error: ${e.message}",
-          "responseData": responseData,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      }
-      
-      // Generic error
+      // Handle error and provide user-friendly response
       return {
         "status": "error",
         "message": "Failed to update webhook: ${e.toString()}",
         "timestamp": DateTime.now().toIso8601String(),
       };
-    }
-  }
-
-  // Helper function to format Shopify errors
-  String _formatShopifyErrors(dynamic errors) {
-    if (errors is Map) {
-      return errors.entries
-          .map((entry) => "${entry.key}: ${entry.value}")
-          .join(", ");
-    } else if (errors is String) {
-      return errors;
-    } else {
-      return errors.toString();
     }
   }
 
