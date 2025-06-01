@@ -5,59 +5,47 @@ import 'package:apis/network/remote/billing/recurring_application_charge/freezed
 import 'package:apis/network/remote/billing/recurring_application_charge/freezed_model/request/create_trial_recurring_application_charge_request.dart';
 import 'package:apis/network/remote/billing/recurring_application_charge/freezed_model/request/create_capped_recurring_application_charge_request.dart';
 
-/// 🔑 Abstract contract for getting all Recurring Application Charges
-abstract class GetRecurringApplicationChargesService {
+abstract class RecurringApplicationChargeService {
+  /// Gets all recurring application charges
   Future<GetAllRecurringApplicationChargesResponse> getRecurringApplicationCharges({
     required String apiVersion,
     String? fields,
     String? sinceId,
   });
-}
 
-/// 🔑 Abstract contract for getting a single Recurring Application Charge
-abstract class GetRecurringApplicationChargeService {
+  /// Gets a single recurring application charge by ID
   Future<GetARecurringApplicationChargeResponse> getRecurringApplicationCharge({
     required String apiVersion,
     required int id,
     String? fields,
   });
-}
 
-/// 🔧 Abstract contract for customizing a Recurring Application Charge
-abstract class CustomizeRecurringApplicationChargeService {
+  /// Customizes a recurring application charge
   Future<GetARecurringApplicationChargeResponse> customizeRecurringApplicationCharge({
     required String apiVersion,
     required int id,
     required CustomizeRecurringApplicationChargeRequest request,
   });
-}
 
-/// 🗑️ Abstract contract for deleting a Recurring Application Charge
-abstract class DeleteRecurringApplicationChargeService {
+  /// Deletes a recurring application charge
   Future<void> deleteRecurringApplicationCharge({
     required String apiVersion,
     required int id,
   });
-}
 
-/// 🆕 Abstract contract for creating a basic Recurring Application Charge
-abstract class CreateBasicRecurringApplicationChargeService {
+  /// Creates a basic recurring application charge
   Future<GetARecurringApplicationChargeResponse> createBasicRecurringApplicationCharge({
     required String apiVersion,
     required CreateBasicRecurringApplicationChargeRequest request,
   });
-}
 
-/// 🆕 Abstract contract for creating a Recurring Application Charge with trial period
-abstract class CreateTrialRecurringApplicationChargeService {
+  /// Creates a recurring application charge with trial period
   Future<GetARecurringApplicationChargeResponse> createTrialRecurringApplicationCharge({
     required String apiVersion,
     required CreateTrialRecurringApplicationChargeRequest request,
   });
-}
 
-/// 🆕 Abstract contract for creating a Recurring Application Charge with terms and capped amount
-abstract class CreateCappedRecurringApplicationChargeService {
+  /// Creates a recurring application charge with terms and capped amount
   Future<GetARecurringApplicationChargeResponse> createCappedRecurringApplicationCharge({
     required String apiVersion,
     required CreateCappedRecurringApplicationChargeRequest request,

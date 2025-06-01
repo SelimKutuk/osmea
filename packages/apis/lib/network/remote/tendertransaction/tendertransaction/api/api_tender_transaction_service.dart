@@ -8,15 +8,15 @@ import 'package:retrofit/retrofit.dart';
 
 part 'api_tender_transaction_service.g.dart';
 
-/// 🌐 GetTenderTransactionsServiceClient
-/// Retrofit client for retrieving a list of tender transactions.
+/// 🌐 TenderTransactionServiceClient
+/// Retrofit client for tender transaction operations.
 /// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏬🔑
 @RestApi()
-@Injectable(as: GetTenderTransactionsService)
-abstract class GetTenderTransactionsServiceClient implements GetTenderTransactionsService {
+@Injectable(as: TenderTransactionService)
+abstract class TenderTransactionServiceClient implements TenderTransactionService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory GetTenderTransactionsServiceClient(Dio dio) => _GetTenderTransactionsServiceClient(
+  factory TenderTransactionServiceClient(Dio dio) => _TenderTransactionServiceClient(
         ApiDioClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
