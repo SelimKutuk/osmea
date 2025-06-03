@@ -86,7 +86,7 @@ class _ModernSidebarState extends State<ModernSidebar>
             color: Theme.of(context).colorScheme.surface,
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.1),
+                color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
                 offset: const Offset(2, 0),
                 blurRadius: 8,
               ),
@@ -153,12 +153,12 @@ class _ModernSidebarState extends State<ModernSidebar>
                   padding: EdgeInsets.all(isNarrow ? 16 : 20),
                   decoration: BoxDecoration(
                     gradient: AppTheme.createGradient(
-                      AppTheme.primaryColor.withOpacity(0.05),
-                      AppTheme.primaryVariant.withOpacity(0.02),
+                      AppTheme.primaryColor.withValues(alpha: 0.05),
+                      AppTheme.primaryVariant.withValues(alpha: 0.02),
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppTheme.primaryColor.withOpacity(0.1),
+                      color: AppTheme.primaryColor.withValues(alpha: 0.1),
                     ),
                   ),
                   child: Column(
@@ -166,13 +166,148 @@ class _ModernSidebarState extends State<ModernSidebar>
                       Container(
                         padding: EdgeInsets.all(isNarrow ? 10 : 12),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withOpacity(0.1),
+                          color: AppTheme.primaryColor.withValues(alpha: 0.01),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                          Icons.api_rounded,
+                          Icons.touch_app_rounded,
                           size: isNarrow ? 20 : 24,
                           color: AppTheme.primaryColor,
+                        ),
+                      ),
+                      SizedBox(height: isNarrow ? 8 : 12),
+                      Text(
+                        'Get Started',
+                        style: TextStyle(
+                          fontSize: isNarrow ? 14 : 16,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.primaryColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: isNarrow ? 4 : 6),
+                      Text(
+                        'Select a category below to explore available APIs',
+                        style: TextStyle(
+                          fontSize: isNarrow ? 11 : 12,
+                          color: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.color
+                              ?.withValues(alpha: 0.7),
+                          height: 1.4,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: isNarrow ? 8 : 12),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isNarrow ? 8 : 12,
+                          vertical: isNarrow ? 4 : 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.arrow_downward_rounded,
+                              size: isNarrow ? 12 : 14,
+                              color: AppTheme.primaryColor,
+                            ),
+                            SizedBox(width: isNarrow ? 4 : 6),
+                            Text(
+                              'Choose below',
+                              style: TextStyle(
+                                fontSize: isNarrow ? 10 : 11,
+                                fontWeight: FontWeight.w500,
+                                color: AppTheme.primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              // Selection Guidance when category is selected but no subcategory
+              if (_selectedCategory != null &&
+                  _selectedSubcategory == null &&
+                  widget.expanded)
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
+                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        size: isNarrow ? 16 : 18,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      SizedBox(width: isNarrow ? 6 : 8),
+                      Expanded(
+                        child: Text(
+                          'Select a subcategory to view available APIs',
+                          style: TextStyle(
+                            fontSize: isNarrow ? 11 : 12,
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              // Service Selection Guidance when subcategory is selected
+              if (_selectedSubcategory != null &&
+                  widget.selectedService == null &&
+                  widget.expanded)
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
+                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                  decoration: BoxDecoration(
+                    color: AppTheme.successColor.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: AppTheme.successColor.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle_outline_rounded,
+                        size: isNarrow ? 16 : 18,
+                        color: AppTheme.successColor,
+                      ),
+                      SizedBox(width: isNarrow ? 6 : 8),
+                      Expanded(
+                        child: Text(
+                          'Great! Now select an API service to start testing',
+                          style: TextStyle(
+                            fontSize: isNarrow ? 11 : 12,
+                            color: AppTheme.successColor,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -209,7 +344,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                         .primary
                                         .withValues(
                                             alpha:
-                                                0.1) // Use dynamic primary color
+                                                0.01) // Use dynamic primary color
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(12),
                               ),
