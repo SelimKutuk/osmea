@@ -267,10 +267,8 @@ class AppTheme {
           primary: primaryColor,
           secondary: secondaryColor,
           surface: Color(0xFF1E1E1E),
-          background: Color(0xFF121212),
           error: errorColor,
           onSurface: Colors.white,
-          onBackground: Colors.white,
         ),
       );
 
@@ -281,10 +279,8 @@ class AppTheme {
           primary: primaryColor,
           secondary: secondaryColor,
           surface: lightSurface,
-          background: lightBackground,
           error: errorColor,
           onSurface: Color(0xFF1A1A1A),
-          onBackground: Color(0xFF1A1A1A),
         ),
       );
 
@@ -296,10 +292,8 @@ class AppTheme {
       primary: primaryColor,
       secondary: secondaryColor,
       surface: lightSurface,
-      background: lightBackground,
       error: errorColor,
       onSurface: Color(0xFF1A1A1A),
-      onBackground: Color(0xFF1A1A1A),
     ),
     textTheme: const TextTheme(
       displayLarge: displayLarge,
@@ -324,7 +318,7 @@ class AppTheme {
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
       color: lightCard,
-      shadowColor: Colors.black.withOpacity(0.05),
+      shadowColor: Colors.black.withValues(alpha:.05),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: lightSurface,
@@ -398,7 +392,7 @@ class AppTheme {
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(radiusLg)),
       color: darkCard,
-      shadowColor: Colors.black.withOpacity(0.3),
+      shadowColor: Colors.black.withValues(alpha:.3),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: darkSurface,
