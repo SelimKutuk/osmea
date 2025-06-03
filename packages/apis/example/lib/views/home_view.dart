@@ -238,6 +238,17 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     }
   }
 
+  double _calculateSidebarWidth(double screenWidth) {
+    final isWideScreen = screenWidth >= 1200;
+    final isMediumScreen = screenWidth >= 800;
+
+    if (!_sidebarExpanded) return 60;
+
+    if (isWideScreen) return 320;
+    if (isMediumScreen) return 280;
+    return 260;
+  }
+
   void _showSnackBar(String message, {required bool isError}) {
     // Ensure the widget is mounted and the Scaffold is in the widget tree
     if (!mounted) return;
@@ -250,15 +261,20 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               children: [
                 Icon(
                   isError ? Icons.error_outline : Icons.check_circle_outline,
-                  color: Colors.white,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onPrimary, // Use dynamic onPrimary color
                   size: 20,
                 ),
                 const SizedBox(width: 8),
                 Expanded(child: Text(message)),
               ],
             ),
-            backgroundColor:
-                isError ? const Color(0xFFEF4444) : const Color(0xFF10B981),
+            backgroundColor: isError
+                ? Theme.of(context).colorScheme.error // Use dynamic error color
+                : Theme.of(context)
+                    .colorScheme
+                    .secondary, // Use dynamic secondary color
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -278,22 +294,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       animation: _themeAnimation,
       builder: (context, child) {
         return Theme(
-          data: _isDarkMode
-              ? ThemeData.dark().copyWith(
-                  colorScheme: const ColorScheme.dark(
-                    primary: Color(0xFF667EEA),
-                    surface: Color(0xFF1E1E1E),
-                  ),
-                )
-              : ThemeData.light().copyWith(
-                  colorScheme: const ColorScheme.light(
-                    primary: Color(0xFF667EEA),
-                    surface: Colors.white,
-                  ),
-                ),
+          data: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
           child: Scaffold(
             backgroundColor:
-                _isDarkMode ? const Color(0xFF121212) : const Color(0xFFF5F5F5),
+                _isDarkMode ? const Color(0xFF121212) : const Color(0xFFFAFAFA),
             appBar: AppHeader(
               title: 'OSMEA APIs',
               apiUrl: _currentApiUrl,
@@ -342,12 +346,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 ? FloatingActionButton(
                     mini: true,
                     onPressed: _toggleSidebar,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: _isDarkMode
+                        ? const Color(0xFF8B5CF6)
+                        : const Color(0xFF8B5CF6),
                     child: AnimatedRotation(
                       turns: _sidebarExpanded ? 0.5 : 0,
                       duration: const Duration(milliseconds: 300),
-                      child: Icon(Icons.menu,
-                          color: Theme.of(context).colorScheme.onPrimary),
+                      child: Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                      ),
                     ),
                   )
                 : null,
@@ -355,16 +363,5 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         );
       },
     );
-  }
-
-  double _calculateSidebarWidth(double screenWidth) {
-    final isWideScreen = screenWidth >= 1200;
-    final isMediumScreen = screenWidth >= 800;
-
-    if (!_sidebarExpanded) return 60;
-
-    if (isWideScreen) return 320;
-    if (isMediumScreen) return 280;
-    return 260;
   }
 }

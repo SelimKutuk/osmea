@@ -83,13 +83,13 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   void _startAnimationSequence() async {
-    // Start logo animation
+    if (!mounted) return;
     await _logoController.forward();
 
-    // Start text animation
+    if (!mounted) return;
     await _textController.forward();
 
-    // Start progress animation
+    if (!mounted) return;
     await _progressController.forward();
 
     // Navigate to home after animations complete

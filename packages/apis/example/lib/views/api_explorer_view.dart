@@ -65,9 +65,8 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
         final shouldUseMobileLayout = isMobile || constraints.maxWidth < 900;
 
         return Scaffold(
-          backgroundColor: _isDarkMode
-              ? Theme.of(context).colorScheme.surface
-              : Theme.of(context).colorScheme.surface,
+          backgroundColor:
+              _isDarkMode ? const Color(0xFF121212) : const Color(0xFFFAFAFA),
           body: shouldUseMobileLayout
               ? MobileLayoutWidget(
                   constraints: constraints,
@@ -190,6 +189,7 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
   Future<void> _sendRequest() async {
     if (_selectedService == null) return;
 
+    if (!mounted) return;
     setState(() {
       _loading = true;
     });
@@ -197,6 +197,7 @@ class _ApiExplorerViewState extends State<ApiExplorerView>
     // Simulate API request
     await Future.delayed(const Duration(seconds: 2));
 
+    if (!mounted) return;
     setState(() {
       _loading = false;
       _responseData = {
