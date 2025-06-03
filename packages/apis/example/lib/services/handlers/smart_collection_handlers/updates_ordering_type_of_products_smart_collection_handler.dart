@@ -52,7 +52,7 @@ class UpdateProductOrderHandler implements ApiRequestHandler {
           await GetIt.I<SmartCollectionService>().updateProductOrder(
         apiVersion: ApiNetwork.apiVersion,
         id: id,
-        request: request,
+        model: request,
       );
 
       return {
