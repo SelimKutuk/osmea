@@ -1,63 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/theme/theme.dart';
-
-/// Defines the theme types supported by the application
 
 /// OSMEA UI Kit color system
 class OsmeaColors {
-  // Primary colors
-  static const Color primary = Color(0xFF3B82F6);
-  static const Color primaryLight = Color(0xFF60A5FA);
-  static const Color primaryDark = Color(0xFF2563EB);
+  static final OsmeaColors _instance = OsmeaColors._internal();
+  factory OsmeaColors() => _instance;
+  OsmeaColors._internal();
 
-  // Secondary colors
-  static const Color secondary = Color(0xFF10B981);
-  static const Color secondaryLight = Color(0xFF34D399);
-  static const Color secondaryDark = Color(0xFF059669);
+  // ================== CORE COLORS ==================
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+  static const Color transparent = Color(0x00000000);
 
-  // Accent colors
-  static const Color accent = Color(0xFFF59E0B);
-  static const Color accentLight = Color(0xFFFBBF24);
-  static const Color accentDark = Color(0xFFD97706);
+  // ================== GRAY PALETTE ==================
+  static const MaterialColor grayMaterial = MaterialColor(
+    0xFF6B7280,
+    <int, Color>{
+      25: Color(0xFFFCFCFD), // Paper White
+      50: Color(0xFFF9FAFB), // Snow
+      100: Color(0xFFF3F4F6), // Ash
+      200: Color(0xFFE5E7EB), // Silver
+      300: Color(0xFFD1D5DB), // Platinum
+      400: Color(0xFF9CA3AF), // Steel
+      500: Color(0xFF6B7280), // Pewter
+      600: Color(0xFF4B5563), // Slate
+      700: Color(0xFF374151), // Thunder
+      800: Color(0xFF1F2937), // Shark
+      900: Color(0xFF111827), // Eclipse
+      950: Color(0xFF030712), // Void
+    },
+  );
 
-  // Neutral colors
-  static const Color neutral100 = Color(0xFFF3F4F6);
-  static const Color neutral200 = Color(0xFFE5E7EB);
-  static const Color neutral300 = Color(0xFFD1D5DB);
-  static const Color neutral400 = Color(0xFF9CA3AF);
-  static const Color neutral500 = Color(0xFF6B7280);
-  static const Color neutral600 = Color(0xFF4B5563);
-  static const Color neutral700 = Color(0xFF374151);
-  static const Color neutral800 = Color(0xFF1F2937);
-  static const Color neutral900 = Color(0xFF111827);
+  static Color get paperWhite => grayMaterial[25]!;
+  static Color get snow => grayMaterial[50]!;
+  static Color get ash => grayMaterial[100]!;
+  static Color get silver => grayMaterial[200]!;
+  static Color get platinum => grayMaterial[300]!;
+  static Color get steel => grayMaterial[400]!;
+  static Color get pewter => grayMaterial[500]!;
+  static Color get slate => grayMaterial[600]!;
+  static Color get thunder => grayMaterial[700]!;
+  static Color get shark => grayMaterial[800]!;
+  static Color get eclipse => grayMaterial[900]!;
+  static Color get void_ => grayMaterial[950]!;
 
-  // Status colors
-  static const Color success = Color(0xFF10B981);
-  static const Color warning = Color(0xFFF59E0B);
-  static const Color error = Color(0xFFEF4444);
-  static const Color info = Color(0xFF3B82F6);
+  // ================== BLUE PALETTE ==================
+  static const MaterialColor blueMaterial = MaterialColor(
+    0xFF1B80BF,
+    <int, Color>{
+      50: Color(0xFFBBDDF2), // Crystal Bay
+      100: Color(0xFFBBDDF2), // Ocean Mist
+      200: Color(0xFF04B2D9), // Azure Wave
+      300: Color(0xFF1B80BF), // Nordic Blue
+      400: Color(0xFF1F3B73), // Deep Sea
+      500: Color(0xFF1B80BF), // Nordic Blue (Primary)
+      600: Color(0xFF1F3B73), // Atlantic
+      700: Color(0xFF021859), // Night Ocean
+      800: Color(0xFF021859), // Marine Depth
+      900: Color(0xFF021859), // Abyss
+    },
+  );
 
-  // Surface colors (based on theme)
-  static Color surface(ThemeType themeType) =>
-      themeType == ThemeType.light ? Colors.white : neutral900;
+  static Color get crystalBay => blueMaterial[50]!;
+  static Color get oceanMist => blueMaterial[100]!;
+  static Color get azureWave => blueMaterial[200]!;
+  static Color get nordicBlue => blueMaterial[300]!;
+  static Color get deepSea => blueMaterial[400]!;
+  static Color get atlantic => blueMaterial[600]!;
+  static Color get nightOcean => blueMaterial[700]!;
+  static Color get marineDepth => blueMaterial[800]!;
+  static Color get abyss => blueMaterial[900]!;
 
-  static Color background(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral100 : neutral800;
+  // ================== ORANGE PALETTE ==================
+  static const MaterialColor orangeMaterial = MaterialColor(
+    0xFFF29422,
+    <int, Color>{
+      100: Color(0xFFF2D49B), // Desert Sand
+      200: Color(0xFFF2D06B), // Golden Hour
+      300: Color(0xFFF29422), // Sunset Glow
+      400: Color(0xFFF2762E), // Amber Flame
+      500: Color(0xFFF29422), // Sunset Glow (Primary)
+    },
+  );
 
-  static Color onSurface(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral900 : Colors.white;
+  static Color get desertSand => orangeMaterial[100]!;
+  static Color get goldenHour => orangeMaterial[200]!;
+  static Color get sunsetGlow => orangeMaterial[300]!;
+  static Color get amberFlame => orangeMaterial[400]!;
 
-  static Color onBackground(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral800 : neutral200;
+  // ================== GREEN PALETTE ==================
+  static const MaterialColor greenMaterial = MaterialColor(
+    0xFF55A605,
+    <int, Color>{
+      100: Color(0xFFDEF2B3), // Spring Leaf
+      200: Color(0xFFBFD962), // Meadow
+      300: Color(0xFF55A605), // Forest Heart
+      400: Color(0xFF488C04), // Pine Grove
+      500: Color(0xFF55A605), // Forest Heart (Primary)
+    },
+  );
 
-  // Border colors
-  static Color border(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral200 : neutral700;
+  static Color get springLeaf => greenMaterial[100]!;
+  static Color get meadow => greenMaterial[200]!;
+  static Color get forestHeart => greenMaterial[300]!;
+  static Color get pineGrove => greenMaterial[400]!;
 
-  static Color divider(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral200 : neutral700;
+  // ================== SHADOW SYSTEM ==================
+  static const Color shadowLight = Color(0x1A000000);
+  static const Color shadowDark = Color(0x4D000000);
 
-  // Text colors
-  static Color textSecondary(ThemeType themeType) =>
-      themeType == ThemeType.light ? neutral500 : neutral400;
 }

@@ -81,4 +81,110 @@ class ComponentDimensions {
       return baseSpacing * 1.2; // 20% larger on desktop
     }
   }
+
+  static of(BuildContext context) {}
+}
+
+/// Extension on BuildContext to easily access component dimensions
+extension ComponentDimensionsExtension on BuildContext {
+  // Space values
+  double get spaceXXS => ComponentDimensions.spaceXXS;
+  double get spaceXS => ComponentDimensions.spaceXS;
+  double get spaceS => ComponentDimensions.spaceS;
+  double get spaceM => ComponentDimensions.spaceM;
+  double get spaceL => ComponentDimensions.spaceL;
+  double get spaceXL => ComponentDimensions.spaceXL;
+  double get spaceXXL => ComponentDimensions.spaceXXL;
+
+  // Radius values
+  double get radiusXS => ComponentDimensions.radiusXS;
+  double get radiusS => ComponentDimensions.radiusS;
+  double get radiusM => ComponentDimensions.radiusM;
+  double get radiusL => ComponentDimensions.radiusL;
+  double get radiusXL => ComponentDimensions.radiusXL;
+  double get radiusCircular => ComponentDimensions.radiusCircular;
+
+  // Get responsive spacing
+  double responsiveSpace(double baseSpacing) =>
+      ComponentDimensions.responsiveSpacing(this, baseSpacing);
+
+  // Icon size getters
+  double get iconSizeXS => ComponentDimensions.iconSizeXS;
+  double get iconSizeS => ComponentDimensions.iconSizeS;
+  double get iconSizeM => ComponentDimensions.iconSizeM;
+  double get iconSizeL => ComponentDimensions.iconSizeL;
+  double get iconSizeXL => ComponentDimensions.iconSizeXL;
+}
+
+/// Extension on BuildContext to easily create spacing widgets using component dimensions
+extension SpacingExtension on BuildContext {
+  // Vertical spacing
+  Widget vSpaceXXS() => const SizedBox(height: ComponentDimensions.spaceXXS);
+  Widget vSpaceXS() => const SizedBox(height: ComponentDimensions.spaceXS);
+  Widget vSpaceS() => const SizedBox(height: ComponentDimensions.spaceS);
+  Widget vSpaceM() => const SizedBox(height: ComponentDimensions.spaceM);
+  Widget vSpaceL() => const SizedBox(height: ComponentDimensions.spaceL);
+  Widget vSpaceXL() => const SizedBox(height: ComponentDimensions.spaceXL);
+  Widget vSpaceXXL() => const SizedBox(height: ComponentDimensions.spaceXXL);
+
+  // Horizontal spacing
+  Widget hSpaceXXS() => const SizedBox(width: ComponentDimensions.spaceXXS);
+  Widget hSpaceXS() => const SizedBox(width: ComponentDimensions.spaceXS);
+  Widget hSpaceS() => const SizedBox(width: ComponentDimensions.spaceS);
+  Widget hSpaceM() => const SizedBox(width: ComponentDimensions.spaceM);
+  Widget hSpaceL() => const SizedBox(width: ComponentDimensions.spaceL);
+  Widget hSpaceXL() => const SizedBox(width: ComponentDimensions.spaceXL);
+  Widget hSpaceXXL() => const SizedBox(width: ComponentDimensions.spaceXXL);
+
+  // Padding helpers
+  EdgeInsets paddingAll(double value) => EdgeInsets.all(value);
+  EdgeInsets paddingAllXXS() =>
+      const EdgeInsets.all(ComponentDimensions.spaceXXS);
+  EdgeInsets paddingAllXS() =>
+      const EdgeInsets.all(ComponentDimensions.spaceXS);
+  EdgeInsets paddingAllS() => const EdgeInsets.all(ComponentDimensions.spaceS);
+  EdgeInsets paddingAllM() => const EdgeInsets.all(ComponentDimensions.spaceM);
+  EdgeInsets paddingAllL() => const EdgeInsets.all(ComponentDimensions.spaceL);
+
+  // Symmetric padding
+  EdgeInsets paddingHorizontal(double value) =>
+      EdgeInsets.symmetric(horizontal: value);
+  EdgeInsets paddingVertical(double value) =>
+      EdgeInsets.symmetric(vertical: value);
+
+  EdgeInsets paddingHorizontalXS() =>
+      const EdgeInsets.symmetric(horizontal: ComponentDimensions.spaceXS);
+  EdgeInsets paddingHorizontalS() =>
+      const EdgeInsets.symmetric(horizontal: ComponentDimensions.spaceS);
+  EdgeInsets paddingHorizontalM() =>
+      const EdgeInsets.symmetric(horizontal: ComponentDimensions.spaceM);
+  EdgeInsets paddingHorizontalL() =>
+      const EdgeInsets.symmetric(horizontal: ComponentDimensions.spaceL);
+
+  EdgeInsets paddingVerticalXS() =>
+      const EdgeInsets.symmetric(vertical: ComponentDimensions.spaceXS);
+  EdgeInsets paddingVerticalS() =>
+      const EdgeInsets.symmetric(vertical: ComponentDimensions.spaceS);
+  EdgeInsets paddingVerticalM() =>
+      const EdgeInsets.symmetric(vertical: ComponentDimensions.spaceM);
+  EdgeInsets paddingVerticalL() =>
+      const EdgeInsets.symmetric(vertical: ComponentDimensions.spaceL);
+
+  // Convenient widgets for icons with predefined sizes
+  Widget iconBox({required Widget icon, required double size}) => SizedBox(
+        width: size,
+        height: size,
+        child: Center(child: icon),
+      );
+
+  Widget iconBoxXS(Widget icon) =>
+      iconBox(icon: icon, size: ComponentDimensions.iconSizeXS);
+  Widget iconBoxS(Widget icon) =>
+      iconBox(icon: icon, size: ComponentDimensions.iconSizeS);
+  Widget iconBoxM(Widget icon) =>
+      iconBox(icon: icon, size: ComponentDimensions.iconSizeM);
+  Widget iconBoxL(Widget icon) =>
+      iconBox(icon: icon, size: ComponentDimensions.iconSizeL);
+  Widget iconBoxXL(Widget icon) =>
+      iconBox(icon: icon, size: ComponentDimensions.iconSizeXL);
 }
