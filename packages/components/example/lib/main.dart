@@ -1,268 +1,427 @@
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/theme/colors.dart';
+import 'package:osmea_components/osmea_components.dart';
 
 void main() {
-  runApp(const OsmeaColorsShowcaseApp());
+  runApp(const OsmeaTextButtonExampleApp());
 }
 
-class OsmeaColorsShowcaseApp extends StatelessWidget {
-  const OsmeaColorsShowcaseApp({super.key});
+class OsmeaTextButtonExampleApp extends StatelessWidget {
+  const OsmeaTextButtonExampleApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'OSMEA Colors Showcase - 6 Main Colors',
+      title: 'Osmea TextButton Examples',
       theme: ThemeData(
-        primarySwatch: OsmeaColors.blueMaterial,
-        primaryColor: OsmeaColors.nordicBlue,
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
-      home: const ColorPaletteScreen(),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+      ),
+      themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
+      home: const TextButtonExamplesScreen(),
     );
   }
 }
 
-class ColorPaletteScreen extends StatefulWidget {
-  const ColorPaletteScreen({super.key});
+class TextButtonExamplesScreen extends StatefulWidget {
+  const TextButtonExamplesScreen({Key? key}) : super(key: key);
 
   @override
-  State<ColorPaletteScreen> createState() => _ColorPaletteScreenState();
+  State<TextButtonExamplesScreen> createState() =>
+      _TextButtonExamplesScreenState();
 }
 
-class _ColorPaletteScreenState extends State<ColorPaletteScreen> {
-  bool isDarkTheme = false;
+class _TextButtonExamplesScreenState extends State<TextButtonExamplesScreen> {
+  bool _isLoading1 = false;
+  bool _isLoading2 = false;
+  bool _isDisabled = false;
+
+  void _toggleLoading1() {
+    setState(() {
+      _isLoading1 = !_isLoading1;
+    });
+  }
+
+  void _toggleLoading2() {
+    setState(() {
+      _isLoading2 = !_isLoading2;
+    });
+  }
+
+  void _toggleDisabled() {
+    setState(() {
+      _isDisabled = !_isDisabled;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isDarkTheme ? OsmeaColors.void_ : OsmeaColors.snow,
       appBar: AppBar(
-        title: const Text('OSMEA Color Palette - 6 Main Colors'),
+        title: const Text('Osmea TextButton Examples'),
+        centerTitle: true,
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
-        actions: [
-          IconButton(
-            icon: Icon(isDarkTheme ? Icons.light_mode : Icons.dark_mode),
-            onPressed: () {
-              setState(() {
-                isDarkTheme = !isDarkTheme;
-              });
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: context.paddingMedium,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildMainColorsSection(),
-            _buildSection('Gray Palette', [
-              ColorInfo('Paper White', OsmeaColors.paperWhite),
-              ColorInfo('Snow', OsmeaColors.snow),
-              ColorInfo('Ash', OsmeaColors.ash),
-              ColorInfo('Silver', OsmeaColors.silver),
-              ColorInfo('Platinum', OsmeaColors.platinum),
-              ColorInfo('Steel', OsmeaColors.steel),
-              ColorInfo('Pewter', OsmeaColors.pewter),
-              ColorInfo('Slate', OsmeaColors.slate),
-              ColorInfo('Thunder', OsmeaColors.thunder),
-              ColorInfo('Shark', OsmeaColors.shark),
-              ColorInfo('Eclipse', OsmeaColors.eclipse),
-              ColorInfo('Void', OsmeaColors.void_),
-            ]),
-            _buildSection('Blue Palette', [
-              ColorInfo('Crystal Bay', OsmeaColors.crystalBay),
-              ColorInfo('Ocean Mist', OsmeaColors.oceanMist),
-              ColorInfo('Azure Wave', OsmeaColors.azureWave),
-              ColorInfo('Nordic Blue', OsmeaColors.nordicBlue),
-              ColorInfo('Deep Sea', OsmeaColors.deepSea),
-              ColorInfo('Atlantic', OsmeaColors.atlantic),
-              ColorInfo('Night Ocean', OsmeaColors.nightOcean),
-              ColorInfo('Marine Depth', OsmeaColors.marineDepth),
-              ColorInfo('Abyss', OsmeaColors.abyss),
-            ]),
-            _buildSection('Orange Palette', [
-              ColorInfo('Desert Sand', OsmeaColors.desertSand),
-              ColorInfo('Golden Hour', OsmeaColors.goldenHour),
-              ColorInfo('Sunset Glow', OsmeaColors.sunsetGlow),
-              ColorInfo('Amber Flame', OsmeaColors.amberFlame),
-            ]),
-            _buildSection('Green Palette', [
-              ColorInfo('Spring Leaf', OsmeaColors.springLeaf),
-              ColorInfo('Meadow', OsmeaColors.meadow),
-              ColorInfo('Forest Heart', OsmeaColors.forestHeart),
-              ColorInfo('Pine Grove', OsmeaColors.pineGrove),
-            ]),
-            _buildSection('Status Colors', [
-              ColorInfo('Status Online', OsmeaColors.forestHeart),
-              ColorInfo('Status Offline', OsmeaColors.pewter),
-              ColorInfo('Status Away', OsmeaColors.sunsetGlow),
-            ]),
-            _buildSection('Core Colors', [
-              ColorInfo('Pure White', OsmeaColors.white),
-              ColorInfo('Pure Black', OsmeaColors.black),
-              ColorInfo('Transparent', OsmeaColors.transparent),
-            ]),
+            // Title
+            Text(
+              'OsmeaTextButton Showcase',
+              style: OsmeaTextStyle.displayMedium(context).copyWith(
+                color: OsmeaColors.nordicBlue,
+              ),
+            ),
+            context.emptySizedHeightBoxMedium,
+
+            // 1. Basic Primary TextButton (No Icon)
+            _buildSection(
+              context,
+              title: '1. Basic Primary Button',
+              description: 'Simple primary text button without icon',
+              child: OsmeaTextButton(
+                text: 'Primary Button',
+                variant: ButtonVariant.primary,
+                size: ButtonSize.medium,
+                onPressed: () =>
+                    _showSnackBar(context, 'Primary button pressed!'),
+              ),
+            ),
+
+            // 2. Secondary with Leading Icon
+            _buildSection(
+              context,
+              title: '2. Secondary with Leading Icon',
+              description:
+                  'Secondary variant with custom colors and leading icon',
+              child: OsmeaTextButton(
+                text: 'Download',
+                variant: ButtonVariant.secondary,
+                size: ButtonSize.large,
+                icon: const Icon(Icons.download),
+                iconPosition: IconPosition.leading,
+                textColor: OsmeaColors.sunsetGlow,
+                hoverColor: OsmeaColors.goldenHour.withValues(alpha: 0.1),
+                onPressed: () => _showSnackBar(context, 'Download started!'),
+              ),
+            ),
+
+            // 3. Ghost with Trailing Icon & Custom Style
+            _buildSection(
+              context,
+              title: '3. Ghost with Trailing Icon',
+              description:
+                  'Ghost variant with trailing icon and custom text style',
+              child: OsmeaTextButton(
+                text: 'Next Step',
+                variant: ButtonVariant.ghost,
+                size: ButtonSize.small,
+                icon: const Icon(Icons.arrow_forward),
+                iconPosition: IconPosition.trailing,
+                textStyle: OsmeaTextStyle.buttonSmall(context).copyWith(
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                ),
+                textColor: OsmeaColors.deepSea,
+                borderRadius: BorderRadius.circular(20),
+                onPressed: () => _showSnackBar(context, 'Moving to next step!'),
+              ),
+            ),
+
+            // 4. Success with Custom Padding & Margin
+            _buildSection(
+              context,
+              title: '4. Success with Custom Spacing',
+              description:
+                  'Success variant with custom padding, margin and uppercase text',
+              child: OsmeaTextButton(
+                text: 'Save Changes',
+                variant: ButtonVariant.success,
+                size: ButtonSize.extraLarge,
+                isUppercase: true,
+                padding: context.paddingHigh,
+                margin: context.horizontalPaddingMedium,
+                backgroundColor: OsmeaColors.forestHeart.withValues(alpha: 0.1),
+                textColor: OsmeaColors.forestHeart,
+                borderRadius: context.borderRadiusLow,
+                onPressed: () =>
+                    _showSnackBar(context, 'Changes saved successfully!'),
+              ),
+            ),
+
+            // 5. Danger with Loading State
+            _buildSection(
+              context,
+              title: '5. Danger with Loading State',
+              description:
+                  'Danger variant demonstrating loading state with custom animation',
+              child: OsmeaTextButton(
+                text: 'Delete Account',
+                variant: ButtonVariant.danger,
+                size: ButtonSize.medium,
+                icon: const Icon(Icons.delete_forever),
+                iconPosition: IconPosition.leading,
+                isLoading: _isLoading1,
+                animationDuration: const Duration(milliseconds: 300),
+                splashColor: OsmeaColors.amberFlame.withValues(alpha: 0.3),
+                onPressed: _isLoading1 ? null : _toggleLoading1,
+              ),
+            ),
+
+            // 6. Outlined with Elevation & Tooltip
+            _buildSection(
+              context,
+              title: '6. Outlined with Elevation',
+              description:
+                  'Outlined variant with elevation, tooltip and custom border',
+              child: OsmeaTextButton(
+                text: 'Help & Support',
+                variant: ButtonVariant.outlined,
+                size: ButtonSize.medium,
+                icon: const Icon(Icons.help_outline),
+                iconPosition: IconPosition.leading,
+                elevation: 4,
+                tooltip: 'Get help and support for your account',
+                borderColor: OsmeaColors.crystalBay,
+                textColor: OsmeaColors.nordicBlue,
+                backgroundColor: OsmeaColors.oceanMist.withValues(alpha: 0.05),
+                borderRadius: context.borderRadiusNormal,
+                onPressed: () =>
+                    _showSnackBar(context, 'Opening help center...'),
+              ),
+            ),
+
+            // 7. Extra Small with Focus & Autofocus
+            _buildSection(
+              context,
+              title: '7. Extra Small with Focus',
+              description:
+                  'Extra small size with focus handling and custom text style',
+              child: OsmeaTextButton(
+                text: 'Quick Action',
+                variant: ButtonVariant.primary,
+                size: ButtonSize.extraSmall,
+                autofocus: true,
+                textStyle: OsmeaTextStyle.labelSmall(context).copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+                textColor: OsmeaColors.deepSea,
+                hoverColor: OsmeaColors.crystalBay.withValues(alpha: 0.2),
+                onPressed: () =>
+                    _showSnackBar(context, 'Quick action executed!'),
+              ),
+            ),
+
+            // 8. Loading State with Custom Colors
+            _buildSection(
+              context,
+              title: '8. Loading with Custom Colors',
+              description:
+                  'Loading state with custom colors and long press support',
+              child: OsmeaTextButton(
+                text: 'Process Data',
+                variant: ButtonVariant.secondary,
+                size: ButtonSize.large,
+                icon: const Icon(Icons.cloud_upload),
+                iconPosition: IconPosition.leading,
+                isLoading: _isLoading2,
+                textColor: OsmeaColors.sunsetGlow,
+                backgroundColor: OsmeaColors.goldenHour.withValues(alpha: 0.08),
+                splashColor: OsmeaColors.goldenHour.withValues(alpha: 0.25),
+                borderRadius: BorderRadius.circular(25),
+                onPressed: _isLoading2 ? null : _toggleLoading2,
+                onLongPress: () =>
+                    _showSnackBar(context, 'Long press detected!'),
+              ),
+            ),
+
+            // 9. Disabled State Demo
+            _buildSection(
+              context,
+              title: '9. Disabled State Demo',
+              description:
+                  'Demonstrating disabled state with custom disabled colors',
+              child: Column(
+                children: [
+                  OsmeaTextButton(
+                    text: 'Submit Form',
+                    variant: ButtonVariant.primary,
+                    size: ButtonSize.medium,
+                    icon: const Icon(Icons.send),
+                    iconPosition: IconPosition.trailing,
+                    isDisabled: _isDisabled,
+                    disabledColor: OsmeaColors.silver.withValues(alpha: 0.1),
+                    textColor: _isDisabled
+                        ? OsmeaColors.steel
+                        : OsmeaColors.nordicBlue,
+                    borderRadius: context.borderRadiusMedium,
+                    onPressed: _isDisabled
+                        ? null
+                        : () => _showSnackBar(context, 'Form submitted!'),
+                  ),
+                  context.emptySizedHeightBoxNormal,
+                  OsmeaTextButton(
+                    text: _isDisabled ? 'Enable Button' : 'Disable Button',
+                    variant: ButtonVariant.ghost,
+                    size: ButtonSize.small,
+                    textColor: OsmeaColors.blueMaterial,
+                    onPressed: _toggleDisabled,
+                  ),
+                ],
+              ),
+            ),
+
+            // 10. Complex Custom Button
+            _buildSection(
+              context,
+              title: '10. Complex Custom Design',
+              description:
+                  'All customization features combined: gradient background, custom styling, hover effects',
+              child: OsmeaTextButton(
+                text: 'Premium Feature',
+                variant: ButtonVariant.primary,
+                size: ButtonSize.large,
+                icon: const Icon(Icons.star),
+                iconPosition: IconPosition.leading,
+                isUppercase: true,
+                textStyle: OsmeaTextStyle.buttonLarge(context).copyWith(
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.5,
+                ),
+                textColor: OsmeaColors.white,
+                backgroundColor: OsmeaColors.nordicBlue,
+                hoverColor: OsmeaColors.deepSea.withValues(alpha: 0.2),
+                splashColor: OsmeaColors.crystalBay.withValues(alpha: 0.4),
+                borderColor: OsmeaColors.crystalBay,
+                borderRadius: BorderRadius.circular(30),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.normalValue * 3,
+                  vertical: context.normalValue * 1.5,
+                ),
+                margin: context.verticalPaddingNormal,
+                elevation: 6,
+                animationDuration: const Duration(milliseconds: 400),
+                tooltip: 'Unlock premium features with advanced customization',
+                onPressed: () =>
+                    _showSnackBar(context, 'Premium features unlocked! ⭐'),
+                onLongPress: () =>
+                    _showSnackBar(context, 'Premium info: Long press detected'),
+                onHover: (isHovered) {
+                  if (isHovered) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Hovering over premium button'),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+
+            // Summary Section
+            context.emptySizedHeightBoxHigh,
+            Container(
+              padding: context.paddingMedium,
+              decoration: BoxDecoration(
+                color: OsmeaColors.oceanMist.withValues(alpha: 0.1),
+                borderRadius: context.borderRadiusNormal,
+                border: Border.all(
+                  color: OsmeaColors.crystalBay.withValues(alpha: 0.3),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Features Demonstrated:',
+                    style: OsmeaTextStyle.titleMedium(context).copyWith(
+                      color: OsmeaColors.nordicBlue,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  context.emptySizedHeightBoxNormal,
+                  ...const [
+                    '• All 6 button variants (primary, secondary, outlined, ghost, success, danger)',
+                    '• All 5 sizes (extraSmall to extraLarge)',
+                    '• Leading and trailing icons',
+                    '• Loading states with animations',
+                    '• Disabled states',
+                    '• Custom colors, padding, margin, borders',
+                    '• Custom text styles and uppercase text',
+                    '• Tooltips and elevation',
+                    '• Hover effects and long press support',
+                    '• Focus handling and autofocus',
+                    '• Custom animation durations',
+                  ].map((feature) => Padding(
+                        padding: EdgeInsets.only(bottom: context.lowValue),
+                        child: Text(
+                          feature,
+                          style: OsmeaTextStyle.bodyMedium(context),
+                        ),
+                      )),
+                ],
+              ),
+            ),
+            context.emptySizedHeightBoxHigh,
           ],
         ),
       ),
     );
   }
 
-  Widget _buildMainColorsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text(
-            '6 Main Colors',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: isDarkTheme ? OsmeaColors.white : OsmeaColors.eclipse,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: isDarkTheme ? OsmeaColors.shark : OsmeaColors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDarkTheme ? OsmeaColors.thunder : OsmeaColors.ash,
-            ),
-          ),
-          child: Wrap(
-            children: [
-              _buildMainColorTile('Pure White', OsmeaColors.white),
-              _buildMainColorTile('Pure Black', OsmeaColors.black),
-              _buildMainColorTile('Pewter', OsmeaColors.pewter),
-              _buildMainColorTile('Nordic Blue', OsmeaColors.nordicBlue),
-              _buildMainColorTile('Sunset Glow', OsmeaColors.sunsetGlow),
-              _buildMainColorTile('Forest Heart', OsmeaColors.forestHeart),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24),
-      ],
-    );
-  }
-
-  Widget _buildMainColorTile(String name, Color color) {
+  Widget _buildSection(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required Widget child,
+  }) {
     return Container(
-      width: 160,
-      height: 100,
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDarkTheme ? OsmeaColors.thunder : OsmeaColors.ash,
-          width: 1,
-        ),
-      ),
+      margin: context.onlyBottomPaddingHigh,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSection(String title, List<ColorInfo> colors) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text(
+          Text(
             title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: isDarkTheme ? OsmeaColors.white : OsmeaColors.eclipse,
+            style: OsmeaTextStyle.headlineSmall(context).copyWith(
+              color: OsmeaColors.black,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: isDarkTheme ? OsmeaColors.shark : OsmeaColors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDarkTheme ? OsmeaColors.thunder : OsmeaColors.ash,
+          context.emptySizedHeightBoxLow,
+          Text(
+            description,
+            style: OsmeaTextStyle.bodySmall(context).copyWith(
+              color: OsmeaColors.steel,
             ),
           ),
-          child: Wrap(
-            children:
-                colors.map((colorInfo) => _buildColorTile(colorInfo)).toList(),
-          ),
-        ),
-        const SizedBox(height: 24),
-      ],
-    );
-  }
-
-  Widget _buildColorTile(ColorInfo colorInfo) {
-    return Container(
-      width: 120,
-      height: 80,
-      margin: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: colorInfo.color,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDarkTheme ? OsmeaColors.thunder : OsmeaColors.ash,
-          width: 0.5,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(4),
-            child: Text(
-              colorInfo.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+          context.emptySizedHeightBoxNormal,
+          Center(child: child),
+          context.emptySizedHeightBoxMedium,
+          const Divider(),
         ],
       ),
     );
   }
 
-}
-
-class ColorInfo {
-  final String name;
-  final Color color;
-
-  ColorInfo(this.name, this.color);
-}
-
-class GradientInfo {
-  final String name;
-  final LinearGradient gradient;
-
-  GradientInfo(this.name, this.gradient);
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+        backgroundColor: OsmeaColors.nordicBlue,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
 }
