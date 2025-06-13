@@ -40,23 +40,17 @@ class OsmeaTextButton extends CoreContainer {
     required this.text,
     required this.onPressed,
     this.size = ButtonSize.medium,
-    this.variant = ButtonVariant.primary,
     this.textStyle,
     this.textColor,
-    this.backgroundColor,
-    this.borderColor,
-    this.disabledColor,
     this.hoverColor,
     this.splashColor,
-    this.icon,
-    this.iconPosition = IconPosition.leading,
+    this.leadingIcon,
+    this.trailingIcon,
     this.isLoading = false,
     this.isDisabled = false,
     this.isUppercase = false,
-    this.borderRadius,
     super.padding,
     super.margin,
-    this.elevation = 0,
     this.animationDuration,
     this.onLongPress,
     this.onHover,
@@ -68,21 +62,15 @@ class OsmeaTextButton extends CoreContainer {
   final String text;
   final VoidCallback? onPressed;
   final ButtonSize size;
-  final ButtonVariant variant;
   final TextStyle? textStyle;
   final Color? textColor;
-  final Color? backgroundColor;
-  final Color? borderColor;
-  final Color? disabledColor;
   final Color? hoverColor;
   final Color? splashColor;
-  final Widget? icon;
-  final IconPosition iconPosition;
+  final Widget? leadingIcon;
+  final Widget? trailingIcon;
   final bool isLoading;
   final bool isDisabled;
   final bool isUppercase;
-  final BorderRadius? borderRadius;
-  final double elevation;
   final Duration? animationDuration;
   final VoidCallback? onLongPress;
   final ValueChanged<bool>? onHover;
@@ -120,15 +108,13 @@ class OsmeaTextButton extends CoreContainer {
       duration: animationDuration ?? const Duration(milliseconds: 200),
       child: Material(
         color: Colors.transparent,
-        elevation: elevation,
-        borderRadius: borderRadius ?? config.borderRadius,
+        elevation: 0,
         child: InkWell(
           onTap: isEffectivelyDisabled ? null : onPressed,
           onLongPress: isEffectivelyDisabled ? null : onLongPress,
           onHover: onHover,
           focusNode: focusNode,
           autofocus: autofocus,
-          borderRadius: borderRadius ?? config.borderRadius,
           splashColor: splashColor ?? colors.splash,
           highlightColor: hoverColor ?? colors.hover,
           child: AnimatedContainer(
@@ -139,20 +125,6 @@ class OsmeaTextButton extends CoreContainer {
               minHeight: config.size.height,
             ),
             padding: padding ?? config.padding,
-            decoration: BoxDecoration(
-              color: isEffectivelyDisabled
-                  ? (disabledColor ?? colors.disabled)
-                  : (backgroundColor ?? colors.background),
-              border: borderColor != null || variant == ButtonVariant.outlined
-                  ? Border.all(
-                      color: isEffectivelyDisabled
-                          ? (disabledColor ?? colors.disabled)
-                          : (borderColor ?? colors.border),
-                      width: 1,
-                    )
-                  : null,
-              borderRadius: borderRadius ?? config.borderRadius,
-            ),
             child:
                 _buildContent(context, config, colors, isEffectivelyDisabled),
           ),
@@ -173,11 +145,11 @@ class OsmeaTextButton extends CoreContainer {
 
     final textWidget = _buildText(context, colors, isEffectivelyDisabled);
 
-    if (icon == null) {
+    if (leadingIcon == null && trailingIcon == null) {
       return textWidget;
     }
 
-    return _buildTextWithIcon(
+    return _buildTextWithIcons(
         context, textWidget, config, colors, isEffectivelyDisabled);
   }
 
@@ -196,41 +168,51 @@ class OsmeaTextButton extends CoreContainer {
     );
   }
 
-  Widget _buildTextWithIcon(
+  Widget _buildTextWithIcons(
     BuildContext context,
     Widget textWidget,
     ButtonSizeConfig config,
     _ButtonColors colors,
     bool isEffectivelyDisabled,
   ) {
-    final iconWidget = _buildIcon(config, colors, isEffectivelyDisabled);
-    final spacing = context.emptySizedWidthBoxLow; 
+    final spacing = context.emptySizedWidthBoxLow;
+    final children = <Widget>[];
+
+    if (leadingIcon != null) {
+      children.add(_buildIcon(leadingIcon!, config, colors, isEffectivelyDisabled));
+      children.add(spacing);
+    }
+
+    children.add(Flexible(child: textWidget));
+
+    if (trailingIcon != null) {
+      children.add(spacing);
+      children.add(_buildIcon(trailingIcon!, config, colors, isEffectivelyDisabled));
+    }
 
     return Row(
-      mainAxisSize: context.min, 
-      mainAxisAlignment: context.centerMain, 
-      children: iconPosition == IconPosition.leading
-          ? [iconWidget, spacing, Flexible(child: textWidget)]
-          : [Flexible(child: textWidget), spacing, iconWidget],
+      mainAxisSize: context.min,
+      mainAxisAlignment: context.centerMain,
+      children: children,
     );
   }
 
-  Widget _buildIcon(ButtonSizeConfig config, _ButtonColors colors,
+  Widget _buildIcon(Widget iconWidget, ButtonSizeConfig config, _ButtonColors colors,
       bool isEffectivelyDisabled) {
     return IconTheme(
       data: IconThemeData(
         size: config.iconSize,
         color: isEffectivelyDisabled ? colors.disabledText : colors.text,
       ),
-      child: icon!,
+      child: iconWidget,
     );
   }
 
   Widget _buildLoadingContent(
       BuildContext context, ButtonSizeConfig config, _ButtonColors colors) {
     return Row(
-      mainAxisSize: context.min, 
-      mainAxisAlignment: context.centerMain, 
+      mainAxisSize: context.min,
+      mainAxisAlignment: context.centerMain,
       children: [
         SizedBox(
           width: config.iconSize,
@@ -240,7 +222,7 @@ class OsmeaTextButton extends CoreContainer {
             valueColor: AlwaysStoppedAnimation<Color>(colors.text),
           ),
         ),
-        context.emptySizedWidthBoxLow, 
+        context.emptySizedWidthBoxLow,
         OsmeaText(
           'Loading...',
           style: _getEffectiveTextStyle(context).copyWith(color: colors.text),
@@ -280,76 +262,20 @@ class OsmeaTextButton extends CoreContainer {
   }
 
   _ButtonColors _getButtonColors(BuildContext context) {
-    switch (variant) {
-      case ButtonVariant.primary:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.nordicBlue,
-          border: Colors.transparent,
-          hover: OsmeaColors.crystalBay.withValues(alpha: 0.1),
-          splash: OsmeaColors.crystalBay.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-      case ButtonVariant.secondary:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.sunsetGlow,
-          border: Colors.transparent,
-          hover: OsmeaColors.goldenHour.withValues(alpha: 0.1),
-          splash: OsmeaColors.goldenHour.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-      case ButtonVariant.outlined:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.nordicBlue,
-          border: Colors.transparent,
-          hover: OsmeaColors.crystalBay.withValues(alpha: 0.1),
-          splash: OsmeaColors.crystalBay.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-      case ButtonVariant.ghost:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.black,
-          border: Colors.transparent,
-          hover: OsmeaColors.silver.withValues(alpha: 0.1),
-          splash: OsmeaColors.silver.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-      case ButtonVariant.success:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.forestHeart,
-          border: Colors.transparent,
-          hover: OsmeaColors.meadow.withValues(alpha: 0.1),
-          splash: OsmeaColors.meadow.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-      case ButtonVariant.danger:
-        return _ButtonColors(
-          background: Colors.transparent,
-          text: OsmeaColors.amberFlame,
-          border: Colors.transparent,
-          hover: OsmeaColors.goldenHour.withValues(alpha: 0.1),
-          splash: OsmeaColors.goldenHour.withValues(alpha: 0.2),
-          disabled: Colors.transparent,
-          disabledText: OsmeaColors.steel,
-        );
-    }
+    return _ButtonColors(
+      background: Colors.transparent,
+      text: textColor ?? OsmeaColors.nordicBlue,
+      border: Colors.transparent,
+      hover: hoverColor ?? OsmeaColors.crystalBay.withValues(alpha: 0.1),
+      splash: splashColor ?? OsmeaColors.crystalBay.withValues(alpha: 0.2),
+      disabled: Colors.transparent,
+      disabledText: OsmeaColors.steel,
+    );
   }
 }
 
 /// Button size variants
 enum ButtonSize { extraSmall, small, medium, large, extraLarge }
-
-/// Button style variants for text buttons
-enum ButtonVariant { primary, secondary, outlined, ghost, success, danger }
 
 /// Icon position in button
 enum IconPosition { leading, trailing }
