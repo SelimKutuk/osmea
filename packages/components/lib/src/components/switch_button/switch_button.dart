@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/core/container_widget.dart';
 
 /// 🔄 **OSMEA Switch**
 ///
 /// A modern, customizable switch component with multiple styles and variants.
 /// Supports all the visual styles from the attached design reference.
-class OsmeaSwitch extends StatefulWidget {
+class OsmeaSwitch extends CoreContainer {
   const OsmeaSwitch({
     super.key,
+    super.customTheme,
     required this.value,
     required this.onChanged,
     this.size = SwitchSize.medium,
@@ -23,15 +25,14 @@ class OsmeaSwitch extends StatefulWidget {
     this.trackColor,
     this.focusColor,
     this.hoverColor,
-    this.padding,
-    this.margin,
+    super.padding,
+    super.margin,
     this.animationDuration,
     this.onHover,
     this.focusNode,
     this.autofocus = false,
     this.semanticLabel,
     this.fullWidth = false,
-    this.customTheme,
   });
 
   /// 🔄 The current state of the switch (true = on, false = off)
@@ -79,12 +80,6 @@ class OsmeaSwitch extends StatefulWidget {
   /// ✨ Color displayed when the user hovers over the switch
   final Color? hoverColor;
 
-  /// 🧩 Custom padding
-  final EdgeInsetsGeometry? padding;
-
-  /// 🧩 Custom margin
-  final EdgeInsetsGeometry? margin;
-
   /// ⏱️ Duration for switch animations
   final Duration? animationDuration;
 
@@ -103,49 +98,36 @@ class OsmeaSwitch extends StatefulWidget {
   /// ↔️ Whether the switch container should take the full width of its parent
   final bool fullWidth;
 
-  /// 🎭 Custom theme
-  final CoreTheme? customTheme;
-
-  @override
-  State<OsmeaSwitch> createState() => _OsmeaSwitchState();
-}
-
-class _OsmeaSwitchState extends State<OsmeaSwitch> {
-  bool _isHovered = false;
-  bool _isFocused = false;
-
   // Computed properties based on state
-  bool get isDisabled => widget.state == SwitchState.disabled;
-  bool get isFocused => widget.state == SwitchState.focused || _isFocused;
-  bool get isHovered => widget.state == SwitchState.hovered || _isHovered;
-  bool get isEffectivelyDisabled => isDisabled || widget.onChanged == null;
+  bool get isDisabled => state == SwitchState.disabled;
+  bool get isFocused => state == SwitchState.focused;
+  bool get isHovered => state == SwitchState.hovered;
+  bool get isEffectivelyDisabled => isDisabled || onChanged == null;
 
   @override
-  Widget build(BuildContext context) {
-    final config = widget.size.config(context);
+  Widget buildWidget(BuildContext context) {
+    final config = size.config(context);
     final colors = _getSwitchColors(context);
 
     Widget switchWidget = _buildSwitch(context, config, colors);
 
     // Variant'a göre label gösterimi
-    if ((widget.variant == SwitchVariant.labeled ||
-            widget.variant == SwitchVariant.extended ||
-            widget.variant == SwitchVariant.card) &&
-        (widget.label != null || widget.description != null)) {
+    if ((variant == SwitchVariant.labeled ||
+            variant == SwitchVariant.extended ||
+            variant == SwitchVariant.card) &&
+        (label != null || description != null)) {
       switchWidget = _buildWithLabel(context, switchWidget, colors);
     }
 
-    if (widget.margin != null) {
-      switchWidget = Padding(padding: widget.margin!, child: switchWidget);
+    if (margin != null) {
+      switchWidget = Padding(padding: margin!, child: switchWidget);
     }
 
-    if (widget.semanticLabel != null) {
+    if (semanticLabel != null) {
       switchWidget = Semantics(
-        label: widget.semanticLabel!,
-        value: widget.value ? 'On' : 'Off',
-        onTap: isEffectivelyDisabled
-            ? null
-            : () => widget.onChanged?.call(!widget.value),
+        label: semanticLabel!,
+        value: value ? 'On' : 'Off',
+        onTap: isEffectivelyDisabled ? null : () => onChanged?.call(!value),
         child: switchWidget,
       );
     }
@@ -159,27 +141,28 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
     _SwitchColors colors,
   ) {
     return AnimatedContainer(
-      duration: widget.animationDuration ?? const Duration(milliseconds: 250),
+      duration: animationDuration ?? const Duration(milliseconds: 250),
       curve: Curves.easeInOutCubic,
       child: Focus(
-        focusNode: widget.focusNode,
-        autofocus: widget.autofocus,
-        onFocusChange: (focused) => setState(() => _isFocused = focused),
+        focusNode: focusNode,
+        autofocus: autofocus,
+        onFocusChange: (focused) {
+          // Note: Since this is now stateless, we cannot track focus state
+          // The focus behavior will be handled by the focus node itself
+        },
         child: GestureDetector(
-          onTap: isEffectivelyDisabled
-              ? null
-              : () => widget.onChanged?.call(!widget.value),
+          onTap: isEffectivelyDisabled ? null : () => onChanged?.call(!value),
           child: MouseRegion(
             cursor: isEffectivelyDisabled
                 ? SystemMouseCursors.forbidden
                 : SystemMouseCursors.click,
             onEnter: (event) {
-              setState(() => _isHovered = true);
-              widget.onHover?.call(true);
+              // Note: Since this is now stateless, hover effects will be
+              // handled through style properties rather than state
+              onHover?.call(true);
             },
             onExit: (event) {
-              setState(() => _isHovered = false);
-              widget.onHover?.call(false);
+              onHover?.call(false);
             },
             child: _buildSwitchTrack(context, config, colors),
           ),
@@ -194,7 +177,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
     _SwitchColors colors,
   ) {
     return AnimatedContainer(
-      duration: widget.animationDuration ?? const Duration(milliseconds: 250),
+      duration: animationDuration ?? const Duration(milliseconds: 250),
       curve: Curves.easeInOutCubic,
       width: config.trackSize.width,
       height: config.trackSize.height,
@@ -202,7 +185,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
       child: Stack(
         children: [
           // Track içi içerik (sadece extended variant için)
-          if (widget.variant == SwitchVariant.extended)
+          if (variant == SwitchVariant.extended)
             _buildTrackContent(context, config, colors),
           // Thumb
           Positioned.fill(
@@ -226,7 +209,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
             child: Center(
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 200),
-                opacity: widget.value ? 0.3 : 0.7,
+                opacity: value ? 0.3 : 0.7,
                 child: Icon(
                   Icons.close,
                   size: config.trackSize.height * 0.3,
@@ -240,7 +223,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
             child: Center(
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 200),
-                opacity: widget.value ? 0.7 : 0.3,
+                opacity: value ? 0.7 : 0.3,
                 child: Icon(
                   Icons.check,
                   size: config.trackSize.height * 0.3,
@@ -256,19 +239,19 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
   BoxDecoration _getTrackDecoration(
       BuildContext context, SwitchSizeConfig config, _SwitchColors colors) {
-    switch (widget.style) {
+    switch (style) {
       case SwitchStyle.material:
         return BoxDecoration(
-          color: widget.value ? colors.activeTrack : colors.inactiveTrack,
+          color: value ? colors.activeTrack : colors.inactiveTrack,
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
         );
 
       case SwitchStyle.cupertino:
         return BoxDecoration(
-          color: widget.value ? colors.activeTrack : colors.inactiveTrack,
+          color: value ? colors.activeTrack : colors.inactiveTrack,
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
           border: Border.all(
-            color: widget.value
+            color: value
                 ? colors.activeTrack
                 : OsmeaColors.pewter.withValues(alpha: 0.3),
             width: 0.5,
@@ -277,7 +260,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
       case SwitchStyle.modern:
         return BoxDecoration(
-          gradient: widget.value
+          gradient: value
               ? LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -298,14 +281,14 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
           boxShadow: [
             if (!isEffectivelyDisabled) ...[
               BoxShadow(
-                color: widget.value
+                color: value
                     ? colors.activeTrack.withValues(alpha: 0.3)
                     : OsmeaColors.shadowLight,
                 offset: const Offset(0, 2),
                 blurRadius: 4,
                 spreadRadius: 0,
               ),
-              if (widget.value)
+              if (value)
                 BoxShadow(
                   color: colors.activeTrack.withValues(alpha: 0.2),
                   offset: const Offset(0, 0),
@@ -318,9 +301,9 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
       case SwitchStyle.neumorphism:
         return BoxDecoration(
-          color: widget.value ? colors.activeTrack : OsmeaColors.ash,
+          color: value ? colors.activeTrack : OsmeaColors.ash,
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
-          boxShadow: widget.value
+          boxShadow: value
               ? [
                   BoxShadow(
                     color: colors.activeTrack.withValues(alpha: 0.4),
@@ -353,7 +336,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
       case SwitchStyle.glassmorphism:
         return BoxDecoration(
-          color: (widget.value ? colors.activeTrack : colors.inactiveTrack)
+          color: (value ? colors.activeTrack : colors.inactiveTrack)
               .withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
           border: Border.all(
@@ -372,7 +355,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
       case SwitchStyle.minimal:
         return BoxDecoration(
-          color: widget.value ? colors.activeTrack : colors.inactiveTrack,
+          color: value ? colors.activeTrack : colors.inactiveTrack,
           borderRadius: BorderRadius.circular(context.radiusLow.toDouble()),
           border: Border.all(
             color: isFocused && !isEffectivelyDisabled
@@ -385,7 +368,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
       case SwitchStyle.custom:
       default:
         return BoxDecoration(
-          color: widget.value ? colors.activeTrack : colors.inactiveTrack,
+          color: value ? colors.activeTrack : colors.inactiveTrack,
           borderRadius: BorderRadius.circular(config.trackSize.height / 2),
         );
     }
@@ -397,11 +380,11 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
     _SwitchColors colors,
   ) {
     return AnimatedAlign(
-      duration: widget.animationDuration ?? const Duration(milliseconds: 250),
+      duration: animationDuration ?? const Duration(milliseconds: 250),
       curve: Curves.easeInOutCubic,
-      alignment: widget.value ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: value ? Alignment.centerRight : Alignment.centerLeft,
       child: AnimatedContainer(
-        duration: widget.animationDuration ?? const Duration(milliseconds: 250),
+        duration: animationDuration ?? const Duration(milliseconds: 250),
         curve: Curves.easeInOutCubic,
         width: config.thumbSize,
         height: config.thumbSize,
@@ -417,16 +400,15 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
   Widget? _buildThumbContent(
       BuildContext context, SwitchSizeConfig config, _SwitchColors colors) {
     // Sadece extended variant'ında thumb içinde ikon göster
-    if (widget.variant == SwitchVariant.extended &&
-        widget.style == SwitchStyle.modern) {
+    if (variant == SwitchVariant.extended && style == SwitchStyle.modern) {
       return Center(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
           child: Icon(
-            widget.value ? Icons.check : Icons.close,
-            key: ValueKey(widget.value),
+            value ? Icons.check : Icons.close,
+            key: ValueKey(value),
             size: config.thumbSize * 0.4,
-            color: widget.value ? colors.activeTrack : OsmeaColors.pewter,
+            color: value ? colors.activeTrack : OsmeaColors.pewter,
           ),
         ),
       );
@@ -437,7 +419,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
   BoxDecoration _getThumbDecoration(
       BuildContext context, SwitchSizeConfig config, _SwitchColors colors) {
-    switch (widget.style) {
+    switch (style) {
       case SwitchStyle.material:
         return BoxDecoration(
           color: colors.thumb,
@@ -530,7 +512,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
     final children = <Widget>[];
     final spacing = context.emptySizedWidthBoxNormal;
 
-    if (widget.labelPosition == SwitchLabelPosition.leading) {
+    if (labelPosition == SwitchLabelPosition.leading) {
       children.addAll([
         Expanded(child: labelWidget),
         spacing,
@@ -545,16 +527,16 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
     }
 
     return Container(
-      width: widget.fullWidth ? double.infinity : null,
-      padding: widget.padding ?? context.paddingNormal,
-      decoration: widget.variant == SwitchVariant.card
+      width: fullWidth ? double.infinity : null,
+      padding: padding ?? context.paddingNormal,
+      decoration: variant == SwitchVariant.card
           ? BoxDecoration(
               color: OsmeaColors.white,
               borderRadius: context.borderRadiusNormal,
             )
           : null,
       child: Row(
-        mainAxisSize: widget.fullWidth ? context.max : context.min,
+        mainAxisSize: fullWidth ? context.max : context.min,
         crossAxisAlignment: context.crossCenter,
         children: children,
       ),
@@ -566,17 +548,17 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
       crossAxisAlignment: context.crossStart,
       mainAxisSize: context.min,
       children: [
-        if (widget.label != null)
+        if (label != null)
           Text(
-            widget.label!,
+            label!,
             style: _getEffectiveLabelStyle(context).copyWith(
               color: isEffectivelyDisabled ? colors.disabledText : colors.text,
             ),
           ),
-        if (widget.description != null) ...[
+        if (description != null) ...[
           SizedBox(height: context.lowValue),
           Text(
-            widget.description!,
+            description!,
             style: _getEffectiveDescriptionStyle(context).copyWith(
               color: colors.disabledText,
             ),
@@ -587,7 +569,7 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
   }
 
   TextStyle _getEffectiveLabelStyle(BuildContext context) {
-    switch (widget.size) {
+    switch (size) {
       case SwitchSize.small:
         return OsmeaTextStyle.labelSmall(context);
       case SwitchSize.medium:
@@ -603,15 +585,15 @@ class _OsmeaSwitchState extends State<OsmeaSwitch> {
 
   _SwitchColors _getSwitchColors(BuildContext context) {
     return _SwitchColors(
-      activeTrack: widget.activeColor ??
+      activeTrack: activeColor ??
           (isEffectivelyDisabled ? OsmeaColors.silver : OsmeaColors.nordicBlue),
-      inactiveTrack: widget.inactiveColor ??
+      inactiveTrack: inactiveColor ??
           (isEffectivelyDisabled ? OsmeaColors.ash : OsmeaColors.pewter),
-      thumb: widget.thumbColor ??
+      thumb: thumbColor ??
           (isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white),
       text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.eclipse,
-      focus: widget.focusColor ?? OsmeaColors.crystalBay,
-      hover: widget.hoverColor ?? OsmeaColors.deepSea,
+      focus: focusColor ?? OsmeaColors.crystalBay,
+      hover: hoverColor ?? OsmeaColors.deepSea,
       disabledText: OsmeaColors.steel,
       trackIcon: OsmeaColors.white.withValues(alpha: 0.8),
     );
