@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/core/abstract/abstract_core_widget.dart';
+import 'package:osmea_components/src/theme/theme.dart';
 
 /// 📦 **OSMEA Components Library - Core Container**
 ///
@@ -47,7 +48,7 @@ import 'package:osmea_components/src/core/abstract/abstract_core_widget.dart';
 abstract class CoreContainer extends AbstractCoreWidget {
   const CoreContainer({
     super.key,
-    super.customTheme,
+    this.customTheme,
     this.alignment,
     this.padding,
     this.color,
@@ -62,6 +63,9 @@ abstract class CoreContainer extends AbstractCoreWidget {
     this.child,
     this.clipBehavior = Clip.none,
   });
+
+  /// 🎨 Custom theme override for this specific component (supports dynamic for flexibility)
+  final CoreTheme? customTheme;
 
   /// 📐 Determines how to position the child within the container
   final AlignmentGeometry? alignment;
@@ -103,5 +107,25 @@ abstract class CoreContainer extends AbstractCoreWidget {
   final Clip clipBehavior;
 
   @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: key,
+      alignment: alignment,
+      padding: padding,
+      color: color,
+      decoration: decoration,
+      foregroundDecoration: foregroundDecoration,
+      width: width,
+      height: height,
+      constraints: constraints,
+      margin: margin,
+      transform: transform,
+      transformAlignment: transformAlignment,
+      clipBehavior: clipBehavior,
+      child: buildWidget(context),
+    );
+  }
+
+  /// Abstract method that must be implemented by subclasses to build their content
   Widget buildWidget(BuildContext context);
 }

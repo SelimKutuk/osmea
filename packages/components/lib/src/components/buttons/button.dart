@@ -75,6 +75,7 @@ class OsmeaButton extends CoreContainer {
     this.size = ButtonSize.medium,
     this.variant = ButtonVariant.primary,
     this.state = ButtonState.enabled,
+    this.shape = ButtonShape.rectangle,
     this.icon,
     this.iconPosition = IconPosition.leading,
     this.textStyle,
@@ -113,6 +114,9 @@ class OsmeaButton extends CoreContainer {
   /// 🎨 The visual style variant of the button
   final ButtonVariant variant;
 
+  /// 🔲 The shape of the button
+  final ButtonShape shape;
+
   /// 🔄 The current interactive state of the button
   final ButtonState state;
 
@@ -137,16 +141,16 @@ class OsmeaButton extends CoreContainer {
   /// 💫 Color shown during the splash animation when button is pressed
   final Color? splashColor;
 
-  /// � When true, converts the button text to uppercase
+  /// When true, converts the button text to uppercase
   final bool isUppercase;
 
   /// ⏱️ Duration for button animations (hover, press effects)
   final Duration? animationDuration;
 
-  /// � Callback triggered when the button is long-pressed
+  /// Callback triggered when the button is long-pressed
   final VoidCallback? onLongPress;
 
-  /// �️ Callback triggered when hover state changes
+  /// Callback triggered when hover state changes
   final ValueChanged<bool>? onHover;
 
   /// 🎯 Node for managing the focus state of the button
@@ -179,10 +183,6 @@ class OsmeaButton extends CoreContainer {
 
     Widget button = _buildButton(context, config, colors);
 
-    if (margin != null) {
-      button = Padding(padding: margin!, child: button);
-    }
-
     if (tooltip != null) {
       button = Tooltip(
         message: tooltip!,
@@ -205,6 +205,8 @@ class OsmeaButton extends CoreContainer {
     ButtonSizeConfig config,
     _ButtonColors colors,
   ) {
+    final borderRadius = shape.getBorderRadius(context, config.size.height);
+
     return AnimatedContainer(
       duration: animationDuration ?? context.animationMedium,
       curve: easeInOutCubic,
@@ -212,33 +214,32 @@ class OsmeaButton extends CoreContainer {
         color: OsmeaColors.transparent,
         elevation: _getElevation(),
         shadowColor: OsmeaColors.shadowDark,
-        borderRadius: config.borderRadius,
+        borderRadius: borderRadius,
         child: InkWell(
           onTap: isEffectivelyDisabled ? null : onPressed,
           onLongPress: isEffectivelyDisabled ? null : onLongPress,
-          onHover: (value) {
-            if (onHover != null) onHover!(value);
-          },
+          onHover: onHover,
           focusNode: focusNode,
           autofocus: autofocus,
           splashColor: colors.splash,
           highlightColor: colors.hover,
-          borderRadius: config.borderRadius,
+          borderRadius: borderRadius,
           child: AnimatedContainer(
             duration: animationDuration ?? context.animationMedium,
             curve: easeInOutCubic,
-            constraints: BoxConstraints(
-              minWidth: fullWidth
-                  ? context.infinity
-                  : (config.size.width == context.infinity
-                      ? 0
-                      : config.size.width),
-              minHeight: config.size.height,
-            ),
-            padding: padding ?? config.padding,
+            constraints: shape == ButtonShape.circular
+                ? BoxConstraints.tightFor(
+                    width: config.size.height,
+                    height: config.size.height,
+                  )
+                : BoxConstraints(
+                    minWidth: fullWidth ? double.infinity : 0,
+                    minHeight: config.size.height,
+                  ),
+            padding: _getEffectivePadding(config),
             decoration: BoxDecoration(
               color: colors.background,
-              borderRadius: config.borderRadius,
+              borderRadius: borderRadius,
               border: _getBorder(colors, context),
             ),
             transform: isPressed
@@ -263,12 +264,76 @@ class OsmeaButton extends CoreContainer {
     final textWidget =
         text != null ? _buildText(context, colors) : context.emptySizedBox;
 
-    return context.buildIconTextLayout(
-      icon: icon != null ? _buildIcon(context, icon!, config, colors) : null,
-      text: textWidget,
-      position: iconPosition,
-      iconSize: config.iconSize,
+    // Handle different icon positions with proper overflow handling
+    return IntrinsicWidth(
+      child: _buildContentLayout(textWidget, config, colors, context),
     );
+  }
+
+  Widget _buildContentLayout(
+    Widget textWidget,
+    ButtonSizeConfig config,
+    _ButtonColors colors,
+    BuildContext context,
+  ) {
+    switch (iconPosition) {
+      case IconPosition.leading:
+        return Row(
+          mainAxisSize: fullWidth ? max : min,
+          mainAxisAlignment: centerMain,
+          crossAxisAlignment: crossCenter,
+          children: [
+            if (icon != null) ...[
+              _buildIcon(context, icon!, config, colors),
+              SizedBox(width: context.lowValue),
+            ],
+            Flexible(child: textWidget),
+          ],
+        );
+      case IconPosition.trailing:
+        return Row(
+          mainAxisSize: fullWidth ? max : min,
+          mainAxisAlignment: centerMain,
+          crossAxisAlignment: crossCenter,
+          children: [
+            Flexible(child: textWidget),
+            if (icon != null) ...[
+              SizedBox(width: context.lowValue),
+              _buildIcon(context, icon!, config, colors),
+            ],
+          ],
+        );
+      case IconPosition.top:
+        return Column(
+          mainAxisSize: min,
+          mainAxisAlignment: centerMain,
+          crossAxisAlignment: crossCenter,
+          children: [
+            if (icon != null) ...[
+              _buildIcon(context, icon!, config, colors),
+              SizedBox(height: context.lowValue / 2),
+            ],
+            textWidget,
+          ],
+        );
+      case IconPosition.bottom:
+        return Column(
+          mainAxisSize: min,
+          mainAxisAlignment: centerMain,
+          crossAxisAlignment: crossCenter,
+          children: [
+            textWidget,
+            if (icon != null) ...[
+              SizedBox(height: context.lowValue / 2),
+              _buildIcon(context, icon!, config, colors),
+            ],
+          ],
+        );
+      case IconPosition.only:
+        return Center(
+          child: _buildIcon(context, icon!, config, colors),
+        );
+    }
   }
 
   Widget _buildText(BuildContext context, _ButtonColors colors) {
@@ -286,8 +351,9 @@ class OsmeaButton extends CoreContainer {
         fontWeight: context.semiBold,
         letterSpacing: context.letterSpacingWide,
       ),
-      textAlign:
-          iconPosition.isVertical ? context.textCenter : context.textLeft,
+      textAlign: textCenter,
+      overflow: ellipsis,
+      maxLines: 1,
     );
   }
 
@@ -333,8 +399,8 @@ class OsmeaButton extends CoreContainer {
   Widget _buildLoadingContent(
       BuildContext context, ButtonSizeConfig config, _ButtonColors colors) {
     return Row(
-      mainAxisSize: fullWidth ? context.max : context.min,
-      mainAxisAlignment: context.centerMain,
+      mainAxisSize: fullWidth ? max : min,
+      mainAxisAlignment: centerMain,
       children: [
         SizedBox(
           width: config.iconSize,
@@ -347,13 +413,18 @@ class OsmeaButton extends CoreContainer {
         ),
         if (text != null) ...[
           SizedBox(width: context.lowValue),
-          OsmeaText(
-            'Loading...',
-            style: textStyle ??
-                OsmeaTextStyle.fromVariant(context, _getTextVariant()).copyWith(
-                  color: colors.text,
-                  fontWeight: context.medium,
-                ),
+          Flexible(
+            child: OsmeaText(
+              'Loading...',
+              style: textStyle ??
+                  OsmeaTextStyle.fromVariant(context, _getTextVariant())
+                      .copyWith(
+                    color: colors.text,
+                    fontWeight: context.medium,
+                  ),
+              overflow: ellipsis,
+              maxLines: 1,
+            ),
           ),
         ],
       ],
@@ -454,8 +525,8 @@ class OsmeaButton extends CoreContainer {
           background: OsmeaColors.forestHeart,
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
           border: OsmeaColors.forestHeart,
-          hover: OsmeaColors.pineGrove,
-          splash: OsmeaColors.springLeaf,
+          hover: OsmeaColors.springLeaf,
+          splash: OsmeaColors.pineGrove,
           disabled: OsmeaColors.ash,
           disabledText: OsmeaColors.steel,
         );
@@ -493,6 +564,18 @@ class OsmeaButton extends CoreContainer {
           disabledText: OsmeaColors.steel,
         );
     }
+  }
+
+  /// Get effective padding based on shape
+  EdgeInsetsGeometry _getEffectivePadding(ButtonSizeConfig config) {
+    if (padding != null) return padding!;
+
+    // For circular shapes with icon only, use symmetric padding for perfect centering
+    if (shape == ButtonShape.circular && iconPosition == IconPosition.only) {
+      return EdgeInsets.zero; // No padding for perfect circular centering
+    }
+
+    return config.padding;
   }
 }
 
@@ -555,6 +638,7 @@ class OsmeaTextButton extends OsmeaButton {
 /// OsmeaIconButton(
 ///   icon: Icon(Icons.favorite),
 ///   variant: ButtonVariant.ghost,
+///   shape: ButtonShape.circular, // Perfect for icon buttons
 ///   onPressed: () => _toggleFavorite(),
 /// )
 /// ```
@@ -565,6 +649,7 @@ class OsmeaIconButton extends OsmeaButton {
     super.variant,
     super.size,
     super.state,
+    ButtonShape? shape, // Custom shape parameter for icon buttons
     super.onPressed,
     super.onLongPress,
     super.tooltip,
@@ -574,5 +659,7 @@ class OsmeaIconButton extends OsmeaButton {
   }) : super(
           icon: icon,
           iconPosition: IconPosition.only,
+          shape: shape ??
+              ButtonShape.circular, // Default to circular for icon buttons
         );
 }

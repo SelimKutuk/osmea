@@ -262,3 +262,50 @@ enum ButtonState {
   /// - Desktop interaction feedback
   hovered,
 }
+
+/// 🔲 **Button Shape Variants**
+///
+/// Defines the shape/border radius options for button components.
+/// Each shape provides different visual characteristics and use cases.
+///
+/// **Shape Guidelines:**
+/// - `rectangle`: Standard rectangular buttons with rounded corners
+/// - `rounded`: Buttons with more pronounced rounded corners
+/// - `circular`: Fully circular buttons (ideal for icon-only buttons)
+/// - `pill`: Capsule-shaped buttons with maximum border radius
+/// - `square`: Sharp rectangular corners with minimal rounding
+///
+/// **Usage:**
+/// ```dart
+/// OsmeaIconButton(
+///   icon: Icon(Icons.favorite),
+///   shape: ButtonShape.circular, // Perfect for icon buttons
+///   onPressed: () {},
+/// )
+/// ```
+enum ButtonShape {
+  /// 📐 **Rectangle** - Standard rounded corners
+  /// - Border radius: 8px
+  /// - Use for: Most button types, standard UI
+  rectangle,
+
+  /// 🔘 **Rounded** - Pronounced rounded corners
+  /// - Border radius: 12px
+  /// - Use for: Modern UI, friendly appearance
+  rounded,
+
+  /// ⭕ **Circular** - Fully circular shape
+  /// - Border radius: 50% of height
+  /// - Use for: Icon-only buttons, FABs
+  circular,
+
+  /// 💊 **Pill** - Capsule shape
+  /// - Border radius: Half of button height
+  /// - Use for: Tags, toggles, modern CTAs
+  pill,
+
+  /// ⬜ **Square** - Sharp corners
+  /// - Border radius: 2px
+  /// - Use for: Technical interfaces, minimal design
+  square,
+}
