@@ -85,7 +85,8 @@ extension NavbarSizeExtension on NavbarSize {
     switch (this) {
       case NavbarSize.small:
         return NavbarSizeConfig(
-          height: 56.0, // Increased for better text visibility
+          height:
+              context.highValue * 0.75, // Increased for better text visibility
           padding: EdgeInsets.symmetric(
             horizontal: context.lowValue,
             vertical: context.lowValue * 0.5,
@@ -96,14 +97,15 @@ extension NavbarSizeExtension on NavbarSize {
           ),
           iconSize: context.iconSizeSmall, // Using sizer extension
           fontSize: context.fontSizeSmall, // Using sizer extension
-          borderRadius: context.borderRadiusLow,
-          elevation: 2.0,
+          borderRadius: context.borderRadiusZero, // No radius by default
+          elevation: 0.0, // No shadow by default
           itemSpacing: context.lowValue,
         );
 
       case NavbarSize.medium:
         return NavbarSizeConfig(
-          height: 64.0, // Increased for better text visibility
+          height:
+              context.highValue * 0.85, // Increased for better text visibility
           padding: EdgeInsets.symmetric(
             horizontal: context.normalValue * 0.75,
             vertical: context.lowValue * 0.75,
@@ -113,15 +115,16 @@ extension NavbarSizeExtension on NavbarSize {
             vertical: context.lowValue * 0.5,
           ),
           iconSize: context.iconSizeNormal, // Using sizer extension
-          fontSize: context.fontSizeMedium, // Using sizer extension
-          borderRadius: context.borderRadiusNormal,
-          elevation: 4.0,
+          fontSize: context.fontSizeNormal, // Using sizer extension
+          borderRadius: context.borderRadiusZero, // No radius by default
+          elevation: 0.0, // No shadow by default
           itemSpacing: context.normalValue * 0.5,
         );
 
       case NavbarSize.large:
         return NavbarSizeConfig(
-          height: 72.0, // Increased height for better text visibility
+          height:
+              context.highValue, // Increased height for better text visibility
           padding: EdgeInsets.symmetric(
             horizontal: context.normalValue, // Adequate padding
             vertical: context.normalValue * 0.25,
@@ -130,10 +133,10 @@ extension NavbarSizeExtension on NavbarSize {
             horizontal: context.normalValue * 0.75,
             vertical: context.normalValue * 0.25,
           ),
-          iconSize: context.iconSizeLarge, // Using sizer extension
+          iconSize: context.normalValue * 1.5, // Using sizer extension
           fontSize: context.fontSizeNormal, // Using sizer extension
-          borderRadius: context.borderRadiusNormal,
-          elevation: 6.0,
+          borderRadius: context.borderRadiusZero, // No radius by default
+          elevation: 0.0, // No shadow by default
           itemSpacing: context.normalValue * 0.75,
         );
     }

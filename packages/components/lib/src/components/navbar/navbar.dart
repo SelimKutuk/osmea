@@ -152,7 +152,7 @@ class OsmeaNavbar extends CoreContainer {
     this.borderRadius,
     this.showLabels = true,
     this.showIcons = true,
-    this.centerItems = false,
+    this.centerItems = true,
     this.scrollable = false,
     this.onItemTap,
     this.currentIndex = 0,
@@ -385,7 +385,7 @@ class OsmeaNavbar extends CoreContainer {
 
     return AnimatedContainer(
       duration: animationDuration ?? context.animationMedium,
-      curve: Curves.easeInOutCubic,
+      curve: easeInOutCubic,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -477,8 +477,8 @@ class OsmeaNavbar extends CoreContainer {
                     color: textColor,
                   ),
                   maxLines: size == NavbarSize.large ? 2 : 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
+                  overflow: ellipsis,
+                  textAlign: textCenter,
                 );
               }
             },
