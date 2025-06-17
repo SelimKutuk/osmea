@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 
-
 /// 🎨 **OSMEA Button Variants**
 ///
 /// Copyright (c) 2025, OSMEA Team
@@ -334,7 +333,8 @@ class ButtonVariantUtils {
   static ButtonVariant? getVariantByName(String name) {
     try {
       return ButtonVariant.values.firstWhere(
-        (variant) => variant.name.toString().toLowerCase() == name.toLowerCase(),
+        (variant) =>
+            variant.name.toString().toLowerCase() == name.toLowerCase(),
       );
     } catch (e) {
       return null;
