@@ -304,7 +304,6 @@ extension ClipBehaviorExtension on dynamic {
   Clip get clipHardEdge => Clip.hardEdge;
   Clip get clipAntiAlias => Clip.antiAlias;
   Clip get clipAntiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer;
-  Clip get clipPremium => Clip.antiAliasWithSaveLayer;
 }
 
 /// ➖ EMPTY SIZED BOX EXTENSION
