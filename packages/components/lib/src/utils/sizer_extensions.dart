@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
-/// 📐 **OSMEA Sizer Extensions**
+/// 🎯 **OSMEA Sizer Extensions**
 ///
-/// A collection of extension methods for responsive sizing and spacing
-/// in OSMEA applications.
+/// Copyright (c) 2025, OSMEA Team
+/// https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components
+///
+/// Extensions for Sizer utilities in the OSMEA UI Kit.
+/// Provides a comprehensive set of utilities for:
+///
+/// {@category Utils}
+/// {@subCategory SizerExtensions}
+///
+/// Extensions:
 ///
 /// **Extension Categories:**
 /// - 📱 Screen Dimensions
@@ -20,11 +28,6 @@ import 'package:flutter/material.dart';
 ///   height: context.dynamicHeight(0.5),
 /// )
 /// ```
-///
-/// @category Utils
-/// @subcategory Extensions
-
-/// 📏 SIZER EXTENSION
 extension SizerExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
@@ -849,4 +852,3 @@ extension BoxShapeExtension on dynamic {
   BoxShape get badgeShape => BoxShape.circle;
   BoxShape get chipShape => BoxShape.rectangle;
 }
-
