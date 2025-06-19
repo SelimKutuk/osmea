@@ -299,10 +299,22 @@ extension AnimationStatusExtension on dynamic {
 
 /// 🔧 CLIP BEHAVIOR EXTENSION
 extension ClipBehaviorExtension on dynamic {
+
   Clip get clipNone => Clip.none;
-  Clip get hardEdge => Clip.hardEdge;
   Clip get antiAlias => Clip.antiAlias;
+  Clip get hardEdge => Clip.hardEdge;
   Clip get antiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer;
+  Clip get noClip => Clip.none;
+  Clip get clipHard => Clip.hardEdge;
+  Clip get clipSmooth => Clip.antiAlias;
+  Clip get clipPremium => Clip.antiAliasWithSaveLayer;
+  Clip get clipRectangle => Clip.hardEdge;
+  Clip get clipRounded => Clip.antiAlias;
+  Clip get clipSharp => Clip.hardEdge;
+  Clip get clipSoft => Clip.antiAlias;
+  Clip get clipFast => Clip.hardEdge;
+  Clip get clipQuality => Clip.antiAlias;
+  Clip get clipHighestQuality => Clip.antiAliasWithSaveLayer;
 }
 
 /// ➖ EMPTY SIZED BOX EXTENSION

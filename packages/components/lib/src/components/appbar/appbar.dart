@@ -300,11 +300,15 @@ class OsmeaAppBar extends CoreContainer implements PreferredSizeWidget {
       scrolledUnderElevation: scrolledUnderElevation,
       centerTitle: titleAlignment.shouldCenter,
       titleSpacing: titleSpacing ??
-          (titleAlignment == AppBarTitleAlignment.left ? context.spacing4 : null),
+          (titleAlignment == AppBarTitleAlignment.left
+              ? context.spacing4
+              : null),
       toolbarOpacity: toolbarOpacity,
       bottomOpacity: bottomOpacity,
       leadingWidth: leadingWidth ??
-          (titleAlignment == AppBarTitleAlignment.left ? context.width40 + context.spacing4 : null),
+          (titleAlignment == AppBarTitleAlignment.left
+              ? context.width40 + context.spacing4
+              : null),
       automaticallyImplyLeading: automaticallyImplyLeading,
       excludeHeaderSemantics: excludeHeaderSemantics,
       primary: primary,
@@ -369,7 +373,7 @@ class OsmeaAppBar extends CoreContainer implements PreferredSizeWidget {
                 : crossCenter,
         children: [
           titleWidget,
-          SizedBox(height: context.spacing2),
+          context.emptySizedHeightBoxLow,
           subtitleWidget,
         ],
       );
@@ -445,14 +449,15 @@ class OsmeaAppBar extends CoreContainer implements PreferredSizeWidget {
     if (action.text != null) {
       actionWidget = InkWell(
         onTap: action.isEnabled ? action.onPressed : null,
-        borderRadius: BorderRadius.circular(context.spacing8),
+        borderRadius: context.borderRadiusNormal,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.spacing8, vertical: context.spacing8),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.spacing8, vertical: context.spacing8),
           child: OsmeaText(
             action.text!,
             variant: OsmeaTextVariant.bodySmall,
             color: action.color ?? actionColor ?? variantConfig.foregroundColor,
-            textAlign: TextAlign.center,
+            textAlign: textCenter,
           ),
         ),
       );
@@ -473,7 +478,7 @@ class OsmeaAppBar extends CoreContainer implements PreferredSizeWidget {
     // Add badge if present - position it over the "n" in "Notifications"
     if (action.badge != null) {
       actionWidget = Stack(
-        clipBehavior: Clip.none,
+        clipBehavior: context.clipNone,
         children: [
           actionWidget,
           // Position badge precisely over the "n" in "Notifications"
@@ -514,7 +519,8 @@ class OsmeaAppBar extends CoreContainer implements PreferredSizeWidget {
       return ClipRRect(
         borderRadius: borderRadius ?? styleConfig.borderRadius,
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: context.spacing10, sigmaY: context.spacing10),
+          filter: ImageFilter.blur(
+              sigmaX: context.spacing10, sigmaY: context.spacing10),
           child: Container(
             decoration: BoxDecoration(
               color: variantConfig.backgroundColor
