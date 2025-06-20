@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
+import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/checkbox/checkbox.dart';
+import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
 import 'package:osmea_components/src/components/login_button/login_button.dart';
 import 'package:osmea_components/src/components/navbar/navbar.dart';
+import 'package:osmea_components/src/components/expanded/expanded.dart';
+import 'package:osmea_components/src/components/padding/padding.dart';
+import 'package:osmea_components/src/components/row/row.dart';
+import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/radio_button/radio_button.dart';
 import 'package:osmea_components/src/theme/theme.dart';
@@ -179,6 +186,223 @@ class OsmeaComponents {
     return const Text('Rich Text Component - Coming Soon');
   }
 
+  /// 🔄 **OSMEA Expanded** - Standard expanded component
+  ///
+  /// Creates an expanded component that matches Flutter's standard Expanded widget API.
+  /// Makes its child expand to fill available space in a Flex container (like Row or Column).
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.expanded(
+  ///   flex: 2,
+  ///   child: Container(
+  ///     color: Colors.blue,
+  ///     child: Center(child: Text('Expanded Area')),
+  ///   ),
+  /// )
+  /// ```
+  static Widget expanded({
+    Key? key,
+    CoreTheme? customTheme,
+    int flex = 1,
+    required Widget child,
+  }) {
+    return OsmeaExpanded(
+      key: key,
+      customTheme: customTheme,
+      flex: flex,
+      child: child,
+    );
+  }
+
+  /// 📏 **OSMEA Padding** - Enhanced padding component
+  ///
+  /// Creates a padding component that adds space around its child,
+  /// matching Flutter's standard Padding widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.padding(
+  ///   padding: EdgeInsets.all(16),
+  ///   child: OsmeaText('Padded content'),
+  /// )
+  /// ```
+  static Widget padding({
+    Key? key,
+    CoreTheme? customTheme,
+    required EdgeInsetsGeometry padding,
+    required Widget child,
+  }) {
+    return OsmeaPadding(
+      key: key,
+      customTheme: customTheme,
+      padding: padding,
+      child: child,
+    );
+  }
+
+  /// 📏 **OSMEA SizedBox** - Standard sized box component
+  ///
+  /// Creates a sized box component that matches Flutter's standard SizedBox widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.sizedBox(
+  ///   width: 100,
+  ///   height: 100,
+  ///   child: Text('Sized Content'),
+  /// )
+  /// ```
+  static Widget sizedBox({
+    Key? key,
+    CoreTheme? customTheme,
+    double? width,
+    double? height,
+    Widget? child,
+  }) {
+    return OsmeaSizedBox(
+      key: key,
+      customTheme: customTheme,
+      width: width,
+      height: height,
+      child: child,
+    );
+  }
+
+  /// 📍 **OSMEA Align** - Standard alignment component
+  ///
+  /// Creates an alignment component that matches Flutter's standard Align widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.align(
+  ///   alignment: Alignment.center,
+  ///   child: Text('Aligned content'),
+  /// )
+  /// ```
+  static Widget align({
+    Key? key,
+    CoreTheme? customTheme,
+    required AlignmentGeometry alignment,
+    required Widget child,
+    double? widthFactor,
+    double? heightFactor,
+  }) {
+    return OsmeaAlign(
+      key: key,
+      customTheme: customTheme,
+      alignment: alignment,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: child,
+    );
+  }
+
+  /// 🎯 **OSMEA Center** - Standard centering component
+  ///
+  /// Creates a centering component that matches Flutter's standard Center widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.center(
+  ///   child: OsmeaText('Centered content'),
+  /// )
+  /// ```
+  static Widget center({
+    Key? key,
+    CoreTheme? customTheme,
+    required Widget child,
+    double? widthFactor,
+    double? heightFactor,
+  }) {
+    return OsmeaCenter(
+      key: key,
+      customTheme: customTheme,
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
+      child: child,
+    );
+  }
+
+  /// � **OSMEA Row** - Flexible row layout component
+  ///
+  /// Creates a row layout component with enhanced capabilities such as automatic spacing,
+  /// A row layout component that matches Flutter's standard Row widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.row(
+  ///   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  ///   children: [
+  ///     Icon(Icons.home),
+  ///     Text('Dashboard'),
+  ///     Icon(Icons.settings),
+  ///   ],
+  /// )
+  /// ```
+  static Widget row({
+    Key? key,
+    CoreTheme? customTheme,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    List<Widget> children = const <Widget>[],
+  }) {
+    return OsmeaRow(
+      key: key,
+      customTheme: customTheme,
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
+      children: children,
+    );
+  }
+
+  /// 📊 **OSMEA Column** - Standard column layout component
+  ///
+  /// Creates a column layout component that matches Flutter's standard Column widget API.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.column(
+  ///   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  ///   crossAxisAlignment: CrossAxisAlignment.center,
+  ///   children: [
+  ///     Icon(Icons.home),
+  ///     Text('Dashboard'),
+  ///     Icon(Icons.settings),
+  ///   ],
+  /// )
+  /// ```
+  static Widget column({
+    Key? key,
+    CoreTheme? customTheme,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    TextBaseline? textBaseline,
+    List<Widget> children = const <Widget>[],
+  }) {
+    return OsmeaColumn(
+      key: key,
+      customTheme: customTheme,
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
+      children: children,
+    );
+  }
 
   /// �📦 **OSMEA Container** - Flexible container component
   ///
