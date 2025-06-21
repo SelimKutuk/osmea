@@ -9,6 +9,7 @@ import 'package:osmea_components_example/radio_button_example.dart';
 import 'package:osmea_components_example/text_example.dart';
 import 'package:osmea_components_example/colors_example.dart';
 import 'package:osmea_components_example/button_example.dart';
+import 'package:osmea_components_example/badge_example.dart';
 import 'package:osmea_components_example/checkbox_example.dart';
 import 'package:osmea_components_example/container_example.dart';
 import 'package:osmea_components_example/row_example.dart';
@@ -222,17 +223,6 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
-                  'Mobile-Inspired AppBars',
-                  Icons.phone_android,
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AppbarDemo(),
-                    ),
-                  ),
-                ),
-                _buildComponentCard(
-                  context,
                   'Text Components',
                   Icons.text_fields,
                   () => Navigator.push(
@@ -250,6 +240,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ButtonExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Badges',
+                  Icons.label,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BadgeExample(),
                     ),
                   ),
                 ),
