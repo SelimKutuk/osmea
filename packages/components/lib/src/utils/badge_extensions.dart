@@ -225,7 +225,6 @@ extension BadgeStyleConfigExtension on BadgeStyle {
   /// Apply style modifications to a base variant configuration
   BadgeVariantConfig applyStyle(
     BadgeVariantConfig baseConfig,
-    bool isIconBadge,
     BuildContext context,
   ) {
     switch (this) {
