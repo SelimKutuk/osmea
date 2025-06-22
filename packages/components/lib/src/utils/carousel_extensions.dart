@@ -131,15 +131,13 @@ extension CarouselVariantExtension on CarouselVariant {
         return CarouselVariantConfig(
           backgroundColor: OsmeaColors.transparent,
           arrowColor: OsmeaColors.white,
-          dotColor: OsmeaColors.white.withValues(alpha: context.alpha50),
+          dotColor: OsmeaColors.silver,
           activeDotColor: OsmeaColors.white,
           borderColor: OsmeaColors.transparent,
-          showShadow: true,
-          shadowBlur: 8.0,
         );
       case CarouselVariant.gallery:
         return CarouselVariantConfig(
-          backgroundColor: OsmeaColors.ash,
+          backgroundColor: OsmeaColors.white,
           arrowColor: OsmeaColors.nordicBlue,
           dotColor: OsmeaColors.silver,
           activeDotColor: OsmeaColors.nordicBlue,
