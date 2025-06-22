@@ -10,18 +10,18 @@ This document tracks the status of both design styles and reusable UI components
 | Text                          | 🟢     | 14.06.25   | 14.06.25 | Nurhayat Yurtaslan  |
 | Size                          | 🟢     | 14.06.25   | 14.06.25 | Nurhayat Yurtaslan  |
 | Assets                        | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Navbar                        | 🟢     | 16.06.25   | 17.06.25 | Nisa Çolak  |
-| App Bar                       | 🟢     | 18.06.25   | 19.06.25 | Nurhayat Yurtaslan|
+| Navbar                        | 🟢     | 16.06.25   | 17.06.25 | Nisa Çolak         |
+| App Bar                       | 🟢     | 18.06.25   | 19.06.25 | Nurhayat Yurtaslan |
 | Buttons (Text, Icon, etc.)    | 🟢     | 14.06.25   | 16.06.25 | Nurhayat Yurtaslan, Nisa Çolak  |
 | Bottom Sheet (S, M, L)        | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Pop Up (S, M, L)              | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Menu Item                     | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Card designs (S, M, L)        | 🟡     | 22.06.25   | (TBD)    |    Nisa Çolak   |
-| Textfields                    | 🟢     | 18.06.25   | 21.06.25 | Nisa Çolak   |
+| Card designs (S, M, L)        | 🟡     | 22.06.25   | (TBD)    |    Nisa Çolak      |
+| Textfields                    | 🟢     | 18.06.25   | 21.06.25 | Nisa Çolak         |
 | List Items                    | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Snackbar - Toast              | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Carousel                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
-| Chips                         | 🟡     | 21.06.25   | (TBD)    | Nurhayat Yurtaslan |
+| Carousel                      | 🟢     | 22.06.25   | 22.06.25 | Nurhayat Yurtaslan |
+| Chips                         | 🟢     | 21.06.25   | 22.06.25 | Nurhayat Yurtaslan |
 | Badge                         | 🟢     | 20.06.25   | 21.06.25 | Nurhayat Yurtaslan |
 | Dividers                      | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
 | Loading ve Progress           | 🔴     | (TBD)      | (TBD)    | (To be assigned)   |
