@@ -2,51 +2,65 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'carousel_state.dart';
 import 'package:osmea_components/src/enums/carousel_enums.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 class CarouselCubit extends Cubit<CarouselState> {
-  CarouselCubit(CarouselState initialState) : super(initialState);
+  final PageController pageController;
+
+  CarouselCubit(CarouselState initialState, {double viewportFraction = 1.0})
+      : pageController = PageController(
+          initialPage: initialState.activeIndex,
+          viewportFraction: viewportFraction,
+        ),
+        super(initialState);
 
   Timer? _autoplayTimer;
 
   @override
   Future<void> close() {
     _autoplayTimer?.cancel();
+    pageController.dispose();
     return super.close();
   }
 
   void next() {
+    int nextIndex;
     if (state.isLooping) {
-      final nextIndex = (state.activeIndex + 1) % state.itemCount;
-      emit(state.copyWith(activeIndex: nextIndex));
+      nextIndex = (state.activeIndex + 1) % state.itemCount;
+    } else if (state.activeIndex < state.itemCount - 1) {
+      nextIndex = state.activeIndex + 1;
+    } else if (state.isAutoPlaying && state.itemCount > 0) {
+      nextIndex = 0;
     } else {
-      if (state.activeIndex < state.itemCount - 1) {
-        emit(state.copyWith(activeIndex: state.activeIndex + 1));
-      } else {
-        if (state.isAutoPlaying && state.itemCount > 0) {
-          emit(state.copyWith(activeIndex: 0));
-        }
-      }
+      return;
+    }
+    emit(state.copyWith(activeIndex: nextIndex));
+    if (pageController.hasClients) {
+      pageController.jumpToPage(nextIndex);
     }
   }
 
   void previous() {
+    int prevIndex;
     if (state.isLooping) {
-      final prevIndex =
-          (state.activeIndex - 1 + state.itemCount) % state.itemCount;
-      emit(state.copyWith(activeIndex: prevIndex));
+      prevIndex = (state.activeIndex - 1 + state.itemCount) % state.itemCount;
+    } else if (state.activeIndex > 0) {
+      prevIndex = state.activeIndex - 1;
     } else {
-      if (state.activeIndex > 0) {
-        emit(state.copyWith(activeIndex: state.activeIndex - 1));
-      } else {
-        // Optionally: emit(state.copyWith(activeIndex: state.itemCount - 1)); // to jump to end
-        // Otherwise, do nothing (arrow will be hidden/disabled)
-      }
+      return;
+    }
+    emit(state.copyWith(activeIndex: prevIndex));
+    if (pageController.hasClients) {
+      pageController.jumpToPage(prevIndex);
     }
   }
 
   void jumpTo(int index) {
     if (index >= 0 && index < state.itemCount) {
       emit(state.copyWith(activeIndex: index));
+      if (pageController.hasClients) {
+        pageController.jumpToPage(index);
+      }
     }
   }
 

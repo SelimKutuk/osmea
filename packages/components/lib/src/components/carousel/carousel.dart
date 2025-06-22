@@ -4,6 +4,7 @@ import 'package:osmea_components/src/components/carousel/cubit/carousel_cubit.da
 import 'package:osmea_components/src/components/carousel/cubit/carousel_state.dart';
 import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
@@ -124,7 +125,7 @@ class OsmeaCarousel extends CoreContainer {
                 : null;
             Widget decorated = child;
             if (child is Icon) {
-              decorated = Container(
+              decorated = OsmeaContainer(
                 decoration: BoxDecoration(
                   border: Border.all(color: OsmeaColors.steel, width: 2),
                   borderRadius: context.borderRadiusMinStandard,
@@ -157,18 +158,28 @@ class OsmeaCarousel extends CoreContainer {
         variant == CarouselVariant.multi ? false : showIndicators;
 
     return BlocProvider<CarouselCubit>(
-      create: (_) => CarouselCubit(CarouselState(
-        activeIndex: initialIndex,
-        itemCount: itemCount,
-        isLooping: loop,
-        isAutoPlaying: autoPlay == CarouselAutoPlay.continuous,
-        enabled: !disabled,
-        selected: selected,
-        transitionType: transitionType,
-        indicatorType: indicatorType,
-        navigationType: navigationType,
-        autoPlayInterval: autoPlayInterval,
-      )),
+      create: (_) {
+        double effectiveViewportFraction;
+        if (variant == CarouselVariant.multi) {
+          effectiveViewportFraction = viewportFraction ?? (1 / 2.2);
+        } else {
+          effectiveViewportFraction = viewportFraction ?? 1.0;
+        }
+        return CarouselCubit(
+            CarouselState(
+              activeIndex: initialIndex,
+              itemCount: itemCount,
+              isLooping: loop,
+              isAutoPlaying: autoPlay == CarouselAutoPlay.continuous,
+              enabled: !disabled,
+              selected: selected,
+              transitionType: transitionType,
+              indicatorType: indicatorType,
+              navigationType: navigationType,
+              autoPlayInterval: autoPlayInterval,
+            ),
+            viewportFraction: effectiveViewportFraction);
+      },
       child: _OsmeaCarouselAutoplayWrapper(
         parent: this,
         itemCount: itemCount,
@@ -311,8 +322,6 @@ class _OsmeaCarouselView extends StatelessWidget {
   final double itemSpacing;
   final bool showIndicators;
 
-  static final Map<Key, PageController> _controllerCache = {};
-
   const _OsmeaCarouselView({
     required this.parent,
     required this.children,
@@ -326,44 +335,12 @@ class _OsmeaCarouselView extends StatelessWidget {
     required this.showIndicators,
   });
 
-  double _responsiveMultiViewportFraction() {
-    return 1 / 2.2;
-  }
-
-  PageController _getController(int activeIndex, double viewportFraction) {
-    final key = parent.key ?? ValueKey(parent.hashCode);
-    if (!_controllerCache.containsKey(key)) {
-      _controllerCache[key] = PageController(
-        initialPage: activeIndex,
-        viewportFraction: viewportFraction,
-      );
-    } else {
-      final controller = _controllerCache[key]!;
-      if (controller.hasClients && controller.page?.round() != activeIndex) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          controller.jumpToPage(activeIndex);
-        });
-      }
-    }
-    return _controllerCache[key]!;
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CarouselCubit, CarouselState>(
       builder: (context, state) {
-        if (parent.currentIndex != null &&
-            parent.currentIndex != state.activeIndex) {
-          context.read<CarouselCubit>().jumpTo(parent.currentIndex!);
-        }
+        final cubit = context.read<CarouselCubit>();
         final bool isMulti = parent.variant == CarouselVariant.multi;
-        double viewportFraction = 1.0;
-        if (isMulti) {
-          viewportFraction =
-              parent.viewportFraction ?? _responsiveMultiViewportFraction();
-        }
-        final pageController =
-            _getController(state.activeIndex, viewportFraction);
         final bool isDisabled = parent.disabled || !state.enabled;
         final bool isSelected = parent.selected || state.selected;
         final Color finalBackgroundColor =
@@ -385,11 +362,11 @@ class _OsmeaCarouselView extends StatelessWidget {
             borderRadius: effectiveBorderRadius,
             clipBehavior: clipAntiAlias,
             child: PageView.builder(
-              controller: pageController,
+              controller: cubit.pageController,
               itemCount: itemCount,
               padEnds: isMulti ? false : true,
               onPageChanged: (index) {
-                context.read<CarouselCubit>().jumpTo(index);
+                cubit.jumpTo(index);
                 parent.onPageChanged?.call(index);
               },
               itemBuilder: (context, index) => Padding(
@@ -600,8 +577,8 @@ class _OsmeaCarouselView extends StatelessWidget {
     Widget indicatorRow;
     switch (parent.indicatorType) {
       case CarouselIndicatorType.dot:
-        indicatorRow = Row(
-          mainAxisSize: MainAxisSize.min,
+        indicatorRow = OsmeaRow(
+          mainAxisSize: min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(itemCount, (index) {
             return GestureDetector(
@@ -630,8 +607,8 @@ class _OsmeaCarouselView extends StatelessWidget {
         );
         break;
       case CarouselIndicatorType.bar:
-        indicatorRow = Row(
-          mainAxisSize: MainAxisSize.min,
+        indicatorRow = OsmeaRow(
+          mainAxisSize: min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(itemCount, (index) {
             return GestureDetector(
@@ -660,8 +637,8 @@ class _OsmeaCarouselView extends StatelessWidget {
         );
         break;
       case CarouselIndicatorType.rectangle:
-        indicatorRow = Row(
-          mainAxisSize: MainAxisSize.min,
+        indicatorRow = OsmeaRow(
+          mainAxisSize: min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(itemCount, (index) {
             return GestureDetector(
@@ -688,9 +665,9 @@ class _OsmeaCarouselView extends StatelessWidget {
         );
         break;
       case CarouselIndicatorType.gradient:
-        indicatorRow = Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+        indicatorRow = OsmeaRow(
+          mainAxisSize: min,
+          mainAxisAlignment: centerMain,
           children: List.generate(itemCount, (index) {
             return GestureDetector(
               onTap: () {
@@ -721,8 +698,8 @@ class _OsmeaCarouselView extends StatelessWidget {
         break;
       case CarouselIndicatorType.minimal:
         indicatorRow = Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: min,
+          mainAxisAlignment: centerMain,
           children: List.generate(itemCount, (index) {
             return Flexible(
               fit: FlexFit.loose,
