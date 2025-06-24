@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
+import 'package:osmea_components/src/components/avatar/avatar.dart';
 import 'package:osmea_components/src/components/badge/badge.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/cards/cards.dart';
@@ -193,6 +194,69 @@ class OsmeaComponents {
       tooltip: tooltip,
       autofocus: autofocus,
       backgroundColor: backgroundColor,
+    );
+  }
+
+  /// 👤 **OSMEA Avatar** - Comprehensive avatar component
+  ///
+  /// Creates a versatile avatar component with support for:
+  /// - All component sizes (extraSmall to extraLarge)
+  /// - All appearance variants (filled, outlined, elevated, etc.)
+  /// - Multiple content types (icon, image, imageUrl, text)
+  /// - Interactive features (onTap, onLongPress)
+  /// - Customizable styling (backgroundColor, borderColor, borderWidth)
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.avatar(
+  ///   size: ComponentSize.large,
+  ///   appearance: ComponentAppearance.elevated,
+  ///   icon: Icons.person,
+  ///   backgroundColor: OsmeaColors.nordicBlue,
+  ///   onTap: () => showUserProfile(),
+  /// )
+  /// ```
+  static Widget avatar({
+    Key? key,
+    CoreTheme? customTheme,
+    ComponentSize size = ComponentSize.medium,
+    ComponentAppearance appearance = ComponentAppearance.filled,
+    ComponentOrientation orientation = ComponentOrientation.horizontal,
+    IconData? icon,
+    ImageProvider? image,
+    String? imageUrl,
+    String? text,
+    Color? backgroundColor,
+    Color? borderColor,
+    double borderWidth = 0.0,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    double elevation = 0.0,
+    Color? shadowColor,
+    BorderRadius? borderRadius,
+    String? semanticLabel,
+    Object? heroTag,
+  }) {
+    return OsmeaAvatar(
+      key: key,
+      customTheme: customTheme,
+      size: size,
+      appearance: appearance,
+      orientation: orientation,
+      icon: icon,
+      image: image,
+      imageUrl: imageUrl,
+      text: text,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      borderWidth: borderWidth,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      elevation: elevation,
+      shadowColor: shadowColor,
+      borderRadius: borderRadius,
+      semanticLabel: semanticLabel,
+      heroTag: heroTag,
     );
   }
 

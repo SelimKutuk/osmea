@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components_example/align_example.dart';
+import 'package:osmea_components_example/avatar_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
 import 'package:osmea_components_example/services/mock_auth_service.dart';
@@ -227,6 +228,17 @@ class ComponentsScreen extends StatelessWidget {
                 ),
                 _buildComponentCard(
                   context,
+                  'Avatar',
+                  Icons.account_circle,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AvatarExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
                   'Text Components',
                   Icons.text_fields,
                   () => Navigator.push(
@@ -400,6 +412,18 @@ class ExamplesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const SwitchButtonExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Avatar Examples',
+                  'User avatars with icons, images, and text',
+                  Icons.account_circle,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AvatarExample(),
                     ),
                   ),
                 ),
