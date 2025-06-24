@@ -96,9 +96,12 @@ class _CardExampleState extends State<CardExample> {
               'A comprehensive Flutter component library with beautiful, accessible, and customizable components.',
           variant: ComponentAppearance.elevated,
           size: ComponentSize.medium,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 12.0,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Basic card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Card with Custom Styling'),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.basicCard(
@@ -108,38 +111,45 @@ class _CardExampleState extends State<CardExample> {
               'Unlock advanced features with our premium plan. Get access to exclusive components and priority support.',
           variant: ComponentAppearance.outlined,
           size: ComponentSize.medium,
+          borderColor: OsmeaColors.nordicBlue,
           titleColor: OsmeaColors.nordicBlue,
           subtitleColor: OsmeaColors.sunsetGlow,
           contentColor: OsmeaColors.pewter,
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Premium card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Card with Custom Content'),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.basicCard(
           variant: ComponentAppearance.filled,
           size: ComponentSize.large,
+          borderRadius: BorderRadius.circular(16),
+          spacing: 20.0,
+          margin: const EdgeInsets.only(bottom: 16),
           customContent: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OsmeaComponents.row(
                 children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 32),
+                  Icon(Icons.star, color: OsmeaColors.sunsetGlow, size: 32),
                   OsmeaComponents.sizedBox(width: 12),
-                  OsmeaComponents.column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      OsmeaComponents.text(
-                        'Featured Component',
-                        variant: OsmeaTextVariant.titleMedium,
-                        color: OsmeaColors.nordicBlue,
-                      ),
-                      OsmeaComponents.text(
-                        'Highly recommended',
-                        variant: OsmeaTextVariant.labelMedium,
-                        color: OsmeaColors.forestHeart,
-                      ),
-                    ],
+                  OsmeaComponents.expanded(
+                    child: OsmeaComponents.column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        OsmeaComponents.text(
+                          'Featured Component',
+                          variant: OsmeaTextVariant.titleMedium,
+                          color: OsmeaColors.nordicBlue,
+                        ),
+                        OsmeaComponents.text(
+                          'Highly recommended',
+                          variant: OsmeaTextVariant.labelMedium,
+                          color: OsmeaColors.forestHeart,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -167,14 +177,28 @@ class _CardExampleState extends State<CardExample> {
           subtitle: 'Photography Collection',
           content:
               'Discover stunning landscape photography from around the world.',
-          imageAsset: 'assets/placeholder_image.png', // Placeholder for demo
+          imageWidget: Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              color: OsmeaColors.nordicBlue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
+          ),
           imageHeight: 200,
           imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
           variant: ComponentAppearance.elevated,
           size: ComponentSize.medium,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
+          semanticLabel: 'Beautiful nature landscape image',
           onTap: () => _showSnackBar('Nature image card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Image Card - Left Position'),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.imageCard(
@@ -186,51 +210,466 @@ class _CardExampleState extends State<CardExample> {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [OsmeaColors.nordicBlue, OsmeaColors.crystalBay],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: OsmeaColors.crystalBay,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.computer, color: Colors.white, size: 32),
+            child: Icon(Icons.computer, color: OsmeaColors.white, size: 32),
           ),
+          imageHeight: 100,
           imagePosition: ComponentPosition.left,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
           variant: ComponentAppearance.outlined,
           size: ComponentSize.medium,
+          borderColor: OsmeaColors.nordicBlue,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
+          semanticLabel: 'Technology innovation icon',
           onTap: () => _showSnackBar('Tech image card tapped'),
         ),
+        // ⭐ Premium Product Cards Section
+        _buildSubsectionTitle('🌟 Premium Product Cards'),
         OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Image Card with Badge'),
-        OsmeaComponents.sizedBox(height: 16),
+
+        // Wireless Earbuds - Premium with solid color
         OsmeaComponents.imageCard(
-          title: 'New Product Launch',
-          subtitle: 'Limited Edition',
-          content:
-              'Get your hands on our newest product with exclusive features.',
+          title: 'Wireless Earbuds Pro',
+          subtitle: 'Premium Sound Quality',
+          content: '₺1,299',
           imageWidget: Container(
             width: double.infinity,
-            height: 150,
+            height: 220,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [OsmeaColors.sunsetGlow, OsmeaColors.goldenHour],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(8),
+              color: OsmeaColors.nordicBlue,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: OsmeaColors.nordicBlue.withOpacity(0.4),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ],
             ),
-            child:
-                const Icon(Icons.shopping_bag, color: Colors.white, size: 48),
+            child: const Center(
+              child: Icon(
+                Icons.headphones,
+                color: OsmeaColors.white,
+                size: 90,
+              ),
+            ),
           ),
-          badge: OsmeaComponents.badge(
-            content: 'NEW',
-            variant: BadgeVariant.danger,
-            size: BadgeSize.small,
+          imageHeight: 220,
+          imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
+          showOverlay: false,
+          badge: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: OsmeaColors.forestHeart,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: OsmeaColors.forestHeart.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: const Text(
+              'NEW',
+              style: TextStyle(
+                color: OsmeaColors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ),
+          badgePosition: BadgePosition.topRight,
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.large,
+          backgroundColor: OsmeaColors.white,
+          titleColor: OsmeaColors.eclipse,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.thunder,
+          spacing: 16.0,
+          borderRadius: BorderRadius.circular(20),
+          elevation: 8.0,
+          shadowColor: OsmeaColors.nordicBlue.withOpacity(0.3),
+          margin: const EdgeInsets.only(bottom: 24),
+          semanticLabel: 'Premium wireless earbuds product card',
+          onTap: () => _showSnackBar('Premium earbuds tapped - ₺1,299'),
+        ),
+
+        // Smart Watch - Health focused with solid color
+        OsmeaComponents.imageCard(
+          title: 'Apple Watch Series 10',
+          subtitle: 'Health & Fitness Tracking',
+          content: '₺2,499',
+          imageWidget: Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              color: OsmeaColors.thunder,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.watch,
+                  color: OsmeaColors.white,
+                  size: 85,
+                ),
+                SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.sunsetGlow.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.favorite, color: OsmeaColors.sunsetGlow, size: 16),
+                      SizedBox(width: 4),
+                      Text('72 BPM',
+                          style:
+                              TextStyle(color: OsmeaColors.white, fontSize: 12)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          imageHeight: 200,
+          imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
+          showOverlay: false,
+          badge: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: OsmeaColors.sunsetGlow,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'HOT',
+              style: TextStyle(
+                color: OsmeaColors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           badgePosition: BadgePosition.topRight,
           variant: ComponentAppearance.elevated,
           size: ComponentSize.medium,
-          onTap: () => _showSnackBar('Product launch card tapped'),
+          backgroundColor: OsmeaColors.white,
+          titleColor: OsmeaColors.thunder,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.forestHeart,
+          spacing: 12.0,
+          borderRadius: BorderRadius.circular(16),
+          elevation: 6.0,
+          margin: const EdgeInsets.only(bottom: 20),
+          semanticLabel: 'Apple Watch health tracking device',
+          onTap: () => _showSnackBar('Apple Watch tapped - Health features'),
+        ),
+
+        // 📱 Mobile & Tech Section
+        _buildSubsectionTitle('📱 Mobile & Technology'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Smartphone with solid color
+        OsmeaComponents.imageCard(
+          title: 'iPhone 16 Pro Max',
+          subtitle: 'Latest Technology • 1TB',
+          content: '₺15,999',
+          imageWidget: Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              color: OsmeaColors.nordicBlue,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        '5G',
+                        style: TextStyle(
+                          color: OsmeaColors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Icon(
+                      Icons.smartphone,
+                      color: OsmeaColors.white,
+                      size: 80,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '1TB Storage',
+                          style: TextStyle(color: OsmeaColors.white, fontSize: 12),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          imageHeight: 200,
+          imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
+          showOverlay: false,
+          badge: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: OsmeaColors.amberFlame,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              '25% OFF',
+              style: TextStyle(
+                color: OsmeaColors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          badgePosition: BadgePosition.topRight,
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.medium,
+          backgroundColor: OsmeaColors.white,
+          titleColor: OsmeaColors.thunder,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.nordicBlue,
+          spacing: 12.0,
+          borderRadius: BorderRadius.circular(16),
+          elevation: 4.0,
+          margin: const EdgeInsets.only(bottom: 20),
+          semanticLabel: 'iPhone 16 Pro Max smartphone',
+          onTap: () => _showSnackBar('iPhone 16 Pro Max - 25% discount!'),
+        ),
+
+        // Gaming Section
+        _buildSubsectionTitle('🎮 Gaming & Entertainment'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Gaming Headset
+        OsmeaComponents.imageCard(
+          title: 'Gaming Headset Pro',
+          subtitle: '7.1 Surround Sound',
+          content: '₺899',
+          imageWidget: Container(
+            width: double.infinity,
+            height: 180,
+            decoration: BoxDecoration(
+              color: OsmeaColors.eclipse,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.azureWave,
+                          borderRadius: BorderRadius.circular(4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: OsmeaColors.azureWave.withOpacity(0.6),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Icon(
+                      Icons.headset_mic,
+                      color: OsmeaColors.azureWave,
+                      size: 75,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          imageHeight: 180,
+          imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
+          showOverlay: false,
+          badge: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: OsmeaColors.azureWave,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'GAMING',
+              style: TextStyle(
+                color: OsmeaColors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ),
+          badgePosition: BadgePosition.topRight,
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.medium,
+          backgroundColor: OsmeaColors.eclipse,
+          titleColor: OsmeaColors.white,
+          subtitleColor: OsmeaColors.azureWave,
+          contentColor: OsmeaColors.forestHeart,
+          spacing: 12.0,
+          borderRadius: BorderRadius.circular(16),
+          elevation: 6.0,
+          margin: const EdgeInsets.only(bottom: 20),
+          semanticLabel: 'Gaming headset with surround sound',
+          onTap: () => _showSnackBar('Gaming Headset Pro - RGB lighting!'),
+        ),
+
+        // Home & Lifestyle Section
+        _buildSubsectionTitle('🏠 Home & Lifestyle'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Smart Home Device
+        OsmeaComponents.imageCard(
+          title: 'Smart Home Hub',
+          subtitle: 'Voice Control • WiFi 6',
+          content: '₺599',
+          imageWidget: Container(
+            width: double.infinity,
+            height: 160,
+            decoration: BoxDecoration(
+              color: OsmeaColors.snow,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: OsmeaColors.silver,
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      Icon(
+                        Icons.wifi,
+                        color: OsmeaColors.forestHeart,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Icon(
+                      Icons.home_outlined,
+                      color: OsmeaColors.pewter,
+                      size: 70,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.nordicBlue.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Icon(
+                          Icons.mic,
+                          color: OsmeaColors.nordicBlue,
+                          size: 16,
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          imageHeight: 160,
+          imagePosition: ComponentPosition.top,
+          imageFit: BoxFit.cover,
+          imageAlignment: Alignment.center,
+          showOverlay: false,
+          badge: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: OsmeaColors.nordicBlue,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'SMART',
+              style: TextStyle(
+                color: OsmeaColors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          badgePosition: BadgePosition.topRight,
+          variant: ComponentAppearance.outlined,
+          size: ComponentSize.small,
+          borderColor: OsmeaColors.silver,
+          backgroundColor: OsmeaColors.white,
+          titleColor: OsmeaColors.thunder,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.nordicBlue,
+          spacing: 10.0,
+          borderRadius: BorderRadius.circular(12),
+          margin: const EdgeInsets.only(bottom: 20),
+          semanticLabel: 'Smart home automation hub',
+          onTap: () => _showSnackBar('Smart Home Hub - Voice control ready'),
         ),
       ],
     );
@@ -240,57 +679,206 @@ class _CardExampleState extends State<CardExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSubsectionTitle('Confirmation Dialog Card'),
+        // 🚨 Critical Actions Section
+        _buildSubsectionTitle('⚠️ Critical Actions'),
         OsmeaComponents.sizedBox(height: 16),
+
+        // Delete Account - High risk action
         OsmeaComponents.actionCard(
           title: 'Delete Account',
           subtitle: 'This action cannot be undone',
           content:
-              'Are you sure you want to permanently delete your account? All your data will be lost.',
-          primaryAction: 'Delete',
-          secondaryAction: 'Cancel',
-          onPrimaryPressed: () => _showSnackBar('Delete confirmed'),
-          onSecondaryPressed: () => _showSnackBar('Delete cancelled'),
+              'Are you sure you want to permanently delete your account? All your data, purchases, and settings will be lost forever.',
+          primaryAction: 'Delete Forever',
+          secondaryAction: 'Keep Account',
+          onPrimaryPressed: () =>
+              _showSnackBar('⚠️ Account deletion confirmed'),
+          onSecondaryPressed: () => _showSnackBar('Account preserved safely'),
           primaryVariant: ButtonVariant.danger,
           secondaryVariant: ButtonVariant.outlined,
-          variant: ComponentAppearance.elevated,
+          primarySize: ButtonSize.medium,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.delete_forever, size: 18),
+          secondaryIcon: const Icon(Icons.shield, size: 18),
+          buttonLayout: ComponentOrientation.horizontal,
+          actionSpacing: 16.0,
+          contentSpacing: 20.0,
+          variant: ComponentAppearance.outlined,
           size: ComponentSize.medium,
+          borderColor: OsmeaColors.sunsetGlow.withOpacity(0.3),
+          backgroundColor: OsmeaColors.sunsetGlow.withOpacity(0.05),
+          titleColor: OsmeaColors.sunsetGlow,
+          subtitleColor: OsmeaColors.amberFlame,
+          contentColor: OsmeaColors.amberFlame,
+          margin: const EdgeInsets.only(bottom: 20),
         ),
+
+        // 💎 Premium & Subscription Section
+        _buildSubsectionTitle('💎 Premium Services'),
         OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Subscription Card'),
-        OsmeaComponents.sizedBox(height: 16),
+
+        // Premium Subscription with benefits
         OsmeaComponents.actionCard(
-          title: 'Upgrade to Pro',
-          subtitle: '\$9.99/month',
+          title: 'Upgrade to OSMEA Pro',
+          subtitle: '₺29.99/month • First 7 days free',
           content:
-              'Get access to premium features, priority support, and exclusive content.',
-          primaryAction: 'Subscribe Now',
+              '✨ Premium components\n🚀 Priority support\n📊 Advanced analytics\n🎨 Custom themes\n📱 Multi-platform access',
+          primaryAction: 'Start Free Trial',
           secondaryAction: 'Learn More',
-          onPrimaryPressed: () => _showSnackBar('Subscription started'),
-          onSecondaryPressed: () => _showSnackBar('Learn more tapped'),
+          onPrimaryPressed: () => _showSnackBar('🎉 Free trial started!'),
+          onSecondaryPressed: () => _showSnackBar('More info requested'),
+          primaryVariant: ButtonVariant.primary,
+          secondaryVariant: ButtonVariant.ghost,
+          primarySize: ButtonSize.large,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.diamond, size: 20),
+          secondaryIcon: const Icon(Icons.info_outline, size: 18),
+          buttonLayout: ComponentOrientation.horizontal,
+          actionSpacing: 16.0,
+          contentSpacing: 24.0,
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.large,
+          elevation: 8.0,
+          backgroundColor: OsmeaColors.snow,
+          borderRadius: BorderRadius.circular(16),
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.forestHeart,
+          contentColor: OsmeaColors.slate,
+          margin: const EdgeInsets.only(bottom: 20),
+        ),
+
+        // 🛒 E-commerce Actions Section
+        _buildSubsectionTitle('🛒 Shopping & Commerce'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Add to Cart action
+        OsmeaComponents.actionCard(
+          title: 'Add to Shopping Cart',
+          subtitle: 'iPhone 16 Pro Max • 1TB',
+          content:
+              'Price: ₺15,999\nStock: 3 items left\nFree shipping available',
+          primaryAction: 'Add to Cart',
+          secondaryAction: 'Add to Wishlist',
+          onPrimaryPressed: () => _showSnackBar('🛒 Added to cart - ₺15,999'),
+          onSecondaryPressed: () => _showSnackBar('💖 Added to wishlist'),
           primaryVariant: ButtonVariant.primary,
           secondaryVariant: ButtonVariant.outlined,
-          primaryIcon: const Icon(Icons.star, size: 18),
-          secondaryIcon: const Icon(Icons.info_outline, size: 18),
+          primarySize: ButtonSize.medium,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.add_shopping_cart, size: 18),
+          secondaryIcon: const Icon(Icons.favorite_outline, size: 18),
+          buttonLayout: ComponentOrientation.horizontal,
+          actionSpacing: 12.0,
+          contentSpacing: 16.0,
           variant: ComponentAppearance.filled,
           size: ComponentSize.medium,
+          backgroundColor: OsmeaColors.forestHeart.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          titleColor: OsmeaColors.thunder,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.pewter,
+          margin: const EdgeInsets.only(bottom: 20),
         ),
+
+        // 📋 Task Management Section
+        _buildSubsectionTitle('📋 Task & Project Management'),
         OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Vertical Button Layout'),
-        OsmeaComponents.sizedBox(height: 16),
+
+        // Save Changes - Vertical layout
         OsmeaComponents.actionCard(
-          title: 'Save Changes',
+          title: 'Save Project Changes',
+          subtitle: '12 files modified • Last saved 5 minutes ago',
           content:
-              'You have unsaved changes. Would you like to save them before leaving?',
-          primaryAction: 'Save & Exit',
+              'You have unsaved changes in your project. Save now to prevent data loss.',
+          primaryAction: 'Save & Continue',
           secondaryAction: 'Discard Changes',
-          onPrimaryPressed: () => _showSnackBar('Changes saved'),
-          onSecondaryPressed: () => _showSnackBar('Changes discarded'),
+          onPrimaryPressed: () =>
+              _showSnackBar('💾 Changes saved successfully'),
+          onSecondaryPressed: () => _showSnackBar('🗑️ Changes discarded'),
           primaryVariant: ButtonVariant.primary,
           secondaryVariant: ButtonVariant.outlined,
+          primarySize: ButtonSize.large,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.save, size: 20),
+          secondaryIcon: const Icon(Icons.delete_outline, size: 18),
           buttonLayout: ComponentOrientation.vertical,
+          actionSpacing: 12.0,
+          contentSpacing: 20.0,
           variant: ComponentAppearance.elevated,
+          size: ComponentSize.large,
+          elevation: 4.0,
+          backgroundColor: OsmeaColors.white,
+          titleColor: OsmeaColors.thunder,
+          subtitleColor: OsmeaColors.slate,
+          contentColor: OsmeaColors.pewter,
+          margin: const EdgeInsets.only(bottom: 20),
+        ),
+
+        // 🔐 Security Actions Section
+        _buildSubsectionTitle('🔐 Security & Privacy'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Two-factor authentication
+        OsmeaComponents.actionCard(
+          title: 'Enable Two-Factor Authentication',
+          subtitle: 'Recommended for account security',
+          content:
+              'Protect your account with an additional layer of security. You\'ll need your phone to sign in.',
+          primaryAction: 'Enable 2FA',
+          secondaryAction: 'Skip for Now',
+          onPrimaryPressed: () => _showSnackBar('🔐 2FA setup started'),
+          onSecondaryPressed: () => _showSnackBar('⏭️ 2FA setup skipped'),
+          primaryVariant: ButtonVariant.primary,
+          secondaryVariant: ButtonVariant.ghost,
+          primarySize: ButtonSize.medium,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.security, size: 18),
+          secondaryIcon: const Icon(Icons.skip_next, size: 18),
+          buttonLayout: ComponentOrientation.horizontal,
+          actionSpacing: 16.0,
+          contentSpacing: 18.0,
+          variant: ComponentAppearance.outlined,
           size: ComponentSize.medium,
+          borderColor: OsmeaColors.nordicBlue,
+          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.05),
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.nordicBlue,
+          contentColor: OsmeaColors.thunder,
+          margin: const EdgeInsets.only(bottom: 20),
+        ),
+
+        // 📱 Communication Section
+        _buildSubsectionTitle('📱 Communication & Social'),
+        OsmeaComponents.sizedBox(height: 16),
+
+        // Share content
+        OsmeaComponents.actionCard(
+          title: 'Share Your Creation',
+          subtitle: 'Let others see your amazing work',
+          content:
+              'Share your project with the community and get feedback from other developers.',
+          primaryAction: 'Share Now',
+          secondaryAction: 'Copy Link',
+          onPrimaryPressed: () => _showSnackBar('📤 Shared successfully!'),
+          onSecondaryPressed: () =>
+              _showSnackBar('🔗 Link copied to clipboard'),
+          primaryVariant: ButtonVariant.primary,
+          secondaryVariant: ButtonVariant.outlined,
+          primarySize: ButtonSize.medium,
+          secondarySize: ButtonSize.medium,
+          primaryIcon: const Icon(Icons.share, size: 18),
+          secondaryIcon: const Icon(Icons.link, size: 18),
+          buttonLayout: ComponentOrientation.horizontal,
+          actionSpacing: 14.0,
+          contentSpacing: 16.0,
+          variant: ComponentAppearance.filled,
+          size: ComponentSize.medium,
+          backgroundColor: OsmeaColors.nordicBlue.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(14),
+          titleColor: OsmeaColors.deepSea,
+          subtitleColor: OsmeaColors.nordicBlue,
+          contentColor: OsmeaColors.slate,
+          margin: const EdgeInsets.only(bottom: 20),
         ),
       ],
     );
@@ -300,7 +888,7 @@ class _CardExampleState extends State<CardExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSubsectionTitle('Elevated Cards'),
+        _buildSubsectionTitle('Different Appearance Variants'),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.wrap(
           spacing: 16,
@@ -311,41 +899,50 @@ class _CardExampleState extends State<CardExample> {
               content: 'This card has shadow elevation for depth.',
               variant: ComponentAppearance.elevated,
               size: ComponentSize.medium,
-              width: 200,
+              width: 180,
+              elevation: 8.0,
+              shadowColor: OsmeaColors.nordicBlue.withOpacity(0.3),
+              margin: const EdgeInsets.all(8),
               onTap: () => _showSnackBar('Elevated card tapped'),
             ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Outlined Cards'),
-        OsmeaComponents.sizedBox(height: 16),
-        OsmeaComponents.wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
             OsmeaComponents.basicCard(
               title: 'Outlined Card',
               content: 'This card has a border outline.',
               variant: ComponentAppearance.outlined,
-              size: ComponentSize.extraSmall,
+              size: ComponentSize.medium,
+              width: 180,
+              borderColor: OsmeaColors.nordicBlue,
+              margin: const EdgeInsets.all(8),
               onTap: () => _showSnackBar('Outlined card tapped'),
             ),
-          ],
-        ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Filled Cards'),
-        OsmeaComponents.sizedBox(height: 16),
-        OsmeaComponents.wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
             OsmeaComponents.basicCard(
               title: 'Filled Card',
               content: 'This card has a filled background.',
               variant: ComponentAppearance.filled,
               size: ComponentSize.medium,
-              width: 200,
+              width: 180,
+              backgroundColor: OsmeaColors.crystalBay.withOpacity(0.1),
+              margin: const EdgeInsets.all(8),
               onTap: () => _showSnackBar('Filled card tapped'),
+            ),
+            OsmeaComponents.basicCard(
+              title: 'Ghost Card',
+              content: 'This card has minimal styling.',
+              variant: ComponentAppearance.ghost,
+              size: ComponentSize.medium,
+              width: 180,
+              margin: const EdgeInsets.all(8),
+              onTap: () => _showSnackBar('Ghost card tapped'),
+            ),
+            OsmeaComponents.basicCard(
+              title: 'Flat Card',
+              content: 'This card has no elevation.',
+              variant: ComponentAppearance.flat,
+              size: ComponentSize.medium,
+              width: 180,
+              backgroundColor: OsmeaColors.ash.withOpacity(0.1),
+              margin: const EdgeInsets.all(8),
+              onTap: () => _showSnackBar('Flat card tapped'),
             ),
           ],
         ),
@@ -357,29 +954,38 @@ class _CardExampleState extends State<CardExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSubsectionTitle('Small Cards'),
+        _buildSubsectionTitle('Different Size Variants'),
         OsmeaComponents.sizedBox(height: 16),
+        OsmeaComponents.basicCard(
+          title: 'Extra Small Card',
+          content: 'Minimal space, compact design.',
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.extraSmall,
+          titleColor: OsmeaColors.nordicBlue,
+          margin: const EdgeInsets.only(bottom: 16),
+          onTap: () => _showSnackBar('Extra small card tapped'),
+        ),
         OsmeaComponents.basicCard(
           title: 'Small Card',
           content: 'Compact card with minimal content.',
           variant: ComponentAppearance.elevated,
           size: ComponentSize.small,
+          titleColor: OsmeaColors.nordicBlue,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Small card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Medium Cards'),
-        OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.basicCard(
           title: 'Medium Card',
           subtitle: 'Standard Size',
           content: 'This is a medium-sized card with standard proportions.',
           variant: ComponentAppearance.elevated,
           size: ComponentSize.medium,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Medium card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
-        _buildSubsectionTitle('Large Cards'),
-        OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.basicCard(
           title: 'Large Card',
           subtitle: 'Extra Space',
@@ -387,7 +993,24 @@ class _CardExampleState extends State<CardExample> {
               'This is a large card with plenty of space for content. It\'s perfect for detailed information and rich content.',
           variant: ComponentAppearance.elevated,
           size: ComponentSize.large,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 20.0,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Large card tapped'),
+        ),
+        OsmeaComponents.basicCard(
+          title: 'Extra Large Card',
+          subtitle: 'Maximum Space',
+          content:
+              'This is an extra large card with maximum spacing and content area. Perfect for rich content displays and detailed information layouts.',
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.extraLarge,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 24.0,
+          margin: const EdgeInsets.only(bottom: 16),
+          onTap: () => _showSnackBar('Extra large card tapped'),
         ),
       ],
     );
@@ -405,16 +1028,22 @@ class _CardExampleState extends State<CardExample> {
           content: 'This card responds to tap events with visual feedback.',
           variant: ComponentAppearance.outlined,
           size: ComponentSize.medium,
+          borderColor: OsmeaColors.crystalBay,
+          titleColor: OsmeaColors.nordicBlue,
+          subtitleColor: OsmeaColors.pewter,
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
           onTap: () => _showSnackBar('Interactive card tapped'),
         ),
-        OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Cards with Custom Actions'),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.basicCard(
-          title: 'Notification Settings',
-          content: 'Manage your notification preferences.',
           variant: ComponentAppearance.filled,
           size: ComponentSize.medium,
+          backgroundColor: OsmeaColors.ash.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(12),
+          spacing: 16.0,
+          margin: const EdgeInsets.only(bottom: 16),
           customContent: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -433,10 +1062,12 @@ class _CardExampleState extends State<CardExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OsmeaComponents.text('Push Notifications'),
-                  Switch(
+                  OsmeaComponents.switchButton(
                     value: true,
                     onChanged: (value) => _showSnackBar(
                         'Push notifications ${value ? 'enabled' : 'disabled'}'),
+                    variant: SwitchVariant.simple,
+                    size: SwitchSize.small,
                   ),
                 ],
               ),
@@ -445,10 +1076,12 @@ class _CardExampleState extends State<CardExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OsmeaComponents.text('Email Notifications'),
-                  Switch(
+                  OsmeaComponents.switchButton(
                     value: false,
                     onChanged: (value) => _showSnackBar(
                         'Email notifications ${value ? 'enabled' : 'disabled'}'),
+                    variant: SwitchVariant.simple,
+                    size: SwitchSize.small,
                   ),
                 ],
               ),
@@ -465,41 +1098,61 @@ class _CardExampleState extends State<CardExample> {
       children: [
         _buildSubsectionTitle('Card Grid Layout'),
         OsmeaComponents.sizedBox(height: 16),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1.2,
+        OsmeaComponents.wrap(
+          spacing: 16,
+          runSpacing: 16,
           children: [
-            OsmeaComponents.basicCard(
-              title: 'Stats',
-              content: '1,234 Users',
-              variant: ComponentAppearance.elevated,
-              size: ComponentSize.small,
-              onTap: () => _showSnackBar('Stats card tapped'),
+            SizedBox(
+              width: 150,
+              height: 125,
+              child: OsmeaComponents.basicCard(
+                title: 'Stats',
+                content: '1,234 Users',
+                variant: ComponentAppearance.elevated,
+                size: ComponentSize.small,
+                titleColor: OsmeaColors.nordicBlue,
+                contentColor: OsmeaColors.forestHeart,
+                onTap: () => _showSnackBar('Stats card tapped'),
+              ),
             ),
-            OsmeaComponents.basicCard(
-              title: 'Revenue',
-              content: '\$12,345',
-              variant: ComponentAppearance.elevated,
-              size: ComponentSize.small,
-              onTap: () => _showSnackBar('Revenue card tapped'),
+            SizedBox(
+              width: 150,
+              height: 125,
+              child: OsmeaComponents.basicCard(
+                title: 'Revenue',
+                content: '\$12,345',
+                variant: ComponentAppearance.elevated,
+                size: ComponentSize.small,
+                titleColor: OsmeaColors.nordicBlue,
+                contentColor: OsmeaColors.sunsetGlow,
+                onTap: () => _showSnackBar('Revenue card tapped'),
+              ),
             ),
-            OsmeaComponents.basicCard(
-              title: 'Growth',
-              content: '+23.4%',
-              variant: ComponentAppearance.elevated,
-              size: ComponentSize.small,
-              onTap: () => _showSnackBar('Growth card tapped'),
+            SizedBox(
+              width: 150,
+              height: 125,
+              child: OsmeaComponents.basicCard(
+                title: 'Growth',
+                content: '+23.4%',
+                variant: ComponentAppearance.elevated,
+                size: ComponentSize.small,
+                titleColor: OsmeaColors.nordicBlue,
+                contentColor: OsmeaColors.forestHeart,
+                onTap: () => _showSnackBar('Growth card tapped'),
+              ),
             ),
-            OsmeaComponents.basicCard(
-              title: 'Orders',
-              content: '567 Orders',
-              variant: ComponentAppearance.elevated,
-              size: ComponentSize.small,
-              onTap: () => _showSnackBar('Orders card tapped'),
+            SizedBox(
+              width: 150,
+              height: 125,
+              child: OsmeaComponents.basicCard(
+                title: 'Orders',
+                content: '567 Orders',
+                variant: ComponentAppearance.elevated,
+                size: ComponentSize.small,
+                titleColor: OsmeaColors.nordicBlue,
+                contentColor: OsmeaColors.crystalBay,
+                onTap: () => _showSnackBar('Orders card tapped'),
+              ),
             ),
           ],
         ),
@@ -509,16 +1162,23 @@ class _CardExampleState extends State<CardExample> {
         OsmeaComponents.basicCard(
           variant: ComponentAppearance.elevated,
           size: ComponentSize.large,
+          elevation: 4.0,
+          borderRadius: BorderRadius.circular(16),
+          spacing: 20.0,
+          margin: const EdgeInsets.only(bottom: 16),
           customContent: OsmeaComponents.column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               OsmeaComponents.row(
                 children: [
-                  CircleAvatar(
-                    radius: 32,
-                    backgroundColor: OsmeaColors.nordicBlue,
-                    child:
-                        const Icon(Icons.person, color: Colors.white, size: 32),
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: OsmeaColors.nordicBlue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.person, color: OsmeaColors.white, size: 32),
                   ),
                   OsmeaComponents.sizedBox(width: 16),
                   OsmeaComponents.expanded(
@@ -546,7 +1206,10 @@ class _CardExampleState extends State<CardExample> {
                 ],
               ),
               OsmeaComponents.sizedBox(height: 16),
-              const Divider(),
+              Container(
+                height: 1,
+                color: OsmeaColors.silver,
+              ),
               OsmeaComponents.sizedBox(height: 16),
               OsmeaComponents.row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
