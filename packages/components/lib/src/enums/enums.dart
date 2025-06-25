@@ -47,6 +47,9 @@ export 'carousel_enums.dart';
 // List item enums
 export 'list_item_enums.dart';
 
+// Loading enums
+export 'loading_enums.dart';
+
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';
 // export 'layout_enums.dart';
