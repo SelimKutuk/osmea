@@ -31,6 +31,8 @@ import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
+import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
+import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 
 import 'enums/enums.dart';
 
@@ -1769,6 +1771,51 @@ class OsmeaComponents {
       maintainState: maintainState,
       collapseIcon: collapseIcon,
       expandIcon: expandIcon,
+    );
+  }
+
+  /// 🎫 **OSMEA Ticket Widget** - Dynamic form generator for support tickets
+  ///
+  /// Creates comprehensive ticket forms from JSON configuration with multiple input types,
+  /// validation, progress tracking, and save as draft functionality.
+  ///
+  /// Example:
+  /// ```dart
+  /// TicketWidget(
+  ///   config: TicketFormConfig.fromJson(jsonConfig),
+  ///   onSubmit: (response) async {
+  ///     return await submitTicket(response);
+  ///   },
+  ///   onSaveAsDraft: (response) async {
+  ///     return await saveDraft(response);
+  ///   },
+  /// )
+  /// ```
+  static Widget ticketWidget({
+    Key? key,
+    required TicketFormConfig config,
+    Future<bool> Function(TicketResponse response)? onSubmit,
+    Future<bool> Function(TicketResponse response)? onSaveAsDraft,
+    VoidCallback? onCancel,
+    TicketResponse? initialResponse,
+    CoreTheme? customTheme,
+    EdgeInsetsGeometry? padding,
+    Color? backgroundColor,
+    bool? showProgressIndicator,
+    bool? enableSaveAsDraft,
+  }) {
+    return TicketWidget(
+      key: key,
+      config: config,
+      onSubmit: onSubmit,
+      onSaveAsDraft: onSaveAsDraft,
+      onCancel: onCancel,
+      initialResponse: initialResponse,
+      customTheme: customTheme,
+      padding: padding,
+      backgroundColor: backgroundColor,
+      showProgressIndicator: showProgressIndicator,
+      enableSaveAsDraft: enableSaveAsDraft,
     );
   }
 }
