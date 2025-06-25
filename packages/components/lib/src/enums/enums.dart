@@ -38,6 +38,10 @@ export 'components_enum.dart';
 
 // Badge enums
 export 'badge_enums.dart';
+
+// Bottom Sheet enums
+export 'bottom_sheet_enums.dart';
+
 // Chips enums
 export 'chips_enums.dart';
 

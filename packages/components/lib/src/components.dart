@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/badge/badge.dart';
+import 'package:osmea_components/src/components/bottom_sheet/bottom_sheet.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/checkbox/checkbox.dart';
@@ -875,6 +876,88 @@ class OsmeaComponents {
       margin: margin,
       animationDuration: animationDuration,
       child: child,
+    );
+  }
+
+  /// 📋 **OSMEA Bottom Sheet** - Comprehensive bottom sheet component
+  ///
+  /// Creates a feature-rich bottom sheet component with support for:
+  /// - Three size variants (small, medium, large)
+  /// - Multiple style variants (standard, modal, persistent, floating)
+  /// - Interactive states (collapsed, expanded, dragging, animating)
+  /// - Drag handle customization
+  /// - Title, subtitle, and action support
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.bottomSheet(
+  ///   size: BottomSheetSize.medium,
+  ///   variant: BottomSheetVariant.modal,
+  ///   title: 'Settings',
+  ///   child: SettingsContent(),
+  ///   onDismiss: () => Navigator.pop(context),
+  /// )
+  /// ```
+  static Widget bottomSheet({
+    Key? key,
+    CoreTheme? customTheme,
+    required Widget child,
+    BottomSheetSize size = BottomSheetSize.medium,
+    BottomSheetVariant variant = BottomSheetVariant.standard,
+    BottomSheetState state = BottomSheetState.expanded,
+    BottomSheetHandle handle = BottomSheetHandle.auto,
+    BottomSheetAnimationType animationType = BottomSheetAnimationType.slide,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    bool enableDrag = true,
+    VoidCallback? onDismiss,
+    ValueChanged<BottomSheetState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    bool isScrollControlled = true,
+    BoxConstraints? constraints,
+    bool showDragIndicator = true,
+    ShapeBorder? shape,
+  }) {
+    return OsmeaBottomSheet(
+      key: key,
+      customTheme: customTheme,
+      child: child,
+      size: size,
+      variant: variant,
+      state: state,
+      handle: handle,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      isScrollControlled: isScrollControlled,
+      constraints: constraints,
+      showDragIndicator: showDragIndicator,
+      shape: shape,
     );
   }
 
