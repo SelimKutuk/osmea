@@ -108,7 +108,6 @@ class LoadingExample extends StatelessWidget {
         'desc': 'Single dot orbiting.'
       },
     ];
-    final List<double> sizes = [24, 36, 48, 64];
     final List<Color> colors = [
       Colors.blue,
       Colors.red,
