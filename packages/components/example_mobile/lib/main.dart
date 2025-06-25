@@ -3,6 +3,7 @@ import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components_example/align_example.dart';
 import 'package:osmea_components_example/carousel_example.dart';
 import 'package:osmea_components_example/chips_example.dart';
+import 'package:osmea_components_example/loading_example.dart';
 import 'package:osmea_components_example/services/mock_auth_service.dart';
 import 'package:osmea_components_example/center_example.dart';
 import 'package:osmea_components_example/appbars_demo.dart';
@@ -255,6 +256,17 @@ class ComponentsScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ButtonExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'loading',
+                  Icons.animation,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoadingExample(),
                     ),
                   ),
                 ),
