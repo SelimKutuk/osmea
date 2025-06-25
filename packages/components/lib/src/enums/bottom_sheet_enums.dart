@@ -101,6 +101,12 @@ enum BottomSheetVariant {
   /// - Shadow: Material design elevation
   /// - Use for: Action sheets, menus
   floating,
+
+  /// 🎯 **Action Bar** - Bottom sheet with action buttons in header
+  /// - Background: Surface color with action bar
+  /// - Header: Left and right action buttons with border
+  /// - Use for: Forms with navigation, multi-step processes
+  actionBar,
 }
 
 /// 🔄 **Bottom Sheet Interactive States**

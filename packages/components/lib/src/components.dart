@@ -882,19 +882,28 @@ class OsmeaComponents {
   /// 📋 **OSMEA Bottom Sheet** - Comprehensive bottom sheet component
   ///
   /// Creates a feature-rich bottom sheet component with support for:
-  /// - Three size variants (small, medium, large)
-  /// - Multiple style variants (standard, modal, persistent, floating)
+  /// - Four size variants (small, medium, large, actionBar)
+  /// - Multiple style variants (standard, modal, persistent, floating, actionBar)
   /// - Interactive states (collapsed, expanded, dragging, animating)
   /// - Drag handle customization
   /// - Title, subtitle, and action support
+  /// - Action bar with left/right action buttons
   /// - Full customization options
   ///
   /// Example:
   /// ```dart
   /// OsmeaComponents.bottomSheet(
   ///   size: BottomSheetSize.medium,
-  ///   variant: BottomSheetVariant.modal,
+  ///   variant: BottomSheetVariant.actionBar,
   ///   title: 'Settings',
+  ///   leftAction: OsmeaComponents.iconButton(
+  ///     icon: Icon(Icons.close),
+  ///     onPressed: () => Navigator.pop(context),
+  ///   ),
+  ///   rightAction: OsmeaComponents.button(
+  ///     text: 'Save',
+  ///     onPressed: () => handleSave(),
+  ///   ),
   ///   child: SettingsContent(),
   ///   onDismiss: () => Navigator.pop(context),
   /// )
@@ -928,6 +937,12 @@ class OsmeaComponents {
     BoxConstraints? constraints,
     bool showDragIndicator = true,
     ShapeBorder? shape,
+    // Action Bar parameters
+    Widget? leftAction,
+    Widget? rightAction,
+    bool showActionBorder = true,
+    Color? actionBarBackgroundColor,
+    Color? actionBarBorderColor,
   }) {
     return OsmeaBottomSheet(
       key: key,
@@ -958,6 +973,11 @@ class OsmeaComponents {
       constraints: constraints,
       showDragIndicator: showDragIndicator,
       shape: shape,
+      leftAction: leftAction,
+      rightAction: rightAction,
+      showActionBorder: showActionBorder,
+      actionBarBackgroundColor: actionBarBackgroundColor,
+      actionBarBorderColor: actionBarBorderColor,
     );
   }
 

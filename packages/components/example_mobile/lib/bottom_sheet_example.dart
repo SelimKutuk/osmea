@@ -93,6 +93,16 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
                 onPressed: () => _showWithOsmeaComponents(context),
                 color: Colors.purple,
               ),
+              
+              OsmeaComponents.sizedBox(height: 12),
+              
+              // Action Bar Bottom Sheet
+              _buildExampleButton(
+                title: 'Action Bar Bottom Sheet',
+                description: 'With left/right action buttons',
+                onPressed: () => _showActionBarBottomSheet(context),
+                color: OsmeaColors.nordicBlue,
+              ),
             ],
           ),
         ),
@@ -481,6 +491,236 @@ class _BottomSheetExampleState extends State<BottomSheetExample> {
               onPressed: () => Navigator.pop(context),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showActionBarBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => OsmeaComponents.bottomSheet(
+        size: BottomSheetSize.medium,
+        variant: BottomSheetVariant.actionBar,
+        title: 'Multi-Step Form',
+        subtitle: 'Step 1 of 3 - Personal Information',
+        leftAction: OsmeaComponents.iconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.pop(context),
+          variant: ButtonVariant.ghost,
+          tooltip: 'Close',
+        ),
+        rightAction: OsmeaComponents.button(
+          text: 'Next',
+          icon: const Icon(Icons.arrow_forward),
+          iconPosition: IconPosition.trailing,
+          onPressed: () {
+            Navigator.pop(context);
+            _showActionBarStep2(context);
+          },
+          variant: ButtonVariant.primary,
+          size: ButtonSize.small,
+        ),
+        showActionBorder: true,
+        actionBarBackgroundColor: Colors.grey.shade50,
+        actionBarBorderColor: Colors.grey.shade300,
+        child: OsmeaComponents.padding(
+          padding: const EdgeInsets.all(20),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OsmeaComponents.textField(
+                label: 'First Name',
+                hint: 'Enter your first name',
+                variant: TextFieldVariant.outlined,
+                size: TextFieldSize.medium,
+                isRequired: true,
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+              OsmeaComponents.textField(
+                label: 'Last Name',
+                hint: 'Enter your last name',
+                variant: TextFieldVariant.outlined,
+                size: TextFieldSize.medium,
+                isRequired: true,
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+              OsmeaComponents.textField(
+                label: 'Email',
+                hint: 'Enter your email address',
+                variant: TextFieldVariant.outlined,
+                size: TextFieldSize.medium,
+                type: TextFieldType.email,
+                isRequired: true,
+              ),
+              OsmeaComponents.sizedBox(height: 16),
+              OsmeaComponents.textField(
+                label: 'Phone Number',
+                hint: 'Enter your phone number',
+                variant: TextFieldVariant.outlined,
+                size: TextFieldSize.medium,
+                type: TextFieldType.phone,
+              ),
+              OsmeaComponents.sizedBox(height: 24),
+              OsmeaComponents.text(
+                'Please fill in all required fields to continue to the next step.',
+                variant: OsmeaTextVariant.bodySmall,
+                color: Colors.grey.shade600,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showActionBarStep2(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => OsmeaComponents.bottomSheet(
+        size: BottomSheetSize.medium,
+        variant: BottomSheetVariant.actionBar,
+        title: 'Multi-Step Form',
+        subtitle: 'Step 2 of 3 - Preferences',
+        leftAction: OsmeaComponents.iconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            _showActionBarBottomSheet(context);
+          },
+          variant: ButtonVariant.ghost,
+          tooltip: 'Back',
+        ),
+        rightAction: OsmeaComponents.button(
+          text: 'Finish',
+          icon: const Icon(Icons.check),
+          iconPosition: IconPosition.trailing,
+          onPressed: () {
+            Navigator.pop(context);
+            _showActionBarStep3(context);
+          },
+          variant: ButtonVariant.success,
+          size: ButtonSize.small,
+        ),
+        showActionBorder: true,
+        actionBarBackgroundColor: OsmeaColors.forestHeart.withOpacity(0.1),
+        actionBarBorderColor: OsmeaColors.forestHeart.withOpacity(0.3),
+        child: OsmeaComponents.padding(
+          padding: const EdgeInsets.all(20),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OsmeaComponents.listItem(
+                title: OsmeaComponents.text('Email Notifications'),
+                subtitle: OsmeaComponents.text('Receive updates via email'),
+                trailing: OsmeaComponents.switchButton(
+                  value: true,
+                  onChanged: (value) {},
+                ),
+              ),
+              OsmeaComponents.listItem(
+                title: OsmeaComponents.text('SMS Notifications'),
+                subtitle: OsmeaComponents.text('Receive updates via SMS'),
+                trailing: OsmeaComponents.switchButton(
+                  value: false,
+                  onChanged: (value) {},
+                ),
+              ),
+              OsmeaComponents.listItem(
+                title: OsmeaComponents.text('Marketing Updates'),
+                subtitle: OsmeaComponents.text('Receive promotional content'),
+                trailing: OsmeaComponents.switchButton(
+                  value: false,
+                  onChanged: (value) {},
+                ),
+              ),
+              OsmeaComponents.sizedBox(height: 24),
+              OsmeaComponents.text(
+                'You can change these preferences later in your account settings.',
+                variant: OsmeaTextVariant.bodySmall,
+                color: Colors.grey.shade600,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showActionBarStep3(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => OsmeaComponents.bottomSheet(
+        size: BottomSheetSize.medium,
+        variant: BottomSheetVariant.actionBar,
+        title: 'Multi-Step Form',
+        subtitle: 'Step 3 of 3 - Complete',
+        leftAction: OsmeaComponents.iconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            _showActionBarStep2(context);
+          },
+          variant: ButtonVariant.ghost,
+          tooltip: 'Back',
+        ),
+        rightAction: OsmeaComponents.button(
+          text: 'Done',
+          icon: const Icon(Icons.done_all),
+          iconPosition: IconPosition.trailing,
+          onPressed: () => Navigator.pop(context),
+          variant: ButtonVariant.success,
+          size: ButtonSize.small,
+        ),
+        showActionBorder: true,
+        actionBarBackgroundColor: OsmeaColors.sunsetGlow.withOpacity(0.1),
+        actionBarBorderColor: OsmeaColors.sunsetGlow.withOpacity(0.3),
+        child: OsmeaComponents.padding(
+          padding: const EdgeInsets.all(20),
+          child: OsmeaComponents.center(
+            child: OsmeaComponents.column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  size: 80,
+                  color: OsmeaColors.forestHeart,
+                ),
+                OsmeaComponents.sizedBox(height: 24),
+                OsmeaComponents.text(
+                  'Form Completed Successfully!',
+                  variant: OsmeaTextVariant.headlineMedium,
+                  fontWeight: FontWeight.bold,
+                  color: OsmeaColors.forestHeart,
+                ),
+                OsmeaComponents.sizedBox(height: 12),
+                OsmeaComponents.text(
+                  'Thank you for completing the multi-step form. Your information has been saved successfully.',
+                  variant: OsmeaTextVariant.bodyMedium,
+                  color: Colors.grey.shade600,
+                  textAlign: TextAlign.center,
+                ),
+                OsmeaComponents.sizedBox(height: 24),
+                OsmeaComponents.badge(
+                  content: 'Complete',
+                  variant: BadgeVariant.success,
+                  size: BadgeSize.large,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
