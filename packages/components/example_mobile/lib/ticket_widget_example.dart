@@ -80,10 +80,10 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
         child: OsmeaComponents.column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.error_outline,
               size: 64,
-              color: Colors.red,
+              color: OsmeaColors.amberFlame,
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.text(
@@ -177,13 +177,13 @@ class _TicketWidgetExampleState extends State<TicketWidgetExample> {
       SnackBar(
         content: OsmeaComponents.text(
           message,
-          color: Colors.white,
+          color: OsmeaColors.white,
         ),
         backgroundColor: isError 
-            ? Colors.red 
+            ? OsmeaColors.amberFlame
             : isSuccess 
-                ? Colors.green 
-                : Colors.blue,
+                ? OsmeaColors.forestHeart
+                : OsmeaColors.nordicBlue,
         duration: const Duration(seconds: 3),
       ),
     );

@@ -150,6 +150,7 @@ class TicketFormField extends StatelessWidget {
     return DropdownButtonFormField<String>(
       value: value?.toString(),
       onChanged: (newValue) => onChanged(newValue),
+      isExpanded: true, // This ensures the dropdown takes available width
       decoration: InputDecoration(
         hintText: question.hint,
         border: OutlineInputBorder(),
@@ -158,7 +159,13 @@ class TicketFormField extends StatelessWidget {
       items: question.options?.map((option) {
         return DropdownMenuItem<String>(
           value: option.value.toString(),
-          child: Text(option.label),
+          child: Flexible(
+            child: Text(
+              option.label,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
         );
       }).toList() ?? [],
     );
