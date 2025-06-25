@@ -25,6 +25,10 @@ import 'package:osmea_components_example/sized_box_example.dart';
 import 'package:osmea_components_example/scaffold_example.dart';
 import 'package:osmea_components_example/single_child_scroll_view_example.dart';
 import 'package:osmea_components_example/wrap_example.dart';
+import 'package:osmea_components_example/list_item_example.dart';
+import 'package:osmea_components_example/ticket_widget_example.dart';
+import 'package:osmea_components_example/bottom_sheet_example.dart';
+import 'package:osmea_components_example/popup_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -336,6 +340,39 @@ class ComponentsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                _buildComponentCard(
+                  context,
+                  'Ticket Widget',
+                  Icons.support_agent,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TicketWidgetExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Bottom Sheet',
+                  Icons.vertical_align_bottom,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BottomSheetExample(),
+                    ),
+                  ),
+                ),
+                _buildComponentCard(
+                  context,
+                  'Popup (S, M, L)',
+                  Icons.open_in_new,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PopupExample(),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -605,6 +642,18 @@ class ExamplesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const CardExample(),
+                    ),
+                  ),
+                ),
+                _buildExampleTile(
+                  context,
+                  'List Item Examples',
+                  'Comprehensive list item component with multiple types and variants',
+                  Icons.list,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ListItemExample(),
                     ),
                   ),
                 ),

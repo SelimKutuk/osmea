@@ -7,6 +7,7 @@ import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
 import 'package:osmea_components/src/components/avatar/avatar.dart';
 import 'package:osmea_components/src/components/badge/badge.dart';
+import 'package:osmea_components/src/components/bottom_sheet/bottom_sheet.dart';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/cards/cards.dart';
 import 'package:osmea_components/src/components/center/center.dart';
@@ -32,6 +33,10 @@ import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
+import 'package:osmea_components/src/components/list_item/list_item.dart';
+import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
+import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
+import 'package:osmea_components/src/components/popup/popup.dart';
 
 import 'enums/enums.dart';
 
@@ -940,6 +945,108 @@ class OsmeaComponents {
     );
   }
 
+  /// 📋 **OSMEA Bottom Sheet** - Comprehensive bottom sheet component
+  ///
+  /// Creates a feature-rich bottom sheet component with support for:
+  /// - Four size variants (small, medium, large, actionBar)
+  /// - Multiple style variants (standard, modal, persistent, floating, actionBar)
+  /// - Interactive states (collapsed, expanded, dragging, animating)
+  /// - Drag handle customization
+  /// - Title, subtitle, and action support
+  /// - Action bar with left/right action buttons
+  /// - Full customization options
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.bottomSheet(
+  ///   size: BottomSheetSize.medium,
+  ///   variant: BottomSheetVariant.actionBar,
+  ///   title: 'Settings',
+  ///   leftAction: OsmeaComponents.iconButton(
+  ///     icon: Icon(Icons.close),
+  ///     onPressed: () => Navigator.pop(context),
+  ///   ),
+  ///   rightAction: OsmeaComponents.button(
+  ///     text: 'Save',
+  ///     onPressed: () => handleSave(),
+  ///   ),
+  ///   child: SettingsContent(),
+  ///   onDismiss: () => Navigator.pop(context),
+  /// )
+  /// ```
+  static Widget bottomSheet({
+    Key? key,
+    CoreTheme? customTheme,
+    required Widget child,
+    BottomSheetSize size = BottomSheetSize.medium,
+    BottomSheetVariant variant = BottomSheetVariant.standard,
+    BottomSheetState state = BottomSheetState.expanded,
+    BottomSheetHandle handle = BottomSheetHandle.auto,
+    BottomSheetAnimationType animationType = BottomSheetAnimationType.slide,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    bool enableDrag = true,
+    VoidCallback? onDismiss,
+    ValueChanged<BottomSheetState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    bool isScrollControlled = true,
+    BoxConstraints? constraints,
+    bool showDragIndicator = true,
+    ShapeBorder? shape,
+    // Action Bar parameters
+    Widget? leftAction,
+    Widget? rightAction,
+    bool showActionBorder = true,
+    Color? actionBarBackgroundColor,
+    Color? actionBarBorderColor,
+  }) {
+    return OsmeaBottomSheet(
+      key: key,
+      customTheme: customTheme,
+      child: child,
+      size: size,
+      variant: variant,
+      state: state,
+      handle: handle,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      isScrollControlled: isScrollControlled,
+      constraints: constraints,
+      showDragIndicator: showDragIndicator,
+      shape: shape,
+      leftAction: leftAction,
+      rightAction: rightAction,
+      showActionBorder: showActionBorder,
+      actionBarBackgroundColor: actionBarBackgroundColor,
+      actionBarBorderColor: actionBarBorderColor,
+    );
+  }
+
   /// ☑️ **OSMEA Checkbox** - Comprehensive checkbox component
   ///
   /// Creates a feature-rich checkbox component with support for:
@@ -1525,7 +1632,7 @@ class OsmeaComponents {
   /// 📜 **OSMEA SingleChildScrollView** - Scrollable content wrapper
   ///
   /// Creates a scrollable widget that can contain a single child.
-  ///
+  ///z
   /// Example:
   /// ```dart
   /// OsmeaComponents.singleChildScrollView(
@@ -2017,6 +2124,312 @@ class OsmeaComponents {
       indicatorType: indicatorType,
       customIndicator: customIndicator,
       customArrowBuilder: customArrowBuilder,
+    );
+  }
+
+  /// 🟦 **OSMEA List Item** - Universal list item component
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.listItem(
+  ///   title: 'List Item',
+  ///   subtitle: 'Subtitle',
+  ///   leading: Icon(Icons.star),
+  /// )
+  /// ```
+  static Widget listItem({
+    Key? key,
+    ListItemVariant variant = ListItemVariant.standard,
+    ListItemSize size = ListItemSize.medium,
+    Widget? title,
+    Widget? subtitle,
+    Widget? leading,
+    Widget? trailing,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    DismissDirectionCallback? onDismissed,
+    bool selected = false,
+    bool disabled = false,
+    bool error = false,
+    bool loading = false,
+    bool selectable = false,
+    ListItemSelectedType selectedType = ListItemSelectedType.checkbox,
+    bool? value,
+    ValueChanged<bool?>? onChanged,
+    ListItemPlatform platform = ListItemPlatform.material,
+    Color? backgroundColor,
+    Color? outlineColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    double elevation = 0,
+    ShapeBorder? shape,
+    double minHeight = 56,
+    int maxLines = 2,
+    bool ripple = true,
+    String? accessibilityLabel,
+    ListItemBorderVariant borderVariant = ListItemBorderVariant.none,
+    Color? borderColor,
+    double borderWidth = 0.5,
+    Border? customBorder,
+    Set<ListItemBorderSide>? borderSides,
+    Widget? child,
+    double? width,
+    // Expandable properties
+    bool expanded = false,
+    ValueChanged<bool>? onExpansionChanged,
+    List<Widget> children = const [],
+    bool initiallyExpanded = false,
+    bool maintainState = false,
+    Widget? collapseIcon,
+    Widget? expandIcon,
+  }) {
+    return OsmeaListItem(
+      key: key,
+      variant: variant,
+      size: size,
+      title: title,
+      subtitle: subtitle,
+      leading: leading,
+      trailing: trailing,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      onDismissed: onDismissed,
+      selected: selected,
+      disabled: disabled,
+      error: error,
+      loading: loading,
+      selectable: selectable,
+      selectedType: selectedType,
+      value: value,
+      onChanged: onChanged,
+      platform: platform,
+      backgroundColor: backgroundColor,
+      outlineColor: outlineColor,
+      padding: padding,
+      margin: margin,
+      elevation: elevation,
+      shape: shape,
+      minHeight: minHeight,
+      maxLines: maxLines,
+      ripple: ripple,
+      accessibilityLabel: accessibilityLabel,
+      borderVariant: borderVariant,
+      borderColor: borderColor,
+      borderWidth: borderWidth,
+      customBorder: customBorder,
+      borderSides: borderSides,
+      child: child,
+      width: width,
+      // Expandable properties
+      expanded: expanded,
+      onExpansionChanged: onExpansionChanged,
+      children: children,
+      initiallyExpanded: initiallyExpanded,
+      maintainState: maintainState,
+      collapseIcon: collapseIcon,
+      expandIcon: expandIcon,
+    );
+  }
+
+  /// 🎫 **OSMEA Ticket Widget** - Dynamic form generator for support tickets
+  ///
+  /// Creates comprehensive ticket forms from JSON configuration with multiple input types,
+  /// validation, progress tracking, and save as draft functionality.
+  ///
+  /// Example:
+  /// ```dart
+  /// TicketWidget(
+  ///   config: TicketFormConfig.fromJson(jsonConfig),
+  ///   onSubmit: (response) async {
+  ///     return await submitTicket(response);
+  ///   },
+  ///   onSaveAsDraft: (response) async {
+  ///     return await saveDraft(response);
+  ///   },
+  /// )
+  /// ```
+  static Widget ticketWidget({
+    Key? key,
+    required TicketFormConfig config,
+    Future<bool> Function(TicketResponse response)? onSubmit,
+    Future<bool> Function(TicketResponse response)? onSaveAsDraft,
+    VoidCallback? onCancel,
+    TicketResponse? initialResponse,
+    CoreTheme? customTheme,
+    EdgeInsetsGeometry? padding,
+    Color? backgroundColor,
+    bool? showProgressIndicator,
+    bool? enableSaveAsDraft,
+  }) {
+    return TicketWidget(
+      key: key,
+      config: config,
+      onSubmit: onSubmit,
+      onSaveAsDraft: onSaveAsDraft,
+      onCancel: onCancel,
+      initialResponse: initialResponse,
+      customTheme: customTheme,
+      padding: padding,
+      backgroundColor: backgroundColor,
+      showProgressIndicator: showProgressIndicator,
+      enableSaveAsDraft: enableSaveAsDraft,
+    );
+  }
+
+  /// 📱 **OSMEA Popup** - Versatile popup component with multiple variants
+  ///
+  /// Creates popup dialogs with support for different sizes, animations, positions and styles.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.popup(
+  ///   size: PopupSize.medium,
+  ///   variant: PopupVariant.modal,
+  ///   title: 'Settings',
+  ///   child: SettingsContent(),
+  /// )
+  /// ```
+  static popup({
+    Key? key,
+    CoreTheme? customTheme,
+    required Widget child,
+    PopupSize size = PopupSize.medium,
+    PopupVariant variant = PopupVariant.modal,
+    PopupState state = PopupState.visible,
+    PopupPosition position = PopupPosition.center,
+    PopupAnimationType animationType = PopupAnimationType.scale,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    VoidCallback? onDismiss,
+    ValueChanged<PopupState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    BoxConstraints? constraints,
+    ShapeBorder? shape,
+    bool showCloseButton = true,
+    Widget? closeButtonIcon,
+    Duration? autoDismiss,
+    double? width,
+    double? height,
+  }) {
+    return OsmeaPopup(
+      key: key,
+      customTheme: customTheme,
+      child: child,
+      size: size,
+      variant: variant,
+      state: state,
+      position: position,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      constraints: constraints,
+      shape: shape,
+      showCloseButton: showCloseButton,
+      closeButtonIcon: closeButtonIcon,
+      autoDismiss: autoDismiss,
+      width: width,
+      height: height,
+    );
+  }
+
+  /// 🚀 **Show OSMEA Popup** - Static method to display popup with navigation
+  ///
+  /// Convenient method to show popup with built-in navigation and state management.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.showPopup(
+  ///   context: context,
+  ///   child: MyContent(),
+  ///   variant: PopupVariant.modal,
+  /// );
+  /// ```
+  static Future<T?> showPopup<T>({
+    required BuildContext context,
+    required Widget child,
+    PopupSize size = PopupSize.medium,
+    PopupVariant variant = PopupVariant.modal,
+    PopupPosition position = PopupPosition.center,
+    PopupAnimationType animationType = PopupAnimationType.scale,
+    String? title,
+    TextStyle? titleStyle,
+    String? subtitle,
+    TextStyle? subtitleStyle,
+    List<Widget>? headerActions,
+    Widget? footer,
+    bool isDismissible = true,
+    VoidCallback? onDismiss,
+    ValueChanged<PopupState>? onStateChanged,
+    Color? backgroundColor,
+    Color? barrierColor,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? animationDuration,
+    BoxConstraints? constraints,
+    ShapeBorder? shape,
+    bool showCloseButton = true,
+    Widget? closeButtonIcon,
+    Duration? autoDismiss,
+    double? width,
+    double? height,
+    bool useRootNavigator = false,
+    RouteSettings? routeSettings,
+  }) {
+    return OsmeaPopup.show<T>(
+      context: context,
+      child: child,
+      size: size,
+      variant: variant,
+      position: position,
+      animationType: animationType,
+      title: title,
+      titleStyle: titleStyle,
+      subtitle: subtitle,
+      subtitleStyle: subtitleStyle,
+      headerActions: headerActions,
+      footer: footer,
+      isDismissible: isDismissible,
+      onDismiss: onDismiss,
+      onStateChanged: onStateChanged,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      elevation: elevation,
+      padding: padding,
+      margin: margin,
+      animationDuration: animationDuration,
+      constraints: constraints,
+      shape: shape,
+      showCloseButton: showCloseButton,
+      closeButtonIcon: closeButtonIcon,
+      autoDismiss: autoDismiss,
+      width: width,
+      height: height,
+      useRootNavigator: useRootNavigator,
+      routeSettings: routeSettings,
     );
   }
 }

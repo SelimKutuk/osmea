@@ -11,11 +11,6 @@
 /// ```dart
 /// import 'package:osmea_components/src/enums/enums.dart';
 ///
-///* Now you can use any enum*///
-/// ButtonSize.large
-/// ButtonVariant.primary
-/// IconPosition.leading
-/// ```
 
 // Button enums
 export 'button_enums.dart';
@@ -43,11 +38,24 @@ export 'components_enum.dart';
 
 // Badge enums
 export 'badge_enums.dart';
+
+// Bottom Sheet enums
+export 'bottom_sheet_enums.dart';
+
 // Chips enums
 export 'chips_enums.dart';
 
 // Carousel enums
 export 'carousel_enums.dart';
+
+// List item enums
+export 'list_item_enums.dart';
+
+// Ticket enums
+export 'ticket_enums.dart';
+
+// Popup enums
+export 'popup_enums.dart';
 
 // ➕ Add other enum files here as they are created
 // export 'input_enums.dart';
