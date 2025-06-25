@@ -12,6 +12,7 @@ import 'package:osmea_components/src/components/checkbox/checkbox.dart';
 import 'package:osmea_components/src/components/chips/chips.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/loading/cubit/loading_cubit.dart';
 import 'package:osmea_components/src/components/login_button/cubit/login_button_cubit.dart';
 import 'package:osmea_components/src/components/login_button/login_button.dart';
 import 'package:osmea_components/src/components/navbar/navbar.dart';
@@ -31,6 +32,7 @@ import 'package:osmea_components/src/theme/theme.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
+import 'package:osmea_components/src/utils/loading_extensions.dart';
 
 import 'enums/enums.dart';
 
@@ -1770,6 +1772,21 @@ class OsmeaComponents {
       collapseIcon: collapseIcon,
       expandIcon: expandIcon,
     );
+  }
+
+  /// 🌀 **OSMEA Loading** - Modern loading spinner/bar component
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.loading(type: LoadingType.circularFade, size: 48)
+  /// ```
+  static Widget loading({
+    required LoadingType type,
+    double size = 32,
+    Color? color,
+    LoadingCubit? cubit,
+  }) {
+    return type.osmeaLoading(size: size, color: color, cubit: cubit);
   }
 }
 
