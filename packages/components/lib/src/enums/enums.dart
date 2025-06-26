@@ -51,6 +51,8 @@ export 'carousel_enums.dart';
 // List item enums
 export 'list_item_enums.dart';
 
+// Loading enums
+export 'loading_enums.dart';
 // Ticket enums
 export 'ticket_enums.dart';
 
