@@ -23,8 +23,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   String _currentApiUrl = '';
   bool _isDarkMode = false;
 
-  // Layout state
-  bool _sidebarExpanded = true;
+  // Scaffold key for drawer control
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Animation controllers
   late AnimationController _sidebarAnimationController;
@@ -177,15 +177,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     });
   }
 
-  void _toggleSidebar() {
-    setState(() {
-      _sidebarExpanded = !_sidebarExpanded;
-    });
-
-    if (_sidebarExpanded) {
-      _sidebarAnimationController.forward();
+  void _toggleDrawer() {
+    if (_scaffoldKey.currentState?.isDrawerOpen == true) {
+      _scaffoldKey.currentState?.closeDrawer();
     } else {
-      _sidebarAnimationController.reverse();
+      _scaffoldKey.currentState?.openDrawer();
     }
   }
 
@@ -238,11 +234,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     }
   }
 
-  double _calculateSidebarWidth(double screenWidth) {
+  double _calculateDrawerWidth(double screenWidth) {
     final isWideScreen = screenWidth >= 1200;
     final isMediumScreen = screenWidth >= 800;
-
-    if (!_sidebarExpanded) return 60;
 
     if (isWideScreen) return 320;
     if (isMediumScreen) return 280;
@@ -288,7 +282,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final isWideScreen = screenWidth >= 1200;
 
     return AnimatedBuilder(
       animation: _themeAnimation,
@@ -296,6 +289,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         return Theme(
           data: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
           child: Scaffold(
+            key: _scaffoldKey,
             backgroundColor:
                 _isDarkMode ? const Color(0xFF121212) : const Color(0xFFFAFAFA),
             appBar: AppHeader(
@@ -304,61 +298,37 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onUrlCopied: () =>
                   _showSnackBar('URL copied to clipboard!', isError: false),
               onThemeToggle: _toggleTheme,
+              onDrawerToggle: _toggleDrawer,
               isDarkMode: _isDarkMode,
             ),
-            body: Row(
-              children: [
-                // Sidebar
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  width: _calculateSidebarWidth(screenWidth),
-                  child: ModernSidebar(
-                    expanded: _sidebarExpanded,
-                    selectedService: _selectedService,
-                    onServiceSelected: _onServiceSelected,
-                    animation: _sidebarAnimation,
-                  ),
-                ),
-
-                // Main content
-                Expanded(
-                  child: ResponsiveContent(
-                    selectedService: _selectedService,
-                    selectedMethod: _selectedMethod,
-                    parameters: _parameters,
-                    rawBody: _rawBody,
-                    currentApiUrl: _currentApiUrl,
-                    loading: _loading,
-                    responseData: _responseData,
-                    responseAnimation: _responseAnimation,
-                    onMethodChanged: _onMethodChanged,
-                    onParametersChanged: _onParametersChanged,
-                    onRawBodyChanged: _onRawBodyChanged,
-                    onSendRequest: _sendRequest,
-                    screenWidth: screenWidth,
-                  ),
-                ),
-              ],
+            drawer: Drawer(
+              width: _calculateDrawerWidth(screenWidth),
+              child: ModernSidebar(
+                expanded: true, // Always expanded in drawer
+                selectedService: _selectedService,
+                onServiceSelected: (service) {
+                  _onServiceSelected(service);
+                  // Close drawer after selection
+                  Navigator.of(context).pop();
+                },
+                animation: _sidebarAnimation,
+              ),
             ),
-
-            // Floating action button for mobile
-            floatingActionButton: !isWideScreen
-                ? FloatingActionButton(
-                    mini: true,
-                    onPressed: _toggleSidebar,
-                    backgroundColor: _isDarkMode
-                        ? const Color(0xFF8B5CF6)
-                        : const Color(0xFF8B5CF6),
-                    child: AnimatedRotation(
-                      turns: _sidebarExpanded ? 0.5 : 0,
-                      duration: const Duration(milliseconds: 300),
-                      child: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                : null,
+            body: ResponsiveContent(
+              selectedService: _selectedService,
+              selectedMethod: _selectedMethod,
+              parameters: _parameters,
+              rawBody: _rawBody,
+              currentApiUrl: _currentApiUrl,
+              loading: _loading,
+              responseData: _responseData,
+              responseAnimation: _responseAnimation,
+              onMethodChanged: _onMethodChanged,
+              onParametersChanged: _onParametersChanged,
+              onRawBodyChanged: _onRawBodyChanged,
+              onSendRequest: _sendRequest,
+              screenWidth: screenWidth,
+            ),
           ),
         );
       },

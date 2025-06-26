@@ -8,6 +8,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final String apiUrl;
   final VoidCallback onUrlCopied;
   final VoidCallback onThemeToggle;
+  final VoidCallback? onDrawerToggle;
   final bool isDarkMode;
 
   const AppHeader({
@@ -16,6 +17,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.apiUrl,
     required this.onUrlCopied,
     required this.onThemeToggle,
+    this.onDrawerToggle,
     this.isDarkMode = false,
   });
 
@@ -38,8 +40,17 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
-        leadingWidth: 0,
-        leading: const SizedBox.shrink(),
+        leadingWidth: onDrawerToggle != null ? 56 : 0,
+        leading: onDrawerToggle != null
+            ? IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: colorScheme.onSurface,
+                ),
+                onPressed: onDrawerToggle,
+                tooltip: 'Open menu',
+              )
+            : const SizedBox.shrink(),
         title: Row(
           children: [
             // Logo and Title
