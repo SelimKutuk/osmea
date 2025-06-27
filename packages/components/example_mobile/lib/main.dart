@@ -30,6 +30,7 @@ import 'package:osmea_components_example/list_item_example.dart';
 import 'package:osmea_components_example/ticket_widget_example.dart';
 import 'package:osmea_components_example/bottom_sheet_example.dart';
 import 'package:osmea_components_example/popup_example.dart';
+import 'package:osmea_components_example/stack_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -452,6 +453,18 @@ class ExamplesScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
+                _buildExampleTile(
+                  context,
+                  'Stack Examples',
+                  'Layered widget stack with alignment control',
+                  Icons.layers,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const StackExample(),
+                    ),
+                  ),
+                ),
                 _buildExampleTile(
                   context,
                   'Switch Examples',
