@@ -65,8 +65,29 @@ class _BadgeExampleState extends State<BadgeExample> {
             const SizedBox(height: 24),
             _buildSectionTitle('Dot Badges'),
             _buildDotBadgeShowcase(),
-
-            const SizedBox(height: 100), // Bottom padding
+            OsmeaComponents.sizedBox(height: 100), // Bottom padding
+            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
+            // OsmeaComponents.loginButton(
+            //   authService: null,
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar örneği
+            // OsmeaComponents.navbar(
+            //   items: [
+            //     NavbarItem(
+            //       text: 'Home',
+            //       icon: const Icon(Icons.home),
+            //       onTap: () {},
+            //     ),
+            //     NavbarItem(
+            //       text: 'Settings',
+            //       icon: const Icon(Icons.settings),
+            //       onTap: () {},
+            //     ),
+            //   ],
+            //   currentIndex: 0,
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
