@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/column/column.dart';
-import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/single_child_scroll_view/single_child_scroll_view.dart';
@@ -402,7 +401,7 @@ class WaveProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressWave(context, size.percentFontSize),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -553,7 +552,7 @@ class RadialBarProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressPercentage(context),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -702,7 +701,7 @@ class ArcProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressPercentage(context),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -858,7 +857,7 @@ class PercentProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressPercentage(context),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -994,7 +993,7 @@ class SegmentedProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressPercentage(context),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -1126,7 +1125,7 @@ class DotCircleBarProgress extends CoreContainer {
         OsmeaCenter(
           child: OsmeaText(
             '${(value * 100).toInt()}%',
-            style: OsmeaTextStyle.progressPercentage(context),
+            style: OsmeaTextStyle.captionLarge(context),
           ),
         ),
       ],
@@ -1249,7 +1248,7 @@ class LinearProgressModern extends StatelessWidget {
               padding: context.paddingNormal,
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: OsmeaTextStyle.progressPercentage(context),
+                style: OsmeaTextStyle.captionLarge(context),
               ),
             ),
         ],
@@ -1306,7 +1305,7 @@ class LinearStripedProgress extends StatelessWidget {
               padding: context.onlyTopPaddingLow,
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: OsmeaTextStyle.progressPercentage(context),
+                style: OsmeaTextStyle.captionLarge(context),
               ),
             ),
         ],
@@ -1401,7 +1400,7 @@ class LinearGradientProgress extends StatelessWidget {
               padding: context.onlyTopPaddingLow,
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: OsmeaTextStyle.progressPercentage(context),
+                style: OsmeaTextStyle.captionLarge(context),
               ),
             ),
         ],
@@ -1458,7 +1457,7 @@ class LinearSegmentedProgress extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0),
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: const TextStyle(fontSize: 13),
+                style: OsmeaTextStyle.captionLarge(context),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
@@ -1532,7 +1531,7 @@ class LinearRoundedProgress extends StatelessWidget {
               padding: context.onlyTopPaddingLow,
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: OsmeaTextStyle.progressPercentage(context),
+                style: OsmeaTextStyle.captionLarge(context),
               ),
             ),
         ],
@@ -1614,7 +1613,7 @@ class LinearBufferProgress extends StatelessWidget {
               padding: context.onlyTopPaddingLow,
               child: OsmeaText(
                 '${(value * 100).toInt()}%',
-                style: OsmeaTextStyle.progressPercentage(context),
+                style: OsmeaTextStyle.captionLarge(context),
               ),
             ),
         ],
