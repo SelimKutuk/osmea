@@ -65,7 +65,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           '☑️ OSMEA Checkbox Examples',
           variant: OsmeaTextVariant.headlineMedium,
@@ -75,7 +75,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
       ),
       body: SingleChildScrollView(
         padding: context.paddingNormal,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionTitle('🎨 Checkbox Variants'),
@@ -98,6 +98,20 @@ class _CheckboxExampleState extends State<CheckboxExample> {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('🎨 Custom Colors'),
             _buildCustomColorsSection(),
+            OsmeaComponents.sizedBox(height: 32),
+            // OsmeaComponents.loginButton(
+            //   authService: null, // Kendi AuthService'inizi ekleyin
+            //   text: 'Login',
+            // ),
+            // OsmeaComponents.navbar(
+            //   currentIndex: 0,
+            //   items: const [
+            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+            //     NavbarItem(icon: Icon(Icons.check_box), text: 'Checkbox'),
+            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+            //   ],
+            //   onItemTap: (index) {},
+            // ),
           ],
         ),
       ),
