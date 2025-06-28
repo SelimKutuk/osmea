@@ -297,7 +297,7 @@ class _ConfigPopupDialogState extends State<ConfigPopupDialog>
                                       ),
                                     ),
                                   )
-                                  .toList(),
+                                  ,
                             ],
                           ),
                         ),
