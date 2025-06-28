@@ -46,17 +46,33 @@ class _PopupExampleState extends State<PopupExample> {
       ),
       body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingMedium,
-        child: OsmeaComponents.column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildWelcomeSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildControlsSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildQuickExamplesSection(),
-            OsmeaComponents.sizedBox(height: 24),
-            _buildSizeComparisonSection(),
-          ],
+        child: OsmeaComponents.singleChildScrollView(
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildWelcomeSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildControlsSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildQuickExamplesSection(),
+              OsmeaComponents.sizedBox(height: 24),
+              _buildSizeComparisonSection(),
+              //OsmeaComponents.sizedBox(height: 32),
+              // OsmeaComponents.loginButton(
+              //   authService: null, // Kendi AuthService'inizi ekleyin
+              //   text: 'Login',
+              // ),
+              // OsmeaComponents.navbar(
+              //   currentIndex: 0,
+              //   items: const [
+              //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+              //     NavbarItem(icon: Icon(Icons.open_in_new), text: 'Popup'),
+              //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+              //   ],
+              //   onItemTap: (index) {},
+              // ),
+            ],
+          ),
         ),
       ),
     );
@@ -600,4 +616,4 @@ class _PopupExampleState extends State<PopupExample> {
       ),
     );
   }
-} 
+}
