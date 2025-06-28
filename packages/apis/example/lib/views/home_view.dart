@@ -103,7 +103,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   void _checkAndShowConfigPopup() async {
-    // Widget'ın mount olmasını bekle
+    // Wait widgets to be mounted
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (mounted) {
         final shouldShow = await ConfigPopupDialog.shouldShow();
@@ -386,7 +386,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               onSendRequest: _sendRequest,
               screenWidth: screenWidth,
             ),
-            // Debug: Config popup'ını test etmek için
+
             
             
           ),
