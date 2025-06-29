@@ -152,19 +152,6 @@ class _CarouselExampleState extends State<CarouselExample> {
               disabled: true,
             ),
             OsmeaComponents.sizedBox(height: 32),
-            // OsmeaComponents.loginButton(
-            //   authService: null,
-            //   text: 'Login',
-            // ),
-            // OsmeaComponents.navbar(
-            //   currentIndex: 0,
-            //   items: const [
-            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
-            //     NavbarItem(icon: Icon(Icons.image), text: 'Carousel'),
-            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
-            //   ],
-            //   onItemTap: (index) {},
-            // ),
           ],
         ),
       ),
