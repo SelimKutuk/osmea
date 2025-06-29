@@ -85,8 +85,8 @@ List<Story> getUnifiedRadioButtonShowcase() {
           label: '📍 Label Position (Labeled/Card/Tile)',
           initial: RadioLabelPosition.trailing,
           options: const [
-            Option(label: 'Trailing (Right)', value: RadioLabelPosition.trailing),
-            Option(label: 'Leading (Left)', value: RadioLabelPosition.leading),
+            Option(label: 'Trailing (Left)', value: RadioLabelPosition.trailing),
+            Option(label: 'Leading (Right)', value: RadioLabelPosition.leading),
           ],
         ),
         
