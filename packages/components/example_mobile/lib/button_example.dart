@@ -352,7 +352,7 @@ class _ButtonExampleState extends State<ButtonExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         _buildSubsectionTitle('Button Row'),
-        Row(
+        OsmeaComponents.row(
           children: [
             Expanded(
               child: OsmeaComponents.button(
