@@ -86,8 +86,8 @@ List<Story> getUnifiedSwitchButtonShowcase() {
           label: '📍 Label Position (Labeled/Card/Extended)',
           initial: SwitchLabelPosition.trailing,
           options: const [
-            Option(label: 'Trailing (Right)', value: SwitchLabelPosition.trailing),
-            Option(label: 'Leading (Left)', value: SwitchLabelPosition.leading),
+            Option(label: 'Trailing (Left)', value: SwitchLabelPosition.trailing),
+            Option(label: 'Leading (Right)', value: SwitchLabelPosition.leading),
           ],
         ),
         
