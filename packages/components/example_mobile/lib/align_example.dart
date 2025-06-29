@@ -10,7 +10,6 @@ class AlignExample extends StatelessWidget {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text(
           'OSMEA Align Examples',
-          textStyle: const TextStyle(),
           variant: OsmeaTextVariant.headlineMedium,
         ),
         backgroundColor: OsmeaColors.nordicBlue,
@@ -33,29 +32,6 @@ class AlignExample extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('Convenience Methods'),
             _buildConvenienceMethodExamples(),
-            OsmeaComponents.sizedBox(height: 80), // Alt boşluk
-            // OsmeaComponents.loginButton örneği (authService zorunlu olduğu için örnek olarak null, kendi servisinizi ekleyin)
-            // OsmeaComponents.loginButton(
-            //   authService: null,
-            //   text: 'Login',
-            // ),
-            // OsmeaComponents.navbar örneği
-            OsmeaComponents.navbar(
-              items: [
-                NavbarItem(
-                  text: 'Home',
-                  icon: const Icon(Icons.home),
-                  onTap: () {},
-                ),
-                NavbarItem(
-                  text: 'Settings',
-                  icon: const Icon(Icons.settings),
-                  onTap: () {},
-                ),
-              ],
-              currentIndex: 0,
-              onItemTap: (index) {},
-            ),
           ],
         ),
       ),
@@ -154,7 +130,7 @@ class AlignExample extends StatelessWidget {
           _buildAlignmentContainer(
             OsmeaComponents.align(
               alignment: Alignment.center,
-              child: Container(
+              child: OsmeaComponents.container(
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(8),
@@ -171,7 +147,7 @@ class AlignExample extends StatelessWidget {
           _buildAlignmentContainer(
             OsmeaComponents.align(
               alignment: Alignment.center,
-              child: Container(
+              child: OsmeaComponents.container(
                 decoration: BoxDecoration(
                   border: Border.all(color: OsmeaColors.nordicBlue, width: 2),
                   borderRadius: BorderRadius.circular(12),
@@ -189,7 +165,7 @@ class AlignExample extends StatelessWidget {
           _buildAlignmentContainer(
             OsmeaComponents.align(
               alignment: Alignment.bottomRight,
-              child: Container(
+              child: OsmeaComponents.container(
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -218,7 +194,7 @@ class AlignExample extends StatelessWidget {
                 onTap: () {
                   debugPrint('Align tapped!');
                 },
-                child: Container(
+                child: OsmeaComponents.container(
                   decoration: BoxDecoration(
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(8),
@@ -238,7 +214,7 @@ class AlignExample extends StatelessWidget {
               alignment: Alignment.center,
               widthFactor: 0.8,
               heightFactor: 0.5,
-              child: Container(
+              child: OsmeaComponents.container(
                 decoration: BoxDecoration(
                   color: Colors.indigo.shade100,
                   borderRadius: BorderRadius.circular(8),
@@ -314,12 +290,13 @@ class AlignExample extends StatelessWidget {
     );
   }
 
-  Widget _buildColoredBox(
-      {required Color color,
-      required String text,
-      double width = 120,
-      double height = 60}) {
-    return Container(
+  Widget _buildColoredBox({
+    required Color color,
+    required String text,
+    double width = 120,
+    double height = 60,
+  }) {
+    return OsmeaComponents.container(
       width: width,
       height: height,
       color: color,
@@ -338,7 +315,7 @@ class AlignExample extends StatelessWidget {
   }
 
   Widget _buildAlignmentContainer(Widget child) {
-    return Container(
+    return OsmeaComponents.container(
       width: double.infinity,
       height: 200,
       decoration: BoxDecoration(
