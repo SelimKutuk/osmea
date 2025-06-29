@@ -11,7 +11,7 @@ class AppbarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Mobile-Inspired AppBars'),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -23,15 +23,14 @@ class AppbarDemo extends StatelessWidget {
         children: [
           OsmeaComponents.text(
             '📱 Mobile App Inspired Designs',
-            textStyle: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
           ),
           OsmeaComponents.sizedBox(height: 8),
           OsmeaComponents.text(
             'AppBar designs inspired by popular mobile applications',
-            textStyle: const TextStyle(fontSize: 16, color: Colors.grey),
+            fontSize: 16,
+            color: Colors.grey,
           ),
           OsmeaComponents.sizedBox(height: 32),
 
@@ -99,7 +98,21 @@ class AppbarDemo extends StatelessWidget {
             preview: _buildMinimalStyleApp(),
           ),
 
-          OsmeaComponents.sizedBox(height: 48),
+          //OsmeaComponents.sizedBox(height: 48),
+
+          // OsmeaComponents.loginButton(
+          //   authService: null,
+          //   text: 'Login',
+          // ),
+          // OsmeaComponents.navbar(
+          //   currentIndex: 0,
+          //   items: const [
+          //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
+          //     NavbarItem(icon: Icon(Icons.image), text: 'Carousel'),
+          //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
+          //   ],
+          //   onItemTap: (index) {},
+          // ),
         ],
       ),
     );
@@ -117,28 +130,24 @@ class AppbarDemo extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey[200]!),
       ),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          OsmeaComponents.padding(
             padding: context.paddingNormal,
-            child: Column(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 OsmeaComponents.text(
                   appName,
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
                 OsmeaComponents.sizedBox(height: 4),
                 OsmeaComponents.text(
                   description,
-                  textStyle: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
+                  fontSize: 14,
+                  color: Colors.grey[600],
                 ),
               ],
             ),
