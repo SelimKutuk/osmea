@@ -321,11 +321,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 Expanded(child: Text(message)),
               ],
             ),
-            backgroundColor: isError
-                ? Theme.of(context).colorScheme.error // Use dynamic error color
-                : Theme.of(context)
-                    .colorScheme
-                    .secondary, // Use dynamic secondary color
+            backgroundColor: const Color(0xFF8B5CF6), 
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -348,7 +344,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           child: Scaffold(
             key: _scaffoldKey,
             backgroundColor:
-                _isDarkMode ? const Color(0xFF121212) : const Color(0xFFFAFAFA),
+                _isDarkMode ? const Color.fromARGB(255, 18, 18, 18) : const Color(0xFFFAFAFA),
             appBar: AppHeader(
               title: 'OSMEA APIs',
               apiUrl: _currentApiUrl,
