@@ -175,7 +175,7 @@ class LoadingExample extends StatelessWidget {
                     child: OsmeaComponents.column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        OsmeaComponents.row(
                           children: [
                             Icon(Icons.bubble_chart,
                                 color: colors[i % colors.length], size: 28),
@@ -196,7 +196,7 @@ class LoadingExample extends StatelessWidget {
                         OsmeaComponents.sizedBox(height: 16),
                         OsmeaComponents.column(
                           children: [
-                            Row(
+                            OsmeaComponents.row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 for (final size in [24.0, 36.0])
@@ -238,7 +238,7 @@ class LoadingExample extends StatelessWidget {
                               ],
                             ),
                             OsmeaComponents.sizedBox(height: 12),
-                            Row(
+                            OsmeaComponents.row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 for (final size in [48.0, 64.0])
