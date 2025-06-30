@@ -27,29 +27,6 @@ class PaddingExample extends StatelessWidget {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('Convenience Methods'),
             _buildConvenienceMethodExamples(),
-            //OsmeaComponents.sizedBox(height: 80), // Alt boşluk
-            // OsmeaComponents.loginButton örneği (authService örnek olarak null, kendi servisinizi ekleyin)
-            // OsmeaComponents.loginButton(
-            //   authService: null,
-            //   text: 'Login',
-            // ),
-            // OsmeaComponents.navbar örneği
-            // OsmeaComponents.navbar(
-            //   items: [
-            //     NavbarItem(
-            //       text: 'Home',
-            //       icon: const Icon(Icons.home),
-            //       onTap: () {},
-            //     ),
-            //     NavbarItem(
-            //       text: 'Settings',
-            //       icon: const Icon(Icons.settings),
-            //       onTap: () {},
-            //     ),
-            //   ],
-            //   currentIndex: 0,
-            //   onItemTap: (index) {},
-            // ),
           ],
         ),
       ),
@@ -288,10 +265,10 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildExampleWithCaption(String caption, Widget child) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.text(
             caption,
@@ -307,7 +284,7 @@ class PaddingExample extends StatelessWidget {
   }
 
   Widget _buildColoredBox({required Color color, required String text}) {
-    return Container(
+    return OsmeaComponents.container(
       width: double.infinity,
       color: color,
       padding: const EdgeInsets.all(12),
