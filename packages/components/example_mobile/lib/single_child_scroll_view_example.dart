@@ -82,20 +82,6 @@ class SingleChildScrollViewExample extends StatelessWidget {
                 'ScrollView with custom styling and effects',
                 _buildStyledScrollExample(context),
               ),
-              //OsmeaComponents.sizedBox(height: 32),
-              // OsmeaComponents.loginButton(
-              //   authService: null, // Kendi AuthService'inizi ekleyin
-              //   text: 'Login',
-              // ),
-              // OsmeaComponents.navbar(
-              //   currentIndex: 0,
-              //   items: const [
-              //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
-              //     NavbarItem(icon: Icon(Icons.view_stream), text: 'ScrollView'),
-              //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
-              //   ],
-              //   onItemTap: (index) {},
-              // ),
             ],
           ),
         ),
@@ -106,9 +92,9 @@ class SingleChildScrollViewExample extends StatelessWidget {
   Widget _buildExampleCard(String title, String description, Widget example) {
     return Card(
       elevation: 2,
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.text(
@@ -123,7 +109,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
               color: OsmeaColors.pewter,
             ),
             OsmeaComponents.sizedBox(height: 16),
-            Container(
+            OsmeaComponents.container(
               height: 300,
               decoration: BoxDecoration(
                 border: Border.all(color: OsmeaColors.silver),
@@ -159,7 +145,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
             ),
             OsmeaComponents.sizedBox(height: 16),
             for (int i = 1; i <= 10; i++)
-              Container(
+              OsmeaComponents.container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(16),
@@ -186,7 +172,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
         child: OsmeaComponents.row(
           children: [
             for (int i = 1; i <= 10; i++)
-              Container(
+              OsmeaComponents.container(
                 width: 150,
                 margin: const EdgeInsets.only(right: 12),
                 padding: const EdgeInsets.all(16),
@@ -233,14 +219,14 @@ class SingleChildScrollViewExample extends StatelessWidget {
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               OsmeaComponents.sizedBox(height: 8),
-              SizedBox(
+              OsmeaComponents.sizedBox(
                 height: 100,
                 child: OsmeaComponents.singleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: OsmeaComponents.row(
                     children: [
                       for (int i = 1; i <= 10; i++)
-                        Container(
+                        OsmeaComponents.container(
                           width: 100,
                           margin: const EdgeInsets.only(right: 8),
                           decoration: BoxDecoration(
@@ -292,7 +278,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
             ),
             OsmeaComponents.sizedBox(height: 16),
             for (int i = 1; i <= 10; i++)
-              Container(
+              OsmeaComponents.container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(16),
@@ -312,7 +298,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
 
   // Example with styling
   Widget _buildStyledScrollExample(BuildContext context) {
-    return Container(
+    return OsmeaComponents.container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -339,7 +325,7 @@ class SingleChildScrollViewExample extends StatelessWidget {
             ),
             OsmeaComponents.sizedBox(height: 16),
             for (int i = 1; i <= 10; i++)
-              Container(
+              OsmeaComponents.container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(16),
@@ -354,9 +340,9 @@ class SingleChildScrollViewExample extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Row(
+                child: OsmeaComponents.row(
                   children: [
-                    Container(
+                    OsmeaComponents.container(
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
