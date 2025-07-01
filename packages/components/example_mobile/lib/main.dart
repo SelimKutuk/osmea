@@ -38,6 +38,7 @@ import 'package:osmea_components_example/positioned_example.dart';
 import 'package:osmea_components_example/spacer_example.dart';
 import 'package:osmea_components_example/rich_text_example.dart';
 import 'package:osmea_components_example/stepper_example.dart';
+import 'package:osmea_components_example/searchbar_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -393,6 +394,15 @@ class ComponentsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                _buildComponentCard(
+                    context,
+                    'SearchBar',
+                    Icons.search,
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchbarExample(),
+                        ))),
                 _buildComponentCard(
                   context,
                   'Stepper',
@@ -775,6 +785,18 @@ class ExamplesScreen extends StatelessWidget {
                   'Flexible tab bar with variants, sizes, and animation',
                   Icons.tab,
                   () => Navigator.pushNamed(context, '/tabbar-example'),
+                ),
+                _buildExampleTile(
+                  context,
+                  'Searchbar Examples',
+                  'Advanced search component with suggestions and history',
+                  Icons.search,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchbarExample(),
+                    ),
+                  ),
                 ),
               ],
             ),
