@@ -40,6 +40,7 @@ import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/stepper/stepper.dart';
+import 'package:osmea_components/src/components/toast/toast.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -2818,6 +2819,39 @@ class OsmeaComponents {
       onStepChanged: onStepChanged,
       allowStepTapping: allowStepTapping,
       stepperStyle: stepperStyle,
+    );
+  }
+
+  /// 🍞 **OSMEA Toast** - Basit toast mesajı gösterimi
+  ///
+  /// Context üzerinden kolayca toast mesajı göstermek için kullanılır.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.showToast(
+  ///   context: context,
+  ///   message: 'Başarılı!',
+  ///   type: ToastType.success,
+  ///   position: ToastPosition.bottom,
+  ///   duration: Duration(seconds: 2),
+  ///   animation: ToastAnimation.slide,
+  /// );
+  /// ```
+  static void showToast({
+    required BuildContext context,
+    required String message,
+    ToastType type = ToastType.info,
+    ToastPosition position = ToastPosition.bottom,
+    ToastAnimation animation = ToastAnimation.slide,
+    Duration duration = const Duration(seconds: 2),
+  }) {
+    OsmeaToast.show(
+      context,
+      message: message,
+      type: type,
+      position: position,
+      animation: animation,
+      duration: duration,
     );
   }
 }
