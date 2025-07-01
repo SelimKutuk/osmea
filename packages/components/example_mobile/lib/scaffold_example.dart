@@ -95,23 +95,6 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
               _buildAdvancedScaffold(),
             ),
             OsmeaComponents.sizedBox(height: 32),
-            // OsmeaComponents.loginButton(
-            //   authService: null, // Kendi AuthService'inizi ekleyin
-            //   text: 'Login',
-            // ),
-            // OsmeaComponents.navbar(
-            //   currentIndex: _currentIndex,
-            //   items: const [
-            //     NavbarItem(icon: Icon(Icons.home), text: 'Home'),
-            //     NavbarItem(icon: Icon(Icons.layers), text: 'Scaffold'),
-            //     NavbarItem(icon: Icon(Icons.settings), text: 'Settings'),
-            //   ],
-            //   onItemTap: (index) {
-            //     setState(() {
-            //       _currentIndex = index;
-            //     });
-            //   },
-            // ),
           ],
         ),
       ),
@@ -121,9 +104,9 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   Widget _buildExampleCard(String title, String description, Widget example) {
     return Card(
       elevation: 2,
-      child: Padding(
+      child: OsmeaComponents.padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OsmeaComponents.text(
@@ -138,7 +121,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
               color: OsmeaColors.pewter,
             ),
             OsmeaComponents.sizedBox(height: 16),
-            Container(
+            OsmeaComponents.container(
               height: 300,
               decoration: BoxDecoration(
                 border: Border.all(color: OsmeaColors.silver),
@@ -158,7 +141,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Standard scaffold example
   Widget _buildStandardScaffold() {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Standard Scaffold'),
         backgroundColor: OsmeaColors.nordicBlue,
         foregroundColor: OsmeaColors.white,
@@ -175,7 +158,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with bottom navigation
   Widget _buildScaffoldWithBottomNav() {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Bottom Navigation'),
         backgroundColor: OsmeaColors.forestHeart,
         foregroundColor: OsmeaColors.white,
@@ -216,7 +199,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   Widget _buildScaffoldWithDrawer() {
     return OsmeaComponents.scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('With Drawer'),
         backgroundColor: OsmeaColors.sunsetGlow,
         foregroundColor: OsmeaColors.white,
@@ -272,7 +255,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with FAB
   Widget _buildScaffoldWithFab() {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('With FAB'),
         backgroundColor: OsmeaColors.deepSea,
         foregroundColor: OsmeaColors.white,
@@ -297,15 +280,15 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   // Scaffold with custom colors
   Widget _buildScaffoldWithCustomColors() {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
+      appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('Custom Colors'),
         backgroundColor: OsmeaColors.amberFlame,
         foregroundColor: OsmeaColors.white,
       ),
-      body: Container(
+      body: OsmeaComponents.container(
         color: OsmeaColors.ash.withOpacity(0.1),
         child: Center(
-          child: Container(
+          child: OsmeaComponents.container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: OsmeaColors.white,
@@ -384,7 +367,7 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
           ],
         ),
       ),
-      body: Container(
+      body: OsmeaComponents.container(
         padding: const EdgeInsets.all(16),
         child: const Center(
           child: Text('Main Content Area'),
