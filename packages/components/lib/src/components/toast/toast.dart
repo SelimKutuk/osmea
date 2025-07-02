@@ -454,8 +454,8 @@ class OsmeaToast extends CoreContainer {
             Icon(_iconData(), color: OsmeaColors.white, size: iconSize),
             context.emptySizedWidthBoxNormal,
             OsmeaExpanded(
-              child: Text(
-                state.message,
+              child: OsmeaText(
+                text: state.message,
                 style: OsmeaTextStyle.bodySmall(context).copyWith(
                   color: OsmeaColors.white,
                   decoration: none,
