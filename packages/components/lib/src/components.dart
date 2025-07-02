@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/components/toast/toast.dart'
+    show ToastManager;
 
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
@@ -2877,6 +2879,76 @@ class OsmeaComponents {
       allowStepTapping: allowStepTapping,
       stepperStyle: stepperStyle,
     );
+  }
+
+  /// 🍞 **OSMEA Toast** - Show toast message with different styles
+  ///
+  /// Shows a toast message with optional title and style.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.toast(
+  ///   context: context,
+  ///   title: 'Success!',
+  ///   message: 'Your message has been sent successfully.',
+  ///   type: ToastType.success,
+  ///   style: ToastStyle.modern,
+  ///   position: ToastPosition.bottom,
+  ///   duration: Duration(seconds: 2),
+  ///   animation: ToastAnimation.slide,
+  ///   stacked: true, // Show multiple toasts at once (default)
+  ///   maxToasts: 5, // Maximum number of toasts visible at once (default)
+  /// );
+  /// ```
+  static void toast({
+    required BuildContext context,
+    String? title,
+    required String message,
+    ToastType type = ToastType.info,
+    ToastStyle style = ToastStyle.defaultStyle,
+    ToastPosition position = ToastPosition.bottom,
+    ToastAnimation animation = ToastAnimation.slide,
+    Duration? duration,
+    bool stacked = true,
+    int maxToasts = 5,
+  }) {
+    ToastManager().showToast(
+      context: context,
+      title: title,
+      message: message,
+      type: type,
+      style: style,
+      position: position,
+      animation: animation,
+      duration: duration,
+      stacked: stacked,
+      maxToasts: maxToasts,
+    );
+  }
+
+  /// Shows a quick toast notification (2 seconds duration) with minimal style.
+  /// Perfect for short status updates like "Copied to clipboard", "Saved", etc.
+  static void quickToast({
+    required BuildContext context,
+    required String message,
+    ToastType type = ToastType.info,
+    ToastPosition position = ToastPosition.bottom,
+  }) {
+    ToastManager().showToast(
+      context: context,
+      message: message,
+      type: type,
+      style: ToastStyle.minimal,
+      position: position,
+      duration: const Duration(seconds: 2),
+      stacked: true,
+      maxToasts: 5,
+    );
+  }
+
+  /// Hides all currently visible toasts
+  static void hideAllToasts() {
+    ToastManager().hideAllToasts();
   }
 }
 
