@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/core/text_field_widget.dart';
@@ -349,14 +350,11 @@ class _OsmeaSearchbarView extends StatelessWidget {
   }
 
   Widget _buildBackButton(BuildContext context, SearchbarCubit cubit) {
-    return IconButton(
+    return OsmeaIconButton(
       icon: searchbar.backIcon ?? Icon(Icons.arrow_back, size: 20),
       onPressed: cubit.handleBack,
-      padding: EdgeInsets.all(8),
-      constraints: BoxConstraints(
-        minWidth: 40,
-        minHeight: 40,
-      ),
+      variant: ButtonVariant.ghost,
+      tooltip: 'Clear',
     );
   }
 

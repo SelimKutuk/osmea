@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/core/text_field_widget.dart';
 import 'package:osmea_components/src/components/searchbar/cubit/searchbar_cubit.dart';
@@ -631,15 +632,14 @@ class _OsmeaExpandableSearchbarViewState
 
   Widget _buildClearButton(
       BuildContext context, ExpandableSearchbarCubit cubit) {
-    return IconButton(
+    return OsmeaIconButton(
       icon: widget.expandableSearchbar.clearIcon ??
           const Icon(Icons.clear, size: 20),
       onPressed: cubit.clear,
-      padding: const EdgeInsets.all(8),
-      constraints: const BoxConstraints(
-        minWidth: 40,
-        minHeight: 40,
-      ),
+      size: widget.expandableSearchbar.buttonSize,
+      variant: widget.expandableSearchbar.buttonVariant,
+      state: widget.expandableSearchbar.buttonState,
+      tooltip: 'Clear',
     );
   }
 }
