@@ -15,7 +15,7 @@ class SpacerExampleScreen extends StatelessWidget {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Spacer Examples'),
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
