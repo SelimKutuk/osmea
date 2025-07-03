@@ -204,7 +204,7 @@ class LoadingExample extends StatelessWidget {
                                     padding:
                                         const EdgeInsets.symmetric(horizontal: 8),
                                     child: ClipRect(
-                                      child: Container(
+                                      child: OsmeaComponents.container(
                                         width: size + 32,
                                         padding:
                                             const EdgeInsets.symmetric(vertical: 10),
@@ -246,7 +246,7 @@ class LoadingExample extends StatelessWidget {
                                     padding:
                                         const EdgeInsets.symmetric(horizontal: 8),
                                     child: ClipRect(
-                                      child: Container(
+                                      child: OsmeaComponents.container(
                                         width: size + 32,
                                         padding:
                                             const EdgeInsets.symmetric(vertical: 10),
