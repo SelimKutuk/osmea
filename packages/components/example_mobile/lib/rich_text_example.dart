@@ -16,7 +16,7 @@ class RichTextExample extends StatelessWidget {
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('OSMEA Rich Text Examples'),
       ),
-      body: SingleChildScrollView(
+      body: OsmeaComponents.singleChildScrollView(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -414,7 +414,7 @@ class RichTextExample extends StatelessWidget {
           child: OsmeaComponents.richText(
             textSpans: [
               WidgetSpan(
-                child: Padding(
+                child: OsmeaComponents.padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Icon(Icons.info, color: Colors.blue, size: 20),
                 ),
