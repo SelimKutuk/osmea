@@ -266,7 +266,7 @@ class RowExampleScreen extends StatelessWidget {
     return OsmeaComponents.container(
       color: Colors.grey.shade200,
       padding: const EdgeInsets.all(16),
-      child: Wrap(
+      child: OsmeaComponents.wrap(
         spacing: 16,
         runSpacing: 16,
         children: [
@@ -482,7 +482,7 @@ class RowExampleScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.shopping_cart, size: 24),
                 OsmeaComponents.sizedBox(width: 8),
-                Expanded(
+                OsmeaComponents.expanded(
                   child: OsmeaComponents.text('Your shopping cart'),
                 ),
                 OsmeaComponents.container(
