@@ -301,7 +301,7 @@ class AlignExample extends StatelessWidget {
       height: height,
       color: color,
       padding: const EdgeInsets.all(8),
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           text,
           textAlign: TextAlign.center,
