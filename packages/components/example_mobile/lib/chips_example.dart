@@ -47,7 +47,7 @@ class _ChipsExampleState extends State<ChipsExample> {
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildFilterChips(),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '2. Interests (Multiple Selection)',
               textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -60,14 +60,14 @@ class _ChipsExampleState extends State<ChipsExample> {
               fontSize: 14,
               color: Colors.grey[600],
             ),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '3. Different Styles',
               textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             OsmeaComponents.sizedBox(height: 12),
             _buildStyleShowcase(),
-            const Divider(height: 32),
+            OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
               '4. Interactive Examples',
               textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -122,7 +122,7 @@ class _ChipsExampleState extends State<ChipsExample> {
       'DevOps',
     ];
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 10,
       runSpacing: 12,
       children: interests.map((interest) {
@@ -183,7 +183,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         OsmeaComponents.text('● Style Variations:',
             fontWeight: FontWeight.w500),
         OsmeaComponents.sizedBox(height: 8),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
@@ -214,7 +214,7 @@ class _ChipsExampleState extends State<ChipsExample> {
         OsmeaComponents.text('● State Variations:',
             fontWeight: FontWeight.w500),
         OsmeaComponents.sizedBox(height: 8),
-        Wrap(
+        OsmeaComponents.wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
