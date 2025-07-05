@@ -137,12 +137,12 @@ class StackExample extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  Positioned(
+                  OsmeaComponents.positioned(
                     top: -20,
                     right: -20,
                     child: _buildColoredBox(color: Colors.red, size: 50),
                   ),
-                  Positioned(
+                  OsmeaComponents.positioned(
                     bottom: -20,
                     left: -20,
                     child: _buildColoredBox(color: Colors.blue, size: 50),
@@ -169,7 +169,7 @@ class StackExample extends StatelessWidget {
                       width: 100,
                       height: 100,
                       color: Colors.green,
-                      child: Center(
+                      child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                           'Expanded',
                           textStyle: const TextStyle(
@@ -304,7 +304,7 @@ class StackExample extends StatelessWidget {
                     heightFactor: 0.3,
                     child: OsmeaComponents.container(
                       color: Colors.amber.withOpacity(0.3),
-                      child: Center(
+                      child: OsmeaComponents.center(
                         child: OsmeaComponents.text(
                             'Fractional Position (80% × 30%)'),
                       ),
@@ -362,7 +362,7 @@ class StackExample extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    OsmeaComponents.positioned(
                       left: 16,
                       right: 16,
                       bottom: 16,
@@ -389,7 +389,7 @@ class StackExample extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Positioned(
+                    OsmeaComponents.positioned(
                       top: 16,
                       right: 16,
                       child: OsmeaComponents.container(
@@ -449,7 +449,7 @@ class StackExample extends StatelessWidget {
                         ),
                       ),
                       OsmeaComponents.sizedBox(width: 16),
-                      Expanded(
+                      OsmeaComponents.expanded(
                         child: OsmeaComponents.column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -473,7 +473,7 @@ class StackExample extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Positioned(
+                  OsmeaComponents.positioned(
                     top: -8,
                     right: -8,
                     child: OsmeaComponents.container(
