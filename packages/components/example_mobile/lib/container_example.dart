@@ -168,7 +168,7 @@ class ContainerExampleScreen extends StatelessWidget {
       width: double.infinity,
       height: 100,
       color: Colors.blue,
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Basic Container',
           textStyle: const TextStyle(color: Colors.white, fontSize: 16),
@@ -184,7 +184,7 @@ class ContainerExampleScreen extends StatelessWidget {
       height: 100,
       borderRadius: BorderRadius.circular(16),
       color: Colors.orange,
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Rounded Container',
           textStyle: const TextStyle(color: Colors.white, fontSize: 16),
@@ -207,7 +207,7 @@ class ContainerExampleScreen extends StatelessWidget {
         ),
       ],
       color: Colors.white,
-      child: Center(
+      child: OsmeaComponents.center(
         child: OsmeaComponents.text(
           'Shadow Container',
           textStyle: const TextStyle(fontSize: 16),
@@ -220,7 +220,7 @@ class ContainerExampleScreen extends StatelessWidget {
   Widget alignmentContainerExamples() {
     return OsmeaComponents.row(
       children: [
-        Expanded(
+        OsmeaComponents.expanded(
           child: OsmeaComponents.container(
             height: 100,
             color: Colors.green.shade300,
@@ -230,7 +230,7 @@ class ContainerExampleScreen extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(width: 8),
-        Expanded(
+        OsmeaComponents.expanded(
           child: OsmeaComponents.container(
             height: 100,
             color: Colors.green.shade500,
@@ -240,7 +240,7 @@ class ContainerExampleScreen extends StatelessWidget {
           ),
         ),
         OsmeaComponents.sizedBox(width: 8),
-        Expanded(
+        OsmeaComponents.expanded(
           child: OsmeaComponents.container(
             height: 100,
             color: Colors.green.shade700,
@@ -275,7 +275,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Size constrained container examples
   Widget sizeConstrainedContainerExamples(BuildContext context) {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 20,
       runSpacing: 20,
       alignment: WrapAlignment.center,
@@ -284,7 +284,7 @@ class ContainerExampleScreen extends StatelessWidget {
           width: 100,
           height: 100,
           color: Colors.red,
-          child: Center(
+          child: OsmeaComponents.center(
               child: OsmeaComponents.text('Fixed Size', color: Colors.white)),
         ),
         OsmeaComponents.container(
@@ -295,7 +295,7 @@ class ContainerExampleScreen extends StatelessWidget {
             maxHeight: 100,
           ),
           color: Colors.amber,
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.padding(
               padding: context.paddingLow,
               child:
@@ -316,7 +316,7 @@ class ContainerExampleScreen extends StatelessWidget {
           height: 100,
           border: Border.all(color: Colors.blue, width: 2),
           borderRadius: BorderRadius.circular(8),
-          child: Center(child: OsmeaComponents.text('Border All')),
+          child: OsmeaComponents.center(child: OsmeaComponents.text('Border All')),
         ),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.container(
@@ -326,7 +326,7 @@ class ContainerExampleScreen extends StatelessWidget {
             top: BorderSide(color: Colors.red, width: 4),
             bottom: BorderSide(color: Colors.green, width: 4),
           ),
-          child: Center(child: OsmeaComponents.text('Custom Border')),
+          child: OsmeaComponents.center(child: OsmeaComponents.text('Custom Border')),
         ),
       ],
     );
@@ -345,7 +345,7 @@ class ContainerExampleScreen extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(8),
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Linear Gradient',
               color: Colors.white,
@@ -362,7 +362,7 @@ class ContainerExampleScreen extends StatelessWidget {
             radius: 0.7,
           ),
           borderRadius: BorderRadius.circular(8),
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Radial Gradient',
               color: Colors.white,
@@ -410,7 +410,7 @@ class ContainerExampleScreen extends StatelessWidget {
               SnackBar(content: OsmeaComponents.text('Container tapped!')),
             );
           },
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Tap Me',
               color: Colors.white,
@@ -429,7 +429,7 @@ class ContainerExampleScreen extends StatelessWidget {
                   content: OsmeaComponents.text('Container long pressed!')),
             );
           },
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Long Press Me',
               color: Colors.white,
@@ -442,7 +442,7 @@ class ContainerExampleScreen extends StatelessWidget {
 
   // Shape variant container examples
   Widget shapeVariantContainerExamples() {
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 16,
       runSpacing: 16,
       alignment: WrapAlignment.spaceEvenly,
@@ -452,7 +452,7 @@ class ContainerExampleScreen extends StatelessWidget {
           height: 100,
           color: Colors.teal,
           shape: BoxShape.circle,
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Circle',
               color: Colors.white,
@@ -464,7 +464,7 @@ class ContainerExampleScreen extends StatelessWidget {
           height: 100,
           color: Colors.indigo,
           borderRadius: BorderRadius.circular(20),
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               'Rounded',
               color: Colors.white,
@@ -475,7 +475,7 @@ class ContainerExampleScreen extends StatelessWidget {
           width: 100,
           height: 100,
           color: Colors.amber,
-          child: Center(
+          child: OsmeaComponents.center(
             child: OsmeaComponents.text('Square'),
           ),
         ),
