@@ -134,10 +134,12 @@ class _PositionedSnackbarGroup extends StatelessWidget {
 class OsmeaSnackbar extends StatelessWidget {
   final SnackbarState state;
   final VoidCallback? onClose;
+  final Color? actionLabelColor;
   const OsmeaSnackbar({
     Key? key,
     required this.state,
     this.onClose,
+    this.actionLabelColor,
   }) : super(key: key);
 
   Color _typeColor() {
@@ -171,6 +173,19 @@ class OsmeaSnackbar extends StatelessWidget {
         return Icons.warning_amber_outlined;
       case SnackbarType.info:
         return Icons.info_outline;
+    }
+  }
+
+  Color _actionTextColor() {
+    switch (state.type) {
+      case SnackbarType.success:
+        return OsmeaColors.forestHeart;
+      case SnackbarType.error:
+        return OsmeaColors.amberFlame;
+      case SnackbarType.warning:
+        return OsmeaColors.sunsetGlow;
+      case SnackbarType.info:
+        return OsmeaColors.nordicBlue;
     }
   }
 
@@ -328,15 +343,18 @@ class OsmeaSnackbar extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
-              if (state.actionLabel != null)
+              if (state.actionLabel != null && state.onAction != null)
                 OsmeaTextButton(
                   text: state.actionLabel!,
                   onPressed: () {
-                    onClose?.call();
                     state.onAction?.call();
+                    onClose?.call();
                   },
                   variant: ButtonVariant.ghost,
                   size: ButtonSize.small,
+                  textColor: state.actionLabelColor ??
+                      actionLabelColor ??
+                      _actionTextColor(),
                 ),
             ],
           ),
@@ -454,6 +472,9 @@ class OsmeaSnackbar extends StatelessWidget {
                     },
                     variant: ButtonVariant.ghost,
                     size: ButtonSize.small,
+                    textColor: state.actionLabelColor ??
+                        actionLabelColor ??
+                        _actionTextColor(),
                   ),
                 ),
               Padding(
@@ -500,6 +521,7 @@ class SnackbarManager {
     int maxSnackbars = _defaultMaxSnackbars,
     String? actionLabel,
     VoidCallback? onAction,
+    Color? actionLabelColor,
   }) {
     final overlay = Overlay.of(context, rootOverlay: true);
     final id = UniqueKey().toString();
@@ -515,6 +537,7 @@ class SnackbarManager {
       duration: duration ?? const Duration(seconds: 4),
       actionLabel: actionLabel,
       onAction: onAction,
+      actionLabelColor: actionLabelColor,
     );
     if (!stacked) {
       for (final entry in _entries) {
@@ -633,4 +656,22 @@ class _SingleSnackbarOverlay extends StatelessWidget {
         return const EdgeInsets.only(bottom: 24, left: 16, right: 16);
     }
   }
+}
+
+class OsmeaTextButton extends OsmeaButton {
+  const OsmeaTextButton({
+    super.key,
+    required String text,
+    super.variant,
+    super.size,
+    super.state,
+    super.onPressed,
+    super.onLongPress,
+    super.tooltip,
+    super.autofocus,
+    super.customTheme,
+    super.fullWidth,
+    super.backgroundColor,
+    Color? textColor,
+  }) : super(text: text, textColor: textColor);
 }

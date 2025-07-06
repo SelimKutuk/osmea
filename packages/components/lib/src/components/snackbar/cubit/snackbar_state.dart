@@ -39,6 +39,9 @@ class SnackbarState {
   /// Callback function for action button
   final VoidCallback? onAction;
 
+  /// Optional color for the action label
+  final Color? actionLabelColor;
+
   /// Visual design variant for the snackbar (advanced UI)
   final SnackbarVisualStyle visualStyle;
 
@@ -62,6 +65,7 @@ class SnackbarState {
     DateTime? createdAt,
     this.actionLabel,
     this.onAction,
+    this.actionLabelColor,
     this.visualStyle = SnackbarVisualStyle.classic,
     this.animationStatus = SnackbarAnimationStatus.animating,
     this.progress,
@@ -97,6 +101,7 @@ class SnackbarState {
     DateTime? createdAt,
     String? actionLabel,
     VoidCallback? onAction,
+    Color? actionLabelColor,
     SnackbarVisualStyle? visualStyle,
     SnackbarAnimationStatus? animationStatus,
     double? progress,
@@ -114,6 +119,7 @@ class SnackbarState {
       createdAt: createdAt ?? this.createdAt,
       actionLabel: actionLabel ?? this.actionLabel,
       onAction: onAction ?? this.onAction,
+      actionLabelColor: actionLabelColor ?? this.actionLabelColor,
       visualStyle: visualStyle ?? this.visualStyle,
       animationStatus: animationStatus ?? this.animationStatus,
       progress: progress ?? this.progress,

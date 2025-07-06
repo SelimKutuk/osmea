@@ -20,6 +20,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     bool stacked = true,
     int maxSnackbars = 3,
     String? actionLabel,
+    Color? actionLabelColor,
     VoidCallback? onAction,
   }) {
     GlobalSnackbarOverlay().ensureOverlay(this);
@@ -36,6 +37,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
       maxSnackbars: maxSnackbars,
       actionLabel: actionLabel,
       onAction: onAction,
+      actionLabelColor: actionLabelColor,
     );
   }
 
@@ -50,6 +52,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     bool stacked = true,
     int maxSnackbars = 3,
     String? actionLabel,
+    Color? actionLabelColor,
     VoidCallback? onAction,
   }) =>
       showSnackbar(
@@ -64,6 +67,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
         maxSnackbars: maxSnackbars,
         actionLabel: actionLabel,
         onAction: onAction,
+        actionLabelColor: actionLabelColor,
       );
 
   /// Shows an error snackbar notification
@@ -77,6 +81,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     bool stacked = true,
     int maxSnackbars = 3,
     String? actionLabel,
+    Color? actionLabelColor,
     VoidCallback? onAction,
   }) =>
       showSnackbar(
@@ -91,6 +96,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
         maxSnackbars: maxSnackbars,
         actionLabel: actionLabel,
         onAction: onAction,
+        actionLabelColor: actionLabelColor,
       );
 
   /// Shows a warning snackbar notification
@@ -104,6 +110,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     bool stacked = true,
     int maxSnackbars = 3,
     String? actionLabel,
+    Color? actionLabelColor,
     VoidCallback? onAction,
   }) =>
       showSnackbar(
@@ -118,6 +125,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
         maxSnackbars: maxSnackbars,
         actionLabel: actionLabel,
         onAction: onAction,
+        actionLabelColor: actionLabelColor,
       );
 
   /// Shows an info snackbar notification
@@ -131,6 +139,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
     bool stacked = true,
     int maxSnackbars = 3,
     String? actionLabel,
+    Color? actionLabelColor,
     VoidCallback? onAction,
   }) =>
       showSnackbar(
@@ -145,6 +154,7 @@ extension OsmeaSnackbarContextExtension on BuildContext {
         maxSnackbars: maxSnackbars,
         actionLabel: actionLabel,
         onAction: onAction,
+        actionLabelColor: actionLabelColor,
       );
 
   /// Hides all currently visible snackbars

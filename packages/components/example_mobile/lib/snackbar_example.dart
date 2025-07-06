@@ -29,6 +29,7 @@ class SnackbarExampleScreen extends StatelessWidget {
                 message: 'Item deleted',
                 type: SnackbarType.success,
                 actionLabel: 'Undo',
+                actionLabelColor: OsmeaColors.white,
                 onAction: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Undo pressed!')),
@@ -195,6 +196,7 @@ class SnackbarExampleScreen extends StatelessWidget {
     SnackbarPosition position = SnackbarPosition.bottom,
     String? actionLabel,
     VoidCallback? onAction,
+    Color? actionLabelColor,
   }) {
     GlobalSnackbarOverlay().ensureOverlay(context);
     final id = UniqueKey().toString();
@@ -211,6 +213,7 @@ class SnackbarExampleScreen extends StatelessWidget {
         },
         actionLabel: actionLabel,
         onAction: onAction,
+        actionLabelColor: actionLabelColor,
       ),
     );
     Overlay.of(context, rootOverlay: true).insert(entry);
@@ -226,6 +229,7 @@ class _ProgressSnackbarOverlay extends StatefulWidget {
   final VoidCallback onClose;
   final String? actionLabel;
   final VoidCallback? onAction;
+  final Color? actionLabelColor;
   const _ProgressSnackbarOverlay({
     required this.id,
     required this.message,
@@ -235,6 +239,7 @@ class _ProgressSnackbarOverlay extends StatefulWidget {
     required this.onClose,
     this.actionLabel,
     this.onAction,
+    this.actionLabelColor,
   });
   @override
   State<_ProgressSnackbarOverlay> createState() =>
@@ -291,8 +296,10 @@ class _ProgressSnackbarOverlayState extends State<_ProgressSnackbarOverlay> {
               progress: _progress,
               actionLabel: widget.actionLabel,
               onAction: widget.onAction,
+              actionLabelColor: widget.actionLabelColor,
             ),
             onClose: widget.onClose,
+            actionLabelColor: widget.actionLabelColor,
           ),
         ),
       ),
