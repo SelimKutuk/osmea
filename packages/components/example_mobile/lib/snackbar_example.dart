@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'dart:async';
+import 'package:osmea_components/src/components/snackbar/snackbar.dart';
+import 'package:osmea_components/src/components/snackbar/cubit/snackbar_state.dart';
 
 class SnackbarExampleScreen extends StatelessWidget {
   const SnackbarExampleScreen({super.key});
@@ -17,59 +20,32 @@ class SnackbarExampleScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildSectionTitle('Basic Snackbars'),
-            const SizedBox(height: 16),
-            OsmeaComponents.button(
-              text: 'Show Success Snackbar',
-              onPressed: () =>
-                  context.snackbarSuccess('Operation completed successfully!'),
-            ),
-            const SizedBox(height: 12),
-            OsmeaComponents.button(
-              text: 'Show Error Snackbar',
-              onPressed: () => context.snackbarError('Something went wrong!'),
-              variant: ButtonVariant.danger,
-            ),
-            const SizedBox(height: 12),
-            OsmeaComponents.button(
-              text: 'Show Warning Snackbar',
-              onPressed: () =>
-                  context.snackbarWarning('Please check your input!'),
-              variant: ButtonVariant.warning,
-            ),
-            const SizedBox(height: 12),
-            OsmeaComponents.button(
-              text: 'Show Info Snackbar',
-              onPressed: () => context.snackbarInfo('New update available!'),
-              variant: ButtonVariant.primary,
-            ),
-            const SizedBox(height: 32),
             _buildSectionTitle('Snackbars with Actions'),
             const SizedBox(height: 16),
             OsmeaComponents.button(
               text: 'Show Undo Snackbar',
-              onPressed: () => context.snackbarSuccess(
-                'Item deleted',
-                actionLabel: 'UNDO',
-                onAction: () => context.snackbarInfo('Item restored!'),
+              onPressed: () => _showSnackbarWithProgress(
+                context,
+                message: 'Item deleted',
+                type: SnackbarType.success,
               ),
             ),
             const SizedBox(height: 12),
             OsmeaComponents.button(
               text: 'Show Retry Snackbar',
-              onPressed: () => context.snackbarError(
-                'Connection failed',
-                actionLabel: 'RETRY',
-                onAction: () => context.snackbarSuccess('Connection restored!'),
+              onPressed: () => _showSnackbarWithProgress(
+                context,
+                message: 'Connection failed',
+                type: SnackbarType.error,
               ),
             ),
             const SizedBox(height: 12),
             OsmeaComponents.button(
               text: 'Show Dismiss Snackbar',
-              onPressed: () => context.snackbarWarning(
-                'This action cannot be undone',
-                actionLabel: 'DISMISS',
-                onAction: () => context.hideAllSnackbars(),
+              onPressed: () => _showSnackbarWithProgress(
+                context,
+                message: 'This action cannot be undone',
+                type: SnackbarType.warning,
               ),
             ),
             const SizedBox(height: 32),
@@ -77,7 +53,8 @@ class SnackbarExampleScreen extends StatelessWidget {
             const SizedBox(height: 16),
             OsmeaComponents.button(
               text: 'Top Position Snackbar',
-              onPressed: () => context.showSnackbar(
+              onPressed: () => _showSnackbarWithProgress(
+                context,
                 message: 'This snackbar appears at the top!',
                 type: SnackbarType.info,
                 position: SnackbarPosition.top,
@@ -87,18 +64,22 @@ class SnackbarExampleScreen extends StatelessWidget {
             const SizedBox(height: 12),
             OsmeaComponents.button(
               text: 'Long Duration Snackbar',
-              onPressed: () => context.showSnackbar(
+              onPressed: () => _showSnackbarWithProgress(
+                context,
                 message: 'This snackbar stays for 8 seconds',
                 type: SnackbarType.warning,
                 duration: const Duration(seconds: 8),
-                actionLabel: 'CLOSE',
-                onAction: () => context.hideAllSnackbars(),
               ),
             ),
             const SizedBox(height: 12),
             OsmeaComponents.button(
               text: 'Quick Snackbar (2s)',
-              onPressed: () => context.quickSnackbar('Copied to clipboard!'),
+              onPressed: () => _showSnackbarWithProgress(
+                context,
+                message: 'Copied to clipboard!',
+                type: SnackbarType.info,
+                duration: const Duration(seconds: 2),
+              ),
             ),
             const SizedBox(height: 32),
             _buildSectionTitle('Multiple Snackbars'),
@@ -106,12 +87,24 @@ class SnackbarExampleScreen extends StatelessWidget {
             OsmeaComponents.button(
               text: 'Show Multiple Snackbars',
               onPressed: () {
-                context.snackbarSuccess('First snackbar');
+                _showSnackbarWithProgress(
+                  context,
+                  message: 'First snackbar',
+                  type: SnackbarType.success,
+                );
                 Future.delayed(const Duration(milliseconds: 500), () {
-                  context.snackbarInfo('Second snackbar');
+                  _showSnackbarWithProgress(
+                    context,
+                    message: 'Second snackbar',
+                    type: SnackbarType.info,
+                  );
                 });
                 Future.delayed(const Duration(milliseconds: 1000), () {
-                  context.snackbarWarning('Third snackbar');
+                  _showSnackbarWithProgress(
+                    context,
+                    message: 'Third snackbar',
+                    type: SnackbarType.warning,
+                  );
                 });
               },
             ),
@@ -172,6 +165,108 @@ class SnackbarExampleScreen extends StatelessWidget {
         text,
         variant: OsmeaTextVariant.bodyMedium,
         color: OsmeaColors.shark,
+      ),
+    );
+  }
+
+  void _showSnackbarWithProgress(
+    BuildContext context, {
+    required String message,
+    required SnackbarType type,
+    Duration duration = const Duration(seconds: 4),
+    SnackbarPosition position = SnackbarPosition.bottom,
+  }) {
+    GlobalSnackbarOverlay().ensureOverlay(context);
+    final id = UniqueKey().toString();
+    OverlayEntry? entry;
+    entry = OverlayEntry(
+      builder: (ctx) => _ProgressSnackbarOverlay(
+        id: id,
+        message: message,
+        type: type,
+        duration: duration,
+        position: position,
+        onClose: () {
+          entry?.remove();
+        },
+      ),
+    );
+    Overlay.of(context, rootOverlay: true).insert(entry);
+  }
+}
+
+class _ProgressSnackbarOverlay extends StatefulWidget {
+  final String id;
+  final String message;
+  final SnackbarType type;
+  final Duration duration;
+  final SnackbarPosition position;
+  final VoidCallback onClose;
+  const _ProgressSnackbarOverlay({
+    required this.id,
+    required this.message,
+    required this.type,
+    required this.duration,
+    required this.position,
+    required this.onClose,
+  });
+  @override
+  State<_ProgressSnackbarOverlay> createState() =>
+      _ProgressSnackbarOverlayState();
+}
+
+class _ProgressSnackbarOverlayState extends State<_ProgressSnackbarOverlay> {
+  double _progress = 0.0;
+  late Timer _timer;
+  late int _elapsed;
+  @override
+  void initState() {
+    super.initState();
+    _elapsed = 0;
+    final totalMs = widget.duration.inMilliseconds;
+    const tickMs = 40;
+    _timer = Timer.periodic(const Duration(milliseconds: tickMs), (timer) {
+      setState(() {
+        _elapsed += tickMs;
+        _progress = (_elapsed / totalMs).clamp(0.0, 1.0);
+      });
+      if (_progress >= 1.0) {
+        timer.cancel();
+        Future.delayed(const Duration(milliseconds: 200), widget.onClose);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: widget.position == SnackbarPosition.top
+          ? Alignment.topCenter
+          : Alignment.bottomCenter,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: OsmeaSnackbar(
+            state: SnackbarState(
+              id: widget.id,
+              visible: true,
+              message: widget.message,
+              type: widget.type,
+              position: widget.position,
+              animation: SnackbarAnimation.slide,
+              style: SnackbarStyle.defaultStyle,
+              duration: widget.duration,
+              progress: _progress,
+            ),
+            onClose: widget.onClose,
+          ),
+        ),
       ),
     );
   }
