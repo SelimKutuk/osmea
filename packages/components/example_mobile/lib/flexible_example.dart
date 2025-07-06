@@ -278,14 +278,9 @@ class FlexibleExampleScreen extends StatelessWidget {
                 OsmeaComponents.sizedBox(width: 8),
                 OsmeaComponents.expanded(
                   // Use expanded instead of flexible
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 8,
-                      ),
-                    ),
+                  child: OsmeaComponents.textField(
+                    variant: TextFieldVariant.outlined,
+                    size: TextFieldSize.medium,
                   ),
                 ),
               ],
@@ -303,14 +298,9 @@ class FlexibleExampleScreen extends StatelessWidget {
                 OsmeaComponents.expanded(
                   // Use expanded instead of flexible
                   flex: 2, // Takes more space
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 8,
-                      ),
-                    ),
+                  child: OsmeaComponents.textField(
+                    variant: TextFieldVariant.outlined,
+                    size: TextFieldSize.medium,
                   ),
                 ),
               ],
