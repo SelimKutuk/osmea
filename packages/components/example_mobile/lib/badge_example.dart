@@ -71,7 +71,7 @@ class _BadgeExampleState extends State<BadgeExample> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: OsmeaColors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             spreadRadius: 0,
             offset: const Offset(0, 3),
@@ -98,9 +98,9 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 14),
           OsmeaComponents.text(
             'Modern, minimalist badges for notifications, labels, and status indicators',
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              color: OsmeaColors.black.withValues(alpha: 0.87),
               height: 1.4,
               letterSpacing: -0.3,
             ),
@@ -156,16 +156,16 @@ class _BadgeExampleState extends State<BadgeExample> {
                 title: 'Positioning',
                 description: 'Place badges anywhere relative to parent elements',
                 badge: OsmeaComponents.badge(
-                  child: OsmeaComponents.container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(Icons.notifications,
-                        size: 24, color: Colors.black54),
+                                  child: OsmeaComponents.container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.ash.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(8),
                   ),
+                  child: Icon(Icons.notifications,
+                      size: 24, color: OsmeaColors.black.withValues(alpha: 0.54)),
+                ),
                   content: '8',
                   position: BadgePosition.topRight,
                   variant: BadgeVariant.danger,
@@ -183,8 +183,8 @@ class _BadgeExampleState extends State<BadgeExample> {
                       content: '3',
                       variant: BadgeVariant.primary,
                       style: BadgeStyle.normal,
-                      child: const Icon(Icons.mail,
-                          size: 22, color: Color.fromARGB(137, 255, 0, 0)),
+                                          child: Icon(Icons.mail,
+                        size: 22, color: OsmeaColors.sunsetGlow.withValues(alpha: 0.54)),
                     ),
                     OsmeaComponents.sizedBox(width: 12),
                     OsmeaComponents.badge(
@@ -192,8 +192,8 @@ class _BadgeExampleState extends State<BadgeExample> {
                       size: BadgeSize.dot,
                       variant: BadgeVariant.warning,
                       style: BadgeStyle.normal,
-                      child: const Icon(Icons.chat,
-                          size: 22, color: Colors.black54),
+                                          child: Icon(Icons.chat,
+                        size: 22, color: OsmeaColors.black.withValues(alpha: 0.54)),
                     ),
                   ],
                 ),
@@ -225,19 +225,19 @@ class _BadgeExampleState extends State<BadgeExample> {
           OsmeaComponents.sizedBox(height: 12),
           OsmeaComponents.text(
             title,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              color: OsmeaColors.black.withValues(alpha: 0.87),
               letterSpacing: -0.3,
             ),
           ),
           OsmeaComponents.sizedBox(height: 6),
           OsmeaComponents.text(
             description,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: OsmeaColors.black.withValues(alpha: 0.54),
               height: 1.4,
               letterSpacing: -0.2,
             ),
@@ -503,7 +503,7 @@ class _BadgeExampleState extends State<BadgeExample> {
               variant: BadgeVariant.primary,
               shape: BadgeShape.rounded,
               style: BadgeStyle.normal, // Use normal style for better contrast
-              textColor: Colors.white, // Ensure text is white for visibility
+              textColor: OsmeaColors.white, // Ensure text is white for visibility
             )),
         _buildBadgeWithLabel(
             'Clickable',
@@ -728,7 +728,7 @@ class _BadgeExampleState extends State<BadgeExample> {
               shape: BadgeShape.pill,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Badge tapped!')),
+                  SnackBar(content: OsmeaComponents.text('Badge tapped!')),
                 );
               },
             )),
