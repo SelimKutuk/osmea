@@ -23,6 +23,7 @@ import 'package:osmea_components/src/components/progress/progress.dart';
 import 'package:osmea_components/src/enums/button_enums.dart';
 import 'package:osmea_components/src/enums/progress_enums.dart';
 import 'dart:math' as math;
+import 'package:osmea_components/osmea_components.dart';
 
 /// Global snackbar overlay handler that manages snackbar positioning and display
 class GlobalSnackbarOverlay {
@@ -33,7 +34,10 @@ class GlobalSnackbarOverlay {
   OverlayEntry? _overlayEntry;
   bool _isShown = false;
   void ensureOverlay(BuildContext context) {
-    if (_isShown && _overlayEntry != null) return;
+    if (_overlayEntry != null) {
+      _overlayEntry!.remove();
+      _isShown = false;
+    }
     _overlayEntry = OverlayEntry(
       builder: (_) => const _SnackbarOverlayWidget(),
     );
@@ -127,70 +131,17 @@ class _PositionedSnackbarGroup extends StatelessWidget {
   }
 }
 
-class OsmeaSnackbar extends StatefulWidget {
+class OsmeaSnackbar extends StatelessWidget {
   final SnackbarState state;
   final VoidCallback? onClose;
-  const OsmeaSnackbar({Key? key, required this.state, this.onClose})
-      : super(key: key);
-
-  @override
-  State<OsmeaSnackbar> createState() => _OsmeaSnackbarState();
-}
-
-class _OsmeaSnackbarState extends State<OsmeaSnackbar>
-    with TickerProviderStateMixin {
-  late AnimationController _slideController;
-  late AnimationController _progressController;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _progressAnimation;
-  bool _isDismissed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _slideController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _progressController = AnimationController(
-      duration: widget.state.duration,
-      vsync: this,
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 1),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutCubic,
-    ));
-
-    _progressAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(_progressController);
-
-    _slideController.forward();
-    _progressController.forward();
-  }
-
-  @override
-  void dispose() {
-    _slideController.dispose();
-    _progressController.dispose();
-    super.dispose();
-  }
-
-  void _dismiss() {
-    if (_isDismissed) return;
-    _isDismissed = true;
-    _slideController.reverse().then((_) {
-      widget.onClose?.call();
-    });
-  }
+  const OsmeaSnackbar({
+    Key? key,
+    required this.state,
+    this.onClose,
+  }) : super(key: key);
 
   Color _typeColor() {
-    switch (widget.state.type) {
+    switch (state.type) {
       case SnackbarType.success:
         return OsmeaColors.forestHeart;
       case SnackbarType.error:
@@ -202,8 +153,16 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
     }
   }
 
+  /// Snackbar arka planına göre biraz daha açık bir renk döndürür
+  Color _lighterTypeColor() {
+    final base = _typeColor();
+    final hsl = HSLColor.fromColor(base);
+    final light = hsl.withLightness((hsl.lightness + 0.15).clamp(0.0, 1.0));
+    return light.toColor();
+  }
+
   IconData _iconData() {
-    switch (widget.state.type) {
+    switch (state.type) {
       case SnackbarType.success:
         return Icons.check_circle_outline;
       case SnackbarType.error:
@@ -217,10 +176,11 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.state.visible) return const SizedBox.shrink();
-
-    // Farklı visualStyle'lara göre farklı tasarımlar uygula
-    switch (widget.state.visualStyle) {
+    if (!state.visible ||
+        state.animationStatus == SnackbarAnimationStatus.dismissed) {
+      return const SizedBox.shrink();
+    }
+    switch (state.visualStyle) {
       case SnackbarVisualStyle.modern:
         return _buildModernSnackbar(context);
       case SnackbarVisualStyle.glass:
@@ -239,19 +199,39 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
   Widget _buildClassicSnackbar(BuildContext context) {
     return _buildDismissibleWrapper(
       context,
-      child: OsmeaContainer(
-        decoration: BoxDecoration(
-          color: _typeColor(),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+      child: Stack(
+        children: [
+          OsmeaContainer(
+            padding:
+                const EdgeInsets.only(bottom: 8, top: 6, left: 8, right: 8),
+            decoration: BoxDecoration(
+              color: _typeColor(),
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: _buildContent(context, showProgress: true, useGlass: false),
+            child: _buildContent(context, showProgress: false, useGlass: false),
+          ),
+          if (state.progress != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: OsmeaProgress(
+                type: ProgressType.linear,
+                value: state.progress!,
+                size: ProgressSize.extraSmall,
+                progressColor: _lighterTypeColor(),
+                showPercentage: false,
+                strokeWidth: 0.5,
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -260,6 +240,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
     return _buildDismissibleWrapper(
       context,
       child: OsmeaContainer(
+        padding: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -292,6 +273,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
           child: OsmeaContainer(
+            padding: const EdgeInsets.only(bottom: 20),
             decoration: BoxDecoration(
               color: _typeColor().withOpacity(0.35),
               borderRadius: BorderRadius.circular(18),
@@ -336,7 +318,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
               Icon(_iconData(), color: Colors.white, size: 32),
               const SizedBox(height: 8),
               OsmeaText(
-                widget.state.message,
+                state.message,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 13,
@@ -346,12 +328,12 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
-              if (widget.state.actionLabel != null)
+              if (state.actionLabel != null)
                 OsmeaTextButton(
-                  text: widget.state.actionLabel!,
+                  text: state.actionLabel!,
                   onPressed: () {
-                    widget.state.onAction?.call();
-                    _dismiss();
+                    onClose?.call();
+                    state.onAction?.call();
                   },
                   variant: ButtonVariant.ghost,
                   size: ButtonSize.small,
@@ -367,6 +349,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
     return _buildDismissibleWrapper(
       context,
       child: OsmeaContainer(
+        padding: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
           color: _typeColor().withOpacity(0.95),
           borderRadius: BorderRadius.circular(14),
@@ -392,6 +375,7 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
     return _buildDismissibleWrapper(
       context,
       child: OsmeaContainer(
+        padding: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
           color: _typeColor().withOpacity(0.92),
           borderRadius: BorderRadius.circular(16),
@@ -412,18 +396,17 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
 
   Widget _buildDismissibleWrapper(BuildContext context,
       {required Widget child}) {
-    return SlideTransition(
-      position: _slideAnimation,
-      child: Dismissible(
-        key: Key(widget.state.id),
-        direction: DismissDirection.horizontal,
-        onDismissed: (_) => _dismiss(),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          constraints: const BoxConstraints(maxWidth: 600),
-          width: double.infinity,
-          child: child,
-        ),
+    return Dismissible(
+      key: Key(state.id),
+      direction: DismissDirection.horizontal,
+      onDismissed: (_) {
+        onClose?.call();
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        constraints: const BoxConstraints(maxWidth: 600),
+        width: double.infinity,
+        child: child,
       ),
     );
   }
@@ -433,27 +416,26 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
       bool useGlass = false,
       bool modern = false,
       bool glow = false}) {
-    final hasAction =
-        widget.state.actionLabel != null && widget.state.onAction != null;
+    final hasAction = state.actionLabel != null && state.onAction != null;
     return OsmeaColumn(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         OsmeaPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(_iconData(), color: Colors.white, size: 20),
-              const SizedBox(width: 8),
+              Icon(_iconData(), color: Colors.white, size: 16),
+              const SizedBox(width: 6),
               Expanded(
                 child: OsmeaText(
-                  widget.state.message,
+                  state.message,
                   style: TextStyle(
                     color: useGlass
                         ? Colors.white.withOpacity(0.95)
                         : Colors.white,
-                    fontSize: modern ? 15 : 14,
+                    fontSize: modern ? 13 : 12,
                     fontWeight: FontWeight.w500,
                     decoration: TextDecoration.none,
                   ),
@@ -463,12 +445,12 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
               ),
               if (hasAction)
                 Padding(
-                  padding: const EdgeInsets.only(left: 4),
+                  padding: const EdgeInsets.only(left: 2),
                   child: OsmeaTextButton(
-                    text: widget.state.actionLabel!,
+                    text: state.actionLabel!,
                     onPressed: () {
-                      widget.state.onAction?.call();
-                      _dismiss();
+                      onClose?.call();
+                      state.onAction?.call();
                     },
                     variant:
                         useGlass ? ButtonVariant.outlined : ButtonVariant.ghost,
@@ -478,40 +460,17 @@ class _OsmeaSnackbarState extends State<OsmeaSnackbar>
               Padding(
                 padding: const EdgeInsets.only(left: 2),
                 child: IconButton(
-                  onPressed: _dismiss,
-                  icon: const Icon(Icons.close, color: Colors.white, size: 18),
+                  onPressed: onClose,
+                  icon: const Icon(Icons.close, color: Colors.white, size: 16),
                   padding: EdgeInsets.zero,
                   constraints:
-                      const BoxConstraints(minWidth: 32, minHeight: 32),
-                  splashRadius: 18,
+                      const BoxConstraints(minWidth: 24, minHeight: 24),
+                  splashRadius: 14,
                 ),
               ),
             ],
           ),
         ),
-        if (showProgress)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(2),
-              child: SizedBox(
-                height: 3,
-                child: AnimatedBuilder(
-                  animation: _progressAnimation,
-                  builder: (context, child) {
-                    return OsmeaProgress(
-                      type: ProgressType.linear,
-                      value: _progressAnimation.value,
-                      size: ProgressSize.small,
-                      progressColor: Colors.white,
-                      showPercentage: false,
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-        if (showProgress) const SizedBox(height: 8),
       ],
     );
   }
