@@ -73,3 +73,6 @@ export 'divider_enums.dart';
 
 // Toast enums
 export 'toast_enums.dart';
+
+// Image enums
+export 'image_enums.dart';
