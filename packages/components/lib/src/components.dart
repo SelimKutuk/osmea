@@ -934,6 +934,8 @@ class OsmeaComponents {
     );
   }
 
+  
+
   /// 🔄 **OSMEA Switch Button** - Comprehensive switch component
   ///
   /// Creates a feature-rich switch component with support for:
@@ -3402,4 +3404,63 @@ class AppBarAction {
       text: text ?? this.text,
     );
   }
+}
+
+class OsmeaDropdownItem<T> {
+  final String label;
+  final T value;
+  final IconData? icon;
+  final bool isDestructive;
+  final String? shortcut;
+  final bool isAvatar;
+  final String? username;
+  final String? avatarUrl;
+  final bool? isOnline;
+
+  const OsmeaDropdownItem({
+    required this.label,
+    required this.value,
+    this.icon,
+    this.isDestructive = false,
+    this.shortcut,
+    this.isAvatar = false,
+    this.username,
+    this.avatarUrl,
+    this.isOnline,
+  });
+
+  @override
+  String toString() => label;
+}
+
+class OsmeaDropdownMenuItem {
+  static OsmeaDropdownItem<T> dropdownMenuItem<T>({
+    required String label,
+    required T value,
+    IconData? icon,
+    bool isDestructive = false,
+    String? shortcut,
+  }) => OsmeaDropdownItem<T>(
+    label: label,
+    value: value,
+    icon: icon,
+    isDestructive: isDestructive,
+    shortcut: shortcut,
+    isAvatar: false,
+  );
+
+  static OsmeaDropdownItem<T> dropdownAvatarItem<T>({
+    required String name,
+    required String username,
+    required T value,
+    String? avatarUrl,
+    bool isOnline = false,
+  }) => OsmeaDropdownItem<T>(
+    label: name,
+    value: value,
+    isAvatar: true,
+    username: username,
+    avatarUrl: avatarUrl,
+    isOnline: isOnline,
+  );
 }

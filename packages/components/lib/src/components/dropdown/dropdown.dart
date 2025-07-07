@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/center/center.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
@@ -9,14 +10,8 @@ import 'package:osmea_components/src/components/padding/padding.dart';
 import 'package:osmea_components/src/components/row/row.dart';
 import 'package:osmea_components/src/components/sized_box/sized_box.dart';
 import 'package:osmea_components/src/components/text/text.dart';
-import 'package:osmea_components/src/enums/dropdown_enums.dart';
-import 'package:osmea_components/src/utils/dropdown_extensions.dart';
 import 'package:osmea_components/src/components/dropdown/cubit/dropdown_cubit.dart';
 import 'package:osmea_components/src/components/dropdown/cubit/dropdown_state.dart';
-import 'package:osmea_components/src/utils/sizer_extensions.dart';
-import 'package:osmea_components/src/utils/text_extensions.dart';
-import 'package:osmea_components/src/styles/colors.dart';
-import 'package:osmea_components/src/styles/text_style.dart';
 
 // Export the models and cubit for external use
 export 'package:osmea_components/src/components/dropdown/cubit/dropdown_cubit.dart';
@@ -495,47 +490,59 @@ class _DropdownView<T> extends StatelessWidget {
   Widget _buildAvatar(BuildContext context) {
     final double avatarSize = size.avatarSize;
 
-    // If the selected item is an OsmeaDropdownUser, use their avatar
-    if (state.selectedItem is OsmeaDropdownUser) {
-      final user = state.selectedItem as OsmeaDropdownUser;
-      if (user.avatarUrl != null) {
-        return CircleAvatar(
-          radius: avatarSize / 2,
-          backgroundImage: NetworkImage(user.avatarUrl!),
-          backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
-        );
-      } else {
-        return CircleAvatar(
-          radius: avatarSize / 2,
-          backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
-          child: Text(
-            user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
-            style: OsmeaTextStyle.bodyLarge(context).copyWith(
-              color: OsmeaColors.nordicBlue,
-              fontWeight: FontWeight.bold,
-              fontSize: avatarSize / 3,
+    // If the selected item is an avatar dropdown item, use its avatar
+    if (state.selectedItem is OsmeaDropdownItem) {
+      final item = state.selectedItem as OsmeaDropdownItem;
+      if (item.isAvatar) {
+        if (item.avatarUrl != null) {
+          return CircleAvatar(
+            radius: avatarSize / 2,
+            backgroundImage: NetworkImage(item.avatarUrl!),
+            backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+          );
+        } else {
+          return CircleAvatar(
+            radius: avatarSize / 2,
+            backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+            child: OsmeaText(
+              item.label.isNotEmpty ? item.label[0].toUpperCase() : '?',
+              style: OsmeaTextStyle.bodyLarge(context).copyWith(
+                color: OsmeaColors.nordicBlue,
+                fontWeight: FontWeight.bold,
+                fontSize: avatarSize / 3,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
-    }
-
-    // If the selected item is an OsmeaDropdownMenuItem with an icon, use it
-    if (state.selectedItem is OsmeaDropdownMenuItem) {
-      final menuItem = state.selectedItem as OsmeaDropdownMenuItem;
-      if (menuItem.icon != null) {
+      // If the selected item has an icon, use it
+      if (item.icon != null) {
         return CircleAvatar(
           radius: avatarSize / 2,
           backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
           child: Icon(
-            menuItem.icon,
+            item.icon,
             size: avatarSize / 2,
             color: OsmeaColors.nordicBlue,
           ),
         );
       }
+    } else if (state.selectedItem != null) {
+      // Handle primitive types: show first letter or default icon
+      final label = state.selectedItem.toString();
+      return CircleAvatar(
+        radius: avatarSize / 2,
+        backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+        child: OsmeaText(
+          label.isNotEmpty ? label[0].toUpperCase() : '?',
+          style: OsmeaTextStyle.bodyLarge(context).copyWith(
+            color: OsmeaColors.nordicBlue,
+            fontWeight: FontWeight.bold,
+            fontSize: avatarSize / 3,
+          ),
+        ),
+      );
     }
-
     // Default avatar logic
     if (avatarImage != null) {
       return CircleAvatar(
@@ -563,8 +570,17 @@ class _DropdownView<T> extends StatelessWidget {
 
   Widget _buildDropdownMenu(BuildContext context, DropdownCubit<T> cubit) {
     // Filter out the selected item from the menu list
-    final List<T> menuItems =
-        items.where((item) => item != state.selectedItem).toList();
+    final List<T> menuItems = items.where((item) {
+      if (state.selectedItem == null) return true;
+      // For OsmeaDropdownItem, compare by value if possible
+      if (item is OsmeaDropdownItem &&
+          state.selectedItem is OsmeaDropdownItem) {
+        return (item as OsmeaDropdownItem).value !=
+            (state.selectedItem as OsmeaDropdownItem).value;
+      }
+      // For primitives, use ==
+      return item != state.selectedItem;
+    }).toList();
     return Material(
       elevation: 8,
       borderRadius: size.borderRadius,
@@ -601,6 +617,7 @@ class _DropdownView<T> extends StatelessWidget {
     T item,
     bool isSelected,
   ) {
+    // If itemBuilder is provided, use it
     if (itemBuilder != null) {
       return InkWell(
         onTap: () => cubit.selectItem(item),
@@ -608,8 +625,8 @@ class _DropdownView<T> extends StatelessWidget {
       );
     }
 
-    // Handle special item types
-    if (item is OsmeaDropdownUser) {
+    // Handle avatar/user dropdown items
+    if (item is OsmeaDropdownItem && item.isAvatar) {
       return InkWell(
         onTap: () => cubit.selectItem(item),
         child: OsmeaContainer(
@@ -623,8 +640,8 @@ class _DropdownView<T> extends StatelessWidget {
                     ? NetworkImage(item.avatarUrl!)
                     : null,
                 child: item.avatarUrl == null
-                    ? Text(
-                        item.name[0],
+                    ? OsmeaText(
+                        item.label[0],
                         style: OsmeaTextStyle.bodyLarge(context).copyWith(
                           color: OsmeaColors.nordicBlue,
                           fontWeight: FontWeight.bold,
@@ -638,31 +655,34 @@ class _DropdownView<T> extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     OsmeaText(
-                      item.name,
+                      item.label,
                       style: OsmeaTextStyle.bodyLarge(context).copyWith(
                         fontWeight: FontWeight.w500,
                         color: OsmeaColors.thunder,
                       ),
                     ),
-                    OsmeaText(
-                      item.username,
-                      style: OsmeaTextStyle.bodySmall(context).copyWith(
-                        color: OsmeaColors.slate,
-                        fontSize: 12,
+                    if (item.username != null)
+                      OsmeaText(
+                        item.username!,
+                        style: OsmeaTextStyle.bodySmall(context).copyWith(
+                          color: OsmeaColors.slate,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
-              OsmeaContainer(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color:
-                      item.isOnline ? OsmeaColors.forestHeart : OsmeaColors.ash,
-                  shape: BoxShape.circle,
+              if (item.isOnline != null)
+                OsmeaContainer(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: item.isOnline!
+                        ? OsmeaColors.forestHeart
+                        : OsmeaColors.ash,
+                    shape: BoxShape.circle,
+                  ),
                 ),
-              ),
               if (isSelected)
                 OsmeaPadding(
                   padding: const EdgeInsets.only(left: 8.0),
@@ -675,11 +695,16 @@ class _DropdownView<T> extends StatelessWidget {
       );
     }
 
-    if (item is OsmeaDropdownMenuSection) {
+    // Handle section headers (if you want to support them, you can add a flag or type field)
+    // For now, treat any DropdownMenuItem with icon == null, shortcut == null, isAvatar == false as a section header
+    if (item is OsmeaDropdownItem &&
+        item.icon == null &&
+        item.shortcut == null &&
+        !item.isAvatar) {
       return OsmeaPadding(
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
         child: OsmeaText(
-          item.title,
+          item.label,
           style: OsmeaTextStyle.bodyLarge(context).copyWith(
             fontWeight: FontWeight.bold,
             color: OsmeaColors.slate,
@@ -688,7 +713,8 @@ class _DropdownView<T> extends StatelessWidget {
       );
     }
 
-    if (item is OsmeaDropdownMenuItem) {
+    // Handle regular menu items
+    if (item is OsmeaDropdownItem) {
       return InkWell(
         onTap: () => cubit.selectItem(item),
         child: OsmeaContainer(
@@ -706,7 +732,7 @@ class _DropdownView<T> extends StatelessWidget {
               if (item.icon != null) const OsmeaSizedBox(width: 12),
               OsmeaExpanded(
                 child: OsmeaText(
-                  item.title,
+                  item.label,
                   style: OsmeaTextStyle.bodyLarge(context).copyWith(
                     color: item.isDestructive
                         ? OsmeaColors.sunsetGlow
@@ -742,7 +768,8 @@ class _DropdownView<T> extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         alignment: centerLeft,
         decoration: BoxDecoration(
-          color: isSelected ? OsmeaColors.nordicBlue.withOpacity(0.1) : null,
+          color:
+              isSelected ? OsmeaColors.nordicBlue.withValues(alpha: 0.1) : null,
         ),
         child: Row(
           children: [
@@ -771,42 +798,4 @@ class _DropdownView<T> extends StatelessWidget {
       ),
     );
   }
-}
-
-// Advanced dropdown item models
-class OsmeaDropdownUser {
-  final String name;
-  final String username;
-  final String? avatarUrl;
-  final bool isOnline;
-  OsmeaDropdownUser({
-    required this.name,
-    required this.username,
-    this.avatarUrl,
-    this.isOnline = false,
-  });
-  @override
-  String toString() => name;
-}
-
-class OsmeaDropdownMenuItem {
-  final String title;
-  final IconData? icon;
-  final String? shortcut;
-  final bool isDestructive;
-  OsmeaDropdownMenuItem({
-    required this.title,
-    this.icon,
-    this.shortcut,
-    this.isDestructive = false,
-  });
-  @override
-  String toString() => title;
-}
-
-class OsmeaDropdownMenuSection {
-  final String title;
-  OsmeaDropdownMenuSection({required this.title});
-  @override
-  String toString() => title;
 }
