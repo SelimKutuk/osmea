@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osmea_components/src/components/center/center.dart';
+import 'package:osmea_components/src/components/column/column.dart';
+import 'package:osmea_components/src/components/container/container.dart';
+import 'package:osmea_components/src/components/expanded/expanded.dart';
+import 'package:osmea_components/src/components/flexible/flexible.dart';
+import 'package:osmea_components/src/components/padding/padding.dart';
+import 'package:osmea_components/src/components/row/row.dart';
+import 'package:osmea_components/src/components/sized_box/sized_box.dart';
+import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/enums/dropdown_enums.dart';
 import 'package:osmea_components/src/utils/dropdown_extensions.dart';
+import 'package:osmea_components/src/components/dropdown/cubit/dropdown_cubit.dart';
+import 'package:osmea_components/src/components/dropdown/cubit/dropdown_state.dart';
+import 'package:osmea_components/src/utils/sizer_extensions.dart';
+import 'package:osmea_components/src/utils/text_extensions.dart';
+import 'package:osmea_components/src/styles/colors.dart';
+import 'package:osmea_components/src/styles/text_style.dart';
+
+// Export the models and cubit for external use
+export 'package:osmea_components/src/components/dropdown/cubit/dropdown_cubit.dart';
+export 'package:osmea_components/src/components/dropdown/cubit/dropdown_state.dart';
 
 /// 🔽 **OSMEA Components Library**
 ///
@@ -44,7 +64,8 @@ import 'package:osmea_components/src/utils/dropdown_extensions.dart';
 ///
 /// A comprehensive dropdown component for the OSMEA UI Kit.
 /// Features customizable appearance, sizes, and support for avatars and icons.
-class OsmeaDropdown<T> extends StatefulWidget {
+/// Now uses Cubit pattern for state management.
+class OsmeaDropdown<T> extends StatelessWidget {
   /// The list of items the user can select.
   final List<T> items;
 
@@ -126,6 +147,27 @@ class OsmeaDropdown<T> extends StatefulWidget {
   /// Whether to show a leading icon.
   final bool showLeadingIcon;
 
+  /// Focus node for managing keyboard focus
+  final FocusNode? focusNode;
+
+  /// Validation function for selected item
+  final String? Function(T?)? validator;
+
+  /// Called when focus changes
+  final ValueChanged<bool>? onFocusChanged;
+
+  /// Called when hover state changes
+  final ValueChanged<bool>? onHoverChanged;
+
+  /// Called when dropdown open/close state changes
+  final ValueChanged<bool>? onOpenChanged;
+
+  /// Called when dropdown is tapped
+  final VoidCallback? onTap;
+
+  /// Animation duration for state changes
+  final Duration? animationDuration;
+
   /// Creates an OsmeaDropdown.
   const OsmeaDropdown({
     super.key,
@@ -156,341 +198,155 @@ class OsmeaDropdown<T> extends StatefulWidget {
     this.avatarIcon,
     this.avatarBackgroundColor,
     this.showLeadingIcon = false,
+    this.focusNode,
+    this.validator,
+    this.onFocusChanged,
+    this.onHoverChanged,
+    this.onOpenChanged,
+    this.onTap,
+    this.animationDuration,
   });
 
   @override
-  State<OsmeaDropdown<T>> createState() => _OsmeaDropdownState<T>();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => DropdownCubit<T>(
+        focusNode: focusNode,
+        onChanged: onChanged,
+        onFocusChanged: onFocusChanged,
+        onHoverChanged: onHoverChanged,
+        onOpenChanged: onOpenChanged,
+        onTap: onTap,
+        validator: validator,
+        items: items,
+        initialValue: value,
+        enabled: isEnabled,
+        isLoading: isLoading,
+      ),
+      child: BlocBuilder<DropdownCubit<T>, DropdownCubitState<T>>(
+        builder: (context, state) {
+          return _DropdownView<T>(
+            items: items,
+            itemBuilder: itemBuilder,
+            selectedItemBuilder: selectedItemBuilder,
+            hint: hint,
+            size: size,
+            variant: variant,
+            type: type,
+            iconPosition: iconPosition,
+            icon: icon,
+            fullWidth: fullWidth,
+            label: label,
+            helperText: helperText,
+            errorText: errorText,
+            showCheckbox: showCheckbox,
+            header: header,
+            autoLayout: autoLayout,
+            leading: leading,
+            maxHeight: maxHeight,
+            avatarUrl: avatarUrl,
+            avatarImage: avatarImage,
+            avatarIcon: avatarIcon,
+            avatarBackgroundColor: avatarBackgroundColor,
+            showLeadingIcon: showLeadingIcon,
+            state: state,
+          );
+        },
+      ),
+    );
+  }
 }
 
-class _OsmeaDropdownState<T> extends State<OsmeaDropdown<T>> {
-  final LayerLink _layerLink = LayerLink();
-  bool _isOpen = false;
-  OverlayEntry? _overlayEntry;
-  T? _selectedItem;
-  final FocusNode _focusNode = FocusNode();
+/// Stateless dropdown view using cubit state
+class _DropdownView<T> extends StatelessWidget {
+  final List<T> items;
+  final Widget Function(T item, bool isSelected)? itemBuilder;
+  final Widget Function(T? selectedItem)? selectedItemBuilder;
+  final String? hint;
+  final DropdownSize size;
+  final DropdownVariant variant;
+  final DropdownType type;
+  final DropdownIconPosition iconPosition;
+  final Widget? icon;
+  final bool fullWidth;
+  final String? label;
+  final String? helperText;
+  final String? errorText;
+  final bool showCheckbox;
+  final Widget? header;
+  final bool autoLayout;
+  final Widget? leading;
+  final double? maxHeight;
+  final String? avatarUrl;
+  final ImageProvider? avatarImage;
+  final IconData? avatarIcon;
+  final Color? avatarBackgroundColor;
+  final bool showLeadingIcon;
+  final DropdownCubitState<T> state;
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedItem = widget.value;
-    _focusNode.addListener(() {
-      if (!_focusNode.hasFocus && _isOpen && mounted) {
-        _closeDropdown();
-      }
-    });
-  }
-
-  @override
-  void didUpdateWidget(OsmeaDropdown<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.value != widget.value && mounted) {
-      setState(() {
-        _selectedItem = widget.value;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  void _toggleDropdown() {
-    if (!widget.isEnabled || widget.isLoading || !mounted) return;
-
-    setState(() {
-      _isOpen = !_isOpen;
-      if (_isOpen) {
-        _overlayEntry = _createOverlayEntry();
-        if (mounted) {
-          Overlay.of(context).insert(_overlayEntry!);
-          _focusNode.requestFocus();
-        }
-      } else {
-        _closeDropdown();
-      }
-    });
-  }
-
-  void _closeDropdown() {
-    if (!mounted) return;
-
-    if (_overlayEntry != null) {
-      _overlayEntry!.remove();
-      _overlayEntry = null;
-    }
-
-    if (mounted) {
-      setState(() {
-        _isOpen = false;
-      });
-    }
-  }
-
-  void _selectItem(T item) {
-    if (!mounted) return;
-
-    setState(() {
-      _selectedItem = item;
-      _isOpen = false;
-    });
-
-    if (mounted) {
-      widget.onChanged?.call(item);
-      _closeDropdown();
-    }
-  }
-
-  OverlayEntry _createOverlayEntry() {
-    if (!mounted) {
-      return OverlayEntry(builder: (context) => const SizedBox.shrink());
-    }
-
-    final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox == null) {
-      return OverlayEntry(builder: (context) => const SizedBox.shrink());
-    }
-
-    final size = renderBox.size;
-
-    return OverlayEntry(
-      builder: (context) => Positioned(
-        width: size.width,
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          offset: Offset(0, size.height + 4),
-          child: Material(
-            elevation: 8,
-            borderRadius: widget.size.borderRadius,
-            color: Theme.of(context).colorScheme.surface,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: widget.maxHeight ?? 300,
-                maxWidth: size.width,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.header != null) widget.header!,
-                  Flexible(
-                    child: ListView.builder(
-                      padding: widget.size.menuPadding,
-                      shrinkWrap: true,
-                      itemCount: widget.items.length,
-                      itemBuilder: (context, index) {
-                        final item = widget.items[index];
-                        final isSelected = item == _selectedItem;
-
-                        return _buildMenuItem(item, isSelected);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuItem(T item, bool isSelected) {
-    if (widget.itemBuilder != null) {
-      return InkWell(
-        onTap: () => _selectItem(item),
-        child: widget.itemBuilder!(item, isSelected),
-      );
-    }
-
-    // Otomatik gelişmiş stiller
-    if (item is OsmeaDropdownUser) {
-      return InkWell(
-        onTap: () => _selectItem(item),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: widget.size.avatarSize / 2,
-                backgroundColor: Colors.grey.shade300,
-                backgroundImage: item.avatarUrl != null
-                    ? NetworkImage(item.avatarUrl!)
-                    : null,
-                child: item.avatarUrl == null ? Text(item.name[0]) : null,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(item.name,
-                        style: TextStyle(fontWeight: FontWeight.w500)),
-                    Text(item.username,
-                        style: TextStyle(fontSize: 12, color: Colors.grey)),
-                  ],
-                ),
-              ),
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: item.isOnline ? Colors.green : Colors.grey,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              if (isSelected)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.check,
-                      color: Theme.of(context).primaryColor, size: 20),
-                ),
-            ],
-          ),
-        ),
-      );
-    }
-    if (item is OsmeaDropdownMenuSection) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
-        child: Text(item.title,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
-      );
-    }
-    if (item is OsmeaDropdownMenuItem) {
-      return InkWell(
-        onTap: () => _selectItem(item),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            children: [
-              if (item.icon != null)
-                Icon(item.icon,
-                    size: 20,
-                    color: item.isDestructive ? Colors.red : Colors.black),
-              if (item.icon != null) const SizedBox(width: 12),
-              Expanded(
-                child: Text(item.title,
-                    style: TextStyle(
-                        color: item.isDestructive ? Colors.red : null)),
-              ),
-              if (item.shortcut != null)
-                Text(item.shortcut!,
-                    style: TextStyle(fontSize: 12, color: Colors.grey)),
-              if (isSelected)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.check,
-                      color: Theme.of(context).primaryColor, size: 20),
-                ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    // Varsayılan (String veya diğer tipler)
-    return InkWell(
-      onTap: () => _selectItem(item),
-      child: Container(
-        height: widget.size.menuItemHeight,
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: isSelected
-              ? Theme.of(context).primaryColor.withOpacity(0.1)
-              : null,
-        ),
-        child: Row(
-          children: [
-            if (widget.showCheckbox)
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: isSelected
-                    ? Icon(Icons.check,
-                        size: widget.size.iconSize,
-                        color: Theme.of(context).primaryColor)
-                    : SizedBox(width: widget.size.iconSize),
-              ),
-            Expanded(
-              child: Text(
-                item.toString(),
-                style: widget.size.textStyle(context).copyWith(
-                      color: isSelected ? Theme.of(context).primaryColor : null,
-                      fontWeight: isSelected ? FontWeight.w500 : null,
-                    ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAvatar() {
-    final double avatarSize = widget.size.avatarSize;
-
-    if (widget.avatarImage != null) {
-      return CircleAvatar(
-        radius: avatarSize / 2,
-        backgroundImage: widget.avatarImage,
-        backgroundColor: widget.avatarBackgroundColor ?? Colors.grey.shade200,
-      );
-    } else if (widget.avatarUrl != null) {
-      return CircleAvatar(
-        radius: avatarSize / 2,
-        backgroundImage: NetworkImage(widget.avatarUrl!),
-        backgroundColor: widget.avatarBackgroundColor ?? Colors.grey.shade200,
-      );
-    } else {
-      return CircleAvatar(
-        radius: avatarSize / 2,
-        backgroundColor: widget.avatarBackgroundColor ?? Colors.grey.shade200,
-        child: Icon(
-          widget.avatarIcon ?? Icons.person,
-          size: avatarSize / 2,
-          color: Colors.white,
-        ),
-      );
-    }
-  }
+  const _DropdownView({
+    required this.items,
+    this.itemBuilder,
+    this.selectedItemBuilder,
+    this.hint,
+    required this.size,
+    required this.variant,
+    required this.type,
+    required this.iconPosition,
+    this.icon,
+    required this.fullWidth,
+    this.label,
+    this.helperText,
+    this.errorText,
+    required this.showCheckbox,
+    this.header,
+    required this.autoLayout,
+    this.leading,
+    this.maxHeight,
+    this.avatarUrl,
+    this.avatarImage,
+    this.avatarIcon,
+    this.avatarBackgroundColor,
+    required this.showLeadingIcon,
+    required this.state,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DropdownCubit<T>>();
     final theme = Theme.of(context);
-    final decoration = widget.variant.getDecoration(context, isOpen: _isOpen);
-    final textStyle = widget.size.textStyle(context);
+    final decoration = variant.getDecoration(context, isOpen: state.isOpen);
+    final textStyle = size.textStyle(context);
 
     // Default dropdown icon
-    final dropdownIcon = widget.icon ??
+    final dropdownIcon = icon ??
         Icon(
-          _isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-          size: widget.size.iconSize * 1.2,
-          color: widget.isEnabled
-              ? (widget.errorText != null
+          state.isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+          size: size.iconSize * 1.2,
+          color: state.isEffectivelyDisabled
+              ? (errorText != null
                   ? theme.colorScheme.error
-                  : theme.iconTheme.color)
-              : theme.disabledColor,
+                  : theme.disabledColor)
+              : theme.iconTheme.color,
         );
 
     Widget dropdownChild;
 
     // Build content based on type
-    switch (widget.type) {
+    switch (type) {
       case DropdownType.avatar:
-        dropdownChild = Row(
-          mainAxisSize: MainAxisSize.min,
+        dropdownChild = OsmeaRow(
+          mainAxisSize: min,
           children: [
-            _buildAvatar(),
-            SizedBox(width: 8.0),
-            Expanded(
-              child: Text(
-                _selectedItem?.toString() ?? widget.hint ?? '',
+            _buildAvatar(context),
+            const SizedBox(width: 8.0),
+            OsmeaExpanded(
+              child: OsmeaText(
+                state.selectedItem?.toString() ?? hint ?? '',
                 style: textStyle.copyWith(
-                  color: _selectedItem == null ? theme.hintColor : null,
+                  color: state.selectedItem == null ? theme.hintColor : null,
                 ),
-                overflow: TextOverflow.ellipsis,
+                overflow: ellipsis,
               ),
             ),
             dropdownIcon,
@@ -499,79 +355,76 @@ class _OsmeaDropdownState<T> extends State<OsmeaDropdown<T>> {
         break;
 
       case DropdownType.avatarLeading:
-        dropdownChild = Row(
-          mainAxisSize: MainAxisSize.min,
+        dropdownChild = OsmeaRow(
+          mainAxisSize: min,
           children: [
-            if (widget.iconPosition == DropdownIconPosition.leading)
-              dropdownIcon,
-            _buildAvatar(),
-            SizedBox(width: 8.0),
-            Expanded(
-              child: Text(
-                _selectedItem?.toString() ?? widget.hint ?? '',
+            if (iconPosition == DropdownIconPosition.leading) dropdownIcon,
+            _buildAvatar(context),
+            const OsmeaSizedBox(width: 8.0),
+            OsmeaExpanded(
+              child: OsmeaText(
+                state.selectedItem?.toString() ?? hint ?? '',
                 style: textStyle.copyWith(
-                  color: _selectedItem == null ? theme.hintColor : null,
+                  color: state.selectedItem == null ? theme.hintColor : null,
                 ),
-                overflow: TextOverflow.ellipsis,
+                overflow: ellipsis,
               ),
             ),
-            if (widget.iconPosition == DropdownIconPosition.trailing)
-              dropdownIcon,
+            if (iconPosition == DropdownIconPosition.trailing) dropdownIcon,
           ],
         );
         break;
 
       case DropdownType.input:
-        dropdownChild = Row(
-          mainAxisSize: MainAxisSize.min,
+        dropdownChild = OsmeaRow(
+          mainAxisSize: min,
           children: [
-            if (widget.leading != null) ...[
-              widget.leading!,
-              SizedBox(width: 8.0),
+            if (leading != null) ...[
+              leading!,
+              const OsmeaSizedBox(width: 8.0),
             ],
-            if (widget.iconPosition == DropdownIconPosition.leading)
-              dropdownIcon,
-            Expanded(
-              child: widget.selectedItemBuilder != null && _selectedItem != null
-                  ? widget.selectedItemBuilder!(_selectedItem)
-                  : Text(
-                      _selectedItem?.toString() ?? widget.hint ?? '',
+            if (iconPosition == DropdownIconPosition.leading) dropdownIcon,
+            OsmeaExpanded(
+              child: selectedItemBuilder != null && state.selectedItem != null
+                  ? selectedItemBuilder!(state.selectedItem)
+                  : OsmeaText(
+                      state.selectedItem?.toString() ?? hint ?? '',
                       style: textStyle.copyWith(
-                        color: _selectedItem == null ? theme.hintColor : null,
+                        color:
+                            state.selectedItem == null ? theme.hintColor : null,
                       ),
-                      overflow: TextOverflow.ellipsis,
+                      overflow: ellipsis,
                     ),
             ),
-            if (widget.iconPosition == DropdownIconPosition.trailing)
-              dropdownIcon,
+            if (iconPosition == DropdownIconPosition.trailing) dropdownIcon,
           ],
         );
         break;
 
       case DropdownType.regular:
       default:
-        dropdownChild = Row(
-          mainAxisSize: MainAxisSize.min,
+        dropdownChild = OsmeaRow(
+          mainAxisSize: min,
           children: [
-            if (widget.showLeadingIcon &&
-                widget.iconPosition == DropdownIconPosition.leading)
-              Padding(
+            if (showLeadingIcon && iconPosition == DropdownIconPosition.leading)
+              OsmeaPadding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: dropdownIcon,
               ),
-            Expanded(
-              child: widget.selectedItemBuilder != null && _selectedItem != null
-                  ? widget.selectedItemBuilder!(_selectedItem)
-                  : Text(
-                      _selectedItem?.toString() ?? widget.hint ?? '',
+            OsmeaExpanded(
+              child: selectedItemBuilder != null && state.selectedItem != null
+                  ? selectedItemBuilder!(state.selectedItem)
+                  : OsmeaText(
+                      state.selectedItem?.toString() ?? hint ?? '',
                       style: textStyle.copyWith(
-                        color: _selectedItem == null ? theme.hintColor : null,
+                        color:
+                            state.selectedItem == null ? theme.hintColor : null,
                       ),
-                      overflow: TextOverflow.ellipsis,
+                      overflow: ellipsis,
                     ),
             ),
-            if (!widget.showLeadingIcon ||
-                widget.iconPosition == DropdownIconPosition.trailing)
+            if (!showLeadingIcon ||
+                iconPosition == DropdownIconPosition.trailing)
               dropdownIcon,
           ],
         );
@@ -579,81 +432,361 @@ class _OsmeaDropdownState<T> extends State<OsmeaDropdown<T>> {
     }
 
     // Main dropdown button
-    final dropdownButton = CompositedTransformTarget(
-      link: _layerLink,
-      child: Focus(
-        focusNode: _focusNode,
-        child: InkWell(
-          onTap: widget.isEnabled && !widget.isLoading ? _toggleDropdown : null,
-          borderRadius: widget.size.borderRadius,
-          child: Container(
-            height: widget.size.height,
-            padding: widget.size.padding,
-            decoration: decoration.copyWith(
-              border: widget.errorText != null
-                  ? Border.all(color: theme.colorScheme.error, width: 1.0)
-                  : decoration.border,
-            ),
-            child: widget.isLoading
-                ? Center(
-                    child: SizedBox(
-                      width: widget.size.iconSize,
-                      height: widget.size.iconSize,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  )
-                : dropdownChild,
+    final dropdownButton = Focus(
+      focusNode: cubit.effectiveFocusNode,
+      child: InkWell(
+        onTap: state.isEffectivelyDisabled ? null : cubit.handleTap,
+        borderRadius: size.borderRadius,
+        child: OsmeaContainer(
+          height: size.height,
+          padding: size.padding,
+          decoration: decoration.copyWith(
+            border: errorText != null
+                ? Border.all(color: theme.colorScheme.error, width: 1.0)
+                : decoration.border,
           ),
+          child: state.isLoading
+              ? OsmeaCenter(
+                  child: OsmeaSizedBox(
+                    width: size.iconSize,
+                    height: size.iconSize,
+                    child: const CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                )
+              : dropdownChild,
         ),
       ),
     );
 
-    // Full widget with label and helper text
+    // Full widget with label, helper text, and menu
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget.label != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Text(
-              widget.label!,
+        if (label != null)
+          OsmeaPadding(
+            padding: context.onlyBottomPaddingNormal,
+            child: OsmeaText(
+              label!,
               style: textStyle.copyWith(
-                fontWeight: FontWeight.w500,
-                color:
-                    widget.errorText != null ? theme.colorScheme.error : null,
+                fontWeight: context.medium,
+                color: errorText != null ? theme.colorScheme.error : null,
               ),
             ),
           ),
-        widget.fullWidth ? dropdownButton : Wrap(children: [dropdownButton]),
-        if (widget.errorText != null || widget.helperText != null)
-          Padding(
+        fullWidth ? dropdownButton : Wrap(children: [dropdownButton]),
+        if (errorText != null || helperText != null)
+          OsmeaPadding(
             padding: const EdgeInsets.only(top: 4.0, left: 4.0),
-            child: Text(
-              widget.errorText ?? widget.helperText ?? '',
+            child: OsmeaText(
+              errorText ?? helperText ?? '',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: widget.errorText != null
+                color: errorText != null
                     ? theme.colorScheme.error
                     : theme.hintColor,
               ),
             ),
           ),
+        if (state.shouldShowMenu) _buildDropdownMenu(context, cubit),
       ],
+    );
+  }
+
+  Widget _buildAvatar(BuildContext context) {
+    final double avatarSize = size.avatarSize;
+
+    // If the selected item is an OsmeaDropdownUser, use their avatar
+    if (state.selectedItem is OsmeaDropdownUser) {
+      final user = state.selectedItem as OsmeaDropdownUser;
+      if (user.avatarUrl != null) {
+        return CircleAvatar(
+          radius: avatarSize / 2,
+          backgroundImage: NetworkImage(user.avatarUrl!),
+          backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+        );
+      } else {
+        return CircleAvatar(
+          radius: avatarSize / 2,
+          backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+          child: Text(
+            user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
+            style: OsmeaTextStyle.bodyLarge(context).copyWith(
+              color: OsmeaColors.nordicBlue,
+              fontWeight: FontWeight.bold,
+              fontSize: avatarSize / 3,
+            ),
+          ),
+        );
+      }
+    }
+
+    // If the selected item is an OsmeaDropdownMenuItem with an icon, use it
+    if (state.selectedItem is OsmeaDropdownMenuItem) {
+      final menuItem = state.selectedItem as OsmeaDropdownMenuItem;
+      if (menuItem.icon != null) {
+        return CircleAvatar(
+          radius: avatarSize / 2,
+          backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+          child: Icon(
+            menuItem.icon,
+            size: avatarSize / 2,
+            color: OsmeaColors.nordicBlue,
+          ),
+        );
+      }
+    }
+
+    // Default avatar logic
+    if (avatarImage != null) {
+      return CircleAvatar(
+        radius: avatarSize / 2,
+        backgroundImage: avatarImage,
+        backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+      );
+    } else if (avatarUrl != null) {
+      return CircleAvatar(
+        radius: avatarSize / 2,
+        backgroundImage: NetworkImage(avatarUrl!),
+        backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+      );
+    }
+    return CircleAvatar(
+      radius: avatarSize / 2,
+      backgroundColor: avatarBackgroundColor ?? OsmeaColors.snow,
+      child: Icon(
+        avatarIcon ?? Icons.person,
+        size: avatarSize / 2,
+        color: OsmeaColors.nordicBlue,
+      ),
+    );
+  }
+
+  Widget _buildDropdownMenu(BuildContext context, DropdownCubit<T> cubit) {
+    // Filter out the selected item from the menu list
+    final List<T> menuItems =
+        items.where((item) => item != state.selectedItem).toList();
+    return Material(
+      elevation: 8,
+      borderRadius: size.borderRadius,
+      color: Theme.of(context).colorScheme.surface,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: maxHeight ?? 300,
+        ),
+        child: OsmeaColumn(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (header != null) header!,
+            OsmeaFlexible(
+              child: ListView.builder(
+                padding: size.menuPadding,
+                shrinkWrap: true,
+                itemCount: menuItems.length,
+                itemBuilder: (context, index) {
+                  final item = menuItems[index];
+                  final isSelected = cubit.isItemSelected(item);
+                  return _buildMenuItem(context, cubit, item, isSelected);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuItem(
+    BuildContext context,
+    DropdownCubit<T> cubit,
+    T item,
+    bool isSelected,
+  ) {
+    if (itemBuilder != null) {
+      return InkWell(
+        onTap: () => cubit.selectItem(item),
+        child: itemBuilder!(item, isSelected),
+      );
+    }
+
+    // Handle special item types
+    if (item is OsmeaDropdownUser) {
+      return InkWell(
+        onTap: () => cubit.selectItem(item),
+        child: OsmeaContainer(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          child: OsmeaRow(
+            children: [
+              CircleAvatar(
+                radius: size.avatarSize / 2,
+                backgroundColor: OsmeaColors.snow,
+                backgroundImage: item.avatarUrl != null
+                    ? NetworkImage(item.avatarUrl!)
+                    : null,
+                child: item.avatarUrl == null
+                    ? Text(
+                        item.name[0],
+                        style: OsmeaTextStyle.bodyLarge(context).copyWith(
+                          color: OsmeaColors.nordicBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : null,
+              ),
+              const OsmeaSizedBox(width: 12),
+              OsmeaExpanded(
+                child: OsmeaColumn(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OsmeaText(
+                      item.name,
+                      style: OsmeaTextStyle.bodyLarge(context).copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: OsmeaColors.thunder,
+                      ),
+                    ),
+                    OsmeaText(
+                      item.username,
+                      style: OsmeaTextStyle.bodySmall(context).copyWith(
+                        color: OsmeaColors.slate,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              OsmeaContainer(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color:
+                      item.isOnline ? OsmeaColors.forestHeart : OsmeaColors.ash,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              if (isSelected)
+                OsmeaPadding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Icon(Icons.check,
+                      color: OsmeaColors.nordicBlue, size: 20),
+                ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (item is OsmeaDropdownMenuSection) {
+      return OsmeaPadding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12),
+        child: OsmeaText(
+          item.title,
+          style: OsmeaTextStyle.bodyLarge(context).copyWith(
+            fontWeight: FontWeight.bold,
+            color: OsmeaColors.slate,
+          ),
+        ),
+      );
+    }
+
+    if (item is OsmeaDropdownMenuItem) {
+      return InkWell(
+        onTap: () => cubit.selectItem(item),
+        child: OsmeaContainer(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          child: OsmeaRow(
+            children: [
+              if (item.icon != null)
+                Icon(
+                  item.icon,
+                  size: 20,
+                  color: item.isDestructive
+                      ? OsmeaColors.sunsetGlow
+                      : OsmeaColors.thunder,
+                ),
+              if (item.icon != null) const OsmeaSizedBox(width: 12),
+              OsmeaExpanded(
+                child: OsmeaText(
+                  item.title,
+                  style: OsmeaTextStyle.bodyLarge(context).copyWith(
+                    color: item.isDestructive
+                        ? OsmeaColors.sunsetGlow
+                        : OsmeaColors.thunder,
+                  ),
+                ),
+              ),
+              if (item.shortcut != null)
+                OsmeaText(
+                  item.shortcut!,
+                  style: OsmeaTextStyle.bodySmall(context).copyWith(
+                    color: OsmeaColors.slate,
+                    fontSize: 12,
+                  ),
+                ),
+              if (isSelected)
+                OsmeaPadding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Icon(Icons.check,
+                      color: OsmeaColors.nordicBlue, size: 20),
+                ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Default (String or other types)
+    return InkWell(
+      onTap: () => cubit.selectItem(item),
+      child: OsmeaContainer(
+        height: size.menuItemHeight,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: centerLeft,
+        decoration: BoxDecoration(
+          color: isSelected ? OsmeaColors.nordicBlue.withOpacity(0.1) : null,
+        ),
+        child: Row(
+          children: [
+            if (showCheckbox)
+              OsmeaPadding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: isSelected
+                    ? Icon(Icons.check,
+                        size: size.iconSize, color: OsmeaColors.nordicBlue)
+                    : OsmeaSizedBox(width: size.iconSize),
+              ),
+            OsmeaExpanded(
+              child: OsmeaText(
+                item.toString(),
+                style: size.textStyle(context).copyWith(
+                      color: isSelected
+                          ? OsmeaColors.nordicBlue
+                          : OsmeaColors.thunder,
+                      fontWeight: isSelected ? FontWeight.w500 : null,
+                    ),
+                overflow: ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-// Gelişmiş dropdown item modelleri
+// Advanced dropdown item models
 class OsmeaDropdownUser {
   final String name;
   final String username;
   final String? avatarUrl;
   final bool isOnline;
-  OsmeaDropdownUser(
-      {required this.name,
-      required this.username,
-      this.avatarUrl,
-      this.isOnline = false});
+  OsmeaDropdownUser({
+    required this.name,
+    required this.username,
+    this.avatarUrl,
+    this.isOnline = false,
+  });
+  @override
+  String toString() => name;
 }
 
 class OsmeaDropdownMenuItem {
@@ -661,14 +794,19 @@ class OsmeaDropdownMenuItem {
   final IconData? icon;
   final String? shortcut;
   final bool isDestructive;
-  OsmeaDropdownMenuItem(
-      {required this.title,
-      this.icon,
-      this.shortcut,
-      this.isDestructive = false});
+  OsmeaDropdownMenuItem({
+    required this.title,
+    this.icon,
+    this.shortcut,
+    this.isDestructive = false,
+  });
+  @override
+  String toString() => title;
 }
 
 class OsmeaDropdownMenuSection {
   final String title;
   OsmeaDropdownMenuSection({required this.title});
+  @override
+  String toString() => title;
 }
