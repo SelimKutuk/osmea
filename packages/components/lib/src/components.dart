@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
+import 'dart:ui';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
@@ -45,7 +46,8 @@ import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/stepper/stepper.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
-
+import 'package:osmea_components/src/components/image/image.dart';
+import 'package:osmea_components/src/enums/image_enums.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
@@ -3186,8 +3188,9 @@ class OsmeaComponents {
       buttonState: buttonState,
       buttonIcon: buttonIcon,
       buttonTooltip: buttonTooltip,
-    ); 
-    }
+    );
+  }
+
   /// 📑 **OSMEA TabBar** - Comprehensive tab navigation component
   ///
   /// Creates a feature-rich tab navigation component with support for:
@@ -3307,7 +3310,7 @@ class OsmeaComponents {
   ///   maxToasts: 5, // Maximum number of toasts visible at once (default)
   /// );
   /// ```
-  
+
   static void toast({
     required BuildContext context,
     String? title,
@@ -3357,6 +3360,110 @@ class OsmeaComponents {
   /// Hides all currently visible toasts
   static void hideAllToasts() {
     ToastManager().hideAllToasts();
+  }
+
+  // ==================== IMAGE ====================
+
+  /// 🖼️ **OSMEA Image** - Universal image component
+  ///
+  /// A comprehensive image component supporting multiple sources and display modes.
+  ///
+  /// **Features:**
+  /// - 🌐 Network, asset, file, and memory sources
+  /// - 🎭 Multiple display variants (normal, rounded, circle, etc.)
+  /// - 📐 Flexible sizing and fitting options
+  /// - 🔄 Loading states and error handling
+  /// - 🎨 Overlay and filter effects
+  ///
+  /// **Example:**
+  /// ```dart
+  /// OsmeaComponents.image(
+  ///   imageUrl: 'https://example.com/image.jpg',
+  ///   variant: ImageVariant.rounded,
+  ///   size: ImageSize.large,
+  ///   fit: BoxFit.cover,
+  /// )
+  /// ```
+  static Widget image({
+    String? imageUrl,
+    String? assetPath,
+    String? filePath,
+    Uint8List? bytes,
+    ImageVariant variant = ImageVariant.normal,
+    ImageSize size = ImageSize.medium,
+    BoxFit fit = BoxFit.cover,
+    double? width,
+    double? height,
+    BorderRadius? borderRadius,
+    Border? border,
+    List<BoxShadow>? boxShadow,
+    Color? backgroundColor,
+    Widget? placeholder,
+    Widget? errorWidget,
+    bool showLoadingIndicator = true,
+    Color? overlayColor,
+    BlendMode? colorBlendMode,
+    VoidCallback? onTap,
+    String? heroTag,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    Alignment alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    bool matchTextDirection = false,
+    FilterQuality filterQuality = FilterQuality.low,
+    Map<String, String>? headers,
+    int? cacheWidth,
+    int? cacheHeight,
+    double? scale,
+    Color? imageColor,
+    Rect? centerSlice,
+    bool gaplessPlayback = false,
+    bool isAntiAlias = false,
+    String? package,
+    ImageCacheStrategy cacheStrategy = ImageCacheStrategy.balanced,
+    int retryCount = 3,
+    Duration retryDelay = const Duration(seconds: 1),
+  }) {
+    return OsmeaImage(
+      imageUrl: imageUrl,
+      assetPath: assetPath,
+      filePath: filePath,
+      bytes: bytes,
+      variant: variant,
+      size: size,
+      fit: fit,
+      width: width,
+      height: height,
+      borderRadius: borderRadius,
+      border: border,
+      boxShadow: boxShadow,
+      backgroundColor: backgroundColor,
+      placeholder: placeholder,
+      errorWidget: errorWidget,
+      showLoadingIndicator: showLoadingIndicator,
+      overlayColor: overlayColor,
+      colorBlendMode: colorBlendMode,
+      onTap: onTap,
+      heroTag: heroTag,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      alignment: alignment,
+      repeat: repeat,
+      matchTextDirection: matchTextDirection,
+      filterQuality: filterQuality,
+      headers: headers,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+      scale: scale,
+      imageColor: imageColor,
+      centerSlice: centerSlice,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      cacheStrategy: cacheStrategy,
+      retryCount: retryCount,
+      retryDelay: retryDelay,
+    );
   }
 }
 
