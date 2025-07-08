@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: OsmeaComponents.text('Login successful!'),
-                  backgroundColor: Colors.green,
+                  backgroundColor: OsmeaColors.green,
                 ),
               );
             },
@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: OsmeaComponents.text('Login failed.'),
-                  backgroundColor: Colors.red,
+                  backgroundColor: OsmeaColors.red,
                 ),
               );
             },
@@ -474,7 +474,7 @@ class ComponentsScreen extends StatelessWidget {
               Icon(
                 icon,
                 size: 48,
-                color: Colors.blue,
+                color: OsmeaColors.blue,
               ),
               OsmeaComponents.sizedBox(height: 12),
               OsmeaComponents.text(
@@ -857,7 +857,7 @@ class ExamplesScreen extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        leading: Icon(icon, color: Colors.blue),
+        leading: Icon(icon, color: OsmeaColors.blue),
         title: OsmeaComponents.text(title),
         subtitle: OsmeaComponents.text(description),
         trailing: const Icon(Icons.arrow_forward_ios),
@@ -947,8 +947,8 @@ class _NavbarExampleState extends State<NavbarExample> {
     return OsmeaComponents.scaffold(
       appBar: OsmeaComponents.appBar(
         title: OsmeaComponents.text('🧭 Navbar Examples'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: OsmeaColors.blue,
+        foregroundColor: OsmeaColors.white,
       ),
       body: OsmeaComponents.column(
         children: [
