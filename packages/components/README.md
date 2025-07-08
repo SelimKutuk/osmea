@@ -670,122 +670,17 @@ We welcome contributions! Please see our [Contributing Guidelines](../../CONTRIB
 ---
 
 ## 📄 License
-This project is licensed under the MIT License – see the [LICENSE](../../LICENSE) file for details.
+
+> 🔐 **License:** GNU AGPL v3.0  
+> 📜 This project is protected under the **GNU Affero General Public License v3.0**.  
+> If you modify and deploy this project publicly, you must also **publish your changes** under the same license.
+
+📎 Full details available in the [`LICENSE`](https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE) file.
 
 ---
 
 **Built with ❤️ by the OSMEA Team**
 
----
+© 2025 MasterFabric Mobile • Maintained by the OSMEA Engineering Team
 
-## 🆕 Advanced Components & Features
 
-<details>
-<summary>🆕 Advanced Components & Features</summary>
-
-Explore even more powerful widgets and utilities included in OSMEA Components:
-
-### 🎫 Ticket Widget
-- **Dynamic, JSON-driven support forms** with Cubit state management, validation, progress tracking, and draft saving.
-- _Use for:_ Support flows, feedback, dynamic forms.
-- _See:_ `lib/src/components/ticket_widget/README.md` for full docs.
-
-### 🔢 OTP Text Field
-- **Cubit-based, highly customizable OTP input** with auto-navigation, copy-paste, and validation.
-- _Use for:_ SMS/email verification, PIN entry, 2FA.
-
-### 🔑 Login Button
-- **Auth-ready button** with built-in Cubit for authentication flows, error handling, and state feedback.
-
-### 🟦 List Item
-- **Highly composable**: supports avatars, badges, switches, checkboxes, radios, expandable menus, and more.
-
-### 🪟 Popup
-- **Modal, alert, dialog, and tooltip variants** with animation, positioning, and accessibility.
-
-### 🧩 Utility Extensions
-- **Sizer Extensions**: Responsive helpers for screen size, padding, border radius, durations, alignment, spacing, opacity, and more. Example:
-  ```dart
-  Container(
-    padding: context.paddingNormal,
-    height: context.dynamicHeight(0.5),
-  )
-  ```
-- **Text Extensions**: Font features, weights, families, spacing, capitalization, overflow, alignment, and more. Example:
-  ```dart
-  Text(
-    'Headline',
-    style: TextStyle(
-      fontWeight: context.bold,
-      letterSpacing: context.letterSpacingWide,
-    ),
-  )
-  ```
-- **Button, Avatar, Navbar, Tabbar, Popup Extensions**: Helpers for variant-specific color, style, state, and behavior.
-- **Text Input Extensions**: TextInputAction helpers for keyboard and form flows.
-
-</details>
-
----
-
-## �� Enums & Variants
-
-<details>
-<summary>🧬 Enums & Variants</summary>
-
-Every component supports rich enums for variants, sizes, states, positions, styles, density, orientation, theme mode, alignment, and emphasis. Some highlights:
-
-- **TicketWidget**: `QuestionType` (text, textarea, select, radio, checkbox, email, phone, number, date, file, rating, url), `TicketPriority`, `TicketCategory`, `ValidationMode`, `TicketWidgetSize`, `TicketStatus`
-- **ListItem, Divider, Badge, Toast, Footer, TabBar, Popup, Switch, Checkbox, Radio, Button, AppBar**: All have detailed enums for every possible variant and state.
-- **ComponentSize, ComponentVariant, ComponentState, ComponentDensity, ComponentOrientation, ComponentThemeMode, ComponentAlignment, ComponentEmphasis**: For global consistency and customization.
-
-</details>
-
----
-
-## 🧑‍💻 Storybook & Developer Tooling
-
-<details>
-<summary>🧑‍💻 Storybook & Developer Tooling</summary>
-
-### 🏗️ Modular Templates & Structure Validator
-- **Rapidly scaffold new component showcases** with `create_component_structure.sh`:
-  ```bash
-  cd packages/components/example_storybook/lib/storybook_test/_templates
-  ./create_component_structure.sh button
-  ```
-- **Validate all component showcases** for structure compliance:
-  ```bash
-  dart storybook_validator.dart
-  ```
-
-### 🧪 Knobs & Builder Utilities
-- **Interactive controls** for live property tweaking in Storybook.
-- **Builder utilities** for consistent demo creation and state management.
-
-### 📱 Device Frame Testing
-- **Preview components on multiple devices and orientations** with built-in device frame wrapper.
-
-### 📚 Component Registry
-- **Centralized metadata** for all showcased components, making it easy to discover and test.
-
-</details>
-
----
-
-## 🟡 Summary Table of Advanced Features
-
-<details>
-<summary>🟡 Summary Table of Advanced Features</summary>
-
-| Feature/Utility         | Description/Usage Example                                                                 |
-|------------------------|-------------------------------------------------------------------------------------------|
-| 🎫 Ticket Widget       | Dynamic, JSON-driven support forms with Cubit state, validation, progress, and drafts     |
-| 🔢 OTP Text Field      | Cubit-based, auto-navigation, validation, copy-paste, secure OTP input                    |
-| 🔑 Login Button        | Auth-ready, Cubit-powered login with error handling and state feedback                    |
-| 🟦 List Item           | Avatars, badges, switches, checkboxes, radios, expandable, multi-trailing/leading, etc.  |
-| 🧩 Utility Extensions  | Sizer, text, button, avatar, navbar, tabbar, popup, carousel, text input helpers          |
-| 🧑‍💻 Storybook Tools   | Modular templates, structure validator, device frame, knobs, builder utilities            |
-| 🧬 Enums & Variants    | Every component: variants, sizes, states, positions, styles, density, orientation, etc.   |
-
-</details>
