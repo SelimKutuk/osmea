@@ -58,7 +58,7 @@ class _ChipsExampleState extends State<ChipsExample> {
             OsmeaComponents.text(
               'Selected interests: ${_selectedInterests.isEmpty ? "No selection yet" : _selectedInterests.join(", ")}',
               fontSize: 14,
-              color: Colors.grey[600],
+              color: OsmeaColors.pewter,
             ),
             OsmeaComponents.divider(height: 32),
             OsmeaComponents.text(
@@ -369,12 +369,12 @@ class _ChipsExampleState extends State<ChipsExample> {
           child: OsmeaComponents.chips(
             text: 'With Avatar',
             avatar: CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: OsmeaColors.nordicBlue,
               radius: 12,
               child: OsmeaComponents.text(
                 'A',
                 textStyle: TextStyle(
-                  color: Colors.white,
+                  color: OsmeaColors.white,
                   fontSize: 12,
                 ),
               ),
