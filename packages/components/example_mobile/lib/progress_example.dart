@@ -32,12 +32,12 @@ class _ProgressExampleState extends State<ProgressExample> {
   ];
 
   final progressColors = [
-    Colors.cyan,
-    Colors.lightBlueAccent,
-    Colors.deepPurpleAccent,
-    Colors.blue,
-    Colors.tealAccent,
-    Colors.orangeAccent,
+    OsmeaColors.azureWave,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.purple,
+    OsmeaColors.blue,
+    OsmeaColors.meadow,
+    OsmeaColors.sunsetGlow,
   ];
 
   final progressSizes = [
@@ -74,11 +74,11 @@ class _ProgressExampleState extends State<ProgressExample> {
   ];
 
   final linearColors = [
-    Colors.blueAccent,
-    Colors.indigoAccent,
-    Colors.tealAccent,
-    Colors.purple,
-    Colors.blueAccent,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.nordicBlue,
+    OsmeaColors.meadow,
+    OsmeaColors.purple,
+    OsmeaColors.nordicBlue,
   ];
 
   @override
