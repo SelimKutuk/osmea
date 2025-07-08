@@ -96,10 +96,10 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: OsmeaComponents.text(
         title,
-        textStyle: const TextStyle(
+        textStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          color: OsmeaColors.black54,
         ),
       ),
     );
@@ -227,7 +227,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               _notificationSwitch,
               (value) => setState(() => _notificationSwitch = value),
               variant: SwitchVariant.labeled,
-              customActiveColor: Colors.green,
+              customActiveColor: OsmeaColors.meadow,
             ),
             OsmeaComponents.divider(),
             _buildSwitchRow(
@@ -236,7 +236,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               _locationSwitch,
               (value) => setState(() => _locationSwitch = value),
               variant: SwitchVariant.labeled,
-              customActiveColor: Colors.orange,
+              customActiveColor: OsmeaColors.sunsetGlow,
             ),
             OsmeaComponents.divider(),
             _buildSwitchRow(
@@ -245,7 +245,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               _bluetoothSwitch,
               (value) => setState(() => _bluetoothSwitch = value),
               variant: SwitchVariant.toggle,
-              customActiveColor: Colors.blue,
+              customActiveColor: OsmeaColors.nordicBlue,
             ),
             OsmeaComponents.divider(),
             _buildSwitchRow(
@@ -262,7 +262,7 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               _autoBackupSwitch,
               (value) => setState(() => _autoBackupSwitch = value),
               variant: SwitchVariant.card,
-              customActiveColor: Colors.purple,
+              customActiveColor: OsmeaColors.purple,
             ),
           ],
         ),
@@ -319,9 +319,9 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               description: 'Switch with custom active and inactive colors',
               variant: SwitchVariant.extended,
               size: SwitchSize.large,
-              activeColor: Colors.purple,
-              inactiveColor: Colors.grey[300],
-              thumbColor: Colors.white,
+              activeColor: OsmeaColors.purple,
+              inactiveColor: OsmeaColors.platinum,
+              thumbColor: OsmeaColors.white,
             ),
             OsmeaComponents.divider(), // Full width switch
             OsmeaComponents.switchButton(
@@ -330,16 +330,15 @@ class _SwitchButtonExampleState extends State<SwitchButtonExample> {
               label: '📐 Full Width Switch',
               description: 'Switch that takes full available width',
               variant: SwitchVariant.card,
-              activeColor: Colors.green, // Custom green color
+              activeColor: OsmeaColors.meadow, 
               fullWidth: true,
             ),
             OsmeaComponents.divider(),
-
             // Switch with custom padding
             OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.blue[50],
+                color: OsmeaColors.nordicBlue.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: OsmeaComponents.switchButton(
