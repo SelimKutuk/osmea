@@ -52,7 +52,6 @@ import 'package:osmea_components/src/enums/image_enums.dart';
 import 'package:osmea_components/src/components/dropdown/dropdown.dart';
 import 'package:osmea_components/src/components/footer/footer.dart';
 
-
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
 
@@ -3445,7 +3444,6 @@ class OsmeaComponents {
     ToastManager().hideAllToasts();
   }
 
-
   // ==================== IMAGE ====================
 
   /// 🖼️ **OSMEA Image** - Universal image component
@@ -3547,6 +3545,8 @@ class OsmeaComponents {
       cacheStrategy: cacheStrategy,
       retryCount: retryCount,
       retryDelay: retryDelay,
+    );
+  }
 
   /// 🦶 **OSMEA Footer** - Modern footer component with multiple variants
   ///

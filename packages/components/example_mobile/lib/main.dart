@@ -857,7 +857,6 @@ class ExamplesScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-<<<<<<< HEAD
                   _buildExampleTile(
                     context,
                     'Toast Example',
@@ -870,24 +869,20 @@ class ExamplesScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
-=======
-                ),
-                _buildExampleTile(
-                  context,
-                  'Dropdown Examples',
-                  'Comprehensive dropdown component with all variants and types',
-                  Icons.arrow_drop_down,
-                  () => Navigator.push(
+                  _buildExampleTile(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const DropdownExample(),
+                    'Dropdown Examples',
+                    'Comprehensive dropdown component with all variants and types',
+                    Icons.arrow_drop_down,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DropdownExample(),
+                      ),
                     ),
                   ),
-                ),
-              ],
->>>>>>> origin/OSMEA-Docs
+                ],
+              ),
             ),
           ]),
     );
