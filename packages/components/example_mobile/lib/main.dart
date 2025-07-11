@@ -493,7 +493,7 @@ class ComponentsScreen extends StatelessWidget {
               OsmeaComponents.sizedBox(height: 12),
               OsmeaComponents.text(
                 title,
-                textStyle: const TextStyle(
+                textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -519,7 +519,7 @@ class ExamplesScreen extends StatelessWidget {
           children: [
             OsmeaComponents.text(
               'Interactive Examples',
-              textStyle: const TextStyle(
+              textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -916,7 +916,7 @@ class SettingsScreen extends StatelessWidget {
         children: [
           OsmeaComponents.text(
             'Settings',
-            textStyle: const TextStyle(
+            textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -1010,7 +1010,7 @@ class _NavbarExampleState extends State<NavbarExample> {
                 children: [
                   OsmeaComponents.text(
                     'Different Navbar Variants:',
-                    textStyle: const TextStyle(
+                    textStyle: OsmeaTextStyle.titleMedium(context).copyWith(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   OsmeaComponents.sizedBox(height: 16),
@@ -1034,8 +1034,8 @@ class _NavbarExampleState extends State<NavbarExample> {
                   OsmeaComponents.sizedBox(height: 16),
 
                   OsmeaComponents.text(
-                    'Selected Index: $_currentIndex',
-                    textStyle: const TextStyle(fontSize: 16),
+                    'Selected Index: _currentIndex',
+                    textStyle: OsmeaTextStyle.bodyLarge(context).copyWith(fontSize: 16),
                   ),
                 ],
               ),
