@@ -261,7 +261,7 @@ class _ToastExamplePageState extends State<ToastExamplePage> {
       onChanged: onChanged,
       borderRadius: BorderRadius.circular(12),
       underline: OsmeaComponents.container(height: 2, color: OsmeaColors.nordicBlue.withOpacity(0.1)),
-      style: TextStyle(fontSize: 15, color: OsmeaColors.steel),
+      style: OsmeaTextStyle.bodyMedium(context).copyWith(fontSize: 15, color: OsmeaColors.steel),
       dropdownColor: OsmeaColors.white,
       elevation: 2,
     );
