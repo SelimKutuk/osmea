@@ -525,7 +525,7 @@ class ExamplesScreen extends StatelessWidget {
               ),
             ),
             OsmeaComponents.sizedBox(height: 16),
-            Expanded(
+            OsmeaComponents.expanded(
               child: ListView(
                 children: [
                   _buildExampleTile(
