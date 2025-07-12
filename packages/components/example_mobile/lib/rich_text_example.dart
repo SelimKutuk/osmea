@@ -161,7 +161,7 @@ class RichTextExample extends StatelessWidget {
             ),
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Website link tapped')),
+                SnackBar(content: OsmeaComponents.text('Website link tapped')),
               );
             },
           ),
@@ -174,7 +174,7 @@ class RichTextExample extends StatelessWidget {
             ),
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Support link tapped')),
+                SnackBar(content: OsmeaComponents.text('Support link tapped')),
               );
             },
           ),
