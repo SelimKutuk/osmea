@@ -92,35 +92,35 @@ extension CounterSizeExtension on CounterSize {
       case CounterSize.small:
         return CounterSizeConfig(
           buttonSize: ButtonSize.small,
-          iconSize: 12, // Text boyutuyla aynı (fontSizeSmall)
+          iconSize: 12, 
           textVariant: OsmeaTextVariant.bodySmall,
           spacing: context.lowValue / 2,
           valueContainerWidth: 28,
           valueContainerHeight: 20,
-          buttonWidth: 28, // Value container ile aynı
-          buttonHeight: 20, // Value container ile aynı
+          buttonWidth: 28, 
+          buttonHeight: 20, 
         );
       case CounterSize.medium:
         return CounterSizeConfig(
           buttonSize: ButtonSize.medium,
-          iconSize: 16, // Text boyutuyla aynı (fontSizeMedium)
+          iconSize: 16, 
           textVariant: OsmeaTextVariant.bodyMedium,
           spacing: context.lowValue,
           valueContainerWidth: 32,
           valueContainerHeight: 24,
-          buttonWidth: 32, // Value container ile aynı
-          buttonHeight: 24, // Value container ile aynı
+          buttonWidth: 32, 
+          buttonHeight: 24, 
         );
       case CounterSize.large:
         return CounterSizeConfig(
           buttonSize: ButtonSize.large,
-          iconSize: 24, // Text boyutuyla aynı (fontSizeLarge)
+          iconSize: 24,
           textVariant: OsmeaTextVariant.bodyLarge,
           spacing: context.mediumValue / 2,
           valueContainerWidth: 40,
           valueContainerHeight: 32,
-          buttonWidth: 40, // Value container ile aynı
-          buttonHeight: 32, // Value container ile aynı
+          buttonWidth: 40, 
+          buttonHeight: 32, 
         );
     }
   }
