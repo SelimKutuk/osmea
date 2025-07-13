@@ -1,7 +1,6 @@
 # 📖 OSMEA Components Storybook
 
 [![Flutter](https://img.shields.io/badge/Flutter-Storybook-blue?logo=flutter)](https://flutter.dev)
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
 
 An interactive playground and documentation hub for all [OSMEA Components](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components).  
 Explore, test, and develop UI components in isolation with live property controls, device frames, and modular stories.
@@ -14,57 +13,10 @@ Explore, test, and develop UI components in isolation with live property control
 - **Device frame previews** for mobile/tablet/desktop
 - **Modular structure:** each component has its own showcase, sections, and examples
 - **Templates & scripts** for rapid new component story creation
-- **Accessibility, theming, and best practices** built-in
 - **Structure validator** to ensure consistency across all stories
 
 ---
 
-## 🏗️ Project Structure
-
-<details>
-<summary>Click to expand full structure</summary>
-
-```
-example_storybook/
-├── lib/
-│   ├── main.dart
-│   └── storybook_test/
-│       ├── appbar_test_modular/
-│       ├── avatar_test_modular/
-│       ├── badge_test_modular/
-│       ├── button_test_modular/
-│       ├── cards_test_modular/
-│       ├── checkbox_test_modular/
-│       ├── navbar_test_modular/
-│       ├── progress_test_modular/
-│       ├── radio_button_test_modular/
-│       ├── switch_button_test_modular/
-│       ├── text_field_test_modular/
-│       ├── _templates/
-│       │   ├── component_template/
-│       │   ├── create_component_structure.sh
-│       │   └── storybook_validator.dart
-│       ├── component_registry.dart
-│       ├── device_frame_test.dart
-│       ├── home_page.dart
-│       ├── story_config.dart
-│       ├── storybook_testing.dart
-│       └── storybook_theme_plugin.dart
-├── web/
-│   ├── favicon.png
-│   ├── index.html
-│   ├── manifest.json
-│   └── icons/
-│       ├── Icon-192.png
-│       ├── Icon-512.png
-│       ├── Icon-maskable-192.png
-│       └── Icon-maskable-512.png
-├── pubspec.yaml
-└── README.md
-```
-</details>
-
----
 
 ## 🧑‍💻 Getting Started
 
