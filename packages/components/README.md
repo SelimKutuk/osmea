@@ -1,7 +1,7 @@
 # 🌟 OSMEA Components
 
 > **A powerful, mobile-first Flutter UI library built for e-commerce.**  
-> Modular. Themed. Accessible. Ready to scale.
+> Modular. Themed. Ready to scale.
 
 ---
 
@@ -16,127 +16,57 @@ Powered by design tokens and Material 3. Global consistency, effortless customiz
 ### ✔️ Mobile-first Design  
 Optimized for high-performance e-commerce interfaces.
 
-### ✔️ Accessibility by Default  
-Semantic structure, screen reader support, and focus handling included.
-
 ### ✔️ Variants, Sizes & Styles  
 Each component is fully customizable with sensible defaults.
 
 ---
 
-## 🗂️ Project Example Structures
+## 🗂️ Project Examples
 
-To help you navigate, OSMEA provides two main example environments:
+OSMEA provides two main example environments to help you get started:
 
-- **📖 Storybook Example**: Interactive, modular component showcase for rapid UI exploration and documentation.
-- **📱 Mobile Example**: Real-world mobile app examples demonstrating OSMEA in production-like scenarios.
+### 📖 Storybook Example
+**Path:** `packages/components/example_storybook/`
 
----
+Interactive playground for all OSMEA components with live property controls, code snippets, and design guidelines.
 
-<details>
-<summary>📖 <strong>Storybook Example Structure</strong> (click to expand)</summary>
-
-- **Path:** `packages/components/example_storybook/`
-- **Purpose:** Interactive playground for all OSMEA components, with live property controls, code snippets, and design guidelines.
-- **Features:**
-  - Modular folder structure for each component
-  - Storybook knobs for live tweaking
-  - Device frame previews
-  - Collapsible documentation sections
-  - Templates and scripts for rapid component showcase creation
-
-<details>
-<summary>📁 <strong>Directory Layout</strong></summary>
-
-```
-example_storybook/
-├── lib/
-│   └── storybook_test/
-│       ├── components/
-│       ├── _templates/
-│       ├── device_frame_test.dart
-│       ├── home_page.dart
-│       └── ...
-├── pubspec.yaml
-└── web/
-```
-</details>
-
-<details>
-<summary>🛠️ <strong>Key Features</strong></summary>
-
+**Key Features:**
 - Live component demos with real-time property changes
 - Code examples and copy-paste snippets
 - Design guidelines and best practices
-- Accessibility and keyboard navigation demos
 - Modular templates for new components
-- Structure validator and code generation scripts
-</details>
+- Device frame previews
 
-<details>
-<summary>🚀 <strong>How to Run</strong></summary>
-
+**Run it:**
 ```bash
 cd packages/components/example_storybook
 flutter run
 ```
-</details>
 
-</details>
+### 📱 Mobile Example
+**Path:** `packages/components/example_mobile/`
 
----
+Real-world mobile app examples using OSMEA components in practical, production-like flows.
 
-<details>
-<summary>📱 <strong>Mobile Example Structure</strong> (click to expand)</summary>
+**Features:**
+- Complete app screens (login, product grid, checkout, etc.)
+- Asset and theme integration
+- Demonstrates best practices for app structure
 
-- **Path:** `packages/components/example_mobile/`
-- **Purpose:** Real-world mobile app examples using OSMEA components in practical, production-like flows.
-- **Features:**
-  - Complete app screens (login, product grid, checkout, etc.)
-  - Asset and theme integration
-  - Demonstrates best practices for app structure
-  - Shows OSMEA in a real Flutter app context
-
-<details>
-<summary>📁 <strong>Directory Layout</strong></summary>
-
-```
-example_mobile/
-├── lib/
-│   ├── align_example.dart
-│   ├── appbars_demo.dart
-│   ├── avatar_example.dart
-│   ├── badge_example.dart
-│   ├── ...
-├── assets/
-├── ios/
-├── pubspec.yaml
-└── web/
-```
-</details>
-
-<details>
-<summary>🚀 <strong>How to Run</strong></summary>
-
+**Run it:**
 ```bash
 cd packages/components/example_mobile
 flutter run
 ```
-</details>
-
-</details>
 
 ---
 
 ## 🏗️ Package Structure
 
-<details>
-<summary>🏗️ Package Structure</summary>
-
 ```
 packages/components/
 ├── lib/
-│   ├── osmea_components.dart          # Main export file - import this in your app
+│   ├── osmea_components.dart          # Main export file
 │   └── src/
 │       ├── components/                # Individual component implementations
 │       │   ├── align/                 # Alignment widget
@@ -144,8 +74,8 @@ packages/components/
 │       │   ├── avatar/                # Avatar components
 │       │   ├── badge/                 # Badge components
 │       │   ├── bottom_sheet/          # Bottom sheet components
-│       │   ├── buttons/               # Button components (primary, secondary, icon, etc.)
-│       │   ├── cards/                 # Card components (basic, image, action cards)
+│       │   ├── buttons/               # Button components
+│       │   ├── cards/                 # Card components
 │       │   ├── carousel/              # Carousel/slider components
 │       │   ├── center/                # Center widget
 │       │   ├── checkbox/              # Checkbox components
@@ -183,27 +113,19 @@ packages/components/
 │       │   ├── text_field/            # Text field, OTP, search
 │       │   ├── ticket_widget/         # Ticket creation widget
 │       │   ├── toast/                 # Toast/alert components
-│       │   ├── wrap/                  # Wrap widget
+│       │   └── wrap/                  # Wrap widget
 │       ├── core/                      # Core functionality and shared logic
 │       ├── enums/                     # Component variants, sizes, and state enums
 │       ├── styles/                    # Text styles and color definitions
 │       ├── theme/                     # Theme system and design tokens
 │       └── utils/                     # Extension methods and utility functions
 ├── example_storybook/                 # Interactive component showcase
-│   ├── lib/storybook_test/            # Storybook implementation
-│   └── ...                            # Component examples and documentation
-├── example_mobile/                    # Mobile app examples
+└── example_mobile/                    # Mobile app examples
 ```
-</details>
 
 ---
 
 ## 🎯 Component Categories
-
-<details>
-<summary>🎯 Component Categories</summary>
-
-Explore the wide range of reusable components available in the `osmea_components` package:
 
 ### 🔲 Layout & Structure
 | Component           | Description                                              |
@@ -265,25 +187,21 @@ Explore the wide range of reusable components available in the `osmea_components
 
 ## 🟦 Expandable & Collapsible Components
 
-<details>
-<summary>🟦 Expandable & Collapsible Components</summary>
+OSMEA offers powerful, flexible widgets for building expandable/collapsible UIs, perfect for settings, menus, FAQs, and more!
 
-OSMEA offers powerful, flexible widgets for building expandable/collapsible (accordion) UIs, perfect for settings, menus, FAQs, and more!
+### 🟦 Expandable List Item (Accordion)
 
-### 1. 🟦 Expandable List Item (Accordion)
+Universal, flexible list/menu item that can act as an accordion/expansion panel.
 
-- **Universal, flexible list/menu item** that can act as an accordion/expansion panel.
-- **Key Features:**
-  - `variant: ListItemVariant.expandable` for accordion behavior
-  - `children: List<Widget>` for nested content
-  - `initiallyExpanded`, `expanded`, `onExpansionChanged`, `maintainState` for state control
-  - Customizable expand/collapse icons
-  - Supports multi-level nesting
-  - Smooth animation, accessible, and themeable
+**Key Features:**
+- `variant: ListItemVariant.expandable` for accordion behavior
+- `children: List<Widget>` for nested content
+- `initiallyExpanded`, `expanded`, `onExpansionChanged`, `maintainState` for state control
+- Customizable expand/collapse icons
+- Supports multi-level nesting
+- Smooth animation and themeable
 
-<details>
-<summary>Basic Example</summary>
-
+**Basic Example:**
 ```dart
 OsmeaComponents.listItem(
   title: 'Settings',
@@ -295,11 +213,8 @@ OsmeaComponents.listItem(
   ],
 )
 ```
-</details>
 
-<details>
-<summary>Controlled Expansion Example</summary>
-
+**Controlled Expansion:**
 ```dart
 bool isExpanded = false;
 OsmeaComponents.listItem(
@@ -313,43 +228,18 @@ OsmeaComponents.listItem(
   ],
 )
 ```
-</details>
 
-<details>
-<summary>Nested (Multi-level) Accordion</summary>
+### 🔍 Expandable Searchbar
 
-```dart
-OsmeaComponents.listItem(
-  title: 'Parent',
-  variant: ListItemVariant.expandable,
-  children: [
-    OsmeaComponents.listItem(
-      title: 'Child 1',
-      variant: ListItemVariant.expandable,
-      children: [
-        OsmeaComponents.listItem(title: 'Grandchild 1'),
-      ],
-    ),
-    OsmeaComponents.listItem(title: 'Child 2'),
-  ],
-)
-```
-</details>
+A searchbar that expands from an icon/button into a full search field.
 
----
+**Key Features:**
+- `expandDirection` (right, left, up, down)
+- `expandWidth`, `expandDuration`, `collapseDuration`
+- Collapses on blur or back button
+- All standard searchbar features (suggestions, history, etc.)
 
-### 2. 🔍 Expandable Searchbar
-
-- **A searchbar that expands from an icon/button into a full search field.**
-- **Key Features:**
-  - `expandDirection` (right, left, up, down)
-  - `expandWidth`, `expandDuration`, `collapseDuration`
-  - Collapses on blur or back button
-  - All standard searchbar features (suggestions, history, etc.)
-
-<details>
-<summary>Expandable Searchbar Example</summary>
-
+**Example:**
 ```dart
 OsmeaComponents.expandableSearchbar(
   onSearch: (query) => performSearch(query),
@@ -357,24 +247,6 @@ OsmeaComponents.expandableSearchbar(
   expandWidth: 300,
 )
 ```
-</details>
-
----
-
-### 3. 🧩 Collapsible Sections in Storybook
-
-- **SectionContainerWidget** in Storybook uses `ExpansionTile` for collapsible documentation/demo sections.
-- Great for organizing large sets of examples or guidelines.
-
----
-
-### 🏆 Feature Table
-
-| Component/Utility         | Type         | Key Props/Methods                | Use Cases                        |
-|--------------------------|--------------|----------------------------------|----------------------------------|
-| 🟦 List Item (Accordion)  | List/Accordion | `variant: expandable`, `children`, `expanded`, `onExpansionChanged`, `maintainState` | Settings, menus, FAQs, nested lists |
-| 🔍 Expandable Searchbar   | Searchbar    | `expandDirection`, `expandWidth`, `onExpand`, `onCollapse` | App bars, headers, minimal UIs   |
-| 🧩 SectionContainerWidget | Storybook    | `isCollapsible`, `initiallyExpanded` | Collapsible docs/demo sections   |
 
 ---
 
@@ -444,9 +316,6 @@ class MyHomePage extends StatelessWidget {
 
 ## 🎨 Theming & Customization
 
-<details>
-<summary>🎨 Theming & Customization</summary>
-
 OSMEA Components come with a built-in theme system for global consistency:
 
 ```dart
@@ -455,6 +324,7 @@ MaterialApp(
   theme: OsmeaTheme.lightTheme,
   darkTheme: OsmeaTheme.darkTheme,
 )
+
 // Or customize with your own theme
 MaterialApp(
   theme: OsmeaTheme.createCustomTheme(
@@ -464,33 +334,24 @@ MaterialApp(
 )
 ```
 
-- **Color System:** All colors are defined in `lib/src/styles/colors.dart` and follow a design token approach (primary, secondary, status, neutral, etc.).
-- **Typography:** Consistent text styles via `lib/src/styles/text_style.dart`.
-- **Component Variants & Sizes:** Most components support multiple variants and sizes for different use cases (see enums in `lib/src/enums/`).
-
-</details>
+**Theme Features:**
+- **Color System:** All colors are defined in `lib/src/styles/colors.dart` and follow a design token approach
+- **Typography:** Consistent text styles via `lib/src/styles/text_style.dart`
+- **Component Variants & Sizes:** Most components support multiple variants and sizes for different use cases
 
 ---
 
-## 🧩 Core, Enums, Styles & Utils
+## 🧩 Core Architecture
 
-<details>
-<summary>🧩 Core, Enums, Styles & Utils</summary>
-
-- **Core (`lib/src/core/`)**: Tüm bileşenlerin temelini oluşturan soyut widgetlar, temel layout ve davranış altyapısı. (Örn: `AbstractCoreWidget`, `CoreContainer`, `CoreText`)
-- **Enums (`lib/src/enums/`)**: Tüm bileşenler için boyut, varyant, durum, stil gibi seçenekleri sağlayan merkezi enum tanımları. (Örn: `ButtonVariant`, `ComponentSize`, `AppBarStyle`, `BadgeShape`)
-- **Styles (`lib/src/styles/`)**: Renk paletleri (`colors.dart`), tipografi (`text_style.dart`) ve diğer stil sabitleri.
-- **Theme (`lib/src/theme/`)**: OSMEA'nın Material 3 tabanlı tema sistemi ve özelleştirilebilir tema fonksiyonları.
-- **Utils (`lib/src/utils/`)**: Sık kullanılan yardımcı fonksiyonlar, extensionlar ve bileşenlere özel yardımcılar. (Örn: `sizer_extensions.dart`, `navbar_extensions.dart`, `text_extensions.dart`)
-
-</details>
+- **Core (`lib/src/core/`)**: Abstract widgets, basic layout and behavior infrastructure for all components
+- **Enums (`lib/src/enums/`)**: Central enum definitions for size, variant, state, style options for all components
+- **Styles (`lib/src/styles/`)**: Color palettes, typography and other style constants
+- **Theme (`lib/src/theme/`)**: OSMEA's Material 3-based theme system and customizable theme functions
+- **Utils (`lib/src/utils/`)**: Frequently used helper functions, extensions and component-specific helpers
 
 ---
 
 ## 💡 Basic Examples
-
-<details>
-<summary>💡 Basic Examples</summary>
 
 ### Simple Login Form
 ```dart
@@ -498,9 +359,11 @@ class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
 }
+
 class _LoginFormState extends State<LoginForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.container(
@@ -551,6 +414,7 @@ class _LoginFormState extends State<LoginForm> {
 class ProductGrid extends StatelessWidget {
   final List<Product> products;
   const ProductGrid({Key? key, required this.products}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -594,8 +458,10 @@ class CheckoutStepper extends StatefulWidget {
   @override
   _CheckoutStepperState createState() => _CheckoutStepperState();
 }
+
 class _CheckoutStepperState extends State<CheckoutStepper> {
   int currentStep = 0;
+  
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.stepper(
@@ -632,8 +498,6 @@ class _CheckoutStepperState extends State<CheckoutStepper> {
 }
 ```
 
-</details>
-
 ---
 
 ## 🎨 Interactive Storybook
@@ -645,22 +509,23 @@ cd packages/components/example_storybook
 flutter run
 ```
 
-The Storybook includes:
+**Storybook Features:**
 - **Live Component Demos** – See components in action with real-time property changes
 - **Code Examples** – Copy-paste ready code snippets
 - **Design Guidelines** – Best practices and usage recommendations
-- **Accessibility Testing** – Screen reader and keyboard navigation demos
-- **Component Templates** – Easily scaffold new components with [templates](example_storybook/lib/storybook_test/_templates/)
+- **Component Templates** – Easily scaffold new components
 
 ---
 
 ## 📚 Additional Resources
+
 - **[Component Templates](example_storybook/lib/storybook_test/_templates/)** – Templates for creating new components
 - **[Examples](example_mobile/)** – Complete mobile app examples
 
 ---
 
 ## 🤝 Contributing
+
 We welcome contributions! Please see our [Contributing Guidelines](../../CONTRIBUTING.md) for details on:
 - Adding new components
 - Following our coding standards  
