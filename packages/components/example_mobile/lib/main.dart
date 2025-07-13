@@ -47,6 +47,7 @@ import 'package:osmea_components_example/dropdown_example.dart';
 import 'package:osmea_components_example/tabbar_example.dart';
 import 'package:osmea_components_example/counter_example.dart';
 import 'package:osmea_components_example/image_example.dart';
+import 'package:osmea_components_example/collapse_example.dart';
 
 void main() {
   runApp(const MyApp());
@@ -718,6 +719,18 @@ class ExamplesScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const AlignExample(),
+                      ),
+                    ),
+                  ),
+                  _buildExampleTile(
+                    context,
+                    'Collapse Examples',
+                    'Expandable panels with accordion and multiple modes',
+                    Icons.expand_more,
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CollapseExample(),
                       ),
                     ),
                   ),
