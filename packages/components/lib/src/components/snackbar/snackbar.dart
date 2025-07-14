@@ -1,11 +1,4 @@
-// @dart=3.0
-/// 🟦 OSMEA Snackbar Component
-///
-/// Snackbar notification system for OSMEA UI Kit.
-/// Copyright (c) 2025, OSMEA Team
-/// https://github.com/masterfabric-mobile/osmea
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -14,7 +7,6 @@ import 'package:osmea_components/src/components/text/text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/src/components/snackbar/cubit/snackbar_cubit.dart';
 import 'package:osmea_components/src/components/snackbar/cubit/snackbar_state.dart';
-import 'dart:async';
 import 'dart:ui';
 import 'package:osmea_components/src/components/buttons/button.dart';
 import 'package:osmea_components/src/components/progress/progress.dart';
@@ -97,7 +89,6 @@ class _PositionedSnackbarGroup extends StatelessWidget {
             ? snackbars.reversed.toList()
             : snackbars;
 
-    // Tüm pozisyonlar için çalışacak şekilde düzenle
     Alignment alignment;
     EdgeInsets padding;
 
@@ -133,11 +124,11 @@ class _PositionedSnackbarGroup extends StatelessWidget {
                 final index = entry.key;
                 final snackbar = entry.value;
                 return Positioned(
-                  bottom: index * 8.0, // Her snackbar 8px yukarıda
+                  bottom: index * 8.0,
                   left: 0,
                   right: 0,
                   child: Transform.translate(
-                    offset: Offset(0, -index * 2.0), // Küçük offset
+                    offset: Offset(0, -index * 2.0),
                     child: OsmeaSnackbar(
                       key: ValueKey(snackbar.id),
                       state: snackbar,
@@ -179,7 +170,6 @@ class OsmeaSnackbar extends StatelessWidget {
     }
   }
 
-  /// Snackbar arka planına göre biraz daha açık bir renk döndürür
   Color _lighterTypeColor() {
     final base = _typeColor();
     final hsl = HSLColor.fromColor(base);
@@ -535,7 +525,6 @@ class OsmeaSnackbar extends StatelessWidget {
 Widget snackbarBuilder(SnackbarState state, VoidCallback onClose) =>
     OsmeaSnackbar(state: state, onClose: onClose);
 
-/// Snackbar Manager to handle snackbar operations and cubit interactions
 class SnackbarManager {
   static final SnackbarManager _instance = SnackbarManager._internal();
   factory SnackbarManager() => _instance;
