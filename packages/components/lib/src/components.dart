@@ -43,9 +43,13 @@ import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart
 import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 
-export 'utils/snackbar_extensions.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
+
+import 'components/collapse/collapse.dart';
+import 'components/dropdown/dropdown.dart';
+import 'components/footer/footer.dart';
+import 'components/image/image.dart';
 
 class OsmeaComponents {
   /// Supported Button variants - All variants are supported
