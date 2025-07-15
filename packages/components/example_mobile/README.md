@@ -6,7 +6,6 @@
 [![Dart](https://img.shields.io/badge/Dart-2.17.0+-blue?logo=dart)](https://dart.dev)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-osmea--app.web.app-brightgreen?logo=google-chrome)](https://osmea-app.web.app)
 [![License](https://img.shields.io/badge/License-GNU%20AGPL%20v3.0-green.svg)](../LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](pubspec.yaml)
 
 **A comprehensive Flutter showcase app demonstrating the power and flexibility of the OSMEA Components UI library**
 
