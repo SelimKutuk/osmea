@@ -1,4 +1,3 @@
-
 import 'package:example/services/index.dart';
 
 enum ApiCategory {
@@ -2668,6 +2667,13 @@ class ApiServiceRegistry {
       category: ApiCategory.products,
       subcategory: 'Product Images',
       handler: ModifyProductImageAddMetafieldHandler(),
+    ),
+    ApiService(
+      name: 'List All Coupons',
+      endpoint: '/coupons',
+      category: ApiCategory.discounts,
+      subcategory: 'Coupons',
+      handler: ListAllCouponsHandler(),
     ),
   ];
 
