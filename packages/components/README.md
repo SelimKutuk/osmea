@@ -17,7 +17,7 @@
 
 ## 📦 What's Inside?
 
-### ✔️ 45+ Production-ready Components  
+### ✔️ 50+ Production-ready Components  
 From layout scaffolds to dynamic carousels and complex form controls.
 
 ### ✔️ Built-in Theming System  
