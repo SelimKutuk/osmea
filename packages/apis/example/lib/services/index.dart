@@ -248,6 +248,9 @@ export 'handlers/products_handlers/product_variant_handlers/create_product_varia
 export 'handlers/products_handlers/product_variant_handlers/add_metafield_to_product_variant_handler.dart';
 export 'handlers/products_handlers/product_variant_handlers/add_image_to_product_variant_handler.dart';
 export 'handlers/products_handlers/product_variant_handlers/update_variant_title_and_price_handler.dart';
+
+// 🛒 WooCommerce Handlers
+export 'handlers/coupons_handlers/coupons_handler.dart';
 export 'handlers/products_handlers/product_variant_handlers/delete_product_variant_handler.dart';
 export 'handlers/products_handlers/custom_collections_handlers/list_all_custom_collections_handler.dart';
 export 'handlers/products_handlers/custom_collections_handlers/specific_custom_collections_handler.dart';
