@@ -13,7 +13,7 @@ import 'di/config/config_di.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await WooNetwork.initFromConfig(
-      GetIt.instance); // config.json'dan WooCommerce ayarlarını yükle
+      GetIt.instance); // Load WooCommerce settings from config.json
   configureDependencies();
   runApp(const MyApp());
 }
