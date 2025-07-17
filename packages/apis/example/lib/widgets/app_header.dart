@@ -167,16 +167,6 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         actions: [
-          // Debug Test Button
-          if (onDebugTest != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: IconButton(
-                icon: const Icon(Icons.bug_report_rounded),
-                onPressed: onDebugTest,
-                tooltip: 'Test Config Loading',
-              ),
-            ),
           // Theme Toggle
           Padding(
             padding: const EdgeInsets.only(right: 16),
