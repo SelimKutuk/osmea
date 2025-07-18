@@ -13,10 +13,10 @@ class VariantInfoSection extends StatelessWidget {
   final bool isDark;
 
   const VariantInfoSection({
-    Key? key,
+    super.key,
     required this.variant,
     this.isDark = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
