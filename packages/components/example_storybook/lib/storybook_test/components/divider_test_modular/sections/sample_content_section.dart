@@ -16,13 +16,13 @@ class SampleContentSection extends StatelessWidget {
   final bool isDark;
 
   const SampleContentSection({
-    Key? key,
+    super.key,
     required this.variant,
     required this.size,
     required this.direction,
     this.color,
     this.isDark = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
