@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Developer grid overlay. Only visible in kDebugMode.
@@ -14,9 +13,8 @@ class DevGridOverlay extends StatelessWidget {
     this.columns = 5, // 5 grid columns
     this.margin = 16,
     this.columnWidth = 16,
-    this.columnColor =
-        const Color.fromARGB(100, 255, 0, 0), // Daha görünür kırmızı
-    this.marginColor = const Color.fromARGB(80, 0, 0, 255), // Daha görünür mavi
+    this.columnColor = const Color.fromARGB(100, 255, 0, 0),
+    this.marginColor = const Color.fromARGB(80, 0, 0, 255),
   });
 
   @override
