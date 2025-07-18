@@ -11,9 +11,9 @@ class UsageGuidelinesSection extends StatelessWidget {
   final bool isDark;
 
   const UsageGuidelinesSection({
-    Key? key,
+    super.key,
     this.isDark = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
