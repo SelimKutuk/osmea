@@ -14,14 +14,14 @@ class DevGridOverlay extends StatelessWidget {
     this.columns = 5, // 5 grid columns
     this.margin = 16,
     this.columnWidth = 16,
-    this.columnColor = const Color.fromARGB(135, 255, 116, 116),
-    this.marginColor =
-        const Color.fromARGB(33, 52, 7, 149), // lighter/transparent for margin
+    this.columnColor =
+        const Color.fromARGB(100, 255, 0, 0), // Daha görünür kırmızı
+    this.marginColor = const Color.fromARGB(80, 0, 0, 255), // Daha görünür mavi
   });
 
   @override
   Widget build(BuildContext context) {
-    if (!kDebugMode) return const SizedBox.shrink();
+    // Remove kDebugMode check to make grid always visible when enabled
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
