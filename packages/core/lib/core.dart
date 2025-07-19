@@ -27,3 +27,5 @@ export 'package:core/src/dev_grid_overlay.dart';
 
 // 🧩 Exports the spacer class for Master View
 export 'package:core/src/spacer.dart';
+
+export 'package:osmea_components/osmea_components.dart';
