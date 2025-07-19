@@ -16,9 +16,6 @@ launchApp() async {
 
   // Run the main application with the specified router
   runApp(MasterApp(
-    devModeGrid: true,
-    devModeSpacer: true,
-
     router: appRouter, // The router handles navigation within the app
   ));
 }
