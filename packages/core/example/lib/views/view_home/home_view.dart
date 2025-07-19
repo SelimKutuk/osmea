@@ -65,9 +65,9 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        title: const Text(
+        title: OsmeaComponents.text(
           'Clear All Products',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          textStyle: TextStyle(fontWeight: FontWeight.bold),
         ),
         content: const Text(
           'Are you sure you want to delete ALL products? '
