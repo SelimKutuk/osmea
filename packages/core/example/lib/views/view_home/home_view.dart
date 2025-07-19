@@ -143,7 +143,7 @@ class HomeView extends MasterView<HomeViewModel, HomeViewEvent, HomeViewState> {
       itemBuilder: (context, index) {
         final product = products[index];
         return Card(
-          margin: EdgeInsets.zero, // Sadece spacer ile boşluk verilecek
+          margin: EdgeInsets.zero,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
