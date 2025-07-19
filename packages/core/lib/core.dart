@@ -19,6 +19,9 @@ export 'package:core/src/resources/resources.g.dart';
 // 🧩 Exports the helper for local storage
 export 'package:core/src/helper/local_storage/local_storage_helper.dart';
 
+// 🧩 Exports the spacer helper for CoreSpacerType
+export 'package:core/src/helper/spacer_helper.dart';
+
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/base/master_view/dev_grid_overlay.dart';
 
