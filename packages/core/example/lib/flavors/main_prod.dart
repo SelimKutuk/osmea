@@ -11,7 +11,6 @@ void main() async {
     name: 'PROD',
     properties: {
       Keys.apiUrl: 'https://api.example.com',
-      // Diğer prod ayarların
     },
   );
   await MasterApp.runBefore(allowCollectDataTelemetry: false);

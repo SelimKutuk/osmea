@@ -12,7 +12,6 @@ void main() async {
     name: 'DEV',
     properties: {
       Keys.apiUrl: 'https://api.dev.example.com',
-      // Diğer dev ayarların
     },
   );
   await MasterApp.runBefore(allowCollectDataTelemetry: true);
