@@ -122,13 +122,13 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
             body: SafeArea(
               child: Column(
                 children: [
-                  // Her zaman navbar altı spacer
+                  // Always a spacer below the navbar  
                   const CoreSpacer(CoreSpacerType.navbar),
                   // Main content from the view
                   Expanded(
                     child: viewContent(context, viewModel, state),
                   ),
-                  // Her zaman footer üstü spacer
+                  // Always footer top spacer
                   const CoreSpacer(CoreSpacerType.footer),
                 ],
               ),
