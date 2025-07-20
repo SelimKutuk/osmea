@@ -277,7 +277,9 @@ class MasterApp extends StatelessWidget {
 
           // Then add grid overlay on top if enabled
           if (devModeGrid) {
-            overlays.add(const DevGridOverlay(margin: 0, columnWidth: 16));
+            final devGridOverlay =
+                const DevGridOverlay(margin: 0, columnWidth: 16);
+            overlays.add(devGridOverlay);
           }
 
           appContent = Stack(
