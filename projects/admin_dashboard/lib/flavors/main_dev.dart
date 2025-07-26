@@ -7,23 +7,15 @@ import 'package:core/core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Flavor.create(
-    Environment.dev,
-    color: const Color.fromARGB(215, 42, 126, 1),
+    Environment.production,
     name: 'DEV',
     properties: {
-      Keys.apiUrl: 'https://api.dev.example.com',
+      Keys.apiUrl: 'https://api.example.com',
     },
   );
-  await MasterApp.runBefore(allowCollectDataTelemetry: true);
+  await MasterApp.runBefore(allowCollectDataTelemetry: false);
   await configureDependencies(environment: 'dev');
-  runApp(
-    Banner(
-      message: 'DEV',
-      location: BannerLocation.topStart,
-      color: Colors.redAccent,
-      child: MasterApp(
-        router: appRouter,
-      ),
-    ),
-  );
+  runApp(MasterApp(
+    router: appRouter,
+  ));
 }
