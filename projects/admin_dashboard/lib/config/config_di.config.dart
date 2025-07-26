@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:admin_dashboard/views/view_splash/models/splash_view_model.dart'
-    as _i800;
+    as _i183;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -24,7 +24,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i800.SplashViewModel>(() => _i800.SplashViewModel());
+    gh.factory<_i183.SplashViewModel>(() => _i183.SplashViewModel());
     return this;
   }
 }
