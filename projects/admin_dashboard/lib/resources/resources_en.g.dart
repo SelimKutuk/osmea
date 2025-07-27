@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsApplicationConfigEn application_config = TranslationsApplicationConfigEn._(_root);
+	late final TranslationsViewsEn views = TranslationsViewsEn._(_root);
 }
 
 // Path: application_config
@@ -49,7 +50,29 @@ class TranslationsApplicationConfigEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get app_name => TranslationOverrides.string(_root.$meta, 'application_config.app_name', {}) ?? 'Admin Dashboard';
+	String get app_name => TranslationOverrides.string(_root.$meta, 'application_config.app_name', {}) ?? 'Dashboard';
+	String get app_version => TranslationOverrides.string(_root.$meta, 'application_config.app_version', {}) ?? '1.0.0';
+}
+
+// Path: views
+class TranslationsViewsEn {
+	TranslationsViewsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsViewsSplashEn splash = TranslationsViewsSplashEn._(_root);
+}
+
+// Path: views.splash
+class TranslationsViewsSplashEn {
+	TranslationsViewsSplashEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get made_by => TranslationOverrides.string(_root.$meta, 'views.splash.made_by', {}) ?? 'Made by';
+	String get mf => TranslationOverrides.string(_root.$meta, 'views.splash.mf', {}) ?? 'MasterFabric';
 }
 
 /// Flat map(s) containing all translations.
@@ -57,7 +80,10 @@ class TranslationsApplicationConfigEn {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'application_config.app_name': return TranslationOverrides.string(_root.$meta, 'application_config.app_name', {}) ?? 'Admin Dashboard';
+			case 'application_config.app_name': return TranslationOverrides.string(_root.$meta, 'application_config.app_name', {}) ?? 'Dashboard';
+			case 'application_config.app_version': return TranslationOverrides.string(_root.$meta, 'application_config.app_version', {}) ?? '1.0.0';
+			case 'views.splash.made_by': return TranslationOverrides.string(_root.$meta, 'views.splash.made_by', {}) ?? 'Made by';
+			case 'views.splash.mf': return TranslationOverrides.string(_root.$meta, 'views.splash.mf', {}) ?? 'MasterFabric';
 			default: return null;
 		}
 	}
