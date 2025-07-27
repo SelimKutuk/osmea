@@ -799,6 +799,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.local_shipping_rounded;
       case ApiCategory.woocommercePaymentGateways:
         return Icons.payment_rounded;
+      case ApiCategory.woocommerceSetting:
+        return Icons.settings_applications_rounded;
       case ApiCategory.woocommerceData:
         return Icons.data_usage_rounded;
       case ApiCategory.woocommerceContinents:
