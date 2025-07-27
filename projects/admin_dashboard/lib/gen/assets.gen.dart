@@ -22,6 +22,9 @@ class $AssetsI18nGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/mf_logo.png
+  AssetGenImage get mfLogo => const AssetGenImage('assets/images/mf_logo.png');
+
   /// File path: assets/images/osmea_logo_black.png
   AssetGenImage get osmeaLogoBlack =>
       const AssetGenImage('assets/images/osmea_logo_black.png');
@@ -31,7 +34,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/osmea_logo_white.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [osmeaLogoBlack, osmeaLogoWhite];
+  List<AssetGenImage> get values => [mfLogo, osmeaLogoBlack, osmeaLogoWhite];
 }
 
 class Assets {
