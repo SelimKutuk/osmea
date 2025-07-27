@@ -23,6 +23,16 @@ class SplashStateContent extends SplashState {
 
   /// Creates a content state with the given value.
   SplashStateContent({required this.contentValue});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SplashStateContent &&
+          runtimeType == other.runtimeType &&
+          contentValue == other.contentValue;
+
+  @override
+  int get hashCode => contentValue.hashCode;
 }
 
 /// State: An error occurred during splash logic.
@@ -32,6 +42,16 @@ class SplashStateError extends SplashState {
 
   /// Creates an error state with the given message.
   SplashStateError({required this.contentValue});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SplashStateError &&
+          runtimeType == other.runtimeType &&
+          contentValue == other.contentValue;
+
+  @override
+  int get hashCode => contentValue.hashCode;
 }
 
 /// State: Signals that the splash screen should navigate to the home screen.

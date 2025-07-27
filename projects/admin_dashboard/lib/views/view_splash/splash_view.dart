@@ -52,17 +52,31 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
           spaceBetween, // Distributes space between top, center, and bottom
       children: [
         // ──────────────────────────────────────────────
-        // Top right decorative container (visual accent)
+        // Top right decorative container (visual accent, DEV mode only)
         // ──────────────────────────────────────────────
-        OsmeaComponents.row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            OsmeaComponents.container(
-              height: 36,
-              width: 36,
-              color: OsmeaColors.atlantic,
-            ),
-          ],
+        // Show the decorative container only if the current flavor is DEV (runtime check)
+        Builder(
+          builder: (context) {
+            final isDev = arguments["isDev"] as bool? ?? false;
+            final environment =
+                arguments["environment"] as String? ?? "unknown";
+            debugPrint(
+              'Current Environment from arguments: $environment (isDev: $isDev)',
+            );
+            if (isDev) {
+              return OsmeaComponents.row(
+                mainAxisAlignment: end,
+                children: [
+                  OsmeaComponents.container(
+                    height: 36,
+                    width: 36,
+                    color: OsmeaColors.atlantic,
+                  ),
+                ],
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
 
         // ──────────────────────────────────────────────
@@ -84,7 +98,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
         // Bottom section: title, version, and credits
         // ──────────────────────────────────────────────
         OsmeaComponents.column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // --- App Title ---
