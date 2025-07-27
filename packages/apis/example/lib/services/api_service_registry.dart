@@ -25,7 +25,7 @@ enum ApiCategory {
   woocommerceProducts,
   woocommerceOrders,
   woocommerceCustomers, 
-  woocommerceReports,
+  woocommerceReports, 
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -2768,70 +2768,64 @@ class ApiServiceRegistry {
       subcategory: 'WooCommerce Customers',
       handler: DeleteCustomerHandler(),
     ),
+
+// 📊 WooCommerce Reports
     ApiService(
       name: 'WooCommerce List All Reports',
-      endpoint: '/wp-json/wc/{api_version}/reports',
+      endpoint: '/wp-json/wc/v3/reports',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'All Reports',
+      subcategory: 'WooCommerce Reports',
       handler: ListAllReportsHandler(),
     ),
-
+    ApiService(
+      name: 'WooCommerce Retrieve Coupon Totals',
+      endpoint: '/wp-json/wc/v3/reports/coupons/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveCouponTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Customer Totals',
+      endpoint: '/wp-json/wc/v3/reports/customers/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveCustomerTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Order Totals',
+      endpoint: '/wp-json/wc/v3/reports/orders/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveOrderTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Product Totals',
+      endpoint: '/wp-json/wc/v3/reports/products/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveProductTotalsHandler(),
+    ),
     ApiService(
       name: 'WooCommerce Retrieve Sales Report',
       endpoint: '/wp-json/wc/v3/reports/sales',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'Sales Report',
-      handler: RetrieveReportSaleHandler(),
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveSalesReportHandler(),
     ),
     ApiService(
-      name: 'WooCommerce Retrieve Top Seller Report',
-      endpoint: '/wp-json/wc/v3/reports/top_sellers',
+      name: 'WooCommerce Retrieve Review Totals',
+      endpoint: '/wp-json/wc/v3/reports/reviews/totals',
       category: ApiCategory.woocommerceReports,
-      subcategory: 'Top Seller Report',
+      subcategory: 'WooCommerce Reports',
+      handler: RetrieveReviewTotalsHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Top Sellers Report',
+      endpoint: '/wp-json/wc/v3/reports/products/totals',
+      category: ApiCategory.woocommerceReports,
+      subcategory: 'WooCommerce Reports',
       handler: RetrieveTopSellerReportHandler(),
-),
-ApiService(
-  name: 'WooCommerce Retrieve Order Totals Report',
-  endpoint: '/wp-json/wc/v3/reports/orders/totals',
-      category: ApiCategory.woocommerceReports,
-  subcategory: 'Order Totals Report',
-  handler: RetrieveOrderTotalsReportHandler(),
-),
-
-ApiService(
-  name: 'WooCommerce Retrieve Product Totals Report',
-  endpoint: '/wp-json/wc/v3/reports/products/totals',
-      category: ApiCategory.woocommerceReports,
-  subcategory: 'Product Totals Report',
-  handler: RetrieveProductTotalsReportHandler(),
-),
-
-ApiService(
-  name: 'WooCommerce Retrieve Customer Totals Report',
-  endpoint: '/wp-json/wc/v3/reports/customers/totals',
-      category: ApiCategory.woocommerceReports,
-  subcategory: 'Customer Totals Report',
-  handler: RetrieveCustomerTotalsReportHandler(),
-),
-
-ApiService(
-  name: 'WooCommerce Retrieve Coupon Totals Report',
-  endpoint: '/wp-json/wc/v3/reports/coupons/totals',
-      category: ApiCategory.woocommerceReports,
-  subcategory: 'Coupon Totals Report',
-  handler: RetrieveCouponTotalsReportHandler(),
-),
-
-ApiService(
-  name: 'WooCommerce Retrieve Review Totals Report',
-  endpoint: '/wp-json/wc/v3/reports/reviews/totals',
-      category: ApiCategory.woocommerceReports,
-  subcategory: 'Review Totals Report',
-  handler: RetrieveReviewTotalsReportHandler(),
-),
-
-
-
+    ),
 
 
   ];
