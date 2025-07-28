@@ -3,6 +3,9 @@ import 'package:apis/dio_config/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/abstract/taxes_rates_service.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/retrieve_tax_rate_response.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/delete_tax_rate_response.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/list_tax_rates_response.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/request/create_tax_rate_request.dart';
+import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/create_tax_rate_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -60,20 +63,31 @@ abstract class TaxesRatesServiceClient implements TaxesRatesService {
     @Query('force') bool? force,
   });
 
-}
-/*  /// ✨ Create a new tax rate in WooCommerce API
+  /// ✨ Create a new tax rate in WooCommerce API
   @override
   @POST('/wp-json/wc/{api_version}/taxes')
-  Future<RetrieveTaxRateResponse> createTaxRate({
+  Future<CreateTaxRateResponse> createTaxRate({
     @Path('api_version') String? apiVersion,
-    @Body() Map<String, dynamic>? taxRateData,
+    @Body() CreateTaxRateRequest? taxRateData,
   });
 
-  /// 🔄 Update an existing tax rate in WooCommerce API
+  /// 🔓 Get all tax rates from WooCommerce API
   @override
-  @PUT('/wp-json/wc/{api_version}/taxes/{tax_rate_id}')
-  Future<RetrieveTaxRateResponse> updateTaxRate({
+  @GET('/wp-json/wc/{api_version}/taxes')
+  Future<List<ListTaxRatesResponse>> listAllTaxRates({
     @Path('api_version') String? apiVersion,
-    @Path('tax_rate_id') int? taxRateId,
-    @Body() Map<String, dynamic>? taxRateData,
-  });*/
+    @Query('context') String? context,
+    @Query('page') int? page,
+    @Query('per_page') int? perPage,
+    @Query('search') String? search,
+    @Query('after') String? after,
+    @Query('before') String? before,
+    @Query('exclude') List<String>? exclude,
+    @Query('include') List<String>? include,
+    @Query('offset') int? offset,
+    @Query('order') String? order,
+    @Query('orderby') String? orderBy,
+    @Query('class') String? taxClass,
+  });
+
+}
