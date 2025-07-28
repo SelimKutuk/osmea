@@ -17,6 +17,9 @@ import 'package:injectable/injectable.dart';
 class OnboardingViewModel
     extends BaseViewModelBloc<OnboardingEvent, OnboardingState> {
   OnboardingViewModel() : super(OnboardingInitialState()) {
+    // Initialize PageController
+    pageController = PageController(initialPage: 0);
+
     // Register event handlers
     on<OnboardingInitialEvent>(_onboardingEvent);
     on<OnboardingSuccessEvent>(_successEvent);
@@ -45,7 +48,6 @@ class OnboardingViewModel
     Emitter<OnboardingState> emit,
   ) {
     index = 0;
-    pageController = PageController(initialPage: 0);
     emit(OnboardingInitialState());
   }
 

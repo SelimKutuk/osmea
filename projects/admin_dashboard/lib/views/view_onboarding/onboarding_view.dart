@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 import 'package:admin_dashboard/views/view_onboarding/models/onboarding_view_model.dart';
 import 'package:admin_dashboard/views/view_onboarding/models/module/events.dart';
 import 'package:admin_dashboard/views/view_onboarding/models/module/states.dart';
@@ -108,167 +109,141 @@ class OnboardingView
     }
 
     // Main onboarding flow
-    return OsmeaComponents.scaffold(
-      backgroundColor: OsmeaColors.white,
-      body: OsmeaComponents.column(
-        children: [
-          OsmeaComponents.expanded(
-            child: PageView.builder(
-              controller: viewModel.pageController,
-              onPageChanged: (index) => viewModel.onPageChanged(index),
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                final pageData = onboardingData[index];
+    return OsmeaComponents.column(
+      children: [
+        OsmeaComponents.expanded(
+          child: PageView.builder(
+            controller: viewModel.pageController,
+            onPageChanged: (index) => viewModel.onPageChanged(index),
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              final pageData = onboardingData[index];
 
-                return OsmeaComponents.padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 30),
-                  child: OsmeaComponents.column(
-                    crossAxisAlignment: crossStart,
+              return OsmeaComponents.column(
+                crossAxisAlignment: crossStart,
+                children: [
+                  // Title section - Mockup size
+                  OsmeaComponents.text(
+                    pageData['title']!,
+                    textStyle: OsmeaTextStyle.headlineLarge(context).copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: OsmeaColors.eclipse,
+                      fontSize: 28,
+                    ),
+                  ),
+
+                  CoreSpacer(CoreSpacerType.content),
+
+                  // Progress indicator showing current page progress
+                  OsmeaComponents.progress(
+                    type: ProgressType.linearRounded,
+                    value: (index + 1) / 3.0, // 1/3, 2/3, 3/3
+                    size: ProgressSize.extraSmall,
+                    progressColor: OsmeaColors.slate,
+                    showPercentage: false,
+                    strokeWidth: 0.5,
+                  ),
+
+                  CoreSpacer(CoreSpacerType.content),
+
+                  // Image section - Much larger like mockup
+                  OsmeaComponents.expanded(
+                    flex: 5,
+                    child: OsmeaComponents.center(
+                      child: OsmeaComponents.container(
+                        constraints: const BoxConstraints(
+                          maxWidth: 350,
+                          maxHeight: 350,
+                        ),
+                        child: Image.asset(
+                          pageData['imagePath']!,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return OsmeaComponents.container(
+                              width: 320,
+                              height: 280,
+                              decoration: BoxDecoration(
+                                color: OsmeaColors.slate.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: OsmeaColors.slate.withOpacity(0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: OsmeaComponents.center(
+                                child: OsmeaComponents.column(
+                                  mainAxisAlignment: centerMain,
+                                  children: [
+                                    Icon(
+                                      Icons.image_not_supported_outlined,
+                                      size: 60,
+                                      color: OsmeaColors.slate,
+                                    ),
+                                    OsmeaComponents.sizedBox(height: 12),
+                                    OsmeaComponents.text(
+                                      'Image missing',
+                                      textStyle: OsmeaTextStyle.bodySmall(
+                                        context,
+                                      ).copyWith(color: OsmeaColors.slate),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  CoreSpacer(CoreSpacerType.section),
+
+                  // Description text - Smaller like mockup
+                  OsmeaComponents.text(
+                    pageData['description']!,
+                    textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                      color: OsmeaColors.black,
+                      height: 1.5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+
+                  CoreSpacer(CoreSpacerType.section),
+
+                  // Button section - Correct colors like mockup
+                  OsmeaComponents.row(
+                    mainAxisAlignment: end,
                     children: [
-                      // Title section - Mockup size
-                      OsmeaComponents.text(
-                        pageData['title']!,
-                        textStyle: OsmeaTextStyle.headlineLarge(
-                          context,
-                        ).copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: OsmeaColors.eclipse,
-                          fontSize: 28,
+                      OsmeaComponents.button(
+                        text: index == 2 ? "Done" : "Next",
+                        onPressed: () => viewModel.nextPage(context),
+                        variant:
+                            index == 2
+                                ? ButtonVariant.success
+                                : ButtonVariant.primary,
+
+                        size: ButtonSize.medium,
+                        icon: Icon(
+                          index == 2 ? Icons.check : Icons.arrow_forward,
+                          color: OsmeaColors.white,
+                          size: 18,
                         ),
+                        iconPosition: IconPosition.trailing,
+                        backgroundColor: OsmeaColors.black,
                       ),
-
-                      OsmeaComponents.sizedBox(height: 16),
-
-                      // Small Progress indicator - like mockup
-                      OsmeaComponents.row(
-                        children: List.generate(3, (progressIndex) {
-                          return OsmeaComponents.container(
-                            width: progressIndex == index ? 24 : 8,
-                            height: 4,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                              color:
-                                  progressIndex == index
-                                      ? OsmeaColors.eclipse
-                                      : OsmeaColors.slate.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          );
-                        }),
-                      ),
-
-                      // Underline decoration for pages 2 & 3 (from mockup)
-                      if (index > 0) ...[
-                        OsmeaComponents.sizedBox(height: 8),
-                        OsmeaComponents.container(
-                          width: 80,
-                          height: 3,
-                          decoration: BoxDecoration(
-                            color: OsmeaColors.eclipse,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                      ],
-
-                      OsmeaComponents.sizedBox(height: 40),
-
-                      // Image section - Much larger like mockup
-                      OsmeaComponents.expanded(
-                        flex: 5,
-                        child: OsmeaComponents.center(
-                          child: OsmeaComponents.container(
-                            constraints: const BoxConstraints(
-                              maxWidth: 350,
-                              maxHeight: 350,
-                            ),
-                            child: Image.asset(
-                              pageData['imagePath']!,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                return OsmeaComponents.container(
-                                  width: 320,
-                                  height: 280,
-                                  decoration: BoxDecoration(
-                                    color: OsmeaColors.slate.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(
-                                      color: OsmeaColors.slate.withOpacity(0.3),
-                                      width: 1,
-                                    ),
-                                  ),
-                                  child: OsmeaComponents.center(
-                                    child: OsmeaComponents.column(
-                                      mainAxisAlignment: centerMain,
-                                      children: [
-                                        Icon(
-                                          Icons.image_not_supported_outlined,
-                                          size: 60,
-                                          color: OsmeaColors.slate,
-                                        ),
-                                        OsmeaComponents.sizedBox(height: 12),
-                                        OsmeaComponents.text(
-                                          'Image missing',
-                                          textStyle: OsmeaTextStyle.bodySmall(
-                                            context,
-                                          ).copyWith(color: OsmeaColors.slate),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      OsmeaComponents.sizedBox(height: 32),
-
-                      // Description text - Smaller like mockup
-                      OsmeaComponents.text(
-                        pageData['description']!,
-                        textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
-                          color: OsmeaColors.slate,
-                          height: 1.5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-
-                      OsmeaComponents.sizedBox(height: 40),
-
-                      // Button section - Correct colors like mockup
-                      OsmeaComponents.row(
-                        mainAxisAlignment: end,
-                        children: [
-                          OsmeaComponents.button(
-                            text: index == 2 ? "Done" : "Next",
-                            onPressed: () => viewModel.nextPage(context),
-                            variant:
-                                index == 2
-                                    ? ButtonVariant.success
-                                    : ButtonVariant.primary,
-                            size: ButtonSize.medium,
-                            icon: Icon(
-                              index == 2 ? Icons.check : Icons.arrow_forward,
-                              color: OsmeaColors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      OsmeaComponents.sizedBox(height: 20),
                     ],
                   ),
-                );
-              },
-            ),
+
+                  OsmeaComponents.sizedBox(height: 20),
+                ],
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
