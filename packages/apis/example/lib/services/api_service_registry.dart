@@ -3465,6 +3465,22 @@ ApiService(
   handler: DeleteTaxClassHandler(),
 ),
 
+ApiService(
+  name: 'WooCommerce Retrieve Tax Rate',
+  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+  category: ApiCategory.woocommerceTaxes,
+  subcategory: 'WooCommerce Tax Rates',
+  handler: RetrieveTaxRateHandler(),
+),
+
+ApiService(
+  name: 'WooCommerce Delete Tax Rate',
+  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+  category: ApiCategory.woocommerceTaxes,
+  subcategory: 'WooCommerce Tax Rates',
+  handler: DeleteTaxRateHandler(),
+),
+
   ];
 
   static void initialize() {}
