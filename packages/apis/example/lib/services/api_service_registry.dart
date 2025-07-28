@@ -24,17 +24,19 @@ enum ApiCategory {
   woocommerceCoupons,
   woocommerceProducts,
   woocommerceOrders,
-  woocommerceCustomers, 
+  woocommerceCustomers,
   woocommerceWebhooks,
   woocommerceSystemStatus,
+  woocommerceReports,
   woocommerceShippingMethods,
+  woocommerceShippingZones,
+  woocommerceShippingZoneMethods,
   woocommercePaymentGateways,
   woocommerceData,
   woocommerceContinents,
   woocommerceCountries,
   woocommerceCurrencies,
   woocommerceRefunds,
-  woocommerceReports, 
   woocommerceSetting,
   woocommerceTaxes,
 }
@@ -98,6 +100,10 @@ extension ApiCategoryExtension on ApiCategory {
         return 'WooCommerce Reports APIs';
       case ApiCategory.woocommerceShippingMethods:
         return 'WooCommerce Shipping Methods APIs';
+      case ApiCategory.woocommerceShippingZones:
+        return 'WooCommerce Shipping Zones APIs';
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return 'WooCommerce Shipping Zone Methods APIs';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways APIs';
       case ApiCategory.woocommerceData:
@@ -3419,7 +3425,7 @@ class ApiServiceRegistry {
       handler: UpdatePaymentGatewayHandler(),
     ),
 
-       // ⚙️ WooCommerce Settings Handlers
+    // ⚙️ WooCommerce Settings Handlers
     ApiService(
       name: 'WooCommerce List All Settings Groups',
       endpoint: '/wp-json/wc/v3/settings',
@@ -3443,68 +3449,150 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
-     name: 'WooCommerce List All Tax Classes',
-     endpoint: '/wp-json/wc/v3/taxes/classes', 
-     category: ApiCategory.woocommerceTaxes,
-     subcategory: 'WooCommerce Tax Classes',
+      name: 'WooCommerce List All Tax Classes',
+      endpoint: '/wp-json/wc/v3/taxes/classes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Classes',
       handler: ListTaxClassesHandler(),
-),
+    ),
 
-ApiService(
-  name: 'WooCommerce Create Tax Class',
-  endpoint: '/wp-json/wc/v3/taxes/classes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Classes',
-  handler: CreateTaxClassHandler(),
-),
-ApiService(
-  name: 'WooCommerce Delete Tax Class',
-  endpoint: '/wp-json/wc/v3/taxes/classes/{slug}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Classes',
-  handler: DeleteTaxClassHandler(),
-),
+    ApiService(
+      name: 'WooCommerce Create Tax Class',
+      endpoint: '/wp-json/wc/v3/taxes/classes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Classes',
+      handler: CreateTaxClassHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Tax Class',
+      endpoint: '/wp-json/wc/v3/taxes/classes/{slug}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Classes',
+      handler: DeleteTaxClassHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Retrieve Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: RetrieveTaxRateHandler(),
-),
+    ApiService(
+      name: 'WooCommerce Retrieve Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Rates',
+      handler: RetrieveTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Delete Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: DeleteTaxRateHandler(),
-),
+    ApiService(
+      name: 'WooCommerce Delete Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Rates',
+      handler: DeleteTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Create Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: CreateTaxRateHandler(),
-),
+    ApiService(
+      name: 'WooCommerce Create Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Rates',
+      handler: CreateTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce Update Tax Rate',
-  endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: UpdateTaxRateHandler(),
-),
+    ApiService(
+      name: 'WooCommerce Update Tax Rate',
+      endpoint: '/wp-json/wc/v3/taxes/{tax_rate_id}',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Rates',
+      handler: UpdateTaxRateHandler(),
+    ),
 
-ApiService(
-  name: 'WooCommerce List All Tax Rates',
-  endpoint: '/wp-json/wc/v3/taxes',
-  category: ApiCategory.woocommerceTaxes,
-  subcategory: 'WooCommerce Tax Rates',
-  handler: ListTaxRatesHandler(),
-),
+    ApiService(
+      name: 'WooCommerce List All Tax Rates',
+      endpoint: '/wp-json/wc/v3/taxes',
+      category: ApiCategory.woocommerceTaxes,
+      subcategory: 'WooCommerce Tax Rates',
+      handler: ListTaxRatesHandler(),
+    ),
 
+    // 🚚 WooCommerce Shipping Zones
+    ApiService(
+      name: 'WooCommerce List All Shipping Zones',
+      endpoint: '/wp-json/wc/v3/shipping/zones',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: ListAllShippingZonesHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Create Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: CreateShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: RetrieveShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: UpdateShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: DeleteShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Shipping Zone Location',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/locations',
+      category: ApiCategory.woocommerceShippingZones,
+      subcategory: 'WooCommerce Shipping Zones',
+      handler: RetrieveShippingZoneLocationHandler(),
+    ),
+
+    // 🚚 WooCommerce Shipping Zone Methods
+    ApiService(
+      name: 'WooCommerce List All Shipping Methods from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'WooCommerce Shipping Zone Methods',
+      handler: ListAllShippingMethodsFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Include Shipping Method to Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'WooCommerce Shipping Zone Methods',
+      handler: IncludeShippingMethodToShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Retrieve Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'WooCommerce Shipping Zone Methods',
+      handler: RetrieveShippingMethodFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Update Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'WooCommerce Shipping Zone Methods',
+      handler: UpdateShippingMethodFromShippingZoneHandler(),
+    ),
+    ApiService(
+      name: 'WooCommerce Delete Shipping Method from Shipping Zone',
+      endpoint: '/wp-json/wc/v3/shipping/zones/{zoneId}/methods/{methodId}',
+      category: ApiCategory.woocommerceShippingZoneMethods,
+      subcategory: 'WooCommerce Shipping Zone Methods',
+      handler: DeleteShippingMethodFromShippingZoneHandler(),
+    ),
+
+    // 💳 WooCommerce Payment Gateways
   ];
 
   static void initialize() {}
@@ -3549,6 +3637,8 @@ ApiService(
       ApiCategory.woocommerceSystemStatus,
       ApiCategory.woocommerceReports,
       ApiCategory.woocommerceShippingMethods,
+      ApiCategory.woocommerceShippingZones,
+      ApiCategory.woocommerceShippingZoneMethods,
       ApiCategory.woocommercePaymentGateways,
       ApiCategory.woocommerceSetting,
       ApiCategory.woocommerceData,
@@ -3636,6 +3726,10 @@ ApiService(
         return 'WooCommerce Reports';
       case ApiCategory.woocommerceShippingMethods:
         return 'WooCommerce Shipping Methods';
+      case ApiCategory.woocommerceShippingZones:
+        return 'WooCommerce Shipping Zones';
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return 'WooCommerce Shipping Zone Methods';
       case ApiCategory.woocommercePaymentGateways:
         return 'WooCommerce Payment Gateways';
       case ApiCategory.woocommerceSetting:
