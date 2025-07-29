@@ -2825,6 +2825,14 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
+      name: 'Batch Update Products',
+      endpoint: '/wp-json/wc/v3/products/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Products',
+      handler: BatchUpdateProductsHandler(),
+    ),
+
+    ApiService(
       name: 'List All Product Categories',
       endpoint: '/wp-json/wc/v3/products/categories',
       category: ApiCategory.woocommerceProducts,
@@ -2862,6 +2870,13 @@ class ApiServiceRegistry {
       category: ApiCategory.woocommerceProducts,
       subcategory: 'Product Categories',
       handler: DeleteProductCategoryHandler(),
+    ),
+    ApiService(
+      name: 'Batch Update Product Categories',
+      endpoint: '/wp-json/wc/v3/products/categories/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Product Categories',
+      handler: BatchUpdateProductCategoriesHandler(),
     ),
 
     ApiService(
@@ -2902,6 +2917,13 @@ class ApiServiceRegistry {
       category: ApiCategory.woocommerceProducts,
       subcategory: 'Product Reviews',
       handler: DeleteProductReviewHandler(),
+    ),
+    ApiService(
+      name: 'Batch Update Product Reviews',
+      endpoint: '/wp-json/wc/v3/products/reviews/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Product Reviews',
+      handler: BatchUpdateProductReviewsHandler(),
     ),
 
     ApiService(
@@ -2945,6 +2967,14 @@ class ApiServiceRegistry {
     ),
 
     ApiService(
+      name: 'Batch Update Product Shipping Classes',
+      endpoint: '/wp-json/wc/v3/products/shipping_classes/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Product Shipping Classes',
+      handler: BatchUpdateProductShippingClassesHandler(),
+    ),
+
+    ApiService(
       name: 'List All Product Tags',
       endpoint: '/wp-json/wc/v3/products/tags',
       category: ApiCategory.woocommerceProducts,
@@ -2983,6 +3013,14 @@ class ApiServiceRegistry {
       subcategory: 'Product Tags',
       handler: DeleteProductTagHandler(),
     ),
+
+    ApiService(
+  name: 'Batch Update Product Tags',
+  endpoint: '/wp-json/wc/v3/products/tags/batch',
+  category: ApiCategory.woocommerceProducts,
+  subcategory: 'Product Tags',
+  handler: BatchUpdateProductTagsHandler(),
+),
 
     ApiService(
       name: 'List All Product Variations',
@@ -3066,6 +3104,13 @@ class ApiServiceRegistry {
       category: ApiCategory.woocommerceProducts,
       subcategory: 'Product Attributes',
       handler: DeleteProductAttributeHandler(),
+    ),
+    ApiService(
+      name: 'Batch Update Product Attributes',
+      endpoint: '/wp-json/wc/v3/products/attributes/batch',
+      category: ApiCategory.woocommerceProducts,
+      subcategory: 'Product Attributes',
+      handler: BatchUpdateProductAttributesHandler(),
     ),
 
     // 🏷️ WooCommerce Product Attribute Terms Services
