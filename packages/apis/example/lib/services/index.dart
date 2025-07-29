@@ -351,6 +351,7 @@ export 'handlers/woocommerce/coupons_handlers/retrieve_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/create_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/update_coupon_handler.dart';
 export 'handlers/woocommerce/coupons_handlers/delete_coupon_handler.dart';
+export 'handlers/woocommerce/coupons_handlers/batch_update_coupons_handler.dart';
 
 // 👥 Customers Handlers
 export 'handlers/woocommerce/customers_handlers/list_all_customers_handler.dart';
@@ -358,6 +359,8 @@ export 'handlers/woocommerce/customers_handlers/retrieve_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/create_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/update_customer_handler.dart';
 export 'handlers/woocommerce/customers_handlers/delete_customer_handler.dart';
+export 'handlers/woocommerce/customers_handlers/batch_update_customers_handler.dart';
+export 'handlers/woocommerce/customers_handlers/batch_update_customer_id_handler.dart';
 
 // 🛍️ Products Handlers
 export 'handlers/woocommerce/products_handlers/list_all_products_handler.dart';
@@ -440,6 +443,7 @@ export 'handlers/woocommerce/orders_handlers/retrieve_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/update_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/delete_order_handler.dart';
 export 'handlers/woocommerce/orders_handlers/send_order_details_handler.dart';
+export 'handlers/woocommerce/orders_handlers/batch_update_orders_handler.dart';
 
 // 📝 Order Notes Handlers
 export 'handlers/woocommerce/order_notes_handlers/list_all_order_notes_handler.dart';
@@ -450,6 +454,21 @@ export 'handlers/woocommerce/order_notes_handlers/delete_order_note_handler.dart
 // 🚚 WooCommerce Shipping Methods Handlers
 export 'handlers/woocommerce/shipping_methods_handlers/list_all_shipping_methods_handler.dart';
 export 'handlers/woocommerce/shipping_methods_handlers/retrieve_shipping_method_handler.dart';
+
+// 🚚 WooCommerce Shipping Zone Methods Handlers
+export 'handlers/woocommerce/shipping_zone_methods_handlers/list_all_shipping_methods_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/include_shipping_method_to_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/retrieve_shipping_method_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/update_shipping_method_from_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zone_methods_handlers/delete_shipping_method_from_shipping_zone_handler.dart';
+
+// 🚚 WooCommerce Shipping Zones Handlers
+export 'handlers/woocommerce/shipping_zones_handlers/list_all_shipping_zones_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/create_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/retrieve_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/update_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/delete_shipping_zone_handler.dart';
+export 'handlers/woocommerce/shipping_zones_handlers/retrieve_shipping_zone_location_handler.dart';
 
 // 💳 WooCommerce Payment Gateways Handlers
 export 'handlers/woocommerce/payment_gateways_handlers/list_all_payment_gateways_handler.dart';
@@ -484,7 +503,6 @@ export 'handlers/woocommerce/reports_handlers/retrieve_product_totals_handler.da
 export 'handlers/woocommerce/reports_handlers/retrieve_customer_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_coupon_totals_handler.dart';
 export 'handlers/woocommerce/reports_handlers/retrieve_review_totals_handler.dart';
-
 
 // Setting handlers
 export 'package:example/services/handlers/woocommerce/settings_handlers/list_settings_groups_handler.dart';
