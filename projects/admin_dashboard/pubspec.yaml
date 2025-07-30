@@ -96,8 +96,9 @@ dev_dependencies:
 # FLUTTER GEN CONFIGURATION
 # ═══════════════════════════════════════════════════════════════════════════════
 flutter_gen:
-  output: lib/gen       # Output directory for generated code (default: lib/gen/)
-  line_length: 80       # Maximum line length for generated Dart files
+  output: lib/gen/
+  line_length: 80
+    
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # FLUTTER PROJECT CONFIGURATION
@@ -109,7 +110,6 @@ flutter:
   assets:
     - assets/i18n/      # Localization JSON files (used by slang)
     - assets/images/    # Image assets used throughout the application
-
   # ────────────────────────────────
   # MATERIAL DESIGN
   # ────────────────────────────────
