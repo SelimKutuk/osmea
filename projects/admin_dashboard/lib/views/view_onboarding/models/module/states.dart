@@ -10,6 +10,12 @@ abstract class OnboardingState {}
 /// Initial state of onboarding
 class OnboardingInitialState extends OnboardingState {}
 
+/// Loaded state with current index information
+class OnboardingLoadedState extends OnboardingState {
+  final int currentIndex;
+  OnboardingLoadedState({required this.currentIndex});
+}
+
 /// Success state when onboarding operations complete successfully
 class OnboardingSuccessState extends OnboardingState {}
 
@@ -18,3 +24,6 @@ class OnboardingErrorState extends OnboardingState {}
 
 /// Done state when onboarding is completed
 class OnboardingDoneState extends OnboardingState {}
+
+/// Complete state when onboarding is completed
+class OnboardingCompleteState extends OnboardingState {}
