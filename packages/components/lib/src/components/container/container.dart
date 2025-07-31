@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_components/src/core/container_widget.dart';
+import 'package:osmea_components/src/enums/container_enums.dart';
+import 'package:osmea_components/src/utils/container_extensions.dart';
 
 /// 📦 **OSMEA Components Library - Container**
 ///
@@ -23,8 +25,7 @@ import 'package:osmea_components/src/core/container_widget.dart';
 ///
 /// ```dart
 /// OsmeaContainer(
-///   width: 200,
-///   height: 100,
+///   size: ContainerSize.medium,
 ///   padding: EdgeInsets.all(16),
 ///   color: Colors.blue,
 ///   borderRadius: BorderRadius.circular(8),
@@ -41,8 +42,8 @@ class OsmeaContainer extends CoreContainer {
     Color? color,
     Decoration? decoration,
     super.foregroundDecoration,
-    super.width,
-    super.height,
+    double? width,
+    double? height,
     super.constraints,
     super.margin,
     super.transform,
@@ -60,7 +61,10 @@ class OsmeaContainer extends CoreContainer {
     this.onDoubleTap,
     this.borderOnForeground = true,
     this.shape,
+    this.size,
   }) : super(
+          width: size != null ? size.width : width,
+          height: size != null ? size.height : height,
           decoration: decoration ??
               _buildDecoration(
                 color: color,
@@ -106,6 +110,9 @@ class OsmeaContainer extends CoreContainer {
 
   /// 🔳 Shape of the container (circle or rectangle)
   final BoxShape? shape;
+
+  /// 📏 Size of the container (overrides width and height)
+  final ContainerSize? size;
 
   /// Builds the container's decoration based on provided properties
   static BoxDecoration? _buildDecoration({

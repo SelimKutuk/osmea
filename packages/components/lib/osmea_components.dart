@@ -77,6 +77,7 @@ export 'src/utils/snackbar_extensions.dart';
 export 'src/utils/dropdown_extensions.dart';
 export 'src/utils/footer_extensions.dart';
 export 'src/utils/collapse_extensions.dart';
+export 'src/utils/container_extensions.dart';
 
 // 🔢 Enums
 export 'src/enums/enums.dart';
