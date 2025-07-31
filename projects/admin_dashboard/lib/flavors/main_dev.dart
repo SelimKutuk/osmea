@@ -1,5 +1,5 @@
-import 'package:admin_dashboard/config/config_di.dart';
-import 'package:admin_dashboard/routes/app_routes.dart';
+import 'package:admin_dashboard/core/config/config_di.dart';
+import 'package:admin_dashboard/app/routes/app_routes.dart';
 import 'package:flavor/flavor.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
