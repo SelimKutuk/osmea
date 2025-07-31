@@ -33,6 +33,7 @@ class OnboardingViewModel
   // Private fields
   late PageController _pageController;
   int _currentIndex = 0;
+  Function(String route)? _onNavigate;
 
   // Public getters
   PageController get pageController => _pageController;
@@ -41,6 +42,11 @@ class OnboardingViewModel
   bool get isFirstPage => _currentIndex == 0;
   bool get isLastPage => _currentIndex == totalPages - 1;
   double get progressValue => (currentIndex + 1) / totalPages.toDouble();
+
+  /// Set navigation callback from view
+  void setNavigationCallback(Function(String route)? onNavigate) {
+    _onNavigate = onNavigate;
+  }
 
   @override
   Future<void> close() {
@@ -64,12 +70,16 @@ class OnboardingViewModel
     if (!isLastPage) {
       _currentIndex++;
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: event.context.animationMedium, // SizerExtensions duration
         curve: Curves.easeInOut,
       );
       emit(OnboardingLoadedState(currentIndex: _currentIndex));
     } else {
       emit(OnboardingCompleteState());
+      // Navigate to home when reaching the last page
+      if (_onNavigate != null) {
+        _onNavigate!('/home');
+      }
     }
   }
 
@@ -80,7 +90,7 @@ class OnboardingViewModel
     if (!isFirstPage) {
       _currentIndex--;
       _pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
+        duration: event.context.animationMedium, // SizerExtensions duration
         curve: Curves.easeInOut,
       );
       emit(OnboardingLoadedState(currentIndex: _currentIndex));
@@ -102,10 +112,14 @@ class OnboardingViewModel
     _currentIndex = totalPages - 1;
     _pageController.animateToPage(
       _currentIndex,
-      duration: const Duration(milliseconds: 500),
+      duration: event.context.animationLong, // SizerExtensions duration
       curve: Curves.easeInOut,
     );
     emit(OnboardingCompleteState());
+    // Navigate to home when skipping
+    if (_onNavigate != null) {
+      _onNavigate!('/home');
+    }
   }
 
   FutureOr<void> _onComplete(
@@ -113,13 +127,20 @@ class OnboardingViewModel
     Emitter<OnboardingState> emit,
   ) {
     emit(OnboardingCompleteState());
+    // Navigate to home when onboarding is completed
+    if (_onNavigate != null) {
+      _onNavigate!('/home');
+    }
   }
 
   // Public methods to trigger events
   void initialize() => add(OnboardingInitialEvent());
-  void nextPage() => add(OnboardingNextEvent());
-  void previousPage() => add(OnboardingPreviousEvent());
+  void nextPage(BuildContext context) =>
+      add(OnboardingNextEvent(context: context));
+  void previousPage(BuildContext context) =>
+      add(OnboardingPreviousEvent(context: context));
   void onPageChanged(int index) => add(OnboardingPageChangedEvent(index));
-  void skipToEnd() => add(OnboardingSkipEvent());
+  void skipToEnd(BuildContext context) =>
+      add(OnboardingSkipEvent(context: context));
   void complete() => add(OnboardingCompleteEvent());
 }

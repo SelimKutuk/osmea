@@ -28,6 +28,11 @@ class OnboardingView
     OnboardingViewModel viewModel,
     BuildContext context,
   ) async {
+    // Set navigation callback
+    viewModel.setNavigationCallback((route) {
+      navigateTo(context, route);
+    });
+    
     // Initialize onboarding
     viewModel.initialize();
   }
@@ -45,6 +50,7 @@ class OnboardingView
 
     // Complete state
     if (state is OnboardingCompleteState || state is OnboardingDoneState) {
+      // Navigation is now handled in ViewModel
       return const OnboardingCompletedWidget();
     }
 
@@ -66,7 +72,11 @@ class OnboardingView
                 title: pageData['title']!,
                 description: pageData['description']!,
                 imagePath: pageData['imagePath']!,
-                onNext: viewModel.nextPage,
+                onNext: () => viewModel.nextPage(context),
+                onSkip: () {
+                  // Skip to complete state which will navigate to home
+                  viewModel.skipToEnd(context);
+                },
               );
             },
           ),

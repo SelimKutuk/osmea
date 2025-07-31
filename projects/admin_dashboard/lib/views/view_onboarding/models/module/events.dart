@@ -4,6 +4,8 @@
  * Events for the onboarding view model.
  */
 
+import 'package:flutter/material.dart';
+
 /// Base class for all onboarding events
 abstract class OnboardingEvent {}
 
@@ -17,10 +19,18 @@ class OnboardingSuccessEvent extends OnboardingEvent {}
 class OnboardingErrorEvent extends OnboardingEvent {}
 
 /// Event triggered when user wants to go to next page
-class OnboardingNextEvent extends OnboardingEvent {}
+class OnboardingNextEvent extends OnboardingEvent {
+  final BuildContext context;
+
+  OnboardingNextEvent({required this.context});
+}
 
 /// Event triggered when user wants to go to previous page
-class OnboardingPreviousEvent extends OnboardingEvent {}
+class OnboardingPreviousEvent extends OnboardingEvent {
+  final BuildContext context;
+
+  OnboardingPreviousEvent({required this.context});
+}
 
 /// Event triggered when page is changed via swipe
 class OnboardingPageChangedEvent extends OnboardingEvent {
@@ -29,7 +39,11 @@ class OnboardingPageChangedEvent extends OnboardingEvent {
 }
 
 /// Event triggered when user wants to skip onboarding
-class OnboardingSkipEvent extends OnboardingEvent {}
+class OnboardingSkipEvent extends OnboardingEvent {
+  final BuildContext context;
+
+  OnboardingSkipEvent({required this.context});
+}
 
 /// Event triggered when onboarding is completed
 class OnboardingDoneEvent extends OnboardingEvent {}
