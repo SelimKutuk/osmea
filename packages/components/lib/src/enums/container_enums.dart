@@ -20,6 +20,12 @@
 /// )
 /// ```
 enum ContainerSize {
+  /// Tiny container size
+  tiny,
+
+  /// Extra small container size
+  extraSmall,
+
   /// Small container size
   small,
 

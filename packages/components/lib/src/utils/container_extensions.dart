@@ -20,6 +20,10 @@ extension ContainerSizeExtension on ContainerSize {
   /// Get size value for this container size
   double get size {
     switch (this) {
+      case ContainerSize.tiny:
+        return 24;
+      case ContainerSize.extraSmall:
+        return 48;
       case ContainerSize.small:
         return 80;
       case ContainerSize.medium:
