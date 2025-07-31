@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:admin_dashboard/config/config_di.config.dart';
-
+import 'package:admin_dashboard/core/config/config_di.config.dart';
 
 GetIt getIt = GetIt.instance;
 
