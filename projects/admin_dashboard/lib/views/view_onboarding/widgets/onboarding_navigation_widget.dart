@@ -39,7 +39,7 @@ class OnboardingNavigationWidget extends StatelessWidget {
           icon: Icon(
             isLastPage ? Icons.check : Icons.arrow_forward,
             color: OsmeaColors.white,
-            size: 18,
+            size: context.iconSizeSmall,
           ),
           iconPosition: IconPosition.trailing,
           backgroundColor: OsmeaColors.black,
