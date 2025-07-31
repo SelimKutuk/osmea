@@ -27,9 +27,7 @@ class OnboardingCompletedWidget extends StatelessWidget {
             CoreSpacer(CoreSpacerType.section),
             OsmeaComponents.text(
               resource.views.onboarding.redirecting,
-              textStyle: OsmeaTextStyle.bodyMedium(
-                context,
-              ).copyWith(color: OsmeaColors.slate),
+              textStyle: OsmeaTextStyle.bodyLarge(context),
             ),
           ],
         ),
