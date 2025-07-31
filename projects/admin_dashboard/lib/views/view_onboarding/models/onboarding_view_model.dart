@@ -18,29 +18,20 @@ import 'package:injectable/injectable.dart';
 class OnboardingViewModel
     extends BaseViewModelBloc<OnboardingEvent, OnboardingState> {
   OnboardingViewModel() : super(OnboardingInitialState()) {
-    // Initialize PageController
-    _pageController = PageController(initialPage: 0);
-
-    // Register event handlers
-    on<OnboardingInitialEvent>(_onInitial);
-    on<OnboardingNextEvent>(_onNext);
-    on<OnboardingPreviousEvent>(_onPrevious);
-    on<OnboardingPageChangedEvent>(_onPageChanged);
-    on<OnboardingSkipEvent>(_onSkip);
-    on<OnboardingCompleteEvent>(_onComplete);
+    on<OnboardingInitialEvent>(_onboardingInitialEvent);
+    on<OnboardingNextEvent>(_onboardingNextEvent);
+    on<OnboardingSkipEvent>(_onboardingSkipEvent);
+    on<OnboardingPageChangedEvent>(_onboardingPageChangedEvent);
   }
 
-  // Private fields
-  late PageController _pageController;
-  int _currentIndex = 0;
+  // Page Controller and State
+  PageController pageController = PageController(initialPage: 0);
+  int currentIndex = 0;
   Function(String route)? _onNavigate;
 
-  // Public getters
-  PageController get pageController => _pageController;
-  int get currentIndex => _currentIndex;
+  // Public getters for UI
   int get totalPages => onboardingData.length;
-  bool get isFirstPage => _currentIndex == 0;
-  bool get isLastPage => _currentIndex == totalPages - 1;
+  bool get isLastPage => currentIndex == totalPages - 1;
   double get progressValue => (currentIndex + 1) / totalPages.toDouble();
 
   /// Set navigation callback from view
@@ -50,97 +41,64 @@ class OnboardingViewModel
 
   @override
   Future<void> close() {
-    _pageController.dispose();
+    pageController.dispose();
     return super.close();
   }
 
-  // Event handlers
-  FutureOr<void> _onInitial(
+  // Public trigger functions - following splash pattern
+  void onboardingInitial() => add(OnboardingInitialEvent());
+  void onboardingNext(BuildContext context) =>
+      add(OnboardingNextEvent(context: context));
+  void onboardingSkip(BuildContext context) =>
+      add(OnboardingSkipEvent(context: context));
+  void onPageChanged(int index) => add(OnboardingPageChangedEvent(index));
+
+  // Event handlers - single responsibility pattern
+  FutureOr<void> _onboardingInitialEvent(
     OnboardingInitialEvent event,
     Emitter<OnboardingState> emit,
   ) {
-    _currentIndex = 0;
-    emit(OnboardingLoadedState(currentIndex: _currentIndex));
+    currentIndex = 0;
+    emit(OnboardingLoadedState(currentIndex: currentIndex));
   }
 
-  FutureOr<void> _onNext(
+  FutureOr<void> _onboardingNextEvent(
     OnboardingNextEvent event,
     Emitter<OnboardingState> emit,
-  ) {
-    if (!isLastPage) {
-      _currentIndex++;
-      _pageController.nextPage(
-        duration: event.context.animationMedium, // SizerExtensions duration
+  ) async {
+    if (currentIndex < totalPages - 1) {
+      currentIndex++;
+      pageController.nextPage(
+        duration: event.context.animationMedium,
         curve: Curves.easeInOut,
       );
-      emit(OnboardingLoadedState(currentIndex: _currentIndex));
+      emit(OnboardingLoadedState(currentIndex: currentIndex));
     } else {
+      // Complete onboarding and navigate
       emit(OnboardingCompleteState());
-      // Navigate to home when reaching the last page
       if (_onNavigate != null) {
         _onNavigate!('/home');
       }
     }
   }
 
-  FutureOr<void> _onPrevious(
-    OnboardingPreviousEvent event,
+  FutureOr<void> _onboardingSkipEvent(
+    OnboardingSkipEvent event,
     Emitter<OnboardingState> emit,
-  ) {
-    if (!isFirstPage) {
-      _currentIndex--;
-      _pageController.previousPage(
-        duration: event.context.animationMedium, // SizerExtensions duration
-        curve: Curves.easeInOut,
-      );
-      emit(OnboardingLoadedState(currentIndex: _currentIndex));
+  ) async {
+    // Skip directly to completion
+    emit(OnboardingCompleteState());
+    if (_onNavigate != null) {
+      _onNavigate!('/home');
     }
   }
 
-  FutureOr<void> _onPageChanged(
+  FutureOr<void> _onboardingPageChangedEvent(
     OnboardingPageChangedEvent event,
     Emitter<OnboardingState> emit,
   ) {
-    _currentIndex = event.index;
-    emit(OnboardingLoadedState(currentIndex: _currentIndex));
+    // Update current index and progress
+    currentIndex = event.index;
+    emit(OnboardingLoadedState(currentIndex: currentIndex));
   }
-
-  FutureOr<void> _onSkip(
-    OnboardingSkipEvent event,
-    Emitter<OnboardingState> emit,
-  ) {
-    _currentIndex = totalPages - 1;
-    _pageController.animateToPage(
-      _currentIndex,
-      duration: event.context.animationLong, // SizerExtensions duration
-      curve: Curves.easeInOut,
-    );
-    emit(OnboardingCompleteState());
-    // Navigate to home when skipping
-    if (_onNavigate != null) {
-      _onNavigate!('/home');
-    }
-  }
-
-  FutureOr<void> _onComplete(
-    OnboardingCompleteEvent event,
-    Emitter<OnboardingState> emit,
-  ) {
-    emit(OnboardingCompleteState());
-    // Navigate to home when onboarding is completed
-    if (_onNavigate != null) {
-      _onNavigate!('/home');
-    }
-  }
-
-  // Public methods to trigger events
-  void initialize() => add(OnboardingInitialEvent());
-  void nextPage(BuildContext context) =>
-      add(OnboardingNextEvent(context: context));
-  void previousPage(BuildContext context) =>
-      add(OnboardingPreviousEvent(context: context));
-  void onPageChanged(int index) => add(OnboardingPageChangedEvent(index));
-  void skipToEnd(BuildContext context) =>
-      add(OnboardingSkipEvent(context: context));
-  void complete() => add(OnboardingCompleteEvent());
 }

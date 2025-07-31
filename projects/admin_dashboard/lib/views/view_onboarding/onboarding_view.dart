@@ -32,9 +32,9 @@ class OnboardingView
     viewModel.setNavigationCallback((route) {
       navigateTo(context, route);
     });
-    
+
     // Initialize onboarding
-    viewModel.initialize();
+    viewModel.onboardingInitial();
   }
 
   @override
@@ -45,7 +45,9 @@ class OnboardingView
   ) {
     // Error state
     if (state is OnboardingErrorState) {
-      return OnboardingErrorWidget(onRetry: () => viewModel.initialize());
+      return OnboardingErrorWidget(
+        onRetry: () => viewModel.onboardingInitial(),
+      );
     }
 
     // Complete state
@@ -72,10 +74,10 @@ class OnboardingView
                 title: pageData['title']!,
                 description: pageData['description']!,
                 imagePath: pageData['imagePath']!,
-                onNext: () => viewModel.nextPage(context),
+                onNext: () => viewModel.onboardingNext(context),
                 onSkip: () {
                   // Skip to complete state which will navigate to home
-                  viewModel.skipToEnd(context);
+                  viewModel.onboardingSkip(context);
                 },
               );
             },
