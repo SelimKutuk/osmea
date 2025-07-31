@@ -23,9 +23,6 @@ class OnboardingNavigationWidget extends StatelessWidget {
     required this.isLastPage,
   });
 
-
-  bool get _isLastPage => currentPage == totalPages - 1;
-
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.row(
@@ -40,7 +37,7 @@ class OnboardingNavigationWidget extends StatelessWidget {
           variant: isLastPage ? ButtonVariant.success : ButtonVariant.primary,
           size: ButtonSize.medium,
           icon: Icon(
-            _isLastPage ? Icons.check : Icons.arrow_forward,
+            isLastPage ? Icons.check : Icons.arrow_forward,
             color: OsmeaColors.white,
             size: 18,
           ),
