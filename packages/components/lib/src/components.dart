@@ -707,15 +707,29 @@ class OsmeaComponents {
   /// This component inherits all standard container features from Flutter and adds
   /// convenient access to commonly used properties.
   ///
+  /// ## 📏 Size Options
+  /// - Use `size` parameter for predefined sizes (small, medium, large, extraLarge)
+  /// - Use `width` and `height` for custom dimensions
+  /// - Size parameter overrides width/height when both are provided
+  ///
   /// Example:
   /// ```dart
+  /// // Using predefined size
+  /// OsmeaComponents.container(
+  ///   size: ContainerSize.medium,
+  ///   color: Colors.blue,
+  ///   borderRadius: BorderRadius.circular(10),
+  ///   child: Text('Medium Container'),
+  /// )
+  ///
+  /// // Using custom dimensions
   /// OsmeaComponents.container(
   ///   width: 300,
   ///   height: 200,
-  ///   color: Colors.blue,
+  ///   color: Colors.green,
   ///   borderRadius: BorderRadius.circular(10),
   ///   boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)],
-  ///   child: Text('Styled Container'),
+  ///   child: Text('Custom Size Container'),
   /// )
   /// ```
   static Widget container({
@@ -745,6 +759,7 @@ class OsmeaComponents {
     VoidCallback? onDoubleTap,
     bool borderOnForeground = true,
     BoxShape? shape,
+    ContainerSize? size,
   }) {
     return OsmeaContainer(
       key: key,
@@ -772,6 +787,7 @@ class OsmeaComponents {
       onDoubleTap: onDoubleTap,
       borderOnForeground: borderOnForeground,
       shape: shape,
+      size: size,
       child: child,
     );
   }
@@ -1521,6 +1537,7 @@ class OsmeaComponents {
       selectionColor: selectionColor,
     );
   }
+
   /// 🔘 **OSMEA Dot Indicator** - Comprehensive dot indicator component
   ///
   /// Creates a feature-rich dot indicator component with support for:
@@ -1563,7 +1580,8 @@ class OsmeaComponents {
     Color? customInactiveColor,
     Color? customDisabledColor,
     Widget? customShape,
-    Widget Function(BuildContext context, int index, bool isActive)? customDotBuilder,
+    Widget Function(BuildContext context, int index, bool isActive)?
+        customDotBuilder,
     bool showNumbers = false,
     bool enableRipple = true,
     Duration? animationDuration,
@@ -3759,8 +3777,6 @@ class OsmeaComponents {
       text: text,
     );
   }
-
-
 
   /// 🔢 **OSMEA Counter** - Interactive numeric counter component with cubit state management
   ///
