@@ -51,7 +51,7 @@ class OnboardingView
     }
 
     // Complete state
-    if (state is OnboardingCompleteState || state is OnboardingDoneState) {
+    if (state is OnboardingCompleteState) {
       // Navigation is now handled in ViewModel
       return const OnboardingCompletedWidget();
     }

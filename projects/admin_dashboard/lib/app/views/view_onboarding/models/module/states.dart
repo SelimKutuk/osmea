@@ -22,8 +22,5 @@ class OnboardingSuccessState extends OnboardingState {}
 /// Error state when something goes wrong during onboarding
 class OnboardingErrorState extends OnboardingState {}
 
-/// Done state when onboarding is completed
-class OnboardingDoneState extends OnboardingState {}
-
 /// Complete state when onboarding is completed
 class OnboardingCompleteState extends OnboardingState {}

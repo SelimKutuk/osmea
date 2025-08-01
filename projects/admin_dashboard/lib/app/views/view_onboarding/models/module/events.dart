@@ -44,9 +44,3 @@ class OnboardingSkipEvent extends OnboardingEvent {
 
   OnboardingSkipEvent({required this.context});
 }
-
-/// Event triggered when onboarding is completed
-class OnboardingDoneEvent extends OnboardingEvent {}
-
-/// Event triggered when onboarding is completed
-class OnboardingCompleteEvent extends OnboardingEvent {}
