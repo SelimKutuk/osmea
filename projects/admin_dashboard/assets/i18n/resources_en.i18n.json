@@ -58,7 +58,7 @@
             "description": "Your complete e-commerce management solution is ready. Start organizing your products, tracking orders, and growing your business with powerful analytics and insights.",
             "manage_your_store": "Manage Your Store",
             "get_started": "Get Started",
-            "button_text": "Done",
+            
             "loading_message": "Setting up your dashboard...",
             "success_message": "Welcome setup completed successfully!",
             "error_message": "Failed to initialize welcome screen"
