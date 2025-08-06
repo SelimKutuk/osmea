@@ -48,10 +48,15 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/welcome',
       builder: (BuildContext context, GoRouterState state) {
+        final flavor = Flavor.I;
+        final isDev = flavor.environment == Environment.dev;
+
         return WelcomeView(
           arguments: {
             "title": "Welcome View",
             "description": "Welcome to OSMEA Admin Dashboard",
+            "isDev": isDev,
+            "environment": flavor.environment.toString(),
           },
           currentView: MasterViewTypes.content,
         );
