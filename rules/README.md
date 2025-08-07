@@ -10,7 +10,8 @@ rules/
 ├── osmea-packages-general.cursorrules  # General package development rules
 ├── osmea-components-ui.cursorrules     # UI components development rules
 ├── osmea-core-foundation.cursorrules   # Foundation infrastructure rules
-└── osmea-apis-network.cursorrules      # API and network layer rules
+├── osmea-apis-network.cursorrules      # API and network layer rules
+└── osmea-website-nextjs.cursorrules    # Website (Next.js) rules
 ```
 
 ## 🎯 Usage
@@ -43,6 +44,13 @@ rules/
 
 ### 4. API and Network Rules
 **File:** `osmea-apis-network.cursorrules`
+### 5. Website (Next.js) Rules
+**File:** `osmea-website-nextjs.cursorrules`
+- 🌐 Next.js App Router structure
+- ♿ Web accessibility and SEO
+- 🚀 Core Web Vitals & performance
+- 📄 Static/SSG-first content loading
+
 - 🛒 Shopify integration
 - 🌐 WooCommerce integration
 - 🔧 Dio HTTP client configuration
@@ -73,6 +81,9 @@ cp rules/osmea-apis-network.cursorrules .cursorrules
 
 # When developing core utilities
 cp rules/osmea-core-foundation.cursorrules .cursorrules
+
+# When working on the website (Next.js)
+cp rules/osmea-website-nextjs.cursorrules website/.cursorrules
 ```
 
 ## 📋 Rules Categories
