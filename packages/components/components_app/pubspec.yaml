@@ -1,4 +1,4 @@
-name: osmea_components_example
+name: components_app
 description: Example app for OSMEA UI Kit.
 
 publish_to: 'none'

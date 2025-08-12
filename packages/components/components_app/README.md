@@ -1,4 +1,4 @@
-# 📱 OSMEA Components Example Mobile App
+# 📱 Components App
 
 <div align="center">
 
@@ -7,7 +7,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-osmea--app.web.app-brightgreen?logo=google-chrome)](https://osmea-app.web.app)
 [![License](https://img.shields.io/badge/License-GNU%20AGPL%20v3.0-green.svg)](../LICENSE)
 
-**A comprehensive Flutter showcase app demonstrating the power and flexibility of the OSMEA Components UI library**
+**A comprehensive Flutter app demonstrating the power and flexibility of the OSMEA Components UI library**
 
 [🚀 Live Demo](https://osmea-app.web.app) • [📚 Documentation](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) • [🐛 Report Issues](https://github.com/masterfabric-mobile/osmea/issues)
 
@@ -17,7 +17,7 @@
 
 ## 🌟 Overview
 
-The **OSMEA Components Example Mobile App** is a production-ready Flutter application that serves as both a comprehensive showcase and practical reference for the [OSMEA Components](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) UI library. This app demonstrates how to build modern, accessible, and beautiful mobile applications using OSMEA's extensive component library.
+The **OSMEA Components App** is a production-ready Flutter application that serves as both a comprehensive showcase and practical reference for the [OSMEA Components](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) UI library. This app demonstrates how to build modern, accessible, and beautiful mobile applications using OSMEA's extensive component library.
 
 ### 🎯 Key Features
 
@@ -104,7 +104,7 @@ The **OSMEA Components Example Mobile App** is a production-ready Flutter applic
 <summary><b>📁 Click to expand full project structure</b></summary>
 
 ```
-example_mobile/
+component_app/
 ├── 📱 lib/                          # Main application code
 │   ├── 🎯 main.dart                 # App entry point and navigation
 │   ├── 🎨 Component Examples        # Individual component demonstrations
@@ -208,8 +208,8 @@ Before you begin, ensure you have the following installed:
 # Clone the main OSMEA repository
 git clone https://github.com/masterfabric-mobile/osmea.git
 
-# Navigate to the example mobile app
-cd osmea/packages/components/example_mobile
+# Navigate to the component app
+cd osmea/packages/components/component_app
 ```
 
 #### **2. Install Dependencies**
