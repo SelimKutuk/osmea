@@ -81,16 +81,24 @@ class _ModernLoginScreenState extends State<ModernLoginScreen> {
             OsmeaComponents.textField(
               controller: _usernameController,
               label: 'Username',
-              prefixIcon: const Icon(Icons.person_outline),
+              prefixIcon: const Icon(
+                Icons.person_outline,
+                color: OsmeaColors.black,
+              ),
               variant: TextFieldVariant.outlined,
+              focusColor: OsmeaColors.black,
               type: TextFieldType.text,
             ),
             OsmeaComponents.sizedBox(height: 16),
             OsmeaComponents.textField(
               controller: _passwordController,
               label: 'Password',
-              prefixIcon: const Icon(Icons.lock_outline),
+              prefixIcon: const Icon(
+                Icons.lock_outline,
+                color: OsmeaColors.black,
+              ),
               variant: TextFieldVariant.outlined,
+              focusColor: OsmeaColors.black,
               type: TextFieldType.password,
             ),
             OsmeaComponents.sizedBox(height: 24),

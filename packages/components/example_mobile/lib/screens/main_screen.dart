@@ -35,8 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      // AppBar kaldırıldı - navbar ile gezilen sayfalarda AppBar yok
-      body: widget.child, // Displays the child from Go Router's ShellRoute
+      body: widget.child,
       bottomNavigationBar: OsmeaComponents.navbar(
         items: _navItems,
         variant: NavbarVariant.transparent,
