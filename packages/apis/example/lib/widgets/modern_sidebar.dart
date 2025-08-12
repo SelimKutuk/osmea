@@ -745,6 +745,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.shopping_bag_rounded;
       case ApiCategory.woocommerce:
         return Icons.shopping_cart_checkout_rounded;
+      case ApiCategory.graphql:
+        return Icons.analytics_rounded;
       case ApiCategory.access:
         return Icons.security_rounded;
       case ApiCategory.storefront:
