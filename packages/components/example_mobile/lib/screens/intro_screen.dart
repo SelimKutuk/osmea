@@ -195,21 +195,11 @@ class _IntroScreenState extends State<IntroScreen>
       child: OsmeaComponents.column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Icon instead of Logo Image
-          OsmeaComponents.container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              color: OsmeaColors.grayMaterial,
-              borderRadius: BorderRadius.circular(60),
-            ),
-            child: OsmeaComponents.center(
-              child: Icon(
-                page.icon,
-                size: 60,
-                color: OsmeaColors.black,
-              ),
-            ),
+          // Icon without background
+          Icon(
+            page.icon,
+            size: 60,
+            color: OsmeaColors.black,
           ),
 
           OsmeaComponents.sizedBox(height: 48),
