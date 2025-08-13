@@ -79,6 +79,45 @@ class ProductGraphQLServiceImpl implements ProductGraphQLService {
       ),
     );
   }
+
+  @override
+  Future<int> getProductsCount({String? query}) async {
+    int count = 0;
+    String? cursor;
+    bool hasNextPage = true;
+
+    while (hasNextPage) {
+      final variables = Variables$Query$GetProducts(
+        first: 250, // Maximum allowed per request
+        after: cursor,
+        query: query,
+      );
+
+      final result = await _graphqlClient.query(
+        QueryOptions(
+          document: documentNodeQueryGetProducts,
+          variables: variables.toJson(),
+        ),
+      );
+
+      if (result.hasException || result.data == null) {
+        throw Exception('Failed to fetch products count: ${result.exception}');
+      }
+
+      final productsQuery = Query$GetProducts.fromJson(result.data!);
+      final products = productsQuery.products;
+
+      if (products != null) {
+        count += products.edges.length;
+        hasNextPage = products.pageInfo.hasNextPage;
+        cursor = products.edges.isNotEmpty ? products.edges.last.cursor : null;
+      } else {
+        hasNextPage = false;
+      }
+    }
+
+    return count;
+  }
 }
 
 /// Abstract interface for Product GraphQL Service
@@ -94,4 +133,6 @@ abstract class ProductGraphQLService {
   Future<QueryResult> createProduct(Map<String, dynamic> input);
 
   Future<QueryResult> updateProduct(String id, Map<String, dynamic> input);
+
+  Future<int> getProductsCount({String? query});
 }
