@@ -1,0 +1,208 @@
+{
+  "screens": {
+    "info_screen": {
+      "title": "Info",
+      "subtitle": "Component Library Information"
+    },
+    "button_example": {
+      "title": "Button Examples",
+      "subtitle": "Comprehensive button component showcase"
+    },
+    "card_example": {
+      "title": "Card Examples",
+      "subtitle": "Beautiful card component variations"
+    },
+    "avatar_example": {
+      "title": "Avatar Examples",
+      "subtitle": "User avatar component showcase"
+    },
+    "badge_example": {
+      "title": "Badge Examples",
+      "subtitle": "Notification and status badges"
+    },
+    "bottom_sheet_example": {
+      "title": "Bottom Sheet Examples",
+      "subtitle": "Modal bottom sheet components"
+    },
+    "carousel_example": {
+      "title": "Carousel Examples",
+      "subtitle": "Image and content carousel"
+    },
+    "checkbox_example": {
+      "title": "Checkbox Examples",
+      "subtitle": "Selection and form checkboxes"
+    },
+    "chips_example": {
+      "title": "Chips Examples",
+      "subtitle": "Filter and selection chips"
+    },
+    "colors_example": {
+      "title": "Colors Examples",
+      "subtitle": "Design system color palette"
+    },
+    "counter_example": {
+      "title": "Counter Examples",
+      "subtitle": "Number input and display components"
+    },
+    "divider_example": {
+      "title": "Divider Examples",
+      "subtitle": "Content separation components"
+    },
+    "dropdown_example": {
+      "title": "Dropdown Examples",
+      "subtitle": "Selection dropdown components"
+    },
+    "loading_example": {
+      "title": "Loading Examples",
+      "subtitle": "Loading and progress indicators"
+    },
+    "progress_example": {
+      "title": "Progress Examples",
+      "subtitle": "Progress bar and circular progress"
+    },
+    "radio_button_example": {
+      "title": "Radio Button Examples",
+      "subtitle": "Single selection radio buttons"
+    },
+    "searchbar_example": {
+      "title": "Searchbar Examples",
+      "subtitle": "Search input components"
+    },
+    "snackbar_example": {
+      "title": "Snackbar Examples",
+      "subtitle": "Notification and feedback messages"
+    },
+    "stepper_example": {
+      "title": "Stepper Examples",
+      "subtitle": "Multi-step form components"
+    },
+    "switch_button_example": {
+      "title": "Switch Examples",
+      "subtitle": "Toggle switch components"
+    },
+    "tabbar_example": {
+      "title": "TabBar Examples",
+      "subtitle": "Tab navigation components"
+    },
+    "text_example": {
+      "title": "Text Examples",
+      "subtitle": "Typography and text components"
+    },
+    "text_field_example": {
+      "title": "TextField Examples",
+      "subtitle": "Input field components"
+    },
+    "toast_example": {
+      "title": "Toast Examples",
+      "subtitle": "Toast notification components"
+    },
+    "ticket_widget_example": {
+      "title": "Ticket Examples",
+      "subtitle": "Ticket and card components"
+    },
+    "popup_example": {
+      "title": "Popup Examples",
+      "subtitle": "Modal and popup components"
+    },
+    "dot_indicator_example": {
+      "title": "Dot Indicator Examples",
+      "subtitle": "Page indicator components"
+    },
+    "appbar_example": {
+      "title": "AppBar Examples",
+      "subtitle": "Application bar components"
+    },
+    "align_example": {
+      "title": "Align Examples",
+      "subtitle": "Alignment utility components"
+    },
+    "center_example": {
+      "title": "Center Examples",
+      "subtitle": "Centering utility components"
+    },
+    "clip_r_rect_example": {
+      "title": "ClipRRect Examples",
+      "subtitle": "Rounded corner clipping"
+    },
+    "collapse_example": {
+      "title": "Collapse Examples",
+      "subtitle": "Expandable content components"
+    },
+    "column_example": {
+      "title": "Column Examples",
+      "subtitle": "Vertical layout components"
+    },
+    "container_example": {
+      "title": "Container Examples",
+      "subtitle": "Container and box components"
+    },
+    "expanded_example": {
+      "title": "Expanded Examples",
+      "subtitle": "Flexible space components"
+    },
+    "fitted_box_example": {
+      "title": "FittedBox Examples",
+      "subtitle": "Fitted content components"
+    },
+    "flexible_example": {
+      "title": "Flexible Examples",
+      "subtitle": "Flexible layout components"
+    },
+    "footer_example": {
+      "title": "Footer Examples",
+      "subtitle": "Footer layout components"
+    },
+    "image_example": {
+      "title": "Image Examples",
+      "subtitle": "Image display components"
+    },
+    "hero_image_detail": {
+      "title": "Hero Image Detail",
+      "subtitle": "Full-screen image view"
+    },
+    "list_item_example": {
+      "title": "ListItem Examples",
+      "subtitle": "List item components"
+    },
+    "padding_example": {
+      "title": "Padding Examples",
+      "subtitle": "Spacing and padding components"
+    },
+    "positioned_example": {
+      "title": "Positioned Examples",
+      "subtitle": "Positioned layout components"
+    },
+    "rich_text_example": {
+      "title": "RichText Examples",
+      "subtitle": "Rich text formatting components"
+    },
+    "row_example": {
+      "title": "Row Examples",
+      "subtitle": "Horizontal layout components"
+    },
+    "scaffold_example": {
+      "title": "Scaffold Examples",
+      "subtitle": "Page structure components"
+    },
+    "single_child_scroll_view_example": {
+      "title": "SingleChildScrollView Examples",
+      "subtitle": "Scrollable content components"
+    },
+    "sized_box_example": {
+      "title": "SizedBox Examples",
+      "subtitle": "Fixed size container components"
+    },
+    "spacer_example": {
+      "title": "Spacer Examples",
+      "subtitle": "Flexible space components"
+    },
+    "stack_example": {
+      "title": "Stack Examples",
+      "subtitle": "Layered layout components"
+    },
+    "wrap_example": {
+      "title": "Wrap Examples",
+      "subtitle": "Wrapping layout components"
+    }
+  }
+} 
