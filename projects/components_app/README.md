@@ -35,7 +35,7 @@ The **OSMEA Components App** is a production-ready Flutter application that serv
 <div align="center">
 
 > **Experience OSMEA Components in Action**  
-> 🌐 **[osmea-app.web.app](https://components.masterfabric.co)**
+> 🌐 **[components.masterfabric.co](https://components.masterfabric.co)**
 
 *Interactive playground showcasing all OSMEA components with real-time examples*
 
