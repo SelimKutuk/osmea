@@ -1,7 +1,7 @@
 name: apis
 description: "This package serves as the API network layer for e-commerce applications. It provides RESTful API handling for Shopify and WooCommerce, with a modern wizard-based configuration system and cross-platform storage (SQLite3 for mobile, SharedPreferences for web)."
 
-version: 0.2.0
+version: 0.0.1
 # homepage:
 
 # Environment configuration

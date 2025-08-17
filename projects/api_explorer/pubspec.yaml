@@ -16,7 +16,6 @@ dependencies:
   # API Package
   apis:
     path: ../../packages/apis
-    version: ^0.2.0
   
   # Dependency Injection
   injectable: 2.5.0
