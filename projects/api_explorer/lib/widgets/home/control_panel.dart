@@ -1,8 +1,9 @@
-import 'package:api_explorer/widgets/common/beautiful_input_field.dart';
 import 'package:api_explorer/widgets/home/http_method_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';
+import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 
 class ControlPanel extends StatefulWidget {
   final ApiCategory? selectedCategory;
@@ -90,20 +91,20 @@ class _ControlPanelState extends State<ControlPanel>
 
     return SlideTransition(
       position: _slideAnimation,
-      child: Container(
-        margin: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
+      child: OsmeaComponents.container(
+        margin: EdgeInsets.all(context.spacing8),
         decoration: BoxDecoration(
-          color: colorScheme.surface, // Updated background color
-          borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
-          boxShadow: OsmeaAppTheme.mediumShadow, // Use OsmeaAppTheme shadows
+          color: colorScheme.surface,
+          borderRadius: context.borderRadiusMaxStandard,
+          boxShadow: OsmeaAppTheme.mediumShadow,
         ),
-        child: Column(
+        child: OsmeaComponents.column(
           children: [
             // 🎨 Modern Header
             _buildModernHeader(context, padding, colorScheme),
 
             // 📋 Content Area
-            Expanded(
+            OsmeaComponents.expanded(
               child: _buildContent(context, padding, colorScheme),
             ),
           ],
@@ -155,10 +156,8 @@ class _ControlPanelState extends State<ControlPanel>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'API Configuration',
-                  style: OsmeaAppTheme.headlineLarge(context)
-                ),
+                Text('API Configuration',
+                    style: OsmeaAppTheme.headlineLarge(context)),
                 const SizedBox(height: OsmeaAppTheme.spaceXs),
                 Text(
                   'Configure and test your API endpoints',
@@ -177,10 +176,10 @@ class _ControlPanelState extends State<ControlPanel>
   /// 📋 Content Area
   Widget _buildContent(
       BuildContext context, double padding, ColorScheme colorScheme) {
-    return Container(
+    return OsmeaComponents.container(
       padding: EdgeInsets.all(padding),
-      child: SingleChildScrollView(
-        child: Column(
+      child: OsmeaComponents.singleChildScrollView(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 🎯 Category Selection
@@ -193,7 +192,7 @@ class _ControlPanelState extends State<ControlPanel>
               colorScheme: colorScheme,
             ),
 
-            const SizedBox(height: OsmeaAppTheme.spaceLg),
+            OsmeaComponents.sizedBox(height: context.spacing24),
 
             // 📁 Subcategory Selection
             if (widget.selectedCategory != null) ...[
@@ -205,7 +204,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernSubcategorySelector(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: OsmeaAppTheme.spaceLg),
+              OsmeaComponents.sizedBox(height: context.spacing24),
             ],
 
             // 🔌 Service Selection
@@ -219,7 +218,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernServiceSelector(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: OsmeaAppTheme.spaceLg),
+              OsmeaComponents.sizedBox(height: context.spacing24),
             ],
 
             // 🔄 Method Selection
@@ -236,7 +235,7 @@ class _ControlPanelState extends State<ControlPanel>
                 ),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: OsmeaAppTheme.spaceLg),
+              OsmeaComponents.sizedBox(height: context.spacing24),
             ],
 
             // ⚙️ Parameters
@@ -273,43 +272,35 @@ class _ControlPanelState extends State<ControlPanel>
     required Widget child,
     required ColorScheme colorScheme,
   }) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section Header
-        Row(
+        OsmeaComponents.row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
+            OsmeaComponents.container(
+              padding: EdgeInsets.all(context.spacing8),
               decoration: BoxDecoration(
-                color: colorScheme.primary.withAlpha(26), // 0.1 * 255 ≈ 26
-                borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusMd),
+                color: colorScheme.primary.withValues(alpha: 0.1),
+                borderRadius: context.borderRadiusMinStandard,
               ),
-              child: Icon(
-                icon,
-                size: 20,
-                color: colorScheme.primary, // Use theme primary color
-              ),
+              child: Icon(icon, size: 20, color: colorScheme.primary),
             ),
-            const SizedBox(width: OsmeaAppTheme.spaceMd),
-            Expanded(
-              child: Column(
+            OsmeaComponents.sizedBox(width: context.spacing16),
+            OsmeaComponents.expanded(
+              child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                      style: OsmeaAppTheme.titleLarge(context)
-                  ),
-                  Text(
-                    subtitle,
-                    style: OsmeaAppTheme.bodyLarge(context)
-                  ),
+                  OsmeaComponents.text(title,
+                      variant: OsmeaTextVariant.titleLarge),
+                  OsmeaComponents.text(subtitle,
+                      variant: OsmeaTextVariant.bodyLarge),
                 ],
               ),
             ),
           ],
         ),
-        const SizedBox(height: OsmeaAppTheme.spaceMd),
+        OsmeaComponents.sizedBox(height: context.spacing16),
         // Content
         child,
       ],
@@ -417,12 +408,12 @@ class _ControlPanelState extends State<ControlPanel>
         widget.selectedCategory!, widget.selectedSubcategory!);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
+    return OsmeaComponents.container(
       decoration: BoxDecoration(
         color: isDarkMode
             ? Colors.white.withValues(alpha: 0.03)
             : Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: context.borderRadiusMaxStandard,
         border: Border.all(
           color: isDarkMode
               ? Colors.white.withValues(alpha: 0.1)
@@ -430,7 +421,7 @@ class _ControlPanelState extends State<ControlPanel>
           width: 1,
         ),
       ),
-      child: Column(
+      child: OsmeaComponents.column(
         children: services.asMap().entries.map((entry) {
           final index = entry.key;
           final service = entry.value;
@@ -442,11 +433,15 @@ class _ControlPanelState extends State<ControlPanel>
             child: InkWell(
               onTap: () => widget.onServiceSelected(service),
               borderRadius: BorderRadius.vertical(
-                top: index == 0 ? const Radius.circular(16) : Radius.zero,
-                bottom: isLast ? const Radius.circular(16) : Radius.zero,
+                top: index == 0
+                    ? context.borderRadiusMaxStandard.topLeft
+                    : Radius.zero,
+                bottom: isLast
+                    ? context.borderRadiusMaxStandard.bottomLeft
+                    : Radius.zero,
               ),
-              child: Container(
-                padding: const EdgeInsets.all(20),
+              child: OsmeaComponents.container(
+                padding: EdgeInsets.all(context.spacing20),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? const Color(0xFF667EEA).withValues(alpha: 0.1)
@@ -462,18 +457,18 @@ class _ControlPanelState extends State<ControlPanel>
                         )
                       : null,
                 ),
-                child: Row(
+                child: OsmeaComponents.row(
                   children: [
                     // Service Icon
-                    Container(
-                      padding: const EdgeInsets.all(12),
+                    OsmeaComponents.container(
+                      padding: EdgeInsets.all(context.spacing12),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? const Color(0xFF667EEA).withValues(alpha: 0.2)
                             : (isDarkMode
                                 ? Colors.white.withValues(alpha: 0.1)
                                 : Colors.grey.shade100),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: context.borderRadiusMinStandard,
                       ),
                       child: Icon(
                         Icons.api_outlined,
@@ -486,35 +481,31 @@ class _ControlPanelState extends State<ControlPanel>
                       ),
                     ),
 
-                    const SizedBox(width: 16),
+                    OsmeaComponents.sizedBox(width: context.spacing16),
 
                     // Service Details
-                    Expanded(
-                      child: Column(
+                    OsmeaComponents.expanded(
+                      child: OsmeaComponents.column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          OsmeaComponents.text(
                             service.name,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: isSelected
-                                  ? const Color(0xFF667EEA)
-                                  : (isDarkMode
-                                      ? Colors.white
-                                      : Colors.grey.shade800),
-                            ),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? const Color(0xFF667EEA)
+                                : (isDarkMode
+                                    ? Colors.white
+                                    : Colors.grey.shade800),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
+                          OsmeaComponents.sizedBox(height: context.spacing4),
+                          OsmeaComponents.text(
                             service.endpoint,
-                            style: TextStyle(
-                              fontFamily: 'monospace',
-                              fontSize: 13,
-                              color: isDarkMode
-                                  ? Colors.white60
-                                  : Colors.grey.shade600,
-                            ),
+                            fontSize: 13,
+                            textStyle: const TextStyle(fontFamily: 'monospace'),
+                            color: isDarkMode
+                                ? Colors.white60
+                                : Colors.grey.shade600,
                           ),
                         ],
                       ),
@@ -522,13 +513,13 @@ class _ControlPanelState extends State<ControlPanel>
 
                     // Selection Indicator
                     if (isSelected)
-                      Container(
-                        padding: const EdgeInsets.all(6),
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.all(context.spacing6),
                         decoration: BoxDecoration(
                           color: const Color(0xFF667EEA),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: context.borderRadiusMinStandard,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.check_rounded,
                           size: 16,
                           color: Colors.white,
@@ -614,11 +605,14 @@ class _ControlPanelState extends State<ControlPanel>
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: BeautifulInputField(
+          child: OsmeaComponents.textField(
             controller: widget.controllers[field.name]!,
             label: field.label,
             hint: field.hint,
-            prefixIcon: Icons.tune_rounded,
+            prefixIcon: Icon(Icons.tune_rounded),
+            variant: TextFieldVariant.outlined,
+            size: TextFieldSize.medium,
+            fullWidth: true,
           ),
         );
       }).toList(),
@@ -663,10 +657,8 @@ class _ControlPanelState extends State<ControlPanel>
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Text(
-                        'Executing...',
-                        style: OsmeaAppTheme.bodyLarge(context)
-                      ),
+                      Text('Executing...',
+                          style: OsmeaAppTheme.bodyLarge(context)),
                     ],
                   )
                 : Row(
@@ -687,11 +679,10 @@ class _ControlPanelState extends State<ControlPanel>
                       ),
                       const SizedBox(width: OsmeaAppTheme.spaceMd),
                       Text(
-                        widget.selectedMethod != null
-                            ? 'Execute ${widget.selectedMethod!} Request'
-                            : 'Execute Request',
-                        style: OsmeaAppTheme.bodyLarge(context)
-                      ),
+                          widget.selectedMethod != null
+                              ? 'Execute ${widget.selectedMethod!} Request'
+                              : 'Execute Request',
+                          style: OsmeaAppTheme.bodyLarge(context)),
                     ],
                   ),
           ),
