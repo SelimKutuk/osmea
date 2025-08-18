@@ -1,4 +1,4 @@
-import 'package:api_explorer/widgets/modern_sidebar.dart';
+import 'package:api_explorer/widgets/home/modern_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 

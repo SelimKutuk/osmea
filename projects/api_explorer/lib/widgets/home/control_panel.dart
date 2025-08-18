@@ -1,5 +1,5 @@
-import 'package:api_explorer/widgets/beautiful_input_field.dart';
-import 'package:api_explorer/widgets/http_method_selector.dart';
+import 'package:api_explorer/widgets/common/beautiful_input_field.dart';
+import 'package:api_explorer/widgets/home/http_method_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';

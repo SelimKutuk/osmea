@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
-import 'package:api_explorer/widgets/add_store_dialog.dart';
-import 'package:api_explorer/widgets/store_management_dialog.dart';
+import 'package:api_explorer/widgets/store_management/add_store_dialog.dart';
+import 'package:api_explorer/widgets/store_management/store_management_dialog.dart';
 
 class StoreSelector extends StatefulWidget {
   final Function(StoreConfiguration) onStoreChanged;
@@ -128,7 +128,7 @@ class _StoreSelectorState extends State<StoreSelector> {
                     _selectedStore = store;
                   });
                   widget.onStoreChanged(store);
-                                },
+                },
               ),
               // Current Store Info
               if (_selectedStore != null) ...[

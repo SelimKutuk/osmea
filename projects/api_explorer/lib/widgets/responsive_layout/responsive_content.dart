@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:api_explorer/widgets/home/wide_screen_layout.dart';
-import 'package:api_explorer/widgets/home/medium_screen_layout.dart';
-import 'package:api_explorer/widgets/home/mobile_layout.dart';
+import 'package:api_explorer/widgets/responsive_layout/wide_screen_layout.dart';
+import 'package:api_explorer/widgets/responsive_layout/medium_screen_layout.dart';
+import 'package:api_explorer/widgets/responsive_layout/mobile_layout.dart';
 
 class ResponsiveContent extends StatelessWidget {
   final ApiService? selectedService;

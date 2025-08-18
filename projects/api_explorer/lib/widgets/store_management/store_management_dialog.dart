@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:api_explorer/widgets/store_management/add_store_dialog.dart';
 import 'package:apis/apis.dart';
-import 'package:api_explorer/widgets/add_store_dialog.dart';
 
 class StoreManagementDialog extends StatefulWidget {
   final StoreManagementService storeService;

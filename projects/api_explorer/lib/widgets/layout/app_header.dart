@@ -1,8 +1,8 @@
-import 'package:api_explorer/styles/app_theme.dart';
-import 'package:api_explorer/widgets/store_profile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:api_explorer/widgets/store_management/store_profile_widget.dart';
+import 'package:api_explorer/styles/app_theme.dart';
 import 'package:flutter/services.dart';
-import 'theme_toggle_button.dart';
+import '../common/theme_toggle_button.dart';
 
 /// Modern IDE-style application header
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -113,7 +113,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             if (apiUrl.isNotEmpty) ...[
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(8),
@@ -146,7 +147,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () async {
                           try {
                             if (apiUrl.isNotEmpty) {
-                              await Clipboard.setData(ClipboardData(text: apiUrl));
+                              await Clipboard.setData(
+                                  ClipboardData(text: apiUrl));
                               onUrlCopied();
                             }
                           } catch (e) {
@@ -181,7 +183,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             onStoreChange: onStoreChange,
           ),
           const SizedBox(width: 8),
-          
+
           // Theme Toggle
           Padding(
             padding: const EdgeInsets.only(right: 16),

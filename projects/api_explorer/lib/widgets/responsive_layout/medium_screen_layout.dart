@@ -1,6 +1,6 @@
-import 'package:api_explorer/widgets/empty_api_guidance.dart';
-import 'package:api_explorer/widgets/ide_response_panel.dart';
-import 'package:api_explorer/widgets/modern_api_panel.dart';
+import 'package:api_explorer/widgets/api_explorer_view/empty_api_guidance.dart';
+import 'package:api_explorer/widgets/home/ide_response_panel.dart';
+import 'package:api_explorer/widgets/home/modern_api_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 

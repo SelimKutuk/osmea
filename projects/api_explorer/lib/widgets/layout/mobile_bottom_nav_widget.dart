@@ -1,4 +1,4 @@
-import 'package:api_explorer/widgets/api_explorer/bottom_nav_item_widget.dart';
+import 'package:api_explorer/widgets/layout/bottom_nav_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class MobileBottomNavWidget extends StatelessWidget {

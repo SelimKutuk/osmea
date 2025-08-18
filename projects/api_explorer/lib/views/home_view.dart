@@ -3,11 +3,11 @@ import 'package:apis/apis.dart';
 import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/services/app_state_persistence.dart';
-import 'package:api_explorer/widgets/app_header.dart';
-import 'package:api_explorer/widgets/store_setup_wizard.dart';
-import 'package:api_explorer/widgets/store_management_dialog.dart';
-import 'package:api_explorer/widgets/home/responsive_content.dart';
-import 'package:api_explorer/widgets/modern_sidebar.dart';
+import 'package:api_explorer/widgets/layout/app_header.dart';
+import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
+import 'package:api_explorer/widgets/store_management/store_management_dialog.dart';
+import 'package:api_explorer/widgets/responsive_layout/responsive_content.dart';
+import 'package:api_explorer/widgets/home/modern_sidebar.dart';
 import 'dart:async';
 
 class HomeView extends StatefulWidget {
@@ -88,12 +88,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             (s) => s.name == serviceName,
             orElse: () => services.first,
           );
-          if (service != null) {
-            setState(() {
-              _selectedService = service;
-            });
-            debugPrint('✅ Restored service: ${service.name}');
-          }
+          setState(() {
+            _selectedService = service;
+          });
+          debugPrint('✅ Restored service: ${service.name}');
         }
 
         debugPrint('✅ App state restored successfully');

@@ -1,7 +1,7 @@
 import 'package:api_explorer/services/api_service_registry.dart';
-import 'package:api_explorer/widgets/api_explorer/desktop_layout_widget.dart';
-import 'package:api_explorer/widgets/api_explorer/mobile_drawer_widget.dart';
-import 'package:api_explorer/widgets/api_explorer/mobile_layout_widget.dart';
+import 'package:api_explorer/widgets/layout/desktop_layout_widget.dart';
+import 'package:api_explorer/widgets/layout/mobile_drawer_widget.dart';
+import 'package:api_explorer/widgets/layout/mobile_layout_widget.dart';
 import 'package:flutter/material.dart';
 
 class ApiExplorerView extends StatefulWidget {
