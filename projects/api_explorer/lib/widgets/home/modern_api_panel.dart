@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:api_explorer/styles/app_theme.dart';
-import 'package:api_explorer/widgets/common/beautiful_gradient_button.dart';
 import 'package:api_explorer/widgets/home/http_method_selector.dart';
 import 'package:api_explorer/widgets/home/panel_header.dart';
 import 'package:api_explorer/widgets/home/service_info.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:core/core.dart';
 
 class ModernApiPanel extends StatefulWidget {
   final ApiService? selectedService;
@@ -101,25 +101,25 @@ class _ModernApiPanelState extends State<ModernApiPanel>
         final isNarrow = constraints.maxWidth <= 400;
         final isVeryNarrow = constraints.maxWidth <= 350;
 
-        return Container(
+        return OsmeaComponents.container(
           margin: EdgeInsets.all(isNarrow
-              ? 8
+              ? context.spacing8
               : isMobile
-                  ? 12
-                  : 16),
+                  ? context.spacing12
+                  : context.spacing16),
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(isNarrow ? 12 : 16),
+            borderRadius: context.borderRadiusMedium,
             boxShadow: [
               BoxShadow(
                 color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.05),
                 offset: const Offset(0, 4),
-                blurRadius: isNarrow ? 8 : 16,
+                blurRadius: isNarrow ? context.spacing8 : context.spacing16,
               ),
             ],
           ),
-          child: SingleChildScrollView(
-            child: Column(
+          child: OsmeaComponents.singleChildScrollView(
+            child: OsmeaComponents.column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 PanelHeader(
@@ -148,7 +148,7 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                   _buildResponsiveMethodSelector(
                       isTablet, isMobile, isNarrow, isVeryNarrow),
                 if (widget.selectedService != null)
-                  SizedBox(
+                  OsmeaComponents.sizedBox(
                     height: isNarrow
                         ? 200
                         : isMobile
@@ -170,21 +170,22 @@ class _ModernApiPanelState extends State<ModernApiPanel>
 
   Widget _buildResponsiveMethodSelector(
       bool isTablet, bool isMobile, bool isNarrow, bool isVeryNarrow) {
-    return Container(
+    return OsmeaComponents.container(
       padding: EdgeInsets.symmetric(
         horizontal: isVeryNarrow
-            ? 12
+            ? context.spacing12
             : isNarrow
-                ? 16
+                ? context.spacing16
                 : isMobile
-                    ? 20
-                    : 24,
-        vertical: isVeryNarrow ? 8 : 12,
+                    ? context.spacing20
+                    : context.spacing24,
+        vertical: isVeryNarrow ? context.spacing8 : context.spacing12,
       ),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: isVeryNarrow ? 8 : 12),
+          OsmeaComponents.sizedBox(
+              height: isVeryNarrow ? context.spacing8 : context.spacing12),
           HttpMethodSelector(
             methods: widget.selectedService!.supportedMethods,
             selectedMethod: widget.selectedMethod,
@@ -197,16 +198,16 @@ class _ModernApiPanelState extends State<ModernApiPanel>
 
   Widget _buildResponsiveTabContent(
       bool isTablet, bool isMobile, bool isNarrow) {
-    return Container(
+    return OsmeaComponents.container(
       margin: EdgeInsets.all(isNarrow
-          ? 16
+          ? context.spacing16
           : isMobile
-              ? 20
-              : 24),
+              ? context.spacing20
+              : context.spacing24),
       child: TabBarView(
         controller: _tabController,
         children: [
-          SingleChildScrollView(
+          OsmeaComponents.singleChildScrollView(
             scrollDirection: Axis.vertical,
             child: _buildResponsiveParametersTab(isTablet, isMobile, isNarrow),
           ),
@@ -231,54 +232,46 @@ class _ModernApiPanelState extends State<ModernApiPanel>
           );
     }
 
-    return Padding(
-      padding: EdgeInsets.all(isNarrow ? 8 : 12),
-      child: Column(
+    return OsmeaComponents.padding(
+      padding: EdgeInsets.all(isNarrow ? context.spacing8 : context.spacing12),
+      child: OsmeaComponents.column(
         mainAxisSize: MainAxisSize.min,
         children: requiredFields.map((field) {
-          return Container(
-            margin: EdgeInsets.only(bottom: isNarrow ? 12 : 16),
-            child: Column(
+          return OsmeaComponents.container(
+            margin: EdgeInsets.only(
+                bottom: isNarrow ? context.spacing12 : context.spacing16),
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                OsmeaComponents.row(
                   children: [
-                    Expanded(
-                      child: Text(
+                    OsmeaComponents.expanded(
+                      child: OsmeaComponents.text(
                         field.label,
-                        style: TextStyle(
-                          fontSize: isNarrow ? 12 : 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+                        fontSize:
+                            isNarrow ? context.spacing12 : context.spacing16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     if (field.isRequired) ...[
-                      const SizedBox(width: 4),
-                      Text(
+                      OsmeaComponents.sizedBox(width: context.spacing4),
+                      OsmeaComponents.text(
                         '*',
-                        style: TextStyle(
-                          color: const Color(0xFFEF4444),
-                          fontSize: isNarrow ? 12 : 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        color: const Color(0xFFEF4444),
+                        fontSize:
+                            isNarrow ? context.spacing12 : context.spacing16,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ],
                 ),
-                SizedBox(height: isNarrow ? 6 : 8),
-                TextField(
+                OsmeaComponents.sizedBox(
+                    height: isNarrow ? context.spacing6 : context.spacing8),
+                OsmeaComponents.textField(
                   controller: _getController(field.name),
-                  style: TextStyle(fontSize: isNarrow ? 12 : 14),
-                  decoration: InputDecoration(
-                    hintText: field.hint,
-                    hintStyle: TextStyle(fontSize: isNarrow ? 11 : 13),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    contentPadding: EdgeInsets.all(isNarrow ? 10 : 12),
-                    isDense: isNarrow,
-                  ),
+                  hint: field.hint,
+                  size: isNarrow ? TextFieldSize.small : TextFieldSize.medium,
+                  variant: TextFieldVariant.outlined,
                   onChanged: (value) {
                     final newParams =
                         Map<String, String>.from(widget.parameters);
@@ -296,24 +289,26 @@ class _ModernApiPanelState extends State<ModernApiPanel>
 
   Widget _buildResponsiveSendButton(
       bool isTablet, bool isMobile, bool isNarrow, bool isVeryNarrow) {
-    return Container(
+    return OsmeaComponents.container(
       padding: EdgeInsets.all(isNarrow
-          ? 16
+          ? context.spacing16
           : isMobile
-              ? 20
-              : 24),
-      child: SizedBox(
+              ? context.spacing20
+              : context.spacing24),
+      child: OsmeaComponents.sizedBox(
         width: double.infinity,
         height: isNarrow
             ? 44
             : isMobile
-                ? 48
+                ? context.spacing48
                 : 52,
-        child: BeautifulGradientButton(
+        child: OsmeaComponents.button(
           text: isNarrow ? 'Send' : 'Send Request',
-          icon: Icons.send_rounded,
-          onPressed: widget.onSendRequest,
-          isLoading: widget.loading,
+          icon: Icon(Icons.send_rounded),
+          onPressed: widget.loading ? null : widget.onSendRequest,
+          state: widget.loading ? ButtonState.loading : ButtonState.enabled,
+          variant: ButtonVariant.primary,
+          size: isNarrow ? ButtonSize.medium : ButtonSize.large,
         ),
       ),
     );
@@ -321,49 +316,42 @@ class _ModernApiPanelState extends State<ModernApiPanel>
 
   Widget _buildResponsiveEmptyState(String title, String message, IconData icon,
       bool isNarrow, bool isMobile, bool isVeryNarrow) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: EdgeInsets.all(isNarrow
-          ? 16
+          ? context.spacing16
           : isMobile
-              ? 24
-              : 32),
-      child: SingleChildScrollView(
-        child: Column(
+              ? context.spacing24
+              : context.spacing32),
+      child: OsmeaComponents.singleChildScrollView(
+        child: OsmeaComponents.column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
               size: isNarrow
-                  ? 40
+                  ? context.spacing40
                   : isMobile
                       ? 44
-                      : 48,
+                      : context.spacing48,
               color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.5),
             ),
-            SizedBox(height: isNarrow ? 12 : 16),
-            Text(
+            OsmeaComponents.sizedBox(
+                height: isNarrow ? context.spacing12 : context.spacing16),
+            OsmeaComponents.text(
               title,
-              style: TextStyle(
-                fontSize: isNarrow ? 14 : 16,
-                fontWeight: FontWeight.w600,
-                color: OsmeaAppTheme.primaryVariant,
-              ),
+              fontSize: isNarrow ? context.spacing16 : context.spacing16,
+              fontWeight: FontWeight.w600,
+              color: OsmeaAppTheme.primaryVariant,
               textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
             ),
-            SizedBox(height: isNarrow ? 6 : 8),
-            Text(
+            OsmeaComponents.sizedBox(
+                height: isNarrow ? context.spacing6 : context.spacing8),
+            OsmeaComponents.text(
               message,
-              style: TextStyle(
-                fontSize: isNarrow ? 12 : 14,
-                color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.7),
-                height: 1.5,
-              ),
+              fontSize: isNarrow ? context.spacing12 : context.spacing16,
+              color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.7),
               textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
             ),
           ],
         ),

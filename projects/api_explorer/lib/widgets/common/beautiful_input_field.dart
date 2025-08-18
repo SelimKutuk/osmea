@@ -1,4 +1,4 @@
-import 'package:api_explorer/styles/app_theme.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -95,151 +95,84 @@ class _BeautifulInputFieldState extends State<BeautifulInputField> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    // Define colors based on state
-    final Color labelColor =
-        _isFocused ? colorScheme.primary : colorScheme.onSurfaceVariant;
-
-    final Color borderColor = _isFocused
-        ? colorScheme.primary
-        : colorScheme.outline.withAlpha(128); // 0.5 * 255 ≈ 128
-
-    final Color fillColor = _isFocused
-        ? colorScheme.surfaceContainerHighest.withAlpha(128) // 0.5 * 255 ≈ 128
-        : colorScheme.surfaceContainerLowest;
-
-    final Color iconColor = _isFocused || _hasText
-        ? colorScheme.primary
-        : colorScheme.onSurfaceVariant;
-
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Field label with required indicator
         if (widget.label.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6.0, left: 2.0),
-            child: Row(
+          OsmeaComponents.padding(
+            padding: EdgeInsets.only(
+              bottom: context.spacing6,
+              left: context.spacing2,
+            ),
+            child: OsmeaComponents.row(
               children: [
-                Text(
+                OsmeaComponents.text(
                   widget.label,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: labelColor,
-                  ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurface,
                 ),
                 if (widget.isRequired) ...[
-                  const SizedBox(width: 4),
-                  Text(
+                  OsmeaComponents.sizedBox(width: context.spacing4),
+                  OsmeaComponents.text(
                     '*',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.error,
-                    ),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: colorScheme.error,
                   ),
                 ],
               ],
             ),
           ),
-
-        // Input field with decorations
-        Focus(
-          onFocusChange: (hasFocus) {
-            setState(() => _isFocused = hasFocus);
-          },
-          child: TextFormField(
-            controller: widget.controller,
-            obscureText: widget.obscureText && _isObscured,
-            maxLines: widget.obscureText ? 1 : widget.maxLines,
-            keyboardType: widget.keyboardType,
-            inputFormatters: widget.inputFormatters,
-            focusNode: widget.focusNode,
-            onFieldSubmitted: widget.onFieldSubmitted,
-            onChanged: widget.onChanged,
-            validator: widget.validator,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
-              color: colorScheme.onSurface,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: fillColor,
-              hintText: widget.hint,
-              hintStyle: TextStyle(
-                color: colorScheme.onSurfaceVariant
-                    .withAlpha(179), // 0.7 * 255 ≈ 179
-                fontSize: 15,
-                fontWeight: FontWeight.normal,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 14,
-                horizontal: 16,
-              ),
-
-              // Border styling
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
-                borderSide: BorderSide(color: borderColor),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
-                borderSide: BorderSide(color: borderColor, width: 1.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
-                borderSide: BorderSide(color: colorScheme.primary, width: 2.0),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
-                borderSide: BorderSide(color: colorScheme.error, width: 1.5),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    OsmeaAppTheme.radiusMd), // Use OsmeaAppTheme radius
-                borderSide: BorderSide(color: colorScheme.error, width: 2.0),
-              ),
-
-              // Prefix and suffix elements
-              prefixIcon: widget.prefixIcon != null
-                  ? Icon(
-                      widget.prefixIcon,
-                      size: 20,
-                      color: iconColor,
-                    )
-                  : null,
-              suffixIcon: widget.obscureText
+        OsmeaComponents.textField(
+          controller: widget.controller,
+          hint: widget.hint,
+          prefixIcon: widget.prefixIcon != null
+              ? Icon(
+                  widget.prefixIcon,
+                  size: 20,
+                  color: colorScheme.onSurfaceVariant,
+                )
+              : null,
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: Icon(
+                    _isObscured ? Icons.visibility : Icons.visibility_off,
+                    color: colorScheme.onSurfaceVariant,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    setState(() => _isObscured = !_isObscured);
+                  },
+                )
+              : (_hasText
                   ? IconButton(
                       icon: Icon(
-                        _isObscured ? Icons.visibility : Icons.visibility_off,
-                        color: colorScheme.onSurfaceVariant,
-                        size: 20,
+                        Icons.cancel,
+                        size: 18,
+                        color: colorScheme.onSurfaceVariant.withAlpha(179),
                       ),
                       onPressed: () {
-                        setState(() => _isObscured = !_isObscured);
+                        widget.controller.clear();
                       },
                     )
-                  : _hasText
-                      ? IconButton(
-                          icon: Icon(
-                            Icons.cancel,
-                            size: 18,
-                            color: colorScheme.onSurfaceVariant
-                                .withAlpha(179), // 0.7 * 255 ≈ 179
-                          ),
-                          onPressed: () {
-                            widget.controller.clear();
-                          },
-                        )
-                      : null,
-            ),
-          ),
+                  : null),
+          size: TextFieldSize.medium,
+          variant: TextFieldVariant.outlined,
+          state: TextFieldState.enabled,
+          type: widget.obscureText
+              ? TextFieldType.password
+              : (widget.keyboardType == TextInputType.number
+                  ? TextFieldType.number
+                  : TextFieldType.text),
+          isRequired: widget.isRequired,
+          validator: widget.validator,
+          onChanged: (value) {
+            widget.onChanged?.call(value);
+          },
+          onSubmitted: widget.onFieldSubmitted,
+          focusNode: widget.focusNode,
         ),
       ],
     );
