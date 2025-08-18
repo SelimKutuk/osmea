@@ -1,7 +1,8 @@
-import 'package:api_explorer/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:apis/apis.dart';
+import 'package:go_router/go_router.dart';
+import 'package:api_explorer/routes/app_router.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -172,29 +173,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   void _navigateToHome() {
     if (!mounted) return;
-
-    Navigator.of(context).pushReplacement(
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const HomeView(),
-        transitionDuration: const Duration(milliseconds: 800),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0.0, 0.1),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeOutCubic,
-              )),
-              child: child,
-            ),
-          );
-        },
-      ),
-    );
+    context.go(AppRouter.home);
   }
 
   @override
