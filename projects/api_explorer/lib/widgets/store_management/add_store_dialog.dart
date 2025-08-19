@@ -186,36 +186,7 @@ class _AddStoreDialogState extends State<AddStoreDialog>
       final success = await WizardHelper.addStore(config);
       if (success) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: OsmeaComponents.column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  OsmeaComponents.text(
-                    '✅ Store added successfully!',
-                    textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  OsmeaComponents.sizedBox(height: 4),
-                  OsmeaComponents.text(
-                    '${config.platform.toUpperCase()}: ${config.displayName}',
-                    textStyle: OsmeaTextStyle.captionMedium(context),
-                  ),
-                ],
-              ),
-              backgroundColor: OsmeaColors.forestHeart,
-              duration: const Duration(seconds: 3),
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
-
-          await Future.delayed(const Duration(milliseconds: 1000));
-
-          if (mounted) {
-            Navigator.of(context).pop(config);
-          }
+          Navigator.of(context).pop(config);
         }
       } else {
         if (mounted) {

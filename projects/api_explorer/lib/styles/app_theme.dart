@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class OsmeaAppTheme {
   // Modern Color Palette - Using OsmeaColors
-  static Color get primaryColor => OsmeaColors.sunsetGlow;
+  static Color get primaryColor => OsmeaColors.deepSea;
   static Color get primaryVariant => OsmeaColors.nordicBlue;
-  static Color get secondaryColor => OsmeaColors.azureWave;
+  static Color get secondaryColor => OsmeaColors.sunsetGlow;
   static Color get surfaceColor => OsmeaColors.white;
-  static Color get errorColor => OsmeaColors.orange;
-  static Color get successColor => OsmeaColors.nordicBlue;
+  static Color get errorColor => OsmeaColors.amberFlame;
+  static Color get successColor => OsmeaColors.forestHeart;
   static Color get warningColor => OsmeaColors.sunsetGlow;
 
   // Glass morphism colors
@@ -18,15 +18,15 @@ class OsmeaAppTheme {
 
   // Method specific gradients
   static List<Color> get getMethodGradient =>
-      [OsmeaColors.nordicBlue, OsmeaColors.azureWave];
+      [OsmeaColors.deepSea, OsmeaColors.nordicBlue];
   static List<Color> get postMethodGradientColors =>
-      [OsmeaColors.sunsetGlow, OsmeaColors.forestHeart];
+      [OsmeaColors.forestHeart, OsmeaColors.pineGrove];
   static List<Color> get putMethodGradientColors =>
       [OsmeaColors.sunsetGlow, OsmeaColors.amberFlame];
   static List<Color> get deleteMethodGradientColors =>
-      [OsmeaColors.orange, OsmeaColors.amberFlame];
+      [OsmeaColors.amberFlame, OsmeaColors.sunsetGlow];
   static List<Color> get patchMethodGradientColors =>
-      [OsmeaColors.nordicBlue, OsmeaColors.sunsetGlow];
+      [OsmeaColors.nordicBlue, OsmeaColors.deepSea];
   static List<Color> get primaryGradient => [primaryColor, primaryVariant];
 
   // Typography Scale - Using OsmeaTextStyle
@@ -164,7 +164,7 @@ class OsmeaAppTheme {
 
   static LinearGradient createDefaultGradient() {
     return LinearGradient(
-      colors: [OsmeaColors.nordicBlue, OsmeaColors.deepSea],
+      colors: [OsmeaColors.deepSea, OsmeaColors.nordicBlue],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     );
@@ -365,11 +365,11 @@ class OsmeaAppTheme {
 
   // HTTP Method Colors
   static Color get getColor => OsmeaColors.nordicBlue;
-  static Color get postColor => OsmeaColors.sunsetGlow;
+  static Color get postColor => OsmeaColors.forestHeart;
   static Color get putColor => OsmeaColors.sunsetGlow;
   static Color get patchColor => OsmeaColors.deepSea;
-  static Color get deleteColor => OsmeaColors.orange;
-  static Color get defaultColor => OsmeaColors.silver;
+  static Color get deleteColor => OsmeaColors.amberFlame;
+  static Color get defaultColor => OsmeaColors.steel;
   static Color getMethodColor(String method) {
     switch (method.toUpperCase()) {
       case 'GET':

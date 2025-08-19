@@ -83,9 +83,6 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
 
     // Use theme color scheme for proper dark/light adherence
     final colorScheme = theme.colorScheme;
-    final primaryColor = colorScheme.primary;
-    final secondaryColor = colorScheme.secondary;
-    final surfaceColor = colorScheme.surface;
     final onSurfaceColor = colorScheme.onSurface;
     final onPrimaryColor = colorScheme.onPrimary;
     final onSurfaceVariantColor = colorScheme.onSurface.withValues(alpha: 0.7);
@@ -94,13 +91,12 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
       child: OsmeaComponents.container(
         margin: EdgeInsets.all(isNarrow ? context.spacing8 : context.spacing16),
         decoration: BoxDecoration(
-          gradient: OsmeaAppTheme.createGradient(
-            primaryColor.withValues(alpha: isDark ? 0.1 : 0.05),
-            secondaryColor.withValues(alpha: isDark ? 0.05 : 0.02),
-          ),
+          color: isDark ? OsmeaColors.eclipse : OsmeaColors.snow,
           borderRadius: context.borderRadiusMedium,
           border: Border.all(
-            color: primaryColor.withValues(alpha: 0.2),
+            color: isDark
+                ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                : OsmeaColors.silver.withValues(alpha: 0.5),
           ),
         ),
         child: SlideTransition(
@@ -123,13 +119,15 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
                             isNarrow ? context.spacing56 : context.spacing64,
                         decoration: BoxDecoration(
                           gradient: OsmeaAppTheme.createGradient(
-                            primaryColor,
-                            secondaryColor,
+                            OsmeaColors.deepSea,
+                            OsmeaColors.nordicBlue,
                           ),
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: primaryColor.withValues(alpha: 0.2),
+                              color: isDark
+                                  ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                                  : OsmeaColors.silver.withValues(alpha: 0.5),
                               blurRadius: context.spacing20,
                               spreadRadius: context.spacing2,
                             ),
@@ -198,9 +196,10 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
                                 ? 'Set parameters and method'
                                 : 'Send requests and view responses',
                         step: '${i + 1}',
-                        primaryColor: primaryColor,
+                        primaryColor: OsmeaColors.deepSea,
                         onSurfaceColor: onSurfaceColor,
                         onSurfaceVariantColor: onSurfaceVariantColor,
+                        isDark: isDark,
                       ),
                     ),
                   ),
@@ -220,6 +219,7 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
     required Color primaryColor,
     required Color onSurfaceColor,
     required Color onSurfaceVariantColor,
+    required bool isDark,
   }) {
     return OsmeaComponents.row(
       children: [
@@ -227,24 +227,26 @@ class _EmptyApiGuidanceState extends State<EmptyApiGuidance>
           width: context.spacing40,
           height: context.spacing40,
           decoration: BoxDecoration(
-            color: primaryColor.withValues(alpha: 0.1),
+            color: isDark ? OsmeaColors.eclipse : OsmeaColors.snow,
             borderRadius: context.borderRadiusNormal,
             border: Border.all(
-              color: primaryColor.withValues(alpha: 0.2),
+              color: isDark
+                  ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                  : OsmeaColors.silver.withValues(alpha: 0.5),
             ),
           ),
           child: OsmeaComponents.center(
             child: OsmeaComponents.text(
               step,
               fontWeight: FontWeight.w700,
-              color: primaryColor,
+              color: OsmeaColors.deepSea,
             ),
           ),
         ),
         OsmeaComponents.sizedBox(width: context.spacing16),
         Icon(
           icon,
-          color: primaryColor,
+          color: OsmeaColors.deepSea,
           size: context.spacing24,
         ),
         OsmeaComponents.sizedBox(width: context.spacing12),

@@ -442,11 +442,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   void _updateApiUrlFromStore(StoreConfiguration store) {
+    if (!mounted) return;
+
     String baseUrl = store.baseUrl;
     String apiVersion = store.apiVersion;
 
     setState(() {
       _currentApiUrl = '$baseUrl/api/$apiVersion/';
+      _selectedStore = store; // Ensure selected store is updated
     });
 
     debugPrint('🔗 API URL updated automatically: $_currentApiUrl');
@@ -454,8 +457,16 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     // Also update the network configuration
     _updateNetworkConfiguration(store);
 
-    // Don't automatically select a service - let users choose from the welcome screen
-    // This ensures the welcome screen is shown after completing the wizard setup
+    // Reset selected service when switching stores
+    setState(() {
+      _selectedService = null;
+    });
+
+    // Show a success message
+    context.toastSuccess(
+      'Successfully switched to ${store.displayName}',
+      position: ToastPosition.bottom,
+    );
   }
 
   void _updateNetworkConfiguration(StoreConfiguration store) {
@@ -501,15 +512,50 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   void _showStoreManagementDialog(BuildContext context) {
+    // Store the context before async operations
+    final dialogContext = context;
+
     showDialog(
-      context: context,
-      builder: (context) => StoreManagementDialog(
+      context: dialogContext,
+      barrierDismissible:
+          false, // Prevent accidental dismissal during store switch
+      builder: (BuildContext context) => StoreManagementDialog(
         storeService: StoreManagementService(),
-        onStoreChanged: (store) {
-          setState(() {
-            _selectedStore = store;
-          });
-          _updateApiUrlFromStore(store);
+        onStoreChanged: (store) async {
+          if (!mounted) return;
+
+          try {
+            // Show loading state
+            setState(() {
+              _selectedStore = null;
+            });
+
+            // Update store and configurations
+            await Future.delayed(
+                const Duration(milliseconds: 100)); // Allow UI to update
+
+            if (!mounted) return;
+            _updateApiUrlFromStore(store);
+
+            // Close the dialog after successful switch
+            if (mounted) {
+              final navContext = context;
+              if (navContext.mounted && Navigator.canPop(navContext)) {
+                Navigator.pop(navContext);
+              }
+            }
+          } catch (e) {
+            debugPrint('❌ Error in store management dialog: $e');
+            if (mounted) {
+              final errorContext = context;
+              if (errorContext.mounted) {
+                errorContext.toastError(
+                  'Failed to switch store. Please try again.',
+                  position: ToastPosition.bottom,
+                );
+              }
+            }
+          }
         },
       ),
     );

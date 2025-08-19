@@ -105,7 +105,9 @@ class _ModernApiPanelState extends State<ModernApiPanel>
                   ? context.spacing12
                   : context.spacing16),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
+            color: theme.brightness == Brightness.dark
+                ? OsmeaColors.eclipse
+                : OsmeaColors.snow,
             borderRadius: context.borderRadiusMedium,
             boxShadow: [
               BoxShadow(

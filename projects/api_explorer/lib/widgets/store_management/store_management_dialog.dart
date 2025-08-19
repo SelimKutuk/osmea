@@ -62,6 +62,33 @@ class _StoreManagementDialogState extends State<StoreManagementDialog> {
     if (result != null) {
       await _loadStores();
       widget.onStoreChanged(result);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: OsmeaComponents.column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OsmeaComponents.text(
+                  '✅ Store added successfully!',
+                  textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                OsmeaComponents.sizedBox(height: 4),
+                OsmeaComponents.text(
+                  '${result.platform.toUpperCase()}: ${result.displayName}',
+                  textStyle: OsmeaTextStyle.captionMedium(context),
+                ),
+              ],
+            ),
+            backgroundColor: OsmeaColors.forestHeart,
+            duration: const Duration(seconds: 3),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     }
   }
 
@@ -114,11 +141,14 @@ class _StoreManagementDialogState extends State<StoreManagementDialog> {
 
   void _setDefaultStore(StoreConfiguration store) async {
     try {
+      await widget.storeService.setDefaultStore(store.id!);
+      await _loadStores();
+      widget.onStoreChanged(store);
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: OsmeaComponents.text(
-                'Set as default functionality coming soon'),
+            content: OsmeaComponents.text('Default store updated successfully'),
             backgroundColor: OsmeaColors.forestHeart,
           ),
         );
@@ -221,161 +251,177 @@ class _StoreManagementDialogState extends State<StoreManagementDialog> {
                           itemCount: _stores.length,
                           itemBuilder: (context, index) {
                             final store = _stores[index];
-                            return OsmeaComponents.container(
-                              margin: const EdgeInsets.only(bottom: 12),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: OsmeaColors.white,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: store.isDefault
-                                      ? OsmeaColors.nordicBlue
-                                      : OsmeaColors.silver,
-                                  width: store.isDefault ? 2 : 1,
+                            return InkWell(
+                              onTap: () async {
+                                await widget.storeService
+                                    .switchToStore(store.id!);
+                                widget.onStoreChanged(store);
+                                if (mounted) {
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                              borderRadius: BorderRadius.circular(12),
+                              child: OsmeaComponents.container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: OsmeaColors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: store.isDefault
+                                        ? OsmeaColors.nordicBlue
+                                        : OsmeaColors.silver,
+                                    width: store.isDefault ? 2 : 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: OsmeaColors.shadowLight,
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: OsmeaColors.shadowLight,
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: OsmeaComponents.row(
-                                children: [
-                                  // Platform Icon
-                                  OsmeaComponents.container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: store.platform == 'shopify'
-                                          ? OsmeaColors.forestHeart
-                                          : OsmeaColors.nordicBlue,
-                                      borderRadius: BorderRadius.circular(8),
+                                child: OsmeaComponents.row(
+                                  children: [
+                                    // Platform Icon
+                                    OsmeaComponents.container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: store.platform == 'shopify'
+                                            ? OsmeaColors.forestHeart
+                                            : OsmeaColors.nordicBlue,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Icon(
+                                        store.platform == 'shopify'
+                                            ? Icons.shopping_bag
+                                            : Icons.wordpress,
+                                        color: OsmeaColors.white,
+                                        size: 20,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      store.platform == 'shopify'
-                                          ? Icons.shopping_bag
-                                          : Icons.wordpress,
-                                      color: OsmeaColors.white,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  OsmeaComponents.sizedBox(width: 16),
+                                    OsmeaComponents.sizedBox(width: 16),
 
-                                  // Store Info
-                                  Expanded(
-                                    child: OsmeaComponents.column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        OsmeaComponents.row(
-                                          children: [
-                                            OsmeaComponents.text(
-                                              store.displayName,
-                                              textStyle:
-                                                  OsmeaTextStyle.bodyLarge(
-                                                          context)
-                                                      .copyWith(
-                                                fontWeight: FontWeight.w600,
+                                    // Store Info
+                                    Expanded(
+                                      child: OsmeaComponents.column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          OsmeaComponents.row(
+                                            children: [
+                                              OsmeaComponents.text(
+                                                store.displayName,
+                                                textStyle:
+                                                    OsmeaTextStyle.bodyLarge(
+                                                            context)
+                                                        .copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
-                                            ),
-                                            if (store.isDefault) ...[
-                                              OsmeaComponents.sizedBox(
-                                                  width: 8),
-                                              OsmeaComponents.container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 2,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: OsmeaColors.nordicBlue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                child: OsmeaComponents.text(
-                                                  'DEFAULT',
-                                                  textStyle: OsmeaTextStyle
-                                                          .captionSmall(context)
-                                                      .copyWith(
-                                                    color: OsmeaColors.white,
-                                                    fontWeight: FontWeight.w600,
+                                              if (store.isDefault) ...[
+                                                OsmeaComponents.sizedBox(
+                                                    width: 8),
+                                                OsmeaComponents.container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 2,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        OsmeaColors.nordicBlue,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                  ),
+                                                  child: OsmeaComponents.text(
+                                                    'DEFAULT',
+                                                    textStyle: OsmeaTextStyle
+                                                            .captionSmall(
+                                                                context)
+                                                        .copyWith(
+                                                      color: OsmeaColors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
+                                              ],
                                             ],
-                                          ],
-                                        ),
-                                        OsmeaComponents.sizedBox(height: 4),
-                                        OsmeaComponents.text(
-                                          '${store.platform.toUpperCase()} • API ${store.apiVersion}',
-                                          textStyle:
-                                              OsmeaTextStyle.bodySmall(context)
-                                                  .copyWith(
-                                            color: OsmeaColors.steel,
                                           ),
-                                        ),
-                                      ],
+                                          OsmeaComponents.sizedBox(height: 4),
+                                          OsmeaComponents.text(
+                                            '${store.platform.toUpperCase()} • API ${store.apiVersion}',
+                                            textStyle: OsmeaTextStyle.bodySmall(
+                                                    context)
+                                                .copyWith(
+                                              color: OsmeaColors.steel,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
 
-                                  // Actions
-                                  PopupMenuButton<String>(
-                                    onSelected: (value) {
-                                      switch (value) {
-                                        case 'default':
-                                          if (!store.isDefault) {
-                                            _setDefaultStore(store);
-                                          }
-                                          break;
-                                        case 'delete':
-                                          _deleteStore(store);
-                                          break;
-                                      }
-                                    },
-                                    itemBuilder: (context) => [
-                                      if (!store.isDefault)
+                                    // Actions
+                                    PopupMenuButton<String>(
+                                      onSelected: (value) {
+                                        switch (value) {
+                                          case 'default':
+                                            if (!store.isDefault) {
+                                              _setDefaultStore(store);
+                                            }
+                                            break;
+                                          case 'delete':
+                                            _deleteStore(store);
+                                            break;
+                                        }
+                                      },
+                                      itemBuilder: (context) => [
+                                        if (!store.isDefault)
+                                          PopupMenuItem(
+                                            value: 'default',
+                                            child: OsmeaComponents.row(
+                                              children: [
+                                                Icon(Icons.star_outline,
+                                                    size: 18),
+                                                OsmeaComponents.sizedBox(
+                                                    width: 8),
+                                                OsmeaComponents.text(
+                                                    'Set as Default'),
+                                              ],
+                                            ),
+                                          ),
                                         PopupMenuItem(
-                                          value: 'default',
+                                          value: 'delete',
                                           child: OsmeaComponents.row(
                                             children: [
-                                              Icon(Icons.star_outline,
-                                                  size: 18),
+                                              Icon(Icons.delete_outline,
+                                                  size: 18,
+                                                  color: OsmeaColors.slate),
                                               OsmeaComponents.sizedBox(
                                                   width: 8),
                                               OsmeaComponents.text(
-                                                  'Set as Default'),
+                                                'Delete',
+                                                textStyle:
+                                                    OsmeaTextStyle.bodyMedium(
+                                                            context)
+                                                        .copyWith(
+                                                  color: OsmeaColors.slate,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                      PopupMenuItem(
-                                        value: 'delete',
-                                        child: OsmeaComponents.row(
-                                          children: [
-                                            Icon(Icons.delete_outline,
-                                                size: 18,
-                                                color: OsmeaColors.slate),
-                                            OsmeaComponents.sizedBox(width: 8),
-                                            OsmeaComponents.text(
-                                              'Delete',
-                                              textStyle:
-                                                  OsmeaTextStyle.bodyMedium(
-                                                          context)
-                                                      .copyWith(
-                                                color: OsmeaColors.slate,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      ],
+                                      child: Icon(
+                                        Icons.more_vert,
+                                        color: OsmeaColors.steel,
                                       ),
-                                    ],
-                                    child: Icon(
-                                      Icons.more_vert,
-                                      color: OsmeaColors.steel,
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },

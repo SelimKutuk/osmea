@@ -194,10 +194,12 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               : isMobile
                   ? 8
                   : 12),
-          color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
+          color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
           borderRadius: BorderRadius.circular(isNarrow ? 8 : 12),
           border: Border.all(
-            color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.silver,
+            color: _ideTheme
+                ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                : OsmeaColors.silver.withValues(alpha: 0.5),
             width: 1,
           ),
           boxShadow: [
@@ -232,7 +234,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           : isMobile
               ? 36
               : 40,
-      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
+      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(isNarrow ? 8 : 12),
         topRight: Radius.circular(isNarrow ? 8 : 12),
@@ -241,11 +243,11 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
         children: [
           // IDE Traffic lights
           const SizedBox(width: 12),
-          _buildTrafficLight(OsmeaColors.amberFlame, isNarrow),
-          const SizedBox(width: 6),
-          _buildTrafficLight(OsmeaColors.sunsetGlow, isNarrow),
+          _buildTrafficLight(OsmeaColors.forestHeart, isNarrow),
           const SizedBox(width: 6),
           _buildTrafficLight(OsmeaColors.nordicBlue, isNarrow),
+          const SizedBox(width: 6),
+          _buildTrafficLight(OsmeaColors.deepSea, isNarrow),
           const SizedBox(width: 16),
 
           // IDE Title with file icon
@@ -253,7 +255,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             widget.responseData == null && !widget.loading
                 ? Icons.code
                 : Icons.data_object_rounded,
-            color: OsmeaColors.nordicBlue,
+            color: OsmeaColors.deepSea,
             size: isNarrow ? 14 : 16,
           ),
           const SizedBox(width: 6),
@@ -262,7 +264,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 ? 'sample_code.dart'
                 : 'response.json',
             variant: OsmeaTextVariant.bodyMedium,
-            color: OsmeaColors.nordicBlue,
+            color: OsmeaColors.deepSea,
             fontSize: isNarrow ? 11 : 12,
             fontWeight: FontWeight.w500,
           ),
@@ -319,7 +321,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
         icon: Icon(
           icon,
           size: isNarrow ? 12 : 14,
-          color: OsmeaColors.nordicBlue,
+          color: OsmeaColors.deepSea,
         ),
         iconPosition: IconPosition.only,
         padding: EdgeInsets.all(isNarrow ? 4 : 6),
@@ -335,7 +337,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     return OsmeaComponents.container(
       height: isNarrow ? 28 : 32,
-      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
+      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.white,
       border: Border(
         bottom: BorderSide(
           color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
@@ -369,7 +371,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           horizontal: isNarrow ? 8 : 12,
           vertical: isNarrow ? 4 : 6,
         ),
-        color: isSelected ? OsmeaColors.nordicBlue : OsmeaColors.transparent,
+        color: isSelected ? OsmeaColors.deepSea : OsmeaColors.transparent,
         borderRadius: BorderRadius.circular(4),
         child: OsmeaComponents.row(
           mainAxisSize: MainAxisSize.min,
@@ -419,13 +421,13 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
   Widget _buildResponsiveCodeEditor(
       bool isTablet, bool isMobile, bool isNarrow) {
     return OsmeaComponents.container(
-      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
+      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
       child: OsmeaComponents.row(
         children: [
           // Line numbers
           OsmeaComponents.container(
             width: isNarrow ? 40 : 50,
-            color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
+            color: _ideTheme ? OsmeaColors.shark : OsmeaColors.white,
             border: Border(
               right: BorderSide(
                 color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
@@ -442,7 +444,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                   child: OsmeaComponents.text(
                     '${index + 1}',
                     variant: OsmeaTextVariant.bodySmall,
-                    color: _ideTheme ? OsmeaColors.steel : OsmeaColors.pewter,
+                    color: _ideTheme ? OsmeaColors.slate : OsmeaColors.pewter,
                     fontSize: isNarrow ? 10 : 11,
                   ),
                 );
@@ -464,7 +466,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                   child: SelectableText(
                     line,
                     style: TextStyle(
-                      color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
+                      color: _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
                       fontSize: isNarrow ? 11 : 12,
                       height: 1.2,
                     ),
@@ -492,14 +494,16 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               content: 'https://github.com/masterfabric-mobile/osmea',
               size: ComponentSize.medium,
               variant: ComponentAppearance.elevated,
-              backgroundColor: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
-              borderColor:
-                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
+              backgroundColor:
+                  _ideTheme ? OsmeaColors.shark : OsmeaColors.white,
+              borderColor: _ideTheme
+                  ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                  : OsmeaColors.silver.withValues(alpha: 0.5),
               customContent: OsmeaComponents.row(
                 children: [
                   Icon(
                     Icons.link,
-                    color: OsmeaColors.nordicBlue,
+                    color: OsmeaColors.deepSea,
                     size: isNarrow ? 20 : 24,
                   ),
                   const SizedBox(width: 12),
@@ -519,7 +523,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                         OsmeaComponents.text(
                           'https://github.com/masterfabric-mobile/osmea',
                           variant: OsmeaTextVariant.bodyMedium,
-                          color: OsmeaColors.nordicBlue,
+                          color: OsmeaColors.deepSea,
                           fontSize: isNarrow ? 12 : 14,
                         ),
                       ],
@@ -540,8 +544,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               variant: ComponentAppearance.elevated,
               backgroundColor:
                   _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
-              borderColor:
-                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
+              borderColor: _ideTheme
+                  ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                  : OsmeaColors.silver.withValues(alpha: 0.5),
             ),
 
             SizedBox(height: isNarrow ? 16 : 24),
@@ -554,8 +559,9 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               variant: ComponentAppearance.elevated,
               backgroundColor:
                   _ideTheme ? OsmeaColors.eclipse : OsmeaColors.snow,
-              borderColor:
-                  _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
+              borderColor: _ideTheme
+                  ? OsmeaColors.thunder.withValues(alpha: 0.5)
+                  : OsmeaColors.silver.withValues(alpha: 0.5),
               customContent: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -588,7 +594,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           OsmeaComponents.container(
             width: isNarrow ? 16 : 20,
             height: isNarrow ? 16 : 20,
-            color: OsmeaColors.nordicBlue,
+            color: OsmeaColors.deepSea,
             borderRadius: BorderRadius.circular(4),
             child: const Icon(
               Icons.check,
@@ -611,7 +617,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                 OsmeaComponents.text(
                   description,
                   variant: OsmeaTextVariant.bodySmall,
-                  color: _ideTheme ? OsmeaColors.steel : OsmeaColors.pewter,
+                  color: _ideTheme ? OsmeaColors.slate : OsmeaColors.pewter,
                   fontSize: isNarrow ? 11 : 12,
                 ),
               ],
@@ -640,7 +646,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               children: [
                 Icon(
                   Icons.lightbulb,
-                  color: OsmeaColors.nordicBlue,
+                  color: OsmeaColors.deepSea,
                   size: isNarrow ? 20 : 24,
                 ),
                 const SizedBox(width: 12),
@@ -658,7 +664,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           OsmeaComponents.text(
             'Examples for Access Scope Handler and other API handlers will be displayed here.',
             variant: OsmeaTextVariant.bodyMedium,
-            color: _ideTheme ? OsmeaColors.steel : OsmeaColors.slate,
+            color: _ideTheme ? OsmeaColors.slate : OsmeaColors.steel,
             fontSize: isNarrow ? 12 : 14,
             lineHeight: 1.5,
           ),
@@ -678,7 +684,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     // Show response data in JSON format
     return OsmeaComponents.container(
-      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.paperWhite,
+      color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final showLineNumbers = constraints.maxWidth > 300;
@@ -706,7 +712,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
 
     return OsmeaComponents.container(
       width: isNarrow ? 35 : 45,
-      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.ash,
+      color: _ideTheme ? OsmeaColors.shark : OsmeaColors.white,
       child: ListView.builder(
         itemCount: lines.length,
         itemBuilder: (context, index) {
@@ -744,7 +750,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             child: SelectableText(
               line,
               style: TextStyle(
-                color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
+                color: _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
                 fontSize: isNarrow ? 9 : 11,
                 height: 1.4,
               ),
@@ -772,7 +778,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             width: 40,
             height: 40,
             child: CircularProgressIndicator(
-              color: OsmeaColors.nordicBlue,
+              color: OsmeaColors.deepSea,
               strokeWidth: 3,
             ),
           ),
@@ -796,7 +802,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           Icon(
             Icons.api_rounded,
             size: isNarrow ? 48 : 64,
-            color: OsmeaColors.nordicBlue,
+            color: OsmeaColors.deepSea,
           ),
           const SizedBox(height: 16),
           OsmeaComponents.text(
@@ -810,7 +816,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
           OsmeaComponents.text(
             'Make a request to see the response here',
             variant: OsmeaTextVariant.bodyMedium,
-            color: _ideTheme ? OsmeaColors.steel : OsmeaColors.slate,
+            color: _ideTheme ? OsmeaColors.slate : OsmeaColors.steel,
             fontSize: isNarrow ? 12 : 14,
           ),
         ],
@@ -822,7 +828,7 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
       bool isTablet, bool isMobile, bool isNarrow) {
     return OsmeaComponents.container(
       height: isNarrow ? 20 : 24,
-      color: _ideTheme ? OsmeaColors.nordicBlue : OsmeaColors.ash,
+      color: _ideTheme ? OsmeaColors.deepSea : OsmeaColors.white,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(isNarrow ? 8 : 12),
         bottomRight: Radius.circular(isNarrow ? 8 : 12),

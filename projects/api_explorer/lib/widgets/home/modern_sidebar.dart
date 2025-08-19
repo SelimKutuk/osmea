@@ -175,7 +175,9 @@ class _ModernSidebarState extends State<ModernSidebar>
 
         return OsmeaComponents.container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? OsmeaColors.eclipse
+                : OsmeaColors.white,
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).shadowColor.withValues(alpha: 0.1),
@@ -194,10 +196,15 @@ class _ModernSidebarState extends State<ModernSidebar>
                 ),
                 padding: EdgeInsets.all(isNarrow ? 12 : 16),
                 decoration: BoxDecoration(
-                  gradient: OsmeaAppTheme.createGradient(
-                    OsmeaAppTheme.primaryColor,
-                    OsmeaAppTheme.primaryVariant,
-                  ),
+                  gradient: Theme.of(context).brightness == Brightness.dark
+                      ? OsmeaAppTheme.createGradient(
+                          OsmeaColors.eclipse,
+                          OsmeaColors.deepSea,
+                        )
+                      : OsmeaAppTheme.createGradient(
+                          OsmeaColors.nordicBlue,
+                          OsmeaColors.nordicBlue.withValues(alpha: 0.8),
+                        ),
                 ),
                 child: OsmeaComponents.column(
                   mainAxisSize: MainAxisSize.min,
@@ -208,7 +215,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                         OsmeaComponents.container(
                           padding: EdgeInsets.all(isNarrow ? 8 : 12),
                           decoration: BoxDecoration(
-                            color: OsmeaAppTheme.primaryColor.withOpacity(0.2),
+                            color: OsmeaColors.white.withOpacity(0.2),
                             borderRadius: context.borderRadiusMinStandard,
                           ),
                           child: Icon(
@@ -303,12 +310,18 @@ class _ModernSidebarState extends State<ModernSidebar>
                   padding: EdgeInsets.all(isNarrow ? 16 : 20),
                   decoration: BoxDecoration(
                     gradient: OsmeaAppTheme.createGradient(
-                      OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
-                      OsmeaAppTheme.primaryVariant.withValues(alpha: 0.05),
+                      Theme.of(context).brightness == Brightness.dark
+                          ? OsmeaColors.eclipse.withValues(alpha: 0.1)
+                          : OsmeaColors.snow,
+                      Theme.of(context).brightness == Brightness.dark
+                          ? OsmeaColors.deepSea.withValues(alpha: 0.05)
+                          : OsmeaColors.white,
                     ),
                     borderRadius: context.borderRadiusMinStandard,
                     border: Border.all(
-                      color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.2),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? OsmeaColors.deepSea.withValues(alpha: 0.2)
+                          : OsmeaColors.silver.withValues(alpha: 0.3),
                     ),
                   ),
                   child: OsmeaComponents.column(
@@ -325,7 +338,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             child: Icon(
                               Icons.rocket_launch_rounded,
                               size: isNarrow ? 16 : 18,
-                              color: OsmeaAppTheme.primaryColor,
+                              color: OsmeaColors.nordicBlue,
                             ),
                           ),
                           OsmeaComponents.sizedBox(width: isNarrow ? 8 : 12),
@@ -338,7 +351,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                   variant: OsmeaTextVariant.labelMedium,
                                   fontSize: isNarrow ? 13 : 14,
                                   fontWeight: FontWeight.w600,
-                                  color: OsmeaAppTheme.primaryColor,
+                                  color: OsmeaColors.nordicBlue,
                                 ),
                                 OsmeaComponents.text(
                                   'Your ${_currentStore!.platform.toUpperCase()} store is configured',
@@ -369,7 +382,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             Icon(
                               Icons.explore_rounded,
                               size: isNarrow ? 14 : 16,
-                              color: OsmeaAppTheme.primaryColor,
+                              color: OsmeaColors.nordicBlue,
                             ),
                             OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
                             OsmeaComponents.expanded(
@@ -377,7 +390,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 'Select a category below to start exploring APIs',
                                 variant: OsmeaTextVariant.bodySmall,
                                 fontSize: isNarrow ? 11 : 12,
-                                color: OsmeaAppTheme.primaryColor,
+                                color: OsmeaColors.nordicBlue,
                                 fontWeight: FontWeight.w500,
                                 maxLines: 2,
                               ),
@@ -468,7 +481,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             Icon(
                               Icons.arrow_downward_rounded,
                               size: isNarrow ? 12 : 14,
-                              color: OsmeaAppTheme.primaryColor,
+                              color: OsmeaColors.nordicBlue,
                             ),
                             OsmeaComponents.sizedBox(width: isNarrow ? 4 : 6),
                             OsmeaComponents.text(
@@ -478,7 +491,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                               variant: OsmeaTextVariant.labelSmall,
                               fontSize: isNarrow ? 10 : 11,
                               fontWeight: FontWeight.w500,
-                              color: OsmeaAppTheme.primaryColor,
+                              color: OsmeaColors.nordicBlue,
                             ),
                           ],
                         ),
@@ -596,9 +609,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                             duration: const Duration(milliseconds: 200),
                             decoration: BoxDecoration(
                               color: isMainSelected
-                                  ? Theme.of(context)
-                                      .colorScheme
-                                      .primary
+                                  ? OsmeaColors.nordicBlue
                                       .withValues(alpha: 0.03)
                                   : Colors.transparent,
                               borderRadius: context.borderRadiusMinStandard,
@@ -614,7 +625,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 _getCategoryIcon(mainCategory),
                                 color: hasStore && _isCurrentStoreComplete
                                     ? (isMainSelected
-                                        ? Theme.of(context).colorScheme.primary
+                                        ? OsmeaColors.nordicBlue
                                         : Theme.of(context).iconTheme.color)
                                     : Theme.of(context)
                                         .iconTheme
@@ -629,9 +640,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       variant: OsmeaTextVariant.labelMedium,
                                       color: hasStore && _isCurrentStoreComplete
                                           ? (isMainSelected
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .primary
+                                              ? OsmeaColors.nordicBlue
                                               : Theme.of(context)
                                                   .textTheme
                                                   .bodyMedium
@@ -690,9 +699,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                               Icons.chevron_right,
                                               size: isNarrow ? 16 : 18,
                                               color: isMainSelected
-                                                  ? Theme.of(context)
-                                                      .colorScheme
-                                                      .primary
+                                                  ? OsmeaColors.nordicBlue
                                                   : Theme.of(context)
                                                       .iconTheme
                                                       .color,
@@ -743,9 +750,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                               leading: Icon(
                                                 _getCategoryIcon(category),
                                                 color: isSelected
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .primary
+                                                    ? OsmeaColors.nordicBlue
                                                     : Theme.of(context)
                                                         .iconTheme
                                                         .color,
@@ -757,9 +762,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                 variant: OsmeaTextVariant
                                                     .labelMedium,
                                                 color: isSelected
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .primary
+                                                    ? OsmeaColors.nordicBlue
                                                     : Theme.of(context)
                                                         .textTheme
                                                         .bodyMedium
@@ -780,9 +783,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                         size:
                                                             isNarrow ? 14 : 16,
                                                         color: isSelected
-                                                            ? Theme.of(context)
-                                                                .colorScheme
-                                                                .primary
+                                                            ? OsmeaColors
+                                                                .deepSea
                                                             : Theme.of(context)
                                                                 .iconTheme
                                                                 .color,
@@ -960,13 +962,13 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             color: isServiceSelected
-                                                                                ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+                                                                                ? OsmeaColors.nordicBlue.withValues(alpha: 0.1)
                                                                                 : Colors.transparent,
                                                                             borderRadius:
                                                                                 context.borderRadiusMinStandard,
                                                                             border: isServiceSelected
                                                                                 ? Border.all(
-                                                                                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                                                                                    color: OsmeaColors.nordicBlue.withValues(alpha: 0.3),
                                                                                     width: 1,
                                                                                   )
                                                                                 : null,
@@ -978,7 +980,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                                                 width: isNarrow ? 3 : 4,
                                                                                 height: isNarrow ? 12 : 16,
                                                                                 decoration: BoxDecoration(
-                                                                                  color: isServiceSelected ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : Colors.transparent,
                                                                                   borderRadius: context.borderRadiusMinStandard,
                                                                                 ),
                                                                               ),
@@ -988,7 +990,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                                                   service.name,
                                                                                   variant: OsmeaTextVariant.bodySmall,
                                                                                   fontSize: isNarrow ? 11 : 13,
-                                                                                  color: isServiceSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).textTheme.bodyMedium?.color,
+                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : Theme.of(context).textTheme.bodyMedium?.color,
                                                                                   fontWeight: isServiceSelected ? FontWeight.w500 : FontWeight.w400,
                                                                                   maxLines: isNarrow ? 2 : 1,
                                                                                 ),
