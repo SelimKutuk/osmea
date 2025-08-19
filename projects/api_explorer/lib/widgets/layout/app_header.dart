@@ -166,7 +166,6 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               apiUrl,
               variant: OsmeaTextVariant.bodySmall,
               fontSize: 11,
-              fontFamily: 'JetBrainsMono',
               color: Theme.of(context)
                   .colorScheme
                   .onSurface

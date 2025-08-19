@@ -501,7 +501,6 @@ class _ControlPanelState extends State<ControlPanel>
                           OsmeaComponents.text(
                             service.endpoint,
                             fontSize: 13,
-                            textStyle: const TextStyle(fontFamily: 'monospace'),
                             color: isDarkMode
                                 ? OsmeaColors.white.withValues(alpha: 0.6)
                                 : OsmeaColors.steel,

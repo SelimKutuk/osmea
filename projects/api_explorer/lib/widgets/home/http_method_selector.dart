@@ -84,7 +84,6 @@ class HttpMethodSelector extends StatelessWidget {
           method,
           variant: OsmeaTextVariant.bodyMedium,
           fontSize: isNarrow ? 12 : 14,
-          fontFamily: 'monospace',
           fontWeight: FontWeight.w600,
         ),
       ],
@@ -112,7 +111,6 @@ class HttpMethodSelector extends StatelessWidget {
           textColor: isSelected ? Colors.white : methodColor,
           borderColor: methodColor,
           textStyle: TextStyle(
-            fontFamily: 'monospace',
             fontWeight: FontWeight.w600,
             fontSize: isMobile ? 13 : 14,
           ),

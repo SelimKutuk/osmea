@@ -265,7 +265,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
             color: OsmeaColors.nordicBlue,
             fontSize: isNarrow ? 11 : 12,
             fontWeight: FontWeight.w500,
-            fontFamily: 'monospace',
           ),
 
           const Spacer(),
@@ -445,7 +444,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                     variant: OsmeaTextVariant.bodySmall,
                     color: _ideTheme ? OsmeaColors.steel : OsmeaColors.pewter,
                     fontSize: isNarrow ? 10 : 11,
-                    fontFamily: 'monospace',
                   ),
                 );
               },
@@ -468,7 +466,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                     style: TextStyle(
                       color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
                       fontSize: isNarrow ? 11 : 12,
-                      fontFamily: 'monospace',
                       height: 1.2,
                     ),
                   ),
@@ -524,7 +521,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
                           variant: OsmeaTextVariant.bodyMedium,
                           color: OsmeaColors.nordicBlue,
                           fontSize: isNarrow ? 12 : 14,
-                          fontFamily: 'monospace',
                         ),
                       ],
                     ),
@@ -723,7 +719,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               variant: OsmeaTextVariant.bodySmall,
               color: _ideTheme ? OsmeaColors.steel : OsmeaColors.steel,
               fontSize: isNarrow ? 9 : 10,
-              fontFamily: 'monospace',
               lineHeight: 1.4,
             ),
           );
@@ -750,7 +745,6 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
               line,
               style: TextStyle(
                 color: _ideTheme ? OsmeaColors.ash : OsmeaColors.shark,
-                fontFamily: 'monospace',
                 fontSize: isNarrow ? 9 : 11,
                 height: 1.4,
               ),
