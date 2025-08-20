@@ -545,7 +545,6 @@ class SnackbarManager {
     VoidCallback? onAction,
     Color? actionLabelColor,
   }) {
-    // Cubit tabanlı sisteme geçiş
     SnackbarCubit.instance.show(
       context: context,
       builder: snackbarBuilder,

@@ -155,7 +155,7 @@ class SnackbarCubit extends Cubit<List<SnackbarState>> {
     });
   }
 
-  /// Progress bar değerini güncelle
+  
   void updateProgress(String id, double progress) {
     final idx = state.indexWhere((t) => t.id == id);
     if (idx != -1) {
@@ -166,10 +166,10 @@ class SnackbarCubit extends Cubit<List<SnackbarState>> {
     }
   }
 
-  /// Progress bar timer'ını başlat
+  
   void _startProgressTimer(String id, Duration duration) {
     final totalMs = duration.inMilliseconds;
-    const tickMs = 50; // 50ms aralıklarla güncelle
+  const tickMs = 50;
     int elapsed = 0;
 
     Timer.periodic(const Duration(milliseconds: tickMs), (timer) {
