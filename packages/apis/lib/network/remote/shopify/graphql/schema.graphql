@@ -31,6 +31,7 @@ type Mutation {
   # Customer mutations
   customerCreate(input: CustomerInput!): CustomerCreatePayload
   customerUpdate(input: CustomerUpdateInput!): CustomerUpdatePayload
+  customerDisable(input: CustomerDisableInput!): CustomerDisablePayload
 }
 
 # Basic types - these should be replaced with actual Shopify schema
@@ -90,6 +91,9 @@ type Customer {
   phone: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  acceptsMarketing: Boolean
+  emailMarketingConsent: EmailMarketingConsent
+  addresses(first: Int): CustomerAddressConnection!
   orders(first: Int): OrderConnection!
 }
 
@@ -160,6 +164,10 @@ input CustomerUpdateInput {
   phone: String
 }
 
+input CustomerDisableInput {
+  id: ID!
+}
+
 input OrderUpdateInput {
   id: ID!
   note: String
@@ -187,6 +195,11 @@ type CustomerCreatePayload {
 }
 
 type CustomerUpdatePayload {
+  customer: Customer
+  userErrors: [UserError!]!
+}
+
+type CustomerDisablePayload {
   customer: Customer
   userErrors: [UserError!]!
 }
@@ -284,6 +297,37 @@ type OrderLineItem {
   variant: ProductVariant
 }
 
+# Customer Address types
+type CustomerAddressConnection {
+  edges: [CustomerAddressEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CustomerAddressEdge {
+  node: CustomerAddress!
+  cursor: String!
+}
+
+type CustomerAddress {
+  id: ID!
+  address1: String
+  address2: String
+  city: String
+  province: String
+  country: String
+  zip: String
+  phone: String
+  firstName: String
+  lastName: String
+  company: String
+}
+
+# Email Marketing Consent
+type EmailMarketingConsent {
+  marketingState: EmailMarketingConsentState!
+  marketingOptInLevel: EmailMarketingConsentOptInLevel!
+}
+
 type ShopPlan {
   displayName: String!
   partnerDevelopment: Boolean!
@@ -295,4 +339,17 @@ enum WeightUnit {
   GRAMS
   POUNDS
   OUNCES
+}
+
+# Email Marketing Consent Enums
+enum EmailMarketingConsentState {
+  NOT_SUBSCRIBED
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+enum EmailMarketingConsentOptInLevel {
+  SINGLE_OPT_IN
+  DOUBLE_OPT_IN
+  CONFIRMED_OPT_IN
 }

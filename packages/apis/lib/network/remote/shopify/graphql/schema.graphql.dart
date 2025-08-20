@@ -1039,6 +1039,102 @@ class _CopyWithStubImpl$Input$CustomerUpdateInput<TRes>
       _res;
 }
 
+class Input$CustomerDisableInput {
+  factory Input$CustomerDisableInput({required String id}) =>
+      Input$CustomerDisableInput._({
+        r'id': id,
+      });
+
+  Input$CustomerDisableInput._(this._$data);
+
+  factory Input$CustomerDisableInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = (l$id as String);
+    return Input$CustomerDisableInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get id => (_$data['id'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = l$id;
+    return result$data;
+  }
+
+  CopyWith$Input$CustomerDisableInput<Input$CustomerDisableInput>
+      get copyWith => CopyWith$Input$CustomerDisableInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$CustomerDisableInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    return Object.hashAll([l$id]);
+  }
+}
+
+abstract class CopyWith$Input$CustomerDisableInput<TRes> {
+  factory CopyWith$Input$CustomerDisableInput(
+    Input$CustomerDisableInput instance,
+    TRes Function(Input$CustomerDisableInput) then,
+  ) = _CopyWithImpl$Input$CustomerDisableInput;
+
+  factory CopyWith$Input$CustomerDisableInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$CustomerDisableInput;
+
+  TRes call({String? id});
+}
+
+class _CopyWithImpl$Input$CustomerDisableInput<TRes>
+    implements CopyWith$Input$CustomerDisableInput<TRes> {
+  _CopyWithImpl$Input$CustomerDisableInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$CustomerDisableInput _instance;
+
+  final TRes Function(Input$CustomerDisableInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? id = _undefined}) => _then(Input$CustomerDisableInput._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+      }));
+}
+
+class _CopyWithStubImpl$Input$CustomerDisableInput<TRes>
+    implements CopyWith$Input$CustomerDisableInput<TRes> {
+  _CopyWithStubImpl$Input$CustomerDisableInput(this._res);
+
+  TRes _res;
+
+  call({String? id}) => _res;
+}
+
 class Input$OrderUpdateInput {
   factory Input$OrderUpdateInput({
     required String id,
@@ -1308,6 +1404,86 @@ Enum$WeightUnit fromJson$Enum$WeightUnit(String value) {
       return Enum$WeightUnit.OUNCES;
     default:
       return Enum$WeightUnit.$unknown;
+  }
+}
+
+enum Enum$EmailMarketingConsentState {
+  NOT_SUBSCRIBED,
+  SUBSCRIBED,
+  UNSUBSCRIBED,
+  $unknown;
+
+  factory Enum$EmailMarketingConsentState.fromJson(String value) =>
+      fromJson$Enum$EmailMarketingConsentState(value);
+
+  String toJson() => toJson$Enum$EmailMarketingConsentState(this);
+}
+
+String toJson$Enum$EmailMarketingConsentState(
+    Enum$EmailMarketingConsentState e) {
+  switch (e) {
+    case Enum$EmailMarketingConsentState.NOT_SUBSCRIBED:
+      return r'NOT_SUBSCRIBED';
+    case Enum$EmailMarketingConsentState.SUBSCRIBED:
+      return r'SUBSCRIBED';
+    case Enum$EmailMarketingConsentState.UNSUBSCRIBED:
+      return r'UNSUBSCRIBED';
+    case Enum$EmailMarketingConsentState.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$EmailMarketingConsentState fromJson$Enum$EmailMarketingConsentState(
+    String value) {
+  switch (value) {
+    case r'NOT_SUBSCRIBED':
+      return Enum$EmailMarketingConsentState.NOT_SUBSCRIBED;
+    case r'SUBSCRIBED':
+      return Enum$EmailMarketingConsentState.SUBSCRIBED;
+    case r'UNSUBSCRIBED':
+      return Enum$EmailMarketingConsentState.UNSUBSCRIBED;
+    default:
+      return Enum$EmailMarketingConsentState.$unknown;
+  }
+}
+
+enum Enum$EmailMarketingConsentOptInLevel {
+  SINGLE_OPT_IN,
+  DOUBLE_OPT_IN,
+  CONFIRMED_OPT_IN,
+  $unknown;
+
+  factory Enum$EmailMarketingConsentOptInLevel.fromJson(String value) =>
+      fromJson$Enum$EmailMarketingConsentOptInLevel(value);
+
+  String toJson() => toJson$Enum$EmailMarketingConsentOptInLevel(this);
+}
+
+String toJson$Enum$EmailMarketingConsentOptInLevel(
+    Enum$EmailMarketingConsentOptInLevel e) {
+  switch (e) {
+    case Enum$EmailMarketingConsentOptInLevel.SINGLE_OPT_IN:
+      return r'SINGLE_OPT_IN';
+    case Enum$EmailMarketingConsentOptInLevel.DOUBLE_OPT_IN:
+      return r'DOUBLE_OPT_IN';
+    case Enum$EmailMarketingConsentOptInLevel.CONFIRMED_OPT_IN:
+      return r'CONFIRMED_OPT_IN';
+    case Enum$EmailMarketingConsentOptInLevel.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$EmailMarketingConsentOptInLevel
+    fromJson$Enum$EmailMarketingConsentOptInLevel(String value) {
+  switch (value) {
+    case r'SINGLE_OPT_IN':
+      return Enum$EmailMarketingConsentOptInLevel.SINGLE_OPT_IN;
+    case r'DOUBLE_OPT_IN':
+      return Enum$EmailMarketingConsentOptInLevel.DOUBLE_OPT_IN;
+    case r'CONFIRMED_OPT_IN':
+      return Enum$EmailMarketingConsentOptInLevel.CONFIRMED_OPT_IN;
+    default:
+      return Enum$EmailMarketingConsentOptInLevel.$unknown;
   }
 }
 

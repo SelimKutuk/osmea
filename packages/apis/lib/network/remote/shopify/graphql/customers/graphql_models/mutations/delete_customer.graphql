@@ -1,0 +1,14 @@
+mutation DisableCustomer($id: ID!) {
+  customerDisable(input: {id: $id}) {
+    customer {
+      id
+      firstName
+      lastName
+      email
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
