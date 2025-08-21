@@ -467,59 +467,6 @@ class ApiServiceRegistry {
       handler: DestroyMultipleCustomerAddressesHandler(),
     ),
 
-    // 🚀 GraphQL APIs - Product Operations
-    ApiService(
-      name: 'Products - GraphQL Query',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlProductsAndCollectionsQueries,
-      subcategory: 'Products',
-      handler: GetProductsGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'Product - GraphQL Query',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlProductsAndCollectionsQueries,
-      subcategory: 'Products',
-      handler: ProductGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'Create Product - GraphQL Mutation',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlProductsAndCollectionsMutations,
-      subcategory: 'Products',
-      handler: CreateProductGraphQLHandler(),
-    ),
-    // ApiService(
-    //   name: 'Manage Products - GraphQL Mutation',
-    //   endpoint: '/admin/api/2024-07/graphql.json',
-    //   category: ApiCategory.graphqlProductsAndCollectionsMutations,
-    //   subcategory: 'Products',
-    //   handler: ProductMutationHandler(),
-    // ),
-
-    // 🚀 GraphQL APIs - Customer Operations
-    ApiService(
-      name: 'Customers - GraphQL Query',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlCustomersQueries,
-      subcategory: 'Customers',
-      handler: GetCustomersGraphQLHandler(),
-    ),
-    ApiService(
-      name: 'Customer - GraphQL Query',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlCustomersQueries,
-      subcategory: 'Customers',
-      handler: CustomerQueryHandler(),
-    ),
-    ApiService(
-      name: 'Manage Customers - GraphQL Mutation',
-      endpoint: '/admin/api/2024-07/graphql.json',
-      category: ApiCategory.graphqlCustomersMutations,
-      subcategory: 'Customers',
-      handler: CustomerMutationHandler(),
-    ),
-
     ApiService(
       name: 'Events List',
       endpoint: '/events',
@@ -3865,6 +3812,79 @@ class ApiServiceRegistry {
       category: ApiCategory.woocommerceRefunds,
       subcategory: 'Refunds',
       handler: ListAllRefundsHandler(),
+    ),
+
+    // 🚀 GraphQL APIs - Product Operations
+    ApiService(
+      name: 'Products - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlProductsAndCollectionsQueries,
+      subcategory: 'Products',
+      handler: GetProductsGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Product - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlProductsAndCollectionsQueries,
+      subcategory: 'Products',
+      handler: ProductGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Create Product - GraphQL Mutation',
+      endpoint: '',
+      category: ApiCategory.graphqlProductsAndCollectionsMutations,
+      subcategory: 'Products',
+      handler: CreateProductGraphQLHandler(),
+    ),
+
+    ApiService(
+      name: 'Get Customers - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersQueries,
+      subcategory: 'Customers',
+      handler: GetCustomersHandler(),
+    ),
+    ApiService(
+      name: 'Get Customer - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersQueries,
+      subcategory: 'Customers',
+      handler: GetCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Get Customers Count - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersQueries,
+      subcategory: 'Customers',
+      handler: GetCustomersCountHandler(),
+    ),
+    ApiService(
+      name: 'Customers List - GraphQL Query',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersQueries,
+      subcategory: 'Customers',
+      handler: CustomersHandler(),
+    ),
+    ApiService(
+      name: 'Create Customer - GraphQL Mutation',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersMutations,
+      subcategory: 'Customers',
+      handler: CreateCustomerGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Update Customer - GraphQL Mutation',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersMutations,
+      subcategory: 'Customers',
+      handler: UpdateCustomerGraphQLHandler(),
+    ),
+    ApiService(
+      name: 'Disable Customer - GraphQL Mutation',
+      endpoint: '',
+      category: ApiCategory.graphqlCustomersMutations,
+      subcategory: 'Customers',
+      handler: DisableCustomerGraphQLHandler(),
     ),
   ];
 

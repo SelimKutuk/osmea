@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 //**************** 👥 GET CUSTOMERS GRAPHQL HANDLER 👥 ********************
 ///*******************************************************************
 
-class GetCustomersGraphQLHandler implements ApiRequestHandler {
+class CustomersHandler implements ApiRequestHandler {
   @override
   List<String> get supportedMethods => ['POST'];
 
@@ -81,7 +81,6 @@ class GetCustomersGraphQLHandler implements ApiRequestHandler {
     } catch (e) {
       // Enhanced error handling
       String errorMessage = e.toString();
-      int statusCode = 500;
 
       if (errorMessage.contains('Store name is not set')) {
         return {

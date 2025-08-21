@@ -10,12 +10,15 @@ export 'handlers/shopify/graphql_handlers/products/queries/product_handler.dart'
 export 'handlers/shopify/graphql_handlers/products/mutations/product_create_handler.dart';
 
 // Customers GraphQL Handlers
-export 'handlers/shopify/graphql_handlers/customers/customers_handler.dart';
-export 'handlers/shopify/graphql_handlers/customers/customer_mutation_handler.dart';
-export 'handlers/shopify/graphql_handlers/customers/customer_query_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/mutations/customer_create_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/mutations/customer_update_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/mutations/customer_disable_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/mutations/customers_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/queries/get_customers_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/queries/get_customer_handler.dart';
+export 'handlers/shopify/graphql_handlers/customers/queries/get_customers_count_handler.dart';
 
-// GraphQL Handler Export Files
-export 'handlers/shopify/graphql_handlers/customers/customers_graphql_handlers.dart';
+// Restful Handlers
 
 // 🔐 Access Handlers
 export 'handlers/shopify/access_handlers/access_scope_handler.dart';
