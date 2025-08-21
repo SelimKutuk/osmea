@@ -44,7 +44,10 @@ enum ApiCategory {
   // GraphQL Shop Main Category
   //graphqlShop,
   // GraphQL Shop Subcategories
-  //graphqlShopQueries,
+  // GraphQL Webhooks Main Category
+  graphqlWebhooks,
+  // GraphQL Webhook Subcategories
+  graphqlWebhookQueries,
   // WooCommerce categories
   woocommerceCoupons,
   woocommerceProducts,
@@ -139,10 +142,6 @@ extension ApiCategoryExtension on ApiCategory {
       case ApiCategory.graphqlCustomersMutations:
         return 'Mutations';
       // GraphQL Shop
-      // case ApiCategory.graphqlShop:
-      //   return 'Shop';
-      // case ApiCategory.graphqlShopQueries:
-      //   return 'Queries';
       case ApiCategory.woocommerceCoupons:
         return 'Coupons APIs';
       case ApiCategory.woocommerceProducts:
@@ -2623,6 +2622,29 @@ class ApiServiceRegistry {
       handler: DeleteWebhookHandler(),
     ),
 
+    // 🔔 GraphQL Webhooks APIs
+    ApiService(
+      name: 'Get Webhook Subscriptions (GraphQL)',
+      endpoint: '/graphql/webhooks/subscriptions',
+      category: ApiCategory.graphqlWebhookQueries,
+      subcategory: 'Queries',
+      handler: GetWebhookSubscriptionsHandler(),
+    ),
+    ApiService(
+      name: 'Get Webhook Subscription (GraphQL)',
+      endpoint: '/graphql/webhooks/subscriptions/:id',
+      category: ApiCategory.graphqlWebhookQueries,
+      subcategory: 'Queries',
+      handler: GetWebhookSubscriptionHandler(),
+    ),
+    ApiService(
+      name: 'Get Webhook Subscriptions Count (GraphQL)',
+      endpoint: '/graphql/webhooks/subscriptions/count',
+      category: ApiCategory.graphqlWebhookQueries,
+      subcategory: 'Queries',
+      handler: GetWebhookSubscriptionsCountHandler(),
+    ),
+
     ApiService(
       name: 'List Smart Collections',
       endpoint: '/smart_collections',
@@ -3931,7 +3953,7 @@ class ApiServiceRegistry {
           .graphqlProductsAndCollections, // Products and Collections main category
       //ApiCategory.graphqlOrders, // Orders main category
       ApiCategory.graphqlCustomers, // Customers main category
-      //ApiCategory.graphqlShop, // Shop main category
+      ApiCategory.graphqlWebhooks, // Webhooks main category
     ];
   }
 
@@ -3997,12 +4019,10 @@ class ApiServiceRegistry {
     switch (category) {
       case ApiCategory.graphqlProductsAndCollections:
         return ['Queries', 'Mutations'];
-      //case ApiCategory.graphqlOrders:
-      //return ['Queries', 'Mutations'];
       case ApiCategory.graphqlCustomers:
         return ['Queries', 'Mutations'];
-      //case ApiCategory.graphqlShop:
-      //return ['Queries'];
+      case ApiCategory.graphqlWebhooks:
+        return ['Queries'];
       default:
         return _services
             .where((s) => s.category == category)
@@ -4033,9 +4053,9 @@ class ApiServiceRegistry {
             ? ApiCategory.graphqlCustomersQueries
             : ApiCategory.graphqlCustomersMutations;
         break;
-      // case ApiCategory.graphqlShop:
-      //   targetCategory = ApiCategory.graphqlShopQueries;
-      //   break;
+      case ApiCategory.graphqlWebhooks:
+        targetCategory = ApiCategory.graphqlWebhookQueries;
+        break;
       default:
         // Use old logic for normal categories
         return _services
@@ -4083,10 +4103,10 @@ class ApiServiceRegistry {
       case ApiCategory.graphqlCustomersMutations:
         return 'Mutations';
       // GraphQL Shop
-      // case ApiCategory.graphqlShop:
-      //   return 'Shop';
-      // case ApiCategory.graphqlShopQueries:
-      //   return 'Queries';
+      case ApiCategory.graphqlWebhooks:
+        return 'Webhooks';
+      case ApiCategory.graphqlWebhookQueries:
+        return 'Queries';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:

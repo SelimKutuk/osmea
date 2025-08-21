@@ -156,7 +156,10 @@ class _ModernSidebarState extends State<ModernSidebar>
       case ApiCategory.woocommerce:
         return ApiServiceRegistry.getWooCommerceCategories();
       case ApiCategory.shopifyGraphql:
-        return ApiServiceRegistry.getShopifyGraphqlCategories();
+        return [
+          ...ApiServiceRegistry.getShopifyGraphqlCategories(),
+          ApiCategory.graphqlQueries, // Webhook'ları da dahil et
+        ];
       default:
         return [];
     }
@@ -1063,10 +1066,10 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.search_rounded;
       case ApiCategory.graphqlCustomersMutations:
         return Icons.edit_rounded;
-      //case ApiCategory.graphqlShop:
-      //return Icons.store_mall_directory_rounded;
-      //case ApiCategory.graphqlShopQueries:
-      //return Icons.search_rounded;
+      case ApiCategory.graphqlWebhooks:
+        return Icons.webhook_rounded;
+      case ApiCategory.graphqlWebhookQueries:
+        return Icons.search_rounded;
       case ApiCategory.access:
         return Icons.security_rounded;
       case ApiCategory.storefront:
@@ -1147,8 +1150,9 @@ class _ModernSidebarState extends State<ModernSidebar>
       case ApiCategory.graphqlProductsAndCollections:
       //case ApiCategory.graphqlOrders:
       case ApiCategory.graphqlCustomers:
-      //case ApiCategory.graphqlShop:
-      //return ['Queries', 'Mutations'];
+        return ['Queries', 'Mutations'];
+      case ApiCategory.graphqlWebhooks:
+        return ['Queries'];
       default:
         return ApiServiceRegistry.getSubcategoriesByCategory(category);
     }
@@ -1186,10 +1190,10 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'GraphQL Customers Queries';
       case ApiCategory.graphqlCustomersMutations:
         return 'GraphQL Customers Mutations';
-      // case ApiCategory.graphqlShop:
-      //   return 'GraphQL Shop';
-      // case ApiCategory.graphqlShopQueries:
-      //   return 'GraphQL Shop Queries';
+      case ApiCategory.graphqlWebhooks:
+        return 'GraphQL Webhooks';
+      case ApiCategory.graphqlWebhookQueries:
+        return 'GraphQL Webhook Queries';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:

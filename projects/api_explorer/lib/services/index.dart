@@ -18,6 +18,11 @@ export 'handlers/shopify/graphql_handlers/customers/queries/get_customers_handle
 export 'handlers/shopify/graphql_handlers/customers/queries/get_customer_handler.dart';
 export 'handlers/shopify/graphql_handlers/customers/queries/get_customers_count_handler.dart';
 
+// Webhook Query Handlers
+export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscriptions_handler.dart';
+export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscription_handler.dart';
+export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscriptions_count_handler.dart';
+
 // Restful Handlers
 
 // 🔐 Access Handlers

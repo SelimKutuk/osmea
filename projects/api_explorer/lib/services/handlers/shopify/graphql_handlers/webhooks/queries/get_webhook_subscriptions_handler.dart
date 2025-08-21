@@ -1,14 +1,14 @@
-import 'package:apis/network/remote/shopify/graphql/customers/abstract/customer_graphql_service.dart';
+import 'package:apis/network/remote/shopify/graphql/webhooks/abstract/webhooks_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
 ///*******************************************************************
-//************ 📋 GET CUSTOMERS HANDLER 📋 ************
+//************ 🔔 GET WEBHOOK SUBSCRIPTIONS HANDLER 🔔 ************
 ///*******************************************************************
 
-class GetCustomersHandler implements ApiRequestHandler {
+class GetWebhookSubscriptionsHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
     String method,
@@ -17,34 +17,31 @@ class GetCustomersHandler implements ApiRequestHandler {
     try {
       final first = int.tryParse(params['first'] ?? '10') ?? 10;
       final after = params['after'];
-      final query = params['query'];
 
-      debugPrint('📋 GetCustomersHandler - DEBUG INFO 📋');
-      debugPrint('📋 Method: $method');
-      debugPrint('📋 All params: $params');
-      debugPrint('📋 First: $first');
-      debugPrint('📋 After: $after');
-      debugPrint('📋 Query: $query');
-      debugPrint('📋 END DEBUG INFO 📋');
+      debugPrint('🔔 GetWebhookSubscriptionsHandler - DEBUG INFO 🔔');
+      debugPrint('🔔 Method: $method');
+      debugPrint('🔔 All params: $params');
+      debugPrint('🔔 First: $first');
+      debugPrint('🔔 After: $after');
+      debugPrint('🔔 END DEBUG INFO 🔔');
 
-      final response = await GetIt.I<CustomerGraphQLService>().getCustomers(
+      final response = await GetIt.I<WebhooksGraphQLService>().webhookSubscriptions(
         first: first,
         after: after,
-        query: query,
       );
 
       return {
         "status": "success",
-        "message": "Customers retrieved successfully",
+        "message": "Webhook subscriptions retrieved successfully",
         "data": response.toJson(),
-        "query_type": "GetCustomers",
+        "query_type": "GetWebhookSubscriptions",
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
-      debugPrint('📋 GetCustomersHandler - ERROR: $e');
+      debugPrint('🔔 GetWebhookSubscriptionsHandler - ERROR: $e');
       return {
         "status": "error",
-        "message": "Failed to get customers: ${e.toString()}",
+        "message": "Failed to get webhook subscriptions: ${e.toString()}",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
@@ -59,7 +56,7 @@ class GetCustomersHandler implements ApiRequestHandler {
           const ApiField(
             name: 'first',
             label: 'First',
-            hint: 'Number of items to retrieve',
+            hint: 'Number of webhook subscriptions to retrieve',
             isRequired: false,
             type: ApiFieldType.number,
           ),
@@ -67,13 +64,6 @@ class GetCustomersHandler implements ApiRequestHandler {
             name: 'after',
             label: 'After',
             hint: 'Cursor for pagination',
-            isRequired: false,
-            type: ApiFieldType.text,
-          ),
-          const ApiField(
-            name: 'query',
-            label: 'Query',
-            hint: 'Search query or filter',
             isRequired: false,
             type: ApiFieldType.text,
           ),
