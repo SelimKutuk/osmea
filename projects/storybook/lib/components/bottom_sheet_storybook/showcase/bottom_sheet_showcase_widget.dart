@@ -53,6 +53,33 @@ class _UnifiedBottomSheetShowcaseWidgetState extends State<UnifiedBottomSheetSho
   bool _isBottomSheetVisible = false;
   double _dragOffset = 0.0;
 
+  // Helper method for drag start logic
+  void _handleDragStart() {
+    _dragOffset = 0.0;
+  }
+
+  // Helper method for drag update logic
+  void _handleDragUpdate(double deltaY) {
+    setState(() {
+      _dragOffset += deltaY;
+      // Limit upward drag
+      if (_dragOffset < 0) _dragOffset = 0;
+    });
+  }
+
+  // Helper method for drag end logic
+  void _handleDragEnd(double velocity) {
+    // If dragged down more than 50 pixels or fast swipe down, dismiss
+    if (_dragOffset > 50 || velocity > 200) {
+      _toggleBottomSheet();
+    } else {
+      // Snap back to original position
+      setState(() {
+        _dragOffset = 0.0;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -141,49 +168,10 @@ class _UnifiedBottomSheetShowcaseWidgetState extends State<UnifiedBottomSheetSho
               alignment: Alignment.bottomCenter,
               child: GestureDetector(
                 onTap: () {}, // Prevent backdrop tap from closing when tapping sheet
-                onPanStart: (details) {
-                  _dragOffset = 0.0;
-                },
-                onPanUpdate: (details) {
-                  setState(() {
-                    _dragOffset += details.delta.dy;
-                    // Limit upward drag
-                    if (_dragOffset < 0) _dragOffset = 0;
-                  });
-                },
-                onPanEnd: (details) {
-                  // If dragged down more than 50 pixels or fast swipe down, dismiss
-                  if (_dragOffset > 50 || details.velocity.pixelsPerSecond.dy > 200) {
-                    _toggleBottomSheet();
-                  } else {
-                    // Snap back to original position
-                    setState(() {
-                      _dragOffset = 0.0;
-                    });
-                  }
-                },
-                // Add vertical drag recognition to make swipe more responsive
-                onVerticalDragStart: (details) {
-                  _dragOffset = 0.0;
-                },
-                onVerticalDragUpdate: (details) {
-                  setState(() {
-                    _dragOffset += details.delta.dy;
-                    // Limit upward drag
-                    if (_dragOffset < 0) _dragOffset = 0;
-                  });
-                },
-                onVerticalDragEnd: (details) {
-                  // More sensitive thresholds for better UX
-                  if (_dragOffset > 50 || details.velocity.pixelsPerSecond.dy > 200) {
-                    _toggleBottomSheet();
-                  } else {
-                    // Snap back to original position
-                    setState(() {
-                      _dragOffset = 0.0;
-                    });
-                  }
-                },
+                // Use only vertical drag handlers to avoid gesture conflicts
+                onVerticalDragStart: (details) => _handleDragStart(),
+                onVerticalDragUpdate: (details) => _handleDragUpdate(details.delta.dy),
+                onVerticalDragEnd: (details) => _handleDragEnd(details.velocity.pixelsPerSecond.dy),
                 child: Transform.translate(
                   offset: Offset(0, _dragOffset),
                   child: Container(
