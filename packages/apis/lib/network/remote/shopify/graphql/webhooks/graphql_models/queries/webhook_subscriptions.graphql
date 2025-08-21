@@ -1,0 +1,23 @@
+query WebhookSubscriptions($first: Int!, $after: String) {
+  webhookSubscriptions(first: $first, after: $after) {
+    edges {
+      node {
+        id
+        topic
+        endpoint {
+          __typename
+          ... on WebhookHttpEndpoint {
+            callbackUrl
+          }
+          ... on WebhookEventBridgeEndpoint {
+            arn
+          }
+          ... on WebhookPubSubEndpoint {
+            pubSubProject
+            pubSubTopic
+          }
+        }
+      }
+    }
+  }
+}

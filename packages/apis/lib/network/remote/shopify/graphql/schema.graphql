@@ -17,6 +17,11 @@ type Query {
   
   # Shop
   shop: Shop
+  
+  # Webhooks
+  webhookSubscription(id: ID!): WebhookSubscription
+  webhookSubscriptions(first: Int, after: String, query: String): WebhookSubscriptionConnection
+  webhookSubscriptionsCount(query: String!): WebhookSubscriptionsCount
 }
 
 type Mutation {
@@ -359,4 +364,48 @@ enum EmailMarketingConsentOptInLevel {
   SINGLE_OPT_IN
   DOUBLE_OPT_IN
   CONFIRMED_OPT_IN
+}
+
+# Webhook types
+type WebhookSubscription {
+  id: ID!
+  topic: String!
+  endpoint: WebhookEndpoint!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type WebhookSubscriptionsCount {
+  count: Int!
+  precision: String!
+}
+
+type WebhookSubscriptionConnection {
+  edges: [WebhookSubscriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type WebhookSubscriptionEdge {
+  node: WebhookSubscription!
+  cursor: String!
+}
+
+interface WebhookEndpoint {
+  __typename: String!
+}
+
+type WebhookHttpEndpoint implements WebhookEndpoint {
+  __typename: String!
+  callbackUrl: String!
+}
+
+type WebhookEventBridgeEndpoint implements WebhookEndpoint {
+  __typename: String!
+  arn: String!
+}
+
+type WebhookPubSubEndpoint implements WebhookEndpoint {
+  __typename: String!
+  pubSubProject: String!
+  pubSubTopic: String!
 }

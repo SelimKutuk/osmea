@@ -1668,4 +1668,10 @@ Enum$__DirectiveLocation fromJson$Enum$__DirectiveLocation(String value) {
   }
 }
 
-const possibleTypesMap = <String, Set<String>>{};
+const possibleTypesMap = <String, Set<String>>{
+  'WebhookEndpoint': {
+    'WebhookHttpEndpoint',
+    'WebhookEventBridgeEndpoint',
+    'WebhookPubSubEndpoint',
+  }
+};

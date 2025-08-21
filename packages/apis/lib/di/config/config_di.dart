@@ -57,9 +57,6 @@ void _registerGraphQLServices(GetIt getIt) {
       getIt.registerSingleton<ShopifyGraphQLClient>(ShopifyGraphQLClient());
     }
 
-    // Base GraphQL Service - abstract olduğu için register etmiyoruz
-    // Concrete implementations kullanılıyor
-
     // Product GraphQL Service
     if (!getIt.isRegistered<ProductGraphQLService>()) {
       getIt.registerFactory<ProductGraphQLService>(

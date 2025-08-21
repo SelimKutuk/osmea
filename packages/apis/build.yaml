@@ -1,0 +1,23 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          schema: lib/network/remote/shopify/graphql/schema.graphql
+          documents: lib/network/remote/shopify/graphql/**/*.graphql
+          generates:
+            lib/network/remote/shopify/graphql/webhooks/graphql_models/queries/:
+              preset: client
+              presetConfig:
+                gqlTagName: gql
+                fragmentMasking: false
+              plugins:
+                - dart
+              config:
+                scalarTypes:
+                  DateTime: DateTime
+                  Money: String
+                  Decimal: String
+                  URL: String
+                  HTML: String
+                  JSON: Map<String, dynamic>
