@@ -1,4 +1,4 @@
-import 'package:apis/network/remote/shopify/graphql/customers/abstract/customer_graphql_service.dart';
+import 'package:apis/network/remote/shopify/graphql/customers/abstract/customer_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:get_it/get_it.dart';
