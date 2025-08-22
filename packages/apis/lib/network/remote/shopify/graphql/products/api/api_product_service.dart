@@ -1,4 +1,4 @@
-import 'package:apis/network/remote/shopify/graphql/products/abstract/product_graphql_service.dart';
+import 'package:apis/network/remote/shopify/graphql/products/abstract/product_service.dart';
 import 'package:apis/network/remote/shopify/graphql/products/graphql_models/mutations/create_product.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/products/graphql_models/mutations/update_product.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/products/graphql_models/queries/product.graphql.dart';
