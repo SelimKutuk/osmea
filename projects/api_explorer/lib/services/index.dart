@@ -23,6 +23,9 @@ export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscript
 export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscription_handler.dart';
 export 'handlers/shopify/graphql_handlers/webhooks/queries/get_webhook_subscriptions_count_handler.dart';
 
+// Webhook Mutation Handlers
+export 'handlers/shopify/graphql_handlers/webhooks/mutations/create_webhook_subscription_handler.dart';
+
 // Restful Handlers
 
 // 🔐 Access Handlers

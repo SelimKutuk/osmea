@@ -48,6 +48,7 @@ enum ApiCategory {
   graphqlWebhooks,
   // GraphQL Webhook Subcategories
   graphqlWebhookQueries,
+  graphqlWebhookMutations,
   // WooCommerce categories
   woocommerceCoupons,
   woocommerceProducts,
@@ -127,7 +128,7 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Queries';
       case ApiCategory.graphqlProductsAndCollectionsMutations:
         return 'Mutations';
-      
+
       case ApiCategory.graphqlCustomers:
         return 'Customers';
       case ApiCategory.graphqlCustomersQueries:
@@ -139,6 +140,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Webhooks';
       case ApiCategory.graphqlWebhookQueries:
         return 'Queries';
+      case ApiCategory.graphqlWebhookMutations:
+        return 'Mutations';
       // GraphQL Shop
       case ApiCategory.woocommerceCoupons:
         return 'Coupons APIs';
@@ -2643,6 +2646,15 @@ class ApiServiceRegistry {
       handler: GetWebhookSubscriptionsCountHandler(),
     ),
 
+    // Webhook Mutation APIs
+    ApiService(
+      name: 'Create Webhook Subscription (GraphQL)',
+      endpoint: '/graphql/webhooks/subscriptions/create',
+      category: ApiCategory.graphqlWebhookMutations,
+      subcategory: 'Mutations',
+      handler: CreateWebhookSubscriptionGraphQLHandler(),
+    ),
+
     ApiService(
       name: 'List Smart Collections',
       endpoint: '/smart_collections',
@@ -4052,7 +4064,9 @@ class ApiServiceRegistry {
             : ApiCategory.graphqlCustomersMutations;
         break;
       case ApiCategory.graphqlWebhooks:
-        targetCategory = ApiCategory.graphqlWebhookQueries;
+        targetCategory = subcategoryName == 'Queries'
+            ? ApiCategory.graphqlWebhookQueries
+            : ApiCategory.graphqlWebhookMutations;
         break;
       default:
         // Use old logic for normal categories
@@ -4105,6 +4119,8 @@ class ApiServiceRegistry {
         return 'Webhooks';
       case ApiCategory.graphqlWebhookQueries:
         return 'Queries';
+      case ApiCategory.graphqlWebhookMutations:
+        return 'Mutations';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:

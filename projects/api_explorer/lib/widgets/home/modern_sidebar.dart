@@ -1070,6 +1070,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return Icons.webhook_rounded;
       case ApiCategory.graphqlWebhookQueries:
         return Icons.search_rounded;
+      case ApiCategory.graphqlWebhookMutations:
+        return Icons.edit_rounded;
       case ApiCategory.access:
         return Icons.security_rounded;
       case ApiCategory.storefront:
@@ -1152,7 +1154,7 @@ class _ModernSidebarState extends State<ModernSidebar>
       case ApiCategory.graphqlCustomers:
         return ['Queries', 'Mutations'];
       case ApiCategory.graphqlWebhooks:
-        return ['Queries'];
+        return ['Queries', 'Mutations'];
       default:
         return ApiServiceRegistry.getSubcategoriesByCategory(category);
     }
@@ -1194,6 +1196,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'GraphQL Webhooks';
       case ApiCategory.graphqlWebhookQueries:
         return 'GraphQL Webhook Queries';
+      case ApiCategory.graphqlWebhookMutations:
+        return 'GraphQL Webhook Mutations';
       case ApiCategory.access:
         return 'Access';
       case ApiCategory.storefront:
@@ -1266,6 +1270,6 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'WooCommerce Taxes';
-      }
+    }
   }
 }

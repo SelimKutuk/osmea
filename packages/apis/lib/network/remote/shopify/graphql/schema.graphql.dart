@@ -1268,6 +1268,276 @@ class _CopyWithStubImpl$Input$OrderUpdateInput<TRes>
       _res;
 }
 
+class Input$WebhookSubscriptionInput {
+  factory Input$WebhookSubscriptionInput({
+    String? callbackUrl,
+    Enum$WebhookSubscriptionFormat? format,
+    String? filter,
+    List<String>? include_fields,
+    List<String>? metafield_namespaces,
+  }) =>
+      Input$WebhookSubscriptionInput._({
+        if (callbackUrl != null) r'callbackUrl': callbackUrl,
+        if (format != null) r'format': format,
+        if (filter != null) r'filter': filter,
+        if (include_fields != null) r'include_fields': include_fields,
+        if (metafield_namespaces != null)
+          r'metafield_namespaces': metafield_namespaces,
+      });
+
+  Input$WebhookSubscriptionInput._(this._$data);
+
+  factory Input$WebhookSubscriptionInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('callbackUrl')) {
+      final l$callbackUrl = data['callbackUrl'];
+      result$data['callbackUrl'] = (l$callbackUrl as String?);
+    }
+    if (data.containsKey('format')) {
+      final l$format = data['format'];
+      result$data['format'] = l$format == null
+          ? null
+          : fromJson$Enum$WebhookSubscriptionFormat((l$format as String));
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = (l$filter as String?);
+    }
+    if (data.containsKey('include_fields')) {
+      final l$include_fields = data['include_fields'];
+      result$data['include_fields'] = (l$include_fields as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('metafield_namespaces')) {
+      final l$metafield_namespaces = data['metafield_namespaces'];
+      result$data['metafield_namespaces'] =
+          (l$metafield_namespaces as List<dynamic>?)
+              ?.map((e) => (e as String))
+              .toList();
+    }
+    return Input$WebhookSubscriptionInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get callbackUrl => (_$data['callbackUrl'] as String?);
+
+  Enum$WebhookSubscriptionFormat? get format =>
+      (_$data['format'] as Enum$WebhookSubscriptionFormat?);
+
+  String? get filter => (_$data['filter'] as String?);
+
+  List<String>? get include_fields =>
+      (_$data['include_fields'] as List<String>?);
+
+  List<String>? get metafield_namespaces =>
+      (_$data['metafield_namespaces'] as List<String>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('callbackUrl')) {
+      final l$callbackUrl = callbackUrl;
+      result$data['callbackUrl'] = l$callbackUrl;
+    }
+    if (_$data.containsKey('format')) {
+      final l$format = format;
+      result$data['format'] = l$format == null
+          ? null
+          : toJson$Enum$WebhookSubscriptionFormat(l$format);
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter;
+    }
+    if (_$data.containsKey('include_fields')) {
+      final l$include_fields = include_fields;
+      result$data['include_fields'] = l$include_fields?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('metafield_namespaces')) {
+      final l$metafield_namespaces = metafield_namespaces;
+      result$data['metafield_namespaces'] =
+          l$metafield_namespaces?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$WebhookSubscriptionInput<Input$WebhookSubscriptionInput>
+      get copyWith => CopyWith$Input$WebhookSubscriptionInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$WebhookSubscriptionInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$callbackUrl = callbackUrl;
+    final lOther$callbackUrl = other.callbackUrl;
+    if (_$data.containsKey('callbackUrl') !=
+        other._$data.containsKey('callbackUrl')) {
+      return false;
+    }
+    if (l$callbackUrl != lOther$callbackUrl) {
+      return false;
+    }
+    final l$format = format;
+    final lOther$format = other.format;
+    if (_$data.containsKey('format') != other._$data.containsKey('format')) {
+      return false;
+    }
+    if (l$format != lOther$format) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$include_fields = include_fields;
+    final lOther$include_fields = other.include_fields;
+    if (_$data.containsKey('include_fields') !=
+        other._$data.containsKey('include_fields')) {
+      return false;
+    }
+    if (l$include_fields != null && lOther$include_fields != null) {
+      if (l$include_fields.length != lOther$include_fields.length) {
+        return false;
+      }
+      for (int i = 0; i < l$include_fields.length; i++) {
+        final l$include_fields$entry = l$include_fields[i];
+        final lOther$include_fields$entry = lOther$include_fields[i];
+        if (l$include_fields$entry != lOther$include_fields$entry) {
+          return false;
+        }
+      }
+    } else if (l$include_fields != lOther$include_fields) {
+      return false;
+    }
+    final l$metafield_namespaces = metafield_namespaces;
+    final lOther$metafield_namespaces = other.metafield_namespaces;
+    if (_$data.containsKey('metafield_namespaces') !=
+        other._$data.containsKey('metafield_namespaces')) {
+      return false;
+    }
+    if (l$metafield_namespaces != null && lOther$metafield_namespaces != null) {
+      if (l$metafield_namespaces.length != lOther$metafield_namespaces.length) {
+        return false;
+      }
+      for (int i = 0; i < l$metafield_namespaces.length; i++) {
+        final l$metafield_namespaces$entry = l$metafield_namespaces[i];
+        final lOther$metafield_namespaces$entry =
+            lOther$metafield_namespaces[i];
+        if (l$metafield_namespaces$entry != lOther$metafield_namespaces$entry) {
+          return false;
+        }
+      }
+    } else if (l$metafield_namespaces != lOther$metafield_namespaces) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$callbackUrl = callbackUrl;
+    final l$format = format;
+    final l$filter = filter;
+    final l$include_fields = include_fields;
+    final l$metafield_namespaces = metafield_namespaces;
+    return Object.hashAll([
+      _$data.containsKey('callbackUrl') ? l$callbackUrl : const {},
+      _$data.containsKey('format') ? l$format : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('include_fields')
+          ? l$include_fields == null
+              ? null
+              : Object.hashAll(l$include_fields.map((v) => v))
+          : const {},
+      _$data.containsKey('metafield_namespaces')
+          ? l$metafield_namespaces == null
+              ? null
+              : Object.hashAll(l$metafield_namespaces.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$WebhookSubscriptionInput<TRes> {
+  factory CopyWith$Input$WebhookSubscriptionInput(
+    Input$WebhookSubscriptionInput instance,
+    TRes Function(Input$WebhookSubscriptionInput) then,
+  ) = _CopyWithImpl$Input$WebhookSubscriptionInput;
+
+  factory CopyWith$Input$WebhookSubscriptionInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$WebhookSubscriptionInput;
+
+  TRes call({
+    String? callbackUrl,
+    Enum$WebhookSubscriptionFormat? format,
+    String? filter,
+    List<String>? include_fields,
+    List<String>? metafield_namespaces,
+  });
+}
+
+class _CopyWithImpl$Input$WebhookSubscriptionInput<TRes>
+    implements CopyWith$Input$WebhookSubscriptionInput<TRes> {
+  _CopyWithImpl$Input$WebhookSubscriptionInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input$WebhookSubscriptionInput _instance;
+
+  final TRes Function(Input$WebhookSubscriptionInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? callbackUrl = _undefined,
+    Object? format = _undefined,
+    Object? filter = _undefined,
+    Object? include_fields = _undefined,
+    Object? metafield_namespaces = _undefined,
+  }) =>
+      _then(Input$WebhookSubscriptionInput._({
+        ..._instance._$data,
+        if (callbackUrl != _undefined) 'callbackUrl': (callbackUrl as String?),
+        if (format != _undefined)
+          'format': (format as Enum$WebhookSubscriptionFormat?),
+        if (filter != _undefined) 'filter': (filter as String?),
+        if (include_fields != _undefined)
+          'include_fields': (include_fields as List<String>?),
+        if (metafield_namespaces != _undefined)
+          'metafield_namespaces': (metafield_namespaces as List<String>?),
+      }));
+}
+
+class _CopyWithStubImpl$Input$WebhookSubscriptionInput<TRes>
+    implements CopyWith$Input$WebhookSubscriptionInput<TRes> {
+  _CopyWithStubImpl$Input$WebhookSubscriptionInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? callbackUrl,
+    Enum$WebhookSubscriptionFormat? format,
+    String? filter,
+    List<String>? include_fields,
+    List<String>? metafield_namespaces,
+  }) =>
+      _res;
+}
+
 enum Enum$ProductStatus {
   ACTIVE,
   ARCHIVED,
@@ -1484,6 +1754,194 @@ Enum$EmailMarketingConsentOptInLevel
       return Enum$EmailMarketingConsentOptInLevel.CONFIRMED_OPT_IN;
     default:
       return Enum$EmailMarketingConsentOptInLevel.$unknown;
+  }
+}
+
+enum Enum$WebhookSubscriptionTopic {
+  ORDERS_CREATE,
+  ORDERS_DELETE,
+  ORDERS_UPDATE,
+  ORDERS_PAID,
+  ORDERS_CANCELLED,
+  ORDERS_FULFILLED,
+  ORDERS_PARTIALLY_FULFILLED,
+  CUSTOMERS_CREATE,
+  CUSTOMERS_DELETE,
+  CUSTOMERS_UPDATE,
+  PRODUCTS_CREATE,
+  PRODUCTS_DELETE,
+  PRODUCTS_UPDATE,
+  INVENTORY_LEVELS_UPDATE,
+  INVENTORY_ITEMS_CREATE,
+  INVENTORY_ITEMS_UPDATE,
+  INVENTORY_ITEMS_DELETE,
+  APP_UNINSTALLED,
+  CARTS_CREATE,
+  CARTS_UPDATE,
+  CHECKOUTS_CREATE,
+  CHECKOUTS_DELETE,
+  CHECKOUTS_UPDATE,
+  COLLECTIONS_CREATE,
+  COLLECTIONS_DELETE,
+  COLLECTIONS_UPDATE,
+  $unknown;
+
+  factory Enum$WebhookSubscriptionTopic.fromJson(String value) =>
+      fromJson$Enum$WebhookSubscriptionTopic(value);
+
+  String toJson() => toJson$Enum$WebhookSubscriptionTopic(this);
+}
+
+String toJson$Enum$WebhookSubscriptionTopic(Enum$WebhookSubscriptionTopic e) {
+  switch (e) {
+    case Enum$WebhookSubscriptionTopic.ORDERS_CREATE:
+      return r'ORDERS_CREATE';
+    case Enum$WebhookSubscriptionTopic.ORDERS_DELETE:
+      return r'ORDERS_DELETE';
+    case Enum$WebhookSubscriptionTopic.ORDERS_UPDATE:
+      return r'ORDERS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.ORDERS_PAID:
+      return r'ORDERS_PAID';
+    case Enum$WebhookSubscriptionTopic.ORDERS_CANCELLED:
+      return r'ORDERS_CANCELLED';
+    case Enum$WebhookSubscriptionTopic.ORDERS_FULFILLED:
+      return r'ORDERS_FULFILLED';
+    case Enum$WebhookSubscriptionTopic.ORDERS_PARTIALLY_FULFILLED:
+      return r'ORDERS_PARTIALLY_FULFILLED';
+    case Enum$WebhookSubscriptionTopic.CUSTOMERS_CREATE:
+      return r'CUSTOMERS_CREATE';
+    case Enum$WebhookSubscriptionTopic.CUSTOMERS_DELETE:
+      return r'CUSTOMERS_DELETE';
+    case Enum$WebhookSubscriptionTopic.CUSTOMERS_UPDATE:
+      return r'CUSTOMERS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.PRODUCTS_CREATE:
+      return r'PRODUCTS_CREATE';
+    case Enum$WebhookSubscriptionTopic.PRODUCTS_DELETE:
+      return r'PRODUCTS_DELETE';
+    case Enum$WebhookSubscriptionTopic.PRODUCTS_UPDATE:
+      return r'PRODUCTS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.INVENTORY_LEVELS_UPDATE:
+      return r'INVENTORY_LEVELS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_CREATE:
+      return r'INVENTORY_ITEMS_CREATE';
+    case Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_UPDATE:
+      return r'INVENTORY_ITEMS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_DELETE:
+      return r'INVENTORY_ITEMS_DELETE';
+    case Enum$WebhookSubscriptionTopic.APP_UNINSTALLED:
+      return r'APP_UNINSTALLED';
+    case Enum$WebhookSubscriptionTopic.CARTS_CREATE:
+      return r'CARTS_CREATE';
+    case Enum$WebhookSubscriptionTopic.CARTS_UPDATE:
+      return r'CARTS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.CHECKOUTS_CREATE:
+      return r'CHECKOUTS_CREATE';
+    case Enum$WebhookSubscriptionTopic.CHECKOUTS_DELETE:
+      return r'CHECKOUTS_DELETE';
+    case Enum$WebhookSubscriptionTopic.CHECKOUTS_UPDATE:
+      return r'CHECKOUTS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.COLLECTIONS_CREATE:
+      return r'COLLECTIONS_CREATE';
+    case Enum$WebhookSubscriptionTopic.COLLECTIONS_DELETE:
+      return r'COLLECTIONS_DELETE';
+    case Enum$WebhookSubscriptionTopic.COLLECTIONS_UPDATE:
+      return r'COLLECTIONS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$WebhookSubscriptionTopic fromJson$Enum$WebhookSubscriptionTopic(
+    String value) {
+  switch (value) {
+    case r'ORDERS_CREATE':
+      return Enum$WebhookSubscriptionTopic.ORDERS_CREATE;
+    case r'ORDERS_DELETE':
+      return Enum$WebhookSubscriptionTopic.ORDERS_DELETE;
+    case r'ORDERS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.ORDERS_UPDATE;
+    case r'ORDERS_PAID':
+      return Enum$WebhookSubscriptionTopic.ORDERS_PAID;
+    case r'ORDERS_CANCELLED':
+      return Enum$WebhookSubscriptionTopic.ORDERS_CANCELLED;
+    case r'ORDERS_FULFILLED':
+      return Enum$WebhookSubscriptionTopic.ORDERS_FULFILLED;
+    case r'ORDERS_PARTIALLY_FULFILLED':
+      return Enum$WebhookSubscriptionTopic.ORDERS_PARTIALLY_FULFILLED;
+    case r'CUSTOMERS_CREATE':
+      return Enum$WebhookSubscriptionTopic.CUSTOMERS_CREATE;
+    case r'CUSTOMERS_DELETE':
+      return Enum$WebhookSubscriptionTopic.CUSTOMERS_DELETE;
+    case r'CUSTOMERS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.CUSTOMERS_UPDATE;
+    case r'PRODUCTS_CREATE':
+      return Enum$WebhookSubscriptionTopic.PRODUCTS_CREATE;
+    case r'PRODUCTS_DELETE':
+      return Enum$WebhookSubscriptionTopic.PRODUCTS_DELETE;
+    case r'PRODUCTS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.PRODUCTS_UPDATE;
+    case r'INVENTORY_LEVELS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.INVENTORY_LEVELS_UPDATE;
+    case r'INVENTORY_ITEMS_CREATE':
+      return Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_CREATE;
+    case r'INVENTORY_ITEMS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_UPDATE;
+    case r'INVENTORY_ITEMS_DELETE':
+      return Enum$WebhookSubscriptionTopic.INVENTORY_ITEMS_DELETE;
+    case r'APP_UNINSTALLED':
+      return Enum$WebhookSubscriptionTopic.APP_UNINSTALLED;
+    case r'CARTS_CREATE':
+      return Enum$WebhookSubscriptionTopic.CARTS_CREATE;
+    case r'CARTS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.CARTS_UPDATE;
+    case r'CHECKOUTS_CREATE':
+      return Enum$WebhookSubscriptionTopic.CHECKOUTS_CREATE;
+    case r'CHECKOUTS_DELETE':
+      return Enum$WebhookSubscriptionTopic.CHECKOUTS_DELETE;
+    case r'CHECKOUTS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.CHECKOUTS_UPDATE;
+    case r'COLLECTIONS_CREATE':
+      return Enum$WebhookSubscriptionTopic.COLLECTIONS_CREATE;
+    case r'COLLECTIONS_DELETE':
+      return Enum$WebhookSubscriptionTopic.COLLECTIONS_DELETE;
+    case r'COLLECTIONS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.COLLECTIONS_UPDATE;
+    default:
+      return Enum$WebhookSubscriptionTopic.$unknown;
+  }
+}
+
+enum Enum$WebhookSubscriptionFormat {
+  JSON,
+  XML,
+  $unknown;
+
+  factory Enum$WebhookSubscriptionFormat.fromJson(String value) =>
+      fromJson$Enum$WebhookSubscriptionFormat(value);
+
+  String toJson() => toJson$Enum$WebhookSubscriptionFormat(this);
+}
+
+String toJson$Enum$WebhookSubscriptionFormat(Enum$WebhookSubscriptionFormat e) {
+  switch (e) {
+    case Enum$WebhookSubscriptionFormat.JSON:
+      return r'JSON';
+    case Enum$WebhookSubscriptionFormat.XML:
+      return r'XML';
+    case Enum$WebhookSubscriptionFormat.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$WebhookSubscriptionFormat fromJson$Enum$WebhookSubscriptionFormat(
+    String value) {
+  switch (value) {
+    case r'JSON':
+      return Enum$WebhookSubscriptionFormat.JSON;
+    case r'XML':
+      return Enum$WebhookSubscriptionFormat.XML;
+    default:
+      return Enum$WebhookSubscriptionFormat.$unknown;
   }
 }
 

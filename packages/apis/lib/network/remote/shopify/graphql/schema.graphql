@@ -37,6 +37,11 @@ type Mutation {
   customerCreate(input: CustomerInput!): CustomerCreatePayload
   customerUpdate(input: CustomerUpdateInput!): CustomerUpdatePayload
   customerDelete(input: CustomerDeleteInput!): CustomerDeletePayload
+  
+  # Webhook mutations
+  webhookSubscriptionCreate(topic: WebhookSubscriptionTopic!, webhookSubscription: WebhookSubscriptionInput!): WebhookSubscriptionCreatePayload
+  webhookSubscriptionUpdate(id: ID!, webhookSubscription: WebhookSubscriptionInput!): WebhookSubscriptionUpdatePayload
+  webhookSubscriptionDelete(id: ID!): WebhookSubscriptionDeletePayload
 }
 
 # Basic types - these should be replaced with actual Shopify schema
@@ -370,6 +375,7 @@ enum EmailMarketingConsentOptInLevel {
 type WebhookSubscription {
   id: ID!
   topic: String!
+  filter: String
   endpoint: WebhookEndpoint!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -408,4 +414,64 @@ type WebhookPubSubEndpoint implements WebhookEndpoint {
   __typename: String!
   pubSubProject: String!
   pubSubTopic: String!
+}
+
+# Webhook input types
+input WebhookSubscriptionInput {
+  callbackUrl: String
+  format: WebhookSubscriptionFormat
+  filter: String
+  include_fields: [String!]
+  metafield_namespaces: [String!]
+}
+
+# Webhook payload types
+type WebhookSubscriptionCreatePayload {
+  webhookSubscription: WebhookSubscription
+  userErrors: [UserError!]!
+}
+
+type WebhookSubscriptionUpdatePayload {
+  webhookSubscription: WebhookSubscription
+  userErrors: [UserError!]!
+}
+
+type WebhookSubscriptionDeletePayload {
+  deletedWebhookSubscriptionId: ID
+  userErrors: [UserError!]!
+}
+
+# Webhook enums
+enum WebhookSubscriptionTopic {
+  ORDERS_CREATE
+  ORDERS_DELETE
+  ORDERS_UPDATE
+  ORDERS_PAID
+  ORDERS_CANCELLED
+  ORDERS_FULFILLED
+  ORDERS_PARTIALLY_FULFILLED
+  CUSTOMERS_CREATE
+  CUSTOMERS_DELETE
+  CUSTOMERS_UPDATE
+  PRODUCTS_CREATE
+  PRODUCTS_DELETE
+  PRODUCTS_UPDATE
+  INVENTORY_LEVELS_UPDATE
+  INVENTORY_ITEMS_CREATE
+  INVENTORY_ITEMS_UPDATE
+  INVENTORY_ITEMS_DELETE
+  APP_UNINSTALLED
+  CARTS_CREATE
+  CARTS_UPDATE
+  CHECKOUTS_CREATE
+  CHECKOUTS_DELETE
+  CHECKOUTS_UPDATE
+  COLLECTIONS_CREATE
+  COLLECTIONS_DELETE
+  COLLECTIONS_UPDATE
+}
+
+enum WebhookSubscriptionFormat {
+  JSON
+  XML
 }
