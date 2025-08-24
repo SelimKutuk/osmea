@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/abstract/taxes_rates_service.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/retrieve_tax_rate_response.dart';
 import 'package:apis/network/remote/woocommerce/taxes/rates/freezed_model/response/delete_tax_rate_response.dart';
@@ -57,7 +57,6 @@ abstract class TaxesRatesServiceClient implements TaxesRatesService {
     @Query('context') String? context,
   });
 
-
   /// 🗑️ Delete a tax rate from WooCommerce API
   @override
   @DELETE('/wp-json/wc/{api_version}/taxes/{tax_rate_id}')
@@ -110,5 +109,4 @@ abstract class TaxesRatesServiceClient implements TaxesRatesService {
     @Path('api_version') required String apiVersion,
     @Body() required BatchUpdateTaxesRatesRequest batchData,
   });
-
 }

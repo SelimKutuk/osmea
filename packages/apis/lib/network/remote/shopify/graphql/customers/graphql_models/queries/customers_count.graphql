@@ -1,0 +1,13 @@
+query CustomersCount($query: String) {
+  customers(first: 1, query: $query) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}

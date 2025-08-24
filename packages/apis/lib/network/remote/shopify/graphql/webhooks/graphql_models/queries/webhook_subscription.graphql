@@ -1,0 +1,15 @@
+query WebhookSubscription($id: ID!) {
+  webhookSubscription(id: $id) {
+    id
+    topic
+    endpoint {
+      __typename
+      ... on WebhookHttpEndpoint {
+        callbackUrl
+      }
+      ... on WebhookEventBridgeEndpoint {
+        arn
+      }
+    }
+  }
+}

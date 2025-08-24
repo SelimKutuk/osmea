@@ -5,7 +5,7 @@ import 'package:core/core.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:apis/apis.dart';
 import 'package:apis/services/wizard_helper.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:api_explorer/routes/app_router.dart';
 import 'di/config/config_di.dart';
 

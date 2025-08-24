@@ -3,6 +3,9 @@
 
 import 'package:apis/apis.dart'; // 📦 Main APIs package
 import 'package:apis/di/config/config_di.config.dart'; // ⚙️ Generated DI config
+import 'package:apis/dio_config/dio_client/shopify_graphql_client.dart'; // 🔌 Shopify GraphQL Client
+import 'package:apis/dio_config/dio_client/api_dio_client.dart'; // 🚀 API Dio Client
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart'; // 🌐 Abstract Base Client
 import 'package:get_it/get_it.dart'; // 🛠️ Service locator
 import 'package:injectable/injectable.dart'; // 💉 Dependency injection
 import 'package:logger/logger.dart'; // 📜 Logger for error handling
@@ -20,7 +23,12 @@ final Logger logger = Logger();
 GetIt configureDependencies() {
   try {
     // 🏗️ Initialize dependencies using the generated config
-    return ApiNetwork.getIt.init();
+    final getIt = ApiNetwork.getIt.init();
+
+    // 🔌 Register services manually if needed
+    _registerServices(getIt);
+
+    return getIt;
   } catch (e) {
     // Log the error if dependency initialization fails
     logger.e('Failed to configure dependencies: $e');
@@ -35,5 +43,24 @@ GetIt configureDependencies() {
     }
 
     rethrow; // Rethrow the error after logging
+  }
+}
+
+/// 🔌 Manually register services if auto-registration fails
+void _registerServices(GetIt getIt) {
+  try {
+    // Shopify GraphQL Client
+    if (!getIt.isRegistered<GraphQLBaseClient>()) {
+      getIt.registerSingleton<GraphQLBaseClient>(ShopifyGraphQLClient());
+    }
+
+    // API Dio Client
+    if (!getIt.isRegistered<ApiBaseClient>()) {
+      getIt.registerSingleton<ApiBaseClient>(ApiDioClient());
+    }
+
+    logger.i('GraphQL and API services registered successfully');
+  } catch (e) {
+    logger.w('Some services could not be registered: $e');
   }
 }

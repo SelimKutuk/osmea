@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/customers/abstract/customers_service.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/list_all_customers_response.dart';
 import 'package:apis/network/remote/woocommerce/customers/freezed_model/response/retrieve_customer_response.dart';

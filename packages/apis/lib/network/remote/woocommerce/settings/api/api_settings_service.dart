@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/settings/abstract/settings_service.dart';
 import 'package:apis/network/remote/woocommerce/settings/freezed_model/response/list_settings_groups_response.dart';
 import 'package:apis/network/remote/woocommerce/settings/freezed_model/response/retrieve_setting_option_response.dart';
@@ -49,5 +49,4 @@ abstract class SettingsServiceClient implements SettingsService {
     @Path('option_id') String? optionId,
     @Body() UpdateSettingsOptionRequest? request,
   });
-
 }

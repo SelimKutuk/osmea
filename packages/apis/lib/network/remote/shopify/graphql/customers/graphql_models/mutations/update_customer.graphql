@@ -1,0 +1,16 @@
+mutation UpdateCustomer($id: ID!, $firstName: String, $lastName: String, $email: String, $phone: String) {
+  customerUpdate(input: {id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone}) {
+    customer {
+      id
+      firstName
+      lastName
+      email
+      phone
+      updatedAt
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

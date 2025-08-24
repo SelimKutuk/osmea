@@ -17,6 +17,11 @@ type Query {
   
   # Shop
   shop: Shop
+  
+  # Webhooks
+  webhookSubscription(id: ID!): WebhookSubscription
+  webhookSubscriptions(first: Int, after: String, query: String): WebhookSubscriptionConnection
+  webhookSubscriptionsCount(query: String!): WebhookSubscriptionsCount
 }
 
 type Mutation {
@@ -31,6 +36,12 @@ type Mutation {
   # Customer mutations
   customerCreate(input: CustomerInput!): CustomerCreatePayload
   customerUpdate(input: CustomerUpdateInput!): CustomerUpdatePayload
+  customerDelete(input: CustomerDeleteInput!): CustomerDeletePayload
+  
+  # Webhook mutations
+  webhookSubscriptionCreate(topic: WebhookSubscriptionTopic!, webhookSubscription: WebhookSubscriptionInput!): WebhookSubscriptionCreatePayload
+  webhookSubscriptionUpdate(id: ID!, webhookSubscription: WebhookSubscriptionInput!): WebhookSubscriptionUpdatePayload
+  webhookSubscriptionDelete(id: ID!): WebhookSubscriptionDeletePayload
 }
 
 # Basic types - these should be replaced with actual Shopify schema
@@ -90,6 +101,9 @@ type Customer {
   phone: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  acceptsMarketing: Boolean
+  emailMarketingConsent: EmailMarketingConsent
+  addresses(first: Int): CustomerAddressConnection!
   orders(first: Int): OrderConnection!
 }
 
@@ -160,6 +174,10 @@ input CustomerUpdateInput {
   phone: String
 }
 
+input CustomerDeleteInput {
+  id: ID!
+}
+
 input OrderUpdateInput {
   id: ID!
   note: String
@@ -191,6 +209,11 @@ type CustomerUpdatePayload {
   userErrors: [UserError!]!
 }
 
+type CustomerDeletePayload {
+  deletedCustomerId: ID
+  userErrors: [UserError!]!
+}
+
 type OrderUpdatePayload {
   order: Order
   userErrors: [UserError!]!
@@ -216,6 +239,13 @@ enum CurrencyCode {
   AUD
   JPY
   TRY
+}
+
+enum WeightUnit {
+  GRAMS
+  KILOGRAMS
+  OUNCES
+  POUNDS
 }
 
 # Scalars
@@ -284,6 +314,37 @@ type OrderLineItem {
   variant: ProductVariant
 }
 
+# Customer Address types
+type CustomerAddressConnection {
+  edges: [CustomerAddressEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CustomerAddressEdge {
+  node: CustomerAddress!
+  cursor: String!
+}
+
+type CustomerAddress {
+  id: ID!
+  address1: String
+  address2: String
+  city: String
+  province: String
+  country: String
+  zip: String
+  phone: String
+  firstName: String
+  lastName: String
+  company: String
+}
+
+# Email Marketing Consent
+type EmailMarketingConsent {
+  marketingState: EmailMarketingConsentState!
+  marketingOptInLevel: EmailMarketingConsentOptInLevel!
+}
+
 type ShopPlan {
   displayName: String!
   partnerDevelopment: Boolean!
@@ -295,4 +356,138 @@ enum WeightUnit {
   GRAMS
   POUNDS
   OUNCES
+}
+
+# Email Marketing Consent Enums
+enum EmailMarketingConsentState {
+  NOT_SUBSCRIBED
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+enum EmailMarketingConsentOptInLevel {
+  SINGLE_OPT_IN
+  DOUBLE_OPT_IN
+  CONFIRMED_OPT_IN
+}
+
+# Webhook types
+type WebhookSubscription {
+  id: ID!
+  topic: String!
+  filter: String
+  endpoint: WebhookEndpoint!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  apiVersion: ApiVersion
+  format: WebhookSubscriptionFormat
+  includeFields: [String!]
+  metafieldNamespaces: [String!]
+}
+
+type WebhookSubscriptionsCount {
+  count: Int!
+  precision: String!
+}
+
+type WebhookSubscriptionConnection {
+  edges: [WebhookSubscriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type WebhookSubscriptionEdge {
+  node: WebhookSubscription!
+  cursor: String!
+}
+
+interface WebhookEndpoint {
+  __typename: String!
+}
+
+type WebhookHttpEndpoint implements WebhookEndpoint {
+  __typename: String!
+  callbackUrl: String!
+}
+
+type WebhookEventBridgeEndpoint implements WebhookEndpoint {
+  __typename: String!
+  arn: String!
+}
+
+type WebhookPubSubEndpoint implements WebhookEndpoint {
+  __typename: String!
+  pubSubProject: String!
+  pubSubTopic: String!
+}
+
+# Webhook input types
+input WebhookSubscriptionInput {
+  callbackUrl: String
+  format: WebhookSubscriptionFormat
+  filter: String
+  includeFields: [String!]
+  metafieldNamespaces: [String!]
+  apiVersion: String
+}
+
+# Webhook payload types
+type WebhookSubscriptionCreatePayload {
+  webhookSubscription: WebhookSubscription
+  userErrors: [UserError!]!
+}
+
+type WebhookSubscriptionUpdatePayload {
+  webhookSubscription: WebhookSubscription
+  userErrors: [UserError!]!
+}
+
+type WebhookSubscriptionDeletePayload {
+  deletedWebhookSubscriptionId: ID
+  userErrors: [UserError!]!
+}
+
+# Webhook enums
+enum WebhookSubscriptionTopic {
+  ORDERS_CREATE
+  ORDERS_DELETE
+  ORDERS_UPDATE
+  ORDERS_PAID
+  ORDERS_CANCELLED
+  ORDERS_FULFILLED
+  ORDERS_PARTIALLY_FULFILLED
+  CUSTOMERS_CREATE
+  CUSTOMERS_DELETE
+  CUSTOMERS_UPDATE
+  PRODUCTS_CREATE
+  PRODUCTS_DELETE
+  PRODUCTS_UPDATE
+  INVENTORY_LEVELS_UPDATE
+  INVENTORY_ITEMS_CREATE
+  INVENTORY_ITEMS_UPDATE
+  INVENTORY_ITEMS_DELETE
+  APP_UNINSTALLED
+  CARTS_CREATE
+  CARTS_UPDATE
+  CHECKOUTS_CREATE
+  CHECKOUTS_DELETE
+  CHECKOUTS_UPDATE
+  COLLECTIONS_CREATE
+  COLLECTIONS_DELETE
+  COLLECTIONS_UPDATE
+  METAOBJECTS_CREATE
+  METAOBJECTS_DELETE
+  METAOBJECTS_UPDATE
+}
+
+enum WebhookSubscriptionFormat {
+  JSON
+  XML
+}
+
+# API Version type
+type ApiVersion {
+  handle: String!
+  displayName: String!
+  supported: Boolean!
+  releaseCandidate: Boolean!
 }

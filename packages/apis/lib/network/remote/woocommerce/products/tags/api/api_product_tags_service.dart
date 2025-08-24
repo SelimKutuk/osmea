@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';

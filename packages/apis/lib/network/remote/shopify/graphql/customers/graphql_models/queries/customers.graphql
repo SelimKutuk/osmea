@@ -1,0 +1,23 @@
+query Customers($first: Int!, $after: String, $query: String) {
+  customers(first: $first, after: $after, query: $query) {
+    edges {
+      node {
+        id
+        firstName
+        lastName
+        email
+        phone
+        createdAt
+        updatedAt
+
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}

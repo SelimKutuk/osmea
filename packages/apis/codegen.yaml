@@ -5,6 +5,7 @@ documents:
   - "lib/network/remote/shopify/graphql/queries/**/*.graphql"
   - "lib/network/remote/shopify/graphql/mutations/**/*.graphql"
   - "lib/network/remote/shopify/graphql/subscriptions/**/*.graphql"
+  - "lib/network/remote/shopify/graphql/webhooks/**/*.graphql"
 
 generates:
   lib/network/remote/shopify/graphql/generated/graphql_client.dart:
