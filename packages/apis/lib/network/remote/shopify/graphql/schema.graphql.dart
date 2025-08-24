@@ -1273,16 +1273,18 @@ class Input$WebhookSubscriptionInput {
     String? callbackUrl,
     Enum$WebhookSubscriptionFormat? format,
     String? filter,
-    List<String>? include_fields,
-    List<String>? metafield_namespaces,
+    List<String>? includeFields,
+    List<String>? metafieldNamespaces,
+    String? apiVersion,
   }) =>
       Input$WebhookSubscriptionInput._({
         if (callbackUrl != null) r'callbackUrl': callbackUrl,
         if (format != null) r'format': format,
         if (filter != null) r'filter': filter,
-        if (include_fields != null) r'include_fields': include_fields,
-        if (metafield_namespaces != null)
-          r'metafield_namespaces': metafield_namespaces,
+        if (includeFields != null) r'includeFields': includeFields,
+        if (metafieldNamespaces != null)
+          r'metafieldNamespaces': metafieldNamespaces,
+        if (apiVersion != null) r'apiVersion': apiVersion,
       });
 
   Input$WebhookSubscriptionInput._(this._$data);
@@ -1303,18 +1305,22 @@ class Input$WebhookSubscriptionInput {
       final l$filter = data['filter'];
       result$data['filter'] = (l$filter as String?);
     }
-    if (data.containsKey('include_fields')) {
-      final l$include_fields = data['include_fields'];
-      result$data['include_fields'] = (l$include_fields as List<dynamic>?)
+    if (data.containsKey('includeFields')) {
+      final l$includeFields = data['includeFields'];
+      result$data['includeFields'] = (l$includeFields as List<dynamic>?)
           ?.map((e) => (e as String))
           .toList();
     }
-    if (data.containsKey('metafield_namespaces')) {
-      final l$metafield_namespaces = data['metafield_namespaces'];
-      result$data['metafield_namespaces'] =
-          (l$metafield_namespaces as List<dynamic>?)
+    if (data.containsKey('metafieldNamespaces')) {
+      final l$metafieldNamespaces = data['metafieldNamespaces'];
+      result$data['metafieldNamespaces'] =
+          (l$metafieldNamespaces as List<dynamic>?)
               ?.map((e) => (e as String))
               .toList();
+    }
+    if (data.containsKey('apiVersion')) {
+      final l$apiVersion = data['apiVersion'];
+      result$data['apiVersion'] = (l$apiVersion as String?);
     }
     return Input$WebhookSubscriptionInput._(result$data);
   }
@@ -1328,11 +1334,12 @@ class Input$WebhookSubscriptionInput {
 
   String? get filter => (_$data['filter'] as String?);
 
-  List<String>? get include_fields =>
-      (_$data['include_fields'] as List<String>?);
+  List<String>? get includeFields => (_$data['includeFields'] as List<String>?);
 
-  List<String>? get metafield_namespaces =>
-      (_$data['metafield_namespaces'] as List<String>?);
+  List<String>? get metafieldNamespaces =>
+      (_$data['metafieldNamespaces'] as List<String>?);
+
+  String? get apiVersion => (_$data['apiVersion'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1350,14 +1357,18 @@ class Input$WebhookSubscriptionInput {
       final l$filter = filter;
       result$data['filter'] = l$filter;
     }
-    if (_$data.containsKey('include_fields')) {
-      final l$include_fields = include_fields;
-      result$data['include_fields'] = l$include_fields?.map((e) => e).toList();
+    if (_$data.containsKey('includeFields')) {
+      final l$includeFields = includeFields;
+      result$data['includeFields'] = l$includeFields?.map((e) => e).toList();
     }
-    if (_$data.containsKey('metafield_namespaces')) {
-      final l$metafield_namespaces = metafield_namespaces;
-      result$data['metafield_namespaces'] =
-          l$metafield_namespaces?.map((e) => e).toList();
+    if (_$data.containsKey('metafieldNamespaces')) {
+      final l$metafieldNamespaces = metafieldNamespaces;
+      result$data['metafieldNamespaces'] =
+          l$metafieldNamespaces?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('apiVersion')) {
+      final l$apiVersion = apiVersion;
+      result$data['apiVersion'] = l$apiVersion;
     }
     return result$data;
   }
@@ -1402,45 +1413,53 @@ class Input$WebhookSubscriptionInput {
     if (l$filter != lOther$filter) {
       return false;
     }
-    final l$include_fields = include_fields;
-    final lOther$include_fields = other.include_fields;
-    if (_$data.containsKey('include_fields') !=
-        other._$data.containsKey('include_fields')) {
+    final l$includeFields = includeFields;
+    final lOther$includeFields = other.includeFields;
+    if (_$data.containsKey('includeFields') !=
+        other._$data.containsKey('includeFields')) {
       return false;
     }
-    if (l$include_fields != null && lOther$include_fields != null) {
-      if (l$include_fields.length != lOther$include_fields.length) {
+    if (l$includeFields != null && lOther$includeFields != null) {
+      if (l$includeFields.length != lOther$includeFields.length) {
         return false;
       }
-      for (int i = 0; i < l$include_fields.length; i++) {
-        final l$include_fields$entry = l$include_fields[i];
-        final lOther$include_fields$entry = lOther$include_fields[i];
-        if (l$include_fields$entry != lOther$include_fields$entry) {
+      for (int i = 0; i < l$includeFields.length; i++) {
+        final l$includeFields$entry = l$includeFields[i];
+        final lOther$includeFields$entry = lOther$includeFields[i];
+        if (l$includeFields$entry != lOther$includeFields$entry) {
           return false;
         }
       }
-    } else if (l$include_fields != lOther$include_fields) {
+    } else if (l$includeFields != lOther$includeFields) {
       return false;
     }
-    final l$metafield_namespaces = metafield_namespaces;
-    final lOther$metafield_namespaces = other.metafield_namespaces;
-    if (_$data.containsKey('metafield_namespaces') !=
-        other._$data.containsKey('metafield_namespaces')) {
+    final l$metafieldNamespaces = metafieldNamespaces;
+    final lOther$metafieldNamespaces = other.metafieldNamespaces;
+    if (_$data.containsKey('metafieldNamespaces') !=
+        other._$data.containsKey('metafieldNamespaces')) {
       return false;
     }
-    if (l$metafield_namespaces != null && lOther$metafield_namespaces != null) {
-      if (l$metafield_namespaces.length != lOther$metafield_namespaces.length) {
+    if (l$metafieldNamespaces != null && lOther$metafieldNamespaces != null) {
+      if (l$metafieldNamespaces.length != lOther$metafieldNamespaces.length) {
         return false;
       }
-      for (int i = 0; i < l$metafield_namespaces.length; i++) {
-        final l$metafield_namespaces$entry = l$metafield_namespaces[i];
-        final lOther$metafield_namespaces$entry =
-            lOther$metafield_namespaces[i];
-        if (l$metafield_namespaces$entry != lOther$metafield_namespaces$entry) {
+      for (int i = 0; i < l$metafieldNamespaces.length; i++) {
+        final l$metafieldNamespaces$entry = l$metafieldNamespaces[i];
+        final lOther$metafieldNamespaces$entry = lOther$metafieldNamespaces[i];
+        if (l$metafieldNamespaces$entry != lOther$metafieldNamespaces$entry) {
           return false;
         }
       }
-    } else if (l$metafield_namespaces != lOther$metafield_namespaces) {
+    } else if (l$metafieldNamespaces != lOther$metafieldNamespaces) {
+      return false;
+    }
+    final l$apiVersion = apiVersion;
+    final lOther$apiVersion = other.apiVersion;
+    if (_$data.containsKey('apiVersion') !=
+        other._$data.containsKey('apiVersion')) {
+      return false;
+    }
+    if (l$apiVersion != lOther$apiVersion) {
       return false;
     }
     return true;
@@ -1451,22 +1470,24 @@ class Input$WebhookSubscriptionInput {
     final l$callbackUrl = callbackUrl;
     final l$format = format;
     final l$filter = filter;
-    final l$include_fields = include_fields;
-    final l$metafield_namespaces = metafield_namespaces;
+    final l$includeFields = includeFields;
+    final l$metafieldNamespaces = metafieldNamespaces;
+    final l$apiVersion = apiVersion;
     return Object.hashAll([
       _$data.containsKey('callbackUrl') ? l$callbackUrl : const {},
       _$data.containsKey('format') ? l$format : const {},
       _$data.containsKey('filter') ? l$filter : const {},
-      _$data.containsKey('include_fields')
-          ? l$include_fields == null
+      _$data.containsKey('includeFields')
+          ? l$includeFields == null
               ? null
-              : Object.hashAll(l$include_fields.map((v) => v))
+              : Object.hashAll(l$includeFields.map((v) => v))
           : const {},
-      _$data.containsKey('metafield_namespaces')
-          ? l$metafield_namespaces == null
+      _$data.containsKey('metafieldNamespaces')
+          ? l$metafieldNamespaces == null
               ? null
-              : Object.hashAll(l$metafield_namespaces.map((v) => v))
+              : Object.hashAll(l$metafieldNamespaces.map((v) => v))
           : const {},
+      _$data.containsKey('apiVersion') ? l$apiVersion : const {},
     ]);
   }
 }
@@ -1484,8 +1505,9 @@ abstract class CopyWith$Input$WebhookSubscriptionInput<TRes> {
     String? callbackUrl,
     Enum$WebhookSubscriptionFormat? format,
     String? filter,
-    List<String>? include_fields,
-    List<String>? metafield_namespaces,
+    List<String>? includeFields,
+    List<String>? metafieldNamespaces,
+    String? apiVersion,
   });
 }
 
@@ -1506,8 +1528,9 @@ class _CopyWithImpl$Input$WebhookSubscriptionInput<TRes>
     Object? callbackUrl = _undefined,
     Object? format = _undefined,
     Object? filter = _undefined,
-    Object? include_fields = _undefined,
-    Object? metafield_namespaces = _undefined,
+    Object? includeFields = _undefined,
+    Object? metafieldNamespaces = _undefined,
+    Object? apiVersion = _undefined,
   }) =>
       _then(Input$WebhookSubscriptionInput._({
         ..._instance._$data,
@@ -1515,10 +1538,11 @@ class _CopyWithImpl$Input$WebhookSubscriptionInput<TRes>
         if (format != _undefined)
           'format': (format as Enum$WebhookSubscriptionFormat?),
         if (filter != _undefined) 'filter': (filter as String?),
-        if (include_fields != _undefined)
-          'include_fields': (include_fields as List<String>?),
-        if (metafield_namespaces != _undefined)
-          'metafield_namespaces': (metafield_namespaces as List<String>?),
+        if (includeFields != _undefined)
+          'includeFields': (includeFields as List<String>?),
+        if (metafieldNamespaces != _undefined)
+          'metafieldNamespaces': (metafieldNamespaces as List<String>?),
+        if (apiVersion != _undefined) 'apiVersion': (apiVersion as String?),
       }));
 }
 
@@ -1532,8 +1556,9 @@ class _CopyWithStubImpl$Input$WebhookSubscriptionInput<TRes>
     String? callbackUrl,
     Enum$WebhookSubscriptionFormat? format,
     String? filter,
-    List<String>? include_fields,
-    List<String>? metafield_namespaces,
+    List<String>? includeFields,
+    List<String>? metafieldNamespaces,
+    String? apiVersion,
   }) =>
       _res;
 }
