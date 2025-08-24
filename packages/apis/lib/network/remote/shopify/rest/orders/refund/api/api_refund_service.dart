@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/orders/refund/abstract/refund_service.dart';
 import 'package:apis/network/remote/shopify/rest/orders/refund/freezed_model/request/create_refund_calculate_request.dart';
 import 'package:apis/network/remote/shopify/rest/orders/refund/freezed_model/request/create_refund_request.dart';
@@ -18,8 +18,8 @@ part 'api_refund_service.g.dart';
 @Injectable(as: RefundService)
 abstract class RefundServiceClient implements RefundService {
   @factoryMethod
-  factory RefundServiceClient(Dio dio) => _RefundServiceClient(
-        ApiDioClient.starter(),
+  factory RefundServiceClient(ApiBaseClient apiClient) => _RefundServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

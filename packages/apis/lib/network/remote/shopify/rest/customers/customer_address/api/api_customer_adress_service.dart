@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer_address/abstract/customer_adress_service.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer_address/freezed_model/request/creates_new_address_for_customer_request.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer_address/freezed_model/request/update_postal_code_of_customer_address_request.dart';
@@ -21,9 +21,9 @@ part 'api_customer_adress_service.g.dart';
 abstract class CustomerAddressServiceClient implements CustomerAddressService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CustomerAddressServiceClient(Dio dio) =>
+  factory CustomerAddressServiceClient(ApiBaseClient apiClient) =>
       _CustomerAddressServiceClient(
-        ApiDioClient.starter(),
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -72,8 +72,7 @@ abstract class CustomerAddressServiceClient implements CustomerAddressService {
       destroyMultipleCustomerAddresses({
     @Path('api_version') required String apiVersion,
     @Path('customer_id') required String customerId,
-    @Query('address_ids[]')
-    required List<int> addressIds,
+    @Query('address_ids[]') required List<int> addressIds,
     @Query('operation') String operation = 'destroy',
   });
 

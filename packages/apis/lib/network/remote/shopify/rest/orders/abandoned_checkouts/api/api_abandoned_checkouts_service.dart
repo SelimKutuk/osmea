@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/orders/abandoned_checkouts/abstract/abandoned_checkouts_service.dart';
 import 'package:apis/network/remote/shopify/rest/orders/abandoned_checkouts/freezed_model/response/abandoned_checkouts_count_response.dart';
 import 'package:apis/network/remote/shopify/rest/orders/abandoned_checkouts/freezed_model/response/abandoned_checkouts_list_response.dart';
@@ -14,9 +14,9 @@ part 'api_abandoned_checkouts_service.g.dart';
 abstract class AbandonedCheckoutsServiceClient
     implements AbandonedCheckoutsService {
   @factoryMethod
-  factory AbandonedCheckoutsServiceClient(Dio dio) =>
+  factory AbandonedCheckoutsServiceClient(ApiBaseClient apiClient) =>
       _AbandonedCheckoutsServiceClient(
-        ApiDioClient.starter(),
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/orders/transaction/abstract/transaction_service.dart';
 import 'package:apis/network/remote/shopify/rest/orders/transaction/freezed_model/request/create_transaction_request.dart';
 import 'package:apis/network/remote/shopify/rest/orders/transaction/freezed_model/response/create_transaction_response.dart';
@@ -16,8 +16,8 @@ part 'api_transaction_service.g.dart';
 @Injectable(as: TransactionService)
 abstract class TransactionServiceClient implements TransactionService {
   @factoryMethod
-  factory TransactionServiceClient(Dio dio) => _TransactionServiceClient(
-        ApiDioClient.starter(),
+  factory TransactionServiceClient(ApiBaseClient apiClient) => _TransactionServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

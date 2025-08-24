@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/gift_card/abstract/gift_card_service.dart';
 import 'package:apis/network/remote/shopify/rest/gift_card/freezed_model/request/create_new_gift_card_request.dart';
 import 'package:apis/network/remote/shopify/rest/gift_card/freezed_model/request/disable_gift_card_request.dart';
@@ -25,8 +25,8 @@ part 'api_gift_card_service.g.dart';
 @Injectable(as: GiftCardService)
 abstract class GiftCardServiceClient implements GiftCardService {
   @factoryMethod
-  factory GiftCardServiceClient(Dio dio) => _GiftCardServiceClient(
-        ApiDioClient.starter(),
+  factory GiftCardServiceClient(ApiBaseClient apiClient) => _GiftCardServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

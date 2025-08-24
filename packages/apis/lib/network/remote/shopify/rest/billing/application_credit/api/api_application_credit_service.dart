@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_credit/abstract/application_credit_service.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_credit/freezed_model/response/get_all_application_credits_response.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_credit/freezed_model/response/get_an_application_credit_response.dart';
@@ -14,11 +14,13 @@ part 'api_application_credit_service.g.dart';
 /// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏬🔑
 @RestApi()
 @Injectable(as: ApplicationCreditService)
-abstract class ApplicationCreditServiceClient implements ApplicationCreditService {
+abstract class ApplicationCreditServiceClient
+    implements ApplicationCreditService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ApplicationCreditServiceClient(Dio dio) => _ApplicationCreditServiceClient(
-        ApiDioClient.starter(),
+  factory ApplicationCreditServiceClient(ApiBaseClient apiClient) =>
+      _ApplicationCreditServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

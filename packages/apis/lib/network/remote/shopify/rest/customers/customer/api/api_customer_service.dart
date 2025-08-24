@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer/abstract/customer_service.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer/freezed_model/request/create_new_customer_record_request.dart';
 import 'package:apis/network/remote/shopify/rest/customers/customer/freezed_model/request/creates_account_activation_url_for_customer_request.dart';
@@ -25,8 +25,8 @@ part 'api_customer_service.g.dart';
 abstract class CustomerServiceClient implements CustomerService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CustomerServiceClient(Dio dio) => _CustomerServiceClient(
-        ApiDioClient.starter(),
+  factory CustomerServiceClient(ApiBaseClient apiClient) => _CustomerServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -54,7 +54,8 @@ abstract class CustomerServiceClient implements CustomerService {
 
   @override
   @GET('/api/{api_version}/customers/{customer_id}/orders.json')
-  Future<RetrievesAllOrdersBelongingToCustomerResponse> RetrievesAllOrdersBelongingToCustomer({
+  Future<RetrievesAllOrdersBelongingToCustomerResponse>
+      RetrievesAllOrdersBelongingToCustomer({
     @Path('api_version') required String apiVersion,
     @Path('customer_id') required String customerId,
   });
@@ -67,13 +68,13 @@ abstract class CustomerServiceClient implements CustomerService {
 
   @override
   @GET('/api/{api_version}/customers/search.json')
-  Future<SearchesForCustomersThatMatchSuppliedQueryResponse> SearchesForCustomersThatMatchSuppliedQuery({
+  Future<SearchesForCustomersThatMatchSuppliedQueryResponse>
+      SearchesForCustomersThatMatchSuppliedQuery({
     @Path('api_version') required String apiVersion,
   });
 
   @override
-  @POST(
-      '/api/{api_version}/customers.json')
+  @POST('/api/{api_version}/customers.json')
   Future<CreateNewCustomerRecordResponse> createNewCustomerRecord({
     @Path('api_version') required String apiVersion,
     @Body() required CreateNewCustomerRecordRequest model,
@@ -90,8 +91,7 @@ abstract class CustomerServiceClient implements CustomerService {
   });
 
   @override
-  @POST(
-      '/api/{api_version}/customers/{customer_id}/send_invite.json')
+  @POST('/api/{api_version}/customers/{customer_id}/send_invite.json')
   Future<SendsAccountInviteToCustomerResponse> sendsAccountInviteToCustomer({
     @Path('api_version') required String apiVersion,
     @Path('customer_id') required String customerId,
@@ -111,5 +111,4 @@ abstract class CustomerServiceClient implements CustomerService {
     @Path('api_version') required String apiVersion,
     @Path('customer_id') required String customerId,
   });
-  
 }

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/events/abstract/events_service.dart';
 import 'package:apis/network/remote/shopify/rest/events/freezed_model/retrieves_list_of_events_response.dart';
 import 'package:apis/network/remote/shopify/rest/events/freezed_model/retrieves_single_events_response.dart';
@@ -15,8 +15,8 @@ part 'api_events_service.g.dart';
 abstract class RetrievesListOfEventsClient implements RetrievesListOfEvents {
   /// 🏗️ Factory for dependency injection
   @factoryMethod
-  factory RetrievesListOfEventsClient(Dio dio) => _RetrievesListOfEventsClient(
-        ApiDioClient.starter(),
+  factory RetrievesListOfEventsClient(ApiBaseClient apiClient) => _RetrievesListOfEventsClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -40,8 +40,8 @@ abstract class RetrievesListOfEventsClient implements RetrievesListOfEvents {
 abstract class RetrievesSingleEventClient implements RetrievesSingleEvent {
   /// 🏗️ Factory for dependency injection
   @factoryMethod
-  factory RetrievesSingleEventClient(Dio dio) => _RetrievesSingleEventClient(
-        ApiDioClient.starter(),
+  factory RetrievesSingleEventClient(ApiBaseClient apiClient) => _RetrievesSingleEventClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -60,8 +60,8 @@ abstract class RetrievesSingleEventClient implements RetrievesSingleEvent {
 abstract class RetrievesCountEventsClient implements RetrievesCountEvents {
   /// 🏗️ Factory for dependency injection
   @factoryMethod
-  factory RetrievesCountEventsClient(Dio dio) => _RetrievesCountEventsClient(
-        ApiDioClient.starter(),
+  factory RetrievesCountEventsClient(ApiBaseClient apiClient) => _RetrievesCountEventsClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

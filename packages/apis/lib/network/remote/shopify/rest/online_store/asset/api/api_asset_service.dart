@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/asset/abstract/asset_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/asset/freezed_model/request/change_liquid_template_value_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/asset/freezed_model/request/create_image_asset_base_request.dart';
@@ -19,12 +19,13 @@ part 'api_asset_service.g.dart';
 
 @RestApi()
 @Injectable(as: AssetService)
+
 /// 🌐 AssetService
 abstract class AssetServiceClient implements AssetService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory AssetServiceClient(Dio dio) => _AssetServiceClient(
-        ApiDioClient.starter(),
+  factory AssetServiceClient(ApiBaseClient apiClient) => _AssetServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

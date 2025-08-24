@@ -1,10 +1,10 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/access/access_scope/abstract/access_scope_service.dart';
 import 'package:apis/network/remote/shopify/rest/access/access_scope/freezed_model/access_scope_response.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart';
 
 part 'api_access_scope_service.g.dart';
 
@@ -16,8 +16,9 @@ part 'api_access_scope_service.g.dart';
 abstract class AccessScopeServiceClient implements AccessScopeService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory AccessScopeServiceClient(Dio dio) => _AccessScopeServiceClient(
-        ApiDioClient.starter(),
+  factory AccessScopeServiceClient(ApiBaseClient apiClient) =>
+      _AccessScopeServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

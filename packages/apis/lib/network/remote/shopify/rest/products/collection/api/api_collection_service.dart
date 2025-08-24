@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/products/collection/abstract/collection_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/collection/freezed_model/products_belonging_to_collection_response.dart';
 import 'package:apis/network/remote/shopify/rest/products/collection/freezed_model/single_collection_response.dart';
@@ -14,8 +14,8 @@ part 'api_collection_service.g.dart';
 abstract class CollectionServiceClient implements CollectionService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CollectionServiceClient(Dio dio) => _CollectionServiceClient(
-        ApiDioClient.starter(),
+  factory CollectionServiceClient(ApiBaseClient apiClient) => _CollectionServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

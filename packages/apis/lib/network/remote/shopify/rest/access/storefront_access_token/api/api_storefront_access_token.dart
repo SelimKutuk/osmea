@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/access/storefront_access_token/abstract/storefront_access_token.dart';
 import 'package:apis/network/remote/shopify/rest/access/storefront_access_token/freezed_model/request/create_new_storefront_access_token_request.dart';
 import 'package:apis/network/remote/shopify/rest/access/storefront_access_token/freezed_model/response/create_new_storefront_access_token_response.dart';
@@ -19,8 +19,8 @@ abstract class StorefrontAccessTokenClient
     implements StorefrontAccessTokenService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory StorefrontAccessTokenClient(Dio dio) => _StorefrontAccessTokenClient(
-        ApiDioClient.starter(),
+  factory StorefrontAccessTokenClient(ApiBaseClient apiClient) => _StorefrontAccessTokenClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -33,17 +33,17 @@ abstract class StorefrontAccessTokenClient
 
   @override
   @POST('/api/{api_version}/storefront_access_tokens.json')
-  Future<CreateNewStorefrontAccessTokenResponse> createNewStorefrontAccessToken({
+  Future<CreateNewStorefrontAccessTokenResponse>
+      createNewStorefrontAccessToken({
     @Path('api_version') required String apiVersion,
     @Body() required CreateNewStorefrontAccessTokenRequest model,
   });
 
   @override
-  @DELETE('/api/{api_version}/storefront_access_tokens/{storefront_access_token_id}.json')
+  @DELETE(
+      '/api/{api_version}/storefront_access_tokens/{storefront_access_token_id}.json')
   Future<void> deleteStorefrontAccessToken({
     @Path('api_version') required String apiVersion,
     @Path('storefront_access_token_id') required String storefrontAccessTokenId,
   });
-
-  
 }

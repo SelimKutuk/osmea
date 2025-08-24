@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/orders/order/abstract/order_service.dart';
 import 'package:apis/network/remote/shopify/rest/orders/order/freezed_model/request/create_cancel_order_request.dart';
 import 'package:apis/network/remote/shopify/rest/orders/order/freezed_model/request/create_close_order_request.dart';
@@ -68,8 +68,8 @@ part 'api_order_service.g.dart';
 /// 🏭 Factory for dependency injection
 abstract class OrderServiceClient implements OrderService {
   @factoryMethod
-  factory OrderServiceClient(Dio dio) => _OrderServiceClient(
-        ApiDioClient.starter(),
+  factory OrderServiceClient(ApiBaseClient apiClient) => _OrderServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/products/collect/abstract/collect_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/collect/freezed_model/request/create_collect_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/collect/freezed_model/response/get_collects_response.dart';
@@ -17,8 +17,8 @@ part 'api_collect_service.g.dart';
 abstract class CollectServiceClient implements CollectService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CollectServiceClient(Dio dio) => _CollectServiceClient(
-        ApiDioClient.starter(),
+  factory CollectServiceClient(ApiBaseClient apiClient) => _CollectServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

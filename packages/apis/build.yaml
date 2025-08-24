@@ -1,6 +1,7 @@
 targets:
   $default:
     builders:
+      # GraphQL code generation
       graphql_codegen:
         options:
           schema: lib/network/remote/shopify/graphql/schema.graphql
@@ -21,3 +22,22 @@ targets:
                   URL: String
                   HTML: String
                   JSON: Map<String, dynamic>
+      
+      # Freezed code generation for REST models
+      freezed:
+        enabled: true
+        generate_for:
+          - lib/network/remote/shopify/rest/**/*.dart
+          - lib/network/remote/woocommerce/**/*.dart
+      
+      # JSON serialization for REST models
+      json_serializable:
+        enabled: true
+        generate_for:
+          - lib/network/remote/shopify/rest/**/*.dart
+          - lib/network/remote/woocommerce/**/*.dart
+        options:
+          # JSON serialization options
+          explicit_to_json: true
+          include_if_null: false
+          field_rename: snake

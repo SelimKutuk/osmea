@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/system_status/abstract/system_status_service.dart';
 import 'package:apis/network/remote/woocommerce/system_status/freezed_model/response/list_all_system_status_response.dart';
 import 'package:apis/network/remote/woocommerce/system_status/freezed_model/response/list_all_tools_from_system_status_response.dart';

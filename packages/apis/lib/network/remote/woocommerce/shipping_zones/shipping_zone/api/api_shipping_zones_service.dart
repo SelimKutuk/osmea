@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/shipping_zones/shipping_zone/abstract/shipping_zones_service.dart';
 import 'package:apis/network/remote/woocommerce/shipping_zones/shipping_zone/freezed_model/response/list_all_shipping_zones_response.dart';
 import 'package:apis/network/remote/woocommerce/shipping_zones/shipping_zone/freezed_model/request/create_shipping_zone_request.dart';

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/redirect/abstract/redirect_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/redirect/freezed_model/request/create_redirect_full_url_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/redirect/freezed_model/request/create_redirect_request.dart';
@@ -20,12 +20,13 @@ part 'api_redirect_service.g.dart';
 
 @RestApi()
 @Injectable(as: RedirectService)
+
 /// 🌐 RedirectService
 abstract class RedirectServiceClient implements RedirectService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory RedirectServiceClient(Dio dio) => _RedirectServiceClient(
-        ApiDioClient.starter(),
+  factory RedirectServiceClient(ApiBaseClient apiClient) => _RedirectServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -92,4 +93,4 @@ abstract class RedirectServiceClient implements RedirectService {
     @Path('api_version') required String apiVersion,
     @Path('redirect_id') required String redirectId,
   });
-} 
+}

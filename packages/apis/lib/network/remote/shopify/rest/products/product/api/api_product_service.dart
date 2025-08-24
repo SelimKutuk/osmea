@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/products/product/abstract/product_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/product/freezed_model/request/create_product_base_image_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/product/freezed_model/request/create_product_multi_variants_options_request.dart';
@@ -51,8 +51,8 @@ part 'api_product_service.g.dart';
 abstract class ProductServiceClient implements ProductService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ProductServiceClient(Dio dio) => _ProductServiceClient(
-        ApiDioClient.starter(),
+  factory ProductServiceClient(ApiBaseClient apiClient) => _ProductServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

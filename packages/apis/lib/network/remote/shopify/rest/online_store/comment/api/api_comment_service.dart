@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/comment/abstract/comment_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/comment/freezed_model/request/create_comment_textile_markup_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/comment/freezed_model/request/update_comment_body_request.dart';
@@ -25,8 +25,8 @@ part 'api_comment_service.g.dart';
 abstract class CommentServiceClient implements CommentService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CommentServiceClient(Dio dio) => _CommentServiceClient(
-        ApiDioClient.starter(),
+  factory CommentServiceClient(ApiBaseClient apiClient) => _CommentServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

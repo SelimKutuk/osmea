@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/discounts/price_rule/abstract/price_rule_service.dart';
 import 'package:apis/network/remote/shopify/rest/discounts/price_rule/freezed_model/request/create_price_rule_discount_collection_request.dart';
 import 'package:apis/network/remote/shopify/rest/discounts/price_rule/freezed_model/request/create_price_rule_discount_order_request.dart';
@@ -27,8 +27,8 @@ part 'api_price_rule_service.g.dart';
 abstract class PriceRuleServiceClient implements PriceRuleService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory PriceRuleServiceClient(Dio dio) => _PriceRuleServiceClient(
-        ApiDioClient.starter(),
+  factory PriceRuleServiceClient(ApiBaseClient apiClient) => _PriceRuleServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

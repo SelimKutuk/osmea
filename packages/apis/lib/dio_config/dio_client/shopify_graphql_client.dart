@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:apis/apis.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
@@ -9,8 +10,8 @@ import 'package:logger/logger.dart';
 ///
 /// Provides a Dio-based GraphQL client that's consistent with the REST API structure.
 /// Uses the same authentication and configuration as REST API.
-@singleton
-class ShopifyGraphQLClient {
+@Singleton(as: GraphQLBaseClient)
+class ShopifyGraphQLClient implements GraphQLBaseClient {
   final Logger _logger = Logger();
 
   ShopifyGraphQLClient();
@@ -29,7 +30,8 @@ class ShopifyGraphQLClient {
   }
 
   /// 🛡️ Sets up proxy settings for QA environments (if proxy IP is provided)
-  static void _proxySettingsForQA(Dio dio) {
+  @override
+  void setupProxySettings(Dio dio) {
     final String proxyIp = ApiNetwork.proxyIp;
 
     if (proxyIp.isNotEmpty) {
@@ -53,7 +55,8 @@ class ShopifyGraphQLClient {
   }
 
   /// 🏁 Creates a Dio instance for GraphQL with current configuration
-  static Dio createGraphQLDio() {
+  @override
+  Dio createGraphQLDio() {
     // Check if we have the required configuration
     if (ApiNetwork.storeName.isEmpty) {
       throw Exception(
@@ -84,12 +87,13 @@ class ShopifyGraphQLClient {
     ));
 
     // Add proxy settings if needed
-    _proxySettingsForQA(dio);
+    setupProxySettings(dio);
 
     return dio;
   }
 
   /// Execute a GraphQL query
+  @override
   Future<Map<String, dynamic>> query({
     required String query,
     Map<String, dynamic>? variables,
@@ -128,6 +132,7 @@ class ShopifyGraphQLClient {
   }
 
   /// Execute a GraphQL mutation
+  @override
   Future<Map<String, dynamic>> mutate({
     required String mutation,
     Map<String, dynamic>? variables,
@@ -169,9 +174,34 @@ class ShopifyGraphQLClient {
     }
   }
 
-  /// Dispose the client (not needed for static approach)
+  /// Dispose the client
+  @override
   void dispose() {
     // No cleanup needed for static Dio instances
+  }
+
+  /// 🛡️ Legacy proxy settings method (kept for backward compatibility)
+  static void _proxySettingsForQA(Dio dio) {
+    final String proxyIp = ApiNetwork.proxyIp;
+
+    if (proxyIp.isNotEmpty) {
+      dio.httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final client = HttpClient();
+
+          client.findProxy = (uri) {
+            // 🖧 Route all requests through the specified proxy
+            return 'PROXY $proxyIp';
+          };
+
+          // ⚠️ Disable certificate validation for QA/testing only!
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) => true;
+
+          return client;
+        },
+      );
+    }
   }
 }
 

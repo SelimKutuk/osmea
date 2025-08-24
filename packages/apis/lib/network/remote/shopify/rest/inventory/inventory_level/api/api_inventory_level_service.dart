@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_level/abstract/inventory_level_service.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_level/freezed_model/request/inventory_item_at_location_request.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_level/freezed_model/request/inventory_item_to_location_request.dart';
@@ -22,9 +22,8 @@ part 'api_inventory_level_service.g.dart';
 abstract class InventoryLevelServiceClient implements InventoryLevelService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory InventoryLevelServiceClient(Dio dio) =>
-      _InventoryLevelServiceClient(
-        ApiDioClient.starter(),
+  factory InventoryLevelServiceClient(ApiBaseClient apiClient) => _InventoryLevelServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -33,7 +32,6 @@ abstract class InventoryLevelServiceClient implements InventoryLevelService {
   Future<InventoryItemAtLocationResponse> inventoryItemAtLocation({
     @Path('api_version') required String apiVersion,
     @Body() required InventoryItemAtLocationRequest model,
-
   });
 
   /// 🔑 🔍 Connects an inventory item to a location
@@ -52,7 +50,8 @@ abstract class InventoryLevelServiceClient implements InventoryLevelService {
 
   /// 🔑 🔍 Retrieves a list of inventory levels for a single location
   @GET('/api/{api_version}/inventory_levels.json')
-  Future<ListInventoryLevelsSingleLocationResponse> listInventoryLevelsSingleLocation({
+  Future<ListInventoryLevelsSingleLocationResponse>
+      listInventoryLevelsSingleLocation({
     @Path('api_version') required String apiVersion,
     @Query('location_ids') required String locationId,
     @Query('limit') int? limit,

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/billing/recurring_application_charge/abstract/recurring_application_charge_service.dart';
 import 'package:apis/network/remote/shopify/rest/billing/recurring_application_charge/freezed_model/response/get_all_recurring_application_charges_response.dart';
 import 'package:apis/network/remote/shopify/rest/billing/recurring_application_charge/freezed_model/response/get_a_recurring_application_charge_response.dart';
@@ -18,18 +18,21 @@ part 'api_recurring_application_charge_service.g.dart';
 /// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏬🔑
 @RestApi()
 @Injectable(as: RecurringApplicationChargeService)
-abstract class RecurringApplicationChargeServiceClient implements RecurringApplicationChargeService {
+abstract class RecurringApplicationChargeServiceClient
+    implements RecurringApplicationChargeService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory RecurringApplicationChargeServiceClient(Dio dio) => _RecurringApplicationChargeServiceClient(
-        ApiDioClient.starter(),
+  factory RecurringApplicationChargeServiceClient(ApiBaseClient apiClient) =>
+      _RecurringApplicationChargeServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
   /// 📋 Get recurring application charges from API
   @override
   @GET('/api/{api_version}/recurring_application_charges.json')
-  Future<GetAllRecurringApplicationChargesResponse> getRecurringApplicationCharges({
+  Future<GetAllRecurringApplicationChargesResponse>
+      getRecurringApplicationCharges({
     @Path('api_version') required String apiVersion,
     @Query('fields') String? fields,
     @Query('since_id') String? sinceId,
@@ -47,7 +50,8 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   /// 🔧 Customize a recurring application charge (update capped_amount)
   @override
   @PUT('/api/{api_version}/recurring_application_charges/{id}/customize.json')
-  Future<GetARecurringApplicationChargeResponse> customizeRecurringApplicationCharge({
+  Future<GetARecurringApplicationChargeResponse>
+      customizeRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
     @Path('id') required int id,
     @Body() required CustomizeRecurringApplicationChargeRequest model,
@@ -64,7 +68,8 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   /// 💳 Create a basic recurring application charge
   @override
   @POST('/api/{api_version}/recurring_application_charges.json')
-  Future<GetARecurringApplicationChargeResponse> createBasicRecurringApplicationCharge({
+  Future<GetARecurringApplicationChargeResponse>
+      createBasicRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
     @Body() required CreateBasicRecurringApplicationChargeRequest model,
   });
@@ -72,7 +77,8 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   /// 🆓 Create a recurring application charge with trial period
   @override
   @POST('/api/{api_version}/recurring_application_charges.json')
-  Future<GetARecurringApplicationChargeResponse> createTrialRecurringApplicationCharge({
+  Future<GetARecurringApplicationChargeResponse>
+      createTrialRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
     @Body() required CreateTrialRecurringApplicationChargeRequest model,
   });
@@ -80,7 +86,8 @@ abstract class RecurringApplicationChargeServiceClient implements RecurringAppli
   /// 🧢 Create a recurring application charge with terms and capped amount
   @override
   @POST('/api/{api_version}/recurring_application_charges.json')
-  Future<GetARecurringApplicationChargeResponse> createCappedRecurringApplicationCharge({
+  Future<GetARecurringApplicationChargeResponse>
+      createCappedRecurringApplicationCharge({
     @Path('api_version') required String apiVersion,
     @Body() required CreateCappedRecurringApplicationChargeRequest model,
   });

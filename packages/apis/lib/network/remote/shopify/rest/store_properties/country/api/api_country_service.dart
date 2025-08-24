@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/country/abstract/country_service.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/country/freezed_model/request/creates_country_request.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/country/freezed_model/request/create_country_using_custom_tax_rate_request.dart';
@@ -18,8 +18,8 @@ part 'api_country_service.g.dart';
 @Injectable(as: CountryService)
 abstract class CountryServiceClient implements CountryService {
   @factoryMethod
-  factory CountryServiceClient(Dio dio) => _CountryServiceClient(
-        ApiDioClient.starter(),
+  factory CountryServiceClient(ApiBaseClient apiClient) => _CountryServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

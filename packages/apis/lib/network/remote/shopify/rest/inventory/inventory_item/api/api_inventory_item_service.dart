@@ -1,14 +1,14 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/abstract/inventory_item_service.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/freezed_model/request/update_inventory_item_sku_request.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/freezed_model/request/update_inventory_item_unit_cost_request.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/freezed_model/response/inventory_item_by_id_response.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/freezed_model/response/update_inventory_item_sku_response.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/inventory_item/freezed_model/response/update_inventory_item_unit_cost_response.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart';
 
 part 'api_inventory_item_service.g.dart';
 
@@ -19,9 +19,9 @@ part 'api_inventory_item_service.g.dart';
 abstract class InventoryItemServiceClient implements InventoryItemService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory InventoryItemServiceClient(Dio dio) =>
+  factory InventoryItemServiceClient(ApiBaseClient apiClient) =>
       _InventoryItemServiceClient(
-        ApiDioClient.starter(),
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

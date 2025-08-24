@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/marketing_event/abstract/marketing_event_service.dart';
 import 'package:apis/network/remote/shopify/rest/marketing_event/freezed_model/request/creates_marketing_engagements_request_model.dart';
 import 'package:apis/network/remote/shopify/rest/marketing_event/freezed_model/request/creates_marketing_event_request_model.dart';
@@ -25,8 +25,8 @@ part 'api_marketing_event_service.g.dart';
 abstract class MarketingEventEventsApi implements MarketingEventEvents {
   /// 🏗️ Factory for dependency injection
   @factoryMethod
-  factory MarketingEventEventsApi(Dio dio) => _MarketingEventEventsApi(
-        ApiDioClient.starter(),
+  factory MarketingEventEventsApi(ApiBaseClient apiClient) => _MarketingEventEventsApi(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

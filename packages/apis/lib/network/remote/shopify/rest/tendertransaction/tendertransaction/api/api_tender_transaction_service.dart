@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/tendertransaction/tendertransaction/abstract/tender_transaction_service.dart';
 import 'package:apis/network/remote/shopify/rest/tendertransaction/tendertransaction/freezed_model/response/get_all_tender_transactions_response.dart';
 import 'package:dio/dio.dart';
@@ -13,11 +13,13 @@ part 'api_tender_transaction_service.g.dart';
 /// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏬🔑
 @RestApi()
 @Injectable(as: TenderTransactionService)
-abstract class TenderTransactionServiceClient implements TenderTransactionService {
+abstract class TenderTransactionServiceClient
+    implements TenderTransactionService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory TenderTransactionServiceClient(Dio dio) => _TenderTransactionServiceClient(
-        ApiDioClient.starter(),
+  factory TenderTransactionServiceClient(ApiBaseClient apiClient) =>
+      _TenderTransactionServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/script_tag/abstract/script_tag_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/script_tag/freezed_model/request/create_script_tag_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/script_tag/freezed_model/request/update_script_tag_url_request.dart';
@@ -16,12 +16,13 @@ part 'api_script_tag_service.g.dart';
 
 @RestApi()
 @Injectable(as: ScriptTagService)
+
 /// 🌐 ScriptTagService
 abstract class ScriptTagServiceClient implements ScriptTagService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ScriptTagServiceClient(Dio dio) => _ScriptTagServiceClient(
-        ApiDioClient.starter(),
+  factory ScriptTagServiceClient(ApiBaseClient apiClient) => _ScriptTagServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

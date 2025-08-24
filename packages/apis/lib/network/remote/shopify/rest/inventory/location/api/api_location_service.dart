@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/location/abstract/location_service.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/location/freezed_model/count_all_locations_response.dart';
 import 'package:apis/network/remote/shopify/rest/inventory/location/freezed_model/list_all_locations_response.dart';
@@ -13,13 +13,14 @@ part 'api_location_service.g.dart';
 
 @RestApi()
 @Injectable(as: LocationService)
+
 /// 🌐 LocationService
 abstract class LocationServiceClient implements LocationService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory LocationServiceClient(Dio dio) =>
+  factory LocationServiceClient(ApiBaseClient apiClient) =>
       _LocationServiceClient(
-        ApiDioClient.starter(),
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

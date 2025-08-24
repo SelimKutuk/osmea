@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_charge/abstract/application_charge_service.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_charge/freezed_model/response/get_all_application_charges_response.dart';
 import 'package:apis/network/remote/shopify/rest/billing/application_charge/freezed_model/response/get_an_application_charge_response.dart';
@@ -16,11 +16,13 @@ part 'api_application_charge_service.g.dart';
 /// Make sure ApiNetwork.storeName and shopifyAccessToken are set before using! 🏬🔑
 @RestApi()
 @Injectable(as: ApplicationChargeService)
-abstract class ApplicationChargeServiceClient implements ApplicationChargeService {
+abstract class ApplicationChargeServiceClient
+    implements ApplicationChargeService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ApplicationChargeServiceClient(Dio dio) => _ApplicationChargeServiceClient(
-        ApiDioClient.starter(),
+  factory ApplicationChargeServiceClient(ApiBaseClient apiClient) =>
+      _ApplicationChargeServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

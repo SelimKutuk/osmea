@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/blog/abstract/blog_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/blog/freezed_model/request/create_empty_blog_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/blog/freezed_model/request/create_empty_blog_with_metafield_request.dart';
@@ -27,8 +27,8 @@ part 'api_blog_service.g.dart';
 abstract class BlogServiceClient implements BlogService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory BlogServiceClient(Dio dio) => _BlogServiceClient(
-        ApiDioClient.starter(),
+  factory BlogServiceClient(ApiBaseClient apiClient) => _BlogServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -70,7 +70,7 @@ abstract class BlogServiceClient implements BlogService {
     @Path('api_version') required String apiVersion,
   });
 
-    /// 📦 Add a metafield to an existing blog 
+  /// 📦 Add a metafield to an existing blog
   @PUT('/api/{api_version}/blogs/{blog_id}.json')
   Future<MetafieldExistingBlogResponse> addMetafieldToExistingBlog({
     @Path('api_version') required String apiVersion,

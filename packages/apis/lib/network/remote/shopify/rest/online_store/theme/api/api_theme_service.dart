@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/theme/abstract/theme_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/theme/freezed_model/request/create_theme_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/theme/freezed_model/request/publish_unpublished_theme_request.dart';
@@ -17,12 +17,13 @@ part 'api_theme_service.g.dart';
 
 @RestApi()
 @Injectable(as: ThemeService)
+
 /// 🌐 ThemeService
 abstract class ThemeServiceClient implements ThemeService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ThemeServiceClient(Dio dio) => _ThemeServiceClient(
-        ApiDioClient.starter(),
+  factory ThemeServiceClient(ApiBaseClient apiClient) => _ThemeServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -70,5 +71,4 @@ abstract class ThemeServiceClient implements ThemeService {
     @Path('api_version') required String apiVersion,
     @Path('theme_id') required String themeId,
   });
-
 }

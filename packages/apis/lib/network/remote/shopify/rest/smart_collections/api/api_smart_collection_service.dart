@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/smart_collections/abstract/smart_collection_service.dart';
 import 'package:apis/network/remote/shopify/rest/smart_collections/freezed_model/request/create_smart_collection_request.dart';
 import 'package:apis/network/remote/shopify/rest/smart_collections/freezed_model/request/updates_existing_smart_collection_request.dart';
@@ -20,8 +20,8 @@ part 'api_smart_collection_service.g.dart';
 abstract class ApiSmartCollectionService implements SmartCollectionService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ApiSmartCollectionService(Dio dio) => _ApiSmartCollectionService(
-        ApiDioClient.starter(),
+  factory ApiSmartCollectionService(ApiBaseClient apiClient) => _ApiSmartCollectionService(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

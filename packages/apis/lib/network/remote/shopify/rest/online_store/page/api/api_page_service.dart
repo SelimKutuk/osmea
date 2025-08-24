@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/blog/freezed_model/response/count_all_blogs_response.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/page/abstract/page_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/page/freeezed_model/request/add_metafield_to_page_request.dart';
@@ -28,12 +28,13 @@ part 'api_page_service.g.dart';
 
 @RestApi()
 @Injectable(as: PageService)
+
 /// 🌐 PageService
 abstract class PageServiceClient implements PageService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory PageServiceClient(Dio dio) => _PageServiceClient(
-        ApiDioClient.starter(),
+  factory PageServiceClient(ApiBaseClient apiClient) => _PageServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -114,7 +115,7 @@ abstract class PageServiceClient implements PageService {
     @Body() required AddMetafieldToPageRequest model,
   });
 
-  /// 📄 Show Hidden Page 
+  /// 📄 Show Hidden Page
   @PUT('/api/{api_version}/pages/{page_id}.json')
   Future<ShowHiddenPageResponse> showHiddenPage({
     @Path('api_version') required String apiVersion,

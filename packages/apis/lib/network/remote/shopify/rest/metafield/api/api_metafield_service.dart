@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/metafield/abstract/metafield_service.dart';
 import 'package:apis/network/remote/shopify/rest/metafield/freezed_model/request/create_metafield_request.dart';
 import 'package:apis/network/remote/shopify/rest/metafield/freezed_model/request/update_metafield_request.dart';
@@ -22,8 +22,8 @@ part 'api_metafield_service.g.dart';
 abstract class MetafieldServiceClient implements MetafieldService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory MetafieldServiceClient(Dio dio) => _MetafieldServiceClient(
-        ApiDioClient.starter(),
+  factory MetafieldServiceClient(ApiBaseClient apiClient) => _MetafieldServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

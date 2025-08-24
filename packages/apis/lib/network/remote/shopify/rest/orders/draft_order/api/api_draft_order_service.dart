@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/orders/draft_order/abstract/draft_order_service.dart';
 import 'package:apis/network/remote/shopify/rest/orders/draft_order/freezed_model/request/update_set_discount_on_draft_order_request.dart';
 import 'package:apis/network/remote/shopify/rest/orders/draft_order/freezed_model/request/update_add_note_draft_order_request.dart';
@@ -39,8 +39,8 @@ part 'api_draft_order_service.g.dart';
 abstract class DraftOrderServiceClient implements DraftOrderService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory DraftOrderServiceClient(Dio dio) => _DraftOrderServiceClient(
-        ApiDioClient.starter(),
+  factory DraftOrderServiceClient(ApiBaseClient apiClient) => _DraftOrderServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

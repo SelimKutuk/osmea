@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/taxes/classes/abstract/taxes_classes_service.dart';
 import 'package:apis/network/remote/woocommerce/taxes/classes/freezed_model/response/list_tax_classes_response.dart';
 import 'package:apis/network/remote/woocommerce/taxes/classes/freezed_model/request/create_tax_class_request.dart';

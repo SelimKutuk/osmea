@@ -3,7 +3,9 @@
 
 import 'package:apis/apis.dart'; // 📦 Main APIs package
 import 'package:apis/di/config/config_di.config.dart'; // ⚙️ Generated DI config
-import 'package:apis/dio_config/shopify_graphql_client.dart'; // 🔌 Shopify GraphQL Client
+import 'package:apis/dio_config/dio_client/shopify_graphql_client.dart'; // 🔌 Shopify GraphQL Client
+import 'package:apis/dio_config/dio_client/api_dio_client.dart'; // 🚀 API Dio Client
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart'; // 🌐 Abstract Base Client
 import 'package:get_it/get_it.dart'; // 🛠️ Service locator
 import 'package:injectable/injectable.dart'; // 💉 Dependency injection
 import 'package:logger/logger.dart'; // 📜 Logger for error handling
@@ -23,8 +25,8 @@ GetIt configureDependencies() {
     // 🏗️ Initialize dependencies using the generated config
     final getIt = ApiNetwork.getIt.init();
 
-    // 🔌 Register GraphQL services manually if needed
-    _registerGraphQLServices(getIt);
+    // 🔌 Register services manually if needed
+    _registerServices(getIt);
 
     return getIt;
   } catch (e) {
@@ -44,15 +46,21 @@ GetIt configureDependencies() {
   }
 }
 
-/// 🔌 Manually register GraphQL services if auto-registration fails
-void _registerGraphQLServices(GetIt getIt) {
+/// 🔌 Manually register services if auto-registration fails
+void _registerServices(GetIt getIt) {
   try {
     // Shopify GraphQL Client
-    if (!getIt.isRegistered<ShopifyGraphQLClient>()) {
-      getIt.registerSingleton<ShopifyGraphQLClient>(ShopifyGraphQLClient());
+    if (!getIt.isRegistered<GraphQLBaseClient>()) {
+      getIt.registerSingleton<GraphQLBaseClient>(ShopifyGraphQLClient());
     }
-    logger.i('GraphQL services registered successfully');
+
+    // API Dio Client
+    if (!getIt.isRegistered<ApiBaseClient>()) {
+      getIt.registerSingleton<ApiBaseClient>(ApiDioClient());
+    }
+
+    logger.i('GraphQL and API services registered successfully');
   } catch (e) {
-    logger.w('Some GraphQL services could not be registered: $e');
+    logger.w('Some services could not be registered: $e');
   }
 }

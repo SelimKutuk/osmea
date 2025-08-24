@@ -1,5 +1,4 @@
-import 'package:apis/dio_config/api_dio_client.dart';
-import 'package:apis/network/remote/shopify/rest/products/product_image/abstract/product_image_service.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';import 'package:apis/network/remote/shopify/rest/products/product_image/abstract/product_image_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_model/request/create_product_image_metafield_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_model/request/modify_product_image_add_metafield_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_model/response/create_a_new_product_image_response.dart';
@@ -18,7 +17,6 @@ import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_
 import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_model/request/modify_product_image_position_alt_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_image/freezed_model/response/modify_product_image_position_alt_response.dart';
 
-
 import 'package:apis/apis.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -29,10 +27,10 @@ part 'api_product_image_service.g.dart';
 @RestApi()
 @Injectable(as: ProductImageService)
 abstract class ProductImageServiceClient implements ProductImageService {
-  /// 🏭 Factory for dependency injection  
+  /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ProductImageServiceClient(Dio dio) => _ProductImageServiceClient(
-        ApiDioClient.starter(),
+  factory ProductImageServiceClient(ApiBaseClient apiClient) => _ProductImageServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -47,31 +45,33 @@ abstract class ProductImageServiceClient implements ProductImageService {
   });
 
   /// 🖼 Retrieve a single product image by ID
-@override
-@GET('/api/{api_version}/products/{product_id}/images/{image_id}.json')
-Future<ReceiveASingleProductImageResponse> getSingleProductImage({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Path('image_id') required String imageId,
-  @Query('fields') String? fields,
-});
+  @override
+  @GET('/api/{api_version}/products/{product_id}/images/{image_id}.json')
+  Future<ReceiveASingleProductImageResponse> getSingleProductImage({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Path('image_id') required String imageId,
+    @Query('fields') String? fields,
+  });
 
-/// 🔢 Retrieve count of all product images
-@override
-@GET('/api/{api_version}/products/{product_id}/images/count.json')
-Future<ReceiveACountOfAllProductImagesResponse> getProductImageCount({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-});  /// ➕ Create a new product image
-@override
-@POST('/api/{api_version}/products/{product_id}/images.json')
-Future<ReceiveASingleProductImageResponse> createProductImage({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Body() required CreateANewProductImageRequest model,
-});
+  /// 🔢 Retrieve count of all product images
+  @override
+  @GET('/api/{api_version}/products/{product_id}/images/count.json')
+  Future<ReceiveACountOfAllProductImagesResponse> getProductImageCount({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+  });
 
- // 🖼 PUT: Update an existing product image
+  /// ➕ Create a new product image
+  @override
+  @POST('/api/{api_version}/products/{product_id}/images.json')
+  Future<ReceiveASingleProductImageResponse> createProductImage({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required CreateANewProductImageRequest model,
+  });
+
+  // 🖼 PUT: Update an existing product image
   @override
   @PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
   Future<ModifyAnExistingProductImageResponse> modifyProductImage({
@@ -90,34 +90,34 @@ Future<ReceiveASingleProductImageResponse> createProductImage({
     @Path('image_id') required String imageId,
   });
 
-/// ➕ Create a new product image (alternative signature)
-@override
-@POST('/api/{api_version}/products/{product_id}/images.json')
-Future<CreateANewProductImageResponse> createProductImageResponse({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Body() required CreateANewProductImageRequest model,
-});
+  /// ➕ Create a new product image (alternative signature)
+  @override
+  @POST('/api/{api_version}/products/{product_id}/images.json')
+  Future<CreateANewProductImageResponse> createProductImageResponse({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required CreateANewProductImageRequest model,
+  });
 
-@override
-@POST('/api/{api_version}/products/{product_id}/images.json')
-Future<CreateProductImageMainResponse> createProductImageMain({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Body() required Map<String, dynamic> model,
-});
+  @override
+  @POST('/api/{api_version}/products/{product_id}/images.json')
+  Future<CreateProductImageMainResponse> createProductImageMain({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required Map<String, dynamic> model,
+  });
 
-/// 🧩 CREATE: Product Image for Variant
-@override
-@POST('/api/{api_version}/products/{product_id}/images.json')
-Future<CreateProductImageVariantResponse> createProductImageVariant({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Body() required Map<String, dynamic> model,
-});
+  /// 🧩 CREATE: Product Image for Variant
+  @override
+  @POST('/api/{api_version}/products/{product_id}/images.json')
+  Future<CreateProductImageVariantResponse> createProductImageVariant({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required Map<String, dynamic> model,
+  });
 
-/// ➕ Create product image with source URL
-@override
+  /// ➕ Create product image with source URL
+  @override
   @POST('/api/{api_version}/products/{product_id}/images.json')
   Future<CreateProductImageSourceUrlResponse> createProductImageSourceUrl({
     @Path('api_version') required String apiVersion,
@@ -126,48 +126,41 @@ Future<CreateProductImageVariantResponse> createProductImageVariant({
     @Query("fields") String? fields,
   });
 
-/// ✅ Modify product image position and alt text
-@override
-@PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
-Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
+  /// ✅ Modify product image position and alt text
+  @override
+  @PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
+  Future<ModifyProductImagePositionAltResponse> modifyProductImagePositionAlt({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Path('image_id') required String imageId,
     @Body() required ModifyProductImagePositionAltRequest model,
   });
 
-@override
-@PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
-Future<ModifyProductImageAttachVariantsResponse> attachVariantsToProductImage({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Path('image_id') required String imageId,
-  @Body() required Map<String, dynamic> model,
-});
+  @override
+  @PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
+  Future<ModifyProductImageAttachVariantsResponse>
+      attachVariantsToProductImage({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Path('image_id') required String imageId,
+    @Body() required Map<String, dynamic> model,
+  });
 
+  @override
+  @POST('/api/{api_version}/products/{product_id}/metafields.json')
+  Future<CreateProductImageMetafieldResponse> createProductImageMetafield({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Body() required CreateProductImageMetafieldRequest model,
+  });
 
-
-@override
-@POST('/api/{api_version}/products/{product_id}/metafields.json')
-Future<CreateProductImageMetafieldResponse> createProductImageMetafield({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Body() required CreateProductImageMetafieldRequest model,
-});
-
-@override
-@PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
-Future<ModifyProductImageAddMetafieldResponse> modifyProductImageAddMetafield({
-  @Path('api_version') required String apiVersion,
-  @Path('product_id') required String productId,
-  @Path('image_id') required String imageId,
-  @Body() required ModifyProductImageAddMetafieldRequest model,
-});
-
-
-
-
-
-
+  @override
+  @PUT('/api/{api_version}/products/{product_id}/images/{image_id}.json')
+  Future<ModifyProductImageAddMetafieldResponse>
+      modifyProductImageAddMetafield({
+    @Path('api_version') required String apiVersion,
+    @Path('product_id') required String productId,
+    @Path('image_id') required String imageId,
+    @Body() required ModifyProductImageAddMetafieldRequest model,
+  });
 }
-

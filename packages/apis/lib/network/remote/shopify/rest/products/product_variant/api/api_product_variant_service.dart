@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_variant/abstract/product_variant_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_variant/freezed_model/request/create_product_variant_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/product_variant/freezed_model/request/update_product_variant_request.dart';
@@ -19,15 +19,16 @@ part 'api_product_variant_service.g.dart';
 abstract class ProductVariantServiceClient implements ProductVariantService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ProductVariantServiceClient(Dio dio) => _ProductVariantServiceClient(
-        ApiDioClient.starter(),
+  factory ProductVariantServiceClient(ApiBaseClient apiClient) => _ProductVariantServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
   /// 🔓 Get product variants from API
   @override
   @GET('/api/{api_version}/products/{product_id}/variants.json')
-  Future<RetrievesListOfProductVariantsResponse> retrievesListOfProductVariants({
+  Future<RetrievesListOfProductVariantsResponse>
+      retrievesListOfProductVariants({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
     @Query('fields') String? fields,
@@ -38,7 +39,8 @@ abstract class ProductVariantServiceClient implements ProductVariantService {
 
   @override
   @GET('/api/{api_version}/products/{product_id}/variants/count.json')
-  Future<RetrievesCountOfProductVariantsResponse> retrievesCountOfProductVariants({
+  Future<RetrievesCountOfProductVariantsResponse>
+      retrievesCountOfProductVariants({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required String productId,
   });

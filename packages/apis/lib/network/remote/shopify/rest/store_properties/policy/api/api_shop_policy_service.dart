@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/policy/abstract/shop_policy_service.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/policy/freezed_model/retrieves_list_of_shop_policies_response.dart';
 import 'package:dio/dio.dart';
@@ -12,8 +12,8 @@ part 'api_shop_policy_service.g.dart';
 @Injectable(as: ShopPolicyService)
 abstract class ShopPolicyServiceClient implements ShopPolicyService {
   @factoryMethod
-  factory ShopPolicyServiceClient(Dio dio) => _ShopPolicyServiceClient(
-        ApiDioClient.starter(),
+  factory ShopPolicyServiceClient(ApiBaseClient apiClient) => _ShopPolicyServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

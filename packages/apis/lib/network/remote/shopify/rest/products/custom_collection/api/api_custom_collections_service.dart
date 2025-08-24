@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/products/custom_collection/abstract/custom_collections_service.dart';
 import 'package:apis/network/remote/shopify/rest/products/custom_collection/freezed_model/request/add_collect_to_collection_by_product_id_request.dart';
 import 'package:apis/network/remote/shopify/rest/products/custom_collection/freezed_model/request/add_metafield_to_custom_collection_request.dart';
@@ -46,9 +46,9 @@ abstract class CustomCollectionsServiceClient
     implements CustomCollectionsService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory CustomCollectionsServiceClient(Dio dio) =>
+  factory CustomCollectionsServiceClient(ApiBaseClient apiClient) =>
       _CustomCollectionsServiceClient(
-        ApiDioClient.starter(),
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

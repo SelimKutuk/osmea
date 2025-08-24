@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/province/abstract/province_service.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/province/freezed_model/request/updates_existing_province_for_country_request.dart';
 import 'package:apis/network/remote/shopify/rest/store_properties/province/freezed_model/response/retrieves_list_of_provinces_for_country_response.dart';
@@ -16,8 +16,8 @@ part 'api_province_service.g.dart';
 @Injectable(as: ProvinceService)
 abstract class ProvinceServiceClient implements ProvinceService {
   @factoryMethod
-  factory ProvinceServiceClient(Dio dio) => _ProvinceServiceClient(
-        ApiDioClient.starter(),
+  factory ProvinceServiceClient(ApiBaseClient apiClient) => _ProvinceServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/webhooks/webhook/abstract/webhook_service.dart';
 import 'package:apis/network/remote/shopify/rest/webhooks/webhook/freezed_model/response/get_all_webhooks_response.dart';
 import 'package:apis/network/remote/shopify/rest/webhooks/webhook/freezed_model/response/get_a_webhook_response.dart';
@@ -20,8 +20,8 @@ part 'api_webhook_service.g.dart';
 abstract class WebhookServiceClient implements WebhookService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory WebhookServiceClient(Dio dio) => _WebhookServiceClient(
-        ApiDioClient.starter(),
+  factory WebhookServiceClient(ApiBaseClient apiClient) => _WebhookServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 

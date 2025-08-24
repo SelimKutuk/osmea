@@ -1,6 +1,5 @@
-
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/article/abstract/article_service.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/article/freezed_model/request/create_article_base_image_request.dart';
 import 'package:apis/network/remote/shopify/rest/online_store/article/freezed_model/request/create_article_html_markup_request.dart';
@@ -31,12 +30,13 @@ part 'api_article_service.g.dart';
 
 @RestApi()
 @Injectable(as: ArticleService)
+
 /// 🌐 ArticleService
 abstract class ArticleServiceClient implements ArticleService {
   /// 🏭 Factory for dependency injection
   @factoryMethod
-  factory ArticleServiceClient(Dio dio) => _ArticleServiceClient(
-        ApiDioClient.starter(),
+  factory ArticleServiceClient(ApiBaseClient apiClient) => _ArticleServiceClient(
+        apiClient.starter(),
         baseUrl: ApiNetwork.baseUrl,
       );
 
@@ -73,7 +73,8 @@ abstract class ArticleServiceClient implements ArticleService {
 
   /// 📦 List most popular tags for a specific blog in the API.
   @GET('/api/{api_version}/blogs/{blog_id}/articles/tags.json')
-  Future<ListMostPopularTagsSpecificBlogResponse> listMostPopularTagsSpecificBlog({
+  Future<ListMostPopularTagsSpecificBlogResponse>
+      listMostPopularTagsSpecificBlog({
     @Path('api_version') required String apiVersion,
     @Path('blog_id') required int blogId,
     @Query('limit') int? limit,
@@ -81,7 +82,7 @@ abstract class ArticleServiceClient implements ArticleService {
   });
 
   /// 📦 List articles from a specific blog in the API.
-  @GET('/api/{api_version}/blogs/{blog_id}/articles.json')  
+  @GET('/api/{api_version}/blogs/{blog_id}/articles.json')
   Future<ListArticlesFromBlogResponse> listArticlesFromBlog({
     @Path('api_version') required String apiVersion,
     @Path('blog_id') required int blogId,

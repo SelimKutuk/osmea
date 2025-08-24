@@ -1,5 +1,5 @@
 import 'package:apis/apis.dart';
-import 'package:apis/dio_config/api_dio_client.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/orders/order_id/notes/abstract/order_notes_service.dart';
 import 'package:apis/network/remote/woocommerce/orders/order_id/notes/freezed_model/response/list_all_order_notes_response.dart';
 import 'package:apis/network/remote/woocommerce/orders/order_id/notes/freezed_model/response/create_order_note_response.dart';

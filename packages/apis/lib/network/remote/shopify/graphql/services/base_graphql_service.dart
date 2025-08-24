@@ -1,4 +1,4 @@
-import 'package:apis/dio_config/shopify_graphql_client.dart';
+import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart';
 import 'package:gql/language.dart' as gql;
 
 /// 🚀 Enhanced Base GraphQL Service
@@ -6,7 +6,7 @@ import 'package:gql/language.dart' as gql;
 /// This service provides automatic GraphQL execution by processing GraphQL annotations.
 /// It offers a Retrofit-like experience for GraphQL operations with automatic variable handling.
 abstract class BaseGraphQLService {
-  final ShopifyGraphQLClient _graphqlClient;
+  final GraphQLBaseClient _graphqlClient;
 
   BaseGraphQLService(this._graphqlClient);
 
@@ -449,7 +449,7 @@ abstract class BaseGraphQLService {
     // Here you could add actual metrics collection
   }
 
-  ShopifyGraphQLClient get graphqlClient => _graphqlClient;
+  GraphQLBaseClient get graphqlClient => _graphqlClient;
   bool get isInitialized => true;
   Future<void> initialize() async {}
   Future<void> reinitialize() async {}
