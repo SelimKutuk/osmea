@@ -3,6 +3,8 @@ import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/quer
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscriptions.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscription.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/mutations/create_webhook_subscription.graphql.dart';
+import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/mutations/update_webhook_subscription.graphql.dart';
+import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/mutations/delete_webhook_subscription.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/services/base_graphql_service.dart';
 import 'package:apis/network/remote/shopify/graphql/annotations/graphql_annotations.dart';
 import 'package:injectable/injectable.dart';
@@ -58,14 +60,40 @@ class ApiWebhooksService extends BaseGraphQLService
 
   @override
   @GraphQLMutation()
-  Future<Mutation$WebhookSubscriptionCreate> webhookSubscriptionCreate({
-    required Variables$Mutation$WebhookSubscriptionCreate input,
+  Future<Map<String, dynamic>> webhookSubscriptionCreate({
+    required Map<String, dynamic> input,
   }) async {
     final result = await executeMutationAuto(
       documentNode: documentNodeMutationWebhookSubscriptionCreate,
-      parameters: {'input': input},
+      parameters: input,
     );
 
-    return Mutation$WebhookSubscriptionCreate.fromJson(result);
+    return result;
+  }
+
+  @override
+  @GraphQLMutation()
+  Future<Map<String, dynamic>> webhookSubscriptionUpdate({
+    required Map<String, dynamic> input,
+  }) async {
+    final result = await executeMutationAuto(
+      documentNode: documentNodeMutationWebhookSubscriptionUpdate,
+      parameters: input,
+    );
+
+    return result;
+  }
+
+  @override
+  @GraphQLMutation()
+  Future<Map<String, dynamic>> webhookSubscriptionDelete({
+    required Map<String, dynamic> input,
+  }) async {
+    final result = await executeMutationAuto(
+      documentNode: documentNodeMutationwebhookSubscriptionDelete,
+      parameters: input,
+    );
+
+    return result;
   }
 }

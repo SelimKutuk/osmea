@@ -1,7 +1,6 @@
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscriptions_count.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscriptions.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscription.graphql.dart';
-import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/mutations/create_webhook_subscription.graphql.dart';
 
 /// 🔗 Abstract Webhooks GraphQL Service
 ///
@@ -25,7 +24,18 @@ abstract class WebhooksGraphQLService {
     required String id,
   });
 
-  Future<Mutation$WebhookSubscriptionCreate> webhookSubscriptionCreate({
-    required Variables$Mutation$WebhookSubscriptionCreate input,
+  /// ✨ Create a new webhook subscription
+  Future<Map<String, dynamic>> webhookSubscriptionCreate({
+    required Map<String, dynamic> input,
+  });
+
+  /// ✏️ Update an existing webhook subscription
+  Future<Map<String, dynamic>> webhookSubscriptionUpdate({
+    required Map<String, dynamic> input,
+  });
+
+  /// 🗑️ Delete a webhook subscription
+  Future<Map<String, dynamic>> webhookSubscriptionDelete({
+    required Map<String, dynamic> input,
   });
 }

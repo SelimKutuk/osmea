@@ -379,6 +379,10 @@ type WebhookSubscription {
   endpoint: WebhookEndpoint!
   createdAt: DateTime!
   updatedAt: DateTime!
+  apiVersion: ApiVersion
+  format: WebhookSubscriptionFormat
+  includeFields: [String!]
+  metafieldNamespaces: [String!]
 }
 
 type WebhookSubscriptionsCount {
@@ -421,8 +425,9 @@ input WebhookSubscriptionInput {
   callbackUrl: String
   format: WebhookSubscriptionFormat
   filter: String
-  include_fields: [String!]
-  metafield_namespaces: [String!]
+  includeFields: [String!]
+  metafieldNamespaces: [String!]
+  apiVersion: String
 }
 
 # Webhook payload types
@@ -477,4 +482,12 @@ enum WebhookSubscriptionTopic {
 enum WebhookSubscriptionFormat {
   JSON
   XML
+}
+
+# API Version type
+type ApiVersion {
+  handle: String!
+  displayName: String!
+  supported: Boolean!
+  releaseCandidate: Boolean!
 }
