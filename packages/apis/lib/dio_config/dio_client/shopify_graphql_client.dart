@@ -7,10 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-/// 🌐 GraphQL Client for Shopify Admin API using Dio
-///
-/// Provides a Dio-based GraphQL client that's consistent with the REST API structure.
-/// Uses the same authentication and configuration as REST API.
 @Singleton(as: GraphQLBaseClient)
 class ShopifyGraphQLClient implements GraphQLBaseClient {
   final Logger _logger = Logger();
