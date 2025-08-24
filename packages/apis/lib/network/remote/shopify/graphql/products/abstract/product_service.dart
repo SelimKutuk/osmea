@@ -36,31 +36,4 @@ abstract class ProductGraphQLService {
     String? query,
   });
 
-  /// 🔍 Search products
-  Future<Query$Products> searchProducts({
-    required String query,
-    required int first,
-    String? after,
-  });
-
-  /// 🏷️ Get products by tag
-  Future<Query$Products> getProductsByTag({
-    required String tag,
-    required int first,
-    String? after,
-  });
-
-  /// 🏭 Get products by vendor
-  Future<Query$Products> getProductsByVendor({
-    required String vendor,
-    required int first,
-    String? after,
-  });
-
-  /// 📦 Get products by collection
-  Future<Query$Products> getProductsByCollection({
-    required String collectionId,
-    required int first,
-    String? after,
-  });
 }

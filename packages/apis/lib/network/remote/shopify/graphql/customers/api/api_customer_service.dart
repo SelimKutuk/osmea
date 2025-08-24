@@ -6,6 +6,7 @@ import 'package:apis/network/remote/shopify/graphql/customers/graphql_models/que
 import 'package:apis/network/remote/shopify/graphql/customers/graphql_models/queries/customers.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/customers/graphql_models/queries/customers_count.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/services/base_graphql_service.dart';
+import 'package:apis/network/remote/shopify/graphql/annotations/graphql_annotations.dart';
 import 'package:injectable/injectable.dart';
 
 /// 👥 Customer GraphQL Service Implementation
@@ -18,147 +19,82 @@ class CustomerGraphQLServiceImpl extends BaseGraphQLService
   CustomerGraphQLServiceImpl(super.graphqlClient);
 
   @override
+  @GraphQLQuery()
   Future<Query$Customers> getCustomers({
     required int first,
     String? after,
     String? query,
   }) async {
-    final result = await this.queryWithDocument(
+    final result = await executeQueryAuto(
       documentNode: documentNodeQueryCustomers,
-      variables: Variables$Query$Customers(
-        first: first,
-        after: after,
-        query: query,
-      ).toJson(),
+      parameters: {'first': first, 'after': after, 'query': query},
     );
 
-    return Query$Customers.fromJson(result['data'] as Map<String, dynamic>);
+    return Query$Customers.fromJson(result);
   }
 
   @override
+  @GraphQLQuery()
   Future<Query$Customer> getCustomer({
     required String id,
   }) async {
-    final result = await this.queryWithDocument(
+    final result = await executeQueryAuto(
       documentNode: documentNodeQueryCustomer,
-      variables: Variables$Query$Customer(
-        id: id,
-      ).toJson(),
+      parameters: {'id': id},
     );
 
-    return Query$Customer.fromJson(result['data'] as Map<String, dynamic>);
+    return Query$Customer.fromJson(result);
   }
 
   @override
+  @GraphQLMutation()
   Future<Mutation$CreateCustomer> createCustomer({
     required Variables$Mutation$CreateCustomer input,
   }) async {
-    final result = await this.mutateWithDocument(
+    final result = await executeMutationAuto(
       documentNode: documentNodeMutationCreateCustomer,
-      variables: input.toJson(),
+      parameters: {'input': input},
     );
 
-    return Mutation$CreateCustomer.fromJson(
-        result['data'] as Map<String, dynamic>);
+    return Mutation$CreateCustomer.fromJson(result);
   }
 
   @override
+  @GraphQLMutation()
   Future<Mutation$UpdateCustomer> updateCustomer({
     required Variables$Mutation$UpdateCustomer input,
   }) async {
-    final result = await this.mutateWithDocument(
+    final result = await executeMutationAuto(
       documentNode: documentNodeMutationUpdateCustomer,
-      variables: input.toJson(),
+      parameters: {'input': input},
     );
 
-    return Mutation$UpdateCustomer.fromJson(
-        result['data'] as Map<String, dynamic>);
+    return Mutation$UpdateCustomer.fromJson(result);
   }
 
   @override
+  @GraphQLMutation()
   Future<Mutation$DeleteCustomer> deleteCustomer({
     required Variables$Mutation$DeleteCustomer input,
   }) async {
-    final result = await this.mutateWithDocument(
+    final result = await executeMutationAuto(
       documentNode: documentNodeMutationDeleteCustomer,
-      variables: input.toJson(),
+      parameters: {'input': input},
     );
 
-    return Mutation$DeleteCustomer.fromJson(
-        result['data'] as Map<String, dynamic>);
+    return Mutation$DeleteCustomer.fromJson(result);
   }
 
   @override
+  @GraphQLQuery()
   Future<Query$CustomersCount> getCustomersCount({
     String? query,
   }) async {
-    final result = await this.queryWithDocument(
+    final result = await executeQueryAuto(
       documentNode: documentNodeQueryCustomersCount,
-      variables: Variables$Query$CustomersCount(
-        query: query,
-      ).toJson(),
+      parameters: {'query': query},
     );
 
-    return Query$CustomersCount.fromJson(
-        result['data'] as Map<String, dynamic>);
-  }
-
-  @override
-  Future<Query$Customers> searchCustomers({
-    required String query,
-    required int first,
-    String? after,
-  }) async {
-    return await getCustomers(
-      first: first,
-      after: after,
-      query: query,
-    );
-  }
-
-  @override
-  Future<Query$Customers> getCustomersByEmail({
-    required String email,
-    required int first,
-    String? after,
-  }) async {
-    return await getCustomers(
-      first: first,
-      after: after,
-      query: 'email:$email',
-    );
-  }
-
-  @override
-  Future<Query$Customers> getCustomersByDateRange({
-    required DateTime startDate,
-    required DateTime endDate,
-    required int first,
-    String? after,
-  }) async {
-    final startStr = startDate.toIso8601String().split('T')[0];
-    final endStr = endDate.toIso8601String().split('T')[0];
-
-    return await getCustomers(
-      first: first,
-      after: after,
-      query: 'created_at:>=$startStr AND created_at:<=$endStr',
-    );
-  }
-
-  @override
-  Future<Query$Customer> getCustomerOrders({
-    required String customerId,
-    required int first,
-    String? after,
-  }) async {
-    return await getCustomer(id: customerId);
-  }
-
-  @override
-  Future<Query$Customer> getCustomerAddresses({
-    required String customerId,
-  }) async {
-    return await getCustomer(id: customerId);
+    return Query$CustomersCount.fromJson(result);
   }
 }

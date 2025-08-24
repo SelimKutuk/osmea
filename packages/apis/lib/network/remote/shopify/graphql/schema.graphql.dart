@@ -1784,6 +1784,9 @@ enum Enum$WebhookSubscriptionTopic {
   COLLECTIONS_CREATE,
   COLLECTIONS_DELETE,
   COLLECTIONS_UPDATE,
+  METAOBJECTS_CREATE,
+  METAOBJECTS_DELETE,
+  METAOBJECTS_UPDATE,
   $unknown;
 
   factory Enum$WebhookSubscriptionTopic.fromJson(String value) =>
@@ -1846,6 +1849,12 @@ String toJson$Enum$WebhookSubscriptionTopic(Enum$WebhookSubscriptionTopic e) {
       return r'COLLECTIONS_DELETE';
     case Enum$WebhookSubscriptionTopic.COLLECTIONS_UPDATE:
       return r'COLLECTIONS_UPDATE';
+    case Enum$WebhookSubscriptionTopic.METAOBJECTS_CREATE:
+      return r'METAOBJECTS_CREATE';
+    case Enum$WebhookSubscriptionTopic.METAOBJECTS_DELETE:
+      return r'METAOBJECTS_DELETE';
+    case Enum$WebhookSubscriptionTopic.METAOBJECTS_UPDATE:
+      return r'METAOBJECTS_UPDATE';
     case Enum$WebhookSubscriptionTopic.$unknown:
       return r'$unknown';
   }
@@ -1906,6 +1915,12 @@ Enum$WebhookSubscriptionTopic fromJson$Enum$WebhookSubscriptionTopic(
       return Enum$WebhookSubscriptionTopic.COLLECTIONS_DELETE;
     case r'COLLECTIONS_UPDATE':
       return Enum$WebhookSubscriptionTopic.COLLECTIONS_UPDATE;
+    case r'METAOBJECTS_CREATE':
+      return Enum$WebhookSubscriptionTopic.METAOBJECTS_CREATE;
+    case r'METAOBJECTS_DELETE':
+      return Enum$WebhookSubscriptionTopic.METAOBJECTS_DELETE;
+    case r'METAOBJECTS_UPDATE':
+      return Enum$WebhookSubscriptionTopic.METAOBJECTS_UPDATE;
     default:
       return Enum$WebhookSubscriptionTopic.$unknown;
   }

@@ -133,6 +133,10 @@ class ShopifyGraphQLClient {
     Map<String, dynamic>? variables,
   }) async {
     try {
+      print('🔍 DEBUG: Starting GraphQL mutation');
+      print('🔍 DEBUG: Mutation string: $mutation');
+      print('🔍 DEBUG: Variables: $variables');
+
       final dio = createGraphQLDio();
 
       final response = await dio.post('', data: {

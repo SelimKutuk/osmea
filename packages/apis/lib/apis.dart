@@ -6,6 +6,9 @@ export 'services/cross_platform_storage.dart';
 export 'services/store_management_service.dart';
 export 'models/store_configuration.dart';
 
+// 🚀 GraphQL Annotations
+export 'network/remote/shopify/graphql/annotations/graphql_annotations.dart';
+
 // 🌐 Dependency Injection & Utilities
 import 'package:apis/di/config/config_di.dart';
 import 'package:apis/services/wizard_helper.dart';
@@ -330,7 +333,8 @@ Future<void> initNetworksFromWizard(GetIt getIt) async {
         debugPrint(
             '[initNetworksFromWizard] Shopify initialized successfully from wizard.');
       } catch (e) {
-        debugPrint('[initNetworksFromWizard] Shopify initialization failed: $e');
+        debugPrint(
+            '[initNetworksFromWizard] Shopify initialization failed: $e');
         rethrow;
       }
     } else if (config.platform == 'woocommerce') {
@@ -339,7 +343,8 @@ Future<void> initNetworksFromWizard(GetIt getIt) async {
         debugPrint(
             '[initNetworksFromWizard] WooCommerce initialized successfully from wizard.');
       } catch (e) {
-        debugPrint('[initNetworksFromWizard] WooCommerce initialization failed: $e');
+        debugPrint(
+            '[initNetworksFromWizard] WooCommerce initialization failed: $e');
         rethrow;
       }
     }
@@ -385,8 +390,11 @@ Future<void> detectEnabledPlatformsFromWizard() async {
     debugPrint(
         '[detectEnabledPlatformsFromWizard] Shopify enabled: $isShopifyEnabled, WooCommerce enabled: $isWooEnabled');
   } catch (e) {
-    debugPrint('[detectEnabledPlatformsFromWizard] Error detecting platforms: $e');
+    debugPrint(
+        '[detectEnabledPlatformsFromWizard] Error detecting platforms: $e');
     isShopifyEnabled = false;
     isWooEnabled = false;
   }
 }
+
+

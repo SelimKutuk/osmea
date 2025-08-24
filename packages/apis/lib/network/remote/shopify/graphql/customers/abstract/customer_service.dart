@@ -41,38 +41,4 @@ abstract class CustomerGraphQLService {
   Future<Query$CustomersCount> getCustomersCount({
     String? query,
   });
-
-  /// 🔍 Search customers
-  Future<Query$Customers> searchCustomers({
-    required String query,
-    required int first,
-    String? after,
-  });
-
-  /// 📧 Get customers by email
-  Future<Query$Customers> getCustomersByEmail({
-    required String email,
-    required int first,
-    String? after,
-  });
-
-  /// 📅 Get customers created in date range
-  Future<Query$Customers> getCustomersByDateRange({
-    required DateTime startDate,
-    required DateTime endDate,
-    required int first,
-    String? after,
-  });
-
-  /// 📦 Get customer orders
-  Future<Query$Customer> getCustomerOrders({
-    required String customerId,
-    required int first,
-    String? after,
-  });
-
-  /// 📍 Get customer addresses
-  Future<Query$Customer> getCustomerAddresses({
-    required String customerId,
-  });
 }

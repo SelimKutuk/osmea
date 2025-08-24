@@ -4,142 +4,68 @@ import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/quer
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/queries/webhook_subscription.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/webhooks/graphql_models/mutations/create_webhook_subscription.graphql.dart';
 import 'package:apis/network/remote/shopify/graphql/services/base_graphql_service.dart';
+import 'package:apis/network/remote/shopify/graphql/annotations/graphql_annotations.dart';
 import 'package:injectable/injectable.dart';
 
 /// 🔗 Concrete Webhooks GraphQL Service Implementation
 ///
-/// Implements the core webhook operations using the base GraphQL service.
-/// Uses codegen-generated types for type safety.
+/// Implements the core webhook operations using the enhanced base GraphQL service.
+/// Uses codegen-generated types for type safety and annotation-based execution.
 @Injectable(as: WebhooksGraphQLService)
 class ApiWebhooksService extends BaseGraphQLService
     implements WebhooksGraphQLService {
   ApiWebhooksService(super.graphqlClient);
 
   @override
+  @GraphQLQuery()
   Future<Query$WebhookSubscriptionsCount> webhookSubscriptionsCount({
     String? query,
   }) async {
-    try {
-      // Execute the GraphQL query using the base service
-      final result = await this.queryWithDocument(
-        documentNode: documentNodeQueryWebhookSubscriptionsCount,
-        variables: {
-          'query': query ?? '',
-        },
-      );
+    final result = await executeQueryAuto(
+      documentNode: documentNodeQueryWebhookSubscriptionsCount,
+      parameters: {'query': query ?? ''},
+    );
 
-      // Check for GraphQL errors
-      if (result.containsKey('errors')) {
-        final errors = result['errors'] as List;
-        final errorMessage = errors.isNotEmpty
-            ? errors.first['message'] ?? 'GraphQL error occurred'
-            : 'GraphQL error occurred';
-        throw Exception('GraphQL Error: $errorMessage');
-      }
-
-      return Query$WebhookSubscriptionsCount.fromJson(result['data']);
-    } catch (e) {
-      throw Exception('Error getting webhook subscriptions count: $e');
-    }
+    return Query$WebhookSubscriptionsCount.fromJson(result);
   }
 
   @override
+  @GraphQLQuery()
   Future<Query$WebhookSubscriptions> webhookSubscriptions({
     required int first,
     String? after,
   }) async {
-    try {
-      // Execute the GraphQL query using the base service
-      final result = await this.queryWithDocument(
-        documentNode: documentNodeQueryWebhookSubscriptions,
-        variables: {
-          'first': first,
-          if (after != null) 'after': after,
-        },
-      );
+    final result = await executeQueryAuto(
+      documentNode: documentNodeQueryWebhookSubscriptions,
+      parameters: {'first': first, 'after': after},
+    );
 
-      // Check for GraphQL errors
-      if (result.containsKey('errors')) {
-        final errors = result['errors'] as List;
-        final errorMessage = errors.isNotEmpty
-            ? errors.first['message'] ?? 'GraphQL error occurred'
-            : 'GraphQL error occurred';
-        throw Exception('GraphQL Error: $errorMessage');
-      }
-
-      return Query$WebhookSubscriptions.fromJson(result['data']);
-    } catch (e) {
-      throw Exception('Error getting webhook subscriptions: $e');
-    }
+    return Query$WebhookSubscriptions.fromJson(result);
   }
 
   @override
+  @GraphQLQuery()
   Future<Query$WebhookSubscription> webhookSubscription({
     required String id,
   }) async {
-    try {
-      // Execute the GraphQL query using the base service
-      final result = await this.queryWithDocument(
-        documentNode: documentNodeQueryWebhookSubscription,
-        variables: {
-          'id': id,
-        },
-      );
+    final result = await executeQueryAuto(
+      documentNode: documentNodeQueryWebhookSubscription,
+      parameters: {'id': id},
+    );
 
-      // Check for GraphQL errors
-      if (result.containsKey('errors')) {
-        final errors = result['errors'] as List;
-        final errorMessage = errors.isNotEmpty
-            ? errors.first['message'] ?? 'GraphQL error occurred'
-            : 'GraphQL error occurred';
-        throw Exception('GraphQL Error: $errorMessage');
-      }
-
-      return Query$WebhookSubscription.fromJson(result['data']);
-    } catch (e) {
-      throw Exception('Error getting webhook subscription: $e');
-    }
+    return Query$WebhookSubscription.fromJson(result);
   }
 
   @override
-  Future<Mutation$webhookSubscriptionCreate> webhookSubscriptionCreate({
-    required Variables$Mutation$webhookSubscriptionCreate input,
+  @GraphQLMutation()
+  Future<Mutation$WebhookSubscriptionCreate> webhookSubscriptionCreate({
+    required Variables$Mutation$WebhookSubscriptionCreate input,
   }) async {
-    try {
-      // Execute the GraphQL mutation using the base service
-      final result = await this.mutateWithDocument(
-        documentNode: documentNodeMutationwebhookSubscriptionCreate,
-        variables: input.toJson(),
-      );
+    final result = await executeMutationAuto(
+      documentNode: documentNodeMutationWebhookSubscriptionCreate,
+      parameters: {'input': input},
+    );
 
-      // Debug: Log the response
-      print('Create Webhook Subscription Response: $result');
-      print('Create Webhook Subscription Response Data: ${result['data']}');
-
-      // Check for GraphQL errors
-      if (result.containsKey('errors')) {
-        final errors = result['errors'] as List;
-        final errorMessage = errors.isNotEmpty
-            ? errors.first['message'] ?? 'GraphQL error occurred'
-            : 'GraphQL error occurred';
-        throw Exception('GraphQL Error: $errorMessage');
-      }
-
-      if (result['data'] == null) {
-        throw Exception('GraphQL response data is null: $result');
-      }
-
-      try {
-        return Mutation$webhookSubscriptionCreate.fromJson(
-            result['data'] as Map<String, dynamic>);
-      } catch (e, stackTrace) {
-        print('Error parsing Mutation\$webhookSubscriptionCreate: $e');
-        print('Stack trace: $stackTrace');
-        print('Data being parsed: ${result['data']}');
-        rethrow;
-      }
-    } catch (e) {
-      throw Exception('Error creating webhook subscription: $e');
-    }
+    return Mutation$WebhookSubscriptionCreate.fromJson(result);
   }
 }

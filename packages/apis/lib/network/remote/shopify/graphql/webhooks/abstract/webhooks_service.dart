@@ -25,7 +25,7 @@ abstract class WebhooksGraphQLService {
     required String id,
   });
 
-  Future<Mutation$webhookSubscriptionCreate> webhookSubscriptionCreate({
-    required Variables$Mutation$webhookSubscriptionCreate input,
+  Future<Mutation$WebhookSubscriptionCreate> webhookSubscriptionCreate({
+    required Variables$Mutation$WebhookSubscriptionCreate input,
   });
 }
