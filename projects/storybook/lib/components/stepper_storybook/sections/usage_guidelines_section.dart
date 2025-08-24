@@ -209,7 +209,3 @@ class StepperUsageGuidelinesSection extends StatelessWidget {
     );
   }
 }
-
-
-
-

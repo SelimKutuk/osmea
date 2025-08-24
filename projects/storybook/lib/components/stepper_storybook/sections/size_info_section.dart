@@ -164,7 +164,3 @@ class StepperSizeInfoSection extends StatelessWidget {
     }
   }
 }
-
-
-
-

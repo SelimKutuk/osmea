@@ -28,7 +28,6 @@ class StepperKnobsConfig {
   ];
 
 
-
   /// Step theme options
   static const List<Option<String>> stepThemeOptions = [
     Option(label: 'Generic Steps', value: 'generic'),
@@ -87,7 +86,6 @@ class StepperKnobsConfig {
         return 'Unknown';
     }
   }
-
 
 
   /// Gets display name for step theme
