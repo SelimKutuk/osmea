@@ -59,6 +59,3 @@ and design preferences throughout the application.
   };
 }
 
-
-
-

@@ -233,7 +233,3 @@ class StepperVariantInfoSection extends StatelessWidget {
     }
   }
 }
-
-
-
-

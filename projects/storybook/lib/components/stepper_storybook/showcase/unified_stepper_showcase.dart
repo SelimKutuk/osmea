@@ -66,8 +66,6 @@ List<Story> getUnifiedStepperShowcase() {
           label: 'Show Step Labels',
           initial: true,
         ),
-        
-
       ),
     ),
   ];

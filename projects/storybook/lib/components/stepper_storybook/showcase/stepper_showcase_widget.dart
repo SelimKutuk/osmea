@@ -24,7 +24,6 @@ class UnifiedStepperShowcaseWidget extends StatefulWidget {
   final bool showLabels;
 
 
-
   const UnifiedStepperShowcaseWidget({
     Key? key,
     required this.stepperStyle,
@@ -35,8 +34,6 @@ class UnifiedStepperShowcaseWidget extends StatefulWidget {
     required this.stepCount,
     required this.allowStepTapping,
     required this.showLabels,
-
-
   }) : super(key: key);
 
   @override
@@ -240,14 +237,4 @@ class _UnifiedStepperShowcaseWidgetState extends State<UnifiedStepperShowcaseWid
             onStepChanged: _onStepChanged,
           );
   }
-
-
-
-
-
-
-
-
-
-
 }
