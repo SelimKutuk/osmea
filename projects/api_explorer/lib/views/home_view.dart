@@ -459,12 +459,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     setState(() {
       _selectedService = null;
     });
-
-    // Show a success message
-    context.toastSuccess(
-      'Successfully switched to ${store.displayName}',
-      position: ToastPosition.bottom,
-    );
   }
 
   void _updateNetworkConfiguration(StoreConfiguration store) {
