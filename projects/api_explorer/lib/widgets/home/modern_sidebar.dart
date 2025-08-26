@@ -51,6 +51,7 @@ class _ModernSidebarState extends State<ModernSidebar>
 
     _listenToStoreChanges();
     _loadCurrentStore();
+    _initializeDefaultCategory();
   }
 
   @override
@@ -68,7 +69,12 @@ class _ModernSidebarState extends State<ModernSidebar>
         (event) {
           if (mounted && !_isDisposed) {
             debugPrint('🔄 Sidebar: Store change detected: ${event.type}');
-            setState(() {});
+            setState(() {
+              // Reset selections when store changes
+              _selectedMainCategory = null;
+              _selectedCategory = null;
+              _selectedSubcategory = null;
+            });
             _loadCurrentStore();
           }
         },
@@ -88,19 +94,44 @@ class _ModernSidebarState extends State<ModernSidebar>
         setState(() {
           _currentStore = store;
         });
+        // Initialize default category after store is loaded
+        _initializeDefaultCategory();
       }
     } catch (e) {
       debugPrint('❌ Error loading current store in sidebar: $e');
     }
   }
 
+  /// Initialize default category to be expanded when sidebar opens
+  void _initializeDefaultCategory() {
+    if (_currentStore != null && _isCurrentStoreComplete) {
+      final availableCategories = ApiServiceRegistry.categories
+          .where((cat) => _hasStoreForPlatform(cat))
+          .toList();
+      
+      if (availableCategories.isNotEmpty && _selectedMainCategory == null) {
+        // Select the first available category by default
+        final defaultMainCategory = availableCategories.first;
+        final subCategories = _getCategoriesForCurrentStore(defaultMainCategory);
+        
+        setState(() {
+          _selectedMainCategory = defaultMainCategory;
+          _categoryAnimationController.forward();
+          
+          // Also auto-select first subcategory if available
+          if (subCategories.isNotEmpty) {
+            _selectedCategory = subCategories.first;
+          }
+        });
+      }
+    }
+  }
+
   void _selectMainCategory(ApiCategory mainCategory) {
     setState(() {
       if (_selectedMainCategory == mainCategory) {
-        _selectedMainCategory = null;
-        _selectedCategory = null;
-        _selectedSubcategory = null;
-        _categoryAnimationController.reverse();
+        // Don't close if already selected, just keep it open
+        return;
       } else {
         _selectedMainCategory = mainCategory;
         _selectedCategory = null;
@@ -113,9 +144,8 @@ class _ModernSidebarState extends State<ModernSidebar>
   void _selectCategory(ApiCategory category) {
     setState(() {
       if (_selectedCategory == category) {
-        _selectedCategory = null;
-        _selectedSubcategory = null;
-        _categoryAnimationController.reverse();
+        // Don't close if already selected, just keep it open
+        return;
       } else {
         _selectedCategory = category;
         _selectedSubcategory = null;
