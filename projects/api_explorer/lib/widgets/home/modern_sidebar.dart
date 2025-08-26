@@ -625,7 +625,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 vertical: isMobile ? 2 : 4,
                               ),
                               leading: Icon(
-                                _getCategoryIcon(mainCategory),
+                                ApiServiceRegistry.getCategoryIcon(mainCategory),
                                 color: hasStore && _isCurrentStoreComplete
                                     ? (isMainSelected
                                         ? OsmeaColors.nordicBlue
@@ -751,7 +751,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                 vertical: isMobile ? 2 : 4,
                                               ),
                                               leading: Icon(
-                                                _getCategoryIcon(category),
+                                                ApiServiceRegistry.getCategoryIcon(category),
                                                 color: isSelected
                                                     ? OsmeaColors.nordicBlue
                                                     : Theme.of(context)
@@ -1032,119 +1032,6 @@ class _ModernSidebarState extends State<ModernSidebar>
         );
       },
     );
-  }
-
-  IconData _getCategoryIcon(ApiCategory category) {
-    switch (category) {
-      case ApiCategory.shopify:
-        return Icons.shopping_bag_rounded;
-      case ApiCategory.woocommerce:
-        return Icons.shopping_cart_checkout_rounded;
-      case ApiCategory.shopifyGraphql:
-        return Icons.analytics_rounded;
-      case ApiCategory.graphql:
-        return Icons.analytics_rounded;
-      case ApiCategory.graphqlQueries:
-        return Icons.search_rounded;
-      case ApiCategory.graphqlMutations:
-        return Icons.edit_rounded;
-      case ApiCategory.graphqlProductsAndCollections:
-        return Icons.inventory_2_rounded;
-      case ApiCategory.graphqlProductsAndCollectionsQueries:
-        return Icons.search_rounded;
-      case ApiCategory.graphqlProductsAndCollectionsMutations:
-        return Icons.edit_rounded;
-      //case ApiCategory.graphqlOrders:
-      //return Icons.shopping_basket_rounded;
-      //case ApiCategory.graphqlOrdersQueries:
-      //return Icons.search_rounded;
-      //case ApiCategory.graphqlOrdersMutations:
-      //return Icons.edit_rounded;
-      case ApiCategory.graphqlCustomers:
-        return Icons.people_alt_rounded;
-      case ApiCategory.graphqlCustomersQueries:
-        return Icons.search_rounded;
-      case ApiCategory.graphqlCustomersMutations:
-        return Icons.edit_rounded;
-      case ApiCategory.graphqlWebhooks:
-        return Icons.webhook_rounded;
-      case ApiCategory.graphqlWebhookQueries:
-        return Icons.search_rounded;
-      case ApiCategory.graphqlWebhookMutations:
-        return Icons.edit_rounded;
-      case ApiCategory.access:
-        return Icons.security_rounded;
-      case ApiCategory.storefront:
-        return Icons.storefront_rounded;
-      case ApiCategory.admin:
-        return Icons.admin_panel_settings_rounded;
-      case ApiCategory.catalog:
-        return Icons.category_rounded;
-      case ApiCategory.customer:
-        return Icons.people_rounded;
-      case ApiCategory.discounts:
-        return Icons.local_offer_rounded;
-      case ApiCategory.billing:
-        return Icons.payment_rounded;
-      case ApiCategory.events:
-        return Icons.event_rounded;
-      case ApiCategory.inventory:
-        return Icons.inventory_rounded;
-      case ApiCategory.orders:
-        return Icons.shopping_cart_rounded;
-      case ApiCategory.marketingEvent:
-        return Icons.campaign_rounded;
-      case ApiCategory.giftCard:
-        return Icons.card_giftcard_rounded;
-      case ApiCategory.metafield:
-        return Icons.label_rounded;
-      case ApiCategory.onlineStore:
-        return Icons.store_rounded;
-      case ApiCategory.products:
-        return Icons.category_rounded;
-      case ApiCategory.storeProperties:
-        return Icons.settings_rounded;
-      case ApiCategory.tendertransaction:
-        return Icons.account_balance_wallet_rounded;
-      case ApiCategory.webhooks:
-        return Icons.webhook_rounded;
-      case ApiCategory.woocommerceCoupons:
-        return Icons.local_offer_rounded;
-      case ApiCategory.woocommerceProducts:
-        return Icons.category_rounded;
-      case ApiCategory.woocommerceOrders:
-        return Icons.shopping_cart_rounded;
-      case ApiCategory.woocommerceCustomers:
-        return Icons.people_rounded;
-      case ApiCategory.woocommerceWebhooks:
-        return Icons.webhook_rounded;
-      case ApiCategory.woocommerceSystemStatus:
-        return Icons.system_update_rounded;
-      case ApiCategory.woocommerceReports:
-        return Icons.analytics_rounded;
-      case ApiCategory.woocommerceShippingMethods:
-        return Icons.local_shipping_rounded;
-      case ApiCategory.woocommerceShippingZones:
-        return Icons.location_on_rounded;
-      case ApiCategory.woocommerceShippingZoneMethods:
-        return Icons.route_rounded;
-      case ApiCategory.woocommercePaymentGateways:
-        return Icons.payment_rounded;
-      case ApiCategory.woocommerceSetting:
-        return Icons.settings_applications_rounded;
-      case ApiCategory.woocommerceData:
-        return Icons.data_usage_rounded;
-      case ApiCategory.woocommerceContinents:
-        return Icons.public_rounded;
-      case ApiCategory.woocommerceCountries:
-        return Icons.flag_rounded;
-      case ApiCategory.woocommerceCurrencies:
-        return Icons.attach_money_rounded;
-      case ApiCategory.woocommerceRefunds:
-        return Icons.money_off_rounded;
-      case ApiCategory.woocommerceTaxes:
-        return Icons.receipt_long_rounded;
-    }
   }
 
   List<String> _getSubCategoriesForGraphQLCategory(ApiCategory category) {
