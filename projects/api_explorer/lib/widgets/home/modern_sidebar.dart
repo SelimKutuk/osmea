@@ -1117,12 +1117,6 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'GraphQL Webhook Mutations';
       case ApiCategory.access:
         return 'Access';
-      case ApiCategory.storefront:
-        return 'Storefront';
-      case ApiCategory.admin:
-        return 'Admin';
-      case ApiCategory.catalog:
-        return 'Catalog';
       case ApiCategory.customer:
         return 'Customer';
       case ApiCategory.discounts:

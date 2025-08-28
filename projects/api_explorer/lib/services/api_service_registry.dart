@@ -7,9 +7,6 @@ enum ApiCategory {
   shopifyGraphql, // New main category
   graphql,
   access,
-  storefront,
-  admin,
-  catalog,
   billing,
   customer,
   discounts,
@@ -84,12 +81,6 @@ extension ApiCategoryExtension on ApiCategory {
         return 'GraphQL APIs (Modern)';
       case ApiCategory.access:
         return 'Access APIs';
-      case ApiCategory.storefront:
-        return 'Storefront APIs';
-      case ApiCategory.admin:
-        return 'Admin APIs';
-      case ApiCategory.catalog:
-        return 'Catalog APIs';
       case ApiCategory.billing:
         return 'Billing APIs';
       case ApiCategory.customer:
@@ -3946,9 +3937,6 @@ class ApiServiceRegistry {
   static List<ApiCategory> getShopifyCategories() {
     return [
       ApiCategory.access,
-      ApiCategory.storefront,
-      ApiCategory.admin,
-      ApiCategory.catalog,
       ApiCategory.customer,
       ApiCategory.discounts,
       ApiCategory.billing,
@@ -3961,7 +3949,6 @@ class ApiServiceRegistry {
       ApiCategory.onlineStore,
       ApiCategory.products,
       ApiCategory.storeProperties,
-      ApiCategory.storefront,
       ApiCategory.webhooks,
       // Removed GraphQL categories from here - now separate main category
     ];
@@ -4118,12 +4105,6 @@ class ApiServiceRegistry {
         return 'Mutations';
       case ApiCategory.access:
         return 'Access';
-      case ApiCategory.storefront:
-        return 'Storefront';
-      case ApiCategory.admin:
-        return 'Admin';
-      case ApiCategory.catalog:
-        return 'Catalog';
       case ApiCategory.customer:
         return 'Customer';
       case ApiCategory.discounts:
@@ -4227,12 +4208,6 @@ class ApiServiceRegistry {
         return Icons.edit_rounded;
       case ApiCategory.access:
         return Icons.security_rounded;
-      case ApiCategory.storefront:
-        return Icons.storefront_rounded;
-      case ApiCategory.admin:
-        return Icons.admin_panel_settings_rounded;
-      case ApiCategory.catalog:
-        return Icons.category_rounded;
       case ApiCategory.customer:
         return Icons.people_rounded;
       case ApiCategory.discounts:
