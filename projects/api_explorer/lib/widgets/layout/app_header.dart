@@ -722,6 +722,14 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         ),
         _buildMenuItem(
           context,
+          'add',
+          Icons.add,
+          'Add New Store',
+          'Add a new store configuration',
+          () => _showAddStoreDialog(context),
+        ),
+        _buildMenuItem(
+          context,
           'profile',
           Icons.account_circle_rounded,
           'Store Profile',
@@ -734,6 +742,43 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         _isMenuOpen = false;
       });
     });
+  }
+
+  /// Show add store dialog using StoreSetupWizard
+  void _showAddStoreDialog(BuildContext context) async {
+    try {
+      final result = await StoreSetupWizard.show(
+        context,
+        isInitialSetup: false,
+        onStoreAdded: (config) {
+          // Store added successfully, trigger refresh if needed
+          debugPrint('✅ New store added: ${config.displayName}');
+        },
+      );
+
+      if (result != null) {
+        // Show success message
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('✅ Store added successfully: ${result.displayName}'),
+              backgroundColor: OsmeaColors.forestHeart,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Error opening add store dialog: $e');
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('❌ Error adding store: $e'),
+            backgroundColor: OsmeaColors.slate,
+          ),
+        );
+      }
+    }
   }
 
   PopupMenuEntry<String> _buildMenuItem(
