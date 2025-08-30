@@ -20,7 +20,14 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
     SplashViewModel viewModel,
     SplashState state,
   ) {
-    return OsmeaComponents.scaffold(body: Center(child: Text('Splash')));
+    return OsmeaComponents.scaffold(
+      body: OsmeaComponents.center(
+        child: OsmeaComponents.image(
+          imageUrl:
+              'https://github.com/masterfabric-mobile/osmea/blob/dev/projects/api_explorer/assets/images/osmea_logo_black.png?raw=true',
+        ),
+      ),
+    );
   }
 
   @override
