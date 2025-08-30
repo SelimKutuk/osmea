@@ -253,7 +253,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                           ),
                           child: Icon(
                             Icons.explore_rounded,
-                            color: Colors.white,
+                            color: OsmeaColors.white,
                             size: isNarrow ? 20 : 24,
                           ),
                         ),
@@ -268,14 +268,14 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 variant: OsmeaTextVariant.titleMedium,
                                 fontSize: isNarrow ? 16 : 18,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                color: OsmeaColors.white,
                               ),
                               if (!isNarrow)
                                 OsmeaComponents.text(
                                   'Browse and test APIs',
                                   variant: OsmeaTextVariant.bodySmall,
                                   fontSize: 12,
-                                  color: Colors.white.withValues(alpha: 0.8),
+                                  color: OsmeaColors.white.withValues(alpha: 0.8),
                                 ),
                             ],
                           ),
@@ -289,7 +289,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                       OsmeaComponents.flexible(
                         child: OsmeaComponents.container(
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.1),
+                            color: OsmeaColors.white.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           padding: EdgeInsets.all(12),
@@ -298,7 +298,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                               Icon(
                                 Icons.store,
                                 size: 16,
-                                color: Colors.white,
+                                color: OsmeaColors.white,
                               ),
                               OsmeaComponents.sizedBox(width: 8),
                               OsmeaComponents.expanded(
@@ -311,7 +311,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       variant: OsmeaTextVariant.labelMedium,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white,
+                                      color: OsmeaColors.white,
                                     ),
                                     OsmeaComponents.text(
                                       _isCurrentStoreComplete
@@ -320,8 +320,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       variant: OsmeaTextVariant.labelSmall,
                                       fontSize: 10,
                                       color: _isCurrentStoreComplete
-                                          ? Colors.green[100]
-                                          : Colors.orange[100],
+                                          ? OsmeaColors.green[100]
+                                          : OsmeaColors.orange[100],
                                     ),
                                   ],
                                 ),
@@ -644,7 +644,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                               color: isMainSelected
                                   ? OsmeaColors.nordicBlue
                                       .withValues(alpha: 0.03)
-                                  : Colors.transparent,
+                                  : OsmeaColors.transparent,
                               borderRadius: context.borderRadiusMinStandard,
                             ),
                             child: ListTile(

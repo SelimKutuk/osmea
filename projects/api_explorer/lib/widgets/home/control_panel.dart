@@ -116,7 +116,7 @@ class _ControlPanelState extends State<ControlPanel>
   /// 🎨 Modern Header
   Widget _buildModernHeader(
       BuildContext context, double padding, ColorScheme colorScheme) {
-    return Container(
+    return OsmeaComponents.container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         gradient: OsmeaAppTheme.createMethodGradient(
@@ -129,10 +129,10 @@ class _ControlPanelState extends State<ControlPanel>
           topRight: Radius.circular(OsmeaAppTheme.radiusLg),
         ),
       ),
-      child: Row(
+      child: OsmeaComponents.row(
         children: [
           // 🎯 Modern Icon
-          Container(
+          OsmeaComponents.container(
             padding: const EdgeInsets.all(OsmeaAppTheme.spaceMd),
             decoration: BoxDecoration(
               color: colorScheme.secondary.withAlpha(51), // Updated color
@@ -149,21 +149,23 @@ class _ControlPanelState extends State<ControlPanel>
             ),
           ),
 
-          const SizedBox(width: OsmeaAppTheme.spaceLg),
+          OsmeaComponents.sizedBox(width: OsmeaAppTheme.spaceLg),
 
           // 📝 Title Section
-          Expanded(
-            child: Column(
+          OsmeaComponents.expanded(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('API Configuration',
-                    style: OsmeaAppTheme.headlineLarge(context)),
-                const SizedBox(height: OsmeaAppTheme.spaceXs),
-                Text(
+                OsmeaComponents.text(
+                  'API Configuration',
+                  variant: OsmeaTextVariant.headlineLarge,
+                  color: OsmeaColors.white,
+                ),
+                OsmeaComponents.sizedBox(height: OsmeaAppTheme.spaceXs),
+                OsmeaComponents.text(
                   'Configure and test your API endpoints',
-                  style: OsmeaAppTheme.bodyLarge(context).copyWith(
-                    color: colorScheme.onSecondary.withAlpha(230),
-                  ),
+                  variant: OsmeaTextVariant.bodyLarge,
+                  color: OsmeaColors.white.withValues(alpha: 0.9),
                 ),
               ],
             ),
@@ -171,45 +173,41 @@ class _ControlPanelState extends State<ControlPanel>
 
           // 🧪 Test Buttons (only in debug mode)
           if (kDebugMode) ...[
-            Container(
+            OsmeaComponents.container(
               margin: const EdgeInsets.only(left: OsmeaAppTheme.spaceMd),
-              child: IconButton(
+              child: OsmeaComponents.iconButton(
                 onPressed: () {
                   // This will be handled by the parent widget
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
+                    SnackBar(
+                      content: OsmeaComponents.text(
                           'Responsive popup test - resize window to <1200px to see it'),
-                      duration: Duration(seconds: 3),
+                      duration: const Duration(seconds: 3),
                     ),
                   );
                 },
                 icon: const Icon(Icons.bug_report_outlined),
                 tooltip: 'Test Responsive Popup',
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.2),
-                  foregroundColor: Colors.white,
-                ),
+                backgroundColor: OsmeaColors.white.withValues(alpha: 0.2),
+                variant: ButtonVariant.ghost,
               ),
             ),
-            Container(
+            OsmeaComponents.container(
               margin: const EdgeInsets.only(left: OsmeaAppTheme.spaceSm),
-              child: IconButton(
+              child: OsmeaComponents.iconButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
+                    SnackBar(
+                      content: OsmeaComponents.text(
                           'Screen size simulation - check console for details'),
-                      duration: Duration(seconds: 3),
+                      duration: const Duration(seconds: 3),
                     ),
                   );
                 },
                 icon: const Icon(Icons.screen_rotation_outlined),
                 tooltip: 'Test Screen Size Simulation',
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.2),
-                  foregroundColor: Colors.white,
-                ),
+                backgroundColor: OsmeaColors.white.withValues(alpha: 0.2),
+                variant: ButtonVariant.ghost,
               ),
             ),
           ],
@@ -296,7 +294,7 @@ class _ControlPanelState extends State<ControlPanel>
                 child: _buildModernParameterFields(context),
                 colorScheme: colorScheme,
               ),
-              const SizedBox(height: OsmeaAppTheme.spaceLg),
+              OsmeaComponents.sizedBox(height: OsmeaAppTheme.spaceLg),
             ],
 
             // 🚀 Execute Button
@@ -394,15 +392,13 @@ class _ControlPanelState extends State<ControlPanel>
               width: isSelected ? 2 : 1,
             ),
           ),
-          child: Text(
+          child: OsmeaComponents.text(
             text,
-            style: TextStyle(
-              color: isSelected
-                  ? OsmeaColors.nordicBlue
-                  : (isDarkMode ? OsmeaColors.white : OsmeaColors.pewter),
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 14,
-            ),
+            fontSize: 14,
+            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+            color: isSelected
+                ? OsmeaColors.nordicBlue
+                : (isDarkMode ? OsmeaColors.white : OsmeaColors.pewter),
           ),
         ),
       ),
@@ -412,7 +408,7 @@ class _ControlPanelState extends State<ControlPanel>
   Widget _buildModernCategorySelector(BuildContext context) {
     final categories = ApiServiceRegistry.categories;
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 12,
       runSpacing: 12,
       children: categories.map((category) {
@@ -432,7 +428,7 @@ class _ControlPanelState extends State<ControlPanel>
     final subcategories =
         ApiServiceRegistry.getSubcategoriesByCategory(widget.selectedCategory!);
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 12,
       runSpacing: 12,
       children: subcategories.map((subcategory) {
@@ -584,7 +580,7 @@ class _ControlPanelState extends State<ControlPanel>
         widget.selectedService!.requiredFields[widget.selectedMethod!] ?? [];
 
     if (fields.isEmpty) {
-      return Container(
+      return OsmeaComponents.container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -599,9 +595,9 @@ class _ControlPanelState extends State<ControlPanel>
             width: 1,
           ),
         ),
-        child: Row(
+        child: OsmeaComponents.row(
           children: [
-            Container(
+            OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: OsmeaColors.forestHeart.withValues(alpha: 0.2),
@@ -613,25 +609,21 @@ class _ControlPanelState extends State<ControlPanel>
                 size: 24,
               ),
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
+            OsmeaComponents.sizedBox(width: 16),
+            OsmeaComponents.expanded(
+              child: OsmeaComponents.column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  OsmeaComponents.text(
                     'Ready to Execute',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: OsmeaColors.forestHeart,
-                    ),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: OsmeaColors.forestHeart,
                   ),
-                  Text(
+                  OsmeaComponents.text(
                     'No parameters required for this endpoint',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: OsmeaColors.meadow,
-                    ),
+                    fontSize: 14,
+                    color: OsmeaColors.meadow,
                   ),
                 ],
               ),
@@ -641,13 +633,13 @@ class _ControlPanelState extends State<ControlPanel>
       );
     }
 
-    return Column(
+    return OsmeaComponents.column(
       children: fields.map((field) {
         if (!widget.controllers.containsKey(field.name)) {
           widget.controllers[field.name] = TextEditingController();
         }
 
-        return Padding(
+        return OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 16),
           child: OsmeaComponents.textField(
             controller: widget.controllers[field.name]!,
@@ -665,7 +657,7 @@ class _ControlPanelState extends State<ControlPanel>
 
   Widget _buildModernExecuteButton(
       BuildContext context, ColorScheme colorScheme) {
-    return Container(
+    return OsmeaComponents.container(
       width: double.infinity,
       height: 56,
       decoration: BoxDecoration(
@@ -686,12 +678,12 @@ class _ControlPanelState extends State<ControlPanel>
         child: InkWell(
           onTap: !widget.loading ? widget.onExecute : null,
           borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusLg),
-          child: Center(
+          child: OsmeaComponents.center(
             child: widget.loading
-                ? Row(
+                ? OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(
+                      OsmeaComponents.sizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
@@ -700,15 +692,18 @@ class _ControlPanelState extends State<ControlPanel>
                               AlwaysStoppedAnimation<Color>(OsmeaColors.white),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Text('Executing...',
-                          style: OsmeaAppTheme.bodyLarge(context)),
+                      OsmeaComponents.sizedBox(width: 12),
+                      OsmeaComponents.text(
+                        'Executing...',
+                        variant: OsmeaTextVariant.bodyLarge,
+                        color: OsmeaColors.white,
+                      ),
                     ],
                   )
-                : Row(
+                : OsmeaComponents.row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
+                      OsmeaComponents.container(
                         padding: const EdgeInsets.all(OsmeaAppTheme.spaceSm),
                         decoration: BoxDecoration(
                           color: OsmeaColors.white.withValues(alpha: 0.2),
@@ -721,12 +716,14 @@ class _ControlPanelState extends State<ControlPanel>
                           size: 20,
                         ),
                       ),
-                      const SizedBox(width: OsmeaAppTheme.spaceMd),
-                      Text(
-                          widget.selectedMethod != null
-                              ? 'Execute ${widget.selectedMethod!} Request'
-                              : 'Execute Request',
-                          style: OsmeaAppTheme.bodyLarge(context)),
+                      OsmeaComponents.sizedBox(width: OsmeaAppTheme.spaceMd),
+                      OsmeaComponents.text(
+                        widget.selectedMethod != null
+                            ? 'Execute ${widget.selectedMethod!} Request'
+                            : 'Execute Request',
+                        variant: OsmeaTextVariant.bodyLarge,
+                        color: OsmeaColors.white,
+                      ),
                     ],
                   ),
           ),

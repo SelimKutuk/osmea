@@ -84,7 +84,7 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -100,7 +100,7 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                       gradient: LinearGradient(
                         colors: [
                           OsmeaColors.nordicBlue,
-                          OsmeaColors.nordicBlue.withOpacity(0.8),
+                          OsmeaColors.nordicBlue.withValues(alpha: 0.8),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -115,7 +115,7 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Icon(
@@ -146,7 +146,7 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                                     .textTheme
                                     .bodyMedium
                                     ?.copyWith(
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withValues(alpha: 0.9),
                                     ),
                               ),
                             ],
@@ -174,8 +174,8 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                           decoration: BoxDecoration(
                             color: Theme.of(context)
                                 .colorScheme
-                                .surfaceVariant
-                                .withOpacity(0.3),
+                                .surfaceContainerHighest
+                                .withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
@@ -207,10 +207,10 @@ class _ResponsivePopupState extends State<ResponsivePopup>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.orange.withOpacity(0.1),
+                              color: Colors.orange.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                  color: Colors.orange.withOpacity(0.3)),
+                                  color: Colors.orange.withValues(alpha: 0.3)),
                             ),
                             child: Column(
                               children: [

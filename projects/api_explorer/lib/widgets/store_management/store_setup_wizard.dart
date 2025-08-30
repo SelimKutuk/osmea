@@ -1146,7 +1146,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     if (!isPassword && !isAccessToken) return null;
 
     bool isVisible = isPassword ? _isPasswordVisible : _isAccessTokenVisible;
-    VoidCallback onToggle = () {
+    onToggle() {
       setState(() {
         if (isPassword) {
           _isPasswordVisible = !_isPasswordVisible;
@@ -1154,7 +1154,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           _isAccessTokenVisible = !_isAccessTokenVisible;
         }
       });
-    };
+    }
 
     return IconButton(
       icon: Icon(
