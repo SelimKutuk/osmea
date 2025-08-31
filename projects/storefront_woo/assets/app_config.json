@@ -1,0 +1,85 @@
+{
+    "app_settings": {
+      "app_name": "Storefront WooCommerce",
+      "app_version": "1.0.0",
+      "build_number": "1",
+      "environment": "development",
+      "debug_mode": true,
+      "maintenance_mode": false
+    },
+    "api_configuration": {
+      "base_url": "https://api.masterfabric.co/woo",
+      "timeout_seconds": 45,
+      "retry_count": 3,
+      "enable_logging": true
+    },
+    "firebase_configuration": {
+      "analytics_enabled": true,
+      "crashlytics_enabled": true,
+      "performance_monitoring_enabled": true,
+      "remote_config_enabled": true,
+      "remote_config_fetch_timeout": 60,
+      "remote_config_cache_expiration": 3600
+    },
+    "ui_configuration": {
+      "theme_mode": "light",
+      "primary_color": "#E91E63",
+      "accent_color": "#FF9800",
+      "font_scale": 1.0,
+      "enable_haptic_feedback": true,
+      "enable_sound_effects": true
+    },
+    "security_configuration": {
+      "enable_ssl_pinning": true,
+      "certificate_validation": true,
+      "biometric_authentication": true,
+      "session_timeout_minutes": 45
+    },
+    "storage_configuration": {
+      "enable_encryption": true,
+      "cache_size_mb": 150,
+      "auto_cleanup_enabled": true,
+      "backup_enabled": true
+    },
+    "notification_configuration": {
+      "push_notifications_enabled": true,
+      "local_notifications_enabled": true,
+      "notification_sound": "default",
+      "vibration_enabled": true
+    },
+    "feature_flags": {
+      "onboarding_enabled": true,
+      "dark_mode_available": true,
+      "offline_mode_enabled": true,
+      "beta_features_enabled": false,
+      "analytics_opt_out_available": true,
+      "woocommerce_integration_enabled": true,
+      "payment_gateway_enabled": true,
+      "wishlist_enabled": true,
+      "cart_persistence_enabled": true
+    },
+    "localization_configuration": {
+      "default_language": "tr",
+      "supported_languages": ["tr", "en", "de", "fr"],
+      "rtl_support": false,
+      "auto_detect_language": true
+    },
+    "performance_configuration": {
+      "image_cache_size_mb": 75,
+      "network_cache_size_mb": 50,
+      "lazy_loading_enabled": true,
+      "preload_critical_assets": true
+    },
+    "woocommerce_configuration": {
+      "store_url": "https://store.masterfabric.co",
+      "consumer_key": "",
+      "consumer_secret": "",
+      "version": "wc/v3",
+      "verify_ssl": true,
+      "query_string_auth": false,
+      "products_per_page": 20,
+      "enable_reviews": true,
+      "enable_coupons": true,
+      "enable_guest_checkout": true
+    }
+  }

@@ -1,0 +1,69 @@
+{
+  "app_settings": {
+    "app_name": "OSMEA Mobile App",
+    "app_version": "1.0.0",
+    "build_number": "1",
+    "environment": "production",
+    "debug_mode": false,
+    "maintenance_mode": false
+  },
+  "api_configuration": {
+    "base_url": "https://api.masterfabric.co/",
+    "timeout_seconds": 30,
+    "retry_count": 3,
+    "enable_logging": false
+  },
+  "firebase_configuration": {
+    "analytics_enabled": true,
+    "crashlytics_enabled": true,
+    "performance_monitoring_enabled": true,
+    "remote_config_enabled": true,
+    "remote_config_fetch_timeout": 60,
+    "remote_config_cache_expiration": 3600
+  },
+  "ui_configuration": {
+    "theme_mode": "light",
+    "primary_color": "#2196F3",
+    "accent_color": "#FFC107",
+    "font_scale": 1.0,
+    "enable_haptic_feedback": true,
+    "enable_sound_effects": true
+  },
+  "security_configuration": {
+    "enable_ssl_pinning": true,
+    "certificate_validation": true,
+    "biometric_authentication": false,
+    "session_timeout_minutes": 30
+  },
+  "storage_configuration": {
+    "enable_encryption": true,
+    "cache_size_mb": 100,
+    "auto_cleanup_enabled": true,
+    "backup_enabled": false
+  },
+  "notification_configuration": {
+    "push_notifications_enabled": true,
+    "local_notifications_enabled": true,
+    "notification_sound": "default",
+    "vibration_enabled": true
+  },
+  "feature_flags": {
+    "onboarding_enabled": true,
+    "dark_mode_available": true,
+    "offline_mode_enabled": false,
+    "beta_features_enabled": false,
+    "analytics_opt_out_available": true
+  },
+  "localization_configuration": {
+    "default_language": "en",
+    "supported_languages": ["en", "tr", "de", "fr", "es"],
+    "rtl_support": false,
+    "auto_detect_language": true
+  },
+  "performance_configuration": {
+    "image_cache_size_mb": 50,
+    "network_cache_size_mb": 25,
+    "lazy_loading_enabled": true,
+    "preload_critical_assets": true
+  }
+}

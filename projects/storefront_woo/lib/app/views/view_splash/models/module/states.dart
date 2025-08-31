@@ -56,3 +56,9 @@ class SplashStateError extends SplashState {
 
 /// State: Signals that the splash screen should navigate to the home screen.
 class SplashStateNavigateHome extends SplashState {}
+
+/// State: Show configuration bottomsheet for dev mode
+class SplashStateShowConfigBottomSheet extends SplashState {}
+
+/// State: Production mode message (no config bottomsheet)
+class SplashStateProductionMode extends SplashState {}

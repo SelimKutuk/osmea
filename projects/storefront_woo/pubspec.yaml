@@ -78,9 +78,8 @@ flutter:
 # ────────────────────────────────
   # ASSET MANAGEMENT
   # ────────────────────────────────
-  # assets:
-  #   - assets/i18n/      # Localization JSON files (used by slang)
-  #   - assets/images/    # Image assets used throughout the application
+  assets:
+    - assets/                    # Configuration files (app_config.json)
   # ────────────────────────────────
   # MATERIAL DESIGN
   # ────────────────────────────────

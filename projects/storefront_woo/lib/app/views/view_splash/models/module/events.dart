@@ -37,3 +37,10 @@ class SplashViewInitialEvent extends SplashEvent {
 
   SplashViewInitialEvent(this.context);
 }
+
+/// Event: Logo tapped for dev mode configuration bottomsheet
+class SplashEventLogoTapped extends SplashEvent {
+  final BuildContext context;
+
+  SplashEventLogoTapped({required this.context});
+}
