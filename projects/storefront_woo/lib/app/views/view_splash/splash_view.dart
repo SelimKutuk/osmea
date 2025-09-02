@@ -10,7 +10,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
     super.key,
     Map<String, dynamic> arguments = const {
       "title": "Splash Screen",
-      "description": "Welcome to OSMEA Storefront",
+      "description": "Welcome to OSMEA Store",
     },
     MasterViewTypes currentView = MasterViewTypes.content,
   }) : super(arguments: arguments, currentView: currentView);
@@ -60,7 +60,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
             
             OsmeaComponents.sizedBox(height: context.spacing16),
             
-            // 📊 Simple Loading Text
+            // 📊 Loading Text
             OsmeaComponents.text(
               'Loading...',
               variant: OsmeaTextVariant.bodyMedium,
@@ -82,7 +82,8 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
     } else if (state is SplashStateProductionMode) {
       // Show production mode toast
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        OsmeaComponents.quickToast(
+        OsmeaComponents.toast(
+          style: ToastStyle.outline,
           context: context,
           message: '🔒 Production Mode',
           type: ToastType.info,
@@ -99,7 +100,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
       backgroundColor: Theme.of(context).colorScheme.surface.withValues(alpha: 0.0),
       builder: (context) => OsmeaComponents.bottomSheet(
         size: BottomSheetSize.large,
-        title: 'Development Configuration',
+        title: 'Developer Settings',
         isDismissible: true,
         enableDrag: true,
         rightAction: OsmeaComponents.iconButton(
@@ -113,5 +114,10 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   }
 
   @override
-  void initialContent(SplashViewModel viewModel, BuildContext context) {}
+  void initialContent(SplashViewModel viewModel, BuildContext context) {
+    // 🚀 Check onboarding after 3 seconds and navigate
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.startSplashWithDirectNavigation(context);
+    });
+  }
 }

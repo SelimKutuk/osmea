@@ -3,8 +3,8 @@
       "app_name": "Storefront WooCommerce",
       "app_version": "1.0.0",
       "build_number": "1",
-      "environment": "development",
-      "debug_mode": true,
+      "environment": "production",
+      "debug_mode": false,
       "maintenance_mode": false
     },
     "api_configuration": {
@@ -23,8 +23,8 @@
     },
     "ui_configuration": {
       "theme_mode": "light",
-      "primary_color": "#E91E63",
-      "accent_color": "#FF9800",
+      "primary_color": "#000000",
+      "accent_color": "#FFFFFF",
       "font_scale": 1.0,
       "enable_haptic_feedback": true,
       "enable_sound_effects": true
@@ -69,6 +69,72 @@
       "network_cache_size_mb": 50,
       "lazy_loading_enabled": true,
       "preload_critical_assets": true
+    },
+    "onboarding_configuration": {
+      "style": "style2",
+      "auto_advance_seconds": null,
+      "show_skip_button": true,
+      "show_page_indicator": true,
+      "animation_duration": 400,
+      "primary_color": "#000000",
+      "secondary_color": "#FFFFFF",
+      "pages": [
+        {
+          "title": "Your WooCommerce Store",
+          "description": "Easily manage your products and increase your sales with powerful WooCommerce integration.",
+          "icon_path": null,
+          "image_path": null,
+          "background_color": "#FFFFFF",
+          "text_color": "#000000",
+          "button_text": null,
+          "skip_text": "Skip",
+          "next_text": "Next"
+        },
+        {
+          "title": "Easy Product Management",
+          "description": "Add, edit your products and track inventory status in real-time.",
+          "icon_path": null,
+          "image_path": null,
+          "background_color": "#F5F5F5",
+          "text_color": "#000000",
+          "button_text": null,
+          "skip_text": "Skip",
+          "next_text": "Continue"
+        },
+        {
+          "title": "Inventory Control",
+          "description": "Keep track of your stock levels and get notified when products are running low.",
+          "icon_path": null,
+          "image_path": null,
+          "background_color": "#E5E5E5",
+          "text_color": "#000000",
+          "button_text": null,
+          "skip_text": "Skip",
+          "next_text": "Continue"
+        },
+        {
+          "title": "Order Management",
+          "description": "Process orders efficiently and keep your customers satisfied with fast delivery.",
+          "icon_path": null,
+          "image_path": null,
+          "background_color": "#D5D5D5",
+          "text_color": "#000000",
+          "button_text": null,
+          "skip_text": "Skip",
+          "next_text": "Continue"
+        },
+        {
+          "title": "Advanced Analytics",
+          "description": "Grow your business with sales reports, customer analytics and performance metrics.",
+          "icon_path": null,
+          "image_path": null,
+          "background_color": "#C5C5C5",
+          "text_color": "#000000",
+          "button_text": "Open My Store",
+          "skip_text": null,
+          "next_text": null
+        }
+      ]
     },
     "woocommerce_configuration": {
       "store_url": "https://store.masterfabric.co",

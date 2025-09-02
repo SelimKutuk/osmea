@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import 'package:storefront_woo/app/views/view_splash/models/module/states.dart';
@@ -50,6 +51,9 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
   
   // 📊 Configuration status tracking
   bool _configurationLoaded = false;
+  
+  // 🎯 Cached configuration info to prevent rebuilds
+  Map<String, dynamic>? _cachedConfigInfo;
   Map<String, dynamic> _appConfiguration = {};
 
   /// 🔧 Initialize and load app configuration
@@ -164,6 +168,37 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
     add(SplashViewInitialEvent(context));
   }
 
+  /// 🚀 Simple splash navigation - onboarding check after 3 seconds
+  Future<void> startSplashWithDirectNavigation(BuildContext context) async {
+    try {
+      debugPrint('🚀 Starting splash - waiting 3 seconds...');
+      
+      // Load configuration
+      await _initializeConfiguration();
+
+      // Wait 3 seconds
+      await Future.delayed(const Duration(seconds: 3));
+      debugPrint('✅ 3 seconds completed, navigating...');
+      
+      // Check onboarding status
+      final hasSeenOnboarding = await _onboardingHelper.hasSeenOnboarding();
+      
+      if (hasSeenOnboarding) {
+        debugPrint('👤 User has seen onboarding, navigating to home');
+        context.go('/home');
+      } else {
+        debugPrint('🆕 First time user, showing onboarding');
+        context.go('/onboarding');
+      }
+      
+    } catch (e) {
+      debugPrint('❌ Splash navigation error: $e');
+      if (context.mounted) {
+        context.go('/onboarding');
+      }
+    }
+  }
+
   /// ⏱️ Handles the start splash event with configuration-based duration
   void _onStartSplash(SplashEventStartSplash event, emit) async {
     emit(SplashStateLoading());
@@ -188,13 +223,17 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
   }
 
   /// 🧭 Handle navigation based on configuration and user state
-  Future<void> _handleConfigurationBasedNavigation() async {
+  Future<void> _handleConfigurationBasedNavigation([BuildContext? context]) async {
     try {
       // Check if app is in maintenance mode
       bool maintenanceMode = _getConfigValue<bool>('app_settings.maintenance_mode', false);
       if (maintenanceMode) {
         debugPrint('🚧 App is in maintenance mode, showing maintenance screen');
-        _navigationCallback?.call('/maintenance');
+        if (context != null) {
+          context.go('/maintenance');
+        } else {
+          _navigationCallback?.call('/maintenance');
+        }
         return;
       }
 
@@ -203,7 +242,11 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
       
       if (!onboardingEnabled) {
         debugPrint('🔒 Onboarding disabled in configuration, navigating to home');
-        _navigationCallback?.call('/home');
+        if (context != null) {
+          context.go('/home');
+        } else {
+          _navigationCallback?.call('/home');
+        }
         return;
       }
 
@@ -218,19 +261,35 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
         
         if (wooCommerceEnabled) {
           debugPrint('🛒 WooCommerce integration enabled, navigating to storefront');
-          _navigationCallback?.call('/storefront');
+          if (context != null) {
+            context.go('/storefront');
+          } else {
+            _navigationCallback?.call('/storefront');
+          }
         } else {
           debugPrint('🏠 Navigating to welcome screen');
-          _navigationCallback?.call('/welcome');
+          if (context != null) {
+            context.go('/welcome');
+          } else {
+            _navigationCallback?.call('/welcome');
+          }
         }
       } else {
         debugPrint('📚 First time user, navigating to onboarding');
-        _navigationCallback?.call('/onboarding');
+        if (context != null) {
+          context.go('/onboarding');
+        } else {
+          _navigationCallback?.call('/onboarding');
+        }
       }
     } catch (e) {
       debugPrint('❌ Error in configuration-based navigation: $e');
       // Fallback to default navigation
-      _navigationCallback?.call('/onboarding');
+      if (context != null) {
+        context.go('/onboarding');
+      } else {
+        _navigationCallback?.call('/onboarding');
+      }
     }
   }
 
@@ -482,7 +541,9 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
 
   /// 📋 Build configuration content for bottomsheet using OsmeaComponents
   Widget buildConfigurationContent(BuildContext context) {
-    final configInfo = getConfigurationInfo();
+    // 🎯 Cache configuration info to prevent rebuilds
+    _cachedConfigInfo ??= getConfigurationInfo();
+    final configInfo = _cachedConfigInfo!;
     final configSource = configInfo['config_source'] ?? 'unknown';
 
     return OsmeaComponents.column(

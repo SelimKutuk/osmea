@@ -39,3 +39,19 @@ export 'package:core/src/layout/spacer.dart';
 
 // 🧩 Exports the Osmea Component UI Kit for Master View
 export 'package:osmea_components/osmea_components.dart';
+
+// 📱 Exports the onboarding models
+export 'package:core/src/models/onboarding_models.dart';
+
+// 🎯 Exports the onboarding view and cubit
+export 'package:core/src/views/onboarding/onboarding_view.dart';
+export 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
+export 'package:core/src/views/onboarding/cubit/onboarding_state.dart';
+
+// 🚨 Exports the error handling models
+export 'package:core/src/models/error_handling_models.dart';
+
+// 🚨 Exports the error handling view and cubit
+export 'package:core/src/views/error_handling/error_handling_view.dart';
+export 'package:core/src/views/error_handling/cubit/error_handling_cubit.dart';
+export 'package:core/src/views/error_handling/cubit/error_handling_state.dart';
