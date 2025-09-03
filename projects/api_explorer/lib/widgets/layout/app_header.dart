@@ -33,43 +33,31 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return AppBar(
+    return OsmeaComponents.appBar(
       backgroundColor:
           isDark ? OsmeaAppTheme.darkSurface : OsmeaAppTheme.lightSurface,
       elevation: 0,
-      scrolledUnderElevation: 2,
       shadowColor: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
       surfaceTintColor: Colors.transparent,
-      shape: Border(
-        bottom: BorderSide(
-          color: isDark
-              ? OsmeaColors.deepSea.withValues(alpha: 0.2)
-              : OsmeaColors.silver.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
       leading: onDrawerToggle != null
-          ? OsmeaComponents.container(
-              margin: EdgeInsets.only(left: context.spacing12),
-              child: OsmeaComponents.iconButton(
-                icon: Icon(
-                  Icons.menu_rounded,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : OsmeaColors.steel,
-                ),
-                onPressed: onDrawerToggle,
-                variant: ButtonVariant.ghost,
-                size: ButtonSize.medium,
-                tooltip: 'Open menu',
+          ? OsmeaComponents.iconButton(
+              icon: Icon(
+                Icons.menu_rounded,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : OsmeaColors.steel,
               ),
+              onPressed: onDrawerToggle,
+              variant: ButtonVariant.ghost,
+              size: ButtonSize.medium,
+              tooltip: 'Open menu',
             )
           : null,
       title: _buildTitle(context),
-      actions: _buildActions(context),
+      actions: _buildAppBarActions(context),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
-        child: Container(
+        child: OsmeaComponents.container(
           height: 1,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -90,7 +78,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     return OsmeaComponents.row(
       children: [
         // Logo
-        SizedBox(
+        OsmeaComponents.sizedBox(
           height: 32,
           child: Image.asset(
             isDarkMode
@@ -151,6 +139,12 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ),
+        
+        OsmeaComponents.sizedBox(width: context.spacing16),
+        
+        // Store Profile - moved from actions
+        _buildCompactStoreProfile(context),
+        
         OsmeaComponents.sizedBox(width: context.spacing16),
       ],
     );
@@ -311,7 +305,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                   variant: OsmeaTextVariant.bodySmall,
                   fontSize: 11,
                   color: isDark 
-                    ? Colors.white.withValues(alpha: 0.8) 
+                    ? OsmeaColors.white.withValues(alpha: 0.8) 
                     : OsmeaColors.steel.withValues(alpha: 0.8),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -321,27 +315,28 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           ),
           
           OsmeaComponents.sizedBox(width: context.spacing8),
-        
+
         ],
       ),
     );
   }
 
   /// Build the actions section
-  List<Widget> _buildActions(BuildContext context) {
+  List<AppBarAction> _buildAppBarActions(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return [
-      // Compact Store Profile Component - Show directly in header
-      _buildCompactStoreProfile(context),
-
-      // Theme Toggle Button
-      OsmeaComponents.iconButton(
+      // Theme Toggle Button as AppBarAction
+      AppBarAction(
+        type: AppBarActionType.settings,
         icon: Icon(
           isDarkMode ? Icons.light_mode : Icons.dark_mode,
           size: 20,
+          color: isDark 
+              ? Colors.white.withValues(alpha: 0.9)
+              : OsmeaColors.steel,
         ),
         onPressed: onThemeToggle,
-        variant: ButtonVariant.ghost,
-        size: ButtonSize.medium,
         tooltip: isDarkMode ? 'Switch to light mode' : 'Switch to dark mode',
       ),
     ];
@@ -375,7 +370,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             child: OsmeaComponents.row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                OsmeaComponents.sizedBox(
                   width: 16,
                   height: 16,
                   child: CircularProgressIndicator(
@@ -423,7 +418,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                   padding: EdgeInsets.all(context.spacing6),
                   decoration: BoxDecoration(
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.1)
+                        ? OsmeaColors.white.withValues(alpha: 0.1)
                         : OsmeaColors.silver.withValues(alpha: 0.1),
                     borderRadius: context.borderRadiusMinStandard,
                   ),
@@ -431,7 +426,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                     Icons.storefront_outlined,
                     size: 16,
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.9)
+                        ? OsmeaColors.white.withValues(alpha: 0.9)
                         : OsmeaColors.steel,
                   ),
                 ),
@@ -649,7 +644,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         borderRadius: BorderRadius.circular(OsmeaAppTheme.radiusMd),
       ),
       elevation: 0,
-      surfaceTintColor: Colors.transparent,
+      surfaceTintColor: OsmeaColors.transparent,
       shadowColor: Colors.transparent,
       color: Theme.of(context).brightness == Brightness.dark
           ? OsmeaAppTheme.darkCard
@@ -712,7 +707,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('✅ Store added successfully: ${result.displayName}'),
+              content: OsmeaComponents.text('✅ Store added successfully: ${result.displayName}'),
               backgroundColor: OsmeaColors.forestHeart,
               duration: const Duration(seconds: 3),
             ),
@@ -724,7 +719,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ Error adding store: $e'),
+            content: OsmeaComponents.text('❌ Error adding store: $e'),
             backgroundColor: OsmeaColors.slate,
           ),
         );
@@ -767,7 +762,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
               icon,
               size: 20,
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
+                  ? OsmeaColors.white
                   : OsmeaColors.nordicBlue,
             ),
           ),
@@ -782,7 +777,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
                   variant: OsmeaTextVariant.titleSmall,
                   fontSize: 14,
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
+                      ? OsmeaColors.white
                       : OsmeaColors.steel,
                 ),
                 OsmeaComponents.sizedBox(height: context.spacing4),
@@ -791,7 +786,7 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
                   variant: OsmeaTextVariant.bodySmall,
                   fontSize: 12,
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white.withValues(alpha: 0.7)
+                      ? OsmeaColors.white.withValues(alpha: 0.7)
                       : OsmeaColors.steel.withValues(alpha: 0.7),
                 ),
               ],
