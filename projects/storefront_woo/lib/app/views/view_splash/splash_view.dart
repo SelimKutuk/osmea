@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:osmea_components/osmea_components.dart';
 import 'package:storefront_woo/app/views/view_splash/models/module/states.dart';
 import 'package:storefront_woo/app/views/view_splash/models/module/events.dart';
-import 'package:storefront_woo/app/views/view_splash/splash_view_model.dart';
+import 'package:storefront_woo/app/views/view_splash/models/splash_view_model.dart';
 
 class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   SplashView({
@@ -16,10 +16,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   }) : super(arguments: arguments, currentView: currentView);
 
   @override
-  void initialContent(
-    SplashViewModel viewModel,
-    BuildContext context,
-  ) {
+  void initialContent(SplashViewModel viewModel, BuildContext context) {
     // Start splash logic with onboarding check
     viewModel.startSplashWithDirectNavigation(context);
   }
@@ -32,7 +29,7 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   ) {
     // 👂 Listen to state changes for bottomsheet and snackbar
     _handleStateChanges(context, viewModel, state);
-    
+
     return OsmeaComponents.scaffold(
       body: OsmeaComponents.center(
         child: OsmeaComponents.column(
@@ -40,40 +37,47 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
           children: [
             // 🖼️ App Logo (Tappable for dev mode)
             GestureDetector(
-              onTap: () => viewModel.add(SplashEventLogoTapped(context: context)),
+              onTap: () =>
+                  viewModel.add(SplashEventLogoTapped(context: context)),
               child: OsmeaComponents.image(
-                imageUrl: 'https://github.com/masterfabric-mobile/osmea/blob/dev/projects/api_explorer/assets/images/osmea_logo_black.png?raw=true',
+                imageUrl:
+                    'https://github.com/masterfabric-mobile/osmea/blob/dev/projects/api_explorer/assets/images/osmea_logo_black.png?raw=true',
                 width: context.width112,
                 height: context.height112,
               ),
             ),
-            
+
             OsmeaComponents.sizedBox(height: context.spacing24),
-            
+
             // 📱 App Name from Configuration
             OsmeaComponents.text(
-              viewModel.assetConfigHelper.getString('app_settings.app_name', 'Storefront WooCommerce'),
+              viewModel.assetConfigHelper.getString(
+                'app_settings.app_name',
+                'Storefront WooCommerce',
+              ),
               variant: OsmeaTextVariant.headlineMedium,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).primaryColor,
             ),
-            
+
             OsmeaComponents.sizedBox(height: context.spacing32),
-            
+
             // 🔄 Loading Indicator with Configuration-based Color
             OsmeaComponents.loading(
               type: LoadingType.circularFade,
               size: 32,
               color: viewModel.getThemeColor(context),
             ),
-            
+
             OsmeaComponents.sizedBox(height: context.spacing16),
-            
+
             // 📊 Loading Text
             OsmeaComponents.text(
               'Loading...',
               variant: OsmeaTextVariant.bodyMedium,
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.6),
             ),
           ],
         ),
@@ -82,7 +86,11 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   }
 
   /// 👂 Handle state changes for UI reactions (bottomsheet, snackbar, etc.)
-  void _handleStateChanges(BuildContext context, SplashViewModel viewModel, SplashState state) {
+  void _handleStateChanges(
+    BuildContext context,
+    SplashViewModel viewModel,
+    SplashState state,
+  ) {
     if (state is SplashStateShowConfigBottomSheet) {
       // Show configuration bottomsheet
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -102,11 +110,16 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
   }
 
   /// 📋 Show configuration bottomsheet with all config details
-  void _showConfigurationBottomSheet(BuildContext context, SplashViewModel viewModel) {
+  void _showConfigurationBottomSheet(
+    BuildContext context,
+    SplashViewModel viewModel,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Theme.of(context).colorScheme.surface.withValues(alpha: 0.0),
+      backgroundColor: Theme.of(
+        context,
+      ).colorScheme.surface.withValues(alpha: 0.0),
       builder: (context) => OsmeaComponents.bottomSheet(
         size: BottomSheetSize.large,
         title: 'Developer Settings',
@@ -120,13 +133,5 @@ class SplashView extends MasterView<SplashViewModel, SplashEvent, SplashState> {
         child: viewModel.buildConfigurationContent(context),
       ),
     );
-  }
-
-  @override
-  void initialContent(SplashViewModel viewModel, BuildContext context) {
-    // 🚀 Check onboarding after 3 seconds and navigate
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      viewModel.startSplashWithDirectNavigation(context);
-    });
   }
 }
