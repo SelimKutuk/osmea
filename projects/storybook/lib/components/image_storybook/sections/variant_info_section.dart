@@ -24,7 +24,7 @@ class VariantInfoSection extends StatelessWidget {
 
     return SectionContainer(
       title: '$variantName Image',
-      description: 'Variant Index: $variantIndex/${ImageVariantNames.variants.length - 1} (Use dropdown: 0=Normal, 1=Rounded, 2=Circle, 3=Square, 4=Card, 5=Framed, 6=Avatar, 7=Thumbnail, 8=Triangle, 9=Banner, 10=Hero)',
+      description: 'Variant Index: $variantIndex/${ImageVariantNames.variants.length - 1} (Use dropdown: ${List.generate(ImageVariantNames.names.length, (i) => '$i=${ImageVariantNames.names[i]}').join(', ')})',
       darkBackground: darkBackground,
       child: Text(
         description,

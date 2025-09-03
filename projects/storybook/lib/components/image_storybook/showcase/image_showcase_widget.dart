@@ -76,7 +76,7 @@ class ImageShowcaseWidget extends StatelessWidget {
                   customHeight: customHeight,
                   fit: ImageKnobsConfig.getBoxFit(boxFitIndex),
                   showCustomError: showCustomError,
-                  showCustomPlaceholder: showCustomPlaceholder || imageUrl == null || imageUrl!.isEmpty,
+                  showCustomPlaceholder: showCustomPlaceholder || imageUrl?.isEmpty != false,
                   heroTag: heroTag?.isNotEmpty == true ? heroTag : null,
                   onTap: enableTap ? () {
                     ScaffoldMessenger.of(context).showSnackBar(
