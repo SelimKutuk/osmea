@@ -55,6 +55,18 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
+  flutter_launcher_icons: "^0.14.4" # App icon generation
+
+# ────────────────────────────────
+# FLUTTER LAUNCHER ICONS CONFIG
+# ────────────────────────────────
+flutter_launcher_icons:
+  ios: true  
+  android: "launcher_icon"                      # Generate iOS app icons
+  image_path: "assets/images/app_icon.png"  # Source icon path
+  remove_alpha_ios: true           # Remove alpha channel for iOS
+
+
    # ────────────────────────────────
   # CODE GENERATION
   # ────────────────────────────────
