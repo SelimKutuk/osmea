@@ -70,13 +70,13 @@ class _ResponsivePopupState extends State<ResponsivePopup>
     if (!widget.isVisible) return const SizedBox.shrink();
 
     return Material(
-      color: Colors.transparent,
-      child: Stack(
+      color: OsmeaColors.transparent,
+      child: OsmeaComponents.stack(
         children: [
           // Full screen overlay with highest z-index
           Positioned.fill(
-            child: Container(
-              color: Colors.black54,
+            child: OsmeaComponents.container(
+              color: OsmeaColors.black54,
             ),
           ),
 
@@ -86,7 +86,7 @@ class _ResponsivePopupState extends State<ResponsivePopup>
               opacity: _fadeAnimation,
               child: SlideTransition(
                 position: _slideAnimation,
-                child: Center(
+                child: OsmeaComponents.center(
                   child: GestureDetector(
                     onTap:
                         widget.onDismiss, // Allow dismissal by tapping outside

@@ -996,7 +996,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                                               BoxDecoration(
                                                                             color: isServiceSelected
                                                                                 ? OsmeaColors.nordicBlue.withValues(alpha: 0.1)
-                                                                                : Colors.transparent,
+                                                                                : OsmeaColors.transparent,
                                                                             borderRadius:
                                                                                 context.borderRadiusMinStandard,
                                                                             border: isServiceSelected
@@ -1013,7 +1013,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                                                 width: isNarrow ? 3 : 4,
                                                                                 height: isNarrow ? 12 : 16,
                                                                                 decoration: BoxDecoration(
-                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : Colors.transparent,
+                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : OsmeaColors.transparent,
                                                                                   borderRadius: context.borderRadiusMinStandard,
                                                                                 ),
                                                                               ),
