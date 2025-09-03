@@ -256,23 +256,11 @@ class SplashViewModel extends BaseViewModelBloc<SplashEvent, SplashState> {
 
       // Navigate based on onboarding status
       if (hasSeenOnboarding) {
-        // Check if WooCommerce integration is enabled
-        bool wooCommerceEnabled = _getConfigValue<bool>('feature_flags.woocommerce_integration_enabled', true);
-        
-        if (wooCommerceEnabled) {
-          debugPrint('🛒 WooCommerce integration enabled, navigating to storefront');
-          if (context != null) {
-            context.go('/storefront');
-          } else {
-            _navigationCallback?.call('/storefront');
-          }
+        debugPrint('👤 User has seen onboarding, navigating to home');
+        if (context != null) {
+          context.go('/home');
         } else {
-          debugPrint('🏠 Navigating to welcome screen');
-          if (context != null) {
-            context.go('/welcome');
-          } else {
-            _navigationCallback?.call('/welcome');
-          }
+          _navigationCallback?.call('/home');
         }
       } else {
         debugPrint('📚 First time user, navigating to onboarding');
