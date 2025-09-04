@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osmea_storybook/components/padding_storybook/paddings.dart';
+import 'package:osmea_storybook/components/stack_storybook/stacks.dart';
 import 'story_config.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import '../components/cards_storybook/cards.dart';
@@ -250,6 +251,15 @@ final List<ComponentInfo> allComponents = [
     color: Colors.teal,
     storyPath: StoryConfig.buildComponentStoryName('Searchbars'),
     getStories: getAllSearchbarStories,
+  ),
+  ComponentInfo(
+    name: 'Stack',
+    description:
+        'Layered widget positioning component for overlapping elements',
+    icon: Icons.layers,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Stack'),
+    getStories: getAllStackStories,
   ),
   ComponentInfo(
     name: 'Snackbars',
