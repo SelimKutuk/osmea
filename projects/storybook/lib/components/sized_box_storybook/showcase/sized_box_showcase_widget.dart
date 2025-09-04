@@ -46,9 +46,6 @@ class SizedBoxShowcaseWidget extends StatelessWidget {
             _buildDemo(context),
 
             const SizedBox(height: 32),
-
-            // Properties Section
-            _buildProperties(context),
           ],
         ),
       ),
@@ -177,116 +174,6 @@ class SizedBoxShowcaseWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _buildProperties(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.grey.shade200,
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.settings,
-                size: 20,
-                color: Colors.grey.shade600,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Current Properties',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey.shade800,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              _buildPropertyChip('Width', '${width.toInt()}px'),
-              _buildPropertyChip('Height', '${height.toInt()}px'),
-              _buildPropertyChip('Child', _getChildType()),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPropertyChip(String label, String value) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey.shade200,
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(width: 6),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: Colors.blue.shade200,
-                width: 1,
-              ),
-            ),
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                color: Colors.blue.shade700,
-                fontFamily: 'monospace',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _getChildType() {
-    if (child == null) return 'null';
-    if (child is Icon) return 'Icon';
-    if (child is Text) return 'Text';
-    if (child is Container) return 'Container';
-    return 'Widget';
   }
 }
 
