@@ -32,3 +32,5 @@ migrate_working_dir/
 build/
 
 # Ignore generated and config files
+.metedata
+.env
