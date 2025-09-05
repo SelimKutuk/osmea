@@ -34,6 +34,7 @@ import '../components/stepper_storybook/showcase/unified_stepper_showcase.dart';
 import '../components/snackbar_storybook/snackbars.dart';
 import '../components/dropdown_storybook/dropdowns.dart';
 import '../components/image_storybook/images.dart';
+import '../components/toast_storybook/toasts.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -328,5 +329,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.green,
     storyPath: StoryConfig.buildComponentStoryName('Ticket Widget'),
     getStories: getAllTicketStories,
+  ),
+    ComponentInfo(
+    name: 'Toasts',
+    description: 'Non-intrusive notifications with multiple styles and animations',
+    icon: Icons.notifications_outlined,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Toasts'),
+    getStories: getAllToastStories,
   ),
 ];
