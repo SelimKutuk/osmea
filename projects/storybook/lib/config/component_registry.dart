@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:osmea_storybook/components/align_storybook/aligns.dart';
+import 'package:osmea_storybook/components/sized_box_storybook/sized_boxes.dart';
+import 'package:osmea_storybook/components/rich_text_storybook/rich_texts.dart';
+import 'package:osmea_storybook/components/row_storybook/rows.dart';
 import 'package:osmea_storybook/components/padding_storybook/paddings.dart';
 import 'package:osmea_storybook/components/stack_storybook/stacks.dart';
 import 'story_config.dart';
@@ -32,6 +36,7 @@ import '../components/stepper_storybook/showcase/unified_stepper_showcase.dart';
 import '../components/snackbar_storybook/snackbars.dart';
 import '../components/dropdown_storybook/dropdowns.dart';
 import '../components/image_storybook/images.dart';
+import '../components/toast_storybook/toasts.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -54,6 +59,14 @@ class ComponentInfo {
 
 /// Central registry for all components (used for both home and stories)
 final List<ComponentInfo> allComponents = [
+    ComponentInfo(
+    name: 'Align',
+    description: 'Alignment widget for precise positioning control',
+    icon: Icons.align_horizontal_center,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Align'),
+    getStories: getAllAlignStories,
+  ),
   ComponentInfo(
     name: 'App Bar',
     description: 'Top application bars and headers',
@@ -236,12 +249,30 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllProgressStories,
   ),
   ComponentInfo(
+    name: 'Row',
+    description:
+        'Horizontal layout component with flexible alignment and spacing options',
+    icon: Icons.view_stream,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Row'),
+    getStories: getAllRowStories,
+  ),
+  ComponentInfo(
     name: 'Radio Buttons',
     description: 'Selection controls for single choice',
     icon: Icons.radio_button_checked,
     color: Colors.red,
     storyPath: StoryConfig.buildComponentStoryName('Radio Buttons'),
     getStories: getAllRadioButtonStories,
+  ),
+  ComponentInfo(
+    name: 'RichText',
+    description:
+        'Display text with multiple styles, colors, and interactive elements',
+    icon: Icons.text_fields,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('RichText'),
+    getStories: getAllRichTextStories,
   ),
   ComponentInfo(
     name: 'Searchbars',
@@ -253,13 +284,12 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllSearchbarStories,
   ),
   ComponentInfo(
-    name: 'Stack',
-    description:
-        'Layered widget positioning component for overlapping elements',
-    icon: Icons.layers,
-    color: Colors.deepPurple,
-    storyPath: StoryConfig.buildComponentStoryName('Stack'),
-    getStories: getAllStackStories,
+    name: 'SizedBox',
+    description: 'Fixed-size container widget for layout and spacing control',
+    icon: Icons.crop_square,
+    color: Colors.blueGrey,
+    storyPath: StoryConfig.buildComponentStoryName('SizedBox'),
+    getStories: getAllSizedBoxStories,
   ),
   ComponentInfo(
     name: 'Snackbars',
@@ -269,6 +299,15 @@ final List<ComponentInfo> allComponents = [
     color: Colors.orange,
     storyPath: StoryConfig.buildComponentStoryName('Snackbars'),
     getStories: getAllSnackbarStories,
+  ),
+    ComponentInfo(
+    name: 'Stack',
+    description:
+        'Layered widget positioning component for overlapping elements',
+    icon: Icons.layers,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Stack'),
+    getStories: getAllStackStories,
   ),
   ComponentInfo(
     name: 'Steppers',
@@ -310,5 +349,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.green,
     storyPath: StoryConfig.buildComponentStoryName('Ticket Widget'),
     getStories: getAllTicketStories,
+  ),
+    ComponentInfo(
+    name: 'Toasts',
+    description: 'Non-intrusive notifications with multiple styles and animations',
+    icon: Icons.notifications_outlined,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Toasts'),
+    getStories: getAllToastStories,
   ),
 ];
