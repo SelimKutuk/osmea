@@ -350,14 +350,28 @@ class _HomeViewState extends State<HomeView>
           endpoint = endpoint.substring(1); // Remove leading slash
         }
 
-        // Replace :parameter with {parameter} for display
-        endpoint = endpoint.replaceAllMapped(RegExp(r':(\w+)'), (match) {
-          final paramName = match.group(1)!;
-          if (params.containsKey(paramName) && params[paramName]!.isNotEmpty) {
-            return params[paramName]!;
-          }
-          return '{$paramName}';
-        });
+        // Handle parameter replacement for different endpoint formats
+        if (isWooCommerceService) {
+          // For WooCommerce: Replace {parameter} with actual values
+          endpoint = endpoint.replaceAllMapped(RegExp(r'\{(\w+)\}'), (match) {
+            final paramName = match.group(1)!;
+            if (params.containsKey(paramName) &&
+                params[paramName]!.isNotEmpty) {
+              return params[paramName]!;
+            }
+            return '{$paramName}';
+          });
+        } else {
+          // For Shopify: Replace :parameter with {parameter} for display
+          endpoint = endpoint.replaceAllMapped(RegExp(r':(\w+)'), (match) {
+            final paramName = match.group(1)!;
+            if (params.containsKey(paramName) &&
+                params[paramName]!.isNotEmpty) {
+              return params[paramName]!;
+            }
+            return '{$paramName}';
+          });
+        }
 
         // For WooCommerce services, don't add Shopify-specific prefixes
         if (isWooCommerceService) {
@@ -1022,7 +1036,6 @@ class _HomeViewState extends State<HomeView>
       ),
     );
   }
-
 
   void _closeAllDialogsAndWizards() {
     // Close any open dialogs, wizards, or modals
