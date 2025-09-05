@@ -45,73 +45,144 @@ const List<TextBaseline> textBaselineOptions = [
 
 /// Sample content widgets for Row
 final List<Widget> sampleContent = [
+  // Home icon
   Container(
-    width: 40,
-    height: 40,
+    width: 48,
+    height: 48,
     decoration: BoxDecoration(
-      color: Colors.blue[100],
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.blue[300]!),
-    ),
-    child: const Icon(Icons.star, color: Colors.blue, size: 20),
-  ),
-  Container(
-    width: 60,
-    height: 30,
-    decoration: BoxDecoration(
-      color: Colors.green[100],
-      borderRadius: BorderRadius.circular(6),
-      border: Border.all(color: Colors.green[300]!),
-    ),
-    child: const Center(
-      child: Text(
-        'Text',
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: Colors.green,
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.blue.shade400, Colors.blue.shade600],
+      ),
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.blue.withValues(alpha: 0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
         ),
+      ],
+    ),
+    child: const Icon(Icons.home, color: Colors.white, size: 24),
+  ),
+
+  // Profile text
+  Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.green.shade400, Colors.green.shade600],
+      ),
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.green.withValues(alpha: 0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: const Text(
+      'Profile',
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
       ),
     ),
   ),
+
+  // Heart icon
   Container(
-    width: 50,
-    height: 50,
+    width: 48,
+    height: 48,
     decoration: BoxDecoration(
-      color: Colors.orange[100],
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.pink.shade400, Colors.pink.shade600],
+      ),
+      borderRadius: BorderRadius.circular(24),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.pink.withValues(alpha: 0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: const Icon(Icons.favorite, color: Colors.white, size: 24),
+  ),
+
+  // Settings button
+  Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.purple.shade400, Colors.purple.shade600],
+      ),
       borderRadius: BorderRadius.circular(25),
-      border: Border.all(color: Colors.orange[300]!),
-    ),
-    child: const Icon(Icons.favorite, color: Colors.orange, size: 24),
-  ),
-  Container(
-    width: 80,
-    height: 25,
-    decoration: BoxDecoration(
-      color: Colors.purple[100],
-      borderRadius: BorderRadius.circular(4),
-      border: Border.all(color: Colors.purple[300]!),
-    ),
-    child: const Center(
-      child: Text(
-        'Button',
-        style: TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.w600,
-          color: Colors.purple,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.purple.withValues(alpha: 0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
         ),
+      ],
+    ),
+    child: const Text(
+      'Settings',
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
       ),
     ),
   ),
+
+  // Notification icon
   Container(
-    width: 30,
-    height: 30,
+    width: 48,
+    height: 48,
     decoration: BoxDecoration(
-      color: Colors.red[100],
-      borderRadius: BorderRadius.circular(4),
-      border: Border.all(color: Colors.red[300]!),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.orange.shade400, Colors.orange.shade600],
+      ),
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.orange.withValues(alpha: 0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ],
     ),
-    child: const Icon(Icons.close, color: Colors.red, size: 16),
+    child: Stack(
+      children: [
+        const Center(
+          child: Icon(Icons.notifications, color: Colors.white, size: 24),
+        ),
+        Positioned(
+          top: 8,
+          right: 8,
+          child: Container(
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
+        ),
+      ],
+    ),
   ),
 ];
 
