@@ -20,7 +20,7 @@ class _ProductCategoriesServiceClient
   String? baseUrl;
 
   @override
-  Future<ListAllProductCategoriesResponse> listAllProductCategories({
+  Future<List<ListAllProductCategoriesResponse>> listAllProductCategories({
     required String apiVersion,
     int? page,
     int? perPage,
@@ -51,8 +51,8 @@ class _ProductCategoriesServiceClient
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListAllProductCategoriesResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ListAllProductCategoriesResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -68,7 +68,10 @@ class _ProductCategoriesServiceClient
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = ListAllProductCategoriesResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => ListAllProductCategoriesResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
