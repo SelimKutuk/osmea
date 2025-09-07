@@ -41,6 +41,7 @@ import '../components/image_storybook/images.dart';
 import '../components/toast_storybook/toasts.dart';
 import '../components/spacer_storybook/spacers.dart';
 import '../components/tabbar_storybook/tabbars.dart';
+import '../components/wrap_storybook/wraps.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -395,5 +396,13 @@ final List<ComponentInfo> allComponents = [
     color: Colors.teal,
     storyPath: StoryConfig.buildComponentStoryName('Toasts'),
     getStories: getAllToastStories,
+  ),
+  ComponentInfo(
+    name: 'Wrap',
+    description: 'Flexible layout widget that wraps children to multiple lines',
+    icon: Icons.wrap_text,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Wrap'),
+    getStories: getAllWrapStories,
   ),
 ];
