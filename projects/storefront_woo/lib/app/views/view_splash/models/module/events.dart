@@ -44,3 +44,9 @@ class SplashEventLogoTapped extends SplashEvent {
 
   SplashEventLogoTapped({required this.context});
 }
+
+/// Event: Show configuration bottomsheet
+class SplashEventShowConfigBottomSheet extends SplashEvent {}
+
+/// Event: Production mode detected
+class SplashEventProductionMode extends SplashEvent {}
