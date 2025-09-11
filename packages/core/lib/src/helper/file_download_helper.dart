@@ -92,6 +92,24 @@ import 'package:path_provider/path_provider.dart';
 class FileDownloadHelper {
   static late Dio _dio = Dio();
 
+  /// Private method to validate common download parameters
+  static void _validateParameters({
+    required String url,
+    required String fileName,
+    required int maxRetries,
+    required Duration retryDelay,
+    required Duration timeout,
+  }) {
+    // Assertions for development mode
+    assert(url.isNotEmpty, 'URL cannot be empty');
+    assert(fileName.isNotEmpty, 'File name cannot be empty');
+    assert(maxRetries > 0, 'Max retries must be greater than 0');
+    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
+    assert(!timeout.isNegative, 'Timeout cannot be negative');
+    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
+    assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
+  }
+
   /// Downloads a file from the given URL
   /// 
   /// [url] → URL of the file to download
@@ -115,14 +133,14 @@ class FileDownloadHelper {
     Duration retryDelay = const Duration(seconds: 2),
     Duration timeout = const Duration(seconds: 30),
   }) async {
-    // Assertions for development mode
-    assert(url.isNotEmpty, 'URL cannot be empty');
-    assert(fileName.isNotEmpty, 'File name cannot be empty');
-    assert(maxRetries > 0, 'Max retries must be greater than 0');
-    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
-    assert(!timeout.isNegative, 'Timeout cannot be negative');
-    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
-    assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
+    // Validate all parameters
+    _validateParameters(
+      url: url,
+      fileName: fileName,
+      maxRetries: maxRetries,
+      retryDelay: retryDelay,
+      timeout: timeout,
+    );
     
     // Runtime validation for production
     if (url.isEmpty) {
@@ -229,14 +247,15 @@ class FileDownloadHelper {
     Duration retryDelay = const Duration(seconds: 2),
     Duration timeout = const Duration(seconds: 30),
   }) async {
-    // Assertions for development mode
-    assert(url.isNotEmpty, 'URL cannot be empty');
-    assert(fileName.isNotEmpty, 'File name cannot be empty');
-    assert(maxRetries > 0, 'Max retries must be greater than 0');
-    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
-    assert(!timeout.isNegative, 'Timeout cannot be negative');
-    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
-    assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
+    // Validate all parameters
+    _validateParameters(
+      url: url,
+      fileName: fileName,
+      maxRetries: maxRetries,
+      retryDelay: retryDelay,
+      timeout: timeout,
+    );
+    
     try {
       final tempDir = await getTemporaryDirectory();
       return downloadFile(
@@ -275,14 +294,15 @@ class FileDownloadHelper {
     Duration retryDelay = const Duration(seconds: 2),
     Duration timeout = const Duration(seconds: 30),
   }) async {
-    // Assertions for development mode
-    assert(url.isNotEmpty, 'URL cannot be empty');
-    assert(fileName.isNotEmpty, 'File name cannot be empty');
-    assert(maxRetries > 0, 'Max retries must be greater than 0');
-    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
-    assert(!timeout.isNegative, 'Timeout cannot be negative');
-    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
-    assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
+    // Validate all parameters
+    _validateParameters(
+      url: url,
+      fileName: fileName,
+      maxRetries: maxRetries,
+      retryDelay: retryDelay,
+      timeout: timeout,
+    );
+    
     try {
       final docsDir = await getApplicationDocumentsDirectory();
       return downloadFile(
@@ -321,14 +341,15 @@ class FileDownloadHelper {
     Duration retryDelay = const Duration(seconds: 2),
     Duration timeout = const Duration(seconds: 30),
   }) async {
-    // Assertions for development mode
-    assert(url.isNotEmpty, 'URL cannot be empty');
-    assert(fileName.isNotEmpty, 'File name cannot be empty');
-    assert(maxRetries > 0, 'Max retries must be greater than 0');
-    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
-    assert(!timeout.isNegative, 'Timeout cannot be negative');
-    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
-    assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
+    // Validate all parameters
+    _validateParameters(
+      url: url,
+      fileName: fileName,
+      maxRetries: maxRetries,
+      retryDelay: retryDelay,
+      timeout: timeout,
+    );
+    
     try {
       final supportDir = await getApplicationSupportDirectory();
       return downloadFile(
@@ -369,12 +390,16 @@ class FileDownloadHelper {
         return tempDir.path;
       } catch (e2) {
         debugPrint('⚠️ Failed to get temporary directory: $e2');
-        // Ultimate fallback for mobile - use external storage
+        // Ultimate fallback for mobile - use external storage directory via path_provider
         if (Platform.isAndroid) {
-          // For Android, try external storage
-          final externalDir = Directory('/storage/emulated/0/Download');
-          if (await externalDir.exists()) {
-            return externalDir.path;
+          try {
+            // For Android, try external storage directory via path_provider
+            final externalDir = await getExternalStorageDirectory();
+            if (externalDir != null && await Directory(externalDir.path).exists()) {
+              return externalDir.path;
+            }
+          } catch (e3) {
+            debugPrint('⚠️ Failed to get external storage directory: $e3');
           }
         }
         // Final fallback - create downloads folder in app directory
@@ -505,18 +530,3 @@ class DirectoryException implements Exception {
   String toString() => 'DirectoryException: $message';
 }
 
-/// Download progress information
-class DownloadProgress {
-  final int received;
-  final int total;
-  final double percentage;
-  
-  const DownloadProgress({
-    required this.received,
-    required this.total,
-    required this.percentage,
-  });
-  
-  @override
-  String toString() => 'DownloadProgress(received: $received, total: $total, percentage: ${percentage.toStringAsFixed(1)}%)';
-}
