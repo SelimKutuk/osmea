@@ -90,7 +90,7 @@ import 'package:path_provider/path_provider.dart';
 /// FileDownloadHelper.cancelAllDownloads();
 /// ```
 class FileDownloadHelper {
-  static final Dio _dio = Dio();
+  static late Dio _dio = Dio();
 
   /// Downloads a file from the given URL
   /// 
@@ -148,11 +148,6 @@ class FileDownloadHelper {
     int retries = 0;
     File file;
 
-    // Configure timeout for this download
-    final dio = Dio();
-    dio.options.connectTimeout = timeout;
-    dio.options.receiveTimeout = timeout;
-
     while (true) {
       try {
         // Mobile/Desktop platform: normal file download
@@ -166,17 +161,33 @@ class FileDownloadHelper {
         debugPrint('📥 Starting download: $url');
         debugPrint('💾 Saving to: $filePath');
 
-        await dio.download(
-          url,
-          filePath,
-          onReceiveProgress: (received, total) {
-            if (total > 0) {
-              final progress = (received / total * 100).toStringAsFixed(1);
-              debugPrint('📊 Download progress: $progress% ($received/$total bytes)');
-            }
-            onProgress?.call(received, total);
-          },
-        );
+        // Configure timeouts for this specific request
+        final originalConnectTimeout = _dio.options.connectTimeout;
+        final originalReceiveTimeout = _dio.options.receiveTimeout;
+        final originalSendTimeout = _dio.options.sendTimeout;
+
+        try {
+          _dio.options.connectTimeout = timeout;
+          _dio.options.receiveTimeout = timeout;
+          _dio.options.sendTimeout = timeout;
+
+          await _dio.download(
+            url,
+            filePath,
+            onReceiveProgress: (received, total) {
+              if (total > 0) {
+                final progress = (received / total * 100).toStringAsFixed(1);
+                debugPrint('📊 Download progress: $progress% ($received/$total bytes)');
+              }
+              onProgress?.call(received, total);
+            },
+          );
+        } finally {
+          // Restore original timeouts
+          _dio.options.connectTimeout = originalConnectTimeout;
+          _dio.options.receiveTimeout = originalReceiveTimeout;
+          _dio.options.sendTimeout = originalSendTimeout;
+        }
 
         file = File(filePath);
         
@@ -222,6 +233,9 @@ class FileDownloadHelper {
     assert(url.isNotEmpty, 'URL cannot be empty');
     assert(fileName.isNotEmpty, 'File name cannot be empty');
     assert(maxRetries > 0, 'Max retries must be greater than 0');
+    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
+    assert(!timeout.isNegative, 'Timeout cannot be negative');
+    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
     assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
     try {
       final tempDir = await getTemporaryDirectory();
@@ -265,6 +279,9 @@ class FileDownloadHelper {
     assert(url.isNotEmpty, 'URL cannot be empty');
     assert(fileName.isNotEmpty, 'File name cannot be empty');
     assert(maxRetries > 0, 'Max retries must be greater than 0');
+    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
+    assert(!timeout.isNegative, 'Timeout cannot be negative');
+    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
     assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
     try {
       final docsDir = await getApplicationDocumentsDirectory();
@@ -308,6 +325,9 @@ class FileDownloadHelper {
     assert(url.isNotEmpty, 'URL cannot be empty');
     assert(fileName.isNotEmpty, 'File name cannot be empty');
     assert(maxRetries > 0, 'Max retries must be greater than 0');
+    assert(!retryDelay.isNegative, 'Retry delay cannot be negative');
+    assert(!timeout.isNegative, 'Timeout cannot be negative');
+    assert(timeout.inMilliseconds > 0, 'Timeout must be greater than 0');
     assert(isValidUrl(url), 'URL must be a valid HTTP or HTTPS URL');
     try {
       final supportDir = await getApplicationSupportDirectory();
@@ -457,7 +477,10 @@ class FileDownloadHelper {
 
   /// Cancels all ongoing downloads
   static void cancelAllDownloads() {
+    // Close the current Dio instance to cancel all ongoing requests
     _dio.close(force: true);
+    // Create a new Dio instance for future downloads
+    _dio = Dio();
     debugPrint('🚫 All downloads cancelled');
   }
 }
