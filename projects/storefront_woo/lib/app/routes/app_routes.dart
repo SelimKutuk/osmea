@@ -14,22 +14,28 @@ final GoRouter appRouter = GoRouter(
         return SplashView();
       },
     ),
-    
+
     // Onboarding Route
     GoRoute(
       path: '/onboarding',
       builder: (BuildContext context, GoRouterState state) {
         return OnboardingScreen(
-          onCompleted: () => context.go('/home'),
-          onSkipped: () => context.go('/home'),
+          onCompleted: () {
+            debugPrint('🎉 Onboarding completed!');
+            context.go('/home');
+          },
+          onSkipped: () {
+            debugPrint('⏭️ Onboarding skipped!');
+            context.go('/home');
+          },
           onError: (error) {
-            debugPrint('Onboarding error: $error');
+            debugPrint('❌ Onboarding error: $error');
             context.go('/home');
           },
         );
       },
     ),
-    
+
     // Home Page
     GoRoute(
       path: '/home',
@@ -37,8 +43,6 @@ final GoRouter appRouter = GoRouter(
         return const _MinimalistHomePage();
       },
     ),
-    
-
   ],
 );
 
@@ -56,9 +60,9 @@ class _MinimalistHomePage extends StatelessWidget {
         title: OsmeaComponents.text(
           'Storefront Woo',
           color: OsmeaColors.black,
-          textStyle: OsmeaTextStyle.titleLarge(context).copyWith(
-            fontWeight: FontWeight.w500,
-          ),
+          textStyle: OsmeaTextStyle.titleLarge(
+            context,
+          ).copyWith(fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
       ),
@@ -75,13 +79,13 @@ class _MinimalistHomePage extends StatelessWidget {
                     'Welcome to Storefront Woo',
                     color: OsmeaColors.black,
                     textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    textStyle: OsmeaTextStyle.headlineSmall(
+                      context,
+                    ).copyWith(fontWeight: FontWeight.w600),
                   ),
-                  
+
                   OsmeaComponents.sizedBox(height: 16),
-                  
+
                   // Welcome Subtitle
                   OsmeaComponents.text(
                     'Your WooCommerce powered store',
@@ -89,9 +93,9 @@ class _MinimalistHomePage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     textStyle: OsmeaTextStyle.bodyMedium(context),
                   ),
-                  
+
                   OsmeaComponents.sizedBox(height: 48),
-                  
+
                   // Main Content
                   OsmeaComponents.text(
                     'This is the default home page. You can customize it according to your needs.',
@@ -99,6 +103,8 @@ class _MinimalistHomePage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     textStyle: OsmeaTextStyle.bodyMedium(context),
                   ),
+
+                  OsmeaComponents.sizedBox(height: 32),
                 ],
               ),
             ),
@@ -107,10 +113,4 @@ class _MinimalistHomePage extends StatelessWidget {
       ),
     );
   }
-
-
 }
-
-
-
-

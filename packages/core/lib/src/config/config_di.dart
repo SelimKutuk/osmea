@@ -19,8 +19,9 @@ GetIt getIt = GetIt.instance;
 @InjectableInit(preferRelativeImports: false)
 Future<GetIt> configureDependencies() async {
   // 🔄 Initialize core dependencies and assign to getIt
-  
+
   // ⚙️ Initialize and return all registered dependencies
-  getIt.registerLazySingleton<ICommonLogger>(() => CommonLogger(logger: Logger()));
+  getIt.registerLazySingleton<ICommonLogger>(
+      () => CommonLogger(logger: Logger()));
   return getIt.init();
 }
