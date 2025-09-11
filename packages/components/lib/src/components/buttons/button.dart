@@ -19,6 +19,7 @@ import 'package:osmea_components/src/core/container_widget.dart';
 /// * 📏 Five size options (extraSmall to extraLarge)
 /// * 🔄 Interactive states (enabled, disabled, loading, pressed, focused, hovered)
 /// * 🎯 Flexible icon positioning (leading, trailing, top, bottom, only)
+/// * 🎨 Complete color customization (background, text, border, hover, splash, disabled states)
 /// * ♿ Full accessibility support
 /// * 🌐 RTL/LTR language support
 /// * 📱 Responsive design
@@ -30,6 +31,10 @@ import 'package:osmea_components/src/core/container_widget.dart';
 ///   variant: ButtonVariant.primary,
 ///   size: ButtonSize.large,
 ///   icon: Icon(Icons.send),
+///   backgroundColor: Colors.blue,
+///   borderColor: Colors.blue.shade700,
+///   disabledBackgroundColor: Colors.grey.shade300,
+///   disabledTextColor: Colors.grey.shade600,
 ///   onPressed: () => _handleSubmit(),
 /// )
 /// ```
@@ -84,6 +89,15 @@ class OsmeaButton extends CoreContainer {
     this.backgroundColor,
     this.hoverColor,
     this.splashColor,
+    this.borderColor,
+    this.disabledBackgroundColor,
+    this.disabledTextColor,
+    this.disabledBorderColor,
+    this.disabledHoverColor,
+    this.disabledSplashColor,
+    this.disabledFocusColor,
+    this.disabledHighlightColor,
+    this.disabledShadowColor,
     this.isUppercase = false,
     super.padding,
     super.margin,
@@ -141,6 +155,33 @@ class OsmeaButton extends CoreContainer {
 
   /// 💫 Color shown during the splash animation when button is pressed
   final Color? splashColor;
+
+  /// 🎨 Custom border color that overrides the default variant border color
+  final Color? borderColor;
+
+  /// 🎨 Custom disabled background color
+  final Color? disabledBackgroundColor;
+
+  /// 🎨 Custom disabled text color
+  final Color? disabledTextColor;
+
+  /// 🎨 Custom disabled border color
+  final Color? disabledBorderColor;
+
+  /// 🎨 Custom disabled hover color
+  final Color? disabledHoverColor;
+
+  /// 🎨 Custom disabled splash color
+  final Color? disabledSplashColor;
+
+  /// 🎨 Custom disabled focus color
+  final Color? disabledFocusColor;
+
+  /// 🎨 Custom disabled highlight color
+  final Color? disabledHighlightColor;
+
+  /// 🎨 Custom disabled shadow color
+  final Color? disabledShadowColor;
 
   /// When true, converts the button text to uppercase
   final bool isUppercase;
@@ -435,14 +476,16 @@ class OsmeaButton extends CoreContainer {
   Border? _getBorder(_ButtonColors colors, BuildContext context) {
     if (variant == ButtonVariant.outlined) {
       return Border.all(
-        color: isEffectivelyDisabled ? colors.disabled : colors.border,
+        color: isEffectivelyDisabled
+            ? colors.disabled
+            : (borderColor ?? colors.border),
         width: context.width1,
       );
     }
 
     if (isFocused && !isEffectivelyDisabled) {
       return Border.all(
-        color: colors.text,
+        color: borderColor ?? colors.text,
         width: context.width2,
       );
     }
@@ -474,11 +517,17 @@ class OsmeaButton extends CoreContainer {
                       ? OsmeaColors.atlantic
                       : OsmeaColors.nordicBlue)),
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
-          border: OsmeaColors.nordicBlue,
+          border: borderColor ?? OsmeaColors.nordicBlue,
           hover: OsmeaColors.deepSea,
           splash: OsmeaColors.crystalBay,
-          disabled: OsmeaColors.silver,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.silver,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.silver,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.secondary:
@@ -488,11 +537,17 @@ class OsmeaButton extends CoreContainer {
                   ? OsmeaColors.ash
                   : (isPressed ? OsmeaColors.steel : OsmeaColors.pewter)),
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
-          border: OsmeaColors.pewter,
+          border: borderColor ?? OsmeaColors.pewter,
           hover: OsmeaColors.slate,
           splash: OsmeaColors.ash,
-          disabled: OsmeaColors.ash,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.ash,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.ash,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.outlined:
@@ -503,66 +558,102 @@ class OsmeaButton extends CoreContainer {
               : OsmeaColors.nordicBlue,
           border: isEffectivelyDisabled
               ? OsmeaColors.silver
-              : OsmeaColors.nordicBlue,
+              : (borderColor ?? OsmeaColors.nordicBlue),
           hover: OsmeaColors.crystalBay.withValues(alpha: context.alpha20),
           splash: OsmeaColors.crystalBay.withValues(alpha: context.alpha30),
-          disabled: OsmeaColors.transparent,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.transparent,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.silver,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.ghost:
         return _ButtonColors(
           background: OsmeaColors.transparent,
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.pewter,
-          border: OsmeaColors.transparent,
+          border: borderColor ?? OsmeaColors.transparent,
           hover: OsmeaColors.ash,
           splash: OsmeaColors.silver,
-          disabled: OsmeaColors.transparent,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.transparent,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.transparent,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.success:
         return _ButtonColors(
           background: OsmeaColors.forestHeart,
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
-          border: OsmeaColors.forestHeart,
+          border: borderColor ?? OsmeaColors.forestHeart,
           hover: OsmeaColors.springLeaf,
           splash: OsmeaColors.pineGrove,
-          disabled: OsmeaColors.ash,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.ash,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.ash,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.warning:
         return _ButtonColors(
           background: OsmeaColors.sunsetGlow,
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
-          border: OsmeaColors.sunsetGlow,
+          border: borderColor ?? OsmeaColors.sunsetGlow,
           hover: OsmeaColors.amberFlame,
           splash: OsmeaColors.goldenHour,
-          disabled: OsmeaColors.ash,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.ash,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.ash,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       case ButtonVariant.danger:
         return _ButtonColors(
           background: OsmeaColors.amberFlame,
           text: isEffectivelyDisabled ? OsmeaColors.steel : OsmeaColors.white,
-          border: OsmeaColors.shark,
+          border: borderColor ?? OsmeaColors.shark,
           hover: OsmeaColors.eclipse,
           splash: OsmeaColors.silver,
-          disabled: OsmeaColors.ash,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.ash,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.ash,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
 
       default:
         return _ButtonColors(
           background: backgroundColor ?? OsmeaColors.nordicBlue,
           text: OsmeaColors.white,
-          border: OsmeaColors.nordicBlue,
+          border: borderColor ?? OsmeaColors.nordicBlue,
           hover: OsmeaColors.deepSea,
           splash: OsmeaColors.crystalBay,
-          disabled: OsmeaColors.silver,
-          disabledText: OsmeaColors.steel,
+          disabled: disabledBackgroundColor ?? OsmeaColors.silver,
+          disabledText: disabledTextColor ?? OsmeaColors.steel,
+          disabledBorder: disabledBorderColor ?? OsmeaColors.silver,
+          disabledHover: disabledHoverColor ?? OsmeaColors.ash,
+          disabledSplash: disabledSplashColor ?? OsmeaColors.ash,
+          disabledFocus: disabledFocusColor ?? OsmeaColors.ash,
+          disabledHighlight: disabledHighlightColor ?? OsmeaColors.ash,
+          disabledShadow: disabledShadowColor ?? OsmeaColors.ash,
         );
     }
   }
@@ -589,6 +680,12 @@ class _ButtonColors {
   final Color splash;
   final Color disabled;
   final Color disabledText;
+  final Color disabledBorder;
+  final Color disabledHover;
+  final Color disabledSplash;
+  final Color disabledFocus;
+  final Color disabledHighlight;
+  final Color disabledShadow;
 
   const _ButtonColors({
     required this.background,
@@ -598,6 +695,12 @@ class _ButtonColors {
     required this.splash,
     required this.disabled,
     required this.disabledText,
+    required this.disabledBorder,
+    required this.disabledHover,
+    required this.disabledSplash,
+    required this.disabledFocus,
+    required this.disabledHighlight,
+    required this.disabledShadow,
   });
 }
 
@@ -627,6 +730,15 @@ class OsmeaTextButton extends OsmeaButton {
     super.customTheme,
     super.fullWidth,
     super.backgroundColor,
+    super.borderColor,
+    super.disabledBackgroundColor,
+    super.disabledTextColor,
+    super.disabledBorderColor,
+    super.disabledHoverColor,
+    super.disabledSplashColor,
+    super.disabledFocusColor,
+    super.disabledHighlightColor,
+    super.disabledShadowColor,
   }) : super(text: text);
 }
 
@@ -657,6 +769,15 @@ class OsmeaIconButton extends OsmeaButton {
     super.autofocus,
     super.customTheme,
     super.backgroundColor,
+    super.borderColor,
+    super.disabledBackgroundColor,
+    super.disabledTextColor,
+    super.disabledBorderColor,
+    super.disabledHoverColor,
+    super.disabledSplashColor,
+    super.disabledFocusColor,
+    super.disabledHighlightColor,
+    super.disabledShadowColor,
   }) : super(
           icon: icon,
           iconPosition: IconPosition.only,
