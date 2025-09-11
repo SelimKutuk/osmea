@@ -133,7 +133,7 @@ class FileDownloadHelper {
     Duration retryDelay = const Duration(seconds: 2),
     Duration timeout = const Duration(seconds: 30),
   }) async {
-    // Validate all parameters
+    // Parameters already validated by _validateParameters
     _validateParameters(
       url: url,
       fileName: fileName,
@@ -141,27 +141,6 @@ class FileDownloadHelper {
       retryDelay: retryDelay,
       timeout: timeout,
     );
-    
-    // Runtime validation for production
-    if (url.isEmpty) {
-      throw FileDownloadException('URL cannot be empty');
-    }
-
-    if (fileName.isEmpty) {
-      throw FileDownloadException('File name cannot be empty');
-    }
-    
-    if (maxRetries <= 0) {
-      throw FileDownloadException('Max retries must be greater than 0');
-    }
-    
-    if (retryDelay.isNegative) {
-      throw FileDownloadException('Retry delay cannot be negative');
-    }
-    
-    if (timeout.isNegative || timeout.inMilliseconds <= 0) {
-      throw FileDownloadException('Timeout must be greater than 0');
-    }
 
     int retries = 0;
     File file;
