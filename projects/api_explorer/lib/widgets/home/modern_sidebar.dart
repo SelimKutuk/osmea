@@ -4,6 +4,7 @@ import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/styles/app_theme.dart';
 import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 import 'dart:async';
 
 /// Modern Sidebar using Osmea components
@@ -37,6 +38,11 @@ class _ModernSidebarState extends State<ModernSidebar>
   StreamSubscription<StoreChangeEvent>? _storeChangeSubscription;
   StoreConfiguration? _currentStore;
 
+  // Search functionality
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+  Map<String, List<ApiService>> _groupedFilteredServices = {};
+
   @override
   void initState() {
     super.initState();
@@ -59,6 +65,7 @@ class _ModernSidebarState extends State<ModernSidebar>
     _isDisposed = true;
     _categoryAnimationController.dispose();
     _scrollController.dispose();
+    _searchController.dispose();
     _storeChangeSubscription?.cancel();
     super.dispose();
   }
@@ -108,16 +115,17 @@ class _ModernSidebarState extends State<ModernSidebar>
       final availableCategories = ApiServiceRegistry.categories
           .where((cat) => _hasStoreForPlatform(cat))
           .toList();
-      
+
       if (availableCategories.isNotEmpty && _selectedMainCategory == null) {
         // Select the first available category by default
         final defaultMainCategory = availableCategories.first;
-        final subCategories = _getCategoriesForCurrentStore(defaultMainCategory);
-        
+        final subCategories =
+            _getCategoriesForCurrentStore(defaultMainCategory);
+
         setState(() {
           _selectedMainCategory = defaultMainCategory;
           _categoryAnimationController.forward();
-          
+
           // Also auto-select first subcategory if available
           if (subCategories.isNotEmpty) {
             _selectedCategory = subCategories.first;
@@ -125,6 +133,33 @@ class _ModernSidebarState extends State<ModernSidebar>
         });
       }
     }
+  }
+
+  /// Check available store types based on current stores
+  Future<Set<String>> _getAvailableStoreTypes() async {
+    final Set<String> storeTypes = {};
+
+    try {
+      // Get all stores and check which platforms are configured
+      final allStores = await WizardHelper.getAllStores();
+
+      for (final store in allStores) {
+        if (store.isComplete) {
+          switch (store.platform) {
+            case 'woocommerce':
+              storeTypes.add('WooCommerce');
+              break;
+            case 'shopify':
+              storeTypes.add('Shopify');
+              break;
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Error getting available store types: $e');
+    }
+
+    return storeTypes;
   }
 
   void _selectMainCategory(ApiCategory mainCategory) {
@@ -162,7 +197,10 @@ class _ModernSidebarState extends State<ModernSidebar>
 
   bool get _isCurrentStoreComplete => _currentStore?.isComplete ?? false;
 
+  /// Check if user has configured stores for a specific platform
   bool _hasStoreForPlatform(ApiCategory mainCategory) {
+    // We'll cache this to avoid repeated async calls
+    // For now, check current store only, but this can be expanded
     if (_currentStore == null) return false;
 
     switch (mainCategory) {
@@ -275,7 +313,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                   'Browse and test APIs',
                                   variant: OsmeaTextVariant.bodySmall,
                                   fontSize: 12,
-                                  color: OsmeaColors.white.withValues(alpha: 0.8),
+                                  color:
+                                      OsmeaColors.white.withValues(alpha: 0.8),
                                 ),
                             ],
                           ),
@@ -430,6 +469,307 @@ class _ModernSidebarState extends State<ModernSidebar>
                             ),
                           ],
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              // Search Bar Section
+              if (_currentStore != null &&
+                  _isCurrentStoreComplete &&
+                  widget.expanded)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: isNarrow ? 12 : 16,
+                    vertical: isNarrow ? 8 : 12,
+                  ),
+                  child: OsmeaComponents.searchbar(
+                    controller: _searchController,
+                    hint: 'Search APIs, categories, endpoints...',
+                    size: TextFieldSize.small,
+                    variant: TextFieldVariant.outlined,
+                    searchbarVariant: SearchbarVariant.outlined,
+                    searchbarStyle: SearchbarStyle.standard,
+                    onChanged: _onSearchChanged,
+                    onClear: _clearSearch,
+                    showClearButton: true,
+                    showSearchIcon: true,
+                    minQueryLength: 1,
+                    debounceDuration: const Duration(milliseconds: 200),
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    borderColor: Theme.of(context)
+                        .colorScheme
+                        .outline
+                        .withValues(alpha: 0.3),
+                    focusColor: OsmeaColors.nordicBlue,
+                    hintColor: Theme.of(context).hintColor,
+                    textColor: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                ),
+
+              // Search Results Section
+              if (_searchQuery.isNotEmpty &&
+                  _groupedFilteredServices.isNotEmpty)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: context.borderRadiusMinStandard,
+                    border: Border.all(
+                      color: OsmeaColors.nordicBlue.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: OsmeaComponents.column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Search Results Header
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.only(
+                            topLeft: context.borderRadiusMinStandard.topLeft,
+                            topRight: context.borderRadiusMinStandard.topRight,
+                          ),
+                        ),
+                        child: OsmeaComponents.row(
+                          children: [
+                            Icon(
+                              Icons.search_rounded,
+                              size: 16,
+                              color: OsmeaColors.nordicBlue,
+                            ),
+                            OsmeaComponents.sizedBox(width: 8),
+                            OsmeaComponents.text(
+                              'Search Results ($_totalFilteredCount)',
+                              variant: OsmeaTextVariant.labelMedium,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: OsmeaColors.nordicBlue,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Grouped Results List
+                      OsmeaComponents.container(
+                        constraints: BoxConstraints(
+                          maxHeight: constraints.maxHeight *
+                              0.4, // Dynamic height based on screen
+                        ),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: _groupedFilteredServices.keys.length,
+                          itemBuilder: (context, groupIndex) {
+                            final platform = _groupedFilteredServices.keys
+                                .elementAt(groupIndex);
+                            final services =
+                                _groupedFilteredServices[platform]!;
+
+                            return OsmeaComponents.column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Platform Header
+                                OsmeaComponents.container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: _getPlatformColor(platform)
+                                        .withValues(alpha: 0.1),
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline
+                                            .withValues(alpha: 0.1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                  ),
+                                  child: OsmeaComponents.row(
+                                    children: [
+                                      Icon(
+                                        _getPlatformIcon(platform),
+                                        size: 16,
+                                        color: _getPlatformColor(platform),
+                                      ),
+                                      OsmeaComponents.sizedBox(width: 8),
+                                      OsmeaComponents.text(
+                                        platform,
+                                        variant: OsmeaTextVariant.labelMedium,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: _getPlatformColor(platform),
+                                      ),
+                                      OsmeaComponents.sizedBox(width: 4),
+                                      OsmeaComponents.container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 6, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: _getPlatformColor(platform)
+                                              .withValues(alpha: 0.2),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: OsmeaComponents.text(
+                                          '${services.length}',
+                                          variant: OsmeaTextVariant.labelSmall,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w600,
+                                          color: _getPlatformColor(platform),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                // Platform Services
+                                ...services.map((service) {
+                                  final isSelected =
+                                      widget.selectedService == service;
+
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        widget.onServiceSelected(service),
+                                    child: OsmeaComponents.container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? OsmeaColors.nordicBlue
+                                                .withValues(alpha: 0.1)
+                                            : Colors.transparent,
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline
+                                                .withValues(alpha: 0.05),
+                                            width: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      child: OsmeaComponents.row(
+                                        children: [
+                                          Icon(
+                                            ApiServiceRegistry.getCategoryIcon(
+                                                service.category),
+                                            size: 16,
+                                            color: isSelected
+                                                ? OsmeaColors.nordicBlue
+                                                : Theme.of(context)
+                                                    .iconTheme
+                                                    .color
+                                                    ?.withValues(alpha: 0.7),
+                                          ),
+                                          OsmeaComponents.sizedBox(width: 12),
+                                          OsmeaComponents.expanded(
+                                            child: OsmeaComponents.column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                OsmeaComponents.text(
+                                                  service.name,
+                                                  variant: OsmeaTextVariant
+                                                      .bodySmall,
+                                                  fontSize: 12,
+                                                  fontWeight: isSelected
+                                                      ? FontWeight.w600
+                                                      : FontWeight.w500,
+                                                  color: isSelected
+                                                      ? OsmeaColors.nordicBlue
+                                                      : Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium
+                                                          ?.color,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                OsmeaComponents.sizedBox(
+                                                    height: 2),
+                                                OsmeaComponents.text(
+                                                  '${service.subcategory} • ${service.supportedMethods.join(', ')}',
+                                                  variant: OsmeaTextVariant
+                                                      .bodySmall,
+                                                  fontSize: 10,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.color
+                                                      ?.withValues(alpha: 0.7),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              // No Search Results
+              if (_searchQuery.isNotEmpty && _groupedFilteredServices.isEmpty)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.all(isNarrow ? 12 : 16),
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: context.borderRadiusMinStandard,
+                    border: Border.all(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .outline
+                          .withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: OsmeaComponents.column(
+                    children: [
+                      Icon(
+                        Icons.search_off_rounded,
+                        size: 32,
+                        color: Theme.of(context)
+                            .iconTheme
+                            .color
+                            ?.withValues(alpha: 0.5),
+                      ),
+                      OsmeaComponents.sizedBox(height: 12),
+                      OsmeaComponents.text(
+                        'No APIs found',
+                        variant: OsmeaTextVariant.titleSmall,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.titleMedium?.color,
+                        textAlign: TextAlign.center,
+                      ),
+                      OsmeaComponents.sizedBox(height: 4),
+                      OsmeaComponents.text(
+                        'Try searching with different keywords like "product", "order", or "customer"',
+                        variant: OsmeaTextVariant.bodySmall,
+                        fontSize: 12,
+                        color: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.color
+                            ?.withValues(alpha: 0.7),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
                       ),
                     ],
                   ),
@@ -655,7 +995,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                 vertical: isMobile ? 2 : 4,
                               ),
                               leading: Icon(
-                                ApiServiceRegistry.getCategoryIcon(mainCategory),
+                                ApiServiceRegistry.getCategoryIcon(
+                                    mainCategory),
                                 color: hasStore && _isCurrentStoreComplete
                                     ? (isMainSelected
                                         ? OsmeaColors.nordicBlue
@@ -781,7 +1122,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                 vertical: isMobile ? 2 : 4,
                                               ),
                                               leading: Icon(
-                                                ApiServiceRegistry.getCategoryIcon(category),
+                                                ApiServiceRegistry
+                                                    .getCategoryIcon(category),
                                                 color: isSelected
                                                     ? OsmeaColors.nordicBlue
                                                     : Theme.of(context)
@@ -1181,6 +1523,201 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'WooCommerce Taxes';
+    }
+  }
+
+  // Search functionality methods
+  Future<void> _onSearchChanged(String query) async {
+    setState(() {
+      _searchQuery = query.toLowerCase();
+    });
+
+    final filteredServices = await _filterAndGroupServices(query);
+    setState(() {
+      _groupedFilteredServices = filteredServices;
+    });
+  }
+
+  Future<Map<String, List<ApiService>>> _filterAndGroupServices(
+      String query) async {
+    if (query.isEmpty) return {};
+
+    final allServices = ApiServiceRegistry.all;
+    final availableStoreTypes = await _getAvailableStoreTypes();
+
+    final filteredServices = allServices.where((service) {
+      final matchesName = service.name.toLowerCase().contains(query);
+      final matchesCategory =
+          service.category.toString().toLowerCase().contains(query);
+      final matchesSubcategory =
+          service.subcategory.toLowerCase().contains(query);
+      final matchesEndpoint = service.endpoint.toLowerCase().contains(query);
+
+      final matchesQuery = matchesName ||
+          matchesCategory ||
+          matchesSubcategory ||
+          matchesEndpoint;
+
+      if (!matchesQuery) return false;
+
+      // Check if user has access to this platform
+      switch (service.category) {
+        case ApiCategory.shopify:
+        case ApiCategory.shopifyGraphql:
+        case ApiCategory.access:
+        case ApiCategory.customer:
+        case ApiCategory.discounts:
+        case ApiCategory.billing:
+        case ApiCategory.events:
+        case ApiCategory.inventory:
+        case ApiCategory.orders:
+        case ApiCategory.marketingEvent:
+        case ApiCategory.giftCard:
+        case ApiCategory.metafield:
+        case ApiCategory.onlineStore:
+        case ApiCategory.products:
+        case ApiCategory.storeProperties:
+        case ApiCategory.tendertransaction:
+        case ApiCategory.webhooks:
+        case ApiCategory.graphqlQueries:
+        case ApiCategory.graphqlMutations:
+        case ApiCategory.graphqlProductsAndCollections:
+        case ApiCategory.graphqlProductsAndCollectionsQueries:
+        case ApiCategory.graphqlProductsAndCollectionsMutations:
+        case ApiCategory.graphqlCustomers:
+        case ApiCategory.graphqlCustomersQueries:
+        case ApiCategory.graphqlCustomersMutations:
+        case ApiCategory.graphqlWebhooks:
+        case ApiCategory.graphqlWebhookQueries:
+        case ApiCategory.graphqlWebhookMutations:
+          return availableStoreTypes.contains('Shopify');
+        case ApiCategory.woocommerce:
+        case ApiCategory.woocommerceCoupons:
+        case ApiCategory.woocommerceProducts:
+        case ApiCategory.woocommerceOrders:
+        case ApiCategory.woocommerceCustomers:
+        case ApiCategory.woocommerceWebhooks:
+        case ApiCategory.woocommerceSystemStatus:
+        case ApiCategory.woocommerceReports:
+        case ApiCategory.woocommerceShippingMethods:
+        case ApiCategory.woocommerceShippingZones:
+        case ApiCategory.woocommerceShippingZoneMethods:
+        case ApiCategory.woocommercePaymentGateways:
+        case ApiCategory.woocommerceSetting:
+        case ApiCategory.woocommerceData:
+        case ApiCategory.woocommerceContinents:
+        case ApiCategory.woocommerceCountries:
+        case ApiCategory.woocommerceCurrencies:
+        case ApiCategory.woocommerceRefunds:
+        case ApiCategory.woocommerceTaxes:
+          return availableStoreTypes.contains('WooCommerce');
+        default:
+          return false; // Don't allow other categories if no store configured
+      }
+    }).toList();
+
+    // Group by platform
+    final Map<String, List<ApiService>> grouped = {};
+    for (final service in filteredServices) {
+      String platform;
+      switch (service.category) {
+        case ApiCategory.shopify:
+        case ApiCategory.shopifyGraphql:
+        case ApiCategory.access:
+        case ApiCategory.customer:
+        case ApiCategory.discounts:
+        case ApiCategory.billing:
+        case ApiCategory.events:
+        case ApiCategory.inventory:
+        case ApiCategory.orders:
+        case ApiCategory.marketingEvent:
+        case ApiCategory.giftCard:
+        case ApiCategory.metafield:
+        case ApiCategory.onlineStore:
+        case ApiCategory.products:
+        case ApiCategory.storeProperties:
+        case ApiCategory.tendertransaction:
+        case ApiCategory.webhooks:
+        case ApiCategory.graphqlQueries:
+        case ApiCategory.graphqlMutations:
+        case ApiCategory.graphqlProductsAndCollections:
+        case ApiCategory.graphqlProductsAndCollectionsQueries:
+        case ApiCategory.graphqlProductsAndCollectionsMutations:
+        case ApiCategory.graphqlCustomers:
+        case ApiCategory.graphqlCustomersQueries:
+        case ApiCategory.graphqlCustomersMutations:
+        case ApiCategory.graphqlWebhooks:
+        case ApiCategory.graphqlWebhookQueries:
+        case ApiCategory.graphqlWebhookMutations:
+          platform = 'Shopify';
+          break;
+        case ApiCategory.woocommerce:
+        case ApiCategory.woocommerceCoupons:
+        case ApiCategory.woocommerceProducts:
+        case ApiCategory.woocommerceOrders:
+        case ApiCategory.woocommerceCustomers:
+        case ApiCategory.woocommerceWebhooks:
+        case ApiCategory.woocommerceSystemStatus:
+        case ApiCategory.woocommerceReports:
+        case ApiCategory.woocommerceShippingMethods:
+        case ApiCategory.woocommerceShippingZones:
+        case ApiCategory.woocommerceShippingZoneMethods:
+        case ApiCategory.woocommercePaymentGateways:
+        case ApiCategory.woocommerceSetting:
+        case ApiCategory.woocommerceData:
+        case ApiCategory.woocommerceContinents:
+        case ApiCategory.woocommerceCountries:
+        case ApiCategory.woocommerceCurrencies:
+        case ApiCategory.woocommerceRefunds:
+        case ApiCategory.woocommerceTaxes:
+          platform = 'WooCommerce';
+          break;
+        default:
+          platform = 'Other';
+      }
+
+      if (!grouped.containsKey(platform)) {
+        grouped[platform] = [];
+      }
+      grouped[platform]!.add(service);
+    }
+
+    return grouped;
+  }
+
+  int get _totalFilteredCount {
+    return _groupedFilteredServices.values
+        .fold(0, (sum, services) => sum + services.length);
+  }
+
+  void _clearSearch() {
+    setState(() {
+      _searchQuery = '';
+      _groupedFilteredServices = {};
+      _searchController.clear();
+    });
+  }
+
+  // Helper methods for platform styling
+  Color _getPlatformColor(String platform) {
+    switch (platform) {
+      case 'Shopify':
+        return const Color(0xFF96BF47); // Shopify green
+      case 'WooCommerce':
+        return const Color(0xFF96588A); // WooCommerce purple
+      default:
+        return OsmeaColors.steel;
+    }
+  }
+
+  IconData _getPlatformIcon(String platform) {
+    switch (platform) {
+      case 'Shopify':
+        return Icons.shopping_bag_rounded;
+      case 'WooCommerce':
+        return Icons.shopping_cart_rounded;
+      default:
+        return Icons.api_rounded;
     }
   }
 }
