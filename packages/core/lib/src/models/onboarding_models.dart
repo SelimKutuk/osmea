@@ -14,28 +14,28 @@ import 'package:flutter/material.dart';
 class OnboardingPageModel {
   /// Page title
   final String title;
-  
+
   /// Page description
   final String description;
-  
+
   /// Page icon (asset path)
   final String? iconPath;
-  
+
   /// Page image (asset path)
   final String? imagePath;
-  
+
   /// Page color
   final String? backgroundColor;
-  
+
   /// Text color
   final String? textColor;
-  
+
   /// Button text (for last page)
   final String? buttonText;
-  
+
   /// Skip button text
   final String? skipText;
-  
+
   /// Next button text
   final String? nextText;
 
@@ -138,31 +138,31 @@ class OnboardingPageModel {
 class OnboardingConfigModel {
   /// List of onboarding pages
   final List<OnboardingPageModel> pages;
-  
-  /// Onboarding style (style1 or style2)
+
+  /// Onboarding style (basic or space)
   final OnboardingStyle style;
-  
+
   /// Auto advance time (seconds)
   final int? autoAdvanceSeconds;
-  
+
   /// Whether to show skip button
   final bool showSkipButton;
-  
+
   /// Whether to show page indicators
   final bool showPageIndicator;
-  
+
   /// Animation duration (milliseconds)
   final int animationDuration;
-  
+
   /// General theme color
   final String? primaryColor;
-  
+
   /// Secondary theme color
   final String? secondaryColor;
 
   const OnboardingConfigModel({
     required this.pages,
-    this.style = OnboardingStyle.style1,
+    this.style = OnboardingStyle.basic,
     this.autoAdvanceSeconds,
     this.showSkipButton = true,
     this.showPageIndicator = true,
@@ -175,11 +175,12 @@ class OnboardingConfigModel {
   factory OnboardingConfigModel.fromJson(Map<String, dynamic> json) {
     return OnboardingConfigModel(
       pages: (json['pages'] as List<dynamic>)
-          .map((page) => OnboardingPageModel.fromJson(page as Map<String, dynamic>))
+          .map((page) =>
+              OnboardingPageModel.fromJson(page as Map<String, dynamic>))
           .toList(),
       style: OnboardingStyle.values.firstWhere(
-        (style) => style.name == (json['style'] as String? ?? 'style1'),
-        orElse: () => OnboardingStyle.style1,
+        (style) => style.name == (json['style'] as String? ?? 'basic'),
+        orElse: () => OnboardingStyle.basic,
       ),
       autoAdvanceSeconds: json['auto_advance_seconds'] as int?,
       showSkipButton: json['show_skip_button'] as bool? ?? true,
@@ -237,24 +238,24 @@ class OnboardingConfigModel {
 
 /// 🎨 Onboarding style options
 enum OnboardingStyle {
-  /// Classic style - Visual on top, text on bottom
-  style1,
-  
-  /// Modern style - Text over full screen visual
-  style2,
+  /// Basic style - Visual on top, text on bottom
+  basic,
+
+  /// Space style - Text over full screen visual
+  space,
 }
 
 /// 📱 Onboarding state
 enum OnboardingFlowState {
   /// Loading
   loading,
-  
+
   /// Ready
   ready,
-  
+
   /// Error
   error,
-  
+
   /// Completed
   completed,
 }
@@ -263,16 +264,16 @@ enum OnboardingFlowState {
 enum OnboardingAction {
   /// Next page
   next,
-  
+
   /// Previous page
   previous,
-  
+
   /// Skip
   skip,
-  
+
   /// Finish
   finish,
-  
+
   /// Go to specific page
   goToPage,
 }
