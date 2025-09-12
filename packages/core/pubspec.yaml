@@ -34,6 +34,7 @@ dependencies:
   url_launcher: ^6.3.1 # URL launcher for support links
   dio: ^5.7.0 # HTTP client for file downloads
   path_provider: ^2.1.5 # Path provider for file storage
+  permission_handler: ^11.2.0 # Runtime permissions handler
   osmea_components:
     path: ../components # osmea UI kit
  
@@ -49,6 +50,7 @@ dev_dependencies:
  
 dependency_overrides:
   build: ^4.0.0
+  intl: ^0.20.0
  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
