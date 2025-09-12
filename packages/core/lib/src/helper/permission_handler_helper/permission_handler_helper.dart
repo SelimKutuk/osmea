@@ -419,7 +419,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   /// Handle storage permission based on Android API level
   Future<bool> _requestStoragePermissionSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
-      // iOS için normal storage permission
       return _requestPermissionDirect(appPermission);
     }
 
@@ -463,7 +462,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   /// Check storage permission status based on Android API level
   Future<bool> _checkStoragePermissionSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
-      // iOS için normal storage permission check
       return _checkPermissionDirect(appPermission);
     }
 
@@ -500,7 +498,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   /// Get storage permission status based on Android API level
   Future<PermissionResult> _getStoragePermissionStatusSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
-      // iOS için normal storage permission status
       final permission = _mapToPermission(appPermission);
       final status = await permission.status;
       return PermissionResult.fromStatus(appPermission, status);
@@ -515,8 +512,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         // Android 13+ (API 33+) - Check granular media permissions
         debugPrint('📱 Android 13+ - getting granular media permission status');
         final photosResult = await _getPermissionStatusDirect(AppPermission.photos);
-        
-        // Storage permission status'unu photos permission'a göre ayarla
         final storageStatus = photosResult.isGranted ? ph.PermissionStatus.granted : ph.PermissionStatus.denied;
         final result = PermissionResult.fromStatus(appPermission, storageStatus);
         
@@ -527,7 +522,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         debugPrint('📱 Android 11-12 - getting MANAGE_EXTERNAL_STORAGE status');
         final manageResult = await _getPermissionStatusDirect(AppPermission.manageExternalStorage);
         
-        // Storage permission status'unu manage external storage'a göre ayarla
         final storageStatus = manageResult.isGranted ? ph.PermissionStatus.granted : ph.PermissionStatus.denied;
         return PermissionResult.fromStatus(appPermission, storageStatus);
       } else {
@@ -573,7 +567,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
 
   @override
   Future<bool> requestPermission(AppPermission appPermission) async {
-   
     if (appPermission == AppPermission.storage) {
       final result = await _requestStoragePermissionSmart(appPermission);
       // Clear cache after request to ensure fresh status
@@ -609,7 +602,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
 
   @override
   Future<bool> checkPermission(AppPermission appPermission) async {
-   
     if (appPermission == AppPermission.storage) {
       return _checkStoragePermissionSmart(appPermission);
     }
@@ -645,7 +637,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
 
   @override
   Future<PermissionResult> getPermissionStatus(AppPermission appPermission) async {
-   
     if (appPermission == AppPermission.storage) {
       return _getStoragePermissionStatusSmart(appPermission);
     }
@@ -732,7 +723,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     try {
       debugPrint('⚙️ Opening app settings for manual permission management...');
       
-      // Global openAppSettings fonksiyonunu prefix ile çağır
       final opened = await ph.openAppSettings();
       
       if (opened) {
