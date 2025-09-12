@@ -28,6 +28,9 @@ export 'package:core/src/helper/spacer_helper.dart';
 // 🔤 Exports the string extension helper for text formatting and capitalization
 export 'package:core/src/helper/first_letter_capitalize_helper.dart';
 
+// 🔢 Exports the double extension helper for precision and formatting operations
+export 'package:core/src/helper/double_extension_helper.dart';
+
 // 🗂️ Exports the asset configuration helper for JSON config management
 export 'package:core/src/helper/asset_config_helper.dart';
 
