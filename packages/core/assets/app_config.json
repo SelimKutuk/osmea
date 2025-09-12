@@ -110,6 +110,54 @@
       }
     ]
   },
+  "url_launcher_configuration": {
+    "social_media_urls": {
+      "x": "https://x.com/",
+      "instagram": "https://instagram.com/",
+      "facebook": "https://facebook.com/",
+      "linkedin": "https://linkedin.com/in/",
+      "youtube": "https://youtube.com/@",
+      "tiktok": "https://tiktok.com/@",
+      "snapchat": "https://snapchat.com/add/",
+      "github": "https://github.com/masterfabric-mobile/osmea",
+      "reddit": "https://reddit.com/u/",
+      "pinterest": "https://pinterest.com/",
+      "telegram": "https://t.me/",
+      "whatsapp": "https://wa.me/"
+    },
+    "music_urls": {
+      "spotify": "spotify:search:",
+      "apple_music": "music://search?term=",
+      "youtube_music": "https://music.youtube.com/search?q=",
+      "soundcloud": "https://soundcloud.com/search?q="
+    },
+    "video_urls": {
+      "youtube": "https://www.youtube.com/results?search_query=",
+      "netflix": "https://www.netflix.com/search?q=",
+      "disney_plus": "https://www.disneyplus.com/search?q=",
+      "prime_video": "https://www.primevideo.com/search?q="
+    },
+    "maps_urls": {
+      "google_maps": "https://www.google.com/maps/",
+      "apple_maps": "http://maps.apple.com/",
+      "waze": "waze://"
+    },
+    "website_urls": {
+      "main": "https://masterfabric.co/",
+      "osmea": "https://github.com/masterfabric-mobile/osmea",
+      "documentation": "https://github.com/masterfabric-mobile/osmea/tree/dev/docs"
+    },
+    "default_values": {
+      "phone_number": "+90 5xx xxx xxxx",
+      "email": "info@masterfabric.co",
+      "latitude": "41.0082",
+      "longitude": "28.9784",
+      "address": "Istanbul, Turkey",
+      "search_query": "Flutter Development",
+      "username": "masterfabric",
+      "url": "https://masterfabric.co"
+    }
+  },
   "error_handling_configuration": {
     "style": "style3",
     "auto_retry_seconds": 5,
