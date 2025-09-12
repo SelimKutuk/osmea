@@ -32,6 +32,8 @@ dependencies:
   device_info_plus: ^11.4.0 # Device info
   package_info_plus: ^8.3.0 # Package info
   url_launcher: ^6.3.1 # URL launcher for support links
+  dio: ^5.7.0 # HTTP client for file downloads
+  path_provider: ^2.1.5 # Path provider for file storage
   osmea_components:
     path: ../components # osmea UI kit
  

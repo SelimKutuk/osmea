@@ -34,6 +34,9 @@ export 'package:core/src/helper/asset_config_helper.dart';
 // 🔥 Exports the remote configuration helper for Firebase Remote Config
 export 'package:core/src/helper/remote_config_helper.dart';
 
+// 📁 Exports the file download helper for downloading files with progress tracking
+export 'package:core/src/helper/file_download_helper.dart';
+
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/layout/grid.dart';
 
