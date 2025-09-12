@@ -483,24 +483,18 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       } else {
         // Android 6-10 (API 23-29) - Check legacy storage permissions
         debugPrint('📱 Android 6-10 - checking legacy storage permissions');
-        final permission = _mapToPermission(appPermission);
-        final status = await permission.status;
-        return status == ph.PermissionStatus.granted;
+        return _checkPermissionDirect(appPermission);
       }
     } catch (e) {
       debugPrint('🔴 Error in smart storage permission check: $e');
-      final permission = _mapToPermission(appPermission);
-      final status = await permission.status;
-      return status == ph.PermissionStatus.granted;
+      return _checkPermissionDirect(appPermission);
     }
   }
 
   /// Get storage permission status based on Android API level
   Future<PermissionResult> _getStoragePermissionStatusSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
-      final permission = _mapToPermission(appPermission);
-      final status = await permission.status;
-      return PermissionResult.fromStatus(appPermission, status);
+      return _getPermissionStatusDirect(appPermission);
     }
 
     try {
@@ -527,15 +521,11 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       } else {
         // Android 6-10 (API 23-29) - Check legacy storage permissions
         debugPrint('📱 Android 6-10 - getting legacy storage permission status');
-        final permission = _mapToPermission(appPermission);
-        final status = await permission.status;
-        return PermissionResult.fromStatus(appPermission, status);
+        return _getPermissionStatusDirect(appPermission);
       }
     } catch (e) {
       debugPrint('🔴 Error in smart storage permission status: $e');
-      final permission = _mapToPermission(appPermission);
-      final status = await permission.status;
-      return PermissionResult.fromStatus(appPermission, status);
+      return _getPermissionStatusDirect(appPermission);
     }
   }
 
