@@ -36,7 +36,7 @@
   Full integration and UI categories for WooCommerce Reports and Settings APIs, including new handlers and registry updates.
 
 - **[#114 – WooCommerce Shipping Methods & Payment Gateways API Integration](https://github.com/masterfabric-mobile/osmea/pull/114)**  
-  Added new APIs and handlers for shipping methods and payment gateways, with sidebar UI extensions.r
+  Added new APIs and handlers for shipping methods and payment gateways, with sidebar UI extensions.
 
 - **[#111 – WooCommerce Webhooks & System Status API Integration](https://github.com/masterfabric-mobile/osmea/pull/111)**  
   Integrated WooCommerce Webhooks and System Status APIs, added new sidebar navigation categories and icons. Significant feature expansion.
