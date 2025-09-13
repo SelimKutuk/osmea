@@ -556,6 +556,7 @@ class ApiDioClient implements ApiBaseClient {
   static Future<WooAuthResult<UserSignUpData>> signUpUser({
     required String email,
     required String password,
+    required String authKey,
     required String firstName,
     required String lastName,
     String? phone,
@@ -571,6 +572,7 @@ class ApiDioClient implements ApiBaseClient {
       final result = await authManager.signUp(
         email: email,
         password: password,
+        authKey: authKey,
         firstName: firstName,
         lastName: lastName,
         phone: phone,
