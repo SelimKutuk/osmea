@@ -30,11 +30,15 @@ class WooJwtSignInManager {
 
       // Authenticate user
       debugPrint('🔑 Authenticating user: $username');
+      debugPrint(
+          '🔍 Calling authService.authenticate with brandName: $brandName');
       final token = await authService.authenticate(
         username: username,
         password: password,
         brandName: brandName,
       );
+      debugPrint(
+          '🔍 Token received from authService: ${token?.accessToken?.substring(0, 20)}...');
 
       // Token is automatically saved by the auth service
       debugPrint('✅ User sign-in successful');

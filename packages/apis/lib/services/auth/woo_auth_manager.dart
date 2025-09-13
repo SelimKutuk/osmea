@@ -47,15 +47,22 @@ class WooAuthManager {
           await _authService.userLogin(WooNetwork.storeName, request);
 
       if (response.success && response.data != null) {
+        // Get JWT token from response (prefer jwt field, fallback to accessToken)
+        final jwtTokenString = response.data!.jwt ?? response.data!.accessToken;
+        if (jwtTokenString == null || jwtTokenString.isEmpty) {
+          throw Exception('No JWT token received from server');
+        }
+
         // Convert to JWT token and save to storage
         final jwtToken = WooJwtToken(
-          accessToken: response.data!.accessToken,
-          tokenType: response.data!.tokenType,
-          expiresIn: response.data!.expiresIn,
+          accessToken: jwtTokenString,
+          tokenType: response.data!.tokenType ?? 'Bearer',
+          expiresIn: response.data!.expiresIn ?? 3600,
           issuedAt: response.data!.issuedAt ?? DateTime.now(),
           refreshToken: response.data!.refreshToken,
           scope: response.data!.scope,
-          userData: response.data!.user.toJson(),
+          userData:
+              response.data!.user != null ? response.data!.user!.toJson() : {},
         );
 
         // Save JWT token to local storage
@@ -64,7 +71,7 @@ class WooAuthManager {
         debugPrint(
             '✅ User login successful - JWT token saved to local storage');
         debugPrint(
-            '👤 User: ${response.data!.user.firstName} ${response.data!.user.lastName}');
+            '👤 User: ${response.data!.user?.firstName ?? 'Unknown'} ${response.data!.user?.lastName ?? 'User'}');
         debugPrint('📅 Token expires at: ${response.data!.expiresAt}');
 
         return WooAuthResult.success(

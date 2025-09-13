@@ -43,16 +43,43 @@ class WooJwtAuthService {
           await authService.userLogin(effectiveBrandName, loginRequest);
 
       if (response.success && response.data != null) {
+        debugPrint('🔍 Response success: ${response.success}');
+        debugPrint('🔍 Response data: ${response.data}');
+        debugPrint('🔍 Response data type: ${response.data.runtimeType}');
+
+        // Get JWT token from response (prefer jwt field, fallback to accessToken)
+        final jwtToken = response.data!.jwt ?? response.data!.accessToken;
+        debugPrint('🔍 JWT token: $jwtToken');
+        debugPrint('🔍 JWT token type: ${jwtToken.runtimeType}');
+        debugPrint('🔍 JWT token is null: ${jwtToken == null}');
+        debugPrint('🔍 JWT token is empty: ${jwtToken?.isEmpty}');
+
+        if (jwtToken == null || jwtToken.isEmpty) {
+          throw Exception('No JWT token received from server');
+        }
+
+        debugPrint('🔑 JWT token received: ${jwtToken.substring(0, 20)}...');
+
         // Convert UserLoginData to WooJwtToken
+        debugPrint('🔍 Creating WooJwtToken...');
+        debugPrint('🔍 response.data!.tokenType: ${response.data!.tokenType}');
+        debugPrint('🔍 response.data!.expiresIn: ${response.data!.expiresIn}');
+        debugPrint('🔍 response.data!.issuedAt: ${response.data!.issuedAt}');
+        debugPrint('🔍 response.data!.user: ${response.data!.user}');
+        debugPrint(
+            '🔍 response.data!.user?.toJson(): ${response.data!.user?.toJson()}');
+
         final token = WooJwtToken(
-          accessToken: response.data!.accessToken,
-          tokenType: response.data!.tokenType,
-          expiresIn: response.data!.expiresIn,
+          accessToken: jwtToken,
+          tokenType: response.data!.tokenType ?? 'Bearer',
+          expiresIn: response.data!.expiresIn ?? 3600,
           refreshToken: response.data!.refreshToken,
           scope: response.data!.scope,
           issuedAt: response.data!.issuedAt ?? DateTime.now(),
-          userData: response.data!.user.toJson(),
+          userData:
+              response.data!.user != null ? response.data!.user!.toJson() : {},
         );
+        debugPrint('🔍 WooJwtToken created successfully');
 
         // Save token to storage
         await WooJwtTokenStorage.saveToken(token);
