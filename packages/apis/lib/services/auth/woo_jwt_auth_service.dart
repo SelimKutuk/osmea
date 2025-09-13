@@ -22,9 +22,17 @@ class WooJwtAuthService {
   }) async {
     try {
       debugPrint('🔐 Starting WooCommerce JWT authentication...');
+      debugPrint('🔍 Username: $username');
+      debugPrint('🔍 Brand name: $brandName');
+      debugPrint('🔍 Password length: ${password.length}');
+      debugPrint('🔍 Dio instance: $_dio');
+      debugPrint('🔍 Dio instance type: ${_dio.runtimeType}');
 
       // Get WooAuthService from dependency injection
+      debugPrint('🔍 Getting WooAuthService from dependency injection...');
       final authService = GetIt.I<WooAuthService>();
+      debugPrint('🔍 WooAuthService obtained: $authService');
+      debugPrint('🔍 WooAuthService type: ${authService.runtimeType}');
 
       // Use brand name or default to 'woocomm'
       final effectiveBrandName = brandName ?? 'woocomm';
@@ -32,24 +40,125 @@ class WooJwtAuthService {
       debugPrint('🔗 Using brand name: $effectiveBrandName');
 
       // Create login request
+      debugPrint('🔍 Creating UserLoginRequest...');
       final loginRequest = UserLoginRequest(
         email: username,
         password: password,
         rememberMe: false,
       );
+      debugPrint('🔍 UserLoginRequest created: ${loginRequest.toJson()}');
 
       // Use the API service for authentication
+      debugPrint(
+          '🔍 Calling authService.userLogin with brand: $effectiveBrandName');
+      debugPrint('🔍 Login request: ${loginRequest.toJson()}');
+
       final response =
           await authService.userLogin(effectiveBrandName, loginRequest);
 
-      if (response.success && response.data != null) {
-        debugPrint('🔍 Response success: ${response.success}');
-        debugPrint('🔍 Response data: ${response.data}');
-        debugPrint('🔍 Response data type: ${response.data.runtimeType}');
+      debugPrint('🔍 Raw response received: $response');
+      debugPrint('🔍 Response success: ${response.success}');
+      debugPrint('🔍 Response data: ${response.data}');
+      debugPrint('🔍 Response data type: ${response.data.runtimeType}');
+      debugPrint('🔍 Response message: ${response.message}');
+      debugPrint('🔍 Response error: ${response.error}');
 
-        // Get JWT token from response (prefer jwt field, fallback to accessToken)
-        final jwtToken = response.data!.jwt ?? response.data!.accessToken;
-        debugPrint('🔍 JWT token: $jwtToken');
+      // Check if response.data is null
+      if (response.data == null) {
+        debugPrint('❌ CRITICAL: response.data is NULL!');
+        throw Exception('Response data is null');
+      }
+
+      // Check individual fields
+      debugPrint('🔍 JWT field: ${response.data!.jwt}');
+      debugPrint('🔍 JWT field type: ${response.data!.jwt.runtimeType}');
+      debugPrint('🔍 JWT field is null: ${response.data!.jwt == null}');
+      debugPrint('🔍 AccessToken field: ${response.data!.accessToken}');
+      debugPrint(
+          '🔍 AccessToken field type: ${response.data!.accessToken.runtimeType}');
+      debugPrint(
+          '🔍 AccessToken field is null: ${response.data!.accessToken == null}');
+      debugPrint('🔍 TokenType field: ${response.data!.tokenType}');
+      debugPrint('🔍 ExpiresIn field: ${response.data!.expiresIn}');
+      debugPrint('🔍 User field: ${response.data!.user}');
+
+      // Debug raw JSON data
+      debugPrint('🔍 Raw response data JSON: ${response.data!.toJson()}');
+
+      // Debug individual field access
+      debugPrint('🔍 Direct field access test:');
+      debugPrint('  - response.data!.jwt: ${response.data!.jwt}');
+      debugPrint(
+          '  - response.data!.jwt == null: ${response.data!.jwt == null}');
+      debugPrint(
+          '  - response.data!.jwt.runtimeType: ${response.data!.jwt.runtimeType}');
+
+      // Try to access via raw JSON
+      final rawJson = response.data!.toJson();
+      debugPrint('🔍 Raw JSON access test:');
+      debugPrint('  - rawJson["jwt"]: ${rawJson["jwt"]}');
+      debugPrint('  - rawJson["jwt"] == null: ${rawJson["jwt"] == null}');
+      debugPrint(
+          '  - rawJson["jwt"].runtimeType: ${rawJson["jwt"].runtimeType}');
+
+      if (response.success && response.data != null) {
+        // Get JWT token from response - try multiple possible field names
+        String? jwtToken;
+
+        // CRITICAL DEBUG: Print raw response before any processing
+        debugPrint('🚨 CRITICAL DEBUG: Raw API response processing');
+        debugPrint('🚨 response.data: ${response.data}');
+        debugPrint(
+            '🚨 response.data.runtimeType: ${response.data.runtimeType}');
+        debugPrint('🚨 response.data == null: ${response.data == null}');
+
+        if (response.data != null) {
+          debugPrint('🚨 response.data.jwt: ${response.data!.jwt}');
+          debugPrint(
+              '🚨 response.data.jwt.runtimeType: ${response.data!.jwt.runtimeType}');
+          debugPrint(
+              '🚨 response.data.jwt == null: ${response.data!.jwt == null}');
+
+          // Try accessing raw JSON
+          final rawJson = response.data!.toJson();
+          debugPrint('🚨 rawJson: $rawJson');
+          debugPrint('🚨 rawJson["jwt"]: ${rawJson["jwt"]}');
+          debugPrint(
+              '🚨 rawJson["jwt"].runtimeType: ${rawJson["jwt"].runtimeType}');
+          debugPrint('🚨 rawJson["jwt"] == null: ${rawJson["jwt"] == null}');
+        }
+
+        // Priority: jwt → accessToken → raw.jwt → raw.access_token → raw.token
+        if ((response.data?.jwt ?? '').toString().isNotEmpty) {
+          jwtToken = response.data!.jwt!.toString();
+          debugPrint(
+              '🔍 JWT token found in jwt field: ${jwtToken.length > 20 ? jwtToken.substring(0, 20) + "..." : jwtToken}');
+        } else if ((response.data?.accessToken ?? '').toString().isNotEmpty) {
+          jwtToken = response.data!.accessToken!.toString();
+          debugPrint(
+              '🔍 JWT token found in accessToken field: ${jwtToken.length > 20 ? jwtToken.substring(0, 20) + "..." : jwtToken}');
+        } else {
+          final rawData = response.data!.toJson();
+          debugPrint('🔍 Raw response data: $rawData');
+
+          if (rawData['jwt'] != null && rawData['jwt'].toString().isNotEmpty) {
+            jwtToken = rawData['jwt'].toString();
+            debugPrint(
+                '🔍 JWT token found in raw jwt field: ${jwtToken.length > 20 ? jwtToken.substring(0, 20) + "..." : jwtToken}');
+          } else if (rawData['access_token'] != null &&
+              rawData['access_token'].toString().isNotEmpty) {
+            jwtToken = rawData['access_token'].toString();
+            debugPrint(
+                '🔍 JWT token found in raw access_token field: ${jwtToken.length > 20 ? jwtToken.substring(0, 20) + "..." : jwtToken}');
+          } else if (rawData['token'] != null &&
+              rawData['token'].toString().isNotEmpty) {
+            jwtToken = rawData['token'].toString();
+            debugPrint(
+                '🔍 JWT token found in raw token field: ${jwtToken.length > 20 ? jwtToken.substring(0, 20) + "..." : jwtToken}');
+          }
+        }
+
+        debugPrint('🔍 Final JWT token: $jwtToken');
         debugPrint('🔍 JWT token type: ${jwtToken.runtimeType}');
         debugPrint('🔍 JWT token is null: ${jwtToken == null}');
         debugPrint('🔍 JWT token is empty: ${jwtToken?.isEmpty}');
@@ -58,7 +167,11 @@ class WooJwtAuthService {
           throw Exception('No JWT token received from server');
         }
 
-        debugPrint('🔑 JWT token received: ${jwtToken.substring(0, 20)}...');
+        // Ensure jwtToken is not null before proceeding
+        final String validJwtToken = jwtToken;
+
+        debugPrint(
+            '🔑 JWT token received: ${validJwtToken.length > 20 ? validJwtToken.substring(0, 20) + "..." : validJwtToken}');
 
         // Convert UserLoginData to WooJwtToken
         debugPrint('🔍 Creating WooJwtToken...');
@@ -69,25 +182,97 @@ class WooJwtAuthService {
         debugPrint(
             '🔍 response.data!.user?.toJson(): ${response.data!.user?.toJson()}');
 
-        final token = WooJwtToken(
-          accessToken: jwtToken,
-          tokenType: response.data!.tokenType ?? 'Bearer',
-          expiresIn: response.data!.expiresIn ?? 3600,
-          refreshToken: response.data!.refreshToken,
-          scope: response.data!.scope,
-          issuedAt: response.data!.issuedAt ?? DateTime.now(),
-          userData:
-              response.data!.user != null ? response.data!.user!.toJson() : {},
-        );
-        debugPrint('🔍 WooJwtToken created successfully');
+        try {
+          debugPrint('🔍 Creating WooJwtToken with parameters:');
+          debugPrint('  - accessToken: $validJwtToken');
+          debugPrint('  - tokenType: ${response.data!.tokenType ?? 'Bearer'}');
+          debugPrint('  - expiresIn: ${response.data!.expiresIn ?? 3600}');
+          debugPrint('  - refreshToken: ${response.data!.refreshToken}');
+          debugPrint('  - scope: ${response.data!.scope}');
+          debugPrint(
+              '  - issuedAt: ${response.data!.issuedAt ?? DateTime.now()}');
+          debugPrint(
+              '  - userData: ${response.data!.user != null ? response.data!.user!.toJson() : <String, dynamic>{}}');
 
-        // Save token to storage
-        await WooJwtTokenStorage.saveToken(token);
+          // Create token step by step to identify the issue
+          debugPrint('🔍 Step 1: Creating WooJwtToken object...');
 
-        debugPrint('✅ JWT authentication successful');
-        return token;
+          // Safely get token type
+          final tokenType = response.data!.tokenType?.toString() ?? 'Bearer';
+          debugPrint('🔍 Token type: $tokenType');
+
+          // Safely get expires in
+          final expiresIn = response.data!.expiresIn ?? 3600;
+          debugPrint('🔍 Expires in: $expiresIn');
+          debugPrint('🔍 Expires in type: ${expiresIn.runtimeType}');
+
+          // Ensure expiresIn is int
+          if (expiresIn is! int) {
+            debugPrint('❌ expiresIn is not int: ${expiresIn.runtimeType}');
+            throw Exception(
+                'expiresIn must be int, got ${expiresIn.runtimeType}');
+          }
+
+          // Safely get issued at
+          final issuedAt = response.data!.issuedAt ?? DateTime.now();
+          debugPrint('🔍 Issued at: $issuedAt');
+
+          // Safely get refresh token
+          final refreshToken = response.data!.refreshToken?.toString();
+          debugPrint('🔍 Refresh token: $refreshToken');
+
+          // Safely get scope
+          final scope = response.data!.scope?.toString();
+          debugPrint('🔍 Scope: $scope');
+
+          // Safely get user data
+          Map<String, dynamic> userData = <String, dynamic>{};
+          if (response.data!.user != null) {
+            try {
+              userData = response.data!.user!.toJson();
+              debugPrint('🔍 User data: $userData');
+            } catch (e) {
+              debugPrint('❌ Error getting user data: $e');
+              userData = <String, dynamic>{};
+            }
+          }
+
+          final token = WooJwtToken(
+            accessToken: validJwtToken,
+            tokenType: response.data?.tokenType ?? 'Bearer',
+            expiresIn: (response.data?.expiresIn is int)
+                ? response.data!.expiresIn!
+                : int.tryParse('${response.data?.expiresIn}') ?? 3600,
+            issuedAt: response.data?.issuedAt ?? DateTime.now(),
+            refreshToken: response.data?.refreshToken,
+            scope: response.data?.scope,
+            userData: response.data?.user != null
+                ? response.data!.user!.toJson()
+                : <String, dynamic>{},
+          );
+          debugPrint('🔍 Step 2: WooJwtToken object created successfully');
+
+          // Save token to storage
+          debugPrint('🔍 Step 3: Saving token to storage...');
+          await WooJwtTokenStorage.saveToken(token);
+          debugPrint('🔍 Step 4: Token saved to storage successfully');
+
+          debugPrint('✅ JWT authentication successful');
+          return token;
+        } catch (e, stackTrace) {
+          debugPrint('❌ Error creating WooJwtToken: $e');
+          debugPrint('❌ Stack trace: $stackTrace');
+          debugPrint('🔍 Valid JWT token: $validJwtToken');
+          debugPrint('🔍 Token type: ${response.data!.tokenType}');
+          debugPrint('🔍 Expires in: ${response.data!.expiresIn}');
+          debugPrint('🔍 Issued at: ${response.data!.issuedAt}');
+          debugPrint('🔍 Refresh token: ${response.data!.refreshToken}');
+          debugPrint('🔍 Scope: ${response.data!.scope}');
+          debugPrint('🔍 User data: ${response.data!.user}');
+          rethrow;
+        }
       } else {
-        throw Exception(response.message);
+        throw Exception(response.message ?? 'Authentication failed');
       }
     } catch (e) {
       debugPrint('❌ JWT authentication failed: $e');
@@ -132,7 +317,7 @@ class WooJwtAuthService {
       );
 
       if (response.statusCode == 200) {
-        final newToken = WooJwtToken.fromWooResponse(response.data);
+        final newToken = WooJwtToken.fromJson(response.data);
 
         // Save new token to storage
         await WooJwtTokenStorage.saveToken(newToken);

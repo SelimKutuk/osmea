@@ -46,6 +46,13 @@ class WooAuthManager {
       final response =
           await _authService.userLogin(WooNetwork.storeName, request);
 
+      debugPrint('🔍 Raw response received in WooAuthManager: $response');
+      debugPrint('🔍 Response success: ${response.success}');
+      debugPrint('🔍 Response data: ${response.data}');
+      debugPrint('🔍 Response data type: ${response.data.runtimeType}');
+      debugPrint('🔍 Response message: ${response.message}');
+      debugPrint('🔍 Response error: ${response.error}');
+
       if (response.success && response.data != null) {
         // Get JWT token from response (prefer jwt field, fallback to accessToken)
         final jwtTokenString = response.data!.jwt ?? response.data!.accessToken;
@@ -53,36 +60,60 @@ class WooAuthManager {
           throw Exception('No JWT token received from server');
         }
 
-        // Convert to JWT token and save to storage
-        final jwtToken = WooJwtToken(
-          accessToken: jwtTokenString,
-          tokenType: response.data!.tokenType ?? 'Bearer',
-          expiresIn: response.data!.expiresIn ?? 3600,
-          issuedAt: response.data!.issuedAt ?? DateTime.now(),
-          refreshToken: response.data!.refreshToken,
-          scope: response.data!.scope,
-          userData:
-              response.data!.user != null ? response.data!.user!.toJson() : {},
-        );
+        // Ensure jwtTokenString is not null before proceeding
+        final String validJwtTokenString = jwtTokenString;
 
-        // Save JWT token to local storage
-        await WooJwtTokenStorage.saveToken(jwtToken);
-
+        debugPrint('🔍 Creating WooJwtToken in WooAuthManager...');
         debugPrint(
-            '✅ User login successful - JWT token saved to local storage');
-        debugPrint(
-            '👤 User: ${response.data!.user?.firstName ?? 'Unknown'} ${response.data!.user?.lastName ?? 'User'}');
-        debugPrint('📅 Token expires at: ${response.data!.expiresAt}');
+            '🔍 Valid JWT token: ${validJwtTokenString.substring(0, 20)}...');
+        debugPrint('🔍 Token type: ${response.data!.tokenType}');
+        debugPrint('🔍 Expires in: ${response.data!.expiresIn}');
+        debugPrint('🔍 Issued at: ${response.data!.issuedAt}');
+        debugPrint('🔍 Refresh token: ${response.data!.refreshToken}');
+        debugPrint('🔍 Scope: ${response.data!.scope}');
+        debugPrint('🔍 User data: ${response.data!.user}');
 
-        return WooAuthResult.success(
-          data: response.data!,
-          message: response.message,
-        );
+        try {
+          // Convert to JWT token and save to storage
+          final jwtToken = WooJwtToken(
+            accessToken: validJwtTokenString,
+            tokenType: response.data!.tokenType ?? 'Bearer',
+            expiresIn: response.data!.expiresIn ?? 3600,
+            issuedAt: response.data!.issuedAt ?? DateTime.now(),
+            refreshToken: response.data!.refreshToken,
+            scope: response.data!.scope,
+            userData: response.data!.user != null
+                ? response.data!.user!.toJson()
+                : <String, dynamic>{},
+          );
+          debugPrint('🔍 WooJwtToken created successfully in WooAuthManager');
+
+          // Save JWT token to local storage
+          await WooJwtTokenStorage.saveToken(jwtToken);
+
+          debugPrint(
+              '✅ User login successful - JWT token saved to local storage');
+          return WooAuthResult.success(
+            data: response.data!,
+            message: 'User login successful',
+          );
+        } catch (e, stackTrace) {
+          debugPrint('❌ Error creating WooJwtToken in WooAuthManager: $e');
+          debugPrint('❌ Stack trace: $stackTrace');
+          debugPrint('🔍 Valid JWT token: $validJwtTokenString');
+          debugPrint('🔍 Token type: ${response.data!.tokenType}');
+          debugPrint('🔍 Expires in: ${response.data!.expiresIn}');
+          debugPrint('🔍 Issued at: ${response.data!.issuedAt}');
+          debugPrint('🔍 Refresh token: ${response.data!.refreshToken}');
+          debugPrint('🔍 Scope: ${response.data!.scope}');
+          debugPrint('🔍 User data: ${response.data!.user}');
+          rethrow;
+        }
       } else {
         debugPrint('❌ Login failed: ${response.message}');
         return WooAuthResult.failure(
           error: response.error ?? 'Login failed',
-          message: response.message,
+          message: response.message ?? 'Login failed',
         );
       }
     } catch (e) {
@@ -134,13 +165,13 @@ class WooAuthManager {
 
         return WooAuthResult.success(
           data: response.data!,
-          message: response.message,
+          message: response.message ?? 'Sign up successful',
         );
       } else {
         debugPrint('❌ Sign up failed: ${response.message}');
         return WooAuthResult.failure(
           error: response.error ?? 'Sign up failed',
-          message: response.message,
+          message: response.message ?? 'Sign up failed',
         );
       }
     } catch (e) {
@@ -184,13 +215,13 @@ class WooAuthManager {
 
         return WooAuthResult.success(
           data: response.data!,
-          message: response.message,
+          message: response.message ?? 'User deletion successful',
         );
       } else {
         debugPrint('❌ User deletion failed: ${response.message}');
         return WooAuthResult.failure(
           error: response.error ?? 'User deletion failed',
-          message: response.message,
+          message: response.message ?? 'User deletion failed',
         );
       }
     } catch (e) {
@@ -227,13 +258,13 @@ class WooAuthManager {
 
         return WooAuthResult.success(
           data: response.data!,
-          message: response.message,
+          message: response.message ?? 'Password reset email sent successfully',
         );
       } else {
         debugPrint('❌ Password reset failed: ${response.message}');
         return WooAuthResult.failure(
           error: response.error ?? 'Password reset failed',
-          message: response.message,
+          message: response.message ?? 'Password reset failed',
         );
       }
     } catch (e) {
@@ -325,9 +356,9 @@ class WooAuthManager {
 
       return WooAuthStatus(
         isLoggedIn: isLoggedIn,
-        hasToken: tokenInfo['hasToken'] == true,
-        isExpired: tokenInfo['isExpired'] == true,
-        needsRefresh: tokenInfo['needsRefresh'] == true,
+        hasToken: tokenInfo?['hasToken'] == true,
+        isExpired: tokenInfo?['isExpired'] == true,
+        needsRefresh: tokenInfo?['needsRefresh'] == true,
         currentUser: currentUser,
         tokenInfo: tokenInfo,
       );

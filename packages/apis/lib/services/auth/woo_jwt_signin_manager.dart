@@ -23,22 +23,28 @@ class WooJwtSignInManager {
       debugPrint('🔐 Starting user sign-in process...');
 
       // Create Dio instance if not provided
+      debugPrint('🔍 Creating Dio instance...');
       final dio = customDio ?? Dio();
+      debugPrint('🔍 Dio instance created: $dio');
 
       // Create auth service
+      debugPrint('🔍 Creating WooJwtAuthService...');
       final authService = WooJwtAuthService(dio);
+      debugPrint('🔍 WooJwtAuthService created: $authService');
 
       // Authenticate user
       debugPrint('🔑 Authenticating user: $username');
       debugPrint(
           '🔍 Calling authService.authenticate with brandName: $brandName');
+      debugPrint('🔍 About to call authService.authenticate...');
       final token = await authService.authenticate(
         username: username,
         password: password,
         brandName: brandName,
       );
+      debugPrint('🔍 authService.authenticate completed');
       debugPrint(
-          '🔍 Token received from authService: ${token?.accessToken?.substring(0, 20)}...');
+          '🔍 Token received from authService: ${token.accessToken.substring(0, 20)}...');
 
       // Token is automatically saved by the auth service
       debugPrint('✅ User sign-in successful');
@@ -149,10 +155,10 @@ class WooJwtSignInManager {
 
       return WooJwtSignInStatus(
         isSignedIn:
-            tokenInfo['hasToken'] == true && tokenInfo['isExpired'] == false,
-        hasToken: tokenInfo['hasToken'] == true,
-        isExpired: tokenInfo['isExpired'] == true,
-        needsRefresh: tokenInfo['needsRefresh'] == true,
+            tokenInfo?['hasToken'] == true && tokenInfo?['isExpired'] == false,
+        hasToken: tokenInfo?['hasToken'] == true,
+        isExpired: tokenInfo?['isExpired'] == true,
+        needsRefresh: tokenInfo?['needsRefresh'] == true,
         tokenInfo: tokenInfo,
         storageStats: storageStats,
       );
