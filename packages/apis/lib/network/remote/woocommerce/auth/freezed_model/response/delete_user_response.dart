@@ -8,7 +8,7 @@ part 'delete_user_response.g.dart';
 class DeleteUserResponse with _$DeleteUserResponse {
   const factory DeleteUserResponse({
     required bool success,
-    required String message,
+    String? message, // Made nullable as server sometimes doesn't send message
     DeleteUserData? data,
     String? error,
     Map<String, dynamic>? metadata,

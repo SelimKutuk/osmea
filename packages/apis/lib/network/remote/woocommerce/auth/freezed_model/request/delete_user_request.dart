@@ -7,10 +7,10 @@ part 'delete_user_request.g.dart';
 @freezed
 class DeleteUserRequest with _$DeleteUserRequest {
   const factory DeleteUserRequest({
-    required String userId,
+    @JsonKey(name: 'user_id') required String userId,
     String? reason,
-    @Default(false) bool deleteOrders,
-    @Default(false) bool deleteReviews,
+    @Default(false) @JsonKey(name: 'delete_orders') bool deleteOrders,
+    @Default(false) @JsonKey(name: 'delete_reviews') bool deleteReviews,
     Map<String, dynamic>? metadata,
   }) = _DeleteUserRequest;
 

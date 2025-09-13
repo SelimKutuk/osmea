@@ -21,7 +21,8 @@ DeleteUserResponse _$DeleteUserResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DeleteUserResponse {
   bool get success => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  String? get message =>
+      throw _privateConstructorUsedError; // Made nullable as server sometimes doesn't send message
   DeleteUserData? get data => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -44,7 +45,7 @@ abstract class $DeleteUserResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       DeleteUserData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -68,7 +69,7 @@ class _$DeleteUserResponseCopyWithImpl<$Res, $Val extends DeleteUserResponse>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -78,10 +79,10 @@ class _$DeleteUserResponseCopyWithImpl<$Res, $Val extends DeleteUserResponse>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -122,7 +123,7 @@ abstract class _$$DeleteUserResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       DeleteUserData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -145,7 +146,7 @@ class __$$DeleteUserResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -155,10 +156,10 @@ class __$$DeleteUserResponseImplCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -180,7 +181,7 @@ class __$$DeleteUserResponseImplCopyWithImpl<$Res>
 class _$DeleteUserResponseImpl implements _DeleteUserResponse {
   const _$DeleteUserResponseImpl(
       {required this.success,
-      required this.message,
+      this.message,
       this.data,
       this.error,
       final Map<String, dynamic>? metadata})
@@ -192,7 +193,8 @@ class _$DeleteUserResponseImpl implements _DeleteUserResponse {
   @override
   final bool success;
   @override
-  final String message;
+  final String? message;
+// Made nullable as server sometimes doesn't send message
   @override
   final DeleteUserData? data;
   @override
@@ -249,7 +251,7 @@ class _$DeleteUserResponseImpl implements _DeleteUserResponse {
 abstract class _DeleteUserResponse implements DeleteUserResponse {
   const factory _DeleteUserResponse(
       {required final bool success,
-      required final String message,
+      final String? message,
       final DeleteUserData? data,
       final String? error,
       final Map<String, dynamic>? metadata}) = _$DeleteUserResponseImpl;
@@ -260,7 +262,7 @@ abstract class _DeleteUserResponse implements DeleteUserResponse {
   @override
   bool get success;
   @override
-  String get message;
+  String? get message; // Made nullable as server sometimes doesn't send message
   @override
   DeleteUserData? get data;
   @override

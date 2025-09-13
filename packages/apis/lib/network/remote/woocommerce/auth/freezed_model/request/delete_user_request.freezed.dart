@@ -20,9 +20,12 @@ DeleteUserRequest _$DeleteUserRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DeleteUserRequest {
+  @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
   String? get reason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'delete_orders')
   bool get deleteOrders => throw _privateConstructorUsedError;
+  @JsonKey(name: 'delete_reviews')
   bool get deleteReviews => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
@@ -43,10 +46,10 @@ abstract class $DeleteUserRequestCopyWith<$Res> {
       _$DeleteUserRequestCopyWithImpl<$Res, DeleteUserRequest>;
   @useResult
   $Res call(
-      {String userId,
+      {@JsonKey(name: 'user_id') String userId,
       String? reason,
-      bool deleteOrders,
-      bool deleteReviews,
+      @JsonKey(name: 'delete_orders') bool deleteOrders,
+      @JsonKey(name: 'delete_reviews') bool deleteReviews,
       Map<String, dynamic>? metadata});
 }
 
@@ -105,10 +108,10 @@ abstract class _$$DeleteUserRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userId,
+      {@JsonKey(name: 'user_id') String userId,
       String? reason,
-      bool deleteOrders,
-      bool deleteReviews,
+      @JsonKey(name: 'delete_orders') bool deleteOrders,
+      @JsonKey(name: 'delete_reviews') bool deleteReviews,
       Map<String, dynamic>? metadata});
 }
 
@@ -160,10 +163,10 @@ class __$$DeleteUserRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DeleteUserRequestImpl implements _DeleteUserRequest {
   const _$DeleteUserRequestImpl(
-      {required this.userId,
+      {@JsonKey(name: 'user_id') required this.userId,
       this.reason,
-      this.deleteOrders = false,
-      this.deleteReviews = false,
+      @JsonKey(name: 'delete_orders') this.deleteOrders = false,
+      @JsonKey(name: 'delete_reviews') this.deleteReviews = false,
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
 
@@ -171,14 +174,15 @@ class _$DeleteUserRequestImpl implements _DeleteUserRequest {
       _$$DeleteUserRequestImplFromJson(json);
 
   @override
+  @JsonKey(name: 'user_id')
   final String userId;
   @override
   final String? reason;
   @override
-  @JsonKey()
+  @JsonKey(name: 'delete_orders')
   final bool deleteOrders;
   @override
-  @JsonKey()
+  @JsonKey(name: 'delete_reviews')
   final bool deleteReviews;
   final Map<String, dynamic>? _metadata;
   @override
@@ -233,22 +237,25 @@ class _$DeleteUserRequestImpl implements _DeleteUserRequest {
 
 abstract class _DeleteUserRequest implements DeleteUserRequest {
   const factory _DeleteUserRequest(
-      {required final String userId,
+      {@JsonKey(name: 'user_id') required final String userId,
       final String? reason,
-      final bool deleteOrders,
-      final bool deleteReviews,
+      @JsonKey(name: 'delete_orders') final bool deleteOrders,
+      @JsonKey(name: 'delete_reviews') final bool deleteReviews,
       final Map<String, dynamic>? metadata}) = _$DeleteUserRequestImpl;
 
   factory _DeleteUserRequest.fromJson(Map<String, dynamic> json) =
       _$DeleteUserRequestImpl.fromJson;
 
   @override
+  @JsonKey(name: 'user_id')
   String get userId;
   @override
   String? get reason;
   @override
+  @JsonKey(name: 'delete_orders')
   bool get deleteOrders;
   @override
+  @JsonKey(name: 'delete_reviews')
   bool get deleteReviews;
   @override
   Map<String, dynamic>? get metadata;

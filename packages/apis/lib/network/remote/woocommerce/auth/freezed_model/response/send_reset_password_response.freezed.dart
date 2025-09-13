@@ -22,7 +22,8 @@ SendResetPasswordResponse _$SendResetPasswordResponseFromJson(
 /// @nodoc
 mixin _$SendResetPasswordResponse {
   bool get success => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  String? get message =>
+      throw _privateConstructorUsedError; // Made nullable as server sometimes doesn't send message
   SendResetPasswordData? get data => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -45,7 +46,7 @@ abstract class $SendResetPasswordResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       SendResetPasswordData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -70,7 +71,7 @@ class _$SendResetPasswordResponseCopyWithImpl<$Res,
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -80,10 +81,10 @@ class _$SendResetPasswordResponseCopyWithImpl<$Res,
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -125,7 +126,7 @@ abstract class _$$SendResetPasswordResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       SendResetPasswordData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -150,7 +151,7 @@ class __$$SendResetPasswordResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -160,10 +161,10 @@ class __$$SendResetPasswordResponseImplCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -185,7 +186,7 @@ class __$$SendResetPasswordResponseImplCopyWithImpl<$Res>
 class _$SendResetPasswordResponseImpl implements _SendResetPasswordResponse {
   const _$SendResetPasswordResponseImpl(
       {required this.success,
-      required this.message,
+      this.message,
       this.data,
       this.error,
       final Map<String, dynamic>? metadata})
@@ -197,7 +198,8 @@ class _$SendResetPasswordResponseImpl implements _SendResetPasswordResponse {
   @override
   final bool success;
   @override
-  final String message;
+  final String? message;
+// Made nullable as server sometimes doesn't send message
   @override
   final SendResetPasswordData? data;
   @override
@@ -254,7 +256,7 @@ class _$SendResetPasswordResponseImpl implements _SendResetPasswordResponse {
 abstract class _SendResetPasswordResponse implements SendResetPasswordResponse {
   const factory _SendResetPasswordResponse(
       {required final bool success,
-      required final String message,
+      final String? message,
       final SendResetPasswordData? data,
       final String? error,
       final Map<String, dynamic>? metadata}) = _$SendResetPasswordResponseImpl;
@@ -265,7 +267,7 @@ abstract class _SendResetPasswordResponse implements SendResetPasswordResponse {
   @override
   bool get success;
   @override
-  String get message;
+  String? get message; // Made nullable as server sometimes doesn't send message
   @override
   SendResetPasswordData? get data;
   @override

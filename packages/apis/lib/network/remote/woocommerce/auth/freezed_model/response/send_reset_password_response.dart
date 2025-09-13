@@ -8,7 +8,7 @@ part 'send_reset_password_response.g.dart';
 class SendResetPasswordResponse with _$SendResetPasswordResponse {
   const factory SendResetPasswordResponse({
     required bool success,
-    required String message,
+    String? message, // Made nullable as server sometimes doesn't send message
     SendResetPasswordData? data,
     String? error,
     Map<String, dynamic>? metadata,

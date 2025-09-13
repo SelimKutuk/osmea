@@ -10,7 +10,7 @@ _$SendResetPasswordResponseImpl _$$SendResetPasswordResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$SendResetPasswordResponseImpl(
       success: json['success'] as bool,
-      message: json['message'] as String,
+      message: json['message'] as String?,
       data: json['data'] == null
           ? null
           : SendResetPasswordData.fromJson(
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$SendResetPasswordResponseImplToJson(
         _$SendResetPasswordResponseImpl instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'message': instance.message,
+      if (instance.message case final value?) 'message': value,
       if (instance.data?.toJson() case final value?) 'data': value,
       if (instance.error case final value?) 'error': value,
       if (instance.metadata case final value?) 'metadata': value,

@@ -22,6 +22,7 @@ SendResetPasswordRequest _$SendResetPasswordRequestFromJson(
 /// @nodoc
 mixin _$SendResetPasswordRequest {
   String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'reset_url')
   String? get resetUrl => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
@@ -41,7 +42,10 @@ abstract class $SendResetPasswordRequestCopyWith<$Res> {
           $Res Function(SendResetPasswordRequest) then) =
       _$SendResetPasswordRequestCopyWithImpl<$Res, SendResetPasswordRequest>;
   @useResult
-  $Res call({String email, String? resetUrl, Map<String, dynamic>? metadata});
+  $Res call(
+      {String email,
+      @JsonKey(name: 'reset_url') String? resetUrl,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -90,7 +94,10 @@ abstract class _$$SendResetPasswordRequestImplCopyWith<$Res>
       __$$SendResetPasswordRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String? resetUrl, Map<String, dynamic>? metadata});
+  $Res call(
+      {String email,
+      @JsonKey(name: 'reset_url') String? resetUrl,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -134,7 +141,7 @@ class __$$SendResetPasswordRequestImplCopyWithImpl<$Res>
 class _$SendResetPasswordRequestImpl implements _SendResetPasswordRequest {
   const _$SendResetPasswordRequestImpl(
       {required this.email,
-      this.resetUrl,
+      @JsonKey(name: 'reset_url') this.resetUrl,
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
 
@@ -144,6 +151,7 @@ class _$SendResetPasswordRequestImpl implements _SendResetPasswordRequest {
   @override
   final String email;
   @override
+  @JsonKey(name: 'reset_url')
   final String? resetUrl;
   final Map<String, dynamic>? _metadata;
   @override
@@ -196,7 +204,7 @@ class _$SendResetPasswordRequestImpl implements _SendResetPasswordRequest {
 abstract class _SendResetPasswordRequest implements SendResetPasswordRequest {
   const factory _SendResetPasswordRequest(
       {required final String email,
-      final String? resetUrl,
+      @JsonKey(name: 'reset_url') final String? resetUrl,
       final Map<String, dynamic>? metadata}) = _$SendResetPasswordRequestImpl;
 
   factory _SendResetPasswordRequest.fromJson(Map<String, dynamic> json) =
@@ -205,6 +213,7 @@ abstract class _SendResetPasswordRequest implements SendResetPasswordRequest {
   @override
   String get email;
   @override
+  @JsonKey(name: 'reset_url')
   String? get resetUrl;
   @override
   Map<String, dynamic>? get metadata;

@@ -22,12 +22,17 @@ UserSignUpRequest _$UserSignUpRequestFromJson(Map<String, dynamic> json) {
 mixin _$UserSignUpRequest {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
   String get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
   String get lastName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get company => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accept_terms')
   bool get acceptTerms => throw _privateConstructorUsedError;
+  @JsonKey(name: 'subscribe_newsletter')
   bool get subscribeNewsletter => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_code')
   String? get referralCode => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
@@ -50,13 +55,13 @@ abstract class $UserSignUpRequestCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
-      String firstName,
-      String lastName,
+      @JsonKey(name: 'first_name') String firstName,
+      @JsonKey(name: 'last_name') String lastName,
       String? phone,
       String? company,
-      bool acceptTerms,
-      bool subscribeNewsletter,
-      String? referralCode,
+      @JsonKey(name: 'accept_terms') bool acceptTerms,
+      @JsonKey(name: 'subscribe_newsletter') bool subscribeNewsletter,
+      @JsonKey(name: 'referral_code') String? referralCode,
       Map<String, dynamic>? metadata});
 }
 
@@ -142,13 +147,13 @@ abstract class _$$UserSignUpRequestImplCopyWith<$Res>
   $Res call(
       {String email,
       String password,
-      String firstName,
-      String lastName,
+      @JsonKey(name: 'first_name') String firstName,
+      @JsonKey(name: 'last_name') String lastName,
       String? phone,
       String? company,
-      bool acceptTerms,
-      bool subscribeNewsletter,
-      String? referralCode,
+      @JsonKey(name: 'accept_terms') bool acceptTerms,
+      @JsonKey(name: 'subscribe_newsletter') bool subscribeNewsletter,
+      @JsonKey(name: 'referral_code') String? referralCode,
       Map<String, dynamic>? metadata});
 }
 
@@ -227,13 +232,13 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
   const _$UserSignUpRequestImpl(
       {required this.email,
       required this.password,
-      required this.firstName,
-      required this.lastName,
+      @JsonKey(name: 'first_name') required this.firstName,
+      @JsonKey(name: 'last_name') required this.lastName,
       this.phone,
       this.company,
-      this.acceptTerms = true,
-      this.subscribeNewsletter = false,
-      this.referralCode,
+      @JsonKey(name: 'accept_terms') this.acceptTerms = true,
+      @JsonKey(name: 'subscribe_newsletter') this.subscribeNewsletter = false,
+      @JsonKey(name: 'referral_code') this.referralCode,
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
 
@@ -245,20 +250,23 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
   @override
   final String password;
   @override
+  @JsonKey(name: 'first_name')
   final String firstName;
   @override
+  @JsonKey(name: 'last_name')
   final String lastName;
   @override
   final String? phone;
   @override
   final String? company;
   @override
-  @JsonKey()
+  @JsonKey(name: 'accept_terms')
   final bool acceptTerms;
   @override
-  @JsonKey()
+  @JsonKey(name: 'subscribe_newsletter')
   final bool subscribeNewsletter;
   @override
+  @JsonKey(name: 'referral_code')
   final String? referralCode;
   final Map<String, dynamic>? _metadata;
   @override
@@ -334,13 +342,13 @@ abstract class _UserSignUpRequest implements UserSignUpRequest {
   const factory _UserSignUpRequest(
       {required final String email,
       required final String password,
-      required final String firstName,
-      required final String lastName,
+      @JsonKey(name: 'first_name') required final String firstName,
+      @JsonKey(name: 'last_name') required final String lastName,
       final String? phone,
       final String? company,
-      final bool acceptTerms,
-      final bool subscribeNewsletter,
-      final String? referralCode,
+      @JsonKey(name: 'accept_terms') final bool acceptTerms,
+      @JsonKey(name: 'subscribe_newsletter') final bool subscribeNewsletter,
+      @JsonKey(name: 'referral_code') final String? referralCode,
       final Map<String, dynamic>? metadata}) = _$UserSignUpRequestImpl;
 
   factory _UserSignUpRequest.fromJson(Map<String, dynamic> json) =
@@ -351,18 +359,23 @@ abstract class _UserSignUpRequest implements UserSignUpRequest {
   @override
   String get password;
   @override
+  @JsonKey(name: 'first_name')
   String get firstName;
   @override
+  @JsonKey(name: 'last_name')
   String get lastName;
   @override
   String? get phone;
   @override
   String? get company;
   @override
+  @JsonKey(name: 'accept_terms')
   bool get acceptTerms;
   @override
+  @JsonKey(name: 'subscribe_newsletter')
   bool get subscribeNewsletter;
   @override
+  @JsonKey(name: 'referral_code')
   String? get referralCode;
   @override
   Map<String, dynamic>? get metadata;

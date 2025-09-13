@@ -10,7 +10,7 @@ _$DeleteUserResponseImpl _$$DeleteUserResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$DeleteUserResponseImpl(
       success: json['success'] as bool,
-      message: json['message'] as String,
+      message: json['message'] as String?,
       data: json['data'] == null
           ? null
           : DeleteUserData.fromJson(json['data'] as Map<String, dynamic>),
@@ -22,7 +22,7 @@ Map<String, dynamic> _$$DeleteUserResponseImplToJson(
         _$DeleteUserResponseImpl instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'message': instance.message,
+      if (instance.message case final value?) 'message': value,
       if (instance.data?.toJson() case final value?) 'data': value,
       if (instance.error case final value?) 'error': value,
       if (instance.metadata case final value?) 'metadata': value,

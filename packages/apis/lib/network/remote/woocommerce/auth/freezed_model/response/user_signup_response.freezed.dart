@@ -21,7 +21,8 @@ UserSignUpResponse _$UserSignUpResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserSignUpResponse {
   bool get success => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  String? get message =>
+      throw _privateConstructorUsedError; // Made nullable as server sometimes doesn't send message
   UserSignUpData? get data => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -44,7 +45,7 @@ abstract class $UserSignUpResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       UserSignUpData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -68,7 +69,7 @@ class _$UserSignUpResponseCopyWithImpl<$Res, $Val extends UserSignUpResponse>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -78,10 +79,10 @@ class _$UserSignUpResponseCopyWithImpl<$Res, $Val extends UserSignUpResponse>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -122,7 +123,7 @@ abstract class _$$UserSignUpResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       UserSignUpData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -145,7 +146,7 @@ class __$$UserSignUpResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -155,10 +156,10 @@ class __$$UserSignUpResponseImplCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -180,7 +181,7 @@ class __$$UserSignUpResponseImplCopyWithImpl<$Res>
 class _$UserSignUpResponseImpl implements _UserSignUpResponse {
   const _$UserSignUpResponseImpl(
       {required this.success,
-      required this.message,
+      this.message,
       this.data,
       this.error,
       final Map<String, dynamic>? metadata})
@@ -192,7 +193,8 @@ class _$UserSignUpResponseImpl implements _UserSignUpResponse {
   @override
   final bool success;
   @override
-  final String message;
+  final String? message;
+// Made nullable as server sometimes doesn't send message
   @override
   final UserSignUpData? data;
   @override
@@ -249,7 +251,7 @@ class _$UserSignUpResponseImpl implements _UserSignUpResponse {
 abstract class _UserSignUpResponse implements UserSignUpResponse {
   const factory _UserSignUpResponse(
       {required final bool success,
-      required final String message,
+      final String? message,
       final UserSignUpData? data,
       final String? error,
       final Map<String, dynamic>? metadata}) = _$UserSignUpResponseImpl;
@@ -260,7 +262,7 @@ abstract class _UserSignUpResponse implements UserSignUpResponse {
   @override
   bool get success;
   @override
-  String get message;
+  String? get message; // Made nullable as server sometimes doesn't send message
   @override
   UserSignUpData? get data;
   @override

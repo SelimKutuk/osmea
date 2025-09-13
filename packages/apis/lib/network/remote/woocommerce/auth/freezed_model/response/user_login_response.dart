@@ -8,7 +8,7 @@ part 'user_login_response.g.dart';
 class UserLoginResponse with _$UserLoginResponse {
   const factory UserLoginResponse({
     required bool success,
-    required String message,
+    String? message, // Made nullable as server sometimes doesn't send message
     UserLoginData? data,
     String? error,
     Map<String, dynamic>? metadata,

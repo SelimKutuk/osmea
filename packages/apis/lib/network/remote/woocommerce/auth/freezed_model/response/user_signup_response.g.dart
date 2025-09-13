@@ -10,7 +10,7 @@ _$UserSignUpResponseImpl _$$UserSignUpResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$UserSignUpResponseImpl(
       success: json['success'] as bool,
-      message: json['message'] as String,
+      message: json['message'] as String?,
       data: json['data'] == null
           ? null
           : UserSignUpData.fromJson(json['data'] as Map<String, dynamic>),
@@ -22,7 +22,7 @@ Map<String, dynamic> _$$UserSignUpResponseImplToJson(
         _$UserSignUpResponseImpl instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'message': instance.message,
+      if (instance.message case final value?) 'message': value,
       if (instance.data?.toJson() case final value?) 'data': value,
       if (instance.error case final value?) 'error': value,
       if (instance.metadata case final value?) 'metadata': value,

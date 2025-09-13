@@ -22,8 +22,11 @@ UserLoginRequest _$UserLoginRequestFromJson(Map<String, dynamic> json) {
 mixin _$UserLoginRequest {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remember_me')
   bool get rememberMe => throw _privateConstructorUsedError;
+  @JsonKey(name: 'device_id')
   String? get deviceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'device_name')
   String? get deviceName => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
@@ -46,9 +49,9 @@ abstract class $UserLoginRequestCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
-      bool rememberMe,
-      String? deviceId,
-      String? deviceName,
+      @JsonKey(name: 'remember_me') bool rememberMe,
+      @JsonKey(name: 'device_id') String? deviceId,
+      @JsonKey(name: 'device_name') String? deviceName,
       Map<String, dynamic>? metadata});
 }
 
@@ -114,9 +117,9 @@ abstract class _$$UserLoginRequestImplCopyWith<$Res>
   $Res call(
       {String email,
       String password,
-      bool rememberMe,
-      String? deviceId,
-      String? deviceName,
+      @JsonKey(name: 'remember_me') bool rememberMe,
+      @JsonKey(name: 'device_id') String? deviceId,
+      @JsonKey(name: 'device_name') String? deviceName,
       Map<String, dynamic>? metadata});
 }
 
@@ -175,9 +178,9 @@ class _$UserLoginRequestImpl implements _UserLoginRequest {
   const _$UserLoginRequestImpl(
       {required this.email,
       required this.password,
-      this.rememberMe = false,
-      this.deviceId,
-      this.deviceName,
+      @JsonKey(name: 'remember_me') this.rememberMe = false,
+      @JsonKey(name: 'device_id') this.deviceId,
+      @JsonKey(name: 'device_name') this.deviceName,
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
 
@@ -189,11 +192,13 @@ class _$UserLoginRequestImpl implements _UserLoginRequest {
   @override
   final String password;
   @override
-  @JsonKey()
+  @JsonKey(name: 'remember_me')
   final bool rememberMe;
   @override
+  @JsonKey(name: 'device_id')
   final String? deviceId;
   @override
+  @JsonKey(name: 'device_name')
   final String? deviceName;
   final Map<String, dynamic>? _metadata;
   @override
@@ -253,9 +258,9 @@ abstract class _UserLoginRequest implements UserLoginRequest {
   const factory _UserLoginRequest(
       {required final String email,
       required final String password,
-      final bool rememberMe,
-      final String? deviceId,
-      final String? deviceName,
+      @JsonKey(name: 'remember_me') final bool rememberMe,
+      @JsonKey(name: 'device_id') final String? deviceId,
+      @JsonKey(name: 'device_name') final String? deviceName,
       final Map<String, dynamic>? metadata}) = _$UserLoginRequestImpl;
 
   factory _UserLoginRequest.fromJson(Map<String, dynamic> json) =
@@ -266,10 +271,13 @@ abstract class _UserLoginRequest implements UserLoginRequest {
   @override
   String get password;
   @override
+  @JsonKey(name: 'remember_me')
   bool get rememberMe;
   @override
+  @JsonKey(name: 'device_id')
   String? get deviceId;
   @override
+  @JsonKey(name: 'device_name')
   String? get deviceName;
   @override
   Map<String, dynamic>? get metadata;

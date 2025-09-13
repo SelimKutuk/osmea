@@ -21,7 +21,8 @@ UserLoginResponse _$UserLoginResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserLoginResponse {
   bool get success => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  String? get message =>
+      throw _privateConstructorUsedError; // Made nullable as server sometimes doesn't send message
   UserLoginData? get data => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -44,7 +45,7 @@ abstract class $UserLoginResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       UserLoginData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -68,7 +69,7 @@ class _$UserLoginResponseCopyWithImpl<$Res, $Val extends UserLoginResponse>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -78,10 +79,10 @@ class _$UserLoginResponseCopyWithImpl<$Res, $Val extends UserLoginResponse>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -122,7 +123,7 @@ abstract class _$$UserLoginResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool success,
-      String message,
+      String? message,
       UserLoginData? data,
       String? error,
       Map<String, dynamic>? metadata});
@@ -145,7 +146,7 @@ class __$$UserLoginResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? success = null,
-    Object? message = null,
+    Object? message = freezed,
     Object? data = freezed,
     Object? error = freezed,
     Object? metadata = freezed,
@@ -155,10 +156,10 @@ class __$$UserLoginResponseImplCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as bool,
-      message: null == message
+      message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -180,7 +181,7 @@ class __$$UserLoginResponseImplCopyWithImpl<$Res>
 class _$UserLoginResponseImpl implements _UserLoginResponse {
   const _$UserLoginResponseImpl(
       {required this.success,
-      required this.message,
+      this.message,
       this.data,
       this.error,
       final Map<String, dynamic>? metadata})
@@ -192,7 +193,8 @@ class _$UserLoginResponseImpl implements _UserLoginResponse {
   @override
   final bool success;
   @override
-  final String message;
+  final String? message;
+// Made nullable as server sometimes doesn't send message
   @override
   final UserLoginData? data;
   @override
@@ -249,7 +251,7 @@ class _$UserLoginResponseImpl implements _UserLoginResponse {
 abstract class _UserLoginResponse implements UserLoginResponse {
   const factory _UserLoginResponse(
       {required final bool success,
-      required final String message,
+      final String? message,
       final UserLoginData? data,
       final String? error,
       final Map<String, dynamic>? metadata}) = _$UserLoginResponseImpl;
@@ -260,7 +262,7 @@ abstract class _UserLoginResponse implements UserLoginResponse {
   @override
   bool get success;
   @override
-  String get message;
+  String? get message; // Made nullable as server sometimes doesn't send message
   @override
   UserLoginData? get data;
   @override

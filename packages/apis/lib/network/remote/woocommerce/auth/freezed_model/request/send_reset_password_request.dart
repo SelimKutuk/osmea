@@ -8,7 +8,7 @@ part 'send_reset_password_request.g.dart';
 class SendResetPasswordRequest with _$SendResetPasswordRequest {
   const factory SendResetPasswordRequest({
     required String email,
-    String? resetUrl,
+    @JsonKey(name: 'reset_url') String? resetUrl,
     Map<String, dynamic>? metadata,
   }) = _SendResetPasswordRequest;
 

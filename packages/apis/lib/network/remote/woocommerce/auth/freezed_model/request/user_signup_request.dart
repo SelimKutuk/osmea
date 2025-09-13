@@ -9,13 +9,15 @@ class UserSignUpRequest with _$UserSignUpRequest {
   const factory UserSignUpRequest({
     required String email,
     required String password,
-    required String firstName,
-    required String lastName,
+    @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'last_name') required String lastName,
     String? phone,
     String? company,
-    @Default(true) bool acceptTerms,
-    @Default(false) bool subscribeNewsletter,
-    String? referralCode,
+    @Default(true) @JsonKey(name: 'accept_terms') bool acceptTerms,
+    @Default(false)
+    @JsonKey(name: 'subscribe_newsletter')
+    bool subscribeNewsletter,
+    @JsonKey(name: 'referral_code') String? referralCode,
     Map<String, dynamic>? metadata,
   }) = _UserSignUpRequest;
 
