@@ -73,8 +73,8 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   static final RegExp _wooCommerceUrlRegex =
       RegExp(r'^https?://[a-zA-Z0-9\-\.:]+(?:\.[a-zA-Z]{2,}|:\d+)/?.*$');
   static final RegExp _usernameRegex = RegExp(r'^[a-zA-Z0-9_\-\.@]{3,50}$');
-  static final RegExp _passwordRegex = RegExp(
-      r'^.+$'); // At least 1 character, supports all characters including special chars
+  // No password regex - backend handles all validation
+  // We only check if password is not empty
   static final RegExp _emailRegex =
       RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
@@ -757,21 +757,19 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         isValid = false;
       }
 
-      // Password validation
+      // Password validation - only check if not empty, backend handles the rest
       if (_passwordController.text.isEmpty) {
         _passwordError = 'Password is required';
         isValid = false;
       } else {
-        // Convert password to safe string and validate
+        // Convert password to safe string (preserves all characters)
         final safePassword =
             _convertPasswordToSafeString(_passwordController.text);
         if (safePassword.isEmpty) {
           _passwordError = 'Password cannot be empty after processing';
           isValid = false;
-        } else if (!_passwordRegex.hasMatch(safePassword)) {
-          _passwordError = 'Password cannot be empty';
-          isValid = false;
         }
+        // No regex validation - backend handles all password rules
       }
 
       // API version validation for WooCommerce
@@ -796,21 +794,19 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         isValid = false;
       }
 
-      // Customer Password validation
+      // Customer Password validation - only check if not empty, backend handles the rest
       if (_customerPasswordController.text.isEmpty) {
         _customerPasswordError = 'Customer password is required';
         isValid = false;
       } else {
-        // Convert password to safe string and validate
+        // Convert password to safe string (preserves all characters)
         final safePassword =
             _convertPasswordToSafeString(_customerPasswordController.text);
         if (safePassword.isEmpty) {
           _customerPasswordError = 'Password cannot be empty after processing';
           isValid = false;
-        } else if (!_passwordRegex.hasMatch(safePassword)) {
-          _customerPasswordError = 'Password cannot be empty';
-          isValid = false;
         }
+        // No regex validation - backend handles all password rules
       }
 
       // Auth Endpoint validation
@@ -834,9 +830,10 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   /// Handles special characters and ensures proper encoding
   String _convertPasswordToSafeString(String rawPassword) {
     try {
-      // Remove any potential null characters or control characters
-      final cleanedPassword =
-          rawPassword.replaceAll(RegExp(r'[\x00-\x1F\x7F]'), '');
+      // Only remove dangerous null characters and control characters (0x00-0x1F, 0x7F)
+      // Keep ALL other characters including special chars, unicode, emojis, etc.
+      final cleanedPassword = rawPassword.replaceAll(
+          RegExp(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]'), '');
 
       // Ensure the password is not empty after cleaning
       if (cleanedPassword.isEmpty) {
@@ -852,7 +849,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       }
 
       debugPrint(
-          '🔐 Password converted safely: ${safePassword.length} characters');
+          '🔐 Password converted safely: ${safePassword.length} characters (preserves all special chars)');
       return safePassword;
     } catch (e) {
       debugPrint('❌ Error converting password: $e');
