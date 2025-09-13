@@ -30,12 +30,15 @@ Map<String, dynamic> _$$UserLoginResponseImplToJson(
 
 _$UserLoginDataImpl _$$UserLoginDataImplFromJson(Map<String, dynamic> json) =>
     _$UserLoginDataImpl(
-      accessToken: json['access_token'] as String,
-      tokenType: json['token_type'] as String,
-      expiresIn: (json['expires_in'] as num).toInt(),
+      jwt: json['jwt'] as String?,
+      accessToken: json['access_token'] as String?,
+      tokenType: json['token_type'] as String?,
+      expiresIn: (json['expires_in'] as num?)?.toInt(),
       refreshToken: json['refresh_token'] as String?,
       scope: json['scope'] as String?,
-      user: UserInfo.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : UserInfo.fromJson(json['user'] as Map<String, dynamic>),
       issuedAt: json['issued_at'] == null
           ? null
           : DateTime.parse(json['issued_at'] as String),
@@ -46,12 +49,13 @@ _$UserLoginDataImpl _$$UserLoginDataImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$UserLoginDataImplToJson(_$UserLoginDataImpl instance) =>
     <String, dynamic>{
-      'access_token': instance.accessToken,
-      'token_type': instance.tokenType,
-      'expires_in': instance.expiresIn,
+      if (instance.jwt case final value?) 'jwt': value,
+      if (instance.accessToken case final value?) 'access_token': value,
+      if (instance.tokenType case final value?) 'token_type': value,
+      if (instance.expiresIn case final value?) 'expires_in': value,
       if (instance.refreshToken case final value?) 'refresh_token': value,
       if (instance.scope case final value?) 'scope': value,
-      'user': instance.user.toJson(),
+      if (instance.user?.toJson() case final value?) 'user': value,
       if (instance.issuedAt?.toIso8601String() case final value?)
         'issued_at': value,
       if (instance.expiresAt?.toIso8601String() case final value?)
@@ -60,10 +64,10 @@ Map<String, dynamic> _$$UserLoginDataImplToJson(_$UserLoginDataImpl instance) =>
 
 _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
     _$UserInfoImpl(
-      id: json['id'] as String,
-      email: json['email'] as String,
-      firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
+      id: json['id'] as String?,
+      email: json['email'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       phone: json['phone'] as String?,
       company: json['company'] as String?,
       avatar: json['avatar'] as String?,
@@ -86,10 +90,10 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'email': instance.email,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
+      if (instance.id case final value?) 'id': value,
+      if (instance.email case final value?) 'email': value,
+      if (instance.firstName case final value?) 'first_name': value,
+      if (instance.lastName case final value?) 'last_name': value,
       if (instance.phone case final value?) 'phone': value,
       if (instance.company case final value?) 'company': value,
       if (instance.avatar case final value?) 'avatar': value,

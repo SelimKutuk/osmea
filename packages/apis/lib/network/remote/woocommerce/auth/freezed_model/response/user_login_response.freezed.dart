@@ -282,12 +282,15 @@ UserLoginData _$UserLoginDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserLoginData {
-  String get accessToken => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
-  int get expiresIn => throw _privateConstructorUsedError;
+  String? get jwt =>
+      throw _privateConstructorUsedError; // JWT token field from server response
+  String? get accessToken =>
+      throw _privateConstructorUsedError; // Alternative access token field
+  String? get tokenType => throw _privateConstructorUsedError;
+  int? get expiresIn => throw _privateConstructorUsedError;
   String? get refreshToken => throw _privateConstructorUsedError;
   String? get scope => throw _privateConstructorUsedError;
-  UserInfo get user => throw _privateConstructorUsedError;
+  UserInfo? get user => throw _privateConstructorUsedError;
   DateTime? get issuedAt => throw _privateConstructorUsedError;
   DateTime? get expiresAt => throw _privateConstructorUsedError;
 
@@ -308,16 +311,17 @@ abstract class $UserLoginDataCopyWith<$Res> {
       _$UserLoginDataCopyWithImpl<$Res, UserLoginData>;
   @useResult
   $Res call(
-      {String accessToken,
-      String tokenType,
-      int expiresIn,
+      {String? jwt,
+      String? accessToken,
+      String? tokenType,
+      int? expiresIn,
       String? refreshToken,
       String? scope,
-      UserInfo user,
+      UserInfo? user,
       DateTime? issuedAt,
       DateTime? expiresAt});
 
-  $UserInfoCopyWith<$Res> get user;
+  $UserInfoCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -335,28 +339,33 @@ class _$UserLoginDataCopyWithImpl<$Res, $Val extends UserLoginData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = null,
-    Object? tokenType = null,
-    Object? expiresIn = null,
+    Object? jwt = freezed,
+    Object? accessToken = freezed,
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
     Object? refreshToken = freezed,
     Object? scope = freezed,
-    Object? user = null,
+    Object? user = freezed,
     Object? issuedAt = freezed,
     Object? expiresAt = freezed,
   }) {
     return _then(_value.copyWith(
-      accessToken: null == accessToken
+      jwt: freezed == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
+              as String?,
+      tokenType: freezed == tokenType
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiresIn: null == expiresIn
+              as String?,
+      expiresIn: freezed == expiresIn
           ? _value.expiresIn
           : expiresIn // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -365,10 +374,10 @@ class _$UserLoginDataCopyWithImpl<$Res, $Val extends UserLoginData>
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserInfo,
+              as UserInfo?,
       issuedAt: freezed == issuedAt
           ? _value.issuedAt
           : issuedAt // ignore: cast_nullable_to_non_nullable
@@ -384,8 +393,12 @@ class _$UserLoginDataCopyWithImpl<$Res, $Val extends UserLoginData>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserInfoCopyWith<$Res> get user {
-    return $UserInfoCopyWith<$Res>(_value.user, (value) {
+  $UserInfoCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserInfoCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -400,17 +413,18 @@ abstract class _$$UserLoginDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accessToken,
-      String tokenType,
-      int expiresIn,
+      {String? jwt,
+      String? accessToken,
+      String? tokenType,
+      int? expiresIn,
       String? refreshToken,
       String? scope,
-      UserInfo user,
+      UserInfo? user,
       DateTime? issuedAt,
       DateTime? expiresAt});
 
   @override
-  $UserInfoCopyWith<$Res> get user;
+  $UserInfoCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -426,28 +440,33 @@ class __$$UserLoginDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = null,
-    Object? tokenType = null,
-    Object? expiresIn = null,
+    Object? jwt = freezed,
+    Object? accessToken = freezed,
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
     Object? refreshToken = freezed,
     Object? scope = freezed,
-    Object? user = null,
+    Object? user = freezed,
     Object? issuedAt = freezed,
     Object? expiresAt = freezed,
   }) {
     return _then(_$UserLoginDataImpl(
-      accessToken: null == accessToken
+      jwt: freezed == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
+              as String?,
+      tokenType: freezed == tokenType
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiresIn: null == expiresIn
+              as String?,
+      expiresIn: freezed == expiresIn
           ? _value.expiresIn
           : expiresIn // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       refreshToken: freezed == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
@@ -456,10 +475,10 @@ class __$$UserLoginDataImplCopyWithImpl<$Res>
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserInfo,
+              as UserInfo?,
       issuedAt: freezed == issuedAt
           ? _value.issuedAt
           : issuedAt // ignore: cast_nullable_to_non_nullable
@@ -476,12 +495,13 @@ class __$$UserLoginDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserLoginDataImpl implements _UserLoginData {
   const _$UserLoginDataImpl(
-      {required this.accessToken,
-      required this.tokenType,
-      required this.expiresIn,
+      {this.jwt,
+      this.accessToken,
+      this.tokenType,
+      this.expiresIn,
       this.refreshToken,
       this.scope,
-      required this.user,
+      this.user,
       this.issuedAt,
       this.expiresAt});
 
@@ -489,17 +509,21 @@ class _$UserLoginDataImpl implements _UserLoginData {
       _$$UserLoginDataImplFromJson(json);
 
   @override
-  final String accessToken;
+  final String? jwt;
+// JWT token field from server response
   @override
-  final String tokenType;
+  final String? accessToken;
+// Alternative access token field
   @override
-  final int expiresIn;
+  final String? tokenType;
+  @override
+  final int? expiresIn;
   @override
   final String? refreshToken;
   @override
   final String? scope;
   @override
-  final UserInfo user;
+  final UserInfo? user;
   @override
   final DateTime? issuedAt;
   @override
@@ -507,7 +531,7 @@ class _$UserLoginDataImpl implements _UserLoginData {
 
   @override
   String toString() {
-    return 'UserLoginData(accessToken: $accessToken, tokenType: $tokenType, expiresIn: $expiresIn, refreshToken: $refreshToken, scope: $scope, user: $user, issuedAt: $issuedAt, expiresAt: $expiresAt)';
+    return 'UserLoginData(jwt: $jwt, accessToken: $accessToken, tokenType: $tokenType, expiresIn: $expiresIn, refreshToken: $refreshToken, scope: $scope, user: $user, issuedAt: $issuedAt, expiresAt: $expiresAt)';
   }
 
   @override
@@ -515,6 +539,7 @@ class _$UserLoginDataImpl implements _UserLoginData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserLoginDataImpl &&
+            (identical(other.jwt, jwt) || other.jwt == jwt) &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.tokenType, tokenType) ||
@@ -533,7 +558,7 @@ class _$UserLoginDataImpl implements _UserLoginData {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, tokenType,
+  int get hashCode => Object.hash(runtimeType, jwt, accessToken, tokenType,
       expiresIn, refreshToken, scope, user, issuedAt, expiresAt);
 
   /// Create a copy of UserLoginData
@@ -554,12 +579,13 @@ class _$UserLoginDataImpl implements _UserLoginData {
 
 abstract class _UserLoginData implements UserLoginData {
   const factory _UserLoginData(
-      {required final String accessToken,
-      required final String tokenType,
-      required final int expiresIn,
+      {final String? jwt,
+      final String? accessToken,
+      final String? tokenType,
+      final int? expiresIn,
       final String? refreshToken,
       final String? scope,
-      required final UserInfo user,
+      final UserInfo? user,
       final DateTime? issuedAt,
       final DateTime? expiresAt}) = _$UserLoginDataImpl;
 
@@ -567,17 +593,19 @@ abstract class _UserLoginData implements UserLoginData {
       _$UserLoginDataImpl.fromJson;
 
   @override
-  String get accessToken;
+  String? get jwt; // JWT token field from server response
   @override
-  String get tokenType;
+  String? get accessToken; // Alternative access token field
   @override
-  int get expiresIn;
+  String? get tokenType;
+  @override
+  int? get expiresIn;
   @override
   String? get refreshToken;
   @override
   String? get scope;
   @override
-  UserInfo get user;
+  UserInfo? get user;
   @override
   DateTime? get issuedAt;
   @override
@@ -597,10 +625,10 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserInfo {
-  String get id => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get company => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
@@ -629,10 +657,10 @@ abstract class $UserInfoCopyWith<$Res> {
       _$UserInfoCopyWithImpl<$Res, UserInfo>;
   @useResult
   $Res call(
-      {String id,
-      String email,
-      String firstName,
-      String lastName,
+      {String? id,
+      String? email,
+      String? firstName,
+      String? lastName,
       String? phone,
       String? company,
       String? avatar,
@@ -661,10 +689,10 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? email = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? id = freezed,
+    Object? email = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phone = freezed,
     Object? company = freezed,
     Object? avatar = freezed,
@@ -678,22 +706,22 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
     Object? isVerified = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -751,10 +779,10 @@ abstract class _$$UserInfoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String email,
-      String firstName,
-      String lastName,
+      {String? id,
+      String? email,
+      String? firstName,
+      String? lastName,
       String? phone,
       String? company,
       String? avatar,
@@ -781,10 +809,10 @@ class __$$UserInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? email = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? id = freezed,
+    Object? email = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phone = freezed,
     Object? company = freezed,
     Object? avatar = freezed,
@@ -798,22 +826,22 @@ class __$$UserInfoImplCopyWithImpl<$Res>
     Object? isVerified = freezed,
   }) {
     return _then(_$UserInfoImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -866,10 +894,10 @@ class __$$UserInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserInfoImpl implements _UserInfo {
   const _$UserInfoImpl(
-      {required this.id,
-      required this.email,
-      required this.firstName,
-      required this.lastName,
+      {this.id,
+      this.email,
+      this.firstName,
+      this.lastName,
       this.phone,
       this.company,
       this.avatar,
@@ -889,13 +917,13 @@ class _$UserInfoImpl implements _UserInfo {
       _$$UserInfoImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String email;
+  final String? email;
   @override
-  final String firstName;
+  final String? firstName;
   @override
-  final String lastName;
+  final String? lastName;
   @override
   final String? phone;
   @override
@@ -1015,10 +1043,10 @@ class _$UserInfoImpl implements _UserInfo {
 
 abstract class _UserInfo implements UserInfo {
   const factory _UserInfo(
-      {required final String id,
-      required final String email,
-      required final String firstName,
-      required final String lastName,
+      {final String? id,
+      final String? email,
+      final String? firstName,
+      final String? lastName,
       final String? phone,
       final String? company,
       final String? avatar,
@@ -1035,13 +1063,13 @@ abstract class _UserInfo implements UserInfo {
       _$UserInfoImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get email;
+  String? get email;
   @override
-  String get firstName;
+  String? get firstName;
   @override
-  String get lastName;
+  String? get lastName;
   @override
   String? get phone;
   @override

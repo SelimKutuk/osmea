@@ -22,12 +22,13 @@ class UserLoginResponse with _$UserLoginResponse {
 @freezed
 class UserLoginData with _$UserLoginData {
   const factory UserLoginData({
-    required String accessToken,
-    required String tokenType,
-    required int expiresIn,
+    String? jwt, // JWT token field from server response
+    String? accessToken, // Alternative access token field
+    String? tokenType,
+    int? expiresIn,
     String? refreshToken,
     String? scope,
-    required UserInfo user,
+    UserInfo? user,
     DateTime? issuedAt,
     DateTime? expiresAt,
   }) = _UserLoginData;
@@ -40,10 +41,10 @@ class UserLoginData with _$UserLoginData {
 @freezed
 class UserInfo with _$UserInfo {
   const factory UserInfo({
-    required String id,
-    required String email,
-    required String firstName,
-    required String lastName,
+    String? id,
+    String? email,
+    String? firstName,
+    String? lastName,
     String? phone,
     String? company,
     String? avatar,
