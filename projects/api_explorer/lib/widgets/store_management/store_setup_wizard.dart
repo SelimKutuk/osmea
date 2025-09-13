@@ -79,7 +79,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
   // WooCommerce Customer Auth regex patterns
-  static final RegExp _jwtSecretRegex = RegExp(r'^[a-zA-Z0-9_\-\.]{32,}$');
   static final RegExp _authEndpointRegex = RegExp(r'^[a-zA-Z0-9_\-\./]+$');
 
   // Validation error messages
@@ -93,7 +92,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   // WooCommerce Customer Auth validation errors
   String? _customerEmailError;
   String? _customerPasswordError;
-  String? _jwtSecretError;
   String? _authEndpointError;
 
   // Authentication testing state
@@ -111,7 +109,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   // WooCommerce Customer Auth Controllers
   final _customerEmailController = TextEditingController();
   final _customerPasswordController = TextEditingController();
-  final _jwtSecretController = TextEditingController();
   final _authEndpointController = TextEditingController();
 
   // Password visibility states
@@ -282,7 +279,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         _storeUrlController.text = store.storeUrl ?? '';
         _usernameController.text = store.username ?? '';
         _passwordController.text = store.password ?? '';
-        _jwtSecretController.text = store.jwtSecret ?? '';
         _authEndpointController.text = store.authEndpoint ?? '';
       }
     });
@@ -378,9 +374,19 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       final result = await handler.handleRequest('POST', params);
 
       if (result['status'] == 'success') {
+        // Extract JWT token from response
+        final tokenInfo = result['token_info'] as Map<String, dynamic>?;
+        final jwtToken = tokenInfo?['jwt'] as String? ??
+            tokenInfo?['access_token'] as String?;
+
+        if (jwtToken != null && jwtToken.isNotEmpty) {
+          debugPrint('🔑 JWT token received: ${jwtToken.substring(0, 20)}...');
+        }
+
         setState(() {
-          _authTestResult =
-              '✅ Authentication successful! JWT token received and saved to local storage.';
+          _authTestResult = jwtToken != null && jwtToken.isNotEmpty
+              ? '✅ Authentication successful! JWT token received and saved to local storage.\n\n🔑 JWT Token:\n$jwtToken'
+              : '✅ Authentication successful! JWT token received and saved to local storage.';
         });
         debugPrint('✅ JWT authentication test successful');
       } else {
@@ -521,10 +527,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
             ? _passwordController.text.trim()
             : null,
         // WooCommerce Customer Auth fields
-        jwtSecret: _selectedPlatform == 'woocommerce' &&
-                _jwtSecretController.text.isNotEmpty
-            ? _jwtSecretController.text.trim()
-            : null,
         authEndpoint: _selectedPlatform == 'woocommerce' &&
                 _authEndpointController.text.isNotEmpty
             ? _authEndpointController.text.trim()
@@ -682,7 +684,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       _storeUrlError = null;
       _usernameError = null;
       _passwordError = null;
-      _jwtSecretError = null;
       _authEndpointError = null;
     });
 
@@ -791,15 +792,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         isValid = false;
       }
 
-      // JWT Secret validation
-      if (_jwtSecretController.text.isEmpty) {
-        _jwtSecretError = 'JWT Secret is required';
-        isValid = false;
-      } else if (!_jwtSecretRegex.hasMatch(_jwtSecretController.text)) {
-        _jwtSecretError = 'JWT Secret must be at least 32 characters';
-        isValid = false;
-      }
-
       // Auth Endpoint validation
       if (_authEndpointController.text.isEmpty) {
         _authEndpointError = 'Authentication endpoint is required';
@@ -828,7 +820,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     _passwordController.dispose();
     _customerEmailController.dispose();
     _customerPasswordController.dispose();
-    _jwtSecretController.dispose();
     _authEndpointController.dispose();
     super.dispose();
   }
@@ -1160,7 +1151,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
             _storeUrlController.clear();
             _usernameController.clear();
             _passwordController.clear();
-            _jwtSecretController.clear();
             _authEndpointController.clear();
 
             // Set default API version based on platform
@@ -1357,18 +1347,6 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           hint: 'Enter customer password for JWT authentication',
           errorText: _customerPasswordError,
           icon: Icons.lock,
-          isPassword: true,
-        ),
-
-        OsmeaComponents.sizedBox(height: context.spacing24),
-
-        // JWT Secret
-        _buildTextField(
-          controller: _jwtSecretController,
-          label: 'JWT Secret Key',
-          hint: 'Enter your JWT secret key (minimum 32 characters)',
-          errorText: _jwtSecretError,
-          icon: Icons.security,
           isPassword: true,
         ),
 
@@ -1588,8 +1566,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               ] else if (_selectedPlatform == 'woocommerce') ...[
                 _buildReviewItem('Username', _usernameController.text.trim()),
                 _buildReviewItem('Password', '••••••••'),
-                if (_jwtSecretController.text.isNotEmpty) ...[
-                  _buildReviewItem('JWT Secret', '••••••••'),
+                if (_authEndpointController.text.isNotEmpty) ...[
                   _buildReviewItem(
                       'Auth Endpoint', _authEndpointController.text.trim()),
                 ],
