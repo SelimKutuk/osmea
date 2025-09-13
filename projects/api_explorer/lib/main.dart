@@ -27,6 +27,17 @@ Future<void> main() async {
     }
   }
 
+  // 🗄️ Initialize LocalStorageHelper from core package (includes SharedPreferences)
+  try {
+    final localStorageHelper = LocalStorageHelper();
+    await localStorageHelper.init();
+    debugPrint(
+        '✅ LocalStorageHelper initialized successfully (includes SharedPreferences)');
+  } catch (e) {
+    debugPrint('❌ Error initializing LocalStorageHelper: $e');
+    // 🔄 Continue anyway - we'll handle errors in the UI
+  }
+
   // 🌐 Network initialization is now handled by the wizard system
   try {
     debugPrint(
