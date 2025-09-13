@@ -43,7 +43,12 @@ class ApiDioClient implements ApiBaseClient {
   @override
   Dio starter() {
     final dio = Dio()
-      ..options = BaseOptions()
+      ..options = BaseOptions(
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      )
       ..options.responseType = ResponseType.json
       ..interceptors.add(ApiInterceptorDefault(
         shopifyAccessToken: ApiNetwork.shopifyAccessToken,
@@ -56,7 +61,12 @@ class ApiDioClient implements ApiBaseClient {
   /// 🛒 Creates a specialized Dio instance for WooCommerce API communication with JWT and cookie support
   static Dio wooDio({bool useJwtAuth = true}) {
     final dio = Dio()
-      ..options = BaseOptions()
+      ..options = BaseOptions(
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      )
       ..options.responseType = ResponseType.json;
 
     // 🔐 Add JWT authentication interceptor
