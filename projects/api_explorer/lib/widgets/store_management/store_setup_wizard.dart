@@ -1158,7 +1158,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               _apiVersionController.text = '2025-07';
             } else if (platform == 'woocommerce') {
               _apiVersionController.text = 'v3';
-              _authEndpointController.text = 'wp-json/wc-auth/v1';
+              _authEndpointController.text = 'wc-auth/v1';
             }
           });
         },
@@ -1356,7 +1356,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         _buildTextField(
           controller: _authEndpointController,
           label: 'Authentication Endpoint',
-          hint: 'e.g., wp-json/wc-auth/v1 or wp-json/custom-auth/v1',
+          hint: 'e.g., wc-auth/v1 or wp-json/custom-auth/v1',
           errorText: _authEndpointError,
           icon: Icons.api,
         ),
