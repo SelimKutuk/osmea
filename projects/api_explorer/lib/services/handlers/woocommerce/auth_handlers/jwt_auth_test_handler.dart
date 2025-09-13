@@ -73,6 +73,8 @@ class JwtAuthTestHandler implements ApiRequestHandler {
           "message": "JWT authentication successful",
           "token_info": {
             "access_token": result.token?.accessToken,
+            "jwt": result
+                .token?.accessToken, // Also include as 'jwt' for compatibility
             "token_type": result.token?.tokenType,
             "expires_at": result.token != null
                 ? result.token!.issuedAt
