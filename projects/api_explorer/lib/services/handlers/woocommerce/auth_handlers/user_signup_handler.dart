@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/user_signup_request.dart';
+import 'package:apis/apis.dart';
 
 ///*******************************************************************
 ///******************* 📝 USER SIGNUP HANDLER **********************
@@ -23,7 +24,15 @@ class UserSignUpHandler implements ApiRequestHandler {
       };
     }
 
-    // Validate required parameters
+    // Validate required parameters (Postman parameters)
+    if (!params.containsKey('rest_route') || params['rest_route']!.isEmpty) {
+      return {
+        "status": "error",
+        "message": "REST route is required",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
+    }
+
     if (!params.containsKey('email') || params['email']!.isEmpty) {
       return {
         "status": "error",
@@ -40,67 +49,52 @@ class UserSignUpHandler implements ApiRequestHandler {
       };
     }
 
-    if (!params.containsKey('first_name') || params['first_name']!.isEmpty) {
+    if (!params.containsKey('AUTH_KEY') || params['AUTH_KEY']!.isEmpty) {
       return {
         "status": "error",
-        "message": "First name is required",
-        "timestamp": DateTime.now().toIso8601String(),
-      };
-    }
-
-    if (!params.containsKey('last_name') || params['last_name']!.isEmpty) {
-      return {
-        "status": "error",
-        "message": "Last name is required",
-        "timestamp": DateTime.now().toIso8601String(),
-      };
-    }
-
-    if (!params.containsKey('brand_name') || params['brand_name']!.isEmpty) {
-      return {
-        "status": "error",
-        "message": "Store name is required",
+        "message": "AUTH_KEY is required",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
 
     try {
+      final restRoute = params['rest_route']!;
       final email = params['email']!;
       final password = params['password']!;
-      final firstName = params['first_name']!;
-      final lastName = params['last_name']!;
-      final storeName = params['brand_name']!;
-      final phone =
-          params['phone']?.isNotEmpty == true ? params['phone'] : null;
-      final company =
-          params['company']?.isNotEmpty == true ? params['company'] : null;
-      final acceptTerms = params['accept_terms']?.toLowerCase() == 'true';
-      final subscribeNewsletter =
-          params['subscribe_newsletter']?.toLowerCase() == 'true';
-      final referralCode = params['referral_code']?.isNotEmpty == true
-          ? params['referral_code']
-          : null;
+      final authKey = params['AUTH_KEY']!;
 
-      debugPrint('📝 Starting user sign up for: $email in store: $storeName');
+      debugPrint('📝 Starting user sign up for: $email');
+      debugPrint('📝 REST Route: $restRoute');
+      debugPrint('📝 Auth Key: ${authKey.substring(0, 10)}...');
+
+      // Extract brand name from rest_route
+      final brandName = restRoute.split('-')[0].replaceAll('/', '');
+      debugPrint('📝 Extracted brand name: $brandName');
+
+      // Debug network configuration
+      debugPrint('🌐 Base URL: ${WooNetwork.baseUrl}');
+      debugPrint(
+          '🌐 Full endpoint will be: ${WooNetwork.baseUrl}/?rest_route=/$brandName-auth-login/v1/users');
 
       // Use WooAuthService from the package
       final authService = GetIt.I<WooAuthService>();
 
-      // Create signup request
+      // Create signup request with minimal required fields
       final signupRequest = UserSignUpRequest(
         email: email,
         password: password,
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone,
-        company: company,
-        acceptTerms: acceptTerms,
-        subscribeNewsletter: subscribeNewsletter,
-        referralCode: referralCode,
+        authKey: authKey,
+        firstName: '', // Not required in Postman
+        lastName: '', // Not required in Postman
+        phone: null,
+        company: null,
+        acceptTerms: true,
+        subscribeNewsletter: false,
+        referralCode: null,
       );
 
-      // Use store name from parameters
-      final response = await authService.userSignUp(storeName, signupRequest);
+      // Use brand name from rest_route
+      final response = await authService.userSignUp(brandName, signupRequest);
 
       if (response.success) {
         debugPrint('✅ User sign up successful');
@@ -183,9 +177,9 @@ class UserSignUpHandler implements ApiRequestHandler {
   Map<String, List<ApiField>> get requiredFields => {
         'POST': [
           const ApiField(
-            name: 'brand_name',
-            label: 'Store Name',
-            hint: 'WooCommerce store name',
+            name: 'rest_route',
+            label: 'REST Route',
+            hint: 'API endpoint route',
             isRequired: true,
           ),
           const ApiField(
@@ -201,41 +195,10 @@ class UserSignUpHandler implements ApiRequestHandler {
             isRequired: true,
           ),
           const ApiField(
-            name: 'first_name',
-            label: 'First Name',
-            hint: 'User first name',
+            name: 'AUTH_KEY',
+            label: 'Auth Key',
+            hint: 'Authentication key for API access',
             isRequired: true,
-          ),
-          const ApiField(
-            name: 'last_name',
-            label: 'Last Name',
-            hint: 'User last name',
-            isRequired: true,
-          ),
-          const ApiField(
-            name: 'phone',
-            label: 'Phone',
-            hint: 'User phone number',
-          ),
-          const ApiField(
-            name: 'company',
-            label: 'Company',
-            hint: 'User company name',
-          ),
-          const ApiField(
-            name: 'accept_terms',
-            label: 'Accept Terms',
-            hint: 'Accept terms and conditions (true/false)',
-          ),
-          const ApiField(
-            name: 'subscribe_newsletter',
-            label: 'Subscribe Newsletter',
-            hint: 'Subscribe to newsletter (true/false)',
-          ),
-          const ApiField(
-            name: 'referral_code',
-            label: 'Referral Code',
-            hint: 'Referral code if any',
           ),
         ],
       };
