@@ -26,6 +26,11 @@ class _MainScreenState extends State<MainScreen> {
       onTap: () {},
     ),
     NavbarItem(
+      text: 'Helpers',
+      icon: const Icon(Icons.build_outlined),
+      onTap: () {},
+    ),
+    NavbarItem(
       text: 'Info',
       icon: const Icon(Icons.info_outline),
       onTap: () {},
@@ -63,6 +68,9 @@ class _MainScreenState extends State<MainScreen> {
         AppRoutes.goToComponents(context); // Navigate to components
         break;
       case 2:
+        AppRoutes.goToHelpers(context); // Navigate to helpers
+        break;
+      case 3:
         AppRoutes.goToInfo(context); // Navigate to info
         break;
     }
