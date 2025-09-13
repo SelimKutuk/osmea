@@ -209,6 +209,10 @@ import 'package:apis/network/remote/shopify/rest/webhooks/webhook/abstract/webho
     as _i352;
 import 'package:apis/network/remote/shopify/rest/webhooks/webhook/api/api_webhook_service.dart'
     as _i827;
+import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.dart'
+    as _i28;
+import 'package:apis/network/remote/woocommerce/auth/api/api_woo_auth_service.dart'
+    as _i916;
 import 'package:apis/network/remote/woocommerce/coupons/abstract/coupons_service.dart'
     as _i218;
 import 'package:apis/network/remote/woocommerce/coupons/api/api_coupons_service.dart'
@@ -317,6 +321,8 @@ import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_servi
     as _i921;
 import 'package:apis/network/remote/woocommerce/webhooks/api/api_webhooks_service.dart'
     as _i648;
+import 'package:apis/services/auth/woo_auth_manager.dart' as _i459;
+import 'package:apis/services/auth/woo_jwt_auth_service.dart' as _i1011;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -388,6 +394,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i619.PageServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i887.ProductImageService>(
         () => _i929.ProductImageServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i28.WooAuthService>(
+        () => _i916.ApiWooAuthService(gh<_i361.Dio>()));
+    gh.factory<_i459.WooAuthManager>(
+        () => _i459.WooAuthManager(gh<_i28.WooAuthService>()));
     gh.factory<_i870.ProductShippingClassesService>(
         () => _i2.ProductShippingClassesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i1007.ProductReviewsService>(
@@ -411,6 +421,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1017.CustomerServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i620.InventoryLevelService>(
         () => _i153.InventoryLevelServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i1011.WooJwtAuthService>(
+        () => _i1011.WooJwtAuthService(gh<_i361.Dio>()));
     gh.factory<_i352.WebhookService>(
         () => _i827.WebhookServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i448.ProductVariantService>(
