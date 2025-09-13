@@ -43,6 +43,14 @@ export 'package:core/src/helper/remote_config_helper.dart';
 // 📁 Exports the file download helper for downloading files with progress tracking
 export 'package:core/src/helper/file_download_helper.dart';
 
+// 🔐 Exports the permission handler helper for runtime permissions management
+export 'package:core/src/helper/permission_handler_helper/permission_handler_helper.dart';
+export 'package:core/src/helper/permission_handler_helper/models/permission_models.dart';
+export 'package:core/src/helper/permission_handler_helper/abstract/permission_handler_base.dart';
+
+// 📱 Exports the device info helper for device information access
+export 'package:core/src/helper/device_info_helper.dart';
+
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/layout/grid.dart';
 
