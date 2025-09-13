@@ -164,6 +164,21 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           }
         }
       }
+      // Update tab states when store name changes
+      if (mounted) setState(() {});
+    });
+    
+    // Add listeners to WooCommerce store configuration fields to update tab states
+    _storeUrlController.addListener(() {
+      if (mounted) setState(() {});
+    });
+    
+    _usernameController.addListener(() {
+      if (mounted) setState(() {});
+    });
+    
+    _passwordController.addListener(() {
+      if (mounted) setState(() {});
     });
   }
 
@@ -338,6 +353,70 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     } catch (e) {
       debugPrint('❌ Error checking duplicate name in real-time: $e');
     }
+  }
+
+  /// Show warning when trying to access Customer Authentication without completing Store Configuration
+  Widget _buildStoreConfigurationWarning() {
+    if (_selectedPlatform != 'woocommerce' || _currentTab != 'store' || _isStoreConfigurationComplete()) {
+      return const SizedBox.shrink();
+    }
+
+    return OsmeaComponents.container(
+      margin: EdgeInsets.only(bottom: context.spacing24),
+      padding: EdgeInsets.all(context.spacing16),
+      decoration: BoxDecoration(
+        color: OsmeaColors.amberFlame.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: OsmeaColors.amberFlame.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: OsmeaComponents.row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.info_outline,
+            color: OsmeaColors.amberFlame,
+            size: 24,
+          ),
+          OsmeaComponents.sizedBox(width: 12),
+          OsmeaComponents.expanded(
+            child: OsmeaComponents.column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OsmeaComponents.text(
+                  'Complete Store Configuration First',
+                  textStyle: OsmeaTextStyle.titleSmall(context).copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: OsmeaColors.amberFlame,
+                  ),
+                ),
+                OsmeaComponents.sizedBox(height: 8),
+                OsmeaComponents.text(
+                  'Please fill in all required store configuration fields below. Once completed, the Customer Authentication tab will become available.',
+                  textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                    color: OsmeaColors.steel,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Check if store configuration is complete
+  bool _isStoreConfigurationComplete() {
+    if (_selectedPlatform != 'woocommerce') {
+      return true; // Only check for WooCommerce
+    }
+
+    return _storeNameController.text.trim().isNotEmpty &&
+           _storeUrlController.text.trim().isNotEmpty &&
+           _usernameController.text.trim().isNotEmpty &&
+           _passwordController.text.trim().isNotEmpty;
   }
 
   /// Test WooCommerce JWT Authentication
@@ -1121,6 +1200,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         children: tabs.map((tab) {
           final isActive = _currentTab == tab;
           final tabName = tabNames[tab] ?? tab;
+          final isCustomerTab = tab == 'customer';
+          final isStoreConfigComplete = _isStoreConfigurationComplete();
+          final isTabDisabled = isCustomerTab && !isStoreConfigComplete;
           
           // Define tab icons with proper styling
           IconData tabIcon;
@@ -1138,22 +1220,33 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
-                child: OsmeaComponents.button(
-                  text: tabName,
-                  variant: isActive ? ButtonVariant.primary : ButtonVariant.ghost,
-                  size: ButtonSize.small, // Changed from medium to small for smaller text
-                  icon: Icon(
-                    tabIcon,
-                    size: 18, // Reduced icon size to match smaller text
-                    color: isActive 
-                      ? Colors.white 
-                      : OsmeaColors.steel.withValues(alpha: 0.8),
+                child: Opacity(
+                  opacity: isTabDisabled ? 0.5 : 1.0,
+                  child: OsmeaComponents.button(
+                    text: tabName,
+                    variant: isActive ? ButtonVariant.primary : ButtonVariant.ghost,
+                    size: ButtonSize.small, // Changed from medium to small for smaller text
+                    icon: Icon(
+                      tabIcon,
+                      size: 18, // Reduced icon size to match smaller text
+                      color: isTabDisabled
+                        ? OsmeaColors.steel.withValues(alpha: 0.4)
+                        : isActive 
+                          ? Colors.white 
+                          : OsmeaColors.steel.withValues(alpha: 0.8),
+                    ),
+                    onPressed: () {
+                      // Check if trying to access Customer Authentication without completing Store Configuration
+                      if (tab == 'customer' && !_isStoreConfigurationComplete()) {
+                        // Don't switch tab, stay on store configuration
+                        return;
+                      }
+                      
+                      setState(() {
+                        _currentTab = tab;
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _currentTab = tab;
-                    });
-                  },
                 ),
               ),
             ),
@@ -1312,6 +1405,8 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
         // Content based on current tab
         if (_currentTab == 'store') ...[
+          // Warning for incomplete store configuration (shown only on store tab)
+          _buildStoreConfigurationWarning(),
           _buildStoreConfiguration(),
         ] else if (_currentTab == 'customer') ...[
           _buildCustomerAuthentication(),
