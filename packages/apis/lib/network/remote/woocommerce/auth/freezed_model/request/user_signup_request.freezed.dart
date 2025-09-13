@@ -22,6 +22,8 @@ UserSignUpRequest _$UserSignUpRequestFromJson(Map<String, dynamic> json) {
 mixin _$UserSignUpRequest {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'AUTH_KEY')
+  String get authKey => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name')
   String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
@@ -36,12 +38,8 @@ mixin _$UserSignUpRequest {
   String? get referralCode => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this UserSignUpRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserSignUpRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserSignUpRequestCopyWith<UserSignUpRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +53,7 @@ abstract class $UserSignUpRequestCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
+      @JsonKey(name: 'AUTH_KEY') String authKey,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String? phone,
@@ -75,13 +74,12 @@ class _$UserSignUpRequestCopyWithImpl<$Res, $Val extends UserSignUpRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserSignUpRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? authKey = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? phone = freezed,
@@ -99,6 +97,10 @@ class _$UserSignUpRequestCopyWithImpl<$Res, $Val extends UserSignUpRequest>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      authKey: null == authKey
+          ? _value.authKey
+          : authKey // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
           ? _value.firstName
@@ -147,6 +149,7 @@ abstract class _$$UserSignUpRequestImplCopyWith<$Res>
   $Res call(
       {String email,
       String password,
+      @JsonKey(name: 'AUTH_KEY') String authKey,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String? phone,
@@ -165,13 +168,12 @@ class __$$UserSignUpRequestImplCopyWithImpl<$Res>
       $Res Function(_$UserSignUpRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserSignUpRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? authKey = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? phone = freezed,
@@ -189,6 +191,10 @@ class __$$UserSignUpRequestImplCopyWithImpl<$Res>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      authKey: null == authKey
+          ? _value.authKey
+          : authKey // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
           ? _value.firstName
@@ -232,6 +238,7 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
   const _$UserSignUpRequestImpl(
       {required this.email,
       required this.password,
+      @JsonKey(name: 'AUTH_KEY') required this.authKey,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') required this.lastName,
       this.phone,
@@ -249,6 +256,9 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
   final String email;
   @override
   final String password;
+  @override
+  @JsonKey(name: 'AUTH_KEY')
+  final String authKey;
   @override
   @JsonKey(name: 'first_name')
   final String firstName;
@@ -280,7 +290,7 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
 
   @override
   String toString() {
-    return 'UserSignUpRequest(email: $email, password: $password, firstName: $firstName, lastName: $lastName, phone: $phone, company: $company, acceptTerms: $acceptTerms, subscribeNewsletter: $subscribeNewsletter, referralCode: $referralCode, metadata: $metadata)';
+    return 'UserSignUpRequest(email: $email, password: $password, authKey: $authKey, firstName: $firstName, lastName: $lastName, phone: $phone, company: $company, acceptTerms: $acceptTerms, subscribeNewsletter: $subscribeNewsletter, referralCode: $referralCode, metadata: $metadata)';
   }
 
   @override
@@ -291,6 +301,7 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.authKey, authKey) || other.authKey == authKey) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -306,12 +317,13 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       email,
       password,
+      authKey,
       firstName,
       lastName,
       phone,
@@ -321,9 +333,7 @@ class _$UserSignUpRequestImpl implements _UserSignUpRequest {
       referralCode,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of UserSignUpRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserSignUpRequestImplCopyWith<_$UserSignUpRequestImpl> get copyWith =>
@@ -342,6 +352,7 @@ abstract class _UserSignUpRequest implements UserSignUpRequest {
   const factory _UserSignUpRequest(
       {required final String email,
       required final String password,
+      @JsonKey(name: 'AUTH_KEY') required final String authKey,
       @JsonKey(name: 'first_name') required final String firstName,
       @JsonKey(name: 'last_name') required final String lastName,
       final String? phone,
@@ -358,6 +369,9 @@ abstract class _UserSignUpRequest implements UserSignUpRequest {
   String get email;
   @override
   String get password;
+  @override
+  @JsonKey(name: 'AUTH_KEY')
+  String get authKey;
   @override
   @JsonKey(name: 'first_name')
   String get firstName;
@@ -379,11 +393,8 @@ abstract class _UserSignUpRequest implements UserSignUpRequest {
   String? get referralCode;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of UserSignUpRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserSignUpRequestImplCopyWith<_$UserSignUpRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

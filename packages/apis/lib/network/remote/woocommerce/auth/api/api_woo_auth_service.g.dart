@@ -65,7 +65,7 @@ class _ApiWooAuthService implements ApiWooAuthService {
     )
             .compose(
               _dio.options,
-              '/${brandName}-auth-signup/v1/auth',
+              '/?rest_route=/${brandName}-auth-login/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )

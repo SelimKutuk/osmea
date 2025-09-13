@@ -39,7 +39,7 @@ abstract class ApiWooAuthService implements WooAuthService {
 
   /// 📝 User Sign Up
   /// Creates a new user account
-  @POST('/{brand_name}-auth-signup/v1/auth')
+  @POST('/?rest_route=/{brand_name}-auth-login/v1/users')
   @override
   Future<UserSignUpResponse> userSignUp(
     @Path('brand_name') String brandName,
