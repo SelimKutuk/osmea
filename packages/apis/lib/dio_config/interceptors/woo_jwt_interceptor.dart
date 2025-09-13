@@ -161,6 +161,11 @@ class WooJwtInterceptor extends Interceptor {
       '/wp-json/jwt-auth/v1/token/refresh',
       '/wp-json/jwt-auth/v1/token/revoke',
       '/wp-json/jwt-auth/v1/token/validate',
+      // Custom brand-specific auth endpoints
+      '-auth-login/v1/auth',
+      '-auth-login/v1/signup',
+      '-auth-login/v1/delete',
+      '-auth-login/v1/reset-password',
     ];
 
     return authEndpoints.any((endpoint) => path.contains(endpoint));
@@ -360,6 +365,11 @@ class WooJwtEnhancedInterceptor extends Interceptor {
       '/wp-json/jwt-auth/v1/token/refresh',
       '/wp-json/jwt-auth/v1/token/revoke',
       '/wp-json/jwt-auth/v1/token/validate',
+      // Custom brand-specific auth endpoints
+      '-auth-login/v1/auth',
+      '-auth-login/v1/signup',
+      '-auth-login/v1/delete',
+      '-auth-login/v1/reset-password',
     ];
 
     return authEndpoints.any((endpoint) => path.contains(endpoint));
