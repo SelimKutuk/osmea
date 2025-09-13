@@ -238,7 +238,15 @@ class UrlLauncherConfig {
 /// This class provides static methods for launching URLs with enhanced functionality
 /// including validation, error handling, and platform-specific behavior.
 class UrlLauncher {
-  static final _commonLogger = GetIt.I<ICommonLogger>();
+  // Logger'ı opsiyonel yap - GetIt kayıtlı değilse hata vermesin
+  static ICommonLogger? get _commonLogger {
+    try {
+      return GetIt.I<ICommonLogger>();
+    } catch (e) {
+      return null;
+    }
+  }
+  
   UrlLauncher();
 
   /// 🌐 Launches a URL in the external browser
@@ -258,10 +266,9 @@ class UrlLauncher {
   /// await UrlLauncher.getLaunchURLBrowser(Uri.parse("https://flutter.dev"));
   /// ```
   static Future<void> getLaunchURLBrowser(Uri url) async {
-    _commonLogger
-        .printURLLogs([" URL launched from Browser = ", url.toString()]);
+    _commonLogger?.printURLLogs([" URL launched from Browser = ", url.toString()]);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
@@ -288,35 +295,33 @@ class UrlLauncher {
   /// ```
   static Future<void> getLaunchInWebViewOrVC(
       Uri url, Map<String, String> headers) async {
-    _commonLogger
-        .printURLLogs([" URL launched from Browser = ", url.toString()]);
+    _commonLogger?.printURLLogs([" URL launched from Browser = ", url.toString()]);
     if (!await launchUrl(
       url,
       mode: LaunchMode.inAppWebView,
       webViewConfiguration: WebViewConfiguration(headers: headers),
     )) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
 
   static Future<void> getLaunchWebViewWithoutJS(
       Uri url, Map<String, String> headers) async {
-    _commonLogger
-        .printURLLogs([" URL launched from Without JS = ", url.toString()]);
+    _commonLogger?.printURLLogs([" URL launched from Without JS = ", url.toString()]);
     if (!await launchUrl(
       url,
       mode: LaunchMode.inAppWebView,
       webViewConfiguration:
           WebViewConfiguration(headers: headers, enableJavaScript: false),
     )) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
 
   static Future<void> getLaunchUniversalLinkIos(Uri url) async {
-    _commonLogger.printURLLogs(
+    _commonLogger?.printURLLogs(
         [" URL launched from Universal Link iOS = ", url.toString()]);
 
     final bool nativeAppLaunchSucceeded = await launchUrl(
@@ -325,7 +330,7 @@ class UrlLauncher {
     );
 
     if (!nativeAppLaunchSucceeded) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
@@ -337,8 +342,7 @@ class UrlLauncher {
     );
 
     if (!await launchUrl(phoneLaunchUri)) {
-      _commonLogger
-          .printURLLogs(["Could not launch = ", phoneLaunchUri.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", phoneLaunchUri.toString()]);
       throw Exception('Could not launch $phoneLaunchUri');
     }
   }
@@ -350,8 +354,7 @@ class UrlLauncher {
     );
 
     if (!await launchUrl(sendMailUri)) {
-      _commonLogger
-          .printURLLogs(["Could not launch = ", sendMailUri.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", sendMailUri.toString()]);
       throw Exception('Could not launch $sendMailUri');
     }
   }
@@ -361,9 +364,9 @@ class UrlLauncher {
   static Future<void> getLaunchMaps(String latitude, String longitude) async {
     final url = Uri.parse(
         'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude');
-    _commonLogger.printURLLogs([" URL launched from Maps = ", url.toString()]);
+    _commonLogger?.printURLLogs([" URL launched from Maps = ", url.toString()]);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
@@ -374,9 +377,9 @@ class UrlLauncher {
     String query = Uri.encodeComponent(address);
     final url =
         Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
-    _commonLogger.printURLLogs([" URL launched from Maps = ", url.toString()]);
+    _commonLogger?.printURLLogs([" URL launched from Maps = ", url.toString()]);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      _commonLogger.printURLLogs(["Could not launch = ", url.toString()]);
+      _commonLogger?.printURLLogs(["Could not launch = ", url.toString()]);
       throw Exception('Could not launch $url');
     }
   }
@@ -419,7 +422,7 @@ class UrlLauncher {
               uri.scheme == 'sms' ||
               uri.scheme == 'geo');
     } catch (e) {
-      _commonLogger.printURLLogs(["Invalid URL format: $url", e.toString()]);
+      _commonLogger?.printURLLogs(["Invalid URL format: $url", e.toString()]);
       return false;
     }
   }
@@ -455,34 +458,38 @@ class UrlLauncher {
     try {
       final uri = Uri.tryParse(url);
       if (uri == null) {
-        _commonLogger.printURLLogs(["Invalid URL format: $url"]);
+        _commonLogger?.printURLLogs(["Invalid URL format: $url"]);
         return false;
       }
 
-      if (await canLaunchUrl(uri)) {
+      try {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-        _commonLogger.printURLLogs(["URL successfully launched: $url"]);
+        _commonLogger?.printURLLogs(["URL successfully launched: $url"]);
         return true;
-      } else {
-        _commonLogger.printURLLogs(["Cannot launch URL: $url"]);
-        return false;
+      } catch (launchError) {
+        try {
+          await launchUrl(uri, mode: LaunchMode.platformDefault);
+          _commonLogger?.printURLLogs(["URL launched with platformDefault: $url"]);
+          return true;
+        } catch (platformError) {
+          _commonLogger?.printURLLogs(["Cannot launch URL: $url", launchError.toString(), platformError.toString()]);
+          return false;
+        }
       }
     } catch (e) {
-      _commonLogger.printURLLogs(["Error launching URL: $url", e.toString()]);
+      _commonLogger?.printURLLogs(["Error launching URL: $url", e.toString()]);
       return false;
     }
   }
 
   /// Safe URL opening with comprehensive error handling
-  ///
   /// Returns true if URL was successfully launched, false otherwise
   /// Does not throw exceptions, handles all errors gracefully
   static Future<bool> safeOpenUrl(String url) async {
     try {
       return await openUrl(url);
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Safe open failed for URL: $url", e.toString()]);
+      _commonLogger?.printURLLogs(["Safe open failed for URL: $url", e.toString()]);
       return false;
     }
   }
@@ -507,14 +514,14 @@ class UrlLauncher {
     try {
       final baseUrl = UrlLauncherConfig.getSocialMediaUrl(platform);
       if (baseUrl.isEmpty) {
-        _commonLogger.printURLLogs(["Unsupported social platform: $platform"]);
+        _commonLogger?.printURLLogs(["Unsupported social platform: $platform"]);
         return false;
       }
 
       final url = '$baseUrl$username';
       return await openUrl(url);
     } catch (e) {
-      _commonLogger.printURLLogs(
+      _commonLogger?.printURLLogs(
           ["Error opening social link: $platform/$username", e.toString()]);
       return false;
     }
@@ -549,7 +556,7 @@ class UrlLauncher {
           if (await canLaunchUrl(appleUri)) {
             await launchUrl(appleUri, mode: LaunchMode.externalApplication);
             _commonLogger
-                .printURLLogs(["Apple Maps launched: $latitude, $longitude"]);
+?.printURLLogs(["Apple Maps launched: $latitude, $longitude"]);
             return true;
           }
         }
@@ -565,14 +572,14 @@ class UrlLauncher {
         if (await canLaunchUrl(googleUri)) {
           await launchUrl(googleUri, mode: LaunchMode.externalApplication);
           _commonLogger
-              .printURLLogs(["Google Maps launched: $latitude, $longitude"]);
+      ?.printURLLogs(["Google Maps launched: $latitude, $longitude"]);
           return true;
         }
       }
 
       return false;
     } catch (e) {
-      _commonLogger.printURLLogs(
+      _commonLogger?.printURLLogs(
           ["Error launching maps: $latitude, $longitude", e.toString()]);
       return false;
     }
@@ -607,7 +614,7 @@ class UrlLauncher {
 
           if (await canLaunchUrl(appleUri)) {
             await launchUrl(appleUri, mode: LaunchMode.externalApplication);
-            _commonLogger.printURLLogs(["Apple Maps query launched: $address"]);
+            _commonLogger?.printURLLogs(["Apple Maps query launched: $address"]);
             return true;
           }
         }
@@ -621,15 +628,14 @@ class UrlLauncher {
 
         if (await canLaunchUrl(googleUri)) {
           await launchUrl(googleUri, mode: LaunchMode.externalApplication);
-          _commonLogger.printURLLogs(["Google Maps query launched: $address"]);
+          _commonLogger?.printURLLogs(["Google Maps query launched: $address"]);
           return true;
         }
       }
 
       return false;
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Error launching maps query: $address", e.toString()]);
+      _commonLogger?.printURLLogs(["Error launching maps query: $address", e.toString()]);
       return false;
     }
   }
@@ -651,15 +657,16 @@ class UrlLauncher {
   static Future<bool> openPhone(String phoneNumber) async {
     try {
       final uri = Uri(scheme: 'tel', path: phoneNumber);
-      if (await canLaunchUrl(uri)) {
+      try {
         await launchUrl(uri);
-        _commonLogger.printURLLogs(["Phone dialer launched: $phoneNumber"]);
+        _commonLogger?.printURLLogs(["Phone dialer launched: $phoneNumber"]);
         return true;
+      } catch (launchError) {
+        _commonLogger?.printURLLogs(["Error launching phone: $phoneNumber", launchError.toString()]);
+        return false;
       }
-      return false;
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Error launching phone: $phoneNumber", e.toString()]);
+      _commonLogger?.printURLLogs(["Error launching phone: $phoneNumber", e.toString()]);
       return false;
     }
   }
@@ -697,15 +704,16 @@ class UrlLauncher {
       }
 
       final uri = Uri.parse(mailtoUrl);
-      if (await canLaunchUrl(uri)) {
+      try {
         await launchUrl(uri);
-        _commonLogger.printURLLogs(["Email client launched: $email"]);
+        _commonLogger?.printURLLogs(["Email client launched: $email"]);
         return true;
+      } catch (launchError) {
+        _commonLogger?.printURLLogs(["Error launching email: $email", launchError.toString()]);
+        return false;
       }
-      return false;
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Error launching email: $email", e.toString()]);
+      _commonLogger?.printURLLogs(["Error launching email: $email", e.toString()]);
       return false;
     }
   }
@@ -733,15 +741,16 @@ class UrlLauncher {
       }
 
       final uri = Uri.parse(smsUrl);
-      if (await canLaunchUrl(uri)) {
+      try {
         await launchUrl(uri);
-        _commonLogger.printURLLogs(["SMS app launched: $phoneNumber"]);
+        _commonLogger?.printURLLogs(["SMS app launched: $phoneNumber"]);
         return true;
+      } catch (launchError) {
+        _commonLogger?.printURLLogs(["Error launching SMS: $phoneNumber", launchError.toString()]);
+        return false;
       }
-      return false;
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Error launching SMS: $phoneNumber", e.toString()]);
+      _commonLogger?.printURLLogs(["Error launching SMS: $phoneNumber", e.toString()]);
       return false;
     }
   }
@@ -765,7 +774,7 @@ class UrlLauncher {
     try {
       final baseUrl = UrlLauncherConfig.getMusicUrl(platform);
       if (baseUrl.isEmpty) {
-        _commonLogger.printURLLogs(["Unsupported music platform: $platform"]);
+        _commonLogger?.printURLLogs(["Unsupported music platform: $platform"]);
         return false;
       }
 
@@ -775,12 +784,12 @@ class UrlLauncher {
       final uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-        _commonLogger.printURLLogs(["Music app launched: $platform - $query"]);
+        _commonLogger?.printURLLogs(["Music app launched: $platform - $query"]);
         return true;
       }
       return false;
     } catch (e) {
-      _commonLogger.printURLLogs(
+      _commonLogger?.printURLLogs(
           ["Error launching music: $platform/$query", e.toString()]);
       return false;
     }
@@ -805,7 +814,7 @@ class UrlLauncher {
     try {
       final baseUrl = UrlLauncherConfig.getVideoUrl(platform);
       if (baseUrl.isEmpty) {
-        _commonLogger.printURLLogs(["Unsupported video platform: $platform"]);
+        _commonLogger?.printURLLogs(["Unsupported video platform: $platform"]);
         return false;
       }
 
@@ -815,12 +824,12 @@ class UrlLauncher {
       final uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-        _commonLogger.printURLLogs(["Video app launched: $platform - $query"]);
+        _commonLogger?.printURLLogs(["Video app launched: $platform - $query"]);
         return true;
       }
       return false;
     } catch (e) {
-      _commonLogger.printURLLogs(
+      _commonLogger?.printURLLogs(
           ["Error launching video: $platform/$query", e.toString()]);
       return false;
     }
@@ -845,14 +854,13 @@ class UrlLauncher {
     try {
       final baseUrl = UrlLauncherConfig.getWebsiteUrl(platform);
       if (baseUrl.isEmpty) {
-        _commonLogger.printURLLogs(["Unsupported website platform: $platform"]);
+        _commonLogger?.printURLLogs(["Unsupported website platform: $platform"]);
         return false;
       }
 
       return await openUrl(baseUrl);
     } catch (e) {
-      _commonLogger
-          .printURLLogs(["Error opening website: $platform", e.toString()]);
+      _commonLogger?.printURLLogs(["Error opening website: $platform", e.toString()]);
       return false;
     }
   }
