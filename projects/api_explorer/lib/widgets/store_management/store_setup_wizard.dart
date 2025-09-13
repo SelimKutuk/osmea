@@ -1097,26 +1097,64 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
     final tabs = WizardHelper.getWooCommerceTabs();
     final tabNames = WizardHelper.getPlatformTabNames('woocommerce');
-    final tabIcons = WizardHelper.getPlatformTabIcons('woocommerce');
 
     return OsmeaComponents.container(
-      margin: EdgeInsets.only(bottom: context.spacing16),
+      margin: EdgeInsets.only(bottom: context.spacing24),
+      padding: EdgeInsets.all(context.spacing6),
+      decoration: BoxDecoration(
+        color: OsmeaColors.ash.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: OsmeaColors.steel.withValues(alpha: 0.15),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: OsmeaColors.steel.withValues(alpha: 0.08),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
       child: OsmeaComponents.row(
         children: tabs.map((tab) {
           final isActive = _currentTab == tab;
+          final tabName = tabNames[tab] ?? tab;
+          
+          // Define tab icons with proper styling
+          IconData tabIcon;
+          if (tab == 'store') {
+            tabIcon = Icons.store_mall_directory_outlined;
+          } else if (tab == 'customer') {
+            tabIcon = Icons.person_outline_rounded;
+          } else {
+            tabIcon = Icons.settings_outlined;
+          }
+          
           return OsmeaComponents.expanded(
             child: OsmeaComponents.container(
               margin: EdgeInsets.symmetric(horizontal: context.spacing4),
-              child: OsmeaComponents.button(
-                text: '${tabIcons[tab]} ${tabNames[tab]}',
-                variant:
-                    isActive ? ButtonVariant.primary : ButtonVariant.outlined,
-                size: ButtonSize.medium,
-                onPressed: () {
-                  setState(() {
-                    _currentTab = tab;
-                  });
-                },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                child: OsmeaComponents.button(
+                  text: tabName,
+                  variant: isActive ? ButtonVariant.primary : ButtonVariant.ghost,
+                  size: ButtonSize.small, // Changed from medium to small for smaller text
+                  icon: Icon(
+                    tabIcon,
+                    size: 18, // Reduced icon size to match smaller text
+                    color: isActive 
+                      ? Colors.white 
+                      : OsmeaColors.steel.withValues(alpha: 0.8),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _currentTab = tab;
+                    });
+                  },
+                ),
               ),
             ),
           );
