@@ -28,12 +28,8 @@ mixin _$SendResetPasswordResponse {
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this SendResetPasswordResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SendResetPasswordResponseCopyWith<SendResetPasswordResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,8 +61,6 @@ class _$SendResetPasswordResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,8 +94,6 @@ class _$SendResetPasswordResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SendResetPasswordDataCopyWith<$Res>? get data {
@@ -145,8 +137,6 @@ class __$$SendResetPasswordResponseImplCopyWithImpl<$Res>
       $Res Function(_$SendResetPasswordResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -231,14 +221,12 @@ class _$SendResetPasswordResponseImpl implements _SendResetPasswordResponse {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, data, error,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SendResetPasswordResponseImplCopyWith<_$SendResetPasswordResponseImpl>
@@ -267,18 +255,15 @@ abstract class _SendResetPasswordResponse implements SendResetPasswordResponse {
   @override
   bool get success;
   @override
-  String? get message; // Made nullable as server sometimes doesn't send message
-  @override
+  String? get message;
+  @override // Made nullable as server sometimes doesn't send message
   SendResetPasswordData? get data;
   @override
   String? get error;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of SendResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SendResetPasswordResponseImplCopyWith<_$SendResetPasswordResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -297,12 +282,8 @@ mixin _$SendResetPasswordData {
   String? get resetUrl => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this SendResetPasswordData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SendResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SendResetPasswordDataCopyWith<SendResetPasswordData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -333,8 +314,6 @@ class _$SendResetPasswordDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SendResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -401,8 +380,6 @@ class __$$SendResetPasswordDataImplCopyWithImpl<$Res>
       $Res Function(_$SendResetPasswordDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SendResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -499,14 +476,12 @@ class _$SendResetPasswordDataImpl implements _SendResetPasswordData {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, email, resetToken, expiresAt,
       emailSent, resetUrl, const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of SendResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SendResetPasswordDataImplCopyWith<_$SendResetPasswordDataImpl>
@@ -545,11 +520,8 @@ abstract class _SendResetPasswordData implements SendResetPasswordData {
   String? get resetUrl;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of SendResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SendResetPasswordDataImplCopyWith<_$SendResetPasswordDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

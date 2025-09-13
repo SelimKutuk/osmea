@@ -27,12 +27,8 @@ mixin _$DeleteUserResponse {
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this DeleteUserResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DeleteUserResponseCopyWith<DeleteUserResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,8 +59,6 @@ class _$DeleteUserResponseCopyWithImpl<$Res, $Val extends DeleteUserResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,8 +92,6 @@ class _$DeleteUserResponseCopyWithImpl<$Res, $Val extends DeleteUserResponse>
     ) as $Val);
   }
 
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeleteUserDataCopyWith<$Res>? get data {
@@ -140,8 +132,6 @@ class __$$DeleteUserResponseImplCopyWithImpl<$Res>
       $Res Function(_$DeleteUserResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,14 +216,12 @@ class _$DeleteUserResponseImpl implements _DeleteUserResponse {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, data, error,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteUserResponseImplCopyWith<_$DeleteUserResponseImpl> get copyWith =>
@@ -262,18 +250,15 @@ abstract class _DeleteUserResponse implements DeleteUserResponse {
   @override
   bool get success;
   @override
-  String? get message; // Made nullable as server sometimes doesn't send message
-  @override
+  String? get message;
+  @override // Made nullable as server sometimes doesn't send message
   DeleteUserData? get data;
   @override
   String? get error;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of DeleteUserResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DeleteUserResponseImplCopyWith<_$DeleteUserResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -292,12 +277,8 @@ mixin _$DeleteUserData {
   bool? get reviewsDeleted => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this DeleteUserData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DeleteUserData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DeleteUserDataCopyWith<DeleteUserData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -328,8 +309,6 @@ class _$DeleteUserDataCopyWithImpl<$Res, $Val extends DeleteUserData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DeleteUserData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -400,8 +379,6 @@ class __$$DeleteUserDataImplCopyWithImpl<$Res>
       _$DeleteUserDataImpl _value, $Res Function(_$DeleteUserDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DeleteUserData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -506,7 +483,7 @@ class _$DeleteUserDataImpl implements _DeleteUserData {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -518,9 +495,7 @@ class _$DeleteUserDataImpl implements _DeleteUserData {
       reviewsDeleted,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of DeleteUserData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteUserDataImplCopyWith<_$DeleteUserDataImpl> get copyWith =>
@@ -562,11 +537,8 @@ abstract class _DeleteUserData implements DeleteUserData {
   bool? get reviewsDeleted;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of DeleteUserData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DeleteUserDataImplCopyWith<_$DeleteUserDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

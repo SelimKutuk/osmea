@@ -11,6 +11,7 @@ _$UserSignUpRequestImpl _$$UserSignUpRequestImplFromJson(
     _$UserSignUpRequestImpl(
       email: json['email'] as String,
       password: json['password'] as String,
+      authKey: json['AUTH_KEY'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       phone: json['phone'] as String?,
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$UserSignUpRequestImplToJson(
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
+      'AUTH_KEY': instance.authKey,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       if (instance.phone case final value?) 'phone': value,

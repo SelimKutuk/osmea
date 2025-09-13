@@ -26,12 +26,8 @@ mixin _$SendResetPasswordRequest {
   String? get resetUrl => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this SendResetPasswordRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SendResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SendResetPasswordRequestCopyWith<SendResetPasswordRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,8 +55,6 @@ class _$SendResetPasswordRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SendResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,8 +104,6 @@ class __$$SendResetPasswordRequestImplCopyWithImpl<$Res>
       $Res Function(_$SendResetPasswordRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SendResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,14 +171,12 @@ class _$SendResetPasswordRequestImpl implements _SendResetPasswordRequest {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, email, resetUrl,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of SendResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SendResetPasswordRequestImplCopyWith<_$SendResetPasswordRequestImpl>
@@ -217,11 +207,8 @@ abstract class _SendResetPasswordRequest implements SendResetPasswordRequest {
   String? get resetUrl;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of SendResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SendResetPasswordRequestImplCopyWith<_$SendResetPasswordRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
