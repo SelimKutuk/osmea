@@ -129,6 +129,7 @@ class WooAuthManager {
   Future<WooAuthResult<UserSignUpData>> signUp({
     required String email,
     required String password,
+    required String authKey,
     required String firstName,
     required String lastName,
     String? phone,
@@ -144,6 +145,7 @@ class WooAuthManager {
       final request = UserSignUpRequest(
         email: email,
         password: password,
+        authKey: authKey,
         firstName: firstName,
         lastName: lastName,
         phone: phone,
