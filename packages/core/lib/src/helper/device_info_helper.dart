@@ -11,6 +11,7 @@ abstract class DeviceInfoHelperBase {
   Future<String> platformDeviceDeviceID();
   Future<bool> platformDevicePhysical();
   Future<String> platformDeviceDeviceModel();
+  Future<int> getAndroidApiLevel();
 }
 
 class Result<T> {
@@ -138,5 +139,19 @@ class DeviceInfoHelper implements DeviceInfoHelperBase {
       return 'Unknown Device Model';
     }
     return 'Unknown Device Model';
+  }
+
+  @override
+  Future<int> getAndroidApiLevel() async {
+    try {
+      if (Platform.isAndroid) {
+        var androidInfo = await DeviceInfoPlugin().androidInfo;
+        return androidInfo.version.sdkInt;
+      }
+    } catch (e) {
+      debugPrint('🤖 Error getting Android API level: $e');
+    }
+    // if iOS or error return 0
+    return 0;
   }
 }

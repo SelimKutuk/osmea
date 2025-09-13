@@ -67,7 +67,7 @@
     "preload_critical_assets": true
   },
   "onboarding_configuration": {
-    "style": "style1",
+    "style": "basic",
     "auto_advance_seconds": null,
     "show_skip_button": true,
     "show_page_indicator": true,
