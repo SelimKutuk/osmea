@@ -73,8 +73,8 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   static final RegExp _wooCommerceUrlRegex =
       RegExp(r'^https?://[a-zA-Z0-9\-\.:]+(?:\.[a-zA-Z]{2,}|:\d+)/?.*$');
   static final RegExp _usernameRegex = RegExp(r'^[a-zA-Z0-9_\-\.@]{3,50}$');
-  static final RegExp _passwordRegex =
-      RegExp(r'^.{8,}$'); // Minimum 8 characters
+  static final RegExp _passwordRegex = RegExp(
+      r'^.+$'); // At least 1 character, supports all characters including special chars
   static final RegExp _emailRegex =
       RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
@@ -365,10 +365,15 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
       // Use the JWT Auth Test Handler
       final handler = JwtAuthTestHandler();
+
+      // Get password as raw string and convert safely
+      final rawPassword = _customerPasswordController.text;
+      final safePassword = _convertPasswordToSafeString(rawPassword);
+
       final params = {
         'brand_name': effectiveBrandName,
         'username': _customerEmailController.text.trim(),
-        'password': _customerPasswordController.text.trim(),
+        'password': safePassword,
       };
 
       final result = await handler.handleRequest('POST', params);
@@ -524,7 +529,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
             ? _usernameController.text.trim()
             : null,
         password: _selectedPlatform == 'woocommerce'
-            ? _passwordController.text.trim()
+            ? _convertPasswordToSafeString(_passwordController.text)
             : null,
         // WooCommerce Customer Auth fields
         authEndpoint: _selectedPlatform == 'woocommerce' &&
@@ -756,9 +761,17 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       if (_passwordController.text.isEmpty) {
         _passwordError = 'Password is required';
         isValid = false;
-      } else if (!_passwordRegex.hasMatch(_passwordController.text)) {
-        _passwordError = 'Password must be at least 8 characters';
-        isValid = false;
+      } else {
+        // Convert password to safe string and validate
+        final safePassword =
+            _convertPasswordToSafeString(_passwordController.text);
+        if (safePassword.isEmpty) {
+          _passwordError = 'Password cannot be empty after processing';
+          isValid = false;
+        } else if (!_passwordRegex.hasMatch(safePassword)) {
+          _passwordError = 'Password cannot be empty';
+          isValid = false;
+        }
       }
 
       // API version validation for WooCommerce
@@ -787,9 +800,17 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       if (_customerPasswordController.text.isEmpty) {
         _customerPasswordError = 'Customer password is required';
         isValid = false;
-      } else if (!_passwordRegex.hasMatch(_customerPasswordController.text)) {
-        _customerPasswordError = 'Password must be at least 8 characters';
-        isValid = false;
+      } else {
+        // Convert password to safe string and validate
+        final safePassword =
+            _convertPasswordToSafeString(_customerPasswordController.text);
+        if (safePassword.isEmpty) {
+          _customerPasswordError = 'Password cannot be empty after processing';
+          isValid = false;
+        } else if (!_passwordRegex.hasMatch(safePassword)) {
+          _customerPasswordError = 'Password cannot be empty';
+          isValid = false;
+        }
       }
 
       // Auth Endpoint validation
@@ -807,6 +828,37 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     }
 
     return isValid;
+  }
+
+  /// 🔐 Convert raw password to safe string for API transmission
+  /// Handles special characters and ensures proper encoding
+  String _convertPasswordToSafeString(String rawPassword) {
+    try {
+      // Remove any potential null characters or control characters
+      final cleanedPassword =
+          rawPassword.replaceAll(RegExp(r'[\x00-\x1F\x7F]'), '');
+
+      // Ensure the password is not empty after cleaning
+      if (cleanedPassword.isEmpty) {
+        throw Exception('Password cannot be empty after cleaning');
+      }
+
+      // Convert to string and trim whitespace
+      final safePassword = cleanedPassword.trim();
+
+      // Validate that the password contains at least one character
+      if (safePassword.isEmpty) {
+        throw Exception('Password cannot be empty');
+      }
+
+      debugPrint(
+          '🔐 Password converted safely: ${safePassword.length} characters');
+      return safePassword;
+    } catch (e) {
+      debugPrint('❌ Error converting password: $e');
+      // Return the original password as fallback, but log the error
+      return rawPassword.trim();
+    }
   }
 
   @override
