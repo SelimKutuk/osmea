@@ -1,3 +1,4 @@
+import 'package:apis/apis.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -24,7 +25,7 @@ abstract class ApiWooAuthService implements WooAuthService {
   factory ApiWooAuthService(Dio dio) => _ApiWooAuthService(
         ApiDioClient.wooDio(
             useJwtAuth: false), // Use Basic Auth for auth endpoints
-        baseUrl: 'https://woocomm.store',
+        baseUrl: WooNetwork.baseUrl,
       );
 
   /// 🔑 User Login
