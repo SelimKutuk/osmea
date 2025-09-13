@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:core/core.dart';
 
 /// 🔐 JWT Token model for WooCommerce authentication
 class WooJwtToken {
@@ -25,15 +23,40 @@ class WooJwtToken {
   });
 
   factory WooJwtToken.fromJson(Map<String, dynamic> json) {
+    // Desteklenen şekiller:
+    // { "access_token": "..." }  |  { "jwt": "..." }  |  { "token": "..." }
+    final dynamic accessCandidate = json['access_token'] ?? json['jwt'] ?? json['token'];
+    final String accessToken = accessCandidate?.toString() ?? '';
+
+    final String tokenType = (json['token_type'] ?? json['type'] ?? 'Bearer').toString();
+
+    final dynamic exp = json['expires_in'];
+    final int expiresIn = exp is int ? exp : int.tryParse(exp?.toString() ?? '') ?? 3600;
+
+    final dynamic issuedRaw = json['issued_at'] ?? json['iat'];
+    DateTime issuedAt;
+    if (issuedRaw == null) {
+      issuedAt = DateTime.now();
+    } else if (issuedRaw is int) {
+      // epoch saniye varsayalım
+      issuedAt = DateTime.fromMillisecondsSinceEpoch(issuedRaw * 1000, isUtc: true).toLocal();
+    } else {
+      issuedAt = DateTime.tryParse(issuedRaw.toString()) ?? DateTime.now();
+    }
+
+    final String? refreshToken = json['refresh_token']?.toString();
+    final String? scope = json['scope']?.toString();
+    final Map<String, dynamic>? userData =
+        json['user_data'] is Map<String, dynamic> ? json['user_data'] as Map<String, dynamic> : null;
+
     return WooJwtToken(
-      accessToken: json['access_token'] as String? ?? '',
-      tokenType: json['token_type'] as String? ?? 'Bearer',
-      expiresIn: json['expires_in'] as int? ?? 3600,
-      issuedAt: DateTime.parse(
-          json['issued_at'] as String? ?? DateTime.now().toIso8601String()),
-      refreshToken: json['refresh_token'] as String?,
-      scope: json['scope'] as String?,
-      userData: json['user_data'] as Map<String, dynamic>?,
+      accessToken: accessToken,
+      tokenType: tokenType,
+      expiresIn: expiresIn,
+      issuedAt: issuedAt,
+      refreshToken: refreshToken,
+      scope: scope,
+      userData: userData,
     );
   }
 
@@ -49,17 +72,31 @@ class WooJwtToken {
     };
   }
 
-  /// Create JWT token from WooCommerce authentication response
-  factory WooJwtToken.fromWooResponse(Map<String, dynamic> response) {
-    return WooJwtToken(
-      accessToken: response['access_token'] as String? ?? '',
-      tokenType: response['token_type'] as String? ?? 'Bearer',
-      expiresIn: response['expires_in'] as int? ?? 3600,
-      issuedAt: DateTime.now(),
-      refreshToken: response['refresh_token'] as String?,
-      scope: response['scope'] as String?,
-      userData: response['user'] as Map<String, dynamic>?,
-    );
+  @override
+  String toString() {
+    return 'WooJwtToken(accessToken: ${accessToken.length > 20 ? accessToken.substring(0, 20) + "..." : accessToken}, tokenType: $tokenType, expiresIn: $expiresIn, issuedAt: $issuedAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is WooJwtToken &&
+        other.accessToken == accessToken &&
+        other.tokenType == tokenType &&
+        other.expiresIn == expiresIn &&
+        other.issuedAt == issuedAt &&
+        other.refreshToken == refreshToken &&
+        other.scope == scope;
+  }
+
+  @override
+  int get hashCode {
+    return accessToken.hashCode ^
+        tokenType.hashCode ^
+        expiresIn.hashCode ^
+        issuedAt.hashCode ^
+        refreshToken.hashCode ^
+        scope.hashCode;
   }
 }
 
@@ -87,7 +124,7 @@ extension WooJwtTokenExtension on WooJwtToken {
   }
 }
 
-/// 🔐 JWT Token Storage Manager
+/// 🔐 JWT Token Storage Manager using Core package's LocalStorageHelper
 class WooJwtTokenStorage {
   static const String _tokenKey = 'woo_jwt_token';
   static const String _refreshTokenKey = 'woo_refresh_token';
@@ -99,11 +136,14 @@ class WooJwtTokenStorage {
   static const String _expiresInKey = 'woo_expires_in';
   static const String _lastSavedKey = 'woo_last_saved';
 
-  /// 💾 Save JWT token to storage with comprehensive information
+  // Core package's LocalStorageHelper instance
+  static final LocalStorageHelper _storage = LocalStorageHelper();
+
+  /// 💾 Save JWT token to storage using Core package's LocalStorageHelper
   static Future<void> saveToken(WooJwtToken token) async {
     try {
-      debugPrint('💾 Saving JWT token to local storage...');
-      debugPrint('🔐 Access token: ${token.accessToken.substring(0, 20)}...');
+      debugPrint('💾 Saving JWT token using Core LocalStorageHelper...');
+      debugPrint('🔐 Access token: ${token.accessToken.length > 20 ? token.accessToken.substring(0, 20) + "..." : token.accessToken}');
       debugPrint('🔑 Token type: ${token.tokenType}');
       debugPrint('⏰ Expires in: ${token.expiresIn} seconds');
       debugPrint('📅 Issued at: ${token.issuedAt}');
@@ -113,350 +153,313 @@ class WooJwtTokenStorage {
       debugPrint(
           '👤 User data: ${token.userData != null ? "Present" : "Not present"}');
 
-      if (kIsWeb) {
-        // Use SharedPreferences for web
-        final prefs = await SharedPreferences.getInstance();
+      // Debug expiresAt calculation
+      try {
+        debugPrint('🔍 Calculating expiresAt...');
+        debugPrint('🔍 issuedAt: ${token.issuedAt}');
+        debugPrint('🔍 expiresIn: ${token.expiresIn}');
+        debugPrint('🔍 expiresIn type: ${token.expiresIn.runtimeType}');
 
-        // Save all token information
-        await prefs.setString(_tokenKey, token.accessToken);
-        await prefs.setString(_refreshTokenKey, token.refreshToken ?? '');
-        await prefs.setString(_tokenTypeKey, token.tokenType);
-        await prefs.setString(_tokenScopeKey, token.scope ?? '');
-        await prefs.setString(_issuedAtKey, token.issuedAt.toIso8601String());
-        await prefs.setInt(_expiresInKey, token.expiresIn);
-        await prefs.setString(
-            _tokenExpiryKey, token.expiresAt.toIso8601String());
-        await prefs.setString(_userDataKey, json.encode(token.userData ?? {}));
-        await prefs.setString(_lastSavedKey, DateTime.now().toIso8601String());
-
-        debugPrint('✅ JWT token saved to SharedPreferences successfully');
-        debugPrint('🔍 Verification - Reading back from storage:');
-        final savedToken = prefs.getString(_tokenKey);
-        final savedType = prefs.getString(_tokenTypeKey);
-        debugPrint(
-            '  - Saved access token: ${savedToken != null ? "Found (${savedToken.length} chars)" : "Not found"}');
-        debugPrint(
-            '  - Saved token type: ${savedType != null ? "Found ($savedType)" : "Not found"}');
-      } else {
-        // Use SQLite for mobile
-        final db = await DatabaseHelper.instance.database;
-        await db.insert(
-          'woo_tokens',
-          {
-            'access_token': token.accessToken,
-            'refresh_token': token.refreshToken ?? '',
-            'token_type': token.tokenType,
-            'scope': token.scope ?? '',
-            'issued_at': token.issuedAt.toIso8601String(),
-            'expires_in': token.expiresIn,
-            'expires_at': token.expiresAt.toIso8601String(),
-            'user_data': json.encode(token.userData ?? {}),
-            'created_at': DateTime.now().toIso8601String(),
-            'last_saved': DateTime.now().toIso8601String(),
-          },
-          conflictAlgorithm: ConflictAlgorithm.replace,
-        );
-
-        debugPrint('✅ JWT token saved to SQLite successfully');
+        final expiresAt = token.expiresAt;
+        debugPrint('📅 Expires at: $expiresAt');
+      } catch (e) {
+        debugPrint('❌ Error calculating expiresAt: $e');
+        debugPrint('❌ issuedAt: ${token.issuedAt}');
+        debugPrint('❌ expiresIn: ${token.expiresIn}');
+        debugPrint('❌ expiresIn type: ${token.expiresIn.runtimeType}');
+        rethrow;
       }
 
-      debugPrint('🔐 JWT token saved successfully to local storage');
-    } catch (e) {
-      debugPrint('❌ Error saving JWT token: $e');
-      rethrow; // Re-throw to allow calling code to handle the error
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+
+      // Save all token information using Core package's LocalStorageHelper
+      debugPrint('🔍 Saving token fields to storage...');
+      await _storage.setItem(_tokenKey, token.accessToken);
+      debugPrint('🔍 Saved access token');
+      await _storage.setItem(_refreshTokenKey, token.refreshToken ?? '');
+      debugPrint('🔍 Saved refresh token');
+      await _storage.setItem(_tokenTypeKey, token.tokenType);
+      debugPrint('🔍 Saved token type');
+      await _storage.setItem(_tokenScopeKey, token.scope ?? '');
+      debugPrint('🔍 Saved scope');
+      await _storage.setItem(_issuedAtKey, token.issuedAt.toIso8601String());
+      debugPrint('🔍 Saved issued at');
+      await _storage.setItem(_expiresInKey, token.expiresIn);
+      debugPrint('🔍 Saved expires in');
+      await _storage.setItem(
+            _tokenExpiryKey, token.expiresAt.toIso8601String());
+      debugPrint('🔍 Saved expires at');
+      await _storage.setItem(_userDataKey, json.encode(token.userData ?? {}));
+      debugPrint('🔍 Saved user data');
+      await _storage.setItem(_lastSavedKey, DateTime.now().toIso8601String());
+      debugPrint('🔍 Saved last saved time');
+
+      debugPrint(
+          '✅ JWT token saved using Core LocalStorageHelper successfully');
+        debugPrint('🔍 Verification - Reading back from storage:');
+
+      // Verify the token was saved correctly
+      final savedToken = await loadToken();
+      if (savedToken != null) {
+        debugPrint('✅ Token verification successful');
+        debugPrint(
+            '🔐 Saved access token: ${savedToken.accessToken.length > 20 ? savedToken.accessToken.substring(0, 20) + "..." : savedToken.accessToken}');
+        debugPrint('🔑 Saved token type: ${savedToken.tokenType}');
+        debugPrint('⏰ Saved expires in: ${savedToken.expiresIn} seconds');
+      } else {
+        debugPrint('❌ Token verification failed - token not found in storage');
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ Error saving JWT token using Core LocalStorageHelper: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
+      rethrow;
     }
   }
 
-  /// 📖 Load JWT token from storage with comprehensive information
+  /// 📖 Load JWT token from storage using Core package's LocalStorageHelper
   static Future<WooJwtToken?> loadToken() async {
     try {
-      debugPrint('📖 Loading JWT token from local storage...');
+      debugPrint('📖 Loading JWT token using Core LocalStorageHelper...');
 
-      String? accessToken;
-      String? refreshToken;
-      String? tokenType;
-      String? scope;
-      String? issuedAt;
-      int? expiresIn;
-      String? expiresAt;
-      String? userData;
-      String? lastSaved;
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-      if (kIsWeb) {
-        // Use SharedPreferences for web
-        final prefs = await SharedPreferences.getInstance();
-        accessToken = prefs.getString(_tokenKey);
-        refreshToken = prefs.getString(_refreshTokenKey);
-        tokenType = prefs.getString(_tokenTypeKey);
-        scope = prefs.getString(_tokenScopeKey);
-        issuedAt = prefs.getString(_issuedAtKey);
-        expiresIn = prefs.getInt(_expiresInKey);
-        expiresAt = prefs.getString(_tokenExpiryKey);
-        userData = prefs.getString(_userDataKey);
-        lastSaved = prefs.getString(_lastSavedKey);
+      // Load all token information using Core package's LocalStorageHelper
+      final accessToken = await _storage.getItem(_tokenKey);
+      final refreshToken = await _storage.getItem(_refreshTokenKey);
+      final tokenType = await _storage.getItem(_tokenTypeKey);
+      final scope = await _storage.getItem(_tokenScopeKey);
+      final issuedAtString = await _storage.getItem(_issuedAtKey);
+      final expiresIn = await _storage.getItem(_expiresInKey);
+      final userDataString = await _storage.getItem(_userDataKey);
 
-        debugPrint('🔍 Loading from SharedPreferences:');
+      debugPrint('🔍 Loaded from Core LocalStorageHelper:');
         debugPrint(
-            '  - Access token: ${accessToken != null ? "Found (${accessToken.length} chars)" : "Not found"}');
+          '  - Access token: ${accessToken != null ? "Present" : "Not found"}');
         debugPrint(
-            '  - Token type: ${tokenType != null ? "Found ($tokenType)" : "Not found"}');
+          '  - Refresh token: ${refreshToken != null ? "Present" : "Not found"}');
+      debugPrint('  - Token type: $tokenType');
+      debugPrint('  - Scope: $scope');
+      debugPrint('  - Issued at: $issuedAtString');
+      debugPrint('  - Expires in: $expiresIn');
         debugPrint(
-            '  - Issued at: ${issuedAt != null ? "Found ($issuedAt)" : "Not found"}');
-        debugPrint(
-            '  - Expires in: ${expiresIn != null ? "Found ($expiresIn)" : "Not found"}');
-        debugPrint(
-            '  - Refresh token: ${refreshToken != null ? "Found" : "Not found"}');
-        debugPrint(
-            '  - Scope: ${scope != null ? "Found ($scope)" : "Not found"}');
-        debugPrint(
-            '  - User data: ${userData != null ? "Found" : "Not found"}');
-        debugPrint(
-            '  - Last saved: ${lastSaved != null ? "Found ($lastSaved)" : "Not found"}');
+          '  - User data: ${userDataString != null ? "Present" : "Not found"}');
+
+      // Check if we have the minimum required data
+      if (accessToken == null || accessToken.isEmpty) {
+        debugPrint('❌ No access token found in Core LocalStorageHelper');
+        return null;
+      }
+
+      // Parse the token data
+      DateTime? issuedAt;
+      if (issuedAtString != null && issuedAtString.isNotEmpty) {
+        try {
+          issuedAt = DateTime.parse(issuedAtString);
+        } catch (e) {
+          debugPrint('❌ Error parsing issuedAt: $e');
+          issuedAt = DateTime.now();
+        }
       } else {
-        // Use SQLite for mobile
-        final db = await DatabaseHelper.instance.database;
-        final result = await db.query(
-          'woo_tokens',
-          orderBy: 'created_at DESC',
-          limit: 1,
-        );
+        issuedAt = DateTime.now();
+      }
 
-        if (result.isNotEmpty) {
-          accessToken = result.first['access_token'] as String?;
-          refreshToken = result.first['refresh_token'] as String?;
-          tokenType = result.first['token_type'] as String?;
-          scope = result.first['scope'] as String?;
-          issuedAt = result.first['issued_at'] as String?;
-          expiresIn = result.first['expires_in'] as int?;
-          expiresAt = result.first['expires_at'] as String?;
-          userData = result.first['user_data'] as String?;
-          lastSaved = result.first['last_saved'] as String?;
+      int? expiresInSeconds;
+      if (expiresIn != null) {
+        if (expiresIn is int) {
+          expiresInSeconds = expiresIn;
+        } else if (expiresIn is String) {
+          expiresInSeconds = int.tryParse(expiresIn) ?? 3600;
+        } else {
+          expiresInSeconds = 3600;
+        }
+      } else {
+        expiresInSeconds = 3600;
+      }
+
+      Map<String, dynamic>? userData;
+      if (userDataString != null && userDataString.isNotEmpty) {
+        try {
+          userData = json.decode(userDataString);
+        } catch (e) {
+          debugPrint('❌ Error parsing user data: $e');
+          userData = {};
         }
       }
 
-      if (accessToken != null && tokenType != null) {
+      // Create the token object
         final token = WooJwtToken(
           accessToken: accessToken,
-          tokenType: tokenType,
-          expiresIn: expiresIn ?? 3600,
-          issuedAt:
-              issuedAt != null ? DateTime.parse(issuedAt) : DateTime.now(),
-          refreshToken: refreshToken?.isEmpty == true ? null : refreshToken,
-          scope: scope?.isEmpty == true ? null : scope,
-          userData: userData != null ? json.decode(userData) : null,
-        );
-
-        debugPrint('✅ JWT token loaded from local storage successfully');
-        debugPrint('📅 Token issued at: ${token.issuedAt}');
-        debugPrint('⏰ Token expires at: ${token.expiresAt}');
-        debugPrint('🔄 Last saved: $lastSaved');
-        debugPrint('📊 Expires at string: $expiresAt');
-        debugPrint('🔐 Access token: ${accessToken.substring(0, 20)}...');
-        debugPrint('🔑 Token type: $tokenType');
-
-        return token;
-      }
-
-      debugPrint('⚠️ No valid JWT token found in local storage');
-      debugPrint('🔍 Debug info:');
-      debugPrint(
-          '  - Access token: ${accessToken != null ? "Found (${accessToken.length} chars)" : "Not found"}');
-      debugPrint(
-          '  - Token type: ${tokenType != null ? "Found ($tokenType)" : "Not found"}');
-      debugPrint(
-          '  - Issued at: ${issuedAt != null ? "Found ($issuedAt)" : "Not found"}');
-      debugPrint(
-          '  - Expires in: ${expiresIn != null ? "Found ($expiresIn)" : "Not found"}');
-      return null;
-    } catch (e) {
-      debugPrint('❌ Error loading JWT token: $e');
-      return null;
-    }
-  }
-
-  /// 🧪 Test JWT token storage functionality
-  static Future<void> testTokenStorage() async {
-    try {
-      debugPrint('🧪 Testing JWT token storage...');
-
-      // Create a test token
-      final testToken = WooJwtToken(
-        accessToken: 'test_access_token_12345',
-        tokenType: 'Bearer',
-        expiresIn: 3600,
-        issuedAt: DateTime.now(),
-        refreshToken: 'test_refresh_token_67890',
-        scope: 'read write',
-        userData: {'id': '1', 'email': 'test@example.com'},
+        tokenType: tokenType ?? 'Bearer',
+        expiresIn: expiresInSeconds,
+        issuedAt: issuedAt,
+        refreshToken: refreshToken?.isNotEmpty == true ? refreshToken : null,
+        scope: scope?.isNotEmpty == true ? scope : null,
+        userData: userData,
       );
 
-      // Save the test token
-      debugPrint('💾 Saving test token...');
-      await saveToken(testToken);
+      debugPrint(
+          '✅ JWT token loaded using Core LocalStorageHelper successfully');
+      debugPrint(
+          '🔐 Loaded access token: ${token.accessToken.length > 20 ? token.accessToken.substring(0, 20) + "..." : token.accessToken}');
+      debugPrint('🔑 Loaded token type: ${token.tokenType}');
+      debugPrint('⏰ Loaded expires in: ${token.expiresIn} seconds');
+      debugPrint('📅 Loaded issued at: ${token.issuedAt}');
+      debugPrint(
+          '🔄 Loaded refresh token: ${token.refreshToken != null ? "Present" : "Not present"}');
+      debugPrint('📊 Loaded scope: ${token.scope ?? "None"}');
+      debugPrint(
+          '👤 Loaded user data: ${token.userData != null ? "Present" : "Not present"}');
 
-      // Load the test token
-      debugPrint('📖 Loading test token...');
-      final loadedToken = await loadToken();
-
-      if (loadedToken != null) {
-        debugPrint('✅ Test token loaded successfully!');
-        debugPrint(
-            '🔐 Access token matches: ${loadedToken.accessToken == testToken.accessToken}');
-        debugPrint(
-            '🔑 Token type matches: ${loadedToken.tokenType == testToken.tokenType}');
-        debugPrint(
-            '⏰ Expires in matches: ${loadedToken.expiresIn == testToken.expiresIn}');
-        debugPrint(
-            '🔄 Refresh token matches: ${loadedToken.refreshToken == testToken.refreshToken}');
-        debugPrint('📊 Scope matches: ${loadedToken.scope == testToken.scope}');
-        debugPrint(
-            '👤 User data matches: ${loadedToken.userData != null && loadedToken.userData!['id'] == '1'}');
-      } else {
-        debugPrint('❌ Test token could not be loaded!');
-      }
-
-      // Clean up test token
-      debugPrint('🗑️ Cleaning up test token...');
-      await clearToken();
-    } catch (e) {
-      debugPrint('❌ Test token storage failed: $e');
+      return token;
+    } catch (e, stackTrace) {
+      debugPrint('❌ Error loading JWT token using Core LocalStorageHelper: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
+      return null;
     }
   }
 
-  /// 🗑️ Clear JWT token from storage
+  /// 🗑️ Clear JWT token from storage using Core package's LocalStorageHelper
   static Future<void> clearToken() async {
     try {
-      debugPrint('🗑️ Clearing JWT token from local storage...');
+      debugPrint('🗑️ Clearing JWT token using Core LocalStorageHelper...');
 
-      if (kIsWeb) {
-        // Use SharedPreferences for web
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.remove(_tokenKey);
-        await prefs.remove(_refreshTokenKey);
-        await prefs.remove(_tokenTypeKey);
-        await prefs.remove(_tokenScopeKey);
-        await prefs.remove(_issuedAtKey);
-        await prefs.remove(_expiresInKey);
-        await prefs.remove(_tokenExpiryKey);
-        await prefs.remove(_userDataKey);
-        await prefs.remove(_lastSavedKey);
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-        debugPrint('✅ JWT token cleared from SharedPreferences successfully');
+      // Remove all token information using Core package's LocalStorageHelper
+      await _storage.removeItem(_tokenKey);
+      await _storage.removeItem(_refreshTokenKey);
+      await _storage.removeItem(_tokenTypeKey);
+      await _storage.removeItem(_tokenScopeKey);
+      await _storage.removeItem(_issuedAtKey);
+      await _storage.removeItem(_expiresInKey);
+      await _storage.removeItem(_tokenExpiryKey);
+      await _storage.removeItem(_userDataKey);
+      await _storage.removeItem(_lastSavedKey);
+
+        debugPrint(
+          '✅ JWT token cleared using Core LocalStorageHelper successfully');
+    } catch (e, stackTrace) {
+        debugPrint(
+          '❌ Error clearing JWT token using Core LocalStorageHelper: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
+      rethrow;
+    }
+  }
+
+  /// 🧹 Cleanup expired tokens using Core package's LocalStorageHelper
+  static Future<void> cleanupExpiredTokens() async {
+    try {
+      debugPrint(
+          '🧹 Cleaning up expired tokens using Core LocalStorageHelper...');
+
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+
+      final token = await loadToken();
+      if (token != null && token.isExpired) {
+        debugPrint('🗑️ Token is expired, clearing it...');
+        await clearToken();
+        debugPrint('✅ Expired token cleared successfully');
       } else {
-        // Use SQLite for mobile
-        final db = await DatabaseHelper.instance.database;
-        await db.delete('woo_tokens');
-
-        debugPrint('✅ JWT token cleared from SQLite successfully');
+        debugPrint('✅ Token is still valid, no cleanup needed');
       }
-
-      debugPrint('🔐 JWT token cleared successfully from local storage');
-    } catch (e) {
-      debugPrint('❌ Error clearing JWT token: $e');
-      rethrow; // Re-throw to allow calling code to handle the error
+    } catch (e, stackTrace) {
+      debugPrint(
+          '❌ Error cleaning up expired tokens using Core LocalStorageHelper: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
+      rethrow;
     }
   }
 
-  /// ⏰ Check if token is expired
-  static Future<bool> isTokenExpired() async {
+  /// 📊 Get storage statistics using Core package's LocalStorageHelper
+  static Future<Map<String, dynamic>> getStorageStats() async {
     try {
-      final token = await loadToken();
-      if (token == null) return true;
+      debugPrint(
+          '📊 Getting storage statistics using Core LocalStorageHelper...');
 
-      return token.isExpired;
-    } catch (e) {
-      debugPrint('❌ Error checking token expiry: $e');
-      return true;
-    }
-  }
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-  /// 🔄 Check if token needs refresh
-  static Future<bool> needsRefresh() async {
-    try {
-      final token = await loadToken();
-      if (token == null || token.refreshToken == null) return false;
+      final allItems = await _storage.getAllItems();
+      final jwtKeys =
+          allItems.keys.where((key) => key.startsWith('woo_')).length;
 
-      return token.needsRefresh;
-    } catch (e) {
-      debugPrint('❌ Error checking refresh need: $e');
-      return false;
-    }
-  }
-
-  /// 📊 Get comprehensive token information
-  static Future<Map<String, dynamic>> getTokenInfo() async {
-    try {
-      final token = await loadToken();
-      if (token == null) {
-        return {
-          'hasToken': false,
-          'isExpired': true,
-          'needsRefresh': false,
-          'message': 'No token found in local storage',
-        };
-      }
-
-      return {
-        'hasToken': true,
-        'isExpired': token.isExpired,
-        'needsRefresh': token.needsRefresh,
-        'tokenType': token.tokenType,
-        'scope': token.scope,
-        'issuedAt': token.issuedAt.toIso8601String(),
-        'expiresAt': token.expiresAt.toIso8601String(),
-        'expiresIn': token.expiresIn,
-        'hasRefreshToken': token.refreshToken != null,
-        'hasUserData': token.userData != null,
-        'userData': token.userData,
-        'timeUntilExpiry': token.expiresAt.difference(DateTime.now()).inMinutes,
+      final stats = {
+        'platform': kIsWeb ? 'web' : 'mobile',
+        'storageType': 'Core LocalStorageHelper',
+        'totalKeys': allItems.length,
+        'jwtKeys': jwtKeys,
+        'hasToken': await hasToken(),
       };
-    } catch (e) {
-      debugPrint('❌ Error getting token info: $e');
+
+      debugPrint('📊 Storage statistics: $stats');
+      return stats;
+    } catch (e, stackTrace) {
+      debugPrint(
+          '❌ Error getting storage statistics using Core LocalStorageHelper: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
       return {
-        'hasToken': false,
-        'isExpired': true,
-        'needsRefresh': false,
+        'platform': kIsWeb ? 'web' : 'mobile',
+        'storageType': 'Core LocalStorageHelper',
         'error': e.toString(),
       };
     }
   }
 
-  /// 🔍 Check if token exists in storage
+  /// 🔍 Check if token is expired
+  static Future<bool> isTokenExpired() async {
+    final token = await loadToken();
+    return token?.isExpired ?? true;
+  }
+
+  /// 🔄 Check if token needs refresh
+  static Future<bool> needsRefresh() async {
+      final token = await loadToken();
+    return token?.needsRefresh ?? true;
+  }
+
+  /// 📋 Get token information
+  static Future<Map<String, dynamic>?> getTokenInfo() async {
+      final token = await loadToken();
+    if (token == null) return null;
+
+      return {
+      'accessToken': token.accessToken,
+      'tokenType': token.tokenType,
+      'expiresIn': token.expiresIn,
+      'issuedAt': token.issuedAt.toIso8601String(),
+      'expiresAt': token.expiresAt.toIso8601String(),
+        'isExpired': token.isExpired,
+        'needsRefresh': token.needsRefresh,
+      'refreshToken': token.refreshToken,
+        'scope': token.scope,
+        'userData': token.userData,
+    };
+  }
+
+  /// ✅ Check if token exists
   static Future<bool> hasToken() async {
-    try {
       final token = await loadToken();
       return token != null;
-    } catch (e) {
-      debugPrint('❌ Error checking token existence: $e');
-      return false;
-    }
   }
 
-  /// 📅 Get token expiry date
+  /// ⏰ Get token expiry date
   static Future<DateTime?> getTokenExpiry() async {
-    try {
       final token = await loadToken();
       return token?.expiresAt;
-    } catch (e) {
-      debugPrint('❌ Error getting token expiry: $e');
-      return null;
-    }
   }
 
-  /// 👤 Get user data from stored token
+  /// 👤 Get user data
   static Future<Map<String, dynamic>?> getUserData() async {
-    try {
       final token = await loadToken();
       return token?.userData;
-    } catch (e) {
-      debugPrint('❌ Error getting user data: $e');
-      return null;
-    }
   }
 
-  /// 🔄 Update only user data in stored token
+  /// 🔄 Update user data
   static Future<void> updateUserData(Map<String, dynamic> userData) async {
-    try {
       final token = await loadToken();
       if (token != null) {
         final updatedToken = WooJwtToken(
@@ -469,145 +472,58 @@ class WooJwtTokenStorage {
           userData: userData,
         );
         await saveToken(updatedToken);
-        debugPrint('✅ User data updated in stored token');
+    }
+  }
+
+  /// 🧪 Test token storage functionality
+  static Future<void> testTokenStorage() async {
+    try {
+      debugPrint(
+          '🧪 Testing JWT token storage using Core LocalStorageHelper...');
+
+      // Test saving a dummy token
+      final testToken = WooJwtToken(
+        accessToken: 'test_token_12345',
+        tokenType: 'Bearer',
+        expiresIn: 3600,
+        issuedAt: DateTime.now(),
+        refreshToken: 'test_refresh_token',
+        scope: 'read write',
+        userData: {'test': 'data'},
+      );
+
+      await saveToken(testToken);
+      debugPrint('✅ Test token saved successfully');
+
+      // Test loading the token
+      final loadedToken = await loadToken();
+      if (loadedToken != null) {
+        debugPrint('✅ Test token loaded successfully');
+        debugPrint('🔐 Loaded token: ${loadedToken.accessToken}');
+        debugPrint('🔑 Loaded type: ${loadedToken.tokenType}');
+        debugPrint('⏰ Loaded expires in: ${loadedToken.expiresIn}');
+        debugPrint('👤 Loaded user data: ${loadedToken.userData}');
       } else {
-        debugPrint('⚠️ No token found to update user data');
+        debugPrint('❌ Test token loading failed');
       }
-    } catch (e) {
-      debugPrint('❌ Error updating user data: $e');
+
+      // Test clearing the token
+      await clearToken();
+      debugPrint('✅ Test token cleared successfully');
+
+      // Verify token is cleared
+      final clearedToken = await loadToken();
+      if (clearedToken == null) {
+        debugPrint('✅ Token clearing verification successful');
+      } else {
+        debugPrint('❌ Token clearing verification failed');
+      }
+
+      debugPrint('✅ JWT token storage test completed successfully');
+    } catch (e, stackTrace) {
+      debugPrint('❌ JWT token storage test failed: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
       rethrow;
     }
-  }
-
-  /// 🧹 Clean up expired tokens
-  static Future<void> cleanupExpiredTokens() async {
-    try {
-      debugPrint('🧹 Cleaning up expired tokens...');
-
-      if (kIsWeb) {
-        // For web, we only store one token, so just check if it's expired
-        final token = await loadToken();
-        if (token != null && token.isExpired) {
-          await clearToken();
-          debugPrint('✅ Expired token cleaned up from SharedPreferences');
-        }
-      } else {
-        // For mobile, clean up expired tokens from SQLite
-        final db = await DatabaseHelper.instance.database;
-        final now = DateTime.now().toIso8601String();
-        final deletedCount = await db.delete(
-          'woo_tokens',
-          where: 'expires_at < ?',
-          whereArgs: [now],
-        );
-
-        if (deletedCount > 0) {
-          debugPrint('✅ Cleaned up $deletedCount expired tokens from SQLite');
-        } else {
-          debugPrint('ℹ️ No expired tokens found to clean up');
-        }
-      }
-    } catch (e) {
-      debugPrint('❌ Error cleaning up expired tokens: $e');
-    }
-  }
-
-  /// 📈 Get storage statistics
-  static Future<Map<String, dynamic>> getStorageStats() async {
-    try {
-      if (kIsWeb) {
-        final prefs = await SharedPreferences.getInstance();
-        final keys = prefs.getKeys();
-        final jwtKeys = keys.where((key) => key.startsWith('woo_')).length;
-
-        return {
-          'platform': 'web',
-          'storageType': 'SharedPreferences',
-          'totalKeys': keys.length,
-          'jwtKeys': jwtKeys,
-          'hasToken': await hasToken(),
-        };
-      } else {
-        final db = await DatabaseHelper.instance.database;
-        final result =
-            await db.rawQuery('SELECT COUNT(*) as count FROM woo_tokens');
-        final count = result.first['count'] as int;
-
-        return {
-          'platform': 'mobile',
-          'storageType': 'SQLite',
-          'tokenCount': count,
-          'hasToken': await hasToken(),
-        };
-      }
-    } catch (e) {
-      debugPrint('❌ Error getting storage stats: $e');
-      return {
-        'error': e.toString(),
-      };
-    }
-  }
-}
-
-/// 🗄️ Database Helper for JWT token storage
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
-  static DatabaseHelper get instance => _instance;
-
-  DatabaseHelper._internal();
-
-  Database? _database;
-
-  Future<Database> get database async {
-    _database ??= await _initDatabase();
-    return _database!;
-  }
-
-  Future<Database> _initDatabase() async {
-    final databasesPath = await getDatabasesPath();
-    final path = join(databasesPath, 'woo_jwt_tokens.db');
-
-    return await openDatabase(
-      path,
-      version: 2, // Increment version for schema update
-      onCreate: (db, version) async {
-        await db.execute('''
-          CREATE TABLE woo_tokens (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            access_token TEXT NOT NULL,
-            refresh_token TEXT,
-            token_type TEXT NOT NULL,
-            scope TEXT,
-            issued_at TEXT NOT NULL,
-            expires_in INTEGER NOT NULL,
-            expires_at TEXT NOT NULL,
-            user_data TEXT,
-            created_at TEXT NOT NULL,
-            last_saved TEXT NOT NULL
-          )
-        ''');
-      },
-      onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 2) {
-          // Add new columns for version 2
-          await db.execute('ALTER TABLE woo_tokens ADD COLUMN token_type TEXT');
-          await db.execute('ALTER TABLE woo_tokens ADD COLUMN scope TEXT');
-          await db.execute('ALTER TABLE woo_tokens ADD COLUMN issued_at TEXT');
-          await db
-              .execute('ALTER TABLE woo_tokens ADD COLUMN expires_in INTEGER');
-          await db.execute('ALTER TABLE woo_tokens ADD COLUMN last_saved TEXT');
-
-          // Set default values for existing records
-          await db.execute(
-              'UPDATE woo_tokens SET token_type = "Bearer" WHERE token_type IS NULL');
-          await db.execute(
-              'UPDATE woo_tokens SET expires_in = 3600 WHERE expires_in IS NULL');
-          await db.execute(
-              'UPDATE woo_tokens SET issued_at = datetime("now", "-1 hour") WHERE issued_at IS NULL');
-          await db.execute(
-              'UPDATE woo_tokens SET last_saved = datetime("now") WHERE last_saved IS NULL');
-        }
-      },
-    );
   }
 }
