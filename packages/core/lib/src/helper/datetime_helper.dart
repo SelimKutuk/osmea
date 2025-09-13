@@ -72,10 +72,6 @@ import 'package:intl/intl.dart';
 /// // Input validation
 /// bool valid = DateTimeHelper.validateDateString("2025-09-12", "yyyy-MM-dd");
 /// DateTime parsed = DateTimeHelper.safeParseDate("invalid", "yyyy-MM-dd");
-///
-/// // Locale support
-/// String localized = DateTimeHelper.formatLocalized(now, "tr_TR");
-/// String weekday = DateTimeHelper.getWeekdayLocalized(now, "tr_TR");
 /// ```
 class DateTimeHelper {
   // ============================================================================
@@ -278,11 +274,6 @@ class DateTimeHelper {
   static int calculateDateDifference(DateTime fromDate, DateTime toDate) {
     return toDate.difference(fromDate).inDays;
   }
-
-  // ============================================================================
-  // ✅ VALIDATION METHODS
-  // ============================================================================
-
   // ============================================================================
   // 🌍 TIMEZONE CONVERSION METHODS
   // ============================================================================
@@ -803,8 +794,6 @@ class DateTimeHelper {
   /// 🌐 **Localized Date Formatter**
   ///
   /// Formats a date using a specific locale.
-  ///
-  /// Example: `formatLocalized(DateTime.now(), "tr_TR")` → `"12 Eylül 2025"`
   static String formatLocalized(DateTime dateTime, String locale) {
     return DateFormat.yMMMMd(locale).format(dateTime);
   }
@@ -812,8 +801,6 @@ class DateTimeHelper {
   /// 🌐 **Localized Time Formatter**
   ///
   /// Formats time using a specific locale.
-  ///
-  /// Example: `formatTimeLocalized(DateTime.now(), "tr_TR")` → `"14:30"`
   static String formatTimeLocalized(DateTime dateTime, String locale) {
     return DateFormat.Hm(locale).format(dateTime);
   }
@@ -822,7 +809,6 @@ class DateTimeHelper {
   ///
   /// Returns weekday name in a specific locale.
   ///
-  /// Example: `getWeekdayLocalized(DateTime.now(), "tr_TR")` → `"Cuma"`
   static String getWeekdayLocalized(DateTime dateTime, String locale) {
     return DateFormat.EEEE(locale).format(dateTime);
   }
@@ -831,11 +817,9 @@ class DateTimeHelper {
   ///
   /// Returns month name in a specific locale.
   ///
-  /// Example: `getMonthLocalized(DateTime.now(), "tr_TR")` → `"Eylül"`
   static String getMonthLocalized(DateTime dateTime, String locale) {
     return DateFormat.MMMM(locale).format(dateTime);
   }
-
   // ============================================================================
   // 🔧 PRIVATE HELPER METHODS
   // ============================================================================
