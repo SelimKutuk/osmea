@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 
 /// 🔗 **URL Launcher Test Component**
 ///
@@ -106,8 +107,8 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
-      appBar: AppBar(
-        title: const Text('🔗 URL Launcher Test'),
+      appBar: OsmeaComponents.appBar(
+        title: OsmeaComponents.text('🔗 URL Launcher Test'),
         backgroundColor: Colors.blue.shade600,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -126,10 +127,10 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
           ],
         ),
       ),
-      body: Column(
+      body: OsmeaComponents.column(
         children: [
           // Results Panel
-          Container(
+          OsmeaComponents.container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             margin: const EdgeInsets.all(16),
@@ -138,33 +139,33 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.grey.shade300),
             ),
-            child: Column(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                OsmeaComponents.row(
                   children: [
                     const Icon(Icons.info_outline, color: Colors.blue),
-                    const SizedBox(width: 8),
-                    const Text(
+                    OsmeaComponents.sizedBox(width: 8),
+                    OsmeaComponents.text(
                       'Test Results',
-                      style: TextStyle(
+                      textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Spacer(),
+                    OsmeaComponents.spacer(),
                     if (_isLoading)
-                      const SizedBox(
+                      OsmeaComponents.sizedBox(
                         width: 16,
                         height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2),
+                        child: const CircularProgressIndicator(strokeWidth: 2),
                       ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                Text(
+                OsmeaComponents.sizedBox(height: 8),
+                OsmeaComponents.text(
                   _lastResult.isEmpty ? 'No tests run yet' : _lastResult,
-                  style: TextStyle(
+                  textStyle: TextStyle(
                     color: _lastResult.contains('✅') 
                         ? Colors.green.shade700 
                         : _lastResult.contains('❌') 
@@ -178,7 +179,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
           ),
           
           // Tab Content
-          Expanded(
+          OsmeaComponents.expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
@@ -197,17 +198,17 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildBasicUrlsTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Form(
         key: _formKey,
-        child: Column(
+        child: OsmeaComponents.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionHeader('🌐 Basic URL Testing', 
                 'Test basic URL launching with validation and error handling'),
             
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             
             OsmeaComponents.textField(
               controller: _urlController,
@@ -221,11 +222,11 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
               },
             ),
             
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             
-            Row(
+            OsmeaComponents.row(
               children: [
-                Expanded(
+                OsmeaComponents.expanded(
                   child: OsmeaComponents.button(
                     text: 'Validate URL',
                     variant: ButtonVariant.outlined,
@@ -239,8 +240,8 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
+                OsmeaComponents.sizedBox(width: 8),
+                OsmeaComponents.expanded(
                   child: OsmeaComponents.button(
                     text: 'Launch URL',
                     variant: ButtonVariant.primary,
@@ -258,7 +259,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
               ],
             ),
             
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 16),
             
             OsmeaComponents.button(
               text: 'Safe Launch (No Exceptions)',
@@ -273,7 +274,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
               },
             ),
             
-            const SizedBox(height: 24),
+            OsmeaComponents.sizedBox(height: 24),
             
             _buildTestUrlButtons(),
           ],
@@ -283,15 +284,15 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildSocialMediaTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionHeader('📱 Social Media Links', 
               'Test social media platform integration'),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.textField(
             controller: _usernameController,
@@ -309,19 +310,19 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildMapsTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionHeader('🗺️ Maps Integration', 
               'Test maps functionality with coordinates and addresses'),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
-          Row(
+          OsmeaComponents.row(
             children: [
-              Expanded(
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.textField(
                   controller: _latController,
                   label: 'Latitude',
@@ -330,8 +331,8 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
                   type: TextFieldType.number,
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
+              OsmeaComponents.sizedBox(width: 8),
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.textField(
                   controller: _lngController,
                   label: 'Longitude',
@@ -343,11 +344,11 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             ],
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
-          Row(
+          OsmeaComponents.row(
             children: [
-              Expanded(
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.button(
                   text: 'Open Google Maps',
                   variant: ButtonVariant.primary,
@@ -363,8 +364,8 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
                   },
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
+              OsmeaComponents.sizedBox(width: 8),
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.button(
                   text: 'Open Apple Maps',
                   variant: ButtonVariant.outlined,
@@ -384,7 +385,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             ],
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.textField(
             controller: _addressController,
@@ -393,7 +394,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             prefixIcon: const Icon(Icons.location_city),
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.button(
             text: 'Search Address',
@@ -413,15 +414,15 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildCommunicationTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionHeader('📞 Communication', 
               'Test phone, email, and SMS functionality'),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.textField(
             controller: _phoneController,
@@ -431,11 +432,11 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             type: TextFieldType.phone,
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
-          Row(
+          OsmeaComponents.row(
             children: [
-              Expanded(
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.button(
                   text: 'Call Phone',
                   variant: ButtonVariant.primary,
@@ -448,8 +449,8 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
                   },
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
+              OsmeaComponents.sizedBox(width: 8),
+              OsmeaComponents.expanded(
                 child: OsmeaComponents.button(
                   text: 'Send SMS',
                   variant: ButtonVariant.outlined,
@@ -468,7 +469,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             ],
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.textField(
             controller: _emailController,
@@ -478,7 +479,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             type: TextFieldType.email,
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.button(
             text: 'Send Email',
@@ -502,15 +503,15 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildMediaTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionHeader('🎵 Media Platforms', 
               'Test music and video streaming platforms'),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           OsmeaComponents.textField(
             controller: _queryController,
@@ -519,23 +520,23 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
             prefixIcon: const Icon(Icons.search),
           ),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
-          const Text(
+          OsmeaComponents.text(
             '🎵 Music Platforms',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          OsmeaComponents.sizedBox(height: 8),
           
           _buildMusicPlatformButtons(),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
-          const Text(
+          OsmeaComponents.text(
             '🎬 Video Platforms',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          OsmeaComponents.sizedBox(height: 8),
           
           _buildVideoPlatformButtons(),
         ],
@@ -544,15 +545,15 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildWebsitesTab() {
-    return SingleChildScrollView(
+    return OsmeaComponents.singleChildScrollView(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildSectionHeader('🌐 Website Links', 
               'Test configured website URLs'),
           
-          const SizedBox(height: 16),
+          OsmeaComponents.sizedBox(height: 16),
           
           _buildWebsiteButtons(),
         ],
@@ -561,20 +562,20 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
   }
 
   Widget _buildSectionHeader(String title, String description) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        OsmeaComponents.text(
           title,
-          style: const TextStyle(
+          textStyle: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 4),
-        Text(
+        OsmeaComponents.sizedBox(height: 4),
+        OsmeaComponents.text(
           description,
-          style: TextStyle(
+          textStyle: TextStyle(
             fontSize: 14,
             color: Colors.grey.shade600,
           ),
@@ -588,18 +589,17 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
       {'label': 'Flutter.dev', 'url': 'https://flutter.dev'},
       {'label': 'GitHub', 'url': 'https://github.com'},
       {'label': 'Invalid URL', 'url': 'not-a-valid-url'},
-      {'label': 'FTP Protocol', 'url': 'ftp://example.com'},
     ];
 
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        OsmeaComponents.text(
           '🧪 Quick Test URLs',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 8),
-        Wrap(
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.wrap(
           spacing: 8,
           runSpacing: 8,
           children: testUrls.map<Widget>((urlData) {
@@ -622,16 +622,11 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
 
   Widget _buildSocialMediaButtons() {
     final socialPlatforms = [
-      {'name': 'X (Twitter)', 'key': 'x', 'icon': Icons.alternate_email},
-      {'name': 'Instagram', 'key': 'instagram', 'icon': Icons.camera_alt},
       {'name': 'LinkedIn', 'key': 'linkedin', 'icon': Icons.work},
-      {'name': 'YouTube', 'key': 'youtube', 'icon': Icons.play_circle},
       {'name': 'GitHub', 'key': 'github', 'icon': Icons.code},
-      {'name': 'TikTok', 'key': 'tiktok', 'icon': Icons.music_video},
-      {'name': 'WhatsApp', 'key': 'whatsapp', 'icon': Icons.message},
     ];
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 8,
       runSpacing: 8,
       children: socialPlatforms.map<Widget>((platform) {
@@ -644,7 +639,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
               '${platform['name']} Link',
               () => UrlLauncher.openSocialLink(
                 platform['key'] as String,
-                _usernameController.text.trim(),
+                '', // Empty string since we use full URLs for LinkedIn and GitHub
               ),
             );
           },
@@ -661,7 +656,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
       {'name': 'SoundCloud', 'key': 'soundcloud', 'icon': Icons.cloud},
     ];
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 8,
       runSpacing: 8,
       children: musicPlatforms.map<Widget>((platform) {
@@ -691,7 +686,7 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
       {'name': 'Prime Video', 'key': 'prime_video', 'icon': Icons.video_library},
     ];
 
-    return Wrap(
+    return OsmeaComponents.wrap(
       spacing: 8,
       runSpacing: 8,
       children: videoPlatforms.map<Widget>((platform) {
@@ -720,9 +715,9 @@ class _UrlLauncherExampleState extends State<UrlLauncherExample>
       {'name': 'Documentation', 'key': 'documentation', 'icon': Icons.book},
     ];
 
-    return Column(
+    return OsmeaComponents.column(
       children: websites.map((website) {
-        return Padding(
+        return OsmeaComponents.padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: OsmeaComponents.button(
             text: website['name'] as String,
