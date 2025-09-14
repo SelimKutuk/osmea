@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:apis/apis.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core/core.dart';
+import '../../services/handlers/woocommerce/auth_handlers/jwt_auth_test_handler.dart';
+import '../../services/handlers/woocommerce/auth_handlers/user_signup_handler.dart';
 
 class StoreSetupWizard extends StatefulWidget {
   final Function(StoreConfiguration)? onStoreAdded;
@@ -60,6 +62,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   int _currentStep = 0;
   String? _selectedPlatform;
+  String _currentTab = 'store'; // For WooCommerce tab navigation
 
   // Regex patterns for validation
   static final RegExp _storeNameRegex = RegExp(r'^[a-zA-Z0-9\s\-_]{2,50}$');
@@ -71,8 +74,13 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   static final RegExp _wooCommerceUrlRegex =
       RegExp(r'^https?://[a-zA-Z0-9\-\.:]+(?:\.[a-zA-Z]{2,}|:\d+)/?.*$');
   static final RegExp _usernameRegex = RegExp(r'^[a-zA-Z0-9_\-\.@]{3,50}$');
-  static final RegExp _passwordRegex =
-      RegExp(r'^.{8,}$'); // Minimum 8 characters
+  // No password regex - backend handles all validation
+  // We only check if password is not empty
+  static final RegExp _emailRegex =
+      RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+
+  // WooCommerce Customer Auth regex patterns
+  static final RegExp _authEndpointRegex = RegExp(r'^[a-zA-Z0-9_\-\./]+$');
 
   // Validation error messages
   String? _storeNameError;
@@ -82,6 +90,16 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   String? _usernameError;
   String? _passwordError;
 
+  // WooCommerce Customer Auth validation errors
+  String? _customerEmailError;
+  String? _customerPasswordError;
+  String? _authEndpointError;
+
+  // Authentication testing state
+  bool _isTestingAuth = false;
+  bool _isSigningUp = false;
+  String? _authTestResult;
+
   // Controllers for form fields
   final _storeNameController = TextEditingController();
   final _accessTokenController = TextEditingController();
@@ -89,6 +107,16 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   final _storeUrlController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  // WooCommerce Customer Auth Controllers
+  final _customerEmailController = TextEditingController();
+  final _customerPasswordController = TextEditingController();
+  final _authEndpointController = TextEditingController();
+
+  // Sign up fields (Postman parameters only)
+  final _signupEmailController = TextEditingController();
+  final _signupPasswordController = TextEditingController();
+  final _signupAuthKeyController = TextEditingController();
 
   // Password visibility states
   bool _isAccessTokenVisible = false;
@@ -143,6 +171,21 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           }
         }
       }
+      // Update tab states when store name changes
+      if (mounted) setState(() {});
+    });
+
+    // Add listeners to WooCommerce store configuration fields to update tab states
+    _storeUrlController.addListener(() {
+      if (mounted) setState(() {});
+    });
+
+    _usernameController.addListener(() {
+      if (mounted) setState(() {});
+    });
+
+    _passwordController.addListener(() {
+      if (mounted) setState(() {});
     });
   }
 
@@ -258,6 +301,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         _storeUrlController.text = store.storeUrl ?? '';
         _usernameController.text = store.username ?? '';
         _passwordController.text = store.password ?? '';
+        _authEndpointController.text = store.authEndpoint ?? '';
       }
     });
 
@@ -315,6 +359,214 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       });
     } catch (e) {
       debugPrint('❌ Error checking duplicate name in real-time: $e');
+    }
+  }
+
+  /// Show warning when trying to access Customer Authentication without completing Store Configuration
+  Widget _buildStoreConfigurationWarning() {
+    if (_selectedPlatform != 'woocommerce' ||
+        _currentTab != 'store' ||
+        _isStoreConfigurationComplete()) {
+      return const SizedBox.shrink();
+    }
+
+    return OsmeaComponents.container(
+      margin: EdgeInsets.only(bottom: context.spacing24),
+      padding: EdgeInsets.all(context.spacing16),
+      decoration: BoxDecoration(
+        color: OsmeaColors.amberFlame.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: OsmeaColors.amberFlame.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: OsmeaComponents.row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.info_outline,
+            color: OsmeaColors.amberFlame,
+            size: 24,
+          ),
+          OsmeaComponents.sizedBox(width: 12),
+          OsmeaComponents.expanded(
+            child: OsmeaComponents.column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OsmeaComponents.text(
+                  'Complete Store Configuration First',
+                  textStyle: OsmeaTextStyle.titleSmall(context).copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: OsmeaColors.amberFlame,
+                  ),
+                ),
+                OsmeaComponents.sizedBox(height: 8),
+                OsmeaComponents.text(
+                  'Please fill in all required store configuration fields below. Once completed, the Customer Authentication tab will become available.',
+                  textStyle: OsmeaTextStyle.bodyMedium(context).copyWith(
+                    color: OsmeaColors.steel,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Check if store configuration is complete
+  bool _isStoreConfigurationComplete() {
+    if (_selectedPlatform != 'woocommerce') {
+      return true; // Only check for WooCommerce
+    }
+
+    return _storeNameController.text.trim().isNotEmpty &&
+        _storeUrlController.text.trim().isNotEmpty &&
+        _usernameController.text.trim().isNotEmpty &&
+        _passwordController.text.trim().isNotEmpty;
+  }
+
+  /// Test WooCommerce JWT Authentication
+  Future<void> _testAuthentication() async {
+    if (_customerEmailController.text.isEmpty ||
+        _customerPasswordController.text.isEmpty) {
+      setState(() {
+        _authTestResult = 'Please enter customer email and password first';
+      });
+      return;
+    }
+
+    setState(() {
+      _isTestingAuth = true;
+      _authTestResult = null;
+    });
+
+    try {
+      debugPrint('🔐 Testing WooCommerce JWT authentication...');
+
+      // Get brand name from current store configuration or use store name
+      final brandName = await WizardHelper.getBrandNameForAuth();
+      final effectiveBrandName =
+          brandName.isNotEmpty ? brandName : _storeNameController.text.trim();
+
+      // Use the JWT Auth Test Handler
+      final handler = JwtAuthTestHandler();
+
+      // Get password as raw string and convert safely
+      final rawPassword = _customerPasswordController.text;
+      final safePassword = _convertPasswordToSafeString(rawPassword);
+
+      final params = {
+        'brand_name': effectiveBrandName,
+        'username': _customerEmailController.text.trim(),
+        'password': safePassword,
+      };
+
+      final result = await handler.handleRequest('POST', params);
+
+      if (result['status'] == 'success') {
+        // Extract JWT token from response
+        final tokenInfo = result['token_info'] as Map<String, dynamic>?;
+        final jwtToken = tokenInfo?['jwt'] as String? ??
+            tokenInfo?['access_token'] as String?;
+
+        if (jwtToken != null && jwtToken.isNotEmpty) {
+          debugPrint('🔑 JWT token received: ${jwtToken.substring(0, 20)}...');
+        }
+
+        setState(() {
+          _authTestResult = jwtToken != null && jwtToken.isNotEmpty
+              ? '✅ Authentication successful! JWT token received and saved to local storage.\n\n🔑 JWT Token:\n$jwtToken'
+              : '✅ Authentication successful! JWT token received and saved to local storage.';
+        });
+        debugPrint('✅ JWT authentication test successful');
+      } else {
+        setState(() {
+          _authTestResult = '❌ Authentication failed: ${result['message']}';
+        });
+        debugPrint('❌ JWT authentication test failed: ${result['message']}');
+      }
+    } catch (e) {
+      setState(() {
+        _authTestResult = '❌ Authentication error: ${e.toString()}';
+      });
+      debugPrint('❌ JWT authentication test error: $e');
+    } finally {
+      setState(() {
+        _isTestingAuth = false;
+      });
+    }
+  }
+
+  /// Sign up new user using WooCommerce auth
+  Future<void> _signUpUser() async {
+    if (_signupEmailController.text.isEmpty ||
+        _signupPasswordController.text.isEmpty ||
+        _signupAuthKeyController.text.isEmpty) {
+      setState(() {
+        _authTestResult =
+            'Please fill in email, password and AUTH_KEY for sign up';
+      });
+      return;
+    }
+
+    setState(() {
+      _isSigningUp = true;
+      _authTestResult = null;
+    });
+
+    try {
+      debugPrint('📝 Starting user sign up...');
+
+      // Get brand name from current store configuration or use store name
+      final brandName = await WizardHelper.getBrandNameForAuth();
+      final effectiveBrandName =
+          brandName.isNotEmpty ? brandName : _storeNameController.text.trim();
+
+      // Use the User Sign Up Handler
+      final handler = UserSignUpHandler();
+
+      // Get password as raw string and convert safely
+      final rawPassword = _signupPasswordController.text;
+      final safePassword = _convertPasswordToSafeString(rawPassword);
+
+      final params = <String, String>{
+        'rest_route': '/$effectiveBrandName-auth-login/v1/users',
+        'email': _signupEmailController.text.trim(),
+        'password': safePassword,
+        'AUTH_KEY': _signupAuthKeyController.text.trim(),
+      };
+
+      final result = await handler.handleRequest('POST', params);
+
+      if (result['status'] == 'success') {
+        setState(() {
+          _authTestResult =
+              '✅ User sign up successful!\n\n👤 User created:\n${result['user_data']}';
+        });
+        debugPrint('✅ User sign up successful');
+
+        // Clear sign up form
+        _signupEmailController.clear();
+        _signupPasswordController.clear();
+        _signupAuthKeyController.clear();
+      } else {
+        setState(() {
+          _authTestResult = '❌ Sign up failed: ${result['message']}';
+        });
+        debugPrint('❌ User sign up failed: ${result['message']}');
+      }
+    } catch (e) {
+      setState(() {
+        _authTestResult = '❌ Sign up error: ${e.toString()}';
+      });
+      debugPrint('❌ User sign up error: $e');
+    } finally {
+      setState(() {
+        _isSigningUp = false;
+      });
     }
   }
 
@@ -435,7 +687,12 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
             ? _usernameController.text.trim()
             : null,
         password: _selectedPlatform == 'woocommerce'
-            ? _passwordController.text.trim()
+            ? _convertPasswordToSafeString(_passwordController.text)
+            : null,
+        // WooCommerce Customer Auth fields
+        authEndpoint: _selectedPlatform == 'woocommerce' &&
+                _authEndpointController.text.isNotEmpty
+            ? _authEndpointController.text.trim()
             : null,
         isActive: widget.existingStore?.isActive ?? true,
         isDefault: widget.existingStore?.isDefault ?? true,
@@ -590,6 +847,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       _storeUrlError = null;
       _usernameError = null;
       _passwordError = null;
+      _authEndpointError = null;
     });
 
     bool isValid = true;
@@ -657,13 +915,19 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         isValid = false;
       }
 
-      // Password validation
+      // Password validation - only check if not empty, backend handles the rest
       if (_passwordController.text.isEmpty) {
         _passwordError = 'Password is required';
         isValid = false;
-      } else if (!_passwordRegex.hasMatch(_passwordController.text)) {
-        _passwordError = 'Password must be at least 8 characters';
-        isValid = false;
+      } else {
+        // Convert password to safe string (preserves all characters)
+        final safePassword =
+            _convertPasswordToSafeString(_passwordController.text);
+        if (safePassword.isEmpty) {
+          _passwordError = 'Password cannot be empty after processing';
+          isValid = false;
+        }
+        // No regex validation - backend handles all password rules
       }
 
       // API version validation for WooCommerce
@@ -677,11 +941,79 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       }
     }
 
+    // Customer Authentication validation (only for WooCommerce)
+    if (_selectedPlatform == 'woocommerce' && _currentTab == 'customer') {
+      // Customer Email validation
+      if (_customerEmailController.text.isEmpty) {
+        _customerEmailError = 'Customer email is required';
+        isValid = false;
+      } else if (!_emailRegex.hasMatch(_customerEmailController.text)) {
+        _customerEmailError = 'Please enter a valid email address';
+        isValid = false;
+      }
+
+      // Customer Password validation - only check if not empty, backend handles the rest
+      if (_customerPasswordController.text.isEmpty) {
+        _customerPasswordError = 'Customer password is required';
+        isValid = false;
+      } else {
+        // Convert password to safe string (preserves all characters)
+        final safePassword =
+            _convertPasswordToSafeString(_customerPasswordController.text);
+        if (safePassword.isEmpty) {
+          _customerPasswordError = 'Password cannot be empty after processing';
+          isValid = false;
+        }
+        // No regex validation - backend handles all password rules
+      }
+
+      // Auth Endpoint validation
+      if (_authEndpointController.text.isEmpty) {
+        _authEndpointError = 'Authentication endpoint is required';
+        isValid = false;
+      } else if (!_authEndpointRegex.hasMatch(_authEndpointController.text)) {
+        _authEndpointError = 'Invalid endpoint format';
+        isValid = false;
+      }
+    }
+
     if (!isValid) {
       setState(() {});
     }
 
     return isValid;
+  }
+
+  /// 🔐 Convert raw password to safe string for API transmission
+  /// Handles special characters and ensures proper encoding
+  String _convertPasswordToSafeString(String rawPassword) {
+    try {
+      // Only remove dangerous null characters and control characters (0x00-0x1F, 0x7F)
+      // Keep ALL other characters including special chars, unicode, emojis, etc.
+      final cleanedPassword = rawPassword.replaceAll(
+          RegExp(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]'), '');
+
+      // Ensure the password is not empty after cleaning
+      if (cleanedPassword.isEmpty) {
+        throw Exception('Password cannot be empty after cleaning');
+      }
+
+      // Convert to string and trim whitespace
+      final safePassword = cleanedPassword.trim();
+
+      // Validate that the password contains at least one character
+      if (safePassword.isEmpty) {
+        throw Exception('Password cannot be empty');
+      }
+
+      debugPrint(
+          '🔐 Password converted safely: ${safePassword.length} characters (preserves all special chars)');
+      return safePassword;
+    } catch (e) {
+      debugPrint('❌ Error converting password: $e');
+      // Return the original password as fallback, but log the error
+      return rawPassword.trim();
+    }
   }
 
   @override
@@ -693,6 +1025,12 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     _storeUrlController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
+    _customerEmailController.dispose();
+    _customerPasswordController.dispose();
+    _authEndpointController.dispose();
+    _signupEmailController.dispose();
+    _signupPasswordController.dispose();
+    _signupAuthKeyController.dispose();
     super.dispose();
   }
 
@@ -913,6 +1251,96 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     }
   }
 
+  Widget _buildTabBar() {
+    if (_selectedPlatform != 'woocommerce') {
+      return const SizedBox.shrink();
+    }
+
+    final tabs = WizardHelper.getWooCommerceTabs();
+    final tabNames = WizardHelper.getPlatformTabNames('woocommerce');
+
+    return OsmeaComponents.container(
+      margin: EdgeInsets.only(bottom: context.spacing24),
+      padding: EdgeInsets.all(context.spacing6),
+      decoration: BoxDecoration(
+        color: OsmeaColors.ash.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: OsmeaColors.steel.withValues(alpha: 0.15),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: OsmeaColors.steel.withValues(alpha: 0.08),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: OsmeaComponents.row(
+        children: tabs.map((tab) {
+          final isActive = _currentTab == tab;
+          final tabName = tabNames[tab] ?? tab;
+          final isCustomerTab = tab == 'customer';
+          final isStoreConfigComplete = _isStoreConfigurationComplete();
+          final isTabDisabled = isCustomerTab && !isStoreConfigComplete;
+
+          // Define tab icons with proper styling
+          IconData tabIcon;
+          if (tab == 'store') {
+            tabIcon = Icons.store_mall_directory_outlined;
+          } else if (tab == 'customer') {
+            tabIcon = Icons.person_outline_rounded;
+          } else {
+            tabIcon = Icons.settings_outlined;
+          }
+
+          return OsmeaComponents.expanded(
+            child: OsmeaComponents.container(
+              margin: EdgeInsets.symmetric(horizontal: context.spacing4),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                child: Opacity(
+                  opacity: isTabDisabled ? 0.5 : 1.0,
+                  child: OsmeaComponents.button(
+                    text: tabName,
+                    variant:
+                        isActive ? ButtonVariant.primary : ButtonVariant.ghost,
+                    size: ButtonSize
+                        .small, // Changed from medium to small for smaller text
+                    icon: Icon(
+                      tabIcon,
+                      size: 18, // Reduced icon size to match smaller text
+                      color: isTabDisabled
+                          ? OsmeaColors.steel.withValues(alpha: 0.4)
+                          : isActive
+                              ? Colors.white
+                              : OsmeaColors.steel.withValues(alpha: 0.8),
+                    ),
+                    onPressed: () {
+                      // Check if trying to access Customer Authentication without completing Store Configuration
+                      if (tab == 'customer' &&
+                          !_isStoreConfigurationComplete()) {
+                        // Don't switch tab, stay on store configuration
+                        return;
+                      }
+
+                      setState(() {
+                        _currentTab = tab;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   Widget _buildPlatformSelectionStep() {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -981,18 +1409,21 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         onTap: () {
           setState(() {
             _selectedPlatform = platform;
+            _currentTab = 'store'; // Reset to store tab when platform changes
             // Reset form when platform changes
             _storeNameController.clear();
             _accessTokenController.clear();
             _storeUrlController.clear();
             _usernameController.clear();
             _passwordController.clear();
+            _authEndpointController.clear();
 
             // Set default API version based on platform
             if (platform == 'shopify') {
               _apiVersionController.text = '2025-07';
             } else if (platform == 'woocommerce') {
               _apiVersionController.text = 'v3';
+              _authEndpointController.text = 'wc-auth/v1';
             }
           });
         },
@@ -1054,6 +1485,25 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         ),
         OsmeaComponents.sizedBox(height: context.spacing32),
 
+        // Tab bar for WooCommerce
+        _buildTabBar(),
+
+        // Content based on current tab
+        if (_currentTab == 'store') ...[
+          // Warning for incomplete store configuration (shown only on store tab)
+          _buildStoreConfigurationWarning(),
+          _buildStoreConfiguration(),
+        ] else if (_currentTab == 'customer') ...[
+          _buildCustomerAuthentication(),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildStoreConfiguration() {
+    return OsmeaComponents.column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         // Store name
         _buildTextField(
           controller: _storeNameController,
@@ -1128,6 +1578,239 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     );
   }
 
+  Widget _buildCustomerAuthentication() {
+    return OsmeaComponents.column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OsmeaComponents.text(
+          'Customer Authentication Setup',
+          textStyle: OsmeaTextStyle.titleMedium(context),
+          color: OsmeaColors.steel,
+        ),
+        OsmeaComponents.sizedBox(height: context.spacing8),
+        OsmeaComponents.text(
+          'Configure JWT-based customer authentication for your WooCommerce store:',
+          textStyle: OsmeaTextStyle.bodyMedium(context),
+          color: OsmeaColors.steel.withValues(alpha: 0.7),
+        ),
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Customer Email
+        _buildTextField(
+          controller: _customerEmailController,
+          label: 'Customer Email',
+          hint: 'Enter customer email for JWT authentication',
+          errorText: _customerEmailError,
+          icon: Icons.email,
+          keyboardType: TextInputType.emailAddress,
+        ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Customer Password
+        _buildTextField(
+          controller: _customerPasswordController,
+          label: 'Customer Password',
+          hint: 'Enter customer password for JWT authentication',
+          errorText: _customerPasswordError,
+          icon: Icons.lock,
+          isPassword: true,
+        ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Auth Endpoint
+        _buildTextField(
+          controller: _authEndpointController,
+          label: 'Authentication Endpoint',
+          hint: 'e.g., wc-auth/v1 or wp-json/custom-auth/v1',
+          errorText: _authEndpointError,
+          icon: Icons.api,
+        ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Test Authentication Button
+        OsmeaComponents.button(
+          text: _isTestingAuth
+              ? 'Testing Authentication...'
+              : 'Test Authentication',
+          onPressed: _isTestingAuth ? null : _testAuthentication,
+          variant: ButtonVariant.primary,
+          size: ButtonSize.medium,
+          icon: _isTestingAuth
+              ? SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      OsmeaColors.white,
+                    ),
+                  ),
+                )
+              : Icon(Icons.security),
+        ),
+
+        OsmeaComponents.sizedBox(height: context.spacing16),
+
+        // Authentication Test Result
+        if (_authTestResult != null)
+          OsmeaComponents.container(
+            padding: context.paddingNormal,
+            decoration: BoxDecoration(
+              color: _authTestResult!.startsWith('✅')
+                  ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
+                  : OsmeaColors.red.withValues(alpha: 0.1),
+              borderRadius: context.borderRadiusNormal,
+              border: Border.all(
+                color: _authTestResult!.startsWith('✅')
+                    ? OsmeaColors.forestHeart.withValues(alpha: 0.3)
+                    : OsmeaColors.red.withValues(alpha: 0.3),
+              ),
+            ),
+            child: OsmeaComponents.row(
+              children: [
+                Icon(
+                  _authTestResult!.startsWith('✅')
+                      ? Icons.check_circle_outline
+                      : Icons.error_outline,
+                  color: _authTestResult!.startsWith('✅')
+                      ? OsmeaColors.forestHeart
+                      : OsmeaColors.red,
+                  size: 24,
+                ),
+                OsmeaComponents.sizedBox(width: context.spacing16),
+                OsmeaComponents.expanded(
+                  child: OsmeaComponents.text(
+                    _authTestResult!,
+                    textStyle: OsmeaTextStyle.bodyMedium(context),
+                    color: _authTestResult!.startsWith('✅')
+                        ? OsmeaColors.forestHeart
+                        : OsmeaColors.red,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Sign Up Section
+        OsmeaComponents.container(
+          padding: context.paddingNormal,
+          decoration: BoxDecoration(
+            color: OsmeaColors.blue.withValues(alpha: 0.05),
+            borderRadius: context.borderRadiusNormal,
+            border: Border.all(
+              color: OsmeaColors.blue.withValues(alpha: 0.2),
+            ),
+          ),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OsmeaComponents.row(
+                children: [
+                  Icon(
+                    Icons.person_add,
+                    color: OsmeaColors.blue,
+                    size: 24,
+                  ),
+                  OsmeaComponents.sizedBox(width: context.spacing12),
+                  OsmeaComponents.text(
+                    'Create New User Account',
+                    textStyle: OsmeaTextStyle.titleLarge(context),
+                    color: OsmeaColors.blue,
+                  ),
+                ],
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              // Sign up form fields (Postman parameters)
+              OsmeaComponents.textField(
+                controller: _signupEmailController,
+                label: 'Email *',
+                hint: 'Enter email address',
+                keyboardType: TextInputType.emailAddress,
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              OsmeaComponents.textField(
+                controller: _signupPasswordController,
+                label: 'Password *',
+                hint: 'Enter password',
+                obscureText: true,
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              OsmeaComponents.textField(
+                controller: _signupAuthKeyController,
+                label: 'AUTH_KEY *',
+                hint: 'Enter authentication key',
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              // Sign Up Button
+              OsmeaComponents.button(
+                text: _isSigningUp ? 'Creating Account...' : 'Create Account',
+                onPressed: _isSigningUp ? null : _signUpUser,
+                variant: ButtonVariant.secondary,
+                size: ButtonSize.medium,
+                icon: _isSigningUp
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            OsmeaColors.white,
+                          ),
+                        ),
+                      )
+                    : Icon(Icons.person_add),
+              ),
+            ],
+          ),
+        ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Info message
+        OsmeaComponents.container(
+          padding: context.paddingNormal,
+          decoration: BoxDecoration(
+            color: OsmeaColors.forestHeart.withValues(alpha: 0.1),
+            borderRadius: context.borderRadiusNormal,
+            border: Border.all(
+              color: OsmeaColors.forestHeart.withValues(alpha: 0.3),
+            ),
+          ),
+          child: OsmeaComponents.row(
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: OsmeaColors.forestHeart,
+                size: 24,
+              ),
+              OsmeaComponents.sizedBox(width: context.spacing16),
+              OsmeaComponents.expanded(
+                child: OsmeaComponents.text(
+                  'This configuration enables JWT-based customer authentication. Make sure your WooCommerce store has the JWT Authentication plugin installed and configured.',
+                  textStyle: OsmeaTextStyle.bodyMedium(context),
+                  color: OsmeaColors.forestHeart,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
@@ -1173,7 +1856,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       setState(() {
         if (isPassword) {
           _isPasswordVisible = !_isPasswordVisible;
-        } else {
+        } else if (isAccessToken) {
           _isAccessTokenVisible = !_isAccessTokenVisible;
         }
       });
@@ -1233,6 +1916,10 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               ] else if (_selectedPlatform == 'woocommerce') ...[
                 _buildReviewItem('Username', _usernameController.text.trim()),
                 _buildReviewItem('Password', '••••••••'),
+                if (_authEndpointController.text.isNotEmpty) ...[
+                  _buildReviewItem(
+                      'Auth Endpoint', _authEndpointController.text.trim()),
+                ],
               ],
               _buildReviewItem(
                   'API Version', _apiVersionController.text.trim()),

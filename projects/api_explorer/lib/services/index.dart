@@ -2,6 +2,15 @@
 
 export 'api_request_handler.dart';
 
+// 🔐 Authentication Handlers
+export 'handlers/woocommerce/auth_handlers/jwt_auth_test_handler.dart';
+export 'handlers/woocommerce/auth_handlers/user_login_handler.dart';
+export 'handlers/woocommerce/auth_handlers/user_signup_handler.dart';
+export 'handlers/woocommerce/auth_handlers/user_logout_handler.dart';
+export 'handlers/woocommerce/auth_handlers/password_reset_handler.dart';
+export 'handlers/woocommerce/auth_handlers/auth_status_handler.dart';
+export 'handlers/woocommerce/auth_handlers/delete_user_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers

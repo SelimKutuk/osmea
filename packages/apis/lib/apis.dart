@@ -6,6 +6,12 @@ export 'services/cross_platform_storage.dart';
 export 'services/store_management_service.dart';
 export 'models/store_configuration.dart';
 
+// 🔐 Authentication Services
+export 'services/auth/woo_auth_manager.dart';
+export 'services/auth/woo_jwt_signin_manager.dart';
+export 'services/auth/woo_jwt_auth_service.dart';
+export 'models/auth/woo_jwt_token.dart';
+
 // 🚀 GraphQL Annotations
 export 'network/remote/shopify/graphql/annotations/graphql_annotations.dart';
 
@@ -173,6 +179,7 @@ class WooNetwork {
   static GetIt getIt = GetIt.instance;
 
   static String storeUrl = '';
+  static String storeName = ''; // 🏬 Store name for custom endpoints
   static String username = '';
   static String password = '';
   static String apiVersion = 'v3';
@@ -182,10 +189,12 @@ class WooNetwork {
     required String storeUrl,
     required String username,
     required String password,
+    String? storeName,
     String? apiVersion,
   }) {
     WooNetwork.getIt = getIt;
     WooNetwork.storeUrl = storeUrl;
+    WooNetwork.storeName = storeName ?? '';
     WooNetwork.username = username;
     WooNetwork.password = password;
     WooNetwork.apiVersion = apiVersion ?? 'v3';
@@ -250,6 +259,10 @@ class WooNetwork {
 
   static void updateStoreUrl(String url) {
     WooNetwork.storeUrl = url;
+  }
+
+  static void updateStoreName(String name) {
+    WooNetwork.storeName = name;
   }
 
   static void updateUsername(String user) {
@@ -396,5 +409,3 @@ Future<void> detectEnabledPlatformsFromWizard() async {
     isWooEnabled = false;
   }
 }
-
-
