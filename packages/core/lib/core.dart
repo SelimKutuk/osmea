@@ -34,6 +34,9 @@ export 'package:core/src/helper/double_extension_helper.dart';
 // 📅 Exports the DateTime helper for comprehensive date and time operations
 export 'package:core/src/helper/datetime_helper.dart';
 
+// 🔗 Exports the URL launcher helper for external URL handling
+export 'package:core/src/helper/url_launcher_helper.dart';
+
 // 🗂️ Exports the asset configuration helper for JSON config management
 export 'package:core/src/helper/asset_config_helper.dart';
 
