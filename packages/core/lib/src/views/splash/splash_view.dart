@@ -219,28 +219,9 @@ class SplashView extends StatelessWidget {
     );
   }
 
-  /// ✅ Build completed state UI (brief transition)
+  /// ✅ Build completed state UI (no UI shown - direct transition)
   Widget _buildCompletedState(BuildContext context, SplashState state) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Completion indicator
-          Icon(
-            Icons.check_circle_outline,
-            size: 48,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-
-          OsmeaComponents.sizedBox(height: context.spacing16),
-
-          OsmeaComponents.text(
-            'Ready!',
-            variant: OsmeaTextVariant.titleMedium,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ],
-      ),
-    );
+    // Return empty container - no completion UI shown
+    return const SizedBox.shrink();
   }
 }
