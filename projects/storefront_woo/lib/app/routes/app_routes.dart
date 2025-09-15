@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
-import 'package:storefront_woo/app/views/view_splash/splash_view.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -11,7 +10,16 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return SplashView();
+        return SplashView(
+          onNavigationReady: (route) {
+            debugPrint('🧭 Navigating to: $route');
+            context.go(route);
+          },
+          onError: (error) {
+            debugPrint('❌ Splash error: $error');
+            context.go('/home'); // Fallback to home on error
+          },
+        );
       },
     ),
 
