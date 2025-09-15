@@ -45,6 +45,8 @@ export 'package:core/src/helper/remote_config_helper.dart';
 
 // 📁 Exports the file download helper for downloading files with progress tracking
 export 'package:core/src/helper/file_download_helper.dart';
+// 📤 Exports the application share helper for sharing text, URLs, and files
+export 'package:core/src/helper/application_share_helper.dart';
 
 // 🔐 Exports the permission handler helper for runtime permissions management
 export 'package:core/src/helper/permission_handler_helper/permission_handler_helper.dart';
