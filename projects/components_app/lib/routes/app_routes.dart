@@ -59,6 +59,7 @@ import '../components/ticket_widget_example.dart';
 import '../components/toast_example.dart';
 import '../components/url_launcher_example.dart';
 import '../components/wrap_example.dart';
+import '../components/file_download_helper_example.dart';
 
 class AppRoutes {
   // Route paths - Splash and Intro
@@ -330,6 +331,7 @@ class AppRoutes {
       'ticket-widget': const TicketWidgetExample(),
       'toast': const ToastExample(),
       'url-launcher': const UrlLauncherExample(),
+      'file-downloader': const FileDownloadHelperExample(),
       'wrap': const WrapExample(),
     };
 
