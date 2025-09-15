@@ -35,6 +35,7 @@ dependencies:
   dio: ^5.7.0 # HTTP client for file downloads
   path_provider: ^2.1.5 # Path provider for file storage
   permission_handler: ^11.2.0 # Runtime permissions handler
+  share_plus: ^10.1.4 # Sharing text/files across platforms
   osmea_components:
     path: ../components # osmea UI kit
  
