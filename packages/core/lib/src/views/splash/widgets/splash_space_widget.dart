@@ -70,19 +70,6 @@ class SplashSpaceWidget extends StatelessWidget {
                       letterSpacing: 4.0,
                     ),
                   ),
-
-                // Subtle loading indicator below the content
-                if (state.config!.showLoadingIndicator) ...[
-                  OsmeaComponents.sizedBox(height: context.spacing48),
-                  SizedBox(
-                    width: 2,
-                    height: 20,
-                    child: LinearProgressIndicator(
-                      color: _getPrimaryColor(context, state),
-                      backgroundColor: Colors.transparent,
-                    ),
-                  ),
-                ],
               ],
             ),
           ),
@@ -139,31 +126,5 @@ class SplashSpaceWidget extends StatelessWidget {
       }
     }
     return const Color(0xFFFFFFFF); // Default white text for space theme
-  }
-
-  /// 🎨 Get primary color from config
-  Color _getPrimaryColor(BuildContext context, SplashState state) {
-    final config = state.config;
-    if (config?.primaryColor != null) {
-      try {
-        String colorString = config!.primaryColor!;
-        // Handle both 6-digit (#RRGGBB) and 8-digit (#RRGGBBAA) hex colors
-        if (colorString.startsWith('#')) {
-          colorString = colorString.substring(1); // Remove #
-          if (colorString.length == 8) {
-            // 8-digit hex: RRGGBBAA - keep as is, just add FF prefix for full opacity
-            return Color(
-                int.parse('FF${colorString.substring(0, 6)}', radix: 16));
-          } else if (colorString.length == 6) {
-            // 6-digit hex: RRGGBB - add FF prefix for full opacity
-            return Color(int.parse('FF$colorString', radix: 16));
-          }
-        }
-      } catch (e) {
-        debugPrint('⚠️ Invalid primary color: ${config!.primaryColor}');
-      }
-    }
-    // Fallback to text color if no primary color
-    return _getTextColor(context, state);
   }
 }
