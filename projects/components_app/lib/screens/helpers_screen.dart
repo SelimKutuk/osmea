@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import '../components/url_launcher_example.dart';
+import '../components/file_download_helper_example.dart';
+import '../components/application_share_helper_example.dart';
 
 /// 🔧 **Helpers Screen**
 ///
@@ -87,8 +89,15 @@ class HelpersScreen extends StatelessWidget {
         'title': 'File Download',
         'icon': Icons.file_download,
         'description': 'Test file download functionality',
-        'route': null,
-        'isComingSoon': true,
+        'route': () => const FileDownloadHelperExample(),
+        'isComingSoon': false,
+      },
+      {
+        'title': 'Application Share',
+        'icon': Icons.share,
+        'description': 'Test sharing text, URLs, and files',
+        'route': () => const ApplicationShareHelperExample(),
+        'isComingSoon': false,
       },
     ];
 
