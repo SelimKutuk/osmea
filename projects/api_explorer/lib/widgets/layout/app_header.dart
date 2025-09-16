@@ -534,7 +534,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
               OsmeaComponents.sizedBox(width: context.spacing12),
 
-              // Store actions menu - status badge kaldırıldı
+              // Store actions menu
               _buildActionMenu(context),
             ],
           ),
