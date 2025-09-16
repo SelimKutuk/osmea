@@ -17,8 +17,8 @@ import 'package:core/src/layout/grid.dart';
 // Global variable for dev mode spacer control
 bool globalDevModeSpacer = true;
 
-/// 🚀 MasterApp: The main entry point for the application
-/// This class initializes Firebase, sets up local storage, and manages app settings.
+/// 🚀 MasterApp: The main entry point for the application.
+/// Initializes Firebase, loads configuration (asset + remote), and wires the root router.
 ///
 /// How to use the MasterApp:
 ///
@@ -53,8 +53,7 @@ class MasterApp extends StatelessWidget {
   ///
   /// Initializes necessary components before running the app.
   ///
-  /// This method is responsible for setting up Firebase, initializing local storage,
-  /// and logging important events related to the app's startup process.
+  /// Sets up Firebase, local storage, configuration sources, and analytics events.
   ///
   /// Parameters:
   /// - [allowCollectDataTelemetry]: A boolean flag that determines whether
@@ -63,10 +62,8 @@ class MasterApp extends StatelessWidget {
   ///   If set to false, no telemetry data will be sent, allowing users to opt-out
   ///   of data collection for privacy or other reasons.
   ///
-  /// This is a critical method as it ensures that all necessary components are
-  /// properly initialized before the app starts functioning. It also respects
-  /// user preferences regarding data collection, which is increasingly important
-  /// in today's privacy-conscious environment.
+  /// This ensures critical services are ready before the app starts and respects
+  /// user preferences around telemetry.
   ///
   ///  update date 11/05/2025
   static Future<void> runBefore({
@@ -355,8 +352,7 @@ class MasterApp extends StatelessWidget {
     this.devModeGrid = true,
     this.devModeSpacer = true,
     this.useConfigurationHelpers = true, // Enable configuration helpers
-  })  : assert(router != null, 'Router cannot be null! 🚫'),
-        assert(fontScale > 0, 'Font scale must be greater than 0! 🔍');
+  })  : assert(fontScale > 0, 'Font scale must be greater than 0! 🔍');
 
   final GoRouter router; // Router for navigation
   final bool shouldSetOrientation; // Flag to manage orientation
