@@ -27,12 +27,8 @@ mixin _$UserSignUpResponse {
   String? get error => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this UserSignUpResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserSignUpResponseCopyWith<UserSignUpResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,8 +59,6 @@ class _$UserSignUpResponseCopyWithImpl<$Res, $Val extends UserSignUpResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,8 +92,6 @@ class _$UserSignUpResponseCopyWithImpl<$Res, $Val extends UserSignUpResponse>
     ) as $Val);
   }
 
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserSignUpDataCopyWith<$Res>? get data {
@@ -140,8 +132,6 @@ class __$$UserSignUpResponseImplCopyWithImpl<$Res>
       $Res Function(_$UserSignUpResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,14 +216,12 @@ class _$UserSignUpResponseImpl implements _UserSignUpResponse {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, success, message, data, error,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserSignUpResponseImplCopyWith<_$UserSignUpResponseImpl> get copyWith =>
@@ -262,18 +250,15 @@ abstract class _UserSignUpResponse implements UserSignUpResponse {
   @override
   bool get success;
   @override
-  String? get message; // Made nullable as server sometimes doesn't send message
-  @override
+  String? get message;
+  @override // Made nullable as server sometimes doesn't send message
   UserSignUpData? get data;
   @override
   String? get error;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of UserSignUpResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserSignUpResponseImplCopyWith<_$UserSignUpResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -295,12 +280,8 @@ mixin _$UserSignUpData {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this UserSignUpData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserSignUpData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserSignUpDataCopyWith<UserSignUpData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -334,8 +315,6 @@ class _$UserSignUpDataCopyWithImpl<$Res, $Val extends UserSignUpData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserSignUpData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -424,8 +403,6 @@ class __$$UserSignUpDataImplCopyWithImpl<$Res>
       _$UserSignUpDataImpl _value, $Res Function(_$UserSignUpDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserSignUpData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -559,7 +536,7 @@ class _$UserSignUpDataImpl implements _UserSignUpData {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -574,9 +551,7 @@ class _$UserSignUpDataImpl implements _UserSignUpData {
       createdAt,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of UserSignUpData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserSignUpDataImplCopyWith<_$UserSignUpDataImpl> get copyWith =>
@@ -627,11 +602,8 @@ abstract class _UserSignUpData implements UserSignUpData {
   DateTime? get createdAt;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of UserSignUpData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserSignUpDataImplCopyWith<_$UserSignUpDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

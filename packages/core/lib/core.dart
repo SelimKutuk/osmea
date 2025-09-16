@@ -7,6 +7,12 @@ export 'package:core/src/base/base_view_bloc.dart';
 // 🧠 Exports the base class for View Models
 export 'package:core/src/base/base_view_model.dart';
 
+// 🧠 Exports the base cubit class View Models
+export 'package:core/src/base/base_view_model_cubit.dart';
+
+// 🧠 Exports the base cubit class View Models
+export 'package:core/src/base/base_view_cubit.dart';
+
 // 🧩 Exports the base class for Master App
 export 'package:core/src/base/master_view/master_app.dart';
 
@@ -34,6 +40,9 @@ export 'package:core/src/helper/double_extension_helper.dart';
 // 📅 Exports the DateTime helper for comprehensive date and time operations
 export 'package:core/src/helper/datetime_helper.dart';
 
+// 🔗 Exports the URL launcher helper for external URL handling
+export 'package:core/src/helper/url_launcher_helper.dart';
+
 // 🗂️ Exports the asset configuration helper for JSON config management
 export 'package:core/src/helper/asset_config_helper.dart';
 
@@ -42,6 +51,8 @@ export 'package:core/src/helper/remote_config_helper.dart';
 
 // 📁 Exports the file download helper for downloading files with progress tracking
 export 'package:core/src/helper/file_download_helper.dart';
+// 📤 Exports the application share helper for sharing text, URLs, and files
+export 'package:core/src/helper/application_share_helper.dart';
 
 // 🔐 Exports the permission handler helper for runtime permissions management
 export 'package:core/src/helper/permission_handler_helper/permission_handler_helper.dart';

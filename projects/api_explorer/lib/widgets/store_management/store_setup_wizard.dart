@@ -4,6 +4,7 @@ import 'package:apis/apis.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core/core.dart';
 import '../../services/handlers/woocommerce/auth_handlers/jwt_auth_test_handler.dart';
+import '../../services/handlers/woocommerce/auth_handlers/user_signup_handler.dart';
 
 class StoreSetupWizard extends StatefulWidget {
   final Function(StoreConfiguration)? onStoreAdded;
@@ -96,6 +97,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   // Authentication testing state
   bool _isTestingAuth = false;
+  bool _isSigningUp = false;
   String? _authTestResult;
 
   // Controllers for form fields
@@ -110,6 +112,11 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   final _customerEmailController = TextEditingController();
   final _customerPasswordController = TextEditingController();
   final _authEndpointController = TextEditingController();
+
+  // Sign up fields (Postman parameters only)
+  final _signupEmailController = TextEditingController();
+  final _signupPasswordController = TextEditingController();
+  final _signupAuthKeyController = TextEditingController();
 
   // Password visibility states
   bool _isAccessTokenVisible = false;
@@ -167,16 +174,16 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
       // Update tab states when store name changes
       if (mounted) setState(() {});
     });
-    
+
     // Add listeners to WooCommerce store configuration fields to update tab states
     _storeUrlController.addListener(() {
       if (mounted) setState(() {});
     });
-    
+
     _usernameController.addListener(() {
       if (mounted) setState(() {});
     });
-    
+
     _passwordController.addListener(() {
       if (mounted) setState(() {});
     });
@@ -357,7 +364,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   /// Show warning when trying to access Customer Authentication without completing Store Configuration
   Widget _buildStoreConfigurationWarning() {
-    if (_selectedPlatform != 'woocommerce' || _currentTab != 'store' || _isStoreConfigurationComplete()) {
+    if (_selectedPlatform != 'woocommerce' ||
+        _currentTab != 'store' ||
+        _isStoreConfigurationComplete()) {
       return const SizedBox.shrink();
     }
 
@@ -414,9 +423,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     }
 
     return _storeNameController.text.trim().isNotEmpty &&
-           _storeUrlController.text.trim().isNotEmpty &&
-           _usernameController.text.trim().isNotEmpty &&
-           _passwordController.text.trim().isNotEmpty;
+        _storeUrlController.text.trim().isNotEmpty &&
+        _usernameController.text.trim().isNotEmpty &&
+        _passwordController.text.trim().isNotEmpty;
   }
 
   /// Test WooCommerce JWT Authentication
@@ -487,6 +496,76 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     } finally {
       setState(() {
         _isTestingAuth = false;
+      });
+    }
+  }
+
+  /// Sign up new user using WooCommerce auth
+  Future<void> _signUpUser() async {
+    if (_signupEmailController.text.isEmpty ||
+        _signupPasswordController.text.isEmpty ||
+        _signupAuthKeyController.text.isEmpty) {
+      setState(() {
+        _authTestResult =
+            'Please fill in email, password and AUTH_KEY for sign up';
+      });
+      return;
+    }
+
+    setState(() {
+      _isSigningUp = true;
+      _authTestResult = null;
+    });
+
+    try {
+      debugPrint('📝 Starting user sign up...');
+
+      // Get brand name from current store configuration or use store name
+      final brandName = await WizardHelper.getBrandNameForAuth();
+      final effectiveBrandName =
+          brandName.isNotEmpty ? brandName : _storeNameController.text.trim();
+
+      // Use the User Sign Up Handler
+      final handler = UserSignUpHandler();
+
+      // Get password as raw string and convert safely
+      final rawPassword = _signupPasswordController.text;
+      final safePassword = _convertPasswordToSafeString(rawPassword);
+
+      final params = <String, String>{
+        'rest_route': '/$effectiveBrandName-auth-login/v1/users',
+        'email': _signupEmailController.text.trim(),
+        'password': safePassword,
+        'AUTH_KEY': _signupAuthKeyController.text.trim(),
+      };
+
+      final result = await handler.handleRequest('POST', params);
+
+      if (result['status'] == 'success') {
+        setState(() {
+          _authTestResult =
+              '✅ User sign up successful!\n\n👤 User created:\n${result['user_data']}';
+        });
+        debugPrint('✅ User sign up successful');
+
+        // Clear sign up form
+        _signupEmailController.clear();
+        _signupPasswordController.clear();
+        _signupAuthKeyController.clear();
+      } else {
+        setState(() {
+          _authTestResult = '❌ Sign up failed: ${result['message']}';
+        });
+        debugPrint('❌ User sign up failed: ${result['message']}');
+      }
+    } catch (e) {
+      setState(() {
+        _authTestResult = '❌ Sign up error: ${e.toString()}';
+      });
+      debugPrint('❌ User sign up error: $e');
+    } finally {
+      setState(() {
+        _isSigningUp = false;
       });
     }
   }
@@ -949,6 +1028,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     _customerEmailController.dispose();
     _customerPasswordController.dispose();
     _authEndpointController.dispose();
+    _signupEmailController.dispose();
+    _signupPasswordController.dispose();
+    _signupAuthKeyController.dispose();
     super.dispose();
   }
 
@@ -1203,7 +1285,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           final isCustomerTab = tab == 'customer';
           final isStoreConfigComplete = _isStoreConfigurationComplete();
           final isTabDisabled = isCustomerTab && !isStoreConfigComplete;
-          
+
           // Define tab icons with proper styling
           IconData tabIcon;
           if (tab == 'store') {
@@ -1213,7 +1295,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
           } else {
             tabIcon = Icons.settings_outlined;
           }
-          
+
           return OsmeaComponents.expanded(
             child: OsmeaComponents.container(
               margin: EdgeInsets.symmetric(horizontal: context.spacing4),
@@ -1224,24 +1306,27 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
                   opacity: isTabDisabled ? 0.5 : 1.0,
                   child: OsmeaComponents.button(
                     text: tabName,
-                    variant: isActive ? ButtonVariant.primary : ButtonVariant.ghost,
-                    size: ButtonSize.small, // Changed from medium to small for smaller text
+                    variant:
+                        isActive ? ButtonVariant.primary : ButtonVariant.ghost,
+                    size: ButtonSize
+                        .small, // Changed from medium to small for smaller text
                     icon: Icon(
                       tabIcon,
                       size: 18, // Reduced icon size to match smaller text
                       color: isTabDisabled
-                        ? OsmeaColors.steel.withValues(alpha: 0.4)
-                        : isActive 
-                          ? Colors.white 
-                          : OsmeaColors.steel.withValues(alpha: 0.8),
+                          ? OsmeaColors.steel.withValues(alpha: 0.4)
+                          : isActive
+                              ? Colors.white
+                              : OsmeaColors.steel.withValues(alpha: 0.8),
                     ),
                     onPressed: () {
                       // Check if trying to access Customer Authentication without completing Store Configuration
-                      if (tab == 'customer' && !_isStoreConfigurationComplete()) {
+                      if (tab == 'customer' &&
+                          !_isStoreConfigurationComplete()) {
                         // Don't switch tab, stay on store configuration
                         return;
                       }
-                      
+
                       setState(() {
                         _currentTab = tab;
                       });
@@ -1608,6 +1693,89 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               ],
             ),
           ),
+
+        OsmeaComponents.sizedBox(height: context.spacing24),
+
+        // Sign Up Section
+        OsmeaComponents.container(
+          padding: context.paddingNormal,
+          decoration: BoxDecoration(
+            color: OsmeaColors.blue.withValues(alpha: 0.05),
+            borderRadius: context.borderRadiusNormal,
+            border: Border.all(
+              color: OsmeaColors.blue.withValues(alpha: 0.2),
+            ),
+          ),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OsmeaComponents.row(
+                children: [
+                  Icon(
+                    Icons.person_add,
+                    color: OsmeaColors.blue,
+                    size: 24,
+                  ),
+                  OsmeaComponents.sizedBox(width: context.spacing12),
+                  OsmeaComponents.text(
+                    'Create New User Account',
+                    textStyle: OsmeaTextStyle.titleLarge(context),
+                    color: OsmeaColors.blue,
+                  ),
+                ],
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              // Sign up form fields (Postman parameters)
+              OsmeaComponents.textField(
+                controller: _signupEmailController,
+                label: 'Email *',
+                hint: 'Enter email address',
+                keyboardType: TextInputType.emailAddress,
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              OsmeaComponents.textField(
+                controller: _signupPasswordController,
+                label: 'Password *',
+                hint: 'Enter password',
+                obscureText: true,
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              OsmeaComponents.textField(
+                controller: _signupAuthKeyController,
+                label: 'AUTH_KEY *',
+                hint: 'Enter authentication key',
+              ),
+
+              OsmeaComponents.sizedBox(height: context.spacing16),
+
+              // Sign Up Button
+              OsmeaComponents.button(
+                text: _isSigningUp ? 'Creating Account...' : 'Create Account',
+                onPressed: _isSigningUp ? null : _signUpUser,
+                variant: ButtonVariant.secondary,
+                size: ButtonSize.medium,
+                icon: _isSigningUp
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            OsmeaColors.white,
+                          ),
+                        ),
+                      )
+                    : Icon(Icons.person_add),
+              ),
+            ],
+          ),
+        ),
 
         OsmeaComponents.sizedBox(height: context.spacing24),
 

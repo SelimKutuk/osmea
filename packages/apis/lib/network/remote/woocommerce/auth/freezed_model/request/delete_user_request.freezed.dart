@@ -29,12 +29,8 @@ mixin _$DeleteUserRequest {
   bool get deleteReviews => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
-  /// Serializes this DeleteUserRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DeleteUserRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DeleteUserRequestCopyWith<DeleteUserRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,8 +59,6 @@ class _$DeleteUserRequestCopyWithImpl<$Res, $Val extends DeleteUserRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DeleteUserRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,8 +117,6 @@ class __$$DeleteUserRequestImplCopyWithImpl<$Res>
       $Res Function(_$DeleteUserRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DeleteUserRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -213,14 +205,12 @@ class _$DeleteUserRequestImpl implements _DeleteUserRequest {
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, reason, deleteOrders,
       deleteReviews, const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of DeleteUserRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteUserRequestImplCopyWith<_$DeleteUserRequestImpl> get copyWith =>
@@ -259,11 +249,8 @@ abstract class _DeleteUserRequest implements DeleteUserRequest {
   bool get deleteReviews;
   @override
   Map<String, dynamic>? get metadata;
-
-  /// Create a copy of DeleteUserRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DeleteUserRequestImplCopyWith<_$DeleteUserRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

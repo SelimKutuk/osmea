@@ -1,5 +1,6 @@
 import 'package:api_explorer/services/api_request_handler.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:apis/apis.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.dart';
@@ -23,47 +24,54 @@ class DeleteUserHandler implements ApiRequestHandler {
       };
     }
 
-    // Validate required parameters
-    if (!params.containsKey('user_id') || params['user_id']!.isEmpty) {
+    // Validate required parameters (JWT and AUTH_KEY both required)
+    if (!params.containsKey('JWT') ||
+        params['JWT']!.isEmpty ||
+        params['JWT'] == 'no_jwt_token') {
       return {
         "status": "error",
-        "message": "User ID is required",
+        "message": "JWT token is required",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
 
-    if (!params.containsKey('brand_name') || params['brand_name']!.isEmpty) {
+    if (!params.containsKey('AUTH_KEY') || params['AUTH_KEY']!.isEmpty) {
       return {
         "status": "error",
-        "message": "Store name is required",
+        "message": "AUTH_KEY is required",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
 
     try {
-      final userId = params['user_id']!;
-      final storeName = params['brand_name']!;
+      final jwt = params['JWT']!;
+      final authKey = params['AUTH_KEY']!;
       final reason =
           params['reason']?.isNotEmpty == true ? params['reason'] : null;
       final deleteOrders = params['delete_orders']?.toLowerCase() == 'true';
       final deleteReviews = params['delete_reviews']?.toLowerCase() == 'true';
 
+      debugPrint('🗑️ Starting user deletion with AUTH_KEY');
       debugPrint(
-          '🗑️ Starting user deletion for ID: $userId in store: $storeName');
+          '🗑️ JWT: ${jwt == 'no_jwt_token' ? 'No JWT token' : (jwt.length > 20 ? jwt.substring(0, 20) + '...' : jwt)}');
+      debugPrint(
+          '🗑️ Auth Key: ${authKey.length > 10 ? authKey.substring(0, 10) + '...' : authKey}');
 
       // Use WooAuthService from the package
       final authService = GetIt.I<WooAuthService>();
 
-      // Create delete user request
+      // Create delete user request (API will determine user from JWT)
       final deleteRequest = DeleteUserRequest(
-        userId: userId,
+        userId: '', // Will be determined by API from JWT
         reason: reason,
         deleteOrders: deleteOrders,
         deleteReviews: deleteReviews,
       );
 
-      // Use store name from parameters
-      final response = await authService.deleteUser(storeName, deleteRequest);
+      // Use default brand name or extract from AUTH_KEY
+      final brandName = _extractBrandNameFromAuthKey(authKey);
+      final response =
+          await authService.deleteUser(brandName, jwt, authKey, deleteRequest);
 
       if (response.success) {
         debugPrint('✅ User deletion successful');
@@ -145,15 +153,15 @@ class DeleteUserHandler implements ApiRequestHandler {
   Map<String, List<ApiField>> get requiredFields => {
         'DELETE': [
           const ApiField(
-            name: 'brand_name',
-            label: 'Store Name',
-            hint: 'WooCommerce store name',
+            name: 'JWT',
+            label: 'JWT Token',
+            hint: 'JWT authentication token (user ID extracted from token)',
             isRequired: true,
           ),
           const ApiField(
-            name: 'user_id',
-            label: 'User ID',
-            hint: 'ID of the user to delete',
+            name: 'AUTH_KEY',
+            label: 'Auth Key',
+            hint: 'Authentication key for API access',
             isRequired: true,
           ),
           const ApiField(
@@ -173,4 +181,30 @@ class DeleteUserHandler implements ApiRequestHandler {
           ),
         ],
       };
+
+  /// Extract brand name from AUTH_KEY
+  String _extractBrandNameFromAuthKey(String authKey) {
+    // Get current store name from WooNetwork
+    try {
+      final storeName = WooNetwork.storeName;
+      if (storeName.isNotEmpty) {
+        debugPrint('🏪 Using store name from WooNetwork: $storeName');
+        return storeName;
+      }
+    } catch (e) {
+      debugPrint('❌ Error getting store name from WooNetwork: $e');
+    }
+
+    // Fallback: try to extract from AUTH_KEY
+    // Assuming AUTH_KEY format contains brand name
+    if (authKey.toLowerCase().contains('ticimax')) {
+      return 'ticimax';
+    } else if (authKey.toLowerCase().contains('woocomm')) {
+      return 'woocomm';
+    }
+
+    // Default fallback
+    debugPrint('⚠️ Using default brand name: ticimax');
+    return 'ticimax';
+  }
 }

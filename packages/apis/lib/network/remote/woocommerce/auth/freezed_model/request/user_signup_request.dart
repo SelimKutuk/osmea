@@ -9,6 +9,7 @@ class UserSignUpRequest with _$UserSignUpRequest {
   const factory UserSignUpRequest({
     required String email,
     required String password,
+    @JsonKey(name: 'AUTH_KEY') required String authKey,
     @JsonKey(name: 'first_name') required String firstName,
     @JsonKey(name: 'last_name') required String lastName,
     String? phone,

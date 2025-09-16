@@ -129,6 +129,7 @@ class WooAuthManager {
   Future<WooAuthResult<UserSignUpData>> signUp({
     required String email,
     required String password,
+    required String authKey,
     required String firstName,
     required String lastName,
     String? phone,
@@ -144,6 +145,7 @@ class WooAuthManager {
       final request = UserSignUpRequest(
         email: email,
         password: password,
+        authKey: authKey,
         firstName: firstName,
         lastName: lastName,
         phone: phone,
@@ -186,6 +188,8 @@ class WooAuthManager {
   /// 🗑️ Delete User Account
   Future<WooAuthResult<DeleteUserData>> deleteUser({
     required String userId,
+    required String jwt,
+    required String authKey,
     String? reason,
     bool deleteOrders = false,
     bool deleteReviews = false,
@@ -203,8 +207,8 @@ class WooAuthManager {
 
       // Call authentication API
       debugPrint('📡 Calling delete user API...');
-      final response =
-          await _authService.deleteUser(WooNetwork.storeName, request);
+      final response = await _authService.deleteUser(
+          WooNetwork.storeName, jwt, authKey, request);
 
       if (response.success && response.data != null) {
         // Clear JWT token from storage

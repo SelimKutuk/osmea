@@ -20,6 +20,7 @@ dependencies:
   injectable: ^2.3.2 # Dependency injection
   logger: ^2.5.0 # Logging utility
   slang: ^4.8.1
+  url_launcher: ^6.3.1 # URL launcher for support links
   flutter_localizations: # add this
     sdk: flutter
   intl: ^0.20.0
@@ -31,10 +32,10 @@ dependencies:
   firebase_remote_config: ^5.3.4 # Remote Config
   device_info_plus: ^11.4.0 # Device info
   package_info_plus: ^8.3.0 # Package info
-  url_launcher: ^6.3.1 # URL launcher for support links
   dio: ^5.7.0 # HTTP client for file downloads
   path_provider: ^2.1.5 # Path provider for file storage
   permission_handler: ^11.2.0 # Runtime permissions handler
+  share_plus: ^10.1.4 # Sharing text/files across platforms
   osmea_components:
     path: ../components # osmea UI kit
  

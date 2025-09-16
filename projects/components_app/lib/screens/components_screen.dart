@@ -230,22 +230,22 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
   }
 
   List<Map<String, dynamic>> _getDisplayComponents() {
-    return _filteredComponents
-        .where((c) => [
-              'Text',
-              'Rich Text',
-              'Image',
-              'Avatar',
-              'Badge',
-              'Card',
-              'Chips',
-              'Progress',
-              'Loading',
-              'Toast',
-              'Snackbar'
-            ].contains(c['title']))
-        .toList();
-  }
+      return _filteredComponents
+          .where((c) => [
+                'Text',
+                'Rich Text',
+                'Image',
+                'Avatar',
+                'Badge',
+                'Card',
+                'Chips',
+                'Progress',
+                'Loading',
+                'Toast',
+                'Snackbar'
+              ].contains(c['title']))
+          .toList();
+    }
 
   Widget _buildSearchResults() {
     if (_filteredComponents.isEmpty) {
