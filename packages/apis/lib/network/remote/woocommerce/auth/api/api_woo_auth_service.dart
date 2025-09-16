@@ -48,16 +48,18 @@ abstract class ApiWooAuthService implements WooAuthService {
 
   /// 🗑️ Delete User
   /// Deletes a user account
-  @DELETE('/{brand_name}-auth-delete/v1/auth')
+  @DELETE('/?rest_route=/{brand_name}-auth-login/v1/users')
   @override
   Future<DeleteUserResponse> deleteUser(
     @Path('brand_name') String brandName,
+    @Query('JWT') String jwt,
+    @Query('AUTH_KEY') String authKey,
     @Body() DeleteUserRequest request,
   );
 
   /// 📧 Send Reset Password Mail
   /// Sends password reset email to user
-  @POST('/{brand_name}-auth-reset/v1/auth')
+  @POST('/?rest_route=/{brand_name}-auth-reset/v1/auth')
   @override
   Future<SendResetPasswordResponse> sendResetPasswordMail(
     @Path('brand_name') String brandName,
@@ -75,7 +77,7 @@ abstract class ApiWooAuthService implements WooAuthService {
 
   /// 🔄 Refresh Token
   /// Refreshes the user's access token
-  @POST('/{brand_name}-auth-refresh/v1/auth')
+  @POST('/?rest_route=/{brand_name}-auth-refresh/v1/auth')
   Future<UserLoginResponse> refreshToken(
     @Path('brand_name') String brandName,
     @Query('refresh_token') String refreshToken,

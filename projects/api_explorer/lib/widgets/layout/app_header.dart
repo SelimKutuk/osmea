@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:api_explorer/styles/app_theme.dart';
 import 'package:apis/apis.dart';
 import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
+import 'package:api_explorer/widgets/delete_account_widget.dart';
 
 /// Modern IDE-style application header using Osmea components
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -533,7 +534,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
               OsmeaComponents.sizedBox(width: context.spacing12),
 
-              // Store actions menu - status badge kaldırıldı
+              // Store actions menu
               _buildActionMenu(context),
             ],
           ),
@@ -687,6 +688,14 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
           'View store details and settings',
           widget.onProfileTap,
         ),
+        _buildMenuItem(
+          context,
+          'delete_account',
+          Icons.delete_forever_rounded,
+          'Delete Account',
+          'Delete user account permanently',
+          () => _showDeleteAccountDialog(context),
+        ),
       ],
     ).then((_) {
       setState(() {
@@ -731,6 +740,20 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         );
       }
     }
+  }
+
+  /// Show delete account dialog
+  void _showDeleteAccountDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          width: 600,
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: const DeleteAccountWidget(),
+        ),
+      ),
+    );
   }
 
   PopupMenuEntry<String> _buildMenuItem(

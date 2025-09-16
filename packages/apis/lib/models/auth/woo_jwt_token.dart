@@ -23,7 +23,6 @@ class WooJwtToken {
   });
 
   factory WooJwtToken.fromJson(Map<String, dynamic> json) {
-    // Desteklenen şekiller:
     // { "access_token": "..." }  |  { "jwt": "..." }  |  { "token": "..." }
     final dynamic accessCandidate = json['access_token'] ?? json['jwt'] ?? json['token'];
     final String accessToken = accessCandidate?.toString() ?? '';
@@ -38,7 +37,6 @@ class WooJwtToken {
     if (issuedRaw == null) {
       issuedAt = DateTime.now();
     } else if (issuedRaw is int) {
-      // epoch saniye varsayalım
       issuedAt = DateTime.fromMillisecondsSinceEpoch(issuedRaw * 1000, isUtc: true).toLocal();
     } else {
       issuedAt = DateTime.tryParse(issuedRaw.toString()) ?? DateTime.now();

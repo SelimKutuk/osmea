@@ -81,10 +81,15 @@ class _ApiWooAuthService implements ApiWooAuthService {
   @override
   Future<DeleteUserResponse> deleteUser(
     String brandName,
+    String jwt,
+    String authKey,
     DeleteUserRequest request,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'JWT': jwt,
+      r'AUTH_KEY': authKey,
+    };
     final _headers = <String, dynamic>{};
     final _data = request;
     final _result = await _dio
@@ -95,7 +100,7 @@ class _ApiWooAuthService implements ApiWooAuthService {
     )
             .compose(
               _dio.options,
-              '/${brandName}-auth-delete/v1/auth',
+              '/?rest_route=/${brandName}-auth-login/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -125,7 +130,7 @@ class _ApiWooAuthService implements ApiWooAuthService {
     )
             .compose(
               _dio.options,
-              '/${brandName}-auth-reset/v1/auth',
+              '/?rest_route=/${brandName}-auth-reset/v1/auth',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -189,7 +194,7 @@ class _ApiWooAuthService implements ApiWooAuthService {
     )
             .compose(
               _dio.options,
-              '/${brandName}-auth-refresh/v1/auth',
+              '/?rest_route=/${brandName}-auth-refresh/v1/auth',
               queryParameters: queryParameters,
               data: _data,
             )
