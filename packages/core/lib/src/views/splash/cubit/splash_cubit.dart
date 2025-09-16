@@ -150,8 +150,8 @@ class SplashCubit extends BaseViewModelCubit<SplashState> {
       final onboardingEnabled =
           _configHelper.getBool('feature_flags.onboarding_enabled', true);
 
-      print("🔍 Debug - maintenanceMode: $maintenanceMode");
-      print("🔍 Debug - onboardingEnabled: $onboardingEnabled");
+      debugPrint("🔍 Debug - maintenanceMode: $maintenanceMode");
+      debugPrint("🔍 Debug - onboardingEnabled: $onboardingEnabled");
 
       // Check maintenance mode first
       if (maintenanceMode) {
@@ -169,7 +169,7 @@ class SplashCubit extends BaseViewModelCubit<SplashState> {
 
         try {
           final hasSeenOnboarding = await _onboardingHelper.hasSeenOnboarding();
-          print("🔍 Debug - hasSeenOnboarding: $hasSeenOnboarding");
+          debugPrint("🔍 Debug - hasSeenOnboarding: $hasSeenOnboarding");
 
           if (hasSeenOnboarding) {
             debugPrint("✅ Onboarding already seen, navigating to home");
@@ -179,13 +179,13 @@ class SplashCubit extends BaseViewModelCubit<SplashState> {
             navigationTarget = '/onboarding';
           }
         } catch (e) {
-          print("❌ Error in hasSeenOnboarding: $e");
+          debugPrint("❌ Error in hasSeenOnboarding: $e");
           // Fallback to onboarding if we can't check status
           navigationTarget = '/onboarding';
         }
       }
 
-      print("🧭 Final navigationTarget: $navigationTarget");
+      debugPrint("🧭 Final navigationTarget: $navigationTarget");
 
       // Update state with navigation target
       stateChanger(state.copyWith(

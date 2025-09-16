@@ -26,10 +26,6 @@ class SplashSpaceWidget extends StatelessWidget {
         if (state.config == null) {
           return const SizedBox.shrink();
         }
-
-        print(
-            '🚀 [SplashSpaceWidget] Building with config: ${state.config?.toJson()}');
-
         return OsmeaComponents.scaffold(
           backgroundColor: _getBackgroundColor(context, state),
           body: Center(
