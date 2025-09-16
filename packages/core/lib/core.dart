@@ -10,6 +10,9 @@ export 'package:core/src/base/base_view_model.dart';
 // 🧠 Exports the base cubit class View Models
 export 'package:core/src/base/base_view_model_cubit.dart';
 
+// 🧠 Exports the base cubit class View Models
+export 'package:core/src/base/base_view_cubit.dart';
+
 // 🧩 Exports the base class for Master App
 export 'package:core/src/base/master_view/master_app.dart';
 
