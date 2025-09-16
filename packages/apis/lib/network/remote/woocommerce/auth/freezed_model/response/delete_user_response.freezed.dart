@@ -20,7 +20,8 @@ DeleteUserResponse _$DeleteUserResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DeleteUserResponse {
-  bool get success => throw _privateConstructorUsedError;
+  bool get success =>
+      throw _privateConstructorUsedError; // Default to true since API doesn't send success field
   String? get message =>
       throw _privateConstructorUsedError; // Made nullable as server sometimes doesn't send message
   DeleteUserData? get data => throw _privateConstructorUsedError;
@@ -170,7 +171,7 @@ class __$$DeleteUserResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DeleteUserResponseImpl implements _DeleteUserResponse {
   const _$DeleteUserResponseImpl(
-      {required this.success,
+      {this.success = true,
       this.message,
       this.data,
       this.error,
@@ -181,7 +182,9 @@ class _$DeleteUserResponseImpl implements _DeleteUserResponse {
       _$$DeleteUserResponseImplFromJson(json);
 
   @override
+  @JsonKey()
   final bool success;
+// Default to true since API doesn't send success field
   @override
   final String? message;
 // Made nullable as server sometimes doesn't send message
@@ -238,7 +241,7 @@ class _$DeleteUserResponseImpl implements _DeleteUserResponse {
 
 abstract class _DeleteUserResponse implements DeleteUserResponse {
   const factory _DeleteUserResponse(
-      {required final bool success,
+      {final bool success,
       final String? message,
       final DeleteUserData? data,
       final String? error,
@@ -249,7 +252,7 @@ abstract class _DeleteUserResponse implements DeleteUserResponse {
 
   @override
   bool get success;
-  @override
+  @override // Default to true since API doesn't send success field
   String? get message;
   @override // Made nullable as server sometimes doesn't send message
   DeleteUserData? get data;
@@ -269,8 +272,10 @@ DeleteUserData _$DeleteUserDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DeleteUserData {
-  String get userId => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
+  String get userId =>
+      throw _privateConstructorUsedError; // API sends 'id' field
+  String? get email => throw _privateConstructorUsedError;
   DateTime? get deletedAt => throw _privateConstructorUsedError;
   String? get reason => throw _privateConstructorUsedError;
   bool? get ordersDeleted => throw _privateConstructorUsedError;
@@ -290,8 +295,8 @@ abstract class $DeleteUserDataCopyWith<$Res> {
       _$DeleteUserDataCopyWithImpl<$Res, DeleteUserData>;
   @useResult
   $Res call(
-      {String userId,
-      String email,
+      {@JsonKey(name: 'id') String userId,
+      String? email,
       DateTime? deletedAt,
       String? reason,
       bool? ordersDeleted,
@@ -313,7 +318,7 @@ class _$DeleteUserDataCopyWithImpl<$Res, $Val extends DeleteUserData>
   @override
   $Res call({
     Object? userId = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? deletedAt = freezed,
     Object? reason = freezed,
     Object? ordersDeleted = freezed,
@@ -325,10 +330,10 @@ class _$DeleteUserDataCopyWithImpl<$Res, $Val extends DeleteUserData>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       deletedAt: freezed == deletedAt
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
@@ -362,8 +367,8 @@ abstract class _$$DeleteUserDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userId,
-      String email,
+      {@JsonKey(name: 'id') String userId,
+      String? email,
       DateTime? deletedAt,
       String? reason,
       bool? ordersDeleted,
@@ -383,7 +388,7 @@ class __$$DeleteUserDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? deletedAt = freezed,
     Object? reason = freezed,
     Object? ordersDeleted = freezed,
@@ -395,10 +400,10 @@ class __$$DeleteUserDataImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       deletedAt: freezed == deletedAt
           ? _value.deletedAt
           : deletedAt // ignore: cast_nullable_to_non_nullable
@@ -427,8 +432,8 @@ class __$$DeleteUserDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DeleteUserDataImpl implements _DeleteUserData {
   const _$DeleteUserDataImpl(
-      {required this.userId,
-      required this.email,
+      {@JsonKey(name: 'id') required this.userId,
+      this.email,
       this.deletedAt,
       this.reason,
       this.ordersDeleted,
@@ -440,9 +445,11 @@ class _$DeleteUserDataImpl implements _DeleteUserData {
       _$$DeleteUserDataImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final String userId;
+// API sends 'id' field
   @override
-  final String email;
+  final String? email;
   @override
   final DateTime? deletedAt;
   @override
@@ -512,8 +519,8 @@ class _$DeleteUserDataImpl implements _DeleteUserData {
 
 abstract class _DeleteUserData implements DeleteUserData {
   const factory _DeleteUserData(
-      {required final String userId,
-      required final String email,
+      {@JsonKey(name: 'id') required final String userId,
+      final String? email,
       final DateTime? deletedAt,
       final String? reason,
       final bool? ordersDeleted,
@@ -524,9 +531,10 @@ abstract class _DeleteUserData implements DeleteUserData {
       _$DeleteUserDataImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   String get userId;
-  @override
-  String get email;
+  @override // API sends 'id' field
+  String? get email;
   @override
   DateTime? get deletedAt;
   @override
