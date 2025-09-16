@@ -23,7 +23,7 @@ abstract class WooAuthService {
   /// 🗑️ Delete User
   /// Deletes a user account
   Future<DeleteUserResponse> deleteUser(
-      String brandName, DeleteUserRequest request);
+      String brandName, String jwt, String authKey, DeleteUserRequest request);
 
   /// 📧 Send Reset Password Mail
   /// Sends password reset email to user
