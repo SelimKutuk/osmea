@@ -1,10 +1,14 @@
 part of master_view; // Indicate that this file is part of the master_view library
 
-// Mixin to provide common functionality for MasterView
+/// Shared UI helpers for MasterView (BLoC-based).
+/// Keep helpers minimal; compose richer UIs in concrete views.
 mixin MasterViewMixin on StatelessWidget {
   MasterViewTypes get currentView;
 
-  // Method to build a loading indicator with customizable properties
+  /// Build a simple loading indicator.
+  ///
+  /// - [color]: progress color (default: blue)
+  /// - [size]: spinner stroke width (default: 50)
   Widget buildLoading({Color color = Colors.blue, double size = 50.0}) {
     return Center(
       child: CircularProgressIndicator(
@@ -14,7 +18,7 @@ mixin MasterViewMixin on StatelessWidget {
     );
   }
 
-  // Method to build an error message with an optional retry button
+  /// Build a minimal error UI with optional [onRetry] action button.
   Widget buildError(String message, {VoidCallback? onRetry}) {
     return Center(
       child: Column(
