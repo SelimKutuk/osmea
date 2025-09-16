@@ -1,4 +1,5 @@
 import 'package:apis/models/auth/woo_jwt_token.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:api_explorer/services/handlers/woocommerce/auth_handlers/delete_user_handler.dart';
 
@@ -16,6 +17,7 @@ class DeleteAccountWidget extends StatefulWidget {
 class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
   final _formKey = GlobalKey<FormState>();
   final _authKeyController = TextEditingController();
+  final _jwtTokenController = TextEditingController();
   bool _isLoading = false;
   String? _jwtToken;
   String? _currentUserId;
@@ -51,6 +53,12 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
           _jwtToken = token.accessToken;
           _currentUserId = token.userData?['id']?.toString();
         });
+
+        // Update JWT token controller
+        _jwtTokenController.text = _jwtToken!.length > 50
+            ? '${_jwtToken!.substring(0, 50)}...'
+            : _jwtToken!;
+
         debugPrint(
             '🔐 JWT token loaded: ${_jwtToken!.length > 20 ? '${_jwtToken!.substring(0, 20)}...' : _jwtToken}');
         debugPrint('👤 Current user ID: $_currentUserId');
@@ -59,6 +67,10 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
           _jwtToken = null;
           _currentUserId = null;
         });
+
+        // Update JWT token controller
+        _jwtTokenController.text = 'No JWT token found';
+
         debugPrint('❌ No JWT token found in local storage');
       }
     } catch (e) {
@@ -67,6 +79,9 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
         _jwtToken = null;
         _currentUserId = null;
       });
+
+      // Update JWT token controller
+      _jwtTokenController.text = 'Error loading token';
     }
   }
 
@@ -125,18 +140,29 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: OsmeaComponents.row(
           children: [
-            Icon(Icons.check_circle, color: Colors.green),
-            SizedBox(width: 8),
-            Text('Success'),
+            Icon(Icons.check_circle, color: OsmeaColors.forestHeart),
+            OsmeaComponents.sizedBox(width: 8),
+            OsmeaComponents.text(
+              'Success',
+              variant: OsmeaTextVariant.titleMedium,
+              color: OsmeaColors.forestHeart,
+              fontWeight: FontWeight.bold,
+            ),
           ],
         ),
-        content: Text(message),
+        content: OsmeaComponents.text(
+          message,
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
         actions: [
-          TextButton(
+          OsmeaComponents.button(
+            text: 'OK',
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            variant: ButtonVariant.primary,
+            size: ButtonSize.medium,
+            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
@@ -148,18 +174,29 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: OsmeaComponents.row(
           children: [
-            Icon(Icons.error, color: Colors.red),
-            SizedBox(width: 8),
-            Text('Error'),
+            Icon(Icons.error, color: OsmeaColors.amberFlame),
+            OsmeaComponents.sizedBox(width: 8),
+            OsmeaComponents.text(
+              'Error',
+              variant: OsmeaTextVariant.titleMedium,
+              color: OsmeaColors.amberFlame,
+              fontWeight: FontWeight.bold,
+            ),
           ],
         ),
-        content: Text(message),
+        content: OsmeaComponents.text(
+          message,
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
         actions: [
-          TextButton(
+          OsmeaComponents.button(
+            text: 'OK',
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            variant: ButtonVariant.primary,
+            size: ButtonSize.medium,
+            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
@@ -169,136 +206,140 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
   @override
   void dispose() {
     _authKeyController.dispose();
+    _jwtTokenController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 500,
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.8,
-      ),
-      child: Card(
-        elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
+    return OsmeaComponents.sizedBox(
+      width: 400,
+      child: OsmeaComponents.basicCard(
+        variant: ComponentAppearance.elevated,
+        size: ComponentSize.medium,
+        customContent: OsmeaComponents.padding(
+          padding: const EdgeInsets.all(20),
           child: Form(
             key: _formKey,
-            child: Column(
+            child: OsmeaComponents.column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Header
-                Row(
+                OsmeaComponents.row(
                   children: [
-                    const Icon(Icons.delete_forever,
-                        color: Colors.red, size: 28),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
+                    OsmeaComponents.sizedBox(
+                      width: 28,
+                      height: 28,
+                      child: Icon(
+                        Icons.delete_forever,
+                        color: OsmeaColors.amberFlame,
+                        size: 28,
+                      ),
+                    ),
+                    OsmeaComponents.sizedBox(width: 12),
+                    OsmeaComponents.expanded(
+                      child: OsmeaComponents.column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          OsmeaComponents.text(
                             'Delete Account',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
-                            ),
+                            variant: OsmeaTextVariant.headlineLarge,
+                            color: OsmeaColors.amberFlame,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
+                          OsmeaComponents.sizedBox(height: 2),
+                          OsmeaComponents.text(
                             'Permanently delete your account. This action cannot be undone.',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
+                            variant: OsmeaTextVariant.bodyMedium,
+                            color: OsmeaColors.slate,
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
+                OsmeaComponents.sizedBox(height: 20),
 
                 // Authentication Status
-                Container(
+                OsmeaComponents.container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color:
-                        _jwtToken != null ? Colors.green[50] : Colors.red[50],
+                    color: _jwtToken != null
+                        ? OsmeaColors.forestHeart.withOpacity(0.1)
+                        : OsmeaColors.amberFlame.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: _jwtToken != null ? Colors.green : Colors.red,
+                      color: _jwtToken != null
+                          ? OsmeaColors.forestHeart
+                          : OsmeaColors.amberFlame,
                     ),
                   ),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
                       Icon(
                         _jwtToken != null ? Icons.check_circle : Icons.error,
-                        color: _jwtToken != null ? Colors.green : Colors.red,
+                        color: _jwtToken != null
+                            ? OsmeaColors.forestHeart
+                            : OsmeaColors.amberFlame,
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
+                      OsmeaComponents.sizedBox(width: 8),
+                      OsmeaComponents.expanded(
+                        child: OsmeaComponents.text(
                           _jwtToken != null
                               ? 'JWT token loaded. Enter AUTH_KEY below to delete your account.'
                               : 'JWT token not found. Please login first.',
-                          style: TextStyle(
-                            color: _jwtToken != null
-                                ? Colors.green[700]
-                                : Colors.red[700],
-                            fontWeight: FontWeight.w500,
-                          ),
+                          variant: OsmeaTextVariant.bodyMedium,
+                          color: _jwtToken != null
+                              ? OsmeaColors.forestHeart
+                              : OsmeaColors.amberFlame,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                OsmeaComponents.sizedBox(height: 20),
 
                 // JWT Token Field (Read-only)
-                TextFormField(
-                  initialValue: _jwtToken != null
-                      ? (_jwtToken!.length > 50
-                          ? '${_jwtToken!.substring(0, 50)}...'
-                          : _jwtToken!)
-                      : 'No JWT token found',
+                OsmeaComponents.textField(
+                  controller: _jwtTokenController,
                   readOnly: true,
-                  decoration: InputDecoration(
-                    labelText: 'JWT Token',
-                    hintText: 'JWT token from local storage',
-                    prefixIcon: const Icon(Icons.security),
-                    border: const OutlineInputBorder(),
-                    filled: true,
-                    fillColor:
-                        _jwtToken != null ? Colors.green[50] : Colors.red[50],
-                    suffixIcon: Icon(
-                      _jwtToken != null ? Icons.check_circle : Icons.error,
-                      color: _jwtToken != null ? Colors.green : Colors.red,
-                    ),
+                  label: 'JWT Token',
+                  hint: 'JWT token from local storage',
+                  prefixIcon: const Icon(Icons.security),
+                  variant: TextFieldVariant.outlined,
+                  size: TextFieldSize.medium,
+                  backgroundColor: _jwtToken != null
+                      ? OsmeaColors.forestHeart.withOpacity(0.1)
+                      : OsmeaColors.amberFlame.withOpacity(0.1),
+                  suffixIcon: Icon(
+                    _jwtToken != null ? Icons.check_circle : Icons.error,
+                    color: _jwtToken != null
+                        ? OsmeaColors.forestHeart
+                        : OsmeaColors.amberFlame,
                   ),
                 ),
-                const SizedBox(height: 16),
+                OsmeaComponents.sizedBox(height: 12),
 
                 // AUTH_KEY Field (Required)
-                TextFormField(
+                OsmeaComponents.textField(
                   controller: _authKeyController,
-                  enabled: _jwtToken != null,
-                  decoration: InputDecoration(
-                    labelText: 'AUTH_KEY *',
-                    hintText: _jwtToken == null
-                        ? 'Please login first'
-                        : 'Enter AUTH_KEY for deletion',
-                    prefixIcon: const Icon(Icons.key),
-                    border: const OutlineInputBorder(),
-                    filled: true,
-                    fillColor: _jwtToken == null ? Colors.grey[100] : null,
-                  ),
+                  enabled: true, // Always enabled to show the field
+                  label: 'AUTH_KEY *',
+                  hint: _jwtToken == null
+                      ? 'Please login first'
+                      : 'Enter AUTH_KEY for deletion',
+                  prefixIcon: const Icon(Icons.key),
+                  variant: TextFieldVariant.outlined,
+                  size: TextFieldSize.medium,
+                  type: TextFieldType.text,
+                  backgroundColor: _jwtToken == null
+                      ? OsmeaColors.slate.withOpacity(0.05)
+                      : OsmeaColors.white,
+                  onChanged: (value) {
+                    debugPrint('🔑 AUTH_KEY changed: $value');
+                  },
                   validator: (value) {
                     if (_jwtToken == null) {
                       return 'Please login first';
@@ -309,13 +350,18 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
+                OsmeaComponents.sizedBox(height: 20),
 
                 // Action Buttons
-                Row(
+                OsmeaComponents.row(
                   children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
+                    OsmeaComponents.expanded(
+                      child: OsmeaComponents.button(
+                        text: _isLoading
+                            ? 'Deleting...'
+                            : _jwtToken == null
+                                ? 'Login Required'
+                                : 'Delete Account',
                         onPressed: (_jwtToken == null || _isLoading)
                             ? null
                             : () {
@@ -323,63 +369,68 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                                   _deleteAccount();
                                 }
                               },
+                        variant: ButtonVariant.danger,
+                        size: ButtonSize.medium,
+                        textStyle: OsmeaTextStyle.buttonMedium(context),
                         icon: _isLoading
                             ? const SizedBox(
                                 width: 16,
                                 height: 16,
-                                child:
-                                    CircularProgressIndicator(strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
                               )
                             : const Icon(Icons.delete_forever),
-                        label: Text(_isLoading
-                            ? 'Deleting...'
-                            : _jwtToken == null
-                                ? 'Login Required'
-                                : 'Delete Account'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              _jwtToken == null ? Colors.grey : Colors.red,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
+                        iconPosition: IconPosition.leading,
+                        fullWidth: true,
+                        state: _isLoading
+                            ? ButtonState.loading
+                            : ButtonState.enabled,
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: OutlinedButton.icon(
+                    OsmeaComponents.sizedBox(width: 12),
+                    OsmeaComponents.expanded(
+                      child: OsmeaComponents.button(
+                        text: 'Clear Form',
                         onPressed: (_jwtToken == null || _isLoading)
                             ? null
                             : _clearForm,
+                        variant: ButtonVariant.outlined,
+                        size: ButtonSize.medium,
+                        textStyle: OsmeaTextStyle.buttonMedium(context),
                         icon: const Icon(Icons.clear),
-                        label: const Text('Clear Form'),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
+                        iconPosition: IconPosition.leading,
+                        fullWidth: true,
                       ),
                     ),
                   ],
                 ),
 
                 // Warning Message
-                const SizedBox(height: 16),
-                Container(
+                OsmeaComponents.sizedBox(height: 12),
+                OsmeaComponents.container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.orange[50],
+                    color: OsmeaColors.sunsetGlow.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.orange[200]!),
+                    border: Border.all(
+                      color: OsmeaColors.sunsetGlow.withOpacity(0.3),
+                    ),
                   ),
-                  child: Row(
+                  child: OsmeaComponents.row(
                     children: [
-                      Icon(Icons.warning, color: Colors.orange[700]),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
+                      Icon(
+                        Icons.warning,
+                        color: OsmeaColors.sunsetGlow,
+                      ),
+                      OsmeaComponents.sizedBox(width: 8),
+                      OsmeaComponents.expanded(
+                        child: OsmeaComponents.text(
                           'This action cannot be undone. All your data will be permanently deleted.',
-                          style: TextStyle(
-                            color: Colors.orange[700],
-                            fontWeight: FontWeight.w500,
-                          ),
+                          variant: OsmeaTextVariant.bodyMedium,
+                          color: OsmeaColors.sunsetGlow,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
