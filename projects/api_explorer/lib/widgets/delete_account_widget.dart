@@ -266,8 +266,8 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: _jwtToken != null
-                        ? OsmeaColors.forestHeart.withOpacity(0.1)
-                        : OsmeaColors.amberFlame.withOpacity(0.1),
+                        ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
+                        : OsmeaColors.amberFlame.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: _jwtToken != null
@@ -311,8 +311,8 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                   variant: TextFieldVariant.outlined,
                   size: TextFieldSize.medium,
                   backgroundColor: _jwtToken != null
-                      ? OsmeaColors.forestHeart.withOpacity(0.1)
-                      : OsmeaColors.amberFlame.withOpacity(0.1),
+                      ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
+                      : OsmeaColors.amberFlame.withValues(alpha: 0.1),
                   suffixIcon: Icon(
                     _jwtToken != null ? Icons.check_circle : Icons.error,
                     color: _jwtToken != null
@@ -335,7 +335,7 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                   size: TextFieldSize.medium,
                   type: TextFieldType.text,
                   backgroundColor: _jwtToken == null
-                      ? OsmeaColors.slate.withOpacity(0.05)
+                      ? OsmeaColors.slate.withValues(alpha: 0.05)
                       : OsmeaColors.white,
                   onChanged: (value) {
                     debugPrint('🔑 AUTH_KEY changed: $value');
@@ -412,10 +412,10 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                 OsmeaComponents.container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: OsmeaColors.sunsetGlow.withOpacity(0.1),
+                    color: OsmeaColors.sunsetGlow.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: OsmeaColors.sunsetGlow.withOpacity(0.3),
+                      color: OsmeaColors.sunsetGlow.withValues(alpha: 0.3),
                     ),
                   ),
                   child: OsmeaComponents.row(
