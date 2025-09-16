@@ -52,7 +52,7 @@ typedef OnCubitStateListener<S> = void Function(BuildContext context, S? state);
 /// ```dart
 /// buildWhen: (previous, current) => previous != current,
 /// ```
-typedef BuilderCondition<S> = bool Function(S? previous, S? current);
+typedef BuilderConditionCubit<S> = bool Function(S? previous, S? current);
 
 /// 🌟
 /// BaseViewCubit simplifies lifecycle, state listening, and builder management with Cubit-based ViewModel.
@@ -80,7 +80,7 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
   final OnCubitStateListener<S>? onStateListener;
 
   /// 🔄 Condition to determine builder call.
-  final BuilderCondition<S>? buildWhen;
+  final BuilderConditionCubit<S>? buildWhen;
 
   /// 🗺️ Global key for navigation, dialogs, and bottom sheets.
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
