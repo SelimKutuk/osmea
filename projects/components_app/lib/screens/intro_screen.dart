@@ -96,9 +96,9 @@ class _IntroScreenState extends State<IntroScreen>
       if (shouldRequest == true) {
         // Clear permission cache first to ensure fresh requests
         await PermissionHandlerHelper.instance.clearPermissionCache();
-        
-        // Request all permissions at once
-        final results = await PermissionHandlerHelper.instance.requestMultiplePermissions([
+
+        // Request permissions one by one with delay for better UX
+        final permissions = [
           AppPermission.storage,
           AppPermission.camera,
           AppPermission.microphone,
@@ -107,26 +107,74 @@ class _IntroScreenState extends State<IntroScreen>
           AppPermission.contacts,
           AppPermission.calendar,
           AppPermission.notifications,
-        ]);
-        
+        ];
+
+        final results = <AppPermission, PermissionStatus>{};
+
+        for (int i = 0; i < permissions.length; i++) {
+          final permission = permissions[i];
+          final permissionName = _getPermissionDisplayName(permission);
+
+          // Show progress to user
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                    'Requesting $permissionName permission... (${i + 1}/${permissions.length})'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: OsmeaColors.nordicBlue,
+              ),
+            );
+          }
+
+          // Request each permission individually
+          final isGranted = await PermissionHandlerHelper.instance
+              .requestPermission(permission);
+          final status =
+              isGranted ? PermissionStatus.granted : PermissionStatus.denied;
+          results[permission] = status;
+
+          // Show result
+          if (mounted) {
+            final isGranted = status == PermissionStatus.granted;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                    '$permissionName: ${isGranted ? "✅ Granted" : "❌ Denied"}'),
+                duration: const Duration(seconds: 1),
+                backgroundColor:
+                    isGranted ? OsmeaColors.green : OsmeaColors.red,
+              ),
+            );
+          }
+
+          // Small delay between requests for better UX
+          await Future.delayed(const Duration(milliseconds: 800));
+
+          if (!mounted) return;
+        }
+
         if (!mounted) return;
-        
+
         // Show summary of permission results
-        final grantedCount = results.values.where((status) => status == PermissionStatus.granted).length;
+        final grantedCount = results.values
+            .where((status) => status == PermissionStatus.granted)
+            .length;
         final totalCount = results.length;
-        
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Permissions granted: $grantedCount/$totalCount'),
             duration: const Duration(seconds: 3),
-            backgroundColor: grantedCount == totalCount ? Colors.green : Colors.orange,
+            backgroundColor: grantedCount == totalCount
+                ? OsmeaColors.green
+                : OsmeaColors.orange,
           ),
         );
       }
-      
+
       // Mark onboarding as completed regardless of permission results
       await _markOnboardingCompleted();
-      
     } catch (_) {
       // Ignore errors; navigation should proceed regardless
       // Still mark onboarding as completed
@@ -153,17 +201,16 @@ class _IntroScreenState extends State<IntroScreen>
         return AlertDialog(
           title: const Text('App Permissions'),
           content: const Text(
-            'This app needs several permissions to function properly:\n\n'
-            '• Storage: Save files to Documents/Downloads\n'
-            '• Camera: Take photos and videos\n'
-            '• Microphone: Record audio\n'
-            '• Location: Use location-based features\n'
-            '• Photos: Access photo library\n'
-            '• Contacts: Access contacts\n'
-            '• Calendar: Access calendar\n'
-            '• Notifications: Send notifications\n\n'
-            'Do you want to grant these permissions now?'
-          ),
+              'This app needs several permissions to function properly:\n\n'
+              '• Storage: Save files to Documents/Downloads\n'
+              '• Camera: Take photos and videos\n'
+              '• Microphone: Record audio\n'
+              '• Location: Use location-based features\n'
+              '• Photos: Access photo library\n'
+              '• Contacts: Access contacts\n'
+              '• Calendar: Access calendar\n'
+              '• Notifications: Send notifications\n\n'
+              'Do you want to grant these permissions now?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(false),
@@ -177,6 +224,29 @@ class _IntroScreenState extends State<IntroScreen>
         );
       },
     );
+  }
+
+  String _getPermissionDisplayName(AppPermission permission) {
+    switch (permission) {
+      case AppPermission.storage:
+        return 'Storage';
+      case AppPermission.camera:
+        return 'Camera';
+      case AppPermission.microphone:
+        return 'Microphone';
+      case AppPermission.locationWhenInUse:
+        return 'Location';
+      case AppPermission.photos:
+        return 'Photos';
+      case AppPermission.contacts:
+        return 'Contacts';
+      case AppPermission.calendar:
+        return 'Calendar';
+      case AppPermission.notifications:
+        return 'Notifications';
+      default:
+        return 'Unknown';
+    }
   }
 
   void _goToLogin() {
