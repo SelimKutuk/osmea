@@ -206,13 +206,6 @@ class WooJwtAuthService {
           debugPrint('🔍 Expires in: $expiresIn');
           debugPrint('🔍 Expires in type: ${expiresIn.runtimeType}');
 
-          // Ensure expiresIn is int
-          if (expiresIn is! int) {
-            debugPrint('❌ expiresIn is not int: ${expiresIn.runtimeType}');
-            throw Exception(
-                'expiresIn must be int, got ${expiresIn.runtimeType}');
-          }
-
           // Safely get issued at
           final issuedAt = response.data!.issuedAt ?? DateTime.now();
           debugPrint('🔍 Issued at: $issuedAt');

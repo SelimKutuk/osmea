@@ -7,7 +7,8 @@ part 'delete_user_response.g.dart';
 @freezed
 class DeleteUserResponse with _$DeleteUserResponse {
   const factory DeleteUserResponse({
-    required bool success,
+    @Default(true)
+    bool success, // Default to true since API doesn't send success field
     String? message, // Made nullable as server sometimes doesn't send message
     DeleteUserData? data,
     String? error,
@@ -22,8 +23,8 @@ class DeleteUserResponse with _$DeleteUserResponse {
 @freezed
 class DeleteUserData with _$DeleteUserData {
   const factory DeleteUserData({
-    required String userId,
-    required String email,
+    @JsonKey(name: 'id') required String userId, // API sends 'id' field
+    String? email,
     DateTime? deletedAt,
     String? reason,
     bool? ordersDeleted,

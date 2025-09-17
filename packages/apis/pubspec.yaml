@@ -37,9 +37,11 @@ dependencies:
   # Logging
   logger: ^2.5.0
 
-  # Core package for localStorage functionality
   core:
-    path: ../core
+    git:
+      url: https://github.com/masterfabric-mobile/osmea.git
+      ref: dev
+      path: packages/core
 
   # Code generation and annotations
   json_annotation: ^4.9.0

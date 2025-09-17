@@ -64,10 +64,6 @@ class JwtAuthTestHandler implements ApiRequestHandler {
       if (result.isSuccess) {
         debugPrint('✅ JWT authentication test successful');
 
-        // Test JWT token storage after successful authentication
-        debugPrint('🧪 Testing JWT token storage functionality...');
-        await WooJwtTokenStorage.testTokenStorage();
-
         return {
           "status": "success",
           "message": "JWT authentication successful",
