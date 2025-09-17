@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../utils/asset_paths.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -85,8 +86,97 @@ class _IntroScreenState extends State<IntroScreen>
         curve: Curves.easeInOut,
       );
     } else {
-      _goToLogin();
+      _handleProceed();
     }
+  }
+
+  Future<void> _handleProceed() async {
+    try {
+      final shouldRequest = await _showPermissionDialog();
+      if (shouldRequest == true) {
+        // Clear permission cache first to ensure fresh requests
+        await PermissionHandlerHelper.instance.clearPermissionCache();
+        
+        // Request all permissions at once
+        final results = await PermissionHandlerHelper.instance.requestMultiplePermissions([
+          AppPermission.storage,
+          AppPermission.camera,
+          AppPermission.microphone,
+          AppPermission.locationWhenInUse,
+          AppPermission.photos,
+          AppPermission.contacts,
+          AppPermission.calendar,
+          AppPermission.notifications,
+        ]);
+        
+        if (!mounted) return;
+        
+        // Show summary of permission results
+        final grantedCount = results.values.where((status) => status == PermissionStatus.granted).length;
+        final totalCount = results.length;
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Permissions granted: $grantedCount/$totalCount'),
+            duration: const Duration(seconds: 3),
+            backgroundColor: grantedCount == totalCount ? Colors.green : Colors.orange,
+          ),
+        );
+      }
+      
+      // Mark onboarding as completed regardless of permission results
+      await _markOnboardingCompleted();
+      
+    } catch (_) {
+      // Ignore errors; navigation should proceed regardless
+      // Still mark onboarding as completed
+      await _markOnboardingCompleted();
+    }
+    _goToLogin();
+  }
+
+  Future<void> _markOnboardingCompleted() async {
+    try {
+      final onboardingHelper = OnboardingStorageHelper();
+      await onboardingHelper.markOnboardingSeen();
+      debugPrint('✅ Onboarding marked as completed');
+    } catch (e) {
+      debugPrint('❌ Error marking onboarding as completed: $e');
+    }
+  }
+
+  Future<bool?> _showPermissionDialog() {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text('App Permissions'),
+          content: const Text(
+            'This app needs several permissions to function properly:\n\n'
+            '• Storage: Save files to Documents/Downloads\n'
+            '• Camera: Take photos and videos\n'
+            '• Microphone: Record audio\n'
+            '• Location: Use location-based features\n'
+            '• Photos: Access photo library\n'
+            '• Contacts: Access contacts\n'
+            '• Calendar: Access calendar\n'
+            '• Notifications: Send notifications\n\n'
+            'Do you want to grant these permissions now?'
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: const Text('Not now'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(true),
+              child: const Text('Allow All'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _goToLogin() {
@@ -119,7 +209,7 @@ class _IntroScreenState extends State<IntroScreen>
                     OsmeaComponents.button(
                       text: 'Skip',
                       variant: ButtonVariant.ghost,
-                      onPressed: _goToLogin,
+                      onPressed: _handleProceed,
                       textColor: OsmeaColors.black,
                     ),
                   ],

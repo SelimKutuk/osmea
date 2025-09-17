@@ -87,10 +87,35 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 500));
     _fadeController.forward();
 
-    // Navigate to intro screen after animations complete
+    // Check onboarding status and navigate accordingly
     await Future.delayed(const Duration(milliseconds: 2000));
-    if (mounted) {
-      context.go('/intro'); // Navigation with Go Router
+    await _checkOnboardingAndNavigate();
+  }
+
+  Future<void> _checkOnboardingAndNavigate() async {
+    try {
+      final onboardingHelper = OnboardingStorageHelper();
+      final hasSeenOnboarding = await onboardingHelper.hasSeenOnboarding();
+      
+      debugPrint('📱 Onboarding status: ${hasSeenOnboarding ? "Seen" : "Not seen"}');
+      
+      if (mounted) {
+        if (hasSeenOnboarding) {
+          // User has seen onboarding before, go directly to main screen
+          debugPrint('🚀 Navigating to main screen (onboarding already seen)');
+          context.go('/');
+        } else {
+          // User hasn't seen onboarding, show onboarding screen
+          debugPrint('📚 Navigating to onboarding screen');
+          context.go('/intro');
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Error checking onboarding status: $e');
+      // Fallback to onboarding screen if there's an error
+      if (mounted) {
+        context.go('/intro');
+      }
     }
   }
 
