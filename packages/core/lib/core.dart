@@ -25,6 +25,9 @@ export 'package:core/src/resources/resources.g.dart';
 // 🧩 Exports the helper for local storage
 export 'package:core/src/helper/local_storage/local_storage_helper.dart';
 
+/// 🧩 Exports the price info currency helper
+export 'package:core/src/helper/price_info_currency_helper.dart';
+
 // 🧩 Exports the onboarding storage helper
 export 'package:core/src/helper/onboarding_helper.dart';
 
