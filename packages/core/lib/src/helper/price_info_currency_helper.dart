@@ -75,7 +75,7 @@
 ///   multiplier: 0.85, // EUR conversion rate
 /// ); // 85.0
 /// ```
-class CurrencyHelper {
+class PriceInfoCurrencyHelper {
   // ============================================================================
   // 🌍 GLOBAL CURRENCY CONFIGURATION
   // ============================================================================
@@ -518,7 +518,7 @@ extension CurrencyExtension on num {
     bool useAlternateUnit = false,
     int decimalPlaces = 2,
   }) {
-    return CurrencyHelper.formatPrice(
+    return PriceInfoCurrencyHelper.formatPrice(
       this,
       currencyCode: currencyCode,
       useAlternateUnit: useAlternateUnit,
