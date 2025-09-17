@@ -9,7 +9,7 @@ part of 'delete_user_response.dart';
 _$DeleteUserResponseImpl _$$DeleteUserResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$DeleteUserResponseImpl(
-      success: json['success'] as bool,
+      success: json['success'] as bool? ?? true,
       message: json['message'] as String?,
       data: json['data'] == null
           ? null
@@ -30,8 +30,8 @@ Map<String, dynamic> _$$DeleteUserResponseImplToJson(
 
 _$DeleteUserDataImpl _$$DeleteUserDataImplFromJson(Map<String, dynamic> json) =>
     _$DeleteUserDataImpl(
-      userId: json['user_id'] as String,
-      email: json['email'] as String,
+      userId: json['id'] as String,
+      email: json['email'] as String?,
       deletedAt: json['deleted_at'] == null
           ? null
           : DateTime.parse(json['deleted_at'] as String),
@@ -44,8 +44,8 @@ _$DeleteUserDataImpl _$$DeleteUserDataImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$DeleteUserDataImplToJson(
         _$DeleteUserDataImpl instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
-      'email': instance.email,
+      'id': instance.userId,
+      if (instance.email case final value?) 'email': value,
       if (instance.deletedAt?.toIso8601String() case final value?)
         'deleted_at': value,
       if (instance.reason case final value?) 'reason': value,
