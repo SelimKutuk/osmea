@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../utils/asset_paths.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -109,7 +108,7 @@ class _IntroScreenState extends State<IntroScreen>
           AppPermission.notifications,
         ];
 
-        final results = <AppPermission, PermissionStatus>{};
+        final results = <AppPermission, PermissionResult>{};
 
         for (int i = 0; i < permissions.length; i++) {
           final permission = permissions[i];
@@ -127,23 +126,36 @@ class _IntroScreenState extends State<IntroScreen>
             );
           }
 
-          // Request each permission individually
-          final isGranted = await PermissionHandlerHelper.instance
-              .requestPermission(permission);
-          final status =
-              isGranted ? PermissionStatus.granted : PermissionStatus.denied;
-          results[permission] = status;
+          // First check current status
+          final currentStatus = await PermissionHandlerHelper.instance
+              .getPermissionStatus(permission);
 
-          // Show result
+          // If not granted, request it
+          PermissionResult result;
+          if (currentStatus.isGranted) {
+            result = currentStatus;
+            debugPrint('✅ $permissionName already granted');
+          } else {
+            // Request permission using helper
+            await PermissionHandlerHelper.instance
+                .requestPermission(permission);
+
+            // Get updated status after request
+            result = await PermissionHandlerHelper.instance
+                .getPermissionStatus(permission);
+          }
+
+          results[permission] = result;
+
+          // Show detailed result
           if (mounted) {
-            final isGranted = status == PermissionStatus.granted;
+            final statusText = _getPermissionStatusText(result);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(
-                    '$permissionName: ${isGranted ? "✅ Granted" : "❌ Denied"}'),
+                content: Text('$permissionName: $statusText'),
                 duration: const Duration(seconds: 1),
                 backgroundColor:
-                    isGranted ? OsmeaColors.green : OsmeaColors.red,
+                    result.isGranted ? OsmeaColors.green : OsmeaColors.red,
               ),
             );
           }
@@ -157,9 +169,8 @@ class _IntroScreenState extends State<IntroScreen>
         if (!mounted) return;
 
         // Show summary of permission results
-        final grantedCount = results.values
-            .where((status) => status == PermissionStatus.granted)
-            .length;
+        final grantedCount =
+            results.values.where((result) => result.isGranted).length;
         final totalCount = results.length;
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -246,6 +257,20 @@ class _IntroScreenState extends State<IntroScreen>
         return 'Notifications';
       default:
         return 'Unknown';
+    }
+  }
+
+  String _getPermissionStatusText(PermissionResult result) {
+    if (result.isGranted) {
+      return '✅ Granted';
+    } else if (result.isPermanentlyDenied) {
+      return '❌ Permanently Denied';
+    } else if (result.isRestricted) {
+      return '⚠️ Restricted';
+    } else if (result.isLimited) {
+      return '⚠️ Limited';
+    } else {
+      return '❌ Denied';
     }
   }
 
