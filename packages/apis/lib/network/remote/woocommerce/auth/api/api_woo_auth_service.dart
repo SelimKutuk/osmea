@@ -5,10 +5,12 @@ import 'package:retrofit/retrofit.dart';
 import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/delete_user_request.dart';
+import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/password_update_request.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/send_reset_password_request.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/user_login_request.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/request/user_signup_request.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/response/delete_user_response.dart';
+import 'package:apis/network/remote/woocommerce/auth/freezed_model/response/password_update_response.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/response/send_reset_password_response.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/response/user_login_response.dart';
 import 'package:apis/network/remote/woocommerce/auth/freezed_model/response/user_signup_response.dart';
@@ -64,6 +66,15 @@ abstract class ApiWooAuthService implements WooAuthService {
   Future<SendResetPasswordResponse> sendResetPasswordMail(
     @Path('brand_name') String brandName,
     @Body() SendResetPasswordRequest request,
+  );
+
+  /// 🔐 Update Password
+  /// Updates user password with JWT authentication
+  @POST('/?rest_route=/{brand_name}-auth-login/v1/user/reset_password')
+  @override
+  Future<PasswordUpdateResponse> updatePassword(
+    @Path('brand_name') String brandName,
+    @Body() PasswordUpdateRequest request,
   );
 
   /// 🔑 User Login with Query Parameters (Alternative method)
