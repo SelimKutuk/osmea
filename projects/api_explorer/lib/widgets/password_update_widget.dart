@@ -155,6 +155,7 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: OsmeaColors.white,
         title: OsmeaComponents.row(
           children: [
             Icon(Icons.check_circle, color: OsmeaColors.forestHeart),
@@ -229,8 +230,15 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return OsmeaComponents.padding(
+    return OsmeaComponents.container(
       padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: OsmeaColors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: OsmeaColors.platinum,
+        ),
+      ),
       child: Form(
         key: _formKey,
         child: OsmeaComponents.column(
