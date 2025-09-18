@@ -1,13 +1,12 @@
-import 'package:apis/models/auth/woo_jwt_token.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:apis/apis.dart';
 import 'package:api_explorer/services/handlers/woocommerce/auth_handlers/password_update_handler.dart';
-import 'package:osmea_components/osmea_components.dart';
 
 /// 🔐 Password Update Widget
 /// User-friendly interface for updating user password
 class PasswordUpdateWidget extends StatefulWidget {
-  const PasswordUpdateWidget({Key? key}) : super(key: key);
+  const PasswordUpdateWidget({super.key});
 
   @override
   State<PasswordUpdateWidget> createState() => _PasswordUpdateWidgetState();
@@ -23,8 +22,6 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
   bool _isLoading = false;
   bool _obscureNewPassword = true;
   bool _obscureConfirmPassword = true;
-  String? _resultMessage;
-  bool _isSuccess = false;
   String? _jwtToken;
   String? _currentUserId;
 
@@ -39,15 +36,6 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
     super.didChangeDependencies();
     // Refresh JWT token when dialog opens
     _loadAuthData();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
-    _jwtTokenController.dispose();
-    super.dispose();
   }
 
   /// 🔐 Load JWT token from local storage using WooJwtTokenStorage
@@ -105,7 +93,6 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
 
     setState(() {
       _isLoading = true;
-      _resultMessage = null;
     });
 
     try {
@@ -168,24 +155,29 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: OsmeaComponents.row(
           children: [
-            Icon(Icons.check_circle, color: Colors.green[700]),
-            const SizedBox(width: 8),
-            Text(
+            Icon(Icons.check_circle, color: OsmeaColors.forestHeart),
+            OsmeaComponents.sizedBox(width: 8),
+            OsmeaComponents.text(
               'Success',
-              style: TextStyle(
-                color: Colors.green[700],
-                fontWeight: FontWeight.bold,
-              ),
+              variant: OsmeaTextVariant.titleMedium,
+              color: OsmeaColors.forestHeart,
+              fontWeight: FontWeight.bold,
             ),
           ],
         ),
-        content: Text(message),
+        content: OsmeaComponents.text(
+          message,
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
         actions: [
-          TextButton(
+          OsmeaComponents.button(
+            text: 'OK',
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            variant: ButtonVariant.primary,
+            size: ButtonSize.medium,
+            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
@@ -197,24 +189,29 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: OsmeaComponents.row(
           children: [
-            Icon(Icons.error, color: Colors.red[700]),
-            const SizedBox(width: 8),
-            Text(
+            Icon(Icons.error, color: OsmeaColors.amberFlame),
+            OsmeaComponents.sizedBox(width: 8),
+            OsmeaComponents.text(
               'Error',
-              style: TextStyle(
-                color: Colors.red[700],
-                fontWeight: FontWeight.bold,
-              ),
+              variant: OsmeaTextVariant.titleMedium,
+              color: OsmeaColors.amberFlame,
+              fontWeight: FontWeight.bold,
             ),
           ],
         ),
-        content: Text(message),
+        content: OsmeaComponents.text(
+          message,
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
         actions: [
-          TextButton(
+          OsmeaComponents.button(
+            text: 'OK',
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            variant: ButtonVariant.primary,
+            size: ButtonSize.medium,
+            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
@@ -222,298 +219,290 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    _jwtTokenController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
+    return OsmeaComponents.padding(
+      padding: const EdgeInsets.all(20),
+      child: Form(
+        key: _formKey,
+        child: OsmeaComponents.column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            // Header
+            OsmeaComponents.row(
               children: [
-                Icon(
-                  Icons.lock_reset,
-                  color: Theme.of(context).primaryColor,
-                  size: 28,
+                OsmeaComponents.sizedBox(
+                  width: 28,
+                  height: 28,
+                  child: Icon(
+                    Icons.lock_reset,
+                    color: OsmeaColors.steel,
+                    size: 28,
+                  ),
                 ),
-                const SizedBox(width: 12),
-                Text(
-                  'Password Update',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                OsmeaComponents.sizedBox(width: 12),
+                OsmeaComponents.expanded(
+                  child: OsmeaComponents.column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OsmeaComponents.text(
+                        'Password Update',
+                        variant: OsmeaTextVariant.headlineLarge,
+                        color: OsmeaColors.steel,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
                       ),
+                      OsmeaComponents.sizedBox(height: 2),
+                      OsmeaComponents.text(
+                        'Update your account password securely',
+                        variant: OsmeaTextVariant.bodyMedium,
+                        color: OsmeaColors.slate,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Update your account password securely',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[600],
-                  ),
-            ),
-            const SizedBox(height: 24),
+            OsmeaComponents.sizedBox(height: 20),
 
             // Authentication Status
-            Container(
+            OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: _jwtToken != null ? Colors.green[50] : Colors.red[50],
+                color: _jwtToken != null
+                    ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
+                    : OsmeaColors.amberFlame.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color:
-                      _jwtToken != null ? Colors.green[200]! : Colors.red[200]!,
+                  color: _jwtToken != null
+                      ? OsmeaColors.forestHeart
+                      : OsmeaColors.amberFlame,
                 ),
               ),
-              child: Row(
+              child: OsmeaComponents.row(
                 children: [
                   Icon(
                     _jwtToken != null ? Icons.check_circle : Icons.error,
-                    color:
-                        _jwtToken != null ? Colors.green[700] : Colors.red[700],
+                    color: _jwtToken != null
+                        ? OsmeaColors.forestHeart
+                        : OsmeaColors.amberFlame,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
+                  OsmeaComponents.sizedBox(width: 8),
+                  OsmeaComponents.expanded(
+                    child: OsmeaComponents.text(
                       _jwtToken != null
                           ? 'JWT token loaded. Enter details below to update password.'
                           : 'JWT token not found. Please login first.',
-                      style: TextStyle(
-                        color: _jwtToken != null
-                            ? Colors.green[700]
-                            : Colors.red[700],
-                        fontWeight: FontWeight.w500,
-                      ),
+                      variant: OsmeaTextVariant.bodyMedium,
+                      color: _jwtToken != null
+                          ? OsmeaColors.forestHeart
+                          : OsmeaColors.amberFlame,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            OsmeaComponents.sizedBox(height: 20),
 
             // JWT Token Field (Read-only)
-            TextFormField(
+            OsmeaComponents.textField(
               controller: _jwtTokenController,
               readOnly: true,
-              decoration: InputDecoration(
-                labelText: 'JWT Token',
-                hintText: 'JWT token from local storage',
-                prefixIcon: const Icon(Icons.security),
-                suffixIcon: Icon(
-                  _jwtToken != null ? Icons.check_circle : Icons.error,
-                  color:
-                      _jwtToken != null ? Colors.green[700] : Colors.red[700],
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                filled: true,
-                fillColor:
-                    _jwtToken != null ? Colors.green[50] : Colors.red[50],
+              label: 'JWT Token',
+              hint: 'JWT token from local storage',
+              prefixIcon: const Icon(Icons.security),
+              variant: TextFieldVariant.outlined,
+              size: TextFieldSize.medium,
+              backgroundColor: _jwtToken != null
+                  ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
+                  : OsmeaColors.amberFlame.withValues(alpha: 0.1),
+              suffixIcon: Icon(
+                _jwtToken != null ? Icons.check_circle : Icons.error,
+                color: _jwtToken != null
+                    ? OsmeaColors.forestHeart
+                    : OsmeaColors.amberFlame,
               ),
             ),
-            const SizedBox(height: 16),
+            OsmeaComponents.sizedBox(height: 12),
 
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  // Email Field
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email Address',
-                      hintText:
-                          'Email of the user whose password you want to update',
-                      prefixIcon: const Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[50],
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (_jwtToken == null) {
-                        return 'Please login first';
-                      }
-                      if (value == null || value.isEmpty) {
-                        return 'Email address is required';
-                      }
-                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                          .hasMatch(value)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
+            // Email Field
+            OsmeaComponents.textField(
+              controller: _emailController,
+              label: 'Email Address *',
+              hint: 'Enter user email address',
+              prefixIcon: const Icon(Icons.email_outlined),
+              variant: TextFieldVariant.outlined,
+              size: TextFieldSize.medium,
+              type: TextFieldType.email,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (_jwtToken == null) {
+                  return 'Please login first';
+                }
+                if (value == null || value.isEmpty) {
+                  return 'Email address is required';
+                }
+                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                    .hasMatch(value)) {
+                  return 'Please enter a valid email address';
+                }
+                return null;
+              },
+            ),
+            OsmeaComponents.sizedBox(height: 12),
 
-                  // New Password Field
-                  TextFormField(
-                    controller: _newPasswordController,
-                    obscureText: _obscureNewPassword,
-                    decoration: InputDecoration(
-                      labelText: 'New Password',
-                      hintText: 'Choose a strong password',
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureNewPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscureNewPassword = !_obscureNewPassword;
-                          });
-                        },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[50],
-                    ),
-                    validator: (value) {
-                      if (_jwtToken == null) {
-                        return 'Please login first';
-                      }
-                      if (value == null || value.isEmpty) {
-                        return 'New password is required';
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
+            // New Password Field
+            OsmeaComponents.textField(
+              controller: _newPasswordController,
+              obscureText: _obscureNewPassword,
+              label: 'New Password *',
+              hint: 'Choose a strong password',
+              prefixIcon: const Icon(Icons.lock_outline),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _obscureNewPassword ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureNewPassword = !_obscureNewPassword;
+                  });
+                },
+              ),
+              variant: TextFieldVariant.outlined,
+              size: TextFieldSize.medium,
+              validator: (value) {
+                if (_jwtToken == null) {
+                  return 'Please login first';
+                }
+                if (value == null || value.isEmpty) {
+                  return 'New password is required';
+                }
+                return null;
+              },
+            ),
+            OsmeaComponents.sizedBox(height: 12),
 
-                  // Confirm Password Field
-                  TextFormField(
-                    controller: _confirmPasswordController,
-                    obscureText: _obscureConfirmPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      hintText: 'Re-enter your new password',
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureConfirmPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscureConfirmPassword = !_obscureConfirmPassword;
-                          });
-                        },
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[50],
-                    ),
-                    validator: (value) {
-                      if (_jwtToken == null) {
-                        return 'Please login first';
-                      }
-                      if (value == null || value.isEmpty) {
-                        return 'Password confirmation is required';
-                      }
-                      if (value != _newPasswordController.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 24),
+            // Confirm Password Field
+            OsmeaComponents.textField(
+              controller: _confirmPasswordController,
+              obscureText: _obscureConfirmPassword,
+              label: 'Confirm Password *',
+              hint: 'Re-enter your new password',
+              prefixIcon: const Icon(Icons.lock_outline),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _obscureConfirmPassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureConfirmPassword = !_obscureConfirmPassword;
+                  });
+                },
+              ),
+              variant: TextFieldVariant.outlined,
+              size: TextFieldSize.medium,
+              validator: (value) {
+                if (_jwtToken == null) {
+                  return 'Please login first';
+                }
+                if (value == null || value.isEmpty) {
+                  return 'Password confirmation is required';
+                }
+                return null;
+              },
+            ),
+            OsmeaComponents.sizedBox(height: 20),
 
-                  // Update Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ElevatedButton.icon(
-                      onPressed: (_jwtToken == null || _isLoading)
-                          ? null
-                          : _updatePassword,
-                      icon: _isLoading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
-                              ),
-                            )
-                          : const Icon(Icons.update),
-                      label: Text(
-                        _isLoading
-                            ? 'Updating...'
-                            : _jwtToken == null
-                                ? 'Login Required'
-                                : 'Update Password',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 2,
-                      ),
-                    ),
-                  ),
-
-                  // Result Message
-                  if (_resultMessage != null) ...[
-                    const SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: _isSuccess ? Colors.green[50] : Colors.red[50],
-                        border: Border.all(
-                          color: _isSuccess
-                              ? Colors.green[200]!
-                              : Colors.red[200]!,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            _isSuccess ? Icons.check_circle : Icons.error,
-                            color: _isSuccess
-                                ? Colors.green[700]
-                                : Colors.red[700],
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              _resultMessage!,
-                              style: TextStyle(
-                                color: _isSuccess
-                                    ? Colors.green[700]
-                                    : Colors.red[700],
-                                fontWeight: FontWeight.w500,
-                              ),
+            // Action Buttons
+            OsmeaComponents.row(
+              children: [
+                OsmeaComponents.expanded(
+                  child: OsmeaComponents.button(
+                    text: _isLoading
+                        ? 'Updating...'
+                        : _jwtToken == null
+                            ? 'Login Required'
+                            : 'Update Password',
+                    onPressed: (_jwtToken == null || _isLoading)
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              _updatePassword();
+                            }
+                          },
+                    variant: ButtonVariant.primary,
+                    size: ButtonSize.medium,
+                    textStyle: OsmeaTextStyle.buttonMedium(context),
+                    icon: _isLoading
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
                             ),
-                          ),
-                        ],
-                      ),
+                          )
+                        : const Icon(Icons.update),
+                    iconPosition: IconPosition.leading,
+                    fullWidth: true,
+                    state:
+                        _isLoading ? ButtonState.loading : ButtonState.enabled,
+                  ),
+                ),
+                OsmeaComponents.sizedBox(width: 12),
+                OsmeaComponents.expanded(
+                  child: OsmeaComponents.button(
+                    text: 'Clear Form',
+                    onPressed:
+                        (_jwtToken == null || _isLoading) ? null : _clearForm,
+                    variant: ButtonVariant.outlined,
+                    size: ButtonSize.medium,
+                    textStyle: OsmeaTextStyle.buttonMedium(context),
+                    icon: const Icon(Icons.clear),
+                    iconPosition: IconPosition.leading,
+                    fullWidth: true,
+                  ),
+                ),
+              ],
+            ),
+
+            // Info Message
+            OsmeaComponents.sizedBox(height: 12),
+            OsmeaComponents.container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: OsmeaColors.forestHeart.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: OsmeaColors.forestHeart.withValues(alpha: 0.3),
+                ),
+              ),
+              child: OsmeaComponents.row(
+                children: [
+                  Icon(
+                    Icons.info,
+                    color: OsmeaColors.forestHeart,
+                  ),
+                  OsmeaComponents.sizedBox(width: 8),
+                  OsmeaComponents.expanded(
+                    child: OsmeaComponents.text(
+                      'Password will be updated securely. Make sure to use a strong password.',
+                      variant: OsmeaTextVariant.bodyMedium,
+                      color: OsmeaColors.forestHeart,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
+                  ),
                 ],
               ),
             ),
