@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import '../components/url_launcher_example.dart';
 import '../components/file_download_helper_example.dart';
 import '../components/application_share_helper_example.dart';
+import '../components/local_notification_helper_example.dart';
 
 /// 🔧 **Helpers Screen**
 ///
@@ -54,7 +55,7 @@ class HelpersScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: OsmeaComponents.text(
-                  '4 helpers available',
+                  '5 helpers available',
                   variant: OsmeaTextVariant.bodySmall,
                   color: OsmeaColors.black.withValues(alpha: 0.6),
                   fontWeight: FontWeight.w500,
@@ -97,6 +98,13 @@ class HelpersScreen extends StatelessWidget {
         'icon': Icons.share,
         'description': 'Test sharing text, URLs, and files',
         'route': () => const ApplicationShareHelperExample(),
+        'isComingSoon': false,
+      },
+      {
+        'title': 'Local Notifications',
+        'icon': Icons.notifications,
+        'description': 'Test local notification functionality with scheduling and rich features',
+        'route': () => const LocalNotificationHelperExample(),
         'isComingSoon': false,
       },
     ];
