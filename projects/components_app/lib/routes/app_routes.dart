@@ -4,6 +4,7 @@ import '../screens/splash_screen.dart';
 import '../screens/intro_screen.dart';
 import '../screens/main_screen.dart';
 import '../screens/components_screen.dart';
+import '../screens/helpers_screen.dart';
 import '../screens/info_screen.dart';
 import '../screens/login_screen.dart';
 
@@ -56,7 +57,9 @@ import '../components/text_example.dart';
 import '../components/text_field_example.dart';
 import '../components/ticket_widget_example.dart';
 import '../components/toast_example.dart';
+import '../components/url_launcher_example.dart';
 import '../components/wrap_example.dart';
+import '../components/file_download_helper_example.dart';
 
 class AppRoutes {
   // Route paths - Splash and Intro
@@ -67,6 +70,7 @@ class AppRoutes {
   static const String home = '/';
   static const String login = '/login';
   static const String components = '/components';
+  static const String helpers = '/helpers';
   static const String info = '/info';
 
   // Route paths - Component pages (Only a few for testing)
@@ -119,6 +123,7 @@ class AppRoutes {
   static const String textField = '/component/text-field';
   static const String ticketWidget = '/component/ticket-widget';
   static const String toast = '/component/toast';
+  static const String urlLauncher = '/component/url-launcher';
   static const String wrap = '/component/wrap';
 
   // Go Router configuration
@@ -165,6 +170,11 @@ class AppRoutes {
             builder: (context, state) => const ModernComponentsScreen(),
           ),
           GoRoute(
+            path: helpers,
+            name: 'helpers',
+            builder: (context, state) => const HelpersScreen(),
+          ),
+          GoRoute(
             path: info,
             name: 'info',
             builder: (context, state) => const ModernInfoScreen(),
@@ -194,6 +204,10 @@ class AppRoutes {
 
   static void goToComponents(BuildContext context) {
     context.go(components);
+  }
+
+  static void goToHelpers(BuildContext context) {
+    context.go(helpers);
   }
 
   static void goToInfo(BuildContext context) {
@@ -258,6 +272,7 @@ class AppRoutes {
       'Input': 'text-field',
       'Ticket': 'ticket-widget',
       'Toast': 'toast',
+      'URL Launcher': 'url-launcher',
       'Wrap': 'wrap',
     };
 
@@ -315,6 +330,8 @@ class AppRoutes {
       'text-field': const TextFieldExample(),
       'ticket-widget': const TicketWidgetExample(),
       'toast': const ToastExample(),
+      'url-launcher': const UrlLauncherExample(),
+      'file-downloader': const FileDownloadHelperExample(),
       'wrap': const WrapExample(),
     };
 
