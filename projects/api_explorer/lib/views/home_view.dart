@@ -1120,6 +1120,7 @@ class _HomeViewState extends State<HomeView>
                   onPasswordUpdate: _selectedStore?.platform == 'woocommerce'
                       ? _showPasswordUpdateDialog
                       : null,
+                  isProfileEnabled: _selectedStore?.platform == 'woocommerce',
                 ),
                 drawer: Drawer(
                   width: _calculateDrawerWidth(screenWidth),
