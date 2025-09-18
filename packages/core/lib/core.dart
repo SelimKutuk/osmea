@@ -19,6 +19,9 @@ export 'package:core/src/base/master_view/master_app.dart';
 // 🧩 Exports the base class for Master View
 export 'package:core/src/base/master_view/master_view.dart';
 
+// 🧩 Exports the base class for Master View Cubit
+export 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
+
 // 🧩 Exports the generated resources about translations
 export 'package:core/src/resources/resources.g.dart';
 
