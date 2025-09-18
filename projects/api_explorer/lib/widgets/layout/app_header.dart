@@ -17,6 +17,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onDebugTest;
   final VoidCallback? onProfileTap;
   final VoidCallback? onStoreChange;
+  final VoidCallback? onPasswordUpdate;
 
   const AppHeader({
     super.key,
@@ -29,6 +30,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.onDebugTest,
     this.onProfileTap,
     this.onStoreChange,
+    this.onPasswordUpdate,
   });
 
   @override
@@ -334,6 +336,21 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return [
+      // Password Update Button (only for WooCommerce)
+      if (onPasswordUpdate != null)
+        AppBarAction(
+          type: AppBarActionType.settings,
+          icon: Icon(
+            Icons.lock_reset,
+            size: 20,
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.9)
+                : OsmeaColors.steel,
+          ),
+          onPressed: onPasswordUpdate,
+          tooltip: 'Update Password',
+        ),
+
       // Theme Toggle Button as AppBarAction
       AppBarAction(
         type: AppBarActionType.settings,
