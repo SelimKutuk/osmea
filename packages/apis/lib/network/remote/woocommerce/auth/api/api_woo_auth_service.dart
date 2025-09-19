@@ -86,6 +86,17 @@ abstract class ApiWooAuthService implements WooAuthService {
     @Path('brand_name') String brandName,
   );
 
+  /// 🔐 Update Password (PUT + Query) — mirrors Postman
+  /// Example: PUT /?rest_route=/ticimax-auth-login/v1/user/reset_password&email=...&new_password=...
+  @PUT('/?rest_route=/{brand_name}-auth-login/v1/user/reset_password')
+  @override
+  Future<PasswordUpdateResponse> updatePasswordPutQuery(
+    @Path('brand_name') String brandName,
+    @Query('email') String email,
+    @Query('new_password') String newPassword,
+    @Query('jwt') String? jwt,
+  );
+
   /// 🔄 Refresh Token
   /// Refreshes the user's access token
   @POST('/?rest_route=/{brand_name}-auth-refresh/v1/auth')

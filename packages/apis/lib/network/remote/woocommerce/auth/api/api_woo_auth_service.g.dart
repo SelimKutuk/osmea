@@ -208,6 +208,43 @@ class _ApiWooAuthService implements ApiWooAuthService {
   }
 
   @override
+  Future<PasswordUpdateResponse> updatePasswordPutQuery(
+    String brandName,
+    String email,
+    String newPassword,
+    String? jwt,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'email': email,
+      r'new_password': newPassword,
+      r'jwt': jwt,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PasswordUpdateResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/?rest_route=/${brandName}-auth-login/v1/user/reset_password',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = PasswordUpdateResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<UserLoginResponse> refreshToken(
     String brandName,
     String refreshToken,
