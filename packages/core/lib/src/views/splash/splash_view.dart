@@ -1,227 +1,123 @@
+import 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:core/src/base/base_view_cubit.dart';
+import 'dart:async';
 import 'package:core/src/views/splash/cubit/splash_cubit.dart';
 import 'package:core/src/views/splash/cubit/splash_state.dart';
 import 'package:core/src/models/splash_models.dart';
 import 'package:core/src/views/splash/widgets/splash_startup_widget.dart';
 import 'package:core/src/views/splash/widgets/splash_space_widget.dart';
 import 'package:core/src/views/splash/widgets/splash_enterprise_widget.dart';
-import 'package:osmea_components/osmea_components.dart';
+import 'package:core/src/helper/asset_config_helper.dart';
 
 /// 🚀 **OSMEA Splash View**
 ///
 /// Copyright (c) 2025, OSMEA Team
 /// https://github.com/masterfabric-mobile/osmea/tree/dev/packages/core
 ///
-/// Main splash view - configuration-driven and stateless
-/// Uses BaseViewCubit for lifecycle management
-/// UI only - no state management
+/// Main splash view - Simple timer-based navigation
+/// Uses MasterViewCubit for lifecycle management
 ///
 /// {@category Views}
 /// {@subCategory SplashView}
 
-class SplashView extends StatelessWidget {
-  /// Callback to be called when splash is completed and ready to navigate
-  final Function(String route)? onNavigationReady;
-
-  /// Callback to be called when an error occurs
-  final Function(String error)? onError;
-
-  const SplashView({
-    super.key,
-    this.onNavigationReady,
-    this.onError,
+class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
+  SplashView({
+    required super.goRoute,
+    super.arguments = const {'splash': true},
   });
 
   @override
-  Widget build(BuildContext context) {
-    return BaseViewCubit<SplashCubit, SplashState>(
-      onViewModelReady: (cubit) {
-        cubit.initializeSplash();
-      },
-      onStateListener: (context, state) {
-        if (state == null) return;
+  Future<void> initialContent(viewModel, BuildContext context) async {
+    debugPrint('🚀 Splash View Start!');
 
-        switch (state.status) {
-          case SplashStatus.completed:
-            if (state.navigationTarget != null) {
-              onNavigationReady?.call(state.navigationTarget!);
+    // Initialize the splash cubit with app configuration
+    await viewModel.initializeSplash();
+
+    // Get duration and navigation settings from AppConfig
+    final configHelper = AssetConfigHelper();
+    await configHelper.loadConfig();
+
+    final durationMs =
+        configHelper.getInt('splash_configuration.duration_milliseconds', 3000);
+    final shouldAutoNavigate =
+        configHelper.getBool('splash_configuration.auto_navigate', true);
+    final navigationTarget = configHelper.getString(
+        'splash_configuration.navigation_target', 'home');
+
+    // Setup auto-navigation if enabled
+    if (shouldAutoNavigate) {
+      Timer(Duration(milliseconds: durationMs), () {
+        debugPrint('🚀 Auto-navigating to $navigationTarget');
+        goRoute(navigationTarget);
+      });
+    }
+  }
+
+  @override
+  Widget viewContent(BuildContext context, viewModel, state) {
+    return Scaffold(
+      body: SafeArea(
+        child: FutureBuilder<SplashStyle>(
+          future: _getSplashStyleFromConfig(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
-            break;
-          case SplashStatus.error:
-            if (state.errorMessage != null) {
-              onError?.call(state.errorMessage!);
-              if (kDebugMode) {
-                debugPrint('❌ Splash error: ${state.errorMessage}');
-              }
+
+            if (snapshot.hasData) {
+              // Use the splash style from config
+              return _getSplashWidget(snapshot.data!);
+            } else {
+              // Default to startup style if config not available
+              debugPrint(
+                  '⚠️ Could not get splash style from config, using default');
+              return _getSplashWidget(SplashStyle.startup);
             }
-            break;
-          default:
-            break;
-        }
-      },
-      builder: (cubit, context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: _buildSplashContent(context, cubit, state),
-          ),
-        );
-      },
-    );
-  }
-
-  /// 🎨 Build splash screen content based on state
-  Widget _buildSplashContent(
-      BuildContext context, SplashCubit cubit, SplashState state) {
-    switch (state.status) {
-      case SplashStatus.initial:
-      case SplashStatus.loading:
-        return _buildLoadingState(context, state);
-
-      case SplashStatus.ready:
-        return _buildReadyState(context, cubit, state);
-
-      case SplashStatus.error:
-        return _buildErrorState(context, cubit, state);
-
-      case SplashStatus.completed:
-        return _buildCompletedState(context, state);
-
-      default:
-        return _buildLoadingState(context, state);
-    }
-  }
-
-  /// 🔄 Build loading state UI
-  Widget _buildLoadingState(BuildContext context, SplashState state) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Simple loading indicator
-          OsmeaComponents.loading(
-            type: LoadingType.circularFade,
-            size: 32,
-            color: Theme.of(context).primaryColor,
-          ),
-
-          OsmeaComponents.sizedBox(height: context.spacing16),
-
-          OsmeaComponents.text(
-            'Initializing...',
-            variant: OsmeaTextVariant.bodyMedium,
-            color:
-                Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// ✅ Build ready state UI (main splash content)
-  Widget _buildReadyState(
-      BuildContext context, SplashCubit cubit, SplashState state) {
-    // Use splash config model from state
-    final config = state.config;
-    if (config == null) {
-      return _buildLoadingState(context, state);
-    }
-
-    return _buildSplashByStyle(context, state, cubit);
-  }
-
-  /// 🎨 Build splash based on style type
-  Widget _buildSplashByStyle(
-      BuildContext context, SplashState state, SplashCubit cubit) {
-    final style = state.config!.style;
-
-    switch (style) {
-      case SplashStyle.startup:
-        debugPrint("📱 Rendering SplashStartupWidget");
-        return SplashStartupWidget(
-          onLogoTap: () => cubit.handleLogoTap(),
-        );
-      case SplashStyle.space:
-        debugPrint("🌌 Rendering SplashSpaceWidget");
-        return SplashSpaceWidget(
-          onLogoTap: () => cubit.handleLogoTap(),
-        );
-      case SplashStyle.enterprise:
-        debugPrint("🏢 Rendering SplashEnterpriseWidget");
-        return SplashEnterpriseWidget(
-          onLogoTap: () => cubit.handleLogoTap(),
-        );
-    }
-  }
-
-  /// ❌ Build error state UI
-  Widget _buildErrorState(
-      BuildContext context, SplashCubit cubit, SplashState state) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(context.spacing24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Error icon
-            Icon(
-              Icons.error_outline,
-              size: 64,
-              color: Theme.of(context).colorScheme.error,
-            ),
-
-            OsmeaComponents.sizedBox(height: context.spacing24),
-
-            // Error title
-            OsmeaComponents.text(
-              'Initialization Failed',
-              variant: OsmeaTextVariant.headlineSmall,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.error,
-              textAlign: TextAlign.center,
-            ),
-
-            OsmeaComponents.sizedBox(height: context.spacing16),
-
-            // Error message
-            if (state.errorMessage != null)
-              OsmeaComponents.text(
-                state.errorMessage!,
-                variant: OsmeaTextVariant.bodyMedium,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withValues(alpha: 0.7),
-                textAlign: TextAlign.center,
-              ),
-
-            OsmeaComponents.sizedBox(height: context.spacing32),
-
-            // Retry button
-            OsmeaComponents.button(
-              text: 'Retry',
-              onPressed: () => cubit.retryInitialization(),
-              variant: ButtonVariant.primary,
-            ),
-
-            OsmeaComponents.sizedBox(height: context.spacing16),
-
-            // Skip to home button
-            OsmeaComponents.button(
-              text: 'Continue Anyway',
-              onPressed: () => cubit.navigateToHome(),
-              variant: ButtonVariant.secondary,
-            ),
-          ],
+          },
         ),
       ),
     );
   }
 
-  /// ✅ Build completed state UI (no UI shown - direct transition)
-  Widget _buildCompletedState(BuildContext context, SplashState state) {
-    // Return empty container - no completion UI shown
-    return const SizedBox.shrink();
+  /// Get splash style from config
+  Future<SplashStyle> _getSplashStyleFromConfig() async {
+    final configHelper = AssetConfigHelper();
+    await configHelper.loadConfig();
+
+    final styleString =
+        configHelper.getString('splash_configuration.style', 'startup');
+    final style = _parseStyleFromString(styleString);
+
+    debugPrint('🎨 Splash style from config: $styleString -> $style');
+
+    return style;
+  }
+
+  /// Convert string to SplashStyle enum
+  SplashStyle _parseStyleFromString(String styleString) {
+    switch (styleString.toLowerCase()) {
+      case 'space':
+        return SplashStyle.space;
+      case 'enterprise':
+        return SplashStyle.enterprise;
+      case 'startup':
+      default:
+        return SplashStyle.startup;
+    }
+  }
+
+  /// Get appropriate splash widget based on style
+  Widget _getSplashWidget(SplashStyle style) {
+    // Use the appropriate splash widget based on style
+    switch (style) {
+      case SplashStyle.startup:
+        return SplashStartupWidget(onLogoTap: () => goRoute('home'));
+      case SplashStyle.space:
+        return SplashSpaceWidget(onLogoTap: () => goRoute('home'));
+      case SplashStyle.enterprise:
+        return SplashEnterpriseWidget(onLogoTap: () => goRoute('home'));
+    }
   }
 }
