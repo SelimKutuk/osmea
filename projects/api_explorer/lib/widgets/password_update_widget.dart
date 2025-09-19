@@ -23,61 +23,38 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
   bool _obscureNewPassword = true;
   bool _obscureConfirmPassword = true;
   String? _jwtToken;
-  String? _currentUserId;
 
   @override
   void initState() {
     super.initState();
-    _loadAuthData();
+    _loadJwtToken();
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Refresh JWT token when dialog opens
-    _loadAuthData();
+  void dispose() {
+    _emailController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    _jwtTokenController.dispose();
+    super.dispose();
   }
 
-  /// 🔐 Load JWT token from local storage using WooJwtTokenStorage
-  Future<void> _loadAuthData() async {
+  /// 🔐 Load JWT token from storage
+  Future<void> _loadJwtToken() async {
     try {
-      // Use WooJwtTokenStorage which is the correct way to load JWT tokens
       final token = await WooJwtTokenStorage.loadToken();
-
-      if (token != null && token.accessToken.isNotEmpty) {
+      if (token != null) {
         setState(() {
           _jwtToken = token.accessToken;
-          _currentUserId = token.userData?['id']?.toString();
         });
-
-        // Update JWT token controller
         _jwtTokenController.text = _jwtToken!.length > 50
             ? '${_jwtToken!.substring(0, 50)}...'
             : _jwtToken!;
-
-        debugPrint(
-            '🔐 JWT token loaded: ${_jwtToken!.length > 20 ? '${_jwtToken!.substring(0, 20)}...' : _jwtToken}');
-        debugPrint('👤 Current user ID: $_currentUserId');
-        debugPrint('👤 User data: ${token.userData}');
       } else {
-        setState(() {
-          _jwtToken = null;
-          _currentUserId = null;
-        });
-
-        // Update JWT token controller
-        _jwtTokenController.text = 'No JWT token found';
-
-        debugPrint('❌ No JWT token found in local storage');
+        _jwtTokenController.text = 'JWT token not found';
       }
     } catch (e) {
       debugPrint('❌ Error loading JWT token: $e');
-      setState(() {
-        _jwtToken = null;
-        _currentUserId = null;
-      });
-
-      // Update JWT token controller
       _jwtTokenController.text = 'Error loading token';
     }
   }
@@ -156,21 +133,16 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: OsmeaColors.white,
-        title: OsmeaComponents.row(
-          children: [
-            Icon(Icons.check_circle, color: OsmeaColors.forestHeart),
-            OsmeaComponents.sizedBox(width: 8),
-            OsmeaComponents.text(
-              'Success',
-              variant: OsmeaTextVariant.titleMedium,
-              color: OsmeaColors.forestHeart,
-              fontWeight: FontWeight.bold,
-            ),
-          ],
+        title: OsmeaComponents.text(
+          'Success',
+          variant: OsmeaTextVariant.headlineSmall,
+          color: OsmeaColors.steel,
+          fontWeight: FontWeight.bold,
         ),
         content: OsmeaComponents.text(
           message,
           variant: OsmeaTextVariant.bodyMedium,
+          color: OsmeaColors.steel,
         ),
         actions: [
           OsmeaComponents.button(
@@ -178,7 +150,6 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
             onPressed: () => Navigator.of(context).pop(),
             variant: ButtonVariant.primary,
             size: ButtonSize.medium,
-            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
@@ -190,21 +161,17 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: OsmeaComponents.row(
-          children: [
-            Icon(Icons.error, color: OsmeaColors.amberFlame),
-            OsmeaComponents.sizedBox(width: 8),
-            OsmeaComponents.text(
-              'Error',
-              variant: OsmeaTextVariant.titleMedium,
-              color: OsmeaColors.amberFlame,
-              fontWeight: FontWeight.bold,
-            ),
-          ],
+        backgroundColor: OsmeaColors.white,
+        title: OsmeaComponents.text(
+          'Error',
+          variant: OsmeaTextVariant.headlineSmall,
+          color: OsmeaColors.steel,
+          fontWeight: FontWeight.bold,
         ),
         content: OsmeaComponents.text(
           message,
           variant: OsmeaTextVariant.bodyMedium,
+          color: OsmeaColors.steel,
         ),
         actions: [
           OsmeaComponents.button(
@@ -212,20 +179,10 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
             onPressed: () => Navigator.of(context).pop(),
             variant: ButtonVariant.primary,
             size: ButtonSize.medium,
-            textStyle: OsmeaTextStyle.buttonMedium(context),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
-    _jwtTokenController.dispose();
-    super.dispose();
   }
 
   @override
@@ -285,23 +242,17 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
             OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: _jwtToken != null
-                    ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
-                    : OsmeaColors.amberFlame.withValues(alpha: 0.1),
+                color: OsmeaColors.white,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: _jwtToken != null
-                      ? OsmeaColors.forestHeart
-                      : OsmeaColors.amberFlame,
+                  color: OsmeaColors.platinum,
                 ),
               ),
               child: OsmeaComponents.row(
                 children: [
                   Icon(
-                    _jwtToken != null ? Icons.check_circle : Icons.error,
-                    color: _jwtToken != null
-                        ? OsmeaColors.forestHeart
-                        : OsmeaColors.amberFlame,
+                    _jwtToken != null ? Icons.check_circle : Icons.info,
+                    color: OsmeaColors.steel,
                   ),
                   OsmeaComponents.sizedBox(width: 8),
                   OsmeaComponents.expanded(
@@ -310,9 +261,7 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
                           ? 'JWT token loaded. Enter details below to update password.'
                           : 'JWT token not found. Please login first.',
                       variant: OsmeaTextVariant.bodyMedium,
-                      color: _jwtToken != null
-                          ? OsmeaColors.forestHeart
-                          : OsmeaColors.amberFlame,
+                      color: OsmeaColors.steel,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -326,18 +275,16 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
               controller: _jwtTokenController,
               readOnly: true,
               label: 'JWT Token',
-              hint: 'JWT token from local storage',
+              hint: _jwtToken != null
+                  ? 'JWT token from local storage'
+                  : 'JWT token not found - please login first',
               prefixIcon: const Icon(Icons.security),
               variant: TextFieldVariant.outlined,
               size: TextFieldSize.medium,
-              backgroundColor: _jwtToken != null
-                  ? OsmeaColors.forestHeart.withValues(alpha: 0.1)
-                  : OsmeaColors.amberFlame.withValues(alpha: 0.1),
+              backgroundColor: OsmeaColors.white,
               suffixIcon: Icon(
-                _jwtToken != null ? Icons.check_circle : Icons.error,
-                color: _jwtToken != null
-                    ? OsmeaColors.forestHeart
-                    : OsmeaColors.amberFlame,
+                _jwtToken != null ? Icons.check_circle : Icons.warning,
+                color: OsmeaColors.steel,
               ),
             ),
             OsmeaComponents.sizedBox(height: 12),
@@ -490,24 +437,24 @@ class _PasswordUpdateWidgetState extends State<PasswordUpdateWidget> {
             OsmeaComponents.container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: OsmeaColors.forestHeart.withValues(alpha: 0.1),
+                color: OsmeaColors.white,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: OsmeaColors.forestHeart.withValues(alpha: 0.3),
+                  color: OsmeaColors.platinum,
                 ),
               ),
               child: OsmeaComponents.row(
                 children: [
                   Icon(
                     Icons.info,
-                    color: OsmeaColors.forestHeart,
+                    color: OsmeaColors.steel,
                   ),
                   OsmeaComponents.sizedBox(width: 8),
                   OsmeaComponents.expanded(
                     child: OsmeaComponents.text(
                       'Password will be updated securely. Make sure to use a strong password.',
                       variant: OsmeaTextVariant.bodyMedium,
-                      color: OsmeaColors.forestHeart,
+                      color: OsmeaColors.steel,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
