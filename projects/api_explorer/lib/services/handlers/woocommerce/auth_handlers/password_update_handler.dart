@@ -15,7 +15,7 @@ class PasswordUpdateHandler implements ApiRequestHandler {
     String method,
     Map<String, String> params,
   ) async {
-    if (method != 'POST') {
+    if (method != 'POST' && method != 'PUT') {
       return {
         "status": "error",
         "message": "Method $method not supported for Password Update API",
@@ -74,16 +74,13 @@ class PasswordUpdateHandler implements ApiRequestHandler {
       // Use WooAuthService from the package
       final authService = GetIt.I<WooAuthService>();
 
-      // Create password update request
-      final passwordUpdateRequest = PasswordUpdateRequest(
-        email: email,
-        newPassword: newPassword,
-        jwtToken: jwtToken,
+      // Call API exactly like Postman: PUT + query params (send JWT as required by server)
+      final response = await authService.updatePasswordPutQuery(
+        storeName,
+        email,
+        newPassword,
+        jwtToken, // send JWT as required by server
       );
-
-      // Use store name from parameters
-      final response =
-          await authService.updatePassword(storeName, passwordUpdateRequest);
 
       if (response.success) {
         debugPrint('✅ Password update successful');
@@ -160,11 +157,37 @@ class PasswordUpdateHandler implements ApiRequestHandler {
   }
 
   @override
-  List<String> get supportedMethods => ['POST'];
+  List<String> get supportedMethods => ['POST', 'PUT'];
 
   @override
   Map<String, List<ApiField>> get requiredFields => {
         'POST': [
+          const ApiField(
+            name: 'brand_name',
+            label: 'Store Name',
+            hint: 'WooCommerce store name',
+            isRequired: true,
+          ),
+          const ApiField(
+            name: 'email',
+            label: 'Email',
+            hint: 'User email address',
+            isRequired: true,
+          ),
+          const ApiField(
+            name: 'new_password',
+            label: 'New Password',
+            hint: 'New password for the user',
+            isRequired: true,
+          ),
+          const ApiField(
+            name: 'JWT',
+            label: 'JWT Token',
+            hint: 'JWT authentication token',
+            isRequired: true,
+          ),
+        ],
+        'PUT': [
           const ApiField(
             name: 'brand_name',
             label: 'Store Name',
