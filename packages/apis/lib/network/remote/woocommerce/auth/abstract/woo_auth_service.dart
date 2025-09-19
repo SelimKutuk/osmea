@@ -39,4 +39,9 @@ abstract class WooAuthService {
 
   Future<UserLoginResponse> userLoginWithQuery(
       String email, String password, String brandName);
+
+  /// 🔐 Update Password (PUT + Query) — mirrors Postman
+  /// Sends email & new_password as query string. JWT is optional and omitted when null.
+  Future<PasswordUpdateResponse> updatePasswordPutQuery(
+      String brandName, String email, String newPassword, String? jwt);
 }
