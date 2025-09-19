@@ -5,6 +5,7 @@ import 'package:api_explorer/styles/app_theme.dart';
 import 'package:apis/apis.dart';
 import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
 import 'package:api_explorer/widgets/delete_account_widget.dart';
+import 'package:api_explorer/widgets/password_update_widget.dart';
 
 /// Modern IDE-style application header using Osmea components
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -17,6 +18,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onDebugTest;
   final VoidCallback? onProfileTap;
   final VoidCallback? onStoreChange;
+  final VoidCallback? onPasswordUpdate;
+  final bool isProfileEnabled;
 
   const AppHeader({
     super.key,
@@ -29,6 +32,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.onDebugTest,
     this.onProfileTap,
     this.onStoreChange,
+    this.onPasswordUpdate,
+    this.isProfileEnabled = false,
   });
 
   @override
@@ -551,6 +556,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       },
       onChangeStore: onStoreChange,
       onProfileTap: onProfileTap,
+      isProfileEnabled: isProfileEnabled,
     );
   }
 
@@ -593,11 +599,13 @@ class _ActionMenuWidget extends StatefulWidget {
   final VoidCallback? onRefresh;
   final VoidCallback? onChangeStore;
   final VoidCallback? onProfileTap;
+  final bool isProfileEnabled;
 
   const _ActionMenuWidget({
     this.onRefresh,
     this.onChangeStore,
     this.onProfileTap,
+    this.isProfileEnabled = false,
   });
 
   @override
@@ -680,22 +688,32 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
           'Add a new store configuration',
           () => _showAddStoreDialog(context),
         ),
-        _buildMenuItem(
-          context,
-          'profile',
-          Icons.account_circle_rounded,
-          'Store Profile',
-          'View store details and settings',
-          widget.onProfileTap,
-        ),
-        _buildMenuItem(
-          context,
-          'delete_account',
-          Icons.delete_forever_rounded,
-          'Delete Account',
-          'Delete user account permanently',
-          () => _showDeleteAccountDialog(context),
-        ),
+        if (widget.isProfileEnabled) ...[
+          _buildMenuItem(
+            context,
+            'profile',
+            Icons.account_circle_rounded,
+            'Store Profile',
+            'View store details and settings',
+            widget.onProfileTap,
+          ),
+          _buildMenuItem(
+            context,
+            'password_update',
+            Icons.lock_reset_rounded,
+            'Update Password',
+            'Update your account password',
+            () => _showPasswordUpdateDialog(context),
+          ),
+          _buildMenuItem(
+            context,
+            'delete_account',
+            Icons.delete_forever_rounded,
+            'Delete Account',
+            'Delete user account permanently',
+            () => _showDeleteAccountDialog(context),
+          ),
+        ],
       ],
     ).then((_) {
       setState(() {
@@ -740,6 +758,20 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         );
       }
     }
+  }
+
+  /// Show password update dialog
+  void _showPasswordUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          width: 600,
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: const PasswordUpdateWidget(),
+        ),
+      ),
+    );
   }
 
   /// Show delete account dialog

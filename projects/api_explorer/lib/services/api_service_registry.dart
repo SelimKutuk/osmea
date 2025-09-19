@@ -3919,6 +3919,64 @@ class ApiServiceRegistry {
       subcategory: 'Customers',
       handler: DisableCustomerGraphQLHandler(),
     ),
+
+    // 🔐 WooCommerce Authentication Services
+    ApiService(
+      name: 'User Login',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLoginHandler(),
+    ),
+    ApiService(
+      name: 'User Sign Up',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserSignUpHandler(),
+    ),
+    ApiService(
+      name: 'User Logout',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/logout',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLogoutHandler(),
+    ),
+    ApiService(
+      name: 'Password Reset',
+      endpoint: '/wp-json/{brand_name}-auth-reset/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordResetHandler(),
+    ),
+    ApiService(
+      name: 'Password Update',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/user/reset_password',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordUpdateHandler(),
+    ),
+    ApiService(
+      name: 'Auth Status',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/status',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: AuthStatusHandler(),
+    ),
+    ApiService(
+      name: 'JWT Auth Test',
+      endpoint: '/wp-json/jwt-auth/v1/token',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: JwtAuthTestHandler(),
+    ),
+    ApiService(
+      name: 'Delete User',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: DeleteUserHandler(),
+    ),
   ];
 
   static void initialize() {}

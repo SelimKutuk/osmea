@@ -53,9 +53,9 @@ class DeleteUserHandler implements ApiRequestHandler {
 
       debugPrint('🗑️ Starting user deletion with AUTH_KEY');
       debugPrint(
-          '🗑️ JWT: ${jwt == 'no_jwt_token' ? 'No JWT token' : (jwt.length > 20 ? jwt.substring(0, 20) + '...' : jwt)}');
+          '🗑️ JWT: ${jwt == 'no_jwt_token' ? 'No JWT token' : (jwt.length > 20 ? '${jwt.substring(0, 20)}...' : jwt)}');
       debugPrint(
-          '🗑️ Auth Key: ${authKey.length > 10 ? authKey.substring(0, 10) + '...' : authKey}');
+          '🗑️ Auth Key: ${authKey.length > 10 ? '${authKey.substring(0, 10)}...' : authKey}');
 
       // Use WooAuthService from the package
       final authService = GetIt.I<WooAuthService>();
@@ -195,16 +195,9 @@ class DeleteUserHandler implements ApiRequestHandler {
       debugPrint('❌ Error getting store name from WooNetwork: $e');
     }
 
-    // Fallback: try to extract from AUTH_KEY
-    // Assuming AUTH_KEY format contains brand name
-    if (authKey.toLowerCase().contains('ticimax')) {
-      return 'ticimax';
-    } else if (authKey.toLowerCase().contains('woocomm')) {
-      return 'woocomm';
-    }
-
-    // Default fallback
-    debugPrint('⚠️ Using default brand name: ticimax');
-    return 'ticimax';
+    // If no store name available, return empty string
+    // The API should handle this case appropriately
+    debugPrint('⚠️ No store name available, using empty string');
+    return '';
   }
 }

@@ -76,6 +76,19 @@ class UserLoginHandler implements ApiRequestHandler {
       // Use store name from parameters
       final response = await authService.userLogin(storeName, loginRequest);
 
+      debugPrint('🔍 Login Response Debug:');
+      debugPrint('  - success: ${response.success}');
+      debugPrint('  - message: ${response.message}');
+      debugPrint('  - data: ${response.data}');
+      debugPrint('  - user: ${response.data?.user}');
+      debugPrint('  - user?.toJson(): ${response.data?.user?.toJson()}');
+      debugPrint('  - jwt: ${response.data?.jwt}');
+      debugPrint('  - accessToken: ${response.data?.accessToken}');
+      debugPrint('  - tokenType: ${response.data?.tokenType}');
+      debugPrint('  - expiresIn: ${response.data?.expiresIn}');
+      debugPrint('  - refreshToken: ${response.data?.refreshToken}');
+      debugPrint('  - scope: ${response.data?.scope}');
+
       if (response.success) {
         debugPrint('✅ User login successful');
 
