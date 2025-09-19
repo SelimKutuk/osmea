@@ -8,6 +8,7 @@ import 'package:core/src/views/splash/widgets/splash_startup_widget.dart';
 import 'package:core/src/views/splash/widgets/splash_space_widget.dart';
 import 'package:core/src/views/splash/widgets/splash_enterprise_widget.dart';
 import 'package:core/src/helper/asset_config_helper.dart';
+import 'package:core/src/views/routes.dart';
 
 /// 🚀 **OSMEA Splash View**
 ///
@@ -48,7 +49,9 @@ class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
     if (shouldAutoNavigate) {
       Timer(Duration(milliseconds: durationMs), () {
         debugPrint('🚀 Auto-navigating to $navigationTarget');
-        goRoute(navigationTarget);
+        // Convert string route to Routes enum
+        final Routes route = _getRouteFromString(navigationTarget);
+        goRoute(route.name); // Use the enum name for navigation
       });
     }
   }
@@ -113,11 +116,25 @@ class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
     // Use the appropriate splash widget based on style
     switch (style) {
       case SplashStyle.startup:
-        return SplashStartupWidget(onLogoTap: () => goRoute('home'));
+        return SplashStartupWidget(onLogoTap: () => goRoute(Routes.home.name));
       case SplashStyle.space:
-        return SplashSpaceWidget(onLogoTap: () => goRoute('home'));
+        return SplashSpaceWidget(onLogoTap: () => goRoute(Routes.home.name));
       case SplashStyle.enterprise:
-        return SplashEnterpriseWidget(onLogoTap: () => goRoute('home'));
+        return SplashEnterpriseWidget(
+            onLogoTap: () => goRoute(Routes.home.name));
+    }
+  }
+
+  /// Convert string route name to Routes enum
+  Routes _getRouteFromString(String routeName) {
+    switch (routeName.toLowerCase()) {
+      case 'onboarding':
+        return Routes.onboarding;
+      case 'home':
+        return Routes.home;
+      case 'splash':
+      default:
+        return Routes.splash;
     }
   }
 }
