@@ -11,13 +11,15 @@ final GoRouter appRouter = GoRouter(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return SplashView(
-          onNavigationReady: (route) {
-            debugPrint('🧭 Navigating to: $route');
-            context.go(route);
-          },
-          onError: (error) {
-            debugPrint('❌ Splash error: $error');
-            context.go('/home'); // Fallback to home on error
+          goRoute: (String routeName) {
+            debugPrint('🧭 Navigating to: $routeName');
+            if (routeName == 'home') {
+              context.go('/home');
+            } else if (routeName == 'onboarding') {
+              context.go('/onboarding');
+            } else {
+              context.go('/home'); // Default fallback
+            }
           },
         );
       },
