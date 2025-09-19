@@ -143,38 +143,65 @@ class FileDownloadHelper {
     try {
       debugPrint('🔐 Checking storage permissions...');
       
-      // Check if permission is already granted
-      final hasPermission = await _permissionHelper.checkPermission(AppPermission.storage);
-      if (hasPermission) {
-        debugPrint('✅ Storage permission already granted');
+      // Android scoped storage nuances: for Android 11+ we need MANAGE_EXTERNAL_STORAGE
+      if (Platform.isAndroid) {
+        final apiLevel = await _deviceInfoHelper.getAndroidApiLevel();
+        if (apiLevel >= 30) {
+          final hasManageAllFiles = await _permissionHelper.checkPermission(AppPermission.manageExternalStorage);
+          if (hasManageAllFiles) {
+            debugPrint('✅ Manage External Storage already granted');
+            return true;
+          }
+          debugPrint('📋 Requesting Manage External Storage (All files access)...');
+          final grantedManage = await _permissionHelper.requestPermission(AppPermission.manageExternalStorage);
+          if (grantedManage) {
+            debugPrint('✅ Manage External Storage granted');
+            return true;
+          }
+          // If not granted, fall through to rationale/status handling below
+        } else {
+          // Android 6-10 legacy storage permission
+          final hasPermission = await _permissionHelper.checkPermission(AppPermission.storage);
+          if (hasPermission) {
+            debugPrint('✅ Storage permission already granted');
+            return true;
+          }
+          debugPrint('📋 Requesting legacy Storage permission...');
+          final granted = await _permissionHelper.requestPermission(AppPermission.storage);
+          if (granted) {
+            debugPrint('✅ Storage permission granted');
+            return true;
+          }
+        }
+      } else {
+        // Non-Android platforms do not require external storage permissions
         return true;
       }
       
       // Check if we should show rationale (Android only)
-      final shouldShowRationale = await _permissionHelper.shouldShowRequestPermissionRationale(AppPermission.storage);
+      final shouldShowRationale = await _permissionHelper.shouldShowRequestPermissionRationale(
+        Platform.isAndroid ? AppPermission.manageExternalStorage : AppPermission.storage,
+      );
       if (shouldShowRationale) {
         debugPrint('💡 Should show storage permission rationale');
       }
       
-      // Request permission
-      debugPrint('📋 Requesting storage permission...');
-      final granted = await _permissionHelper.requestPermission(AppPermission.storage);
-      
-      if (granted) {
-        debugPrint('✅ Storage permission granted');
+      // Re-check status to provide better error message
+      final result = await _permissionHelper.getPermissionStatus(
+        Platform.isAndroid ? AppPermission.manageExternalStorage : AppPermission.storage,
+      );
+      if (result.isGranted) {
         return true;
       } else {
-        // Check if permanently denied
-        final result = await _permissionHelper.getPermissionStatus(AppPermission.storage);
         if (result.isPermanentlyDenied) {
           debugPrint('🚫 Storage permission permanently denied');
           throw StoragePermissionException(
-            'Storage permission is permanently denied. Please enable it in app settings to save files to public directories.'
+            'Storage access is permanently denied. Please enable "All files access" in app settings to save to public directories.'
           );
         } else {
           debugPrint('❌ Storage permission denied');
           throw StoragePermissionException(
-            'Storage permission is required to save files to public directories.'
+            'Storage access is required to save files to public directories.'
           );
         }
       }
