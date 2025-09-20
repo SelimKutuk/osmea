@@ -85,6 +85,14 @@ export 'package:core/src/views/onboarding/onboarding_view.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_state.dart';
 
+// 🚀 Exports the splash models
+export 'package:core/src/models/splash_models.dart';
+
+// 🚀 Exports the splash view, view model and related modules
+export 'package:core/src/views/splash/splash_view.dart';
+export 'package:core/src/views/splash/cubit/splash_cubit.dart';
+export 'package:core/src/views/splash/cubit/splash_state.dart';
+
 // 🚨 Exports the error handling models
 export 'package:core/src/models/error_handling_models.dart';
 
