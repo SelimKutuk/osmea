@@ -47,12 +47,23 @@ class CreateWishlistGroupHandler implements ApiRequestHandler {
         request: groupData,
       );
 
-      return {
-        "status": "success",
-        "group": response.toJson(),
-        "params": params,
-        "timestamp": DateTime.now().toIso8601String(),
-      };
+      // Check if the response was successful
+      if (response.success == true && response.data != null) {
+        return {
+          "status": "success",
+          "message": response.message ?? "Wishlist group created successfully",
+          "group": response.data!.toJson(),
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      } else {
+        return {
+          "status": "error",
+          "message": response.message ?? "Failed to create wishlist group",
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
     } catch (e) {
       return {
         "status": "error",
