@@ -1,24 +1,34 @@
 # OSMEA ®️
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-1.0.0-00D4AA?style=for-the-badge&logo=flutter&logoColor=white)](https://github.com/masterfabric-mobile/osmea)
-[![License](https://img.shields.io/badge/license-AGPLv3-FF6B6B?style=for-the-badge&logo=gnu&logoColor=white)](https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-[![Shopify](https://img.shields.io/badge/shopify-8DB543?style=for-the-badge&logo=shopify&logoColor=white)](https://shopify.dev/docs/api)
-[![WooCommerce](https://img.shields.io/badge/woocommerce-96588A?style=for-the-badge&logo=woocommerce&logoColor=white)](https://woocommerce.com/documentation/)
-[![Firebase](https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+<div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/pulls)
-[![GitHub contributors](https://img.shields.io/github/contributors/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/commits)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea/graphs/commit-activity)
-[![GitHub repo size](https://img.shields.io/github/repo-size/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea)
-[![GitHub language count](https://img.shields.io/github/languages/count/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white)](https://github.com/masterfabric-mobile/osmea)
-[![GitHub top language](https://img.shields.io/github/languages/top/masterfabric-mobile/osmea?style=for-the-badge&logo=dart&logoColor=white)](https://github.com/masterfabric-mobile/osmea)
+### 🚀 **Technology Stack**
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+[![Shopify](https://img.shields.io/badge/Shopify-8DB543?style=for-the-badge&logo=shopify&logoColor=white)](https://shopify.dev)
+[![WooCommerce](https://img.shields.io/badge/WooCommerce-96588A?style=for-the-badge&logo=woocommerce&logoColor=white)](https://woocommerce.com)
+
+### 📊 **Project Stats**
+[![GitHub stars](https://img.shields.io/github/stars/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/pulls)
+[![GitHub contributors](https://img.shields.io/github/contributors/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/graphs/contributors)
+
+### 📈 **Activity & Quality**
+[![GitHub last commit](https://img.shields.io/github/last-commit/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/commits)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea/graphs/commit-activity)
+[![GitHub repo size](https://img.shields.io/github/repo-size/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea)
+[![GitHub language count](https://img.shields.io/github/languages/count/masterfabric-mobile/osmea?style=for-the-badge&logo=github&logoColor=white&labelColor=24292E)](https://github.com/masterfabric-mobile/osmea)
+[![GitHub top language](https://img.shields.io/github/languages/top/masterfabric-mobile/osmea?style=for-the-badge&logo=dart&logoColor=white&labelColor=0175C2)](https://github.com/masterfabric-mobile/osmea)
+
+### 📄 **License & Version**
+[![Version](https://img.shields.io/badge/version-1.0.0-00D4AA?style=for-the-badge&logo=flutter&logoColor=white&labelColor=02569B)](https://github.com/masterfabric-mobile/osmea)
+[![License](https://img.shields.io/badge/license-AGPLv3-FF6B6B?style=for-the-badge&logo=gnu&logoColor=white&labelColor=8B0000)](https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE)
+
+</div>
 
 </div>
 
