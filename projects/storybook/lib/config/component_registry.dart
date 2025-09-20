@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:osmea_storybook/components/align_storybook/aligns.dart';
+import 'package:osmea_storybook/components/sized_box_storybook/sized_boxes.dart';
+import 'package:osmea_storybook/components/rich_text_storybook/rich_texts.dart';
+import 'package:osmea_storybook/components/row_storybook/rows.dart';
+import 'package:osmea_storybook/components/column_storybook/columns.dart';
+import 'package:osmea_storybook/components/padding_storybook/paddings.dart';
+import 'package:osmea_storybook/components/clip_r_rect_storybook/clip_r_rects.dart';
+import 'package:osmea_storybook/components/stack_storybook/stacks.dart';
 import 'story_config.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 import '../components/cards_storybook/cards.dart';
@@ -24,9 +32,16 @@ import '../components/carousel_storybook/carousels.dart';
 import '../components/searchbar_storybook/searchbars.dart';
 import '../components/ticket_storybook/tickets.dart';
 import '../components/bottom_sheet_storybook/bottom_sheets.dart';
+import '../components/collapse_storybook/collapses.dart';
 import '../components/popup_storybook/popups.dart';
 import '../components/stepper_storybook/showcase/unified_stepper_showcase.dart';
-
+import '../components/snackbar_storybook/snackbars.dart';
+import '../components/dropdown_storybook/dropdowns.dart';
+import '../components/image_storybook/images.dart';
+import '../components/toast_storybook/toasts.dart';
+import '../components/spacer_storybook/spacers.dart';
+import '../components/tabbar_storybook/tabbars.dart';
+import '../components/wrap_storybook/wraps.dart';
 
 /// Model for component information displayed on home page and stories
 class ComponentInfo {
@@ -49,6 +64,14 @@ class ComponentInfo {
 
 /// Central registry for all components (used for both home and stories)
 final List<ComponentInfo> allComponents = [
+  ComponentInfo(
+    name: 'Align',
+    description: 'Alignment widget for precise positioning control',
+    icon: Icons.align_horizontal_center,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Align'),
+    getStories: getAllAlignStories,
+  ),
   ComponentInfo(
     name: 'App Bar',
     description: 'Top application bars and headers',
@@ -99,7 +122,8 @@ final List<ComponentInfo> allComponents = [
   ),
   ComponentInfo(
     name: 'Carousels',
-    description: 'Interactive carousel components with multiple variants and navigation',
+    description:
+        'Interactive carousel components with multiple variants and navigation',
     icon: Icons.view_carousel,
     color: Colors.cyan,
     storyPath: StoryConfig.buildComponentStoryName('Carousels'),
@@ -120,6 +144,32 @@ final List<ComponentInfo> allComponents = [
     color: Colors.blueGrey,
     storyPath: StoryConfig.buildComponentStoryName('Chips'),
     getStories: getAllChipStories,
+  ),
+  ComponentInfo(
+    name: 'ClipRRect',
+    description: 'Clip child with rounded corners for beautiful UI elements',
+    icon: Icons.crop_square,
+    color: Colors.pink,
+    storyPath: StoryConfig.buildComponentStoryName('ClipRRect'),
+    getStories: getAllClipRRectStories,
+  ),
+  ComponentInfo(
+    name: 'Collapse',
+    description:
+        'Expandable content panels with smooth animations and accordion mode',
+    icon: Icons.expand_more,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Collapse'),
+    getStories: getAllCollapseStories,
+  ),
+  ComponentInfo(
+    name: 'Column',
+    description:
+        'Vertical layout component with flexible alignment and spacing options',
+    icon: Icons.view_column,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Column'),
+    getStories: getAllColumnStories,
   ),
   ComponentInfo(
     name: 'Containers',
@@ -146,6 +196,14 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllDividerStories,
   ),
   ComponentInfo(
+    name: 'Dropdowns',
+    description: 'Selection controls with primitive, icon, and avatar options',
+    icon: Icons.arrow_drop_down_circle,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Dropdowns'),
+    getStories: getAllDropdownStories,
+  ),
+  ComponentInfo(
     name: 'Footers',
     description: 'Page footers with navigation links and information',
     icon: Icons.foundation,
@@ -154,8 +212,18 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllFooterStories,
   ),
   ComponentInfo(
+    name: 'Images',
+    description:
+        'Image components with various shapes, sizes, and loading states',
+    icon: Icons.image,
+    color: Colors.purple.shade400,
+    storyPath: StoryConfig.buildComponentStoryName('Images'),
+    getStories: getAllImageStories,
+  ),
+  ComponentInfo(
     name: 'List Item',
-    description: 'Interactive list items with various styles and configurations',
+    description:
+        'Interactive list items with various styles and configurations',
     icon: Icons.list,
     color: Colors.pink,
     storyPath: StoryConfig.buildComponentStoryName('List Item'),
@@ -176,6 +244,15 @@ final List<ComponentInfo> allComponents = [
     color: Colors.orange,
     storyPath: StoryConfig.buildComponentStoryName('Navigation Bar'),
     getStories: getAllNavbarStories,
+  ),
+  ComponentInfo(
+    name: 'Padding',
+    description:
+        'Flexible padding component with Flutter\'s standard Padding widget API',
+    icon: Icons.padding,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Padding'),
+    getStories: getAllPaddingStories,
   ),
   ComponentInfo(
     name: 'Popups',
@@ -202,12 +279,66 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllRadioButtonStories,
   ),
   ComponentInfo(
+    name: 'RichText',
+    description:
+        'Display text with multiple styles, colors, and interactive elements',
+    icon: Icons.text_fields,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('RichText'),
+    getStories: getAllRichTextStories,
+  ),
+  ComponentInfo(
+    name: 'Row',
+    description:
+        'Horizontal layout component with flexible alignment and spacing options',
+    icon: Icons.view_stream,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Row'),
+    getStories: getAllRowStories,
+  ),
+  ComponentInfo(
     name: 'Searchbars',
-    description: 'Search inputs with suggestions, history, and expandable features',
+    description:
+        'Search inputs with suggestions, history, and expandable features',
     icon: Icons.search,
     color: Colors.teal,
     storyPath: StoryConfig.buildComponentStoryName('Searchbars'),
     getStories: getAllSearchbarStories,
+  ),
+  ComponentInfo(
+    name: 'SizedBox',
+    description: 'Fixed-size container widget for layout and spacing control',
+    icon: Icons.crop_square,
+    color: Colors.blueGrey,
+    storyPath: StoryConfig.buildComponentStoryName('SizedBox'),
+    getStories: getAllSizedBoxStories,
+  ),
+  ComponentInfo(
+    name: 'Snackbars',
+    description:
+        'Temporary notifications and feedback messages with various styles',
+    icon: Icons.message_rounded,
+    color: Colors.orange,
+    storyPath: StoryConfig.buildComponentStoryName('Snackbars'),
+    getStories: getAllSnackbarStories,
+  ),
+  ComponentInfo(
+    name: 'Spacer',
+    description:
+        'Flexible space that expands to fill available space in Row or Column',
+    icon: Icons.space_bar,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Spacer'),
+    getStories: getAllSpacerStories,
+  ),
+  ComponentInfo(
+    name: 'Stack',
+    description:
+        'Layered widget positioning component for overlapping elements',
+    icon: Icons.layers,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Stack'),
+    getStories: getAllStackStories,
   ),
   ComponentInfo(
     name: 'Steppers',
@@ -242,11 +373,36 @@ final List<ComponentInfo> allComponents = [
     getStories: getAllTextFieldStories,
   ),
   ComponentInfo(
+    name: 'Tab Bars',
+    description: 'Tab navigation components with various styles and configurations',
+    icon: Icons.tab,
+    color: Colors.indigo,
+    storyPath: StoryConfig.buildComponentStoryName('Tab Bars'),
+    getStories: getAllTabBarStories,
+  ),
+  ComponentInfo(
     name: 'Ticket Widget',
-    description: 'Dynamic form generation for support tickets with various input types',
+    description:
+        'Dynamic form generation for support tickets with various input types',
     icon: Icons.confirmation_number,
     color: Colors.green,
     storyPath: StoryConfig.buildComponentStoryName('Ticket Widget'),
     getStories: getAllTicketStories,
+  ),
+    ComponentInfo(
+    name: 'Toasts',
+    description: 'Non-intrusive notifications with multiple styles and animations',
+    icon: Icons.notifications_outlined,
+    color: Colors.teal,
+    storyPath: StoryConfig.buildComponentStoryName('Toasts'),
+    getStories: getAllToastStories,
+  ),
+  ComponentInfo(
+    name: 'Wrap',
+    description: 'Flexible layout widget that wraps children to multiple lines',
+    icon: Icons.wrap_text,
+    color: Colors.deepPurple,
+    storyPath: StoryConfig.buildComponentStoryName('Wrap'),
+    getStories: getAllWrapStories,
   ),
 ];

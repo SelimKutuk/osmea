@@ -49,7 +49,9 @@ import '../components/text_example.dart';
 import '../components/text_field_example.dart';
 import '../components/ticket_widget_example.dart';
 import '../components/toast_example.dart';
+import '../components/url_launcher_example.dart';
 import '../components/wrap_example.dart';
+// FileDownloadHelperExample is shown in Helpers, not in Display list
 
 final List<Map<String, dynamic>> components = [
   {
@@ -292,6 +294,12 @@ final List<Map<String, dynamic>> components = [
     'icon': Icons.notifications_outlined,
     'route': () => const ToastExample(),
   },
+  {
+    'title': 'URL Launcher',
+    'icon': Icons.launch_outlined,
+    'route': () => const UrlLauncherExample(),
+  },
+  // FileDownloader moved to Helpers screen
   {
     'title': 'Wrap',
     'icon': Icons.wrap_text_outlined,

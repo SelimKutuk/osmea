@@ -37,10 +37,16 @@ dependencies:
   # Logging
   logger: ^2.5.0
 
+  core:
+    git:
+      url: https://github.com/masterfabric-mobile/osmea.git
+      ref: dev
+      path: packages/core
+
   # Code generation and annotations
   json_annotation: ^4.9.0
   freezed_annotation: 2.4.4
-  freezed: 2.5.7
+  freezed: 2.5.2
   
   # GraphQL dependencies
   graphql: ^5.1.3
@@ -65,4 +71,5 @@ dev_dependencies:
   
   # GraphQL code generation
   graphql_codegen: ^1.1.1
+  test: ^1.25.15
 

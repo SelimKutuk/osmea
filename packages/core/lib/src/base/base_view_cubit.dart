@@ -11,7 +11,7 @@ import 'package:get_it/get_it.dart';
 ///   viewModel.init();
 /// }
 /// ```
-typedef OnViewModelReady<V> = void Function(V viewModel);
+typedef OnCubitViewModelReady<V> = void Function(V viewModel);
 
 /// 🧹 Called before the ViewModel is disposed.
 /// 
@@ -21,7 +21,7 @@ typedef OnViewModelReady<V> = void Function(V viewModel);
 ///   viewModel.disposeResources();
 /// }
 /// ```
-typedef OnViewModelEnd<V> = void Function(V viewModel);
+typedef OnCubitViewModelEnd<V> = void Function(V viewModel);
 
 /// 🖼️ Builder function that creates the UI with ViewModel and state.
 /// 
@@ -31,7 +31,7 @@ typedef OnViewModelEnd<V> = void Function(V viewModel);
 ///   return Text(state.title);
 /// }
 /// ```
-typedef OnViewModelStateBuilder<V, S> = Widget Function(
+typedef OnCubitViewModelStateBuilder<V, S> = Widget Function(
     V viewModel, BuildContext context, S state);
 
 /// 🎧 Listener triggered on state changes.
@@ -44,7 +44,7 @@ typedef OnViewModelStateBuilder<V, S> = Widget Function(
 ///   }
 /// }
 /// ```
-typedef OnStateListener<S> = void Function(BuildContext context, S? state);
+typedef OnCubitStateListener<S> = void Function(BuildContext context, S? state);
 
 /// 🔄 Determines whether the builder should be called.
 /// 
@@ -52,7 +52,7 @@ typedef OnStateListener<S> = void Function(BuildContext context, S? state);
 /// ```dart
 /// buildWhen: (previous, current) => previous != current,
 /// ```
-typedef BuilderCondition<S> = bool Function(S? previous, S? current);
+typedef BuilderConditionCubit<S> = bool Function(S? previous, S? current);
 
 /// 🌟
 /// BaseViewCubit simplifies lifecycle, state listening, and builder management with Cubit-based ViewModel.
@@ -68,19 +68,19 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
   }) : super(key: key);
 
   /// 🧑‍💻 Callback when ViewModel is ready.
-  final OnViewModelReady<V>? onViewModelReady;
+  final OnCubitViewModelReady<V>? onViewModelReady;
 
   /// 🧹 Callback before ViewModel is disposed.
-  final OnViewModelEnd<V>? onViewModelEnd;
+  final OnCubitViewModelEnd<V>? onViewModelEnd;
 
   /// 🖼️ Builder for UI with ViewModel and state.
-  final OnViewModelStateBuilder<V, S> builder;
+  final OnCubitViewModelStateBuilder<V, S> builder;
 
   /// 🎧 Listener for state changes.
-  final OnStateListener<S>? onStateListener;
+  final OnCubitStateListener<S>? onStateListener;
 
   /// 🔄 Condition to determine builder call.
-  final BuilderCondition<S>? buildWhen;
+  final BuilderConditionCubit<S>? buildWhen;
 
   /// 🗺️ Global key for navigation, dialogs, and bottom sheets.
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

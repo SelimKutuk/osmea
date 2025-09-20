@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:api_explorer/services/index.dart';
 
 enum ApiCategory {
@@ -6,9 +7,6 @@ enum ApiCategory {
   shopifyGraphql, // New main category
   graphql,
   access,
-  storefront,
-  admin,
-  catalog,
   billing,
   customer,
   discounts,
@@ -68,6 +66,7 @@ enum ApiCategory {
   woocommerceRefunds,
   woocommerceSetting,
   woocommerceTaxes,
+  woocommerceWishlist,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -83,12 +82,6 @@ extension ApiCategoryExtension on ApiCategory {
         return 'GraphQL APIs (Modern)';
       case ApiCategory.access:
         return 'Access APIs';
-      case ApiCategory.storefront:
-        return 'Storefront APIs';
-      case ApiCategory.admin:
-        return 'Admin APIs';
-      case ApiCategory.catalog:
-        return 'Catalog APIs';
       case ApiCategory.billing:
         return 'Billing APIs';
       case ApiCategory.customer:
@@ -179,6 +172,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Settings';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes APIs';
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist APIs';
     }
   }
 }
@@ -3927,6 +3922,115 @@ class ApiServiceRegistry {
       subcategory: 'Customers',
       handler: DisableCustomerGraphQLHandler(),
     ),
+
+    // 🔐 WooCommerce Authentication Services
+    ApiService(
+      name: 'User Login',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLoginHandler(),
+    ),
+    ApiService(
+      name: 'User Sign Up',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserSignUpHandler(),
+    ),
+    ApiService(
+      name: 'User Logout',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/logout',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLogoutHandler(),
+    ),
+    ApiService(
+      name: 'Password Reset',
+      endpoint: '/wp-json/{brand_name}-auth-reset/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordResetHandler(),
+    ),
+    ApiService(
+      name: 'Password Update',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/user/reset_password',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordUpdateHandler(),
+    ),
+    ApiService(
+      name: 'Auth Status',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/status',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: AuthStatusHandler(),
+    ),
+    ApiService(
+      name: 'JWT Auth Test',
+      endpoint: '/wp-json/jwt-auth/v1/token',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: JwtAuthTestHandler(),
+    ),
+    ApiService(
+      name: 'Delete User',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: DeleteUserHandler(),
+    ),
+
+    // 💖 WooCommerce Wishlist APIs
+    ApiService(
+      name: 'Create Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: CreateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get All Wishlist Groups',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: GetAllWishlistGroupsHandler(),
+    ),
+    ApiService(
+      name: 'Update Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: UpdateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: DeleteWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get Wishlist Items',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: GetWishlistItemsHandler(),
+    ),
+    ApiService(
+      name: 'Add Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: AddWishlistItemHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: DeleteWishlistItemHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -3945,9 +4049,6 @@ class ApiServiceRegistry {
   static List<ApiCategory> getShopifyCategories() {
     return [
       ApiCategory.access,
-      ApiCategory.storefront,
-      ApiCategory.admin,
-      ApiCategory.catalog,
       ApiCategory.customer,
       ApiCategory.discounts,
       ApiCategory.billing,
@@ -3960,7 +4061,6 @@ class ApiServiceRegistry {
       ApiCategory.onlineStore,
       ApiCategory.products,
       ApiCategory.storeProperties,
-      ApiCategory.storefront,
       ApiCategory.webhooks,
       // Removed GraphQL categories from here - now separate main category
     ];
@@ -4012,6 +4112,38 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceCurrencies,
       ApiCategory.woocommerceRefunds,
       ApiCategory.woocommerceTaxes,
+      ApiCategory.woocommerceWishlist,
+    ];
+  }
+
+  // Get WooCommerce Admin categories (all except customer-facing ones)
+  static List<ApiCategory> getWooCommerceAdminCategories() {
+    return [
+      ApiCategory.woocommerceCoupons,
+      ApiCategory.woocommerceProducts,
+      ApiCategory.woocommerceOrders,
+      ApiCategory.woocommerceCustomers,
+      ApiCategory.woocommerceWebhooks,
+      ApiCategory.woocommerceSystemStatus,
+      ApiCategory.woocommerceReports,
+      ApiCategory.woocommerceShippingMethods,
+      ApiCategory.woocommerceShippingZones,
+      ApiCategory.woocommerceShippingZoneMethods,
+      ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceSetting,
+      ApiCategory.woocommerceData,
+      ApiCategory.woocommerceContinents,
+      ApiCategory.woocommerceCountries,
+      ApiCategory.woocommerceCurrencies,
+      ApiCategory.woocommerceRefunds,
+      ApiCategory.woocommerceTaxes,
+    ];
+  }
+
+  // Get WooCommerce Customer categories (customer-facing features)
+  static List<ApiCategory> getWooCommerceCustomerCategories() {
+    return [
+      ApiCategory.woocommerceWishlist,
     ];
   }
 
@@ -4117,12 +4249,6 @@ class ApiServiceRegistry {
         return 'Mutations';
       case ApiCategory.access:
         return 'Access';
-      case ApiCategory.storefront:
-        return 'Storefront';
-      case ApiCategory.admin:
-        return 'Admin';
-      case ApiCategory.catalog:
-        return 'Catalog';
       case ApiCategory.customer:
         return 'Customer';
       case ApiCategory.discounts:
@@ -4188,6 +4314,112 @@ class ApiServiceRegistry {
         return 'Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes';
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist';
+    }
+  }
+
+  // UI Helper method for category icons
+  static IconData getCategoryIcon(ApiCategory category) {
+    switch (category) {
+      case ApiCategory.shopify:
+        return Icons.shopping_bag_rounded;
+      case ApiCategory.woocommerce:
+        return Icons.shopping_cart_checkout_rounded;
+      case ApiCategory.shopifyGraphql:
+        return Icons.analytics_rounded;
+      case ApiCategory.graphql:
+        return Icons.analytics_rounded;
+      case ApiCategory.graphqlQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlMutations:
+        return Icons.edit_rounded;
+      case ApiCategory.graphqlProductsAndCollections:
+        return Icons.inventory_2_rounded;
+      case ApiCategory.graphqlProductsAndCollectionsQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlProductsAndCollectionsMutations:
+        return Icons.edit_rounded;
+      case ApiCategory.graphqlCustomers:
+        return Icons.people_alt_rounded;
+      case ApiCategory.graphqlCustomersQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlCustomersMutations:
+        return Icons.edit_rounded;
+      case ApiCategory.graphqlWebhooks:
+        return Icons.webhook_rounded;
+      case ApiCategory.graphqlWebhookQueries:
+        return Icons.search_rounded;
+      case ApiCategory.graphqlWebhookMutations:
+        return Icons.edit_rounded;
+      case ApiCategory.access:
+        return Icons.security_rounded;
+      case ApiCategory.customer:
+        return Icons.people_rounded;
+      case ApiCategory.discounts:
+        return Icons.local_offer_rounded;
+      case ApiCategory.billing:
+        return Icons.payment_rounded;
+      case ApiCategory.events:
+        return Icons.event_rounded;
+      case ApiCategory.inventory:
+        return Icons.inventory_rounded;
+      case ApiCategory.orders:
+        return Icons.shopping_cart_rounded;
+      case ApiCategory.marketingEvent:
+        return Icons.campaign_rounded;
+      case ApiCategory.giftCard:
+        return Icons.card_giftcard_rounded;
+      case ApiCategory.metafield:
+        return Icons.label_rounded;
+      case ApiCategory.onlineStore:
+        return Icons.store_rounded;
+      case ApiCategory.products:
+        return Icons.category_rounded;
+      case ApiCategory.storeProperties:
+        return Icons.settings_rounded;
+      case ApiCategory.tendertransaction:
+        return Icons.account_balance_wallet_rounded;
+      case ApiCategory.webhooks:
+        return Icons.webhook_rounded;
+      case ApiCategory.woocommerceCoupons:
+        return Icons.local_offer_rounded;
+      case ApiCategory.woocommerceProducts:
+        return Icons.category_rounded;
+      case ApiCategory.woocommerceOrders:
+        return Icons.shopping_cart_rounded;
+      case ApiCategory.woocommerceCustomers:
+        return Icons.people_rounded;
+      case ApiCategory.woocommerceWebhooks:
+        return Icons.webhook_rounded;
+      case ApiCategory.woocommerceSystemStatus:
+        return Icons.system_update_rounded;
+      case ApiCategory.woocommerceReports:
+        return Icons.analytics_rounded;
+      case ApiCategory.woocommerceShippingMethods:
+        return Icons.local_shipping_rounded;
+      case ApiCategory.woocommerceShippingZones:
+        return Icons.location_on_rounded;
+      case ApiCategory.woocommerceShippingZoneMethods:
+        return Icons.route_rounded;
+      case ApiCategory.woocommercePaymentGateways:
+        return Icons.payment_rounded;
+      case ApiCategory.woocommerceSetting:
+        return Icons.settings_applications_rounded;
+      case ApiCategory.woocommerceData:
+        return Icons.data_usage_rounded;
+      case ApiCategory.woocommerceContinents:
+        return Icons.public_rounded;
+      case ApiCategory.woocommerceCountries:
+        return Icons.flag_rounded;
+      case ApiCategory.woocommerceCurrencies:
+        return Icons.attach_money_rounded;
+      case ApiCategory.woocommerceRefunds:
+        return Icons.money_off_rounded;
+      case ApiCategory.woocommerceTaxes:
+        return Icons.receipt_long_rounded;
+      case ApiCategory.woocommerceWishlist:
+        return Icons.favorite_border_rounded;
     }
   }
 }
