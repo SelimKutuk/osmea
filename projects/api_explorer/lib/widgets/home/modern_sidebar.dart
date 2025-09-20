@@ -1536,15 +1536,15 @@ class _ModernSidebarState extends State<ModernSidebar>
                           vertical: isNarrow ? 2 : 4,
                         ),
                         decoration: BoxDecoration(
-                          color: OsmeaColors.orange[100]?.withValues(alpha: 0.3),
+                          color: OsmeaColors.nordicBlue.withValues(alpha: 0.15),
                           borderRadius: context.borderRadiusMinStandard,
                         ),
                         child: OsmeaComponents.text(
-                          'Coming Soon',
+                          'Available',
                           variant: OsmeaTextVariant.labelSmall,
                           fontSize: isNarrow ? 10 : 11,
                           fontWeight: FontWeight.w600,
-                          color: OsmeaColors.orange[700],
+                          color: OsmeaColors.nordicBlue,
                         ),
                       ),
                     ],
@@ -1674,6 +1674,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'WooCommerce Taxes';
+      case ApiCategory.woocommerceWishlist:
+        return 'WooCommerce Wishlist';
     }
   }
 
@@ -1761,6 +1763,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCurrencies:
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
+        case ApiCategory.woocommerceWishlist:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1821,6 +1824,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCurrencies:
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
+        case ApiCategory.woocommerceWishlist:
           platform = 'WooCommerce';
           break;
         default:
