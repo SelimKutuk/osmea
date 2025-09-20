@@ -1,4 +1,5 @@
 import 'package:apis/apis.dart';
+import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -19,7 +20,7 @@ part 'api_woo_wishlist_service.g.dart';
 abstract class ApiWooWishlistService implements WooWishlistService {
   @factoryMethod
   factory ApiWooWishlistService(Dio dio) => _ApiWooWishlistService(
-        dio,
+        ApiDioClient.wooDio(),
         baseUrl: WooNetwork.baseUrl,
       );
 
