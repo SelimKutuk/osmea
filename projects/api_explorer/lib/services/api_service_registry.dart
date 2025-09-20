@@ -4058,6 +4058,37 @@ class ApiServiceRegistry {
     ];
   }
 
+  // Get WooCommerce Admin categories (all except customer-facing ones)
+  static List<ApiCategory> getWooCommerceAdminCategories() {
+    return [
+      ApiCategory.woocommerceCoupons,
+      ApiCategory.woocommerceProducts,
+      ApiCategory.woocommerceOrders,
+      ApiCategory.woocommerceCustomers,
+      ApiCategory.woocommerceWebhooks,
+      ApiCategory.woocommerceSystemStatus,
+      ApiCategory.woocommerceReports,
+      ApiCategory.woocommerceShippingMethods,
+      ApiCategory.woocommerceShippingZones,
+      ApiCategory.woocommerceShippingZoneMethods,
+      ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceSetting,
+      ApiCategory.woocommerceData,
+      ApiCategory.woocommerceContinents,
+      ApiCategory.woocommerceCountries,
+      ApiCategory.woocommerceCurrencies,
+      ApiCategory.woocommerceRefunds,
+      ApiCategory.woocommerceTaxes,
+    ];
+  }
+
+  // Get WooCommerce Customer categories (customer-facing features)
+  static List<ApiCategory> getWooCommerceCustomerCategories() {
+    return [
+      ApiCategory.woocommerceWishlist,
+    ];
+  }
+
   static List<ApiService> getByCategory(ApiCategory category) =>
       _services.where((s) => s.category == category).toList();
 
