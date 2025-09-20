@@ -40,12 +40,13 @@ class UpdateWishlistGroupHandler implements ApiRequestHandler {
     }
 
     try {
-      // Parse group ID
-      final groupId = int.tryParse(params['group_id']!);
+      // Parse group ID - convert string to int for API call
+      final groupIdString = params['group_id']!;
+      final groupId = int.tryParse(groupIdString);
       if (groupId == null) {
         return {
           "status": "error",
-          "message": "Group ID must be a valid integer",
+          "message": "Group ID must be a valid integer, received: $groupIdString",
           "timestamp": DateTime.now().toIso8601String(),
         };
       }
@@ -66,12 +67,37 @@ class UpdateWishlistGroupHandler implements ApiRequestHandler {
         request: updateData,
       );
 
-      return {
-        "status": "success",
-        "group": response.toJson(),
-        "params": params,
-        "timestamp": DateTime.now().toIso8601String(),
-      };
+      // Check if the update was successful using the standard WishlistApiResponse structure
+      if (response.success == true) {
+        // If we have data, use it; otherwise create a response with the input values
+        final groupData = response.data != null ? {
+          "id": response.data!.id,
+          "name": response.data!.name,
+          "description": response.data!.description,
+          "created_at": response.data!.createdAt,
+        } : {
+          "id": groupId.toString(),
+          "name": name,
+          "description": description,
+        };
+
+        return {
+          "status": "success",
+          "message": response.message ?? "Wishlist group updated successfully",
+          "group": groupData,
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      } else {
+        return {
+          "status": "error",
+          "message": response.message ?? "Failed to update wishlist group",
+          "error_code": response.errorCode,
+          "errors": response.errors,
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
     } catch (e) {
       return {
         "status": "error",
