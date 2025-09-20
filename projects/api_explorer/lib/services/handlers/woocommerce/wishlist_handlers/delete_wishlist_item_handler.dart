@@ -40,13 +40,24 @@ class DeleteWishlistItemHandler implements ApiRequestHandler {
           itemId: itemId,
         );
 
-        return {
-          "status": "success",
-          "message": "Wishlist item deleted successfully (by ID)",
-          "result": response,
-          "params": params,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
+        // Check if the deletion was successful
+        if (response.success == true) {
+          return {
+            "status": "success",
+            "message": response.message ?? "Wishlist item deleted successfully (by ID)",
+            "params": params,
+            "timestamp": DateTime.now().toIso8601String(),
+          };
+        } else {
+          return {
+            "status": "error",
+            "message": response.message ?? "Failed to delete wishlist item",
+            "error_code": response.errorCode,
+            "errors": response.errors,
+            "params": params,
+            "timestamp": DateTime.now().toIso8601String(),
+          };
+        }
       } else if (params.containsKey('product_id') && 
                  params.containsKey('group_id') &&
                  params['product_id']!.isNotEmpty && 
@@ -80,13 +91,24 @@ class DeleteWishlistItemHandler implements ApiRequestHandler {
           request: deleteRequest,
         );
 
-        return {
-          "status": "success",
-          "message": "Wishlist item deleted successfully (by product)",
-          "result": response,
-          "params": params,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
+        // Check if the deletion was successful
+        if (response.success == true) {
+          return {
+            "status": "success",
+            "message": response.message ?? "Wishlist item deleted successfully (by product)",
+            "params": params,
+            "timestamp": DateTime.now().toIso8601String(),
+          };
+        } else {
+          return {
+            "status": "error",
+            "message": response.message ?? "Failed to delete wishlist item",
+            "error_code": response.errorCode,
+            "errors": response.errors,
+            "params": params,
+            "timestamp": DateTime.now().toIso8601String(),
+          };
+        }
       } else {
         return {
           "status": "error",
