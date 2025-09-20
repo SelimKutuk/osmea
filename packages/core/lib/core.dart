@@ -19,11 +19,17 @@ export 'package:core/src/base/master_view/master_app.dart';
 // 🧩 Exports the base class for Master View
 export 'package:core/src/base/master_view/master_view.dart';
 
+// 🧩 Exports the base class for Master View Cubit
+export 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
+
 // 🧩 Exports the generated resources about translations
 export 'package:core/src/resources/resources.g.dart';
 
 // 🧩 Exports the helper for local storage
 export 'package:core/src/helper/local_storage/local_storage_helper.dart';
+
+/// 🧩 Exports the price info currency helper
+export 'package:core/src/helper/price_info_currency_helper.dart';
 
 // 🧩 Exports the onboarding storage helper
 export 'package:core/src/helper/onboarding_helper.dart';
@@ -78,6 +84,14 @@ export 'package:core/src/models/onboarding_models.dart';
 export 'package:core/src/views/onboarding/onboarding_view.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_state.dart';
+
+// 🚀 Exports the splash models
+export 'package:core/src/models/splash_models.dart';
+
+// 🚀 Exports the splash view, view model and related modules
+export 'package:core/src/views/splash/splash_view.dart';
+export 'package:core/src/views/splash/cubit/splash_cubit.dart';
+export 'package:core/src/views/splash/cubit/splash_state.dart';
 
 // 🚨 Exports the error handling models
 export 'package:core/src/models/error_handling_models.dart';

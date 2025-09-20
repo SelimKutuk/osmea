@@ -17,6 +17,7 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
   final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
+  final Function(String path) goRoute;
 
   /// Optional bottom navigation bar widget for the Scaffold.
   final Widget? bottomNavigationBar;
@@ -30,7 +31,8 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     this.coreBottomBar,
     this.showDevGrid = true,
     this.bottomNavigationBar,
-  })  : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
+    required this.goRoute,
+  }) : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
     FlutterError.onError = (FlutterErrorDetails details) {
       debugPrint('FlutterError: ${details.exception}');
       debugPrintStack(stackTrace: details.stack);
@@ -222,23 +224,3 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     GoRouter.of(context).go(path, extra: arguments);
   }
 }
-
-class FooterArea extends StatelessWidget {
-  const FooterArea({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CoreSpacer(CoreSpacerType.footer);
-  }
-}
-
-class NavbarArea extends StatelessWidget {
-  const NavbarArea({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CoreSpacer(CoreSpacerType.navbar);
-  }
-}
-
-

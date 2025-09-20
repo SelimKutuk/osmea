@@ -79,7 +79,7 @@ extension SystemMouseCursorsExtension on dynamic {
 }
 
 /// ⌨️ KEYBOARD TYPE EXTENSION
-extension KeyboardTypeExtension on dynamic {
+extension KeyboardTypeExtension on TextInputType {
   TextInputType get text => TextInputType.text;
   TextInputType get multiline => TextInputType.multiline;
   TextInputType get number => TextInputType.number;
