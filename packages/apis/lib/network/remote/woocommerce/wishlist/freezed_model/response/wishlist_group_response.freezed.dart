@@ -21,7 +21,7 @@ WishlistGroupResponse _$WishlistGroupResponseFromJson(
 
 /// @nodoc
 mixin _$WishlistGroupResponse {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_default')
@@ -48,7 +48,7 @@ abstract class $WishlistGroupResponseCopyWith<$Res> {
       _$WishlistGroupResponseCopyWithImpl<$Res, WishlistGroupResponse>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       String? description,
       @JsonKey(name: 'is_default') bool? isDefault,
@@ -85,7 +85,7 @@ class _$WishlistGroupResponseCopyWithImpl<$Res,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$WishlistGroupResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       String? description,
       @JsonKey(name: 'is_default') bool? isDefault,
@@ -163,7 +163,7 @@ class __$$WishlistGroupResponseImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -213,7 +213,7 @@ class _$WishlistGroupResponseImpl implements _WishlistGroupResponse {
       _$$WishlistGroupResponseImplFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? name;
   @override
@@ -281,7 +281,7 @@ class _$WishlistGroupResponseImpl implements _WishlistGroupResponse {
 
 abstract class _WishlistGroupResponse implements WishlistGroupResponse {
   const factory _WishlistGroupResponse(
-          {final int? id,
+          {final String? id,
           final String? name,
           final String? description,
           @JsonKey(name: 'is_default') final bool? isDefault,
@@ -295,7 +295,7 @@ abstract class _WishlistGroupResponse implements WishlistGroupResponse {
       _$WishlistGroupResponseImpl.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get name;
   @override

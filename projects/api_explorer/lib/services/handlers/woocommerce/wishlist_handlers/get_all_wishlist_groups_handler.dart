@@ -34,10 +34,14 @@ class GetAllWishlistGroupsHandler implements ApiRequestHandler {
         perPage: perPage,
       );
 
+      // Handle the wrapper response structure
+      final responseJson = response.toJson();
+      final groups = responseJson['groups'] as List<dynamic>? ?? [];
+
       return {
         "status": "success",
-        "groups": response.map((e) => e.toJson()).toList(),
-        "total": response.length,
+        "groups": groups,
+        "total": groups.length,
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };

@@ -6,7 +6,7 @@ part 'wishlist_group_response.g.dart';
 @freezed
 class WishlistGroupResponse with _$WishlistGroupResponse {
   const factory WishlistGroupResponse({
-    int? id,
+    String? id,
     String? name,
     String? description,
     @JsonKey(name: 'is_default') bool? isDefault,

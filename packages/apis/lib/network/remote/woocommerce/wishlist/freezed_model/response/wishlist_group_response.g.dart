@@ -9,7 +9,7 @@ part of 'wishlist_group_response.dart';
 _$WishlistGroupResponseImpl _$$WishlistGroupResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$WishlistGroupResponseImpl(
-      id: (json['id'] as num?)?.toInt(),
+      id: json['id'] as String?,
       name: json['name'] as String?,
       description: json['description'] as String?,
       isDefault: json['is_default'] as bool?,
