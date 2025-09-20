@@ -46,13 +46,24 @@ class DeleteWishlistGroupHandler implements ApiRequestHandler {
         groupId: groupId,
       );
 
-      return {
-        "status": "success",
-        "message": "Wishlist group deleted successfully",
-        "result": response,
-        "params": params,
-        "timestamp": DateTime.now().toIso8601String(),
-      };
+      // Check if the deletion was successful
+      if (response.success == true) {
+        return {
+          "status": "success",
+          "message": response.message ?? "Wishlist group deleted successfully",
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      } else {
+        return {
+          "status": "error",
+          "message": response.message ?? "Failed to delete wishlist group",
+          "error_code": response.errorCode,
+          "errors": response.errors,
+          "params": params,
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
     } catch (e) {
       return {
         "status": "error",
