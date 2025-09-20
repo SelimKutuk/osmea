@@ -12,6 +12,7 @@ import '../freezed_model/response/create_wishlist_group_response.dart';
 import '../freezed_model/response/wishlist_api_response.dart';
 import '../freezed_model/response/wishlist_group_response.dart';
 import '../freezed_model/response/wishlist_item_response.dart';
+import '../freezed_model/response/get_all_wishlist_groups_response.dart';
 
 part 'api_woo_wishlist_service.g.dart';
 
@@ -28,7 +29,7 @@ abstract class ApiWooWishlistService implements WooWishlistService {
   /// Endpoint: GET /wp-json/custom-wishlist/{api_version}/groups
   @GET('/wp-json/custom-wishlist/{api_version}/groups')
   @override
-  Future<List<WishlistGroupResponse>> getAllGroups({
+  Future<GetAllWishlistGroupsResponse> getAllGroups({
     @Path('api_version') required String apiVersion,
     @Query('page') int? page,
     @Query('per_page') int? perPage,

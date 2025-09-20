@@ -19,7 +19,7 @@ class _ApiWooWishlistService implements ApiWooWishlistService {
   String? baseUrl;
 
   @override
-  Future<List<WishlistGroupResponse>> getAllGroups({
+  Future<GetAllWishlistGroupsResponse> getAllGroups({
     required String apiVersion,
     int? page,
     int? perPage,
@@ -32,8 +32,8 @@ class _ApiWooWishlistService implements ApiWooWishlistService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<WishlistGroupResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetAllWishlistGroupsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -49,10 +49,7 @@ class _ApiWooWishlistService implements ApiWooWishlistService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            WishlistGroupResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _value = GetAllWishlistGroupsResponse.fromJson(_result.data!);
     return _value;
   }
 

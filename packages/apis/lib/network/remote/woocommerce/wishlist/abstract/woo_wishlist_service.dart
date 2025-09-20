@@ -6,6 +6,7 @@ import '../freezed_model/response/create_wishlist_group_response.dart';
 import '../freezed_model/response/wishlist_api_response.dart';
 import '../freezed_model/response/wishlist_group_response.dart';
 import '../freezed_model/response/wishlist_item_response.dart';
+import '../freezed_model/response/get_all_wishlist_groups_response.dart';
 
 /// Abstract service for WooCommerce Custom Wishlist API operations
 abstract class WooWishlistService {
@@ -14,7 +15,7 @@ abstract class WooWishlistService {
   /// [apiVersion] - API version (e.g., 'v1')
   /// [page] - Page number for pagination (optional)
   /// [perPage] - Number of items per page (optional)
-  Future<List<WishlistGroupResponse>> getAllGroups({
+  Future<GetAllWishlistGroupsResponse> getAllGroups({
     required String apiVersion,
     int? page,
     int? perPage,
