@@ -951,6 +951,83 @@ class _ModernSidebarState extends State<ModernSidebar>
                   ),
                 ),
 
+              // Admin APIs Section Header
+              if (_currentStore != null && _isCurrentStoreComplete && widget.expanded)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: isNarrow ? 12 : 16,
+                    vertical: isNarrow ? 8 : 12,
+                  ),
+                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                  decoration: BoxDecoration(
+                    gradient: OsmeaAppTheme.createGradient(
+                      OsmeaColors.red[50]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.05),
+                      OsmeaColors.red[100]?.withValues(alpha: 0.1) ?? Colors.red.withValues(alpha: 0.02),
+                    ),
+                    borderRadius: context.borderRadiusMinStandard,
+                    border: Border.all(
+                      color: OsmeaColors.red[200]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: OsmeaComponents.row(
+                    children: [
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.red[100]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.admin_panel_settings_rounded,
+                          size: isNarrow ? 18 : 20,
+                          color: OsmeaColors.red[600] ?? Colors.red[600],
+                        ),
+                      ),
+                      OsmeaComponents.sizedBox(width: isNarrow ? 8 : 12),
+                      OsmeaComponents.expanded(
+                        child: OsmeaComponents.column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            OsmeaComponents.text(
+                              'Admin APIs',
+                              variant: OsmeaTextVariant.titleSmall,
+                              fontSize: isNarrow ? 14 : 16,
+                              fontWeight: FontWeight.w700,
+                              color: OsmeaColors.red[700] ?? Colors.red[700],
+                            ),
+                            OsmeaComponents.sizedBox(height: 2),
+                            OsmeaComponents.text(
+                              'Management and configuration APIs for administrators',
+                              variant: OsmeaTextVariant.bodySmall,
+                              fontSize: isNarrow ? 11 : 12,
+                              color: OsmeaColors.red[600]?.withValues(alpha: 0.8) ?? Colors.red[600]?.withValues(alpha: 0.8),
+                              maxLines: 2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isNarrow ? 6 : 8,
+                          vertical: isNarrow ? 2 : 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.red[600]?.withValues(alpha: 0.1) ?? Colors.red[600]?.withValues(alpha: 0.1),
+                          borderRadius: context.borderRadiusMinStandard,
+                        ),
+                        child: OsmeaComponents.text(
+                          'Current',
+                          variant: OsmeaTextVariant.labelSmall,
+                          fontSize: isNarrow ? 10 : 11,
+                          fontWeight: FontWeight.w600,
+                          color: OsmeaColors.red[600] ?? Colors.red[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               // Categories List
               OsmeaComponents.expanded(
                 child: Scrollbar(
@@ -1399,6 +1476,80 @@ class _ModernSidebarState extends State<ModernSidebar>
                   ),
                 ),
               ),
+
+              // Customer APIs Coming Soon Section
+              if (_currentStore != null && _isCurrentStoreComplete && widget.expanded)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.all(isNarrow ? 12 : 16),
+                  padding: EdgeInsets.all(isNarrow ? 16 : 20),
+                  decoration: BoxDecoration(
+                    gradient: OsmeaAppTheme.createGradient(
+                      OsmeaColors.nordicBlue.withValues(alpha: 0.05),
+                      OsmeaColors.nordicBlue.withValues(alpha: 0.02),
+                    ),
+                    borderRadius: context.borderRadiusMinStandard,
+                    border: Border.all(
+                      color: OsmeaColors.nordicBlue.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: OsmeaComponents.row(
+                    children: [
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.nordicBlue.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.people_rounded,
+                          size: isNarrow ? 18 : 20,
+                          color: OsmeaColors.nordicBlue,
+                        ),
+                      ),
+                      OsmeaComponents.sizedBox(width: isNarrow ? 8 : 12),
+                      OsmeaComponents.expanded(
+                        child: OsmeaComponents.column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            OsmeaComponents.text(
+                              'Customer APIs',
+                              variant: OsmeaTextVariant.titleSmall,
+                              fontSize: isNarrow ? 14 : 16,
+                              fontWeight: FontWeight.w700,
+                              color: OsmeaColors.nordicBlue,
+                            ),
+                            OsmeaComponents.sizedBox(height: 4),
+                            OsmeaComponents.text(
+                              'Customer-facing features like wishlists, cart management, and personalized experiences',
+                              variant: OsmeaTextVariant.bodySmall,
+                              fontSize: isNarrow ? 11 : 12,
+                              color: OsmeaColors.nordicBlue.withValues(alpha: 0.8),
+                              maxLines: 3,
+                            ),
+                          ],
+                        ),
+                      ),
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isNarrow ? 6 : 8,
+                          vertical: isNarrow ? 2 : 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.orange[100]?.withValues(alpha: 0.3),
+                          borderRadius: context.borderRadiusMinStandard,
+                        ),
+                        child: OsmeaComponents.text(
+                          'Coming Soon',
+                          variant: OsmeaTextVariant.labelSmall,
+                          fontSize: isNarrow ? 10 : 11,
+                          fontWeight: FontWeight.w600,
+                          color: OsmeaColors.orange[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         );
