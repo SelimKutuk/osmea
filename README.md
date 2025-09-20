@@ -12,7 +12,7 @@
 </div>
 
 <div align="center">
-<img src = "https://github.com/masterfabric-mobile/osmea/blob/dev/docs/assets/osmea_banner_v2.png?raw=true" width="800" alt="OSMEA Banner">
+<img src = "https://github.com/masterfabric-mobile/osmea/blob/OSMEA-Docs/docs/assets/osmea_banner_v2.png?raw=true" width="800" alt="OSMEA Banner">
   
   **"The Ultimate Flutter E-commerce Ecosystem"**
   
