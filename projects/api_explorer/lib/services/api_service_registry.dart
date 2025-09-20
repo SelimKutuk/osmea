@@ -66,6 +66,7 @@ enum ApiCategory {
   woocommerceRefunds,
   woocommerceSetting,
   woocommerceTaxes,
+  woocommerceWishlist,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -171,6 +172,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Settings';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes APIs';
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist APIs';
     }
   }
 }
@@ -3919,6 +3922,57 @@ class ApiServiceRegistry {
       subcategory: 'Customers',
       handler: DisableCustomerGraphQLHandler(),
     ),
+
+    // 💖 WooCommerce Wishlist APIs
+    ApiService(
+      name: 'Create Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: CreateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get All Wishlist Groups',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: GetAllWishlistGroupsHandler(),
+    ),
+    ApiService(
+      name: 'Update Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: UpdateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: DeleteWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get Wishlist Items',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: GetWishlistItemsHandler(),
+    ),
+    ApiService(
+      name: 'Add Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: AddWishlistItemHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: DeleteWishlistItemHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4000,6 +4054,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceCurrencies,
       ApiCategory.woocommerceRefunds,
       ApiCategory.woocommerceTaxes,
+      ApiCategory.woocommerceWishlist,
     ];
   }
 
@@ -4170,6 +4225,8 @@ class ApiServiceRegistry {
         return 'Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes';
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist';
     }
   }
 
@@ -4272,6 +4329,8 @@ class ApiServiceRegistry {
         return Icons.money_off_rounded;
       case ApiCategory.woocommerceTaxes:
         return Icons.receipt_long_rounded;
+      case ApiCategory.woocommerceWishlist:
+        return Icons.favorite_border_rounded;
     }
   }
 }
