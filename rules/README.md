@@ -9,6 +9,9 @@ rules/
 ├── README.md                           # This file
 ├── osmea-packages-general.cursorrules  # General package development rules
 ├── osmea-components-ui.cursorrules     # UI components development rules
+├── osmea-sizer-extensions.cursorrules  # Sizer extensions and responsive design rules
+├── osmea-text-system.cursorrules       # Unified text system (extensions, styles, components)
+├── osmea-color-system.cursorrules      # Color system and theming rules
 ├── osmea-core-foundation.cursorrules   # Foundation infrastructure rules
 ├── osmea-apis-network.cursorrules      # API and network layer rules
 └── osmea-website-nextjs.cursorrules    # Website (Next.js) rules
@@ -32,7 +35,36 @@ rules/
 - 🎨 Theme management
 - 📱 Mobile-first approach
 
-### 3. Foundation Infrastructure Rules
+### 3. Sizer Extensions Rules
+**File:** `osmea-sizer-extensions.cursorrules`
+- 📱 Responsive design utilities
+- 🔲 Padding & margin standards
+- ⭕ Border radius consistency
+- ⏱️ Animation duration patterns
+- 📏 Spacing and sizing guidelines
+- 🎯 Alignment and layout utilities
+
+### 4. Text System Rules
+**File:** `osmea-text-system.cursorrules`
+- 🔤 Typography and font management
+- 📝 Text styling and decoration
+- 📏 Letter and word spacing
+- 🎨 Font features and variations
+- 📱 Responsive typography
+- ♿ Accessibility considerations
+- 📝 Unified text component system
+- 🎨 Text style integration patterns
+- 🔧 Specialized text components
+
+### 5. Color System Rules
+**File:** `osmea-color-system.cursorrules`
+- 🎨 Comprehensive color palette
+- 🌈 Brand and semantic colors
+- ⚫ Gray scale system
+- 🚦 Status and theme colors
+- ♿ Accessibility considerations
+
+### 6. Foundation Infrastructure Rules
 **File:** `osmea-core-foundation.cursorrules`
 - 🏗️ Base classes structure
 - 🔧 Dependency injection
@@ -42,9 +74,9 @@ rules/
 - 📱 Device utilities
 - 🛣️ Routing patterns
 
-### 4. API and Network Rules
+### 7. API and Network Rules
 **File:** `osmea-apis-network.cursorrules`
-### 5. Website (Next.js) Rules
+### 8. Website (Next.js) Rules
 **File:** `osmea-website-nextjs.cursorrules`
 - 🌐 Next.js App Router structure
 - ♿ Web accessibility and SEO
@@ -75,6 +107,12 @@ To apply rules for a specific area:
 ```bash
 # When developing UI components
 cp rules/osmea-components-ui.cursorrules .cursorrules
+
+# When working with responsive design and sizer extensions
+cp rules/osmea-sizer-extensions.cursorrules .cursorrules
+
+# When working with typography and text system
+cp rules/osmea-text-system.cursorrules .cursorrules
 
 # When developing API services
 cp rules/osmea-apis-network.cursorrules .cursorrules
