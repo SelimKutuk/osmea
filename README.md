@@ -29,6 +29,56 @@
 
 ---
 
+## 📋 Table of Contents
+
+- [🌟 What is OSMEA?](#-what-is-osmea)
+  - [🎯 Our Vision](#-our-vision)
+  - [🚀 Why OSMEA Exists](#-why-osmea-exists)
+- [🏗️ OSMEA Ecosystem](#️-osmea-ecosystem)
+  - [📦 Core Packages](#-core-packages)
+  - [🚀 Ready-to-Use Applications](#-ready-to-use-applications)
+- [🛠️ Technology Stack](#️-technology-stack)
+  - [Frontend & UI](#frontend--ui)
+  - [Backend & APIs](#backend--apis)
+  - [Development & Quality](#development--quality)
+  - [Deployment & Distribution](#deployment--distribution)
+- [💡 Why Choose OSMEA?](#-why-choose-osmea)
+  - [✅ What Makes OSMEA Unique?](#-what-makes-osmea-unique)
+  - [🛠️ Built For](#️-built-for)
+- [📦 Core Packages](#-core-packages-1)
+  - [🎨 OSMEA Components](#-osmea-components---ui-component-library)
+  - [🔧 OSMEA Core](#-osmea-core---foundation-package)
+  - [🌐 OSMEA APIs](#-osmea-apis---api-integration-layer)
+- [🏗️ Architecture Overview](#️-architecture-overview)
+- [🚀 Ready-to-Use Applications](#-ready-to-use-applications-1)
+- [📁 Project Structure](#-project-structure)
+- [✨ Key Features](#-key-features)
+  - [🔌 Platform Integration](#-platform-integration)
+  - [📱 Mobile Experience](#-mobile-experience)
+  - [🛍️ E-commerce Features](#️-e-commerce-features)
+  - [🧰 Developer Tools](#-developer-tools)
+- [🚀 Getting Started](#-getting-started)
+  - [📋 Prerequisites](#-prerequisites)
+  - [🎯 Choose Your Path](#-choose-your-path)
+  - [🛠️ Development Setup](#️-development-setup)
+  - [🎮 Try the Live Demo](#-try-the-live-demo)
+- [🤝 Contributing](#-contributing)
+  - [How to Contribute](#how-to-contribute)
+  - [Current Opportunities](#current-opportunities)
+  - [Development Guidelines](#development-guidelines)
+- [📄 License](#-license)
+- [🎯 Use Cases](#-use-cases)
+  - [🛒 E-commerce Applications](#-e-commerce-applications)
+  - [📱 Mobile Apps](#-mobile-apps)
+  - [🌐 Web Applications](#-web-applications)
+  - [🖥️ Desktop Applications](#-desktop-applications)
+- [🌟 Community & Support](#-community--support)
+  - [📚 Resources](#-resources)
+  - [💬 Get Help](#-get-help)
+  - [🤝 Contributing](#-contributing-1)
+
+---
+
 ## 🌟 What is OSMEA?
 
 **OSMEA** (Open Source Mobile E-commerce Architecture) is the most comprehensive Flutter ecosystem for building modern, scalable e-commerce applications. It's not just a framework—it's a complete solution that empowers developers to create production-ready mobile commerce experiences in record time.
