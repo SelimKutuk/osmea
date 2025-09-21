@@ -487,92 +487,6 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     }
   }
 
-  /// Handle exact alarm permissions based on Android API level
-  Future<bool> _requestExactAlarmPermissionSmart(AppPermission appPermission) async {
-    if (!Platform.isAndroid) {
-      // iOS doesn't have exact alarm permissions
-      return true;
-    }
-
-    try {
-      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
-      
-      debugPrint('🤖 Android API Level: $apiLevel');
-
-      if (apiLevel >= 31) {
-        // Android 12+ (API 31+) - Exact alarm permissions required
-        debugPrint('📱 Android 12+ detected - requesting exact alarm permissions');
-        
-        if (appPermission == AppPermission.scheduleExactAlarm) {
-          return _requestPermissionDirect(AppPermission.scheduleExactAlarm);
-        }
-      } else {
-        // Android 11 and below - No exact alarm restrictions
-        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
-        return true;
-      }
-      
-      return _requestPermissionDirect(appPermission);
-    } catch (e) {
-      debugPrint('🔴 Error in smart exact alarm permission: $e');
-      return _requestPermissionDirect(appPermission);
-    }
-  }
-
-  /// Check exact alarm permission status based on Android API level
-  Future<bool> _checkExactAlarmPermissionSmart(AppPermission appPermission) async {
-    if (!Platform.isAndroid) {
-      // iOS doesn't have exact alarm permissions
-      return true;
-    }
-
-    try {
-      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
-      
-      debugPrint('🔍 Checking exact alarm permission on API Level: $apiLevel');
-
-      if (apiLevel >= 31) {
-        // Android 12+ (API 31+) - Check exact alarm permissions
-        debugPrint('📱 Android 12+ - checking exact alarm permissions');
-        return _checkPermissionDirect(appPermission);
-      } else {
-        // Android 11 and below - No exact alarm restrictions
-        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
-        return true;
-      }
-    } catch (e) {
-      debugPrint('🔴 Error in smart exact alarm permission check: $e');
-      return _checkPermissionDirect(appPermission);
-    }
-  }
-
-  /// Get exact alarm permission status based on Android API level
-  Future<PermissionResult> _getExactAlarmPermissionStatusSmart(AppPermission appPermission) async {
-    if (!Platform.isAndroid) {
-      // iOS doesn't have exact alarm permissions
-      return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
-    }
-
-    try {
-      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
-      
-      debugPrint('📊 Getting exact alarm permission status on API Level: $apiLevel');
-
-      if (apiLevel >= 31) {
-        // Android 12+ (API 31+) - Check exact alarm permissions
-        debugPrint('📱 Android 12+ - getting exact alarm permission status');
-        return _getPermissionStatusDirect(appPermission);
-      } else {
-        // Android 11 and below - No exact alarm restrictions
-        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
-        return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
-      }
-    } catch (e) {
-      debugPrint('🔴 Error in smart exact alarm permission status: $e');
-      return _getPermissionStatusDirect(appPermission);
-    }
-  }
-
   /// Handle storage permission based on Android API level
   Future<bool> _requestStoragePermissionSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
@@ -691,6 +605,84 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     } catch (e) {
       debugPrint('🔴 Error in smart storage permission status: $e');
       return _getPermissionStatusDirect(appPermission);
+    }
+  }
+
+  /// Handle exact alarm permission based on Android API level
+  Future<bool> _requestExactAlarmPermissionSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      debugPrint('🔔 Exact alarm request: iOS - no restrictions');
+      return true;
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      debugPrint('🔔 Android API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Request exact alarm permission
+        debugPrint('🔔 Android 12+ detected - requesting exact alarm permission');
+        return _requestPermissionDirect(appPermission);
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('🔔 Android 11 and below - exact alarm permissions not required');
+        return true;
+      }
+    } catch (e) {
+      debugPrint('🔔 Error requesting exact alarm permission: $e');
+      return false;
+    }
+  }
+
+  /// Check exact alarm permission based on Android API level
+  Future<bool> _checkExactAlarmPermissionSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      debugPrint('🔔 Exact alarm check: iOS - no restrictions');
+      return true;
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      debugPrint('🔔 Android API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Check exact alarm permission
+        debugPrint('🔔 Android 12+ detected - checking exact alarm permission');
+        return _checkPermissionDirect(appPermission);
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('🔔 Android 11 and below - exact alarm permissions not required');
+        return true;
+      }
+    } catch (e) {
+      debugPrint('🔔 Error checking exact alarm permission: $e');
+      return false;
+    }
+  }
+
+  /// Get exact alarm permission status based on Android API level
+  Future<PermissionResult> _getExactAlarmPermissionStatusSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      debugPrint('🔔 Exact alarm status: iOS - no restrictions');
+      return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      debugPrint('🔔 Android API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Get exact alarm permission status
+        debugPrint('🔔 Android 12+ detected - getting exact alarm permission status');
+        return _getPermissionStatusDirect(appPermission);
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('🔔 Android 11 and below - exact alarm permissions not required');
+        return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
+      }
+    } catch (e) {
+      debugPrint('🔔 Error getting exact alarm permission status: $e');
+      return PermissionResult.error(appPermission, 'Error getting exact alarm permission status: $e');
     }
   }
 
