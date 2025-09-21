@@ -95,6 +95,18 @@ enum AppPermission {
   /// - File manager functionality
   /// - Legacy app compatibility
   manageExternalStorage,
+  
+  /// Schedule exact alarms permission (Android 12+)
+  /// 
+  /// Required for:
+  /// - Precise notification scheduling
+  /// - Exact alarm functionality
+  /// - Time-sensitive notifications
+  /// - Critical reminders
+  /// 
+  /// Note: This permission is required for Android 12+ (API 31+) when using
+  /// exact alarm scheduling for notifications or other time-sensitive operations.
+  scheduleExactAlarm,
 }
 
 /// Result class for permission operations with detailed information

@@ -28,6 +28,7 @@ import 'models/permission_models.dart';
 /// - **Notifications**: Permission to send push notifications
 /// - **Contacts**: Access to device contacts
 /// - **Calendar**: Access to device calendar
+/// - **Schedule Exact Alarm**: Permission to schedule exact alarms (Android 12+)
 /// 
 /// ## Usage Examples
 /// 
@@ -92,6 +93,19 @@ import 'models/permission_models.dart';
 /// 
 /// // Then request permission
 /// await permissionHelper.requestPermission(AppPermission.camera);
+/// ```
+/// 
+/// ### Exact Alarm Permissions (Android 12+)
+/// ```dart
+/// // Check if exact alarm permissions are needed (Android 12+)
+/// final hasSchedulePermission = await permissionHelper.checkPermission(AppPermission.scheduleExactAlarm);
+/// if (!hasSchedulePermission) {
+///   final granted = await permissionHelper.requestPermission(AppPermission.scheduleExactAlarm);
+///   if (!granted) {
+///     // Show explanation and redirect to settings
+///     await permissionHelper.openAppSettings();
+///   }
+/// }
 /// ```
 
 
@@ -413,6 +427,94 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         return ph.Permission.calendarFullAccess;
       case AppPermission.manageExternalStorage:
         return ph.Permission.manageExternalStorage;
+      case AppPermission.scheduleExactAlarm:
+        return ph.Permission.scheduleExactAlarm;
+    }
+  }
+
+  /// Handle exact alarm permissions based on Android API level
+  Future<bool> _requestExactAlarmPermissionSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      // iOS doesn't have exact alarm permissions
+      return true;
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      
+      debugPrint('🤖 Android API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Exact alarm permissions required
+        debugPrint('📱 Android 12+ detected - requesting exact alarm permissions');
+        
+        if (appPermission == AppPermission.scheduleExactAlarm) {
+          return _requestPermissionDirect(AppPermission.scheduleExactAlarm);
+        }
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
+        return true;
+      }
+      
+      return _requestPermissionDirect(appPermission);
+    } catch (e) {
+      debugPrint('🔴 Error in smart exact alarm permission: $e');
+      return _requestPermissionDirect(appPermission);
+    }
+  }
+
+  /// Check exact alarm permission status based on Android API level
+  Future<bool> _checkExactAlarmPermissionSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      // iOS doesn't have exact alarm permissions
+      return true;
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      
+      debugPrint('🔍 Checking exact alarm permission on API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Check exact alarm permissions
+        debugPrint('📱 Android 12+ - checking exact alarm permissions');
+        return _checkPermissionDirect(appPermission);
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
+        return true;
+      }
+    } catch (e) {
+      debugPrint('🔴 Error in smart exact alarm permission check: $e');
+      return _checkPermissionDirect(appPermission);
+    }
+  }
+
+  /// Get exact alarm permission status based on Android API level
+  Future<PermissionResult> _getExactAlarmPermissionStatusSmart(AppPermission appPermission) async {
+    if (!Platform.isAndroid) {
+      // iOS doesn't have exact alarm permissions
+      return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
+    }
+
+    try {
+      final apiLevel = await DeviceInfoHelper.instance.getAndroidApiLevel();
+      
+      debugPrint('📊 Getting exact alarm permission status on API Level: $apiLevel');
+
+      if (apiLevel >= 31) {
+        // Android 12+ (API 31+) - Check exact alarm permissions
+        debugPrint('📱 Android 12+ - getting exact alarm permission status');
+        return _getPermissionStatusDirect(appPermission);
+      } else {
+        // Android 11 and below - No exact alarm restrictions
+        debugPrint('📱 Android 11 and below - exact alarm permissions not required');
+        return PermissionResult.fromStatus(appPermission, ph.PermissionStatus.granted);
+      }
+    } catch (e) {
+      debugPrint('🔴 Error in smart exact alarm permission status: $e');
+      return _getPermissionStatusDirect(appPermission);
     }
   }
 
@@ -552,6 +654,8 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         return 'Calendar';
       case AppPermission.manageExternalStorage:
         return 'Manage External Storage';
+      case AppPermission.scheduleExactAlarm:
+        return 'Schedule Exact Alarm';
     }
   }
 
@@ -559,6 +663,13 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   Future<bool> requestPermission(AppPermission appPermission) async {
     if (appPermission == AppPermission.storage) {
       final result = await _requestStoragePermissionSmart(appPermission);
+      // Clear cache after request to ensure fresh status
+      await clearPermissionCache(appPermission);
+      return result;
+    }
+    
+    if (appPermission == AppPermission.scheduleExactAlarm) {
+      final result = await _requestExactAlarmPermissionSmart(appPermission);
       // Clear cache after request to ensure fresh status
       await clearPermissionCache(appPermission);
       return result;
@@ -595,6 +706,10 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     if (appPermission == AppPermission.storage) {
       return _checkStoragePermissionSmart(appPermission);
     }
+    
+    if (appPermission == AppPermission.scheduleExactAlarm) {
+      return _checkExactAlarmPermissionSmart(appPermission);
+    }
 
     try {
       final permissionName = _getPermissionName(appPermission);
@@ -629,6 +744,10 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   Future<PermissionResult> getPermissionStatus(AppPermission appPermission) async {
     if (appPermission == AppPermission.storage) {
       return _getStoragePermissionStatusSmart(appPermission);
+    }
+    
+    if (appPermission == AppPermission.scheduleExactAlarm) {
+      return _getExactAlarmPermissionStatusSmart(appPermission);
     }
 
     try {
