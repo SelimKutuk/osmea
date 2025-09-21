@@ -1,13 +1,17 @@
-# 📱 Components App
+# OSMEA Components App 📱
 
 <div align="center">
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.19.0+-blue?logo=flutter)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-2.17.0+-blue?logo=dart)](https://dart.dev)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-osmea--app.web.app-brightgreen?logo=google-chrome)](https://components.masterfabric.co)
-[![License](https://img.shields.io/badge/License-GNU%20AGPL%20v3.0-green.svg)](../LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-2D3748?style=for-the-badge&logo=dart&logoColor=white&labelColor=1A202C)](https://github.com/masterfabric-mobile/osmea)
+[![Platform](https://img.shields.io/badge/platform-Flutter-2D3748?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1A202C)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-2D3748?style=for-the-badge&logo=dart&logoColor=white&labelColor=1A202C)](https://dart.dev)
+[![Web](https://img.shields.io/badge/Web-2D3748?style=for-the-badge&logo=web&logoColor=white&labelColor=1A202C)](https://web.dev)
 
-**A comprehensive Flutter app demonstrating the power and flexibility of the OSMEA Components UI library**
+</div>
+
+<div align="center">
+
+**"Interactive UI Components Showcase"**
 
 [🚀 Live Demo](https://components.masterfabric.co) • [📚 Documentation](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) • [🐛 Report Issues](https://github.com/masterfabric-mobile/osmea/issues)
 
@@ -15,18 +19,18 @@
 
 ---
 
-## 🌟 Overview
+## 🌟 What is OSMEA Components App?
 
-The **OSMEA Components App** is a production-ready Flutter application that serves as both a comprehensive showcase and practical reference for the [OSMEA Components](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) UI library. This app demonstrates how to build modern, accessible, and beautiful mobile applications using OSMEA's extensive component library.
+**OSMEA Components App** is a comprehensive Flutter application that serves as both a showcase and practical reference for the OSMEA Components UI library. It demonstrates how to build modern, accessible, and beautiful applications using OSMEA's extensive component library.
 
-### 🎯 Key Features
+### ✨ **Key Features**
 
-- **📱 Cross-Platform Support**: Runs seamlessly on iOS, Android, and Web
-- **🎨 Modern UI Design**: Beautiful, themed, and accessible components
-- **⚡ Performance Optimized**: Built with Flutter's latest features and best practices
-- **🔧 Developer Friendly**: Comprehensive examples and clear code patterns
-- **📖 Learning Resource**: Perfect for understanding OSMEA component usage
-- **🚀 Production Ready**: Real-world implementation patterns and architecture
+- **🔌 Interactive Showcase** - Live examples of all OSMEA components
+- **⚡ Real-time Testing** - Test components with different configurations
+- **🎨 Modern UI Design** - Beautiful, themed, and accessible components
+- **📱 Cross-Platform** - Works on iOS, Android, and Web
+- **🔧 Developer Friendly** - Comprehensive examples and clear code patterns
+- **📖 Learning Resource** - Perfect for understanding component usage
 
 ---
 
@@ -45,220 +49,184 @@ The **OSMEA Components App** is a production-ready Flutter application that serv
 
 ## ✨ What's Inside?
 
-### 🎨 UI Components Showcase
+### 🎨 **UI Components Showcase**
+
+<table>
+<tr>
+<td width="50%">
 
 #### **Basic Components**
-- **Buttons**: Primary, Secondary, Outline, Ghost variants with different sizes
-- **Text & Typography**: Rich text formatting, headings, body text, captions
-- **Badges & Chips**: Status indicators, labels, and interactive chips
-- **Avatars**: User profile images with fallback options
-- **Cards**: Information containers with various layouts and styles
+- 🎯 **Buttons**: Primary, Secondary, Outline, Ghost variants
+- 📝 **Text & Typography**: Rich text formatting and headings
+- 🏷️ **Badges & Chips**: Status indicators and labels
+- 👤 **Avatars**: User profile images with fallbacks
+- 📄 **Cards**: Information containers with layouts
 
 #### **Form Components**
-- **Input Fields**: Text fields, password fields, search bars with validation
-- **Checkboxes & Radio Buttons**: Selection controls with custom styling
-- **Switches & Toggles**: Binary state controls
-- **Dropdowns**: Selection menus with search and multi-select options
-- **Steppers**: Multi-step form navigation
-- **Ticket Widget**: Specialized form component for support tickets
+- 📝 **Input Fields**: Text fields with validation
+- ☑️ **Checkboxes & Radio**: Selection controls
+- 🔄 **Switches & Toggles**: Binary state controls
+- 📋 **Dropdowns**: Selection menus with search
+- 📊 **Steppers**: Multi-step form navigation
+
+</td>
+<td width="50%">
 
 #### **Layout Components**
-- **Containers**: Flexible layout containers with padding and styling
-- **Grid System**: Row, Column, Stack, Wrap for responsive layouts
-- **Spacing**: Padding, Margin, Spacer, SizedBox for precise spacing
-- **Alignment**: Center, Align, Positioned for element positioning
-- **Flexible Layouts**: Expanded, Flexible, FittedBox for dynamic sizing
+- 📦 **Containers**: Flexible layout containers
+- 🔲 **Grid System**: Row, Column, Stack, Wrap
+- 📏 **Spacing**: Padding, Margin, Spacer utilities
+- 🎯 **Alignment**: Center, Align, Positioned
+- 🔧 **Flexible Layouts**: Expanded, Flexible sizing
 
 #### **Navigation Components**
-- **App Bars**: Customizable headers with actions and navigation
-- **Navigation Bars**: Bottom navigation with icons and labels
-- **Tab Bars**: Horizontal tab navigation
-- **Bottom Sheets**: Modal overlays for additional content
-- **Popups**: Contextual information and actions
+- 📱 **App Bars**: Customizable headers
+- 🧭 **Navigation Bars**: Bottom navigation
+- 📑 **Tab Bars**: Horizontal tab navigation
+- 📄 **Bottom Sheets**: Modal overlays
+- 💬 **Popups**: Contextual information
 
-#### **Dynamics Components**
-- **Loading Indicators**: Spinners, progress bars, skeleton screens
-- **Toast Notifications**: Temporary success, error, and info messages
-- **Progress Indicators**: Linear and circular progress displays
-- **Alerts & Dialogs**: Modal dialogs for user confirmation
+</td>
+</tr>
+</table>
 
-#### **Advanced Components**
-- **Carousels**: Image and content sliders
-- **Search Bars**: Intelligent search with suggestions
-- **Rich Text**: Formatted text with styling options
-- **List Items**: Structured list components
+### 🎨 **Advanced Components**
 
+<table>
+<tr>
+<td width="50%">
 
-### 🏗️ Architecture Features
+#### **Dynamic Components**
+- ⏳ **Loading Indicators**: Spinners and progress bars
+- 🍞 **Toast Notifications**: Success, error, info messages
+- 📊 **Progress Indicators**: Linear and circular progress
+- ⚠️ **Alerts & Dialogs**: Modal confirmations
 
-- **📱 Responsive Design**: Adapts to different screen sizes and orientations
-- **🎯 Type Safety**: Full TypeScript-like type safety with Dart
-- **🔧 Customization**: Extensive theming and styling options
-- **📦 Modular Structure**: Clean separation of concerns and reusable components
+#### **Interactive Components**
+- 🎠 **Carousels**: Image and content sliders
+- 🔍 **Search Bars**: Intelligent search with suggestions
+- 📝 **Rich Text**: Formatted text with styling
+- 📋 **List Items**: Structured list components
+
+</td>
+<td width="50%">
+
+#### **Utility Components**
+- 🎨 **Color Picker**: Interactive color selection
+- 📱 **Device Frame**: Web preview with device frames
+- 🔗 **URL Launcher**: External link handling
+- 📤 **Share Helper**: Content sharing utilities
+- 📁 **File Download**: File download management
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 🏗️ Project Structure
+## 🛠️ Technology Stack
 
-<details>
-<summary><b>📁 Click to expand full project structure</b></summary>
+- **Flutter 3.19+** - Cross-platform UI framework
+- **Dart 2.17+** - Type-safe programming language
+- **GoRouter** - Declarative routing solution
+- **Device Frame** - Device frame for web preview
+- **Color Picker** - Interactive color selection
+- **URL Launcher** - External link handling
+- **Share Plus** - Content sharing utilities
 
-```
-component_app/
-├── 📱 lib/                          # Main application code
-│   ├── 🎯 main.dart                 # App entry point and navigation
-│   ├── 🎨 Component Examples        # Individual component demonstrations
-│   │   ├── align_example.dart       # Alignment utilities
-│   │   ├── appbar_example.dart      # App bar components
-│   │   ├── avatar_example.dart      # User avatar components
-│   │   ├── badge_example.dart       # Status badges and labels
-│   │   ├── bottom_sheet_example.dart # Modal bottom sheets
-│   │   ├── button_example.dart      # Button variants and states
-│   │   ├── card_example.dart        # Card layouts and styling
-│   │   ├── carousel_example.dart    # Image/content carousels
-│   │   ├── center_example.dart      # Centering utilities
-│   │   ├── checkbox_example.dart    # Checkbox controls
-│   │   ├── chips_example.dart       # Interactive chips
-│   │   ├── clip_r_rect_example.dart # Clipping utilities
-│   │   ├── colors_example.dart      # Color system showcase
-│   │   ├── column_example.dart      # Vertical layouts
-│   │   ├── container_example.dart   # Layout containers
-│   │   ├── counter_example.dart     # Counter components
-│   │   ├── divider_example.dart     # Visual separators
-│   │   ├── dropdown_example.dart    # Dropdown menus
-│   │   ├── expanded_example.dart    # Flexible layout expansion
-│   │   ├── fitted_box_example.dart  # Size-fitting containers
-│   │   ├── flexible_example.dart    # Flexible layout components
-│   │   ├── footer_example.dart      # Footer components
-│   │   ├── image_example.dart       # Image handling
-│   │   ├── list_item_example.dart   # List item components
-│   │   ├── loading_example.dart     # Loading indicators
-│   │   ├── padding_example.dart     # Spacing utilities
-│   │   ├── popup_example.dart       # Popup dialogs
-│   │   ├── positioned_example.dart  # Positioned elements
-│   │   ├── progress_example.dart    # Progress indicators
-│   │   ├── radio_button_example.dart # Radio button controls
-│   │   ├── rich_text_example.dart   # Rich text formatting
-│   │   ├── row_example.dart         # Horizontal layouts
-│   │   ├── scaffold_example.dart    # Page scaffolding
-│   │   ├── searchbar_example.dart   # Search functionality
-│   │   ├── single_child_scroll_view_example.dart # Scrollable content
-│   │   ├── sized_box_example.dart   # Fixed-size containers
-│   │   ├── spacer_example.dart      # Spacing components
-│   │   ├── stack_example.dart       # Layered layouts
-│   │   ├── stepper_example.dart     # Multi-step forms
-│   │   ├── switch_button_example.dart # Toggle switches
-│   │   ├── tabbar_example.dart      # Tab navigation
+---
+
+## 📁 Project Structure
+
+```bash
+projects/components_app/
+├── 📦 lib/                          # Source code
+│   ├── main.dart                    # Application entry point
+│   ├── components/                  # Component examples
+│   │   ├── button_example.dart      # Button variants
 │   │   ├── text_example.dart        # Text components
-│   │   ├── text_field_example.dart  # Input fields
-│   │   ├── ticket_widget_example.dart # Support ticket form
-│   │   ├── toast_example.dart       # Toast notifications
-│   │   └── wrap_example.dart        # Wrapping layouts
-│   └── 🔧 services/                 # Business logic and services
-│       └── mock_auth_service.dart   # Authentication service mock
+│   │   ├── card_example.dart        # Card layouts
+│   │   ├── form_examples/           # Form components
+│   │   └── ...                      # 50+ component examples
+│   ├── screens/                     # Application screens
+│   │   ├── main_screen.dart         # Main navigation
+│   │   ├── components_screen.dart   # Components showcase
+│   │   ├── helpers_screen.dart      # Helper utilities
+│   │   └── info_screen.dart         # App information
+│   ├── widgets/                     # Reusable UI components
+│   │   ├── common_appbar.dart       # Common app bar
+│   │   ├── device_frame_wrapper.dart # Device frame
+│   │   └── ...                      # Custom widgets
+│   ├── services/                    # Business logic
+│   │   └── production_auth_service.dart # Authentication
+│   ├── routes/                      # Application routing
+│   │   └── app_routes.dart          # Route definitions
+│   └── constants/                   # App constants
+│       ├── app_constants.dart       # General constants
+│       └── components_list.dart     # Components registry
+├── 🧪 test/                         # Unit and integration tests
+├── 🌐 web/                          # Web platform files
+├── 📱 android/                      # Android platform files
+├── 🍎 ios/                          # iOS platform files
 ├── 📦 assets/                       # Static assets
-│   └── ticket_form_example.json     # Sample form configuration
-├── 🍎 ios/                          # iOS platform configuration
-│   ├── Runner/                      # iOS app bundle
-│   ├── Runner.xcodeproj/            # Xcode project
-│   ├── Runner.xcworkspace/          # Xcode workspace
-│   ├── Flutter/                     # Flutter iOS configuration
-│   ├── Pods/                        # CocoaPods dependencies
-│   ├── RunnerTests/                 # iOS unit tests
-│   ├── Podfile                      # CocoaPods configuration
-│   └── Podfile.lock                 # Dependency lock file
-├── 🌐 web/                          # Web platform configuration
-│   ├── favicon.png                  # Web app icon
-│   ├── index.html                   # Web entry point
-│   ├── manifest.json                # PWA manifest
-│   └── icons/                       # Web app icons
-│       ├── Icon-192.png             # Small icon
-│       ├── Icon-512.png             # Large icon
-│       ├── Icon-maskable-192.png    # Maskable icon (small)
-│       └── Icon-maskable-512.png    # Maskable icon (large)
-├── 📋 pubspec.yaml                  # Flutter dependencies
+│   └── images/                      # Image assets
+├── 📄 pubspec.yaml                  # Package dependencies
 └── 📖 README.md                     # This file
 ```
 
-</details>
-
 ---
 
-## 🛠️ Getting Started
+## 🚀 Quick Start
 
 ### 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
 
 - **Flutter SDK** (3.19.0 or higher)
 - **Dart SDK** (2.17.0 or higher)
 - **Android Studio** or **VS Code** with Flutter extensions
 - **Git** for version control
 
-### 🚀 Quick Start
+### 📦 Installation
 
-<div align="center">
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/masterfabric-mobile/osmea.git
+   cd osmea/projects/components_app
+   ```
 
-[![Get Started](https://img.shields.io/badge/Start%20Now-Flutter%20Run-blue?logo=playstation&style=for-the-badge)](#getting-started)
+2. **Install dependencies:**
+   ```bash
+   flutter pub get
+   ```
 
-</div>
+3. **Run the application:**
+   ```bash
+   # Run on web (recommended for showcase)
+   flutter run -d chrome
+   
+   # Run on mobile
+   flutter run
+   
+   # Run on specific device
+   flutter run -d <device-id>
+   ```
 
-#### **1. Clone the Repository**
+### 🌐 **Web Deployment**
+
+For production deployment:
+
 ```bash
-# Clone the main OSMEA repository
-git clone https://github.com/masterfabric-mobile/osmea.git
+# Build for web
+flutter build web --release
 
-# Navigate to the component app
-cd osmea/packages/components/component_app
-```
-
-#### **2. Install Dependencies**
-```bash
-# Get Flutter dependencies
-flutter pub get
-
-# For iOS (if developing on macOS)
-cd ios && pod install && cd ..
-```
-
-#### **3. Run the Application**
-
-**Mobile (iOS/Android):**
-```bash
-# Run on connected device or simulator
-flutter run
-
-# Run on specific device
-flutter run -d <device-id>
-
-# Run in release mode
-flutter run --release
-```
-
-### 🔧 Development Setup
-
-#### **IDE Configuration**
-
-**VS Code (Recommended):**
-1. Install the Flutter extension
-2. Install the Dart extension
-3. Configure your workspace settings
-
-
-#### **Hot Reload Development**
-```bash
-# Start with hot reload enabled (default)
-flutter run
-
-# Use 'r' for hot reload, 'R' for hot restart
-# Press 'q' to quit
+# Deploy to your hosting service
+# The build/web directory contains all static files
 ```
 
 ---
 
 ## 💡 Usage Examples
 
-### 🎨 Basic Component Usage
+### 🎨 **Basic Component Usage**
 
 ```dart
 import 'package:osmea_components/osmea_components.dart';
@@ -287,7 +255,7 @@ OsmeaComponents.card(
 )
 ```
 
-### 🏗️ Layout Examples
+### 🏗️ **Layout Examples**
 
 ```dart
 // Responsive column layout
@@ -312,7 +280,7 @@ OsmeaComponents.row(
 )
 ```
 
-### 🎯 Form Components
+### 🎯 **Form Components**
 
 ```dart
 // Text field with validation
@@ -339,7 +307,7 @@ OsmeaComponents.checkbox(
 
 ## 🎨 Customization
 
-### 🎨 Color System
+### 🎨 **Color System**
 
 OSMEA provides a comprehensive color system:
 
@@ -363,57 +331,47 @@ OsmeaColors.gray100       // Very light gray
 
 ---
 
+## 🎯 Use Cases
 
-## 🔧 Configuration
+### 👨‍💻 **Developers**
+- **Component Testing** - Test components with different configurations
+- **Code Examples** - Learn how to use OSMEA components
+- **Best Practices** - See modern Flutter development patterns
+- **Integration** - Understand component integration
 
-### 📦 Dependencies
+### 🎨 **Designers**
+- **UI Exploration** - Explore component variations and themes
+- **Design System** - Understand the design system structure
+- **Prototyping** - Use components for rapid prototyping
+- **Consistency** - Ensure design consistency across projects
 
-The app uses the following key dependencies:
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  osmea_components:     # Main UI component library
-    path: ../
-  intl: ^0.18.0         # Internationalization
-  url_launcher: ^6.3.1  # URL handling
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0  # Code quality
-```
-
-### ⚙️ Build Configuration
-
-```bash
-# Debug build
-flutter build apk --debug
-
-# Release build
-flutter build apk --release
-
-# Web build
-flutter build web
-
-# iOS build
-flutter build ios
-```
+### 🎓 **Students & Learners**
+- **Flutter Learning** - Learn Flutter through component examples
+- **UI Development** - Understand modern UI development
+- **Component Library** - Learn how to build component libraries
+- **Best Practices** - See production-ready code patterns
 
 ---
 
-## 🚀 Deployment
+## 🛠️ Development
 
-### 📱 Mobile Deployment
-
-**iOS:**
+### **Code Generation**
 ```bash
-# Build for iOS
-flutter build ios --release
+# Generate app icons
+flutter packages pub run flutter_launcher_icons:main
 
-# Archive for App Store
-# Use Xcode to archive and upload
+# Run tests
+flutter test
+```
+
+### **Building**
+```bash
+# Build for web
+flutter build web --release
+
+# Build for mobile
+flutter build apk --release
+flutter build ios --release
 ```
 
 ---
@@ -422,51 +380,35 @@ flutter build ios --release
 
 We welcome contributions! Here's how you can help:
 
-### 🐛 Reporting Issues
+### **Development Guidelines**
+- **Code Style**: Follow Dart/Flutter conventions
+- **Testing**: Write tests for new features
+- **Documentation**: Update docs for API changes
+- **Commit Messages**: Use conventional commits
 
-1. Check existing issues first
-2. Create a new issue with detailed information
-3. Include steps to reproduce
-4. Add screenshots if applicable
-
-### 💡 Suggesting Features
-
-1. Open a feature request issue
-2. Describe the use case
-3. Provide mockups if possible
-4. Discuss implementation approach
-
-### 🔧 Code Contributions
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-### 📋 Contribution Guidelines
-
-- Follow Dart/Flutter style guidelines
-- Write clear commit messages
-- Add documentation for new features
-- Ensure all tests pass
-- Update examples if needed
+### **How to Contribute**
+1. **Fork the Repository**
+2. **Create a Feature Branch**
+3. **Make Your Changes**
+4. **Submit a Pull Request**
 
 ---
 
 ## 📄 License
 
-<div align="center">
-
 > 🔐 **License:** GNU AGPL v3.0  
-> 📜 This project is protected under the **GNU Affero General Public License v3.0**.  
-> If you modify and deploy this project publicly, you must also **publish your changes** under the same license.
+> 📜 This project is protected under the **GNU Affero General Public License v3.0**.
 
-📎 Full details available in the [`LICENSE`](https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE) file.
-
-</div>
+📎 Full details available in the [`LICENSE`](LICENSE) file.
 
 ---
+
+<div align="center">
+
 **Built with ❤️ by the OSMEA Team**
 
 © 2025 MasterFabric Mobile • Maintained by the OSMEA Engineering Team
+
+[⬆ Back to Top](#osmea-components-app-)
+
+</div>
