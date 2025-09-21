@@ -141,6 +141,28 @@ class WizardHelper {
     }
   }
 
+  /// Get brand name from current store configuration
+  static Future<String?> getBrandName() async {
+    try {
+      final currentStore = await getCurrentStore();
+      return currentStore?.storeName;
+    } catch (e) {
+      debugPrint('❌ Error getting brand name: $e');
+      return null;
+    }
+  }
+
+  /// Get brand name for authentication requests
+  static Future<String> getBrandNameForAuth() async {
+    try {
+      final brandName = await getBrandName();
+      return brandName ?? 'woocomm'; // Default fallback
+    } catch (e) {
+      debugPrint('❌ Error getting brand name for auth: $e');
+      return 'woocomm'; // Default fallback
+    }
+  }
+
   /// Get storage information
   static Future<Map<String, dynamic>> getStorageInfo() async {
     try {
@@ -183,6 +205,61 @@ class WizardHelper {
         return '#7f54b3';
       default:
         return '#666666';
+    }
+  }
+
+  /// Get platform-specific tabs for WooCommerce
+  static List<String> getWooCommerceTabs() {
+    return ['store', 'customer'];
+  }
+
+  /// Get platform-specific tab display names
+  static Map<String, String> getPlatformTabNames(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'woocommerce':
+        return {
+          'store': 'Store Configuration',
+          'customer': 'Customer Authentication',
+        };
+      case 'shopify':
+        return {
+          'store': 'Store Configuration',
+        };
+      default:
+        return {
+          'store': 'Store Configuration',
+        };
+    }
+  }
+
+  /// Get platform-specific tab icons
+  static Map<String, String> getPlatformTabIcons(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'woocommerce':
+        return {
+          'store': '🏪',
+          'customer': '👤',
+        };
+      case 'shopify':
+        return {
+          'store': '🏪',
+        };
+      default:
+        return {
+          'store': '🏪',
+        };
+    }
+  }
+
+  /// Check if platform has multiple tabs
+  static bool hasMultipleTabs(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'woocommerce':
+        return true;
+      case 'shopify':
+        return false;
+      default:
+        return false;
     }
   }
 

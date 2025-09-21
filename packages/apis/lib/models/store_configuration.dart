@@ -8,6 +8,8 @@ class StoreConfiguration {
   final String? storeUrl;
   final String? username;
   final String? password;
+  final String? jwtSecret;
+  final String? authEndpoint;
   final bool isActive;
   final bool isDefault;
   final DateTime createdAt;
@@ -23,6 +25,8 @@ class StoreConfiguration {
     this.storeUrl,
     this.username,
     this.password,
+    this.jwtSecret,
+    this.authEndpoint,
     this.isActive = false,
     this.isDefault = false,
     required this.createdAt,
@@ -40,6 +44,8 @@ class StoreConfiguration {
       'store_url': storeUrl,
       'username': username,
       'password': password,
+      'jwt_secret': jwtSecret,
+      'auth_endpoint': authEndpoint,
       'is_active': isActive ? 1 : 0,
       'is_default': isDefault ? 1 : 0,
       'created_at': createdAt.toIso8601String(),
@@ -58,6 +64,8 @@ class StoreConfiguration {
       storeUrl: json['store_url'],
       username: json['username'],
       password: json['password'],
+      jwtSecret: json['jwt_secret'],
+      authEndpoint: json['auth_endpoint'],
       isActive: json['is_active'] == 1,
       isDefault: json['is_default'] == 1,
       createdAt: DateTime.parse(json['created_at']),
@@ -102,6 +110,8 @@ class StoreConfiguration {
     String? storeUrl,
     String? username,
     String? password,
+    String? jwtSecret,
+    String? authEndpoint,
     bool? isActive,
     bool? isDefault,
     DateTime? createdAt,
@@ -117,6 +127,8 @@ class StoreConfiguration {
       storeUrl: storeUrl ?? this.storeUrl,
       username: username ?? this.username,
       password: password ?? this.password,
+      jwtSecret: jwtSecret ?? this.jwtSecret,
+      authEndpoint: authEndpoint ?? this.authEndpoint,
       isActive: isActive ?? this.isActive,
       isDefault: isDefault ?? this.isDefault,
       createdAt: createdAt ?? this.createdAt,

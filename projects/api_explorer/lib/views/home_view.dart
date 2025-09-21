@@ -4,6 +4,7 @@ import 'package:api_explorer/widgets/layout/app_header.dart';
 import 'package:api_explorer/widgets/responsive_layout/responsive_content.dart';
 import 'package:api_explorer/widgets/store_management/store_management_dialog.dart';
 import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
+import 'package:api_explorer/widgets/password_update_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:apis/apis.dart';
@@ -39,6 +40,9 @@ class _HomeViewState extends State<HomeView>
   double _previousScreenWidth = 0;
   bool _hasShownResponsivePopup = false;
   bool _isAppFullyLoaded = false;
+
+  // Password update state
+  bool _showPasswordUpdate = false;
 
   // Scaffold key for drawer control
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -580,6 +584,18 @@ class _HomeViewState extends State<HomeView>
     _showStoreManagementDialog(context);
   }
 
+  void _showPasswordUpdateDialog() {
+    setState(() {
+      _showPasswordUpdate = true;
+    });
+  }
+
+  void _hidePasswordUpdateDialog() {
+    setState(() {
+      _showPasswordUpdate = false;
+    });
+  }
+
   void _updateApiUrlFromStore(StoreConfiguration store) {
     if (!mounted) return;
 
@@ -1101,6 +1117,10 @@ class _HomeViewState extends State<HomeView>
                   isDarkMode: _isDarkMode,
                   onProfileTap: _onProfileTap,
                   onStoreChange: _onStoreChange,
+                  onPasswordUpdate: _selectedStore?.platform == 'woocommerce'
+                      ? _showPasswordUpdateDialog
+                      : null,
+                  isProfileEnabled: _selectedStore?.platform == 'woocommerce',
                 ),
                 drawer: Drawer(
                   width: _calculateDrawerWidth(screenWidth),
@@ -1141,6 +1161,65 @@ class _HomeViewState extends State<HomeView>
           onDismiss: _dismissResponsivePopup,
           onUseWebVersion: _openWebVersion,
         ),
+
+        // Password Update Dialog
+        if (_showPasswordUpdate)
+          Container(
+            color: Colors.black54,
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Header
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.nordicBlue,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.lock_reset,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                'Password Update',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _hidePasswordUpdateDialog,
+                              icon: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Content
+                      const PasswordUpdateWidget(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

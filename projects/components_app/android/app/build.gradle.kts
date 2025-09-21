@@ -6,9 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.masterfabric.components_app"
-    compileSdk = flutter.compileSdkVersion
+    // Align NDK with plugins that require 27.x
     ndkVersion = "27.0.12077973"
+    namespace = "com.masterfabric.osmea.components_app"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -22,7 +24,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.masterfabric.components_app"
+        applicationId = "com.masterfabric.osmea.components_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
