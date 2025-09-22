@@ -1,4 +1,4 @@
-package com.masterfabric.components
+package com.masterfabric.components_app
 
 import io.flutter.embedding.android.FlutterActivity
 
