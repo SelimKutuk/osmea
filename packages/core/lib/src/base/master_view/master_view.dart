@@ -8,24 +8,33 @@ import 'package:core/src/helper/grid_helper.dart';
 part 'master_view_enums.dart'; // Include the enums part
 part 'master_view_mixins.dart'; // Include the mixins part
 
-/// A generic master view widget that serves as a base template for views in the application.
-/// This widget provides a consistent structure and common functionality that can be
-/// extended by specific view implementations.
+/// MasterView (BLoC-based) — reusable screen scaffold for feature views.
 ///
-/// Features:
-/// - Scaffold with customizable app bar
-/// - Safe area support
-/// - Responsive layout support
-/// - Common navigation patterns
-/// - Error handling
-/// Usage:
+/// Purpose
+/// - Provide consistent skeleton (app bar, safe area, paddings, footer/navbar spacers)
+/// - Host `BaseView<V,E,S>` lifecycle and state listening
+/// - Centralize error handling and default snackbars for high-level states
+///
+/// Extend points
+/// - `viewContent(context, viewModel, state)`: render your feature UI
+/// - `initialContent(viewModel, context)`: fire first effects (e.g., dispatch init event)
+/// - `coreAppBar/coreBottomBar/bottomNavigationBar`: customize chrome
+///
+/// Example
 /// ```dart
-/// class MyCustomView extends MasterView {
+/// class ProductsView extends MasterView<MyBloc, MyEvent, MyState> {
+///   ProductsView({super.key}) : super(currentView: MasterViewTypes.content);
+///
 ///   @override
-///   Widget viewContent(BuildContext context) {
-///     return Center(
-///       child: Text('My Custom Content'),
-///     );
+///   void initialContent(MyBloc vm, BuildContext context) {
+///     vm.add(LoadProducts());
+///   }
+///
+///   @override
+///   Widget viewContent(BuildContext context, MyBloc vm, MyState state) {
+///     if (state is Loading) return buildLoading();
+///     if (state is Failure) return buildError(state.message);
+///     return ProductsList(items: state.items);
 ///   }
 /// }
 /// ```
@@ -52,13 +61,8 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
     this.coreBottomBar, // New: function to build bottom bar
     this.showDevGrid = true,
     this.bottomNavigationBar, // Optional bottom navigation bar
-  })  : assert(arguments != null,
-            'Arguments must not be null'), // Ensure arguments is not null
-        assert(arguments.isNotEmpty,
-            'Arguments must not be empty'), // Ensure arguments is not empty
-        assert(currentView != null,
-            'Current view must not be null'), // Ensure currentView is not null
-        assert(snackBarFunction != null, 'SnackBar function must not be null') {
+  })  : assert(arguments.isNotEmpty,
+            'Arguments must not be empty') {
     // Global Flutter error handler
     FlutterError.onError = (FlutterErrorDetails details) {
       debugPrint(
@@ -77,7 +81,6 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
 
   @override
   Widget build(BuildContext context) {
-    assert(currentView != null, 'currentState must not be null');
     debugPrint('MasterView build started. -> View Type: $currentView');
 
     // Show Snackbar for non-content states
