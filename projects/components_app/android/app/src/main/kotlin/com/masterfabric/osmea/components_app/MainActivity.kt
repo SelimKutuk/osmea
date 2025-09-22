@@ -1,4 +1,4 @@
-package com.masterfabric.osmea.components_app
+package com.masterfabric.components
 
 import io.flutter.embedding.android.FlutterActivity
 
