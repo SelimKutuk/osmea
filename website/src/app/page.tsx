@@ -4,6 +4,7 @@ import ProgressSection from '@/components/progress-section';
 import FooterSection from '@/components/footer-section';
 import GitHubStatistics from '@/components/github-statistics';
 import RulesClaimsSection from '@/components/rules-claims-section';
+import ManifestoCard from '@/components/manifesto-card';
 import { data } from '@/lib/data-loader';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection data={data.hero} />
       <GitHubStatistics config={data.siteConfig} />
       <RulesClaimsSection />
+      <ManifestoCard />
       <FeaturesSection data={data.features} />
       <ProgressSection data={data.progress} />
       <FooterSection data={data.footer} />
