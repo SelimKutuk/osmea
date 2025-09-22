@@ -461,7 +461,7 @@ class ThemedText extends StatelessWidget {
 
 #### 3. Accessibility Considerations
 ```dart
-// ✅ Good - Accessible text with proper semantics
+// ✅ Good - Text with proper semantics
 OsmeaComponents.text(
   'Important information',
   textStyle: OsmeaTextStyle.bodyLarge(context),

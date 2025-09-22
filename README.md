@@ -129,7 +129,7 @@ OSMEA is built with the most modern and reliable technologies:
 ### **Frontend & UI**
 - **Flutter 3.19+** - Cross-platform UI framework with native performance
 - **Dart 2.17+** - Type-safe programming language with fast compilation
-- **Material Design 3** - Modern design system with accessible components
+- **Material Design 3** - Modern design system 
 - **BLoC Pattern** - Predictable state management for scalable apps
 
 ### **Backend & APIs**
@@ -180,7 +180,6 @@ OSMEA is built with the most modern and reliable technologies:
 - **📱 Responsive**: Mobile-first design with adaptive layouts
 - **🎯 Type Safe**: Full type safety with Dart
 - **🔧 Customizable**: Extensive theming and styling options
-- **♿ Accessible**: Built-in accessibility features
 
 ### 🔧 [OSMEA Core](packages/core/) - Foundation Package
 **Essential utilities, base classes, and shared logic for OSMEA applications.**

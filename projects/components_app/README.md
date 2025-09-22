@@ -21,13 +21,13 @@
 
 ## 🌟 What is OSMEA Components App?
 
-**OSMEA Components App** is a comprehensive Flutter application that serves as both a showcase and practical reference for the OSMEA Components UI library. It demonstrates how to build modern, accessible, and beautiful applications using OSMEA's extensive component library.
+**OSMEA Components App** is a comprehensive Flutter application that serves as both a showcase and practical reference for the OSMEA Components UI library. It demonstrates how to build modern, and beautiful applications using OSMEA's extensive component library.
 
 ### ✨ **Key Features**
 
 - **🔌 Interactive Showcase** - Live examples of all OSMEA components
 - **⚡ Real-time Testing** - Test components with different configurations
-- **🎨 Modern UI Design** - Beautiful, themed, and accessible components
+- **🎨 Modern UI Design** - Beautiful, themed components
 - **📱 Cross-Platform** - Works on iOS, Android, and Web
 - **🔧 Developer Friendly** - Comprehensive examples and clear code patterns
 - **📖 Learning Resource** - Perfect for understanding component usage

@@ -162,7 +162,7 @@ packages/components/lib/src/utils/
 
 #### 31. 📱 Media Query Extensions (`MediaQueryExtension`)
 - **Screen Info**: `statusBarHeight`, `bottomBarHeight`, `viewPadding`, `viewInsets`, `orientation`, `isPortrait`, `isLandscape`
-- **Device Info**: `devicePixelRatio`, `accessibleNavigation`, `invertColors`, `disableAnimations`, `boldText`
+- **Device Info**: `devicePixelRatio`, `invertColors`, `disableAnimations`, `boldText`
 - **Text Scaling**: `textScaleFactorClamped` (0.8-1.2 range)
 
 #### 32. 📏 Line Height Extensions (`LineHeightExtension`)
@@ -708,7 +708,7 @@ Text(
 
 // ✅ Good - Use clamped text scaling
 Text(
-  'Accessible Text',
+  'Text',
   style: TextStyle(
     fontSize: 18 * context.textScaleFactorClamped, // 0.8-1.2 range
   ),
@@ -1330,7 +1330,6 @@ class ConsistentButton extends StatelessWidget {
 - [ ] Layout adapts to different screen sizes
 - [ ] Text scales appropriately with `textScaleFactorClamped`
 - [ ] Touch targets are adequate for mobile
-- [ ] Content is accessible on small screens
 - [ ] Proper use of dynamic width/height
 - [ ] Breakpoints are handled correctly
 - [ ] Orientation changes are handled

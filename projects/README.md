@@ -60,7 +60,7 @@
 
 **A comprehensive Flutter showcase for OSMEA UI components**
 
-The Components App demonstrates how to build modern, accessible, and beautiful mobile applications using OSMEA's extensive component library. Perfect for developers learning to use OSMEA components or as a reference for production implementations.
+The Components App demonstrates how to build modern, and beautiful mobile applications using OSMEA's extensive component library. Perfect for developers learning to use OSMEA components or as a reference for production implementations.
 
 #### **🎯 Key Features**
 - **📱 Cross-Platform Support** - iOS, Android, and Web compatibility
