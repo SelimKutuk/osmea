@@ -222,7 +222,7 @@ class _ModernSidebarState extends State<ModernSidebar>
       case ApiCategory.shopify:
         return ApiServiceRegistry.getShopifyCategories();
       case ApiCategory.woocommerce:
-        return ApiServiceRegistry.getWooCommerceCategories();
+        return ApiServiceRegistry.getWooCommerceAdminCategories();
       case ApiCategory.shopifyGraphql:
         return [
           ...ApiServiceRegistry.getShopifyGraphqlCategories(),
@@ -951,6 +951,83 @@ class _ModernSidebarState extends State<ModernSidebar>
                   ),
                 ),
 
+              // Admin APIs Section Header
+              if (_currentStore != null && _isCurrentStoreComplete && widget.expanded)
+                OsmeaComponents.container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: isNarrow ? 12 : 16,
+                    vertical: isNarrow ? 8 : 12,
+                  ),
+                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                  decoration: BoxDecoration(
+                    gradient: OsmeaAppTheme.createGradient(
+                      OsmeaColors.red[50]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.05),
+                      OsmeaColors.red[100]?.withValues(alpha: 0.1) ?? Colors.red.withValues(alpha: 0.02),
+                    ),
+                    borderRadius: context.borderRadiusMinStandard,
+                    border: Border.all(
+                      color: OsmeaColors.red[200]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: OsmeaComponents.row(
+                    children: [
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.red[100]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.admin_panel_settings_rounded,
+                          size: isNarrow ? 18 : 20,
+                          color: OsmeaColors.red[600] ?? Colors.red[600],
+                        ),
+                      ),
+                      OsmeaComponents.sizedBox(width: isNarrow ? 8 : 12),
+                      OsmeaComponents.expanded(
+                        child: OsmeaComponents.column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            OsmeaComponents.text(
+                              'Admin APIs',
+                              variant: OsmeaTextVariant.titleSmall,
+                              fontSize: isNarrow ? 14 : 16,
+                              fontWeight: FontWeight.w700,
+                              color: OsmeaColors.red[700] ?? Colors.red[700],
+                            ),
+                            OsmeaComponents.sizedBox(height: 2),
+                            OsmeaComponents.text(
+                              'Management and configuration APIs for administrators',
+                              variant: OsmeaTextVariant.bodySmall,
+                              fontSize: isNarrow ? 11 : 12,
+                              color: OsmeaColors.red[600]?.withValues(alpha: 0.8) ?? Colors.red[600]?.withValues(alpha: 0.8),
+                              maxLines: 2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      OsmeaComponents.container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isNarrow ? 6 : 8,
+                          vertical: isNarrow ? 2 : 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.red[600]?.withValues(alpha: 0.1) ?? Colors.red[600]?.withValues(alpha: 0.1),
+                          borderRadius: context.borderRadiusMinStandard,
+                        ),
+                        child: OsmeaComponents.text(
+                          'Current',
+                          variant: OsmeaTextVariant.labelSmall,
+                          fontSize: isNarrow ? 10 : 11,
+                          fontWeight: FontWeight.w600,
+                          color: OsmeaColors.red[600] ?? Colors.red[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               // Categories List
               OsmeaComponents.expanded(
                 child: Scrollbar(
@@ -1399,6 +1476,13 @@ class _ModernSidebarState extends State<ModernSidebar>
                   ),
                 ),
               ),
+
+              // Customer APIs Section
+              if (_currentStore != null && 
+                  _isCurrentStoreComplete && 
+                  widget.expanded &&
+                  _selectedMainCategory == ApiCategory.woocommerce)
+                _buildCustomerApisSection(isNarrow, isMobile, context),
             ],
           ),
         );
@@ -1523,6 +1607,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'WooCommerce Taxes';
+      case ApiCategory.woocommerceWishlist:
+        return 'WooCommerce Wishlist';
     }
   }
 
@@ -1610,6 +1696,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCurrencies:
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
+        case ApiCategory.woocommerceWishlist:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1670,6 +1757,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCurrencies:
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
+        case ApiCategory.woocommerceWishlist:
           platform = 'WooCommerce';
           break;
         default:
@@ -1719,5 +1807,266 @@ class _ModernSidebarState extends State<ModernSidebar>
       default:
         return Icons.api_rounded;
     }
+  }
+
+  // Build Customer APIs section for WooCommerce
+  Widget _buildCustomerApisSection(bool isNarrow, bool isMobile, BuildContext context) {
+    final customerCategories = ApiServiceRegistry.getWooCommerceCustomerCategories();
+    
+    return OsmeaComponents.container(
+      margin: EdgeInsets.only(
+        left: isNarrow ? 16 : 24,
+        right: isNarrow ? 16 : 24,
+        bottom: isNarrow ? 8 : 12,
+      ),
+      child: OsmeaComponents.column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Customer APIs Header
+          OsmeaComponents.container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isNarrow ? 12 : 16,
+              vertical: 8,
+            ),
+            child: OsmeaComponents.row(
+              children: [
+                Icon(
+                  Icons.people_rounded,
+                  size: isNarrow ? 18 : 20,
+                  color: OsmeaColors.nordicBlue,
+                ),
+                OsmeaComponents.sizedBox(width: 8),
+                OsmeaComponents.text(
+                  'Customer APIs',
+                  variant: OsmeaTextVariant.titleSmall,
+                  fontSize: isNarrow ? 13 : 15,
+                  fontWeight: FontWeight.w700,
+                  color: OsmeaColors.nordicBlue,
+                ),
+                OsmeaComponents.spacer(),
+                OsmeaComponents.container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isNarrow ? 6 : 8,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.nordicBlue.withValues(alpha: 0.15),
+                    borderRadius: context.borderRadiusMinStandard,
+                  ),
+                  child: OsmeaComponents.text(
+                    'Available',
+                    variant: OsmeaTextVariant.labelSmall,
+                    fontSize: isNarrow ? 9 : 10,
+                    fontWeight: FontWeight.w600,
+                    color: OsmeaColors.nordicBlue,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Customer Categories
+          ...customerCategories.map((category) {
+            final isSelected = _selectedCategory == category;
+            final subcategories = _getSubCategoriesForGraphQLCategory(category);
+            
+            return OsmeaComponents.column(
+              children: [
+                // Category Header
+                ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: isNarrow ? 12 : 16,
+                    vertical: isMobile ? 2 : 4,
+                  ),
+                  leading: Icon(
+                    ApiServiceRegistry.getCategoryIcon(category),
+                    color: isSelected
+                        ? OsmeaColors.nordicBlue
+                        : Theme.of(context).iconTheme.color,
+                    size: isNarrow ? 18 : 20,
+                  ),
+                  title: OsmeaComponents.text(
+                    _getCategoryDisplayName(category),
+                    variant: OsmeaTextVariant.labelMedium,
+                    color: isSelected
+                        ? OsmeaColors.nordicBlue
+                        : Theme.of(context).textTheme.bodyMedium?.color,
+                    fontWeight: isSelected
+                        ? FontWeight.w600
+                        : FontWeight.w500,
+                    fontSize: isNarrow ? 12 : 14,
+                  ),
+                  trailing: subcategories.isNotEmpty
+                      ? AnimatedRotation(
+                          turns: isSelected ? 0.25 : 0,
+                          duration: const Duration(milliseconds: 200),
+                          child: Icon(
+                            Icons.chevron_right,
+                            size: isNarrow ? 14 : 16,
+                            color: isSelected
+                                ? OsmeaColors.deepSea
+                                : Theme.of(context).iconTheme.color,
+                          ),
+                        )
+                      : null,
+                  onTap: () => _selectCategory(category),
+                ),
+
+                // Subcategories with animation
+                if (isSelected && widget.expanded)
+                  AnimatedBuilder(
+                    animation: _categoryAnimation,
+                    builder: (context, child) {
+                      return SizeTransition(
+                        sizeFactor: _categoryAnimation,
+                        child: OsmeaComponents.container(
+                          margin: EdgeInsets.only(
+                            left: isNarrow ? 16 : 24,
+                            bottom: isNarrow ? 6 : 8,
+                          ),
+                          child: OsmeaComponents.column(
+                            children: subcategories.map((subcategory) {
+                              final services = ApiServiceRegistry.getBySubcategory(
+                                  category, subcategory);
+                              final isSubSelected = _selectedSubcategory == subcategory;
+                              
+                              return OsmeaComponents.column(
+                                children: [
+                                  // Subcategory Header
+                                  ListTile(
+                                    dense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      horizontal: isNarrow ? 12 : 16,
+                                      vertical: isMobile ? 2 : 4,
+                                    ),
+                                    title: OsmeaComponents.text(
+                                      subcategory,
+                                      variant: OsmeaTextVariant.labelMedium,
+                                      fontSize: isNarrow ? 12 : 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: isSubSelected
+                                          ? Theme.of(context).colorScheme.primary
+                                          : Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.color,
+                                    ),
+                                    trailing: OsmeaComponents.container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: isNarrow ? 6 : 8,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withValues(alpha: 0.1),
+                                        borderRadius: context.borderRadiusMinStandard,
+                                      ),
+                                      child: OsmeaComponents.text(
+                                        '${services.length}',
+                                        variant: OsmeaTextVariant.labelSmall,
+                                        fontSize: isNarrow ? 9 : 10,
+                                        color: Theme.of(context).colorScheme.primary,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    onTap: () => _selectSubcategory(subcategory),
+                                  ),
+
+                                  // Services
+                                  if (isSubSelected)
+                                    ...services.asMap().entries.map((entry) {
+                                      final index = entry.key;
+                                      final service = entry.value;
+                                      final isServiceSelected =
+                                          widget.selectedService == service;
+                                      
+                                      return AnimatedContainer(
+                                        duration: Duration(
+                                            milliseconds: 200 + (index * 50)),
+                                        margin: EdgeInsets.only(
+                                          left: isNarrow ? 12 : 16,
+                                          bottom: isNarrow ? 2 : 4,
+                                        ),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius:
+                                                context.borderRadiusMinStandard,
+                                            onTap: () =>
+                                                widget.onServiceSelected(service),
+                                            child: OsmeaComponents.container(
+                                              padding: EdgeInsets.all(isNarrow ? 6 : 8),
+                                              decoration: BoxDecoration(
+                                                color: isServiceSelected
+                                                    ? OsmeaColors.nordicBlue
+                                                        .withValues(alpha: 0.1)
+                                                    : OsmeaColors.transparent,
+                                                borderRadius:
+                                                    context.borderRadiusMinStandard,
+                                                border: isServiceSelected
+                                                    ? Border.all(
+                                                        color: OsmeaColors.nordicBlue
+                                                            .withValues(alpha: 0.3),
+                                                        width: 1,
+                                                      )
+                                                    : null,
+                                              ),
+                                              child: OsmeaComponents.row(
+                                                children: [
+                                                  OsmeaComponents.container(
+                                                    width: isNarrow ? 3 : 4,
+                                                    height: isNarrow ? 12 : 16,
+                                                    decoration: BoxDecoration(
+                                                      color: isServiceSelected
+                                                          ? OsmeaColors.nordicBlue
+                                                          : OsmeaColors.transparent,
+                                                      borderRadius: context
+                                                          .borderRadiusMinStandard,
+                                                    ),
+                                                  ),
+                                                  OsmeaComponents.sizedBox(
+                                                      width: isNarrow ? 6 : 8),
+                                                  OsmeaComponents.expanded(
+                                                    child: OsmeaComponents.text(
+                                                      service.name,
+                                                      variant: OsmeaTextVariant
+                                                          .bodySmall,
+                                                      fontSize: isNarrow ? 11 : 13,
+                                                      color: isServiceSelected
+                                                          ? OsmeaColors.nordicBlue
+                                                          : Theme.of(context)
+                                                              .textTheme
+                                                              .bodyMedium
+                                                              ?.color,
+                                                      fontWeight: isServiceSelected
+                                                          ? FontWeight.w500
+                                                          : FontWeight.w400,
+                                                      maxLines: isNarrow ? 2 : 1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              ],
+            );
+          }).toList(),
+        ],
+      ),
+    );
   }
 }

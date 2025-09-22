@@ -8,6 +8,7 @@ export 'handlers/woocommerce/auth_handlers/user_login_handler.dart';
 export 'handlers/woocommerce/auth_handlers/user_signup_handler.dart';
 export 'handlers/woocommerce/auth_handlers/user_logout_handler.dart';
 export 'handlers/woocommerce/auth_handlers/password_reset_handler.dart';
+export 'handlers/woocommerce/auth_handlers/password_update_handler.dart';
 export 'handlers/woocommerce/auth_handlers/auth_status_handler.dart';
 export 'handlers/woocommerce/auth_handlers/delete_user_handler.dart';
 
@@ -558,3 +559,12 @@ export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/list_tax_rates_
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/create_tax_rate_handler.dart';
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/update_tax_rate_handler.dart';
 export 'handlers/woocommerce/taxes_handlers/taxes_rates_handlers/batch_update_taxes_rates_handler.dart';
+
+// 💖 WooCommerce Wishlist Handlers
+export 'handlers/woocommerce/wishlist_handlers/create_wishlist_group_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/get_all_wishlist_groups_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/update_wishlist_group_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/delete_wishlist_group_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/get_wishlist_items_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/add_wishlist_item_handler.dart';
+export 'handlers/woocommerce/wishlist_handlers/delete_wishlist_item_handler.dart';
