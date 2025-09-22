@@ -38,7 +38,7 @@
 <div align="center">
 
 > **Experience OSMEA Projects in Action**  
-> 🌐 **[components.masterfabric.co](https://components.masterfabric.co)** • 📖 **Storybook** • 🔌 **API Explorer** • 🏪 **Admin Dashboard**
+>  📱**Components App** • 📖 **Storybook** • 🔌 **API Explorer** 
 
 *Interactive demos showcasing the full power of the OSMEA ecosystem*
 
