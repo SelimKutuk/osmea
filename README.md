@@ -37,6 +37,7 @@
 - [🏗️ OSMEA Ecosystem](#️-osmea-ecosystem)
   - [📦 Core Packages](#-core-packages)
   - [🚀 Ready-to-Use Applications](#-ready-to-use-applications)
+  - [🔄 In Development](#-in-development)
 - [🛠️ Technology Stack](#️-technology-stack)
   - [Frontend & UI](#frontend--ui)
   - [Backend & APIs](#backend--apis)
@@ -114,12 +115,17 @@ OSMEA consists of **3 core packages** and **5 production-ready applications**:
 
 | Application | Description | Platform | Status |
 |-------------|-------------|----------|--------|
-| **[🛍️ Storefront Woo](projects/storefront_woo/)** | Complete WooCommerce mobile app | iOS, Android | ✅ Ready |
-| **[📊 Admin Dashboard](projects/admin_dashboard/)** | Management interface | Web | 🔄 In Development |
+
 | **[🎮 Components App](projects/components_app/)** | Interactive showcase | All Platforms | ✅ Ready |
 | **[📖 Storybook](projects/storybook/)** | Documentation hub | Web | ✅ Ready |
 | **[🔍 API Explorer](projects/api_explorer/)** | API testing tool | Web | ✅ Ready |
 
+### 🔄 **In Development**
+
+| Application | Description | Platform | Status |
+|-------------|-------------|----------|--------|
+| **[📊 Admin Dashboard](projects/admin_dashboard/)** | Management interface | Web | 🔄 In Development |
+| **[🛍️ Storefront Woo](projects/storefront_woo/)** | Complete WooCommerce mobile app | iOS, Android | 🔄 In Development |
 ---
 
 ## 🛠️ Technology Stack
@@ -215,11 +221,14 @@ graph TB
         end
         
         subgraph "Ready-to-Use Applications"
-            D[🛍️ Storefront Woo<br/>E-commerce Mobile App]
-            E[📊 Admin Dashboard<br/>Management Interface]
             F[🎮 Components App<br/>Component Showcase]
             G[📖 Storybook<br/>Documentation Hub]
             H[🔍 API Explorer<br/>API Testing Tool]
+        end
+        
+        subgraph "In Development"
+            D[🛍️ Storefront Woo<br/>E-commerce Mobile App]
+            E[📊 Admin Dashboard<br/>Management Interface]
         end
         
         subgraph "Platform Support"
@@ -260,9 +269,6 @@ graph TB
 ### 🛍️ [Storefront Woo](projects/storefront_woo/) - E-commerce Mobile App
 Complete WooCommerce storefront with product browsing, cart, checkout, and orders. Built with Material Design 3 and BLoC pattern.
 
-### 📊 [Admin Dashboard](projects/admin_dashboard/) - Management Interface
-Comprehensive admin interface with analytics, product management, customer profiles, and order processing.
-
 ### 🎮 [Components App](projects/components_app/) - Interactive Showcase
 Interactive playground for exploring OSMEA components with live demos and customization controls.
 
@@ -271,6 +277,11 @@ Complete documentation environment with component testing, API references, and u
 
 ### 🔍 [API Explorer](projects/api_explorer/) - API Testing Tool
 Powerful tool for testing Shopify, WooCommerce, and custom APIs with interactive debugging and visualization.
+
+## 🔄 In Development
+
+### 📊 [Admin Dashboard](projects/admin_dashboard/) - Management Interface
+Comprehensive admin interface with analytics, product management, customer profiles, and order processing.
 
 ---
 
@@ -440,7 +451,7 @@ flutter build web --release  # Web
 ### 🎮 Try the Live Demo
 
 Experience OSMEA components in action:
-- **[🎮 Live Demo](https://components.masterfabric.co)** - Interactive component showcase
+- **[🎮 Componenets App](https://components.masterfabric.co)** - Interactive component showcase
 - **[📖 Storybook](https://storybook.osmea.dev)** - Component documentation
 - **[🔍 API Explorer](https://api-explorer.osmea.dev)** - API testing tool
 
