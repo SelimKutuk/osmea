@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-typedef OnViewModelReady<V> = void Function(V viewModel);
+typedef OnViewModelReadyCubit<V> = void Function(V viewModel);
  
-typedef OnViewModelEnd<V> = void Function(V viewModel);
-typedef OnViewModelStaeBuilder<V, S> = Widget Function(
+typedef OnViewModelEndCubit<V> = void Function(V viewModel);
+typedef OnViewModelStaeBuilderCubit<V, S> = Widget Function(
     V viewModel, BuildContext context, S state);
  
 typedef OnStateListenerCubit<S> = void Function(BuildContext context, S? state);
  
-typedef BuilderCondition<S> = bool Function(S? previues, S? current);
+typedef BuilderConditionCubit<S> = bool Function(S? previues, S? current);
  
 class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
   const BaseViewCubit({
@@ -22,11 +22,11 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
     this.builderCondition, this.onVievModelEnd,
   }) : super(key: key);
  
-  final OnViewModelReady<V>? onViewModelReady;
-  final OnViewModelEnd<V>? onVievModelEnd;
-  final OnViewModelStaeBuilder<V, S>? builder;
+  final OnViewModelReadyCubit<V>? onViewModelReady;
+  final OnViewModelEndCubit<V>? onVievModelEnd;
+  final OnViewModelStaeBuilderCubit<V, S>? builder;
   final OnStateListenerCubit<S>? onStateListener;
-  final BuilderCondition<S>? builderCondition;
+  final BuilderConditionCubit<S>? builderCondition;
  
   @override
   State<BaseViewCubit<V, S>> createState() => _BaseViewCubitState<V, S>();
