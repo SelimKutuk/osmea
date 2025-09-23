@@ -1,8 +1,26 @@
 # 📦 OSMEA Packages Version Changelog
 
-> This changelog is generated from the latest closed pull requests. For a full, always-up-to-date changelog, visit [Closed PRs on GitHub](https://github.com/masterfabric-mobile/osmea/pulls?state=closed&sort=updated&direction=desc).  
+> This changelog is generated from the latest closed pull requests. For a full, always-up-to-date changelog, visit [Closed PRs on GitHub](https://github.com/masterfabric-mobile/osmea/pulls?q=is%3Apr+is%3Aclosed).  
 
-## 📦 APIs – v0.37.11
+## 📦 APIs – v0.43.11
+
+- **[#206 – Package → API → Woocommerce Wishlist](https://github.com/masterfabric-mobile/osmea/pull/206)**  
+  Integrates WooCommerce Wishlist API, CRUD operations, group and item management, Admin/Customer API separation, models and services.
+
+- **[#203 – Package → API → Woocommerce Update Password Module](https://github.com/masterfabric-mobile/osmea/pull/203)**  
+  Adds secure password update feature to the WooCommerce auth module, new endpoint, validation, StoreSetupWizard UI integration.
+
+- **[#195 – Package → API → Woocommerce Delete Account Module](https://github.com/masterfabric-mobile/osmea/pull/195)**  
+  Adds Delete User API with JWT and Auth Key, UI integration, secure account deletion.
+
+- **[#190 – Package → API → Woocommerce Sign Up Module](https://github.com/masterfabric-mobile/osmea/pull/190)**  
+  Extends WooCommerce auth with authKey support for secure, store-scoped signup flow. Model, service, and UI refactors.
+
+- **[#189 – Package → API → Woocommerce Auth Module](https://github.com/masterfabric-mobile/osmea/pull/189)**  
+  Adds JWT-based WooCommerce authentication layer, models, services, local storage persistence, session handling and UI improvements.
+
+- **[#169 – Api Explorer – Searchbar in ModernSidebar](https://github.com/masterfabric-mobile/osmea/pull/169)**  
+  Adds search functionality to ModernSidebar for dynamic API filtering, case-insensitive, real-time updates for improved navigation.
 
 - **[#149 – Apis - Refactor and Improvement GraphQL Structure](https://github.com/masterfabric-mobile/osmea/pull/149)**  
   Introduced a modern GraphQL architecture, migrated from REST to GraphQL, established an annotation-driven, type-safe client and service structure.
@@ -36,7 +54,7 @@
   Full integration and UI categories for WooCommerce Reports and Settings APIs, including new handlers and registry updates.
 
 - **[#114 – WooCommerce Shipping Methods & Payment Gateways API Integration](https://github.com/masterfabric-mobile/osmea/pull/114)**  
-  Added new APIs and handlers for shipping methods and payment gateways, with sidebar UI extensions.r
+  Added new APIs and handlers for shipping methods and payment gateways, with sidebar UI extensions.
 
 - **[#111 – WooCommerce Webhooks & System Status API Integration](https://github.com/masterfabric-mobile/osmea/pull/111)**  
   Integrated WooCommerce Webhooks and System Status APIs, added new sidebar navigation categories and icons. Significant feature expansion.
@@ -147,7 +165,16 @@
   Major improvements to customer management: new API endpoints, enhanced validation, search and filtering, pagination fixes, UI enhancements, and updated documentation.
 
 
-## 🎨 Components – v0.59.25
+## 🎨 Components – v0.63.25
+
+- **[#168 – Storybook – Wrap Component](https://github.com/masterfabric-mobile/osmea/pull/168)**  
+  Adds Storybook for Wrap component, modular architecture, flexible layout, alignment/direction/spacing controls, dynamic child management, and responsive design.
+
+- **[#167 – Storybook – Tab Bars Component](https://github.com/masterfabric-mobile/osmea/pull/167)**  
+  Adds Storybook for TabBar component, modular architecture, multiple variants, interactive showcase, indicator options, centralized knob config, and dynamic tab management.
+
+- **[#166 – Storybook – Column and Spacer Components](https://github.com/masterfabric-mobile/osmea/pull/166)**  
+  Adds Storybook for Column & Spacer components, featuring vertical layouts, adaptive sizing, alignment/indicator controls, flexible spacing, and responsive previews.
 
 - **[#163 – Storybook – Toast Component](https://github.com/masterfabric-mobile/osmea/pull/163)**  
   Added a Storybook showcase for the Toast component, featuring interactive demonstration, style/type/position/animation controls, stacking behavior, and configuration display.
@@ -163,6 +190,9 @@
 
 - **[#159 – Storybook – Padding Component](https://github.com/masterfabric-mobile/osmea/pull/159)**  
   Introduced Storybook for the Padding component, with flexible spacing controls, live slider adjustments, support for various child types, and documentation.
+
+- **[#158 – Storybook – ClipRRect Component](https://github.com/masterfabric-mobile/osmea/pull/158)**  
+  Adds Storybook for ClipRRect component with rounded corner clipping, customizable border radius, clip behavior, child variants, and responsive design.
 
 - **[#157 – Storybook – Align Component](https://github.com/masterfabric-mobile/osmea/pull/157)**  
   Provided a Storybook for the Align component, enabling precise alignment control and support for multiple child types.
@@ -399,7 +429,49 @@
   Established a modular, scalable UI structure (`lib/src/`), reusable components, enums, design tokens, and core infrastructure for future UI elements.
                                            
 
-## ⚙️ Core – v1.4.2
+## ⚙️ Core – v3.14.4
+
+- **[#207 – Core → Permission Handler Helper Improvements](https://github.com/masterfabric-mobile/osmea/pull/207)**  
+    Adds exact alarm permission management for Android 12+, intelligent permission caching, cross-platform permission handling, advanced error handling, smart storage permission management, real-time permission status tracking, and production-ready architecture.
+
+- **[#204 – Core → Master-View-Cubit](https://github.com/masterfabric-mobile/osmea/pull/204)**  
+  Small improvement in KeyboardTypeExtension (update to TextInputType) and MasterViewCubit export path update.
+
+- **[#202 – Core → File Download Helper & Update → Components App](https://github.com/masterfabric-mobile/osmea/pull/202)**  
+  Enhances File Download Helper & Permission Handler (iOS/Android support, onboarding flow, simulator compatibility, permission logic, component app updates).
+
+- **[#199 – Core → Price-Currency-Info-Helper](https://github.com/masterfabric-mobile/osmea/pull/199)**  
+  Old `PriceFormatWithCurrencyHelper` deprecated and replaced by `CurrencyHelper` (method signatures, global state, extension usage, migration required).
+
+- **[#198 – Core → Splash View and Storefront Update](https://github.com/masterfabric-mobile/osmea/pull/198)**  
+  Adds splash screen feature, improved splash/onboarding/storefront integration, configuration, state management.
+
+- **[#194 – Core → Core-Base-View-Cubit-Export](https://github.com/masterfabric-mobile/osmea/pull/194)**  
+  Typedef breaking change: `BuilderCondition` renamed to `BuilderConditionCubit` (refactoring that breaks consumers using the old typedef).
+
+- **[#193 – Core → Core-Base-Cubit-Export](https://github.com/masterfabric-mobile/osmea/pull/193)**  
+  Fixes missing export for `BaseViewModelCubit` class in core.dart; makes base class accessible to consumers.
+
+- **[#192 – Core → File Download Helper & Application Share Helper](https://github.com/masterfabric-mobile/osmea/pull/192)**  
+  Adds ApplicationShareHelper for unified sharing; upgrades FileDownloadHelper (public storage, file opening/sharing, permission integration, robust error handling).
+
+- **[#191 – Core → Url Launcher Helper](https://github.com/masterfabric-mobile/osmea/pull/191)**  
+  Adds UrlLauncherHelper for robust, cross-platform URL launching, validation, social/media/maps integration, error handling.
+
+- **[#188 – Core → Datetime Helper](https://github.com/masterfabric-mobile/osmea/pull/188)**  
+  Adds DateTimeHelper with comprehensive date/time utilities, formatting, parsing, duration ops, timezone handling, and validation.
+
+- **[#187 – Core → Permission Handler Helper](https://github.com/masterfabric-mobile/osmea/pull/187)**  
+  Adds PermissionHandlerHelper for unified, cross-platform permission management (camera, microphone, location, storage, etc.), intelligent caching, and advanced error handling.
+
+- **[#184 – Core → Double Extension Helper](https://github.com/masterfabric-mobile/osmea/pull/184)**  
+  Adds centralized Double Extension Helper for precision, formatting, mathematical operations, and business logic on double values.
+
+- **[#183 – Core → File Download Helper](https://github.com/masterfabric-mobile/osmea/pull/183)**  
+  Adds unified FileDownloadHelper for robust, cross-platform file downloads, error handling, progress tracking, and utility functions.
+
+- **[#181 – Core → First Letter Capabilitize Helper](https://github.com/masterfabric-mobile/osmea/pull/181)**  
+  Adds `capitalizeFirst()` string extension for first-letter capitalization (core helper utility).
 
 - **[#153 – Projects – Storefront Woo](https://github.com/masterfabric-mobile/osmea/pull/153)**  
   Established the foundation for the Osmea Storefront project. Introduced initial project structure, environment configurations, dependency injection, branding, asset management, multi-flavor support, and licensing. Major architectural addition with project-wide impact.
