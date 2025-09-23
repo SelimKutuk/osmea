@@ -62,9 +62,11 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
     Key? key,
     this.onViewModelReady,
     this.onViewModelEnd,
-    required this.builder,
+    this.onVievModelEnd,
+    this.builder,
     this.onStateListener,
     this.buildWhen,
+    this.builderCondition,
   }) : super(key: key);
 
   /// 🧑‍💻 Callback when ViewModel is ready.
@@ -74,13 +76,19 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
   final OnCubitViewModelEnd<V>? onViewModelEnd;
 
   /// 🖼️ Builder for UI with ViewModel and state.
-  final OnCubitViewModelStateBuilder<V, S> builder;
+  final OnCubitViewModelStateBuilder<V, S>? builder;
 
   /// 🎧 Listener for state changes.
   final OnCubitStateListener<S>? onStateListener;
 
   /// 🔄 Condition to determine builder call.
   final BuilderConditionCubit<S>? buildWhen;
+
+  /// 🧩 Backward-compat: legacy typo alias for onViewModelEnd
+  final OnCubitViewModelEnd<V>? onVievModelEnd;
+
+  /// 🔁 Backward-compat: alias for buildWhen named as builderCondition
+  final BuilderConditionCubit<S>? builderCondition;
 
   /// 🗺️ Global key for navigation, dialogs, and bottom sheets.
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -205,7 +213,7 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
 class _BaseViewCubitState<V extends BaseViewModelCubit<S>, S>
     extends State<BaseViewCubit<V, S>> {
   /// 🏗️ Lazily get ViewModel instance from GetIt.
-  late final V viewModel = GetIt.I<V>();
+  V viewModel = GetIt.I<V>();
 
   @override
   void initState() {
@@ -227,7 +235,7 @@ class _BaseViewCubitState<V extends BaseViewModelCubit<S>, S>
   void dispose() {
     try {
       // 🧹 Call onViewModelEnd if provided.
-      widget.onViewModelEnd?.call(viewModel);
+      (widget.onViewModelEnd ?? widget.onVievModelEnd)?.call(viewModel);
     } catch (e, stack) {
       FlutterError.reportError(FlutterErrorDetails(
         exception: e,
@@ -250,11 +258,11 @@ class _BaseViewCubitState<V extends BaseViewModelCubit<S>, S>
           onGenerateRoute: (settings) => MaterialPageRoute(
             builder: (context) => BlocConsumer<V, S>(
               listener: widget.onStateListener ?? (_, __) {},
-              buildWhen: widget.buildWhen,
+              buildWhen: widget.buildWhen ?? widget.builderCondition,
               builder: (context, state) {
                 try {
                   // 🖼️ Build UI with ViewModel and state.
-                  return widget.builder(viewModel, context, state);
+                  return widget.builder?.call(viewModel, context, state) ?? const SizedBox.shrink();
                 } catch (e, stack) {
                   FlutterError.reportError(FlutterErrorDetails(
                     exception: e,
