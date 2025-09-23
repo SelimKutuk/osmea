@@ -9,7 +9,7 @@ typedef OnViewModelEnd<V> = void Function(V viewModel);
 typedef OnViewModelStaeBuilder<V, S> = Widget Function(
     V viewModel, BuildContext context, S state);
  
-typedef OnStateListener<S> = void Function(BuildContext context, S? state);
+typedef OnStateListenerCubit<S> = void Function(BuildContext context, S? state);
  
 typedef BuilderCondition<S> = bool Function(S? previues, S? current);
  
@@ -25,7 +25,7 @@ class BaseViewCubit<V extends BaseViewModelCubit<S>, S> extends StatefulWidget {
   final OnViewModelReady<V>? onViewModelReady;
   final OnViewModelEnd<V>? onVievModelEnd;
   final OnViewModelStaeBuilder<V, S>? builder;
-  final OnStateListener<S>? onStateListener;
+  final OnStateListenerCubit<S>? onStateListener;
   final BuilderCondition<S>? builderCondition;
  
   @override
