@@ -15,6 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0 # State management
+  hydrated_bloc: ^10.1.1 # Persisted state management for Cubit/BLoC (bloc 9.x)
   equatable: ^2.0.7 # Value equality
   go_router: ^15.1.1 # Routing
   injectable: ^2.3.2 # Dependency injection
@@ -37,10 +38,7 @@ dependencies:
   permission_handler: ^11.2.0 # Runtime permissions handler
   share_plus: ^10.1.4 # Sharing text/files across platforms
   osmea_components:
-    git:
-      url: https://github.com/masterfabric-mobile/osmea.git
-      ref: dev
-      path: packages/components
+    path: ../components
  
 # -------------------------------
 # Development dependencies

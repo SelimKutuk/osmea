@@ -88,15 +88,12 @@ abstract class BaseViewModelCubit<S> extends Cubit<S> {
   /// - [change]: Contains the previous and next state values
   @override
   void onChange(Change<S> change) {
-    // 📝 Log state changes for debugging and monitoring
     _logger.printBaseViewModelQubitLogs([
       "🔄 State Change Detected",
       "📊 Previous State: ${change.currentState}",
       "📈 Next State: ${change.nextState}",
       "⏰ Timestamp: ${DateTime.now().toIso8601String()}"
     ]);
-
-    // 🔄 Call the parent's onChange to maintain Cubit's default behavior
     super.onChange(change);
   }
 }
