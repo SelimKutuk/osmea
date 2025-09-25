@@ -1,0 +1,62 @@
+import 'package:apis/apis.dart';
+import 'package:apis/network/remote/woocommerce/admin_api/reports/abstract/reports_service.dart';
+import 'package:apis/network/remote/woocommerce/admin_api/reports/freezed_model/response/retrieve_order_totals_response.dart';
+import 'package:api_explorer/services/api_request_handler.dart';
+import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:flutter/foundation.dart';
+
+class RetrieveOrderTotalsHandler implements ApiRequestHandler {
+  @override
+  List<String> get supportedMethods => ['GET'];
+
+  @override
+  Map<String, List<ApiField>> get requiredFields => {
+        'GET': [
+          const ApiField(
+            name: 'api_version',
+            label: 'API Version',
+            hint: 'WooCommerce API version (default: v3)',
+            isRequired: false,
+          ),
+        ],
+      };
+
+  @override
+  Future<Map<String, dynamic>> handleRequest(
+    String method,
+    Map<String, dynamic> params,
+  ) async {
+    try {
+      // Parse API version
+      final apiVersion = params['api_version']?.toString() ?? 'v3';
+
+      debugPrint('📦 Retrieve Order Totals Parameters:');
+      debugPrint('  API Version: $apiVersion');
+
+      // Get service and call API
+      final service = WooNetwork.getIt.get<ReportsService>();
+      final List<RetrieveOrderTotalsResponse> response =
+          await service.retrieveOrderTotals(
+        apiVersion: apiVersion,
+      );
+
+      debugPrint(
+          '✅ Retrieve Order Totals Success: Found ${response.length} order totals');
+
+      return {
+        'success': true,
+        'data': response.map((order) => order.toJson()).toList(),
+        'message': 'Order totals retrieved successfully',
+        'count': response.length,
+      };
+    } catch (e) {
+      debugPrint('❌ Error: $e');
+
+      return {
+        'success': false,
+        'message': 'Failed to retrieve order totals: $e',
+        'error_details': e.toString(),
+      };
+    }
+  }
+}
