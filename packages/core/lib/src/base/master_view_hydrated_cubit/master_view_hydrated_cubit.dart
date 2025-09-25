@@ -8,9 +8,36 @@ import 'package:go_router/go_router.dart';
 part 'master_view_hydrated_cubit_enums.dart';
 part 'master_view_hydrated_cubit_mixins.dart';
 
-/// Hydrated Cubit-based Master View
-abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
-    S> extends StatelessWidget with MasterViewHydratedCubitMixin {
+/// Hydrated Cubit-based master view scaffold that wires a
+/// `BaseViewHydratedCubit` into a consistent layout, complete with app bar,
+/// spacing, snackbars, and route helpers. Extend this widget when building a
+/// screen whose state comes from a `BaseViewModelHydratedCubit` so that the UI
+/// automatically reacts to hydrated state changes.
+///
+/// Typical usage—after calling `MasterApp.runBefore(hydrated: true)` during app
+/// boot—is to subclass `MasterViewHydratedCubit` and provide implementations for
+/// `viewContent` and `initialContent`:
+///
+/// ```dart
+/// class ProfileView extends MasterViewHydratedCubit<ProfileViewModel, ProfileState> {
+///   ProfileView({required super.goRoute}) : super(arguments: {'userId': '123'});
+///
+///   @override
+///   void initialContent(ProfileViewModel viewModel, BuildContext context) {
+///     viewModel.loadProfile(arguments['userId'] as String);
+///   }
+///
+///   @override
+///   Widget viewContent(BuildContext context, ProfileViewModel viewModel, ProfileState state) {
+///     if (currentView == MasterViewHydratedCubitTypes.loading) {
+///       return buildLoading();
+///     }
+///     return ProfileBody(state: state, onRetry: viewModel.reload);
+///   }
+/// }
+/// ```
+abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, S>
+    extends StatelessWidget with MasterViewHydratedCubitMixin {
   final Map<String, dynamic> arguments;
   final MasterViewHydratedCubitTypes currentView;
   final Function snackBarFunction;
@@ -73,8 +100,14 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
 
   final ValueNotifier<bool> _didCallInitial = ValueNotifier<bool>(false);
 
+  /// Builds the primary body for the screen by consuming the latest hydrated
+  /// state. Use the provided `viewModel` to dispatch actions or read helper
+  /// methods.
   Widget viewContent(BuildContext context, V viewModel, S state);
 
+  /// Runs once after the widget is mounted and the internal scaffold has a
+  /// context. Ideal spot to trigger initial data loads based on `arguments` or
+  /// perform one-off side effects.
   void initialContent(V viewModel, BuildContext context);
 
   @override
@@ -105,6 +138,8 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     }
   }
 
+  /// Creates the underlying `BaseViewHydratedCubit` scaffold, handling snackbars
+  /// and error resilience.
   Widget _scaffold(BuildContext context) {
     return _handleScaffoldErrors(() {
       return BaseViewHydratedCubit<V, S>(
@@ -153,6 +188,8 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     }, context);
   }
 
+  /// Wraps scaffold construction to surface unexpected errors in a fallback UI
+  /// instead of crashing the app tree.
   Widget _handleScaffoldErrors(
       Function() scaffoldBuilder, BuildContext context) {
     try {
@@ -164,12 +201,16 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     }
   }
 
+  /// Builds a minimal scaffold displaying the provided error message. Used when
+  /// an exception occurs before the normal layout can render.
   Widget _buildErrorScaffold(BuildContext context, String message) {
     return _createScaffold(
       body: buildError(message),
     );
   }
 
+  /// Convenience method to create the fallback scaffold without duplicating
+  /// boilerplate properties.
   Widget _createScaffold({required Widget body}) {
     return Scaffold(
       key: _scaffoldMessengerKey,
@@ -206,6 +247,9 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     }
   }
 
+  /// Generates a snackbar based on the current view type. The snackbar stays
+  /// visible until dismissed, giving product teams control over messaging for
+  /// non-content states.
   SnackBar _createSnackBar(MasterViewHydratedCubitTypes viewType) {
     final message = _getSnackbarMessage(viewType);
     return SnackBar(
@@ -222,6 +266,8 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     );
   }
 
+  /// Safely shows the snackbar, swallowing errors that can occur when the
+  /// messenger has not yet been mounted.
   void _showSnackBar(BuildContext context, SnackBar snackBar) {
     try {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -231,14 +277,18 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     }
   }
 
+  /// Default fallback for snackbar actions when none is provided.
   static void defaultSnackBarFunction() {
     debugPrint('Default Snackbar function called');
   }
 
+  /// Navigates to a route managed by `GoRouter` without passing extra data.
   void navigateTo(BuildContext context, String path) {
     GoRouter.of(context).go(path);
   }
 
+  /// Navigates to a route while attaching `arguments` to the `extra` payload so
+  /// downstream screens can retrieve the hydrated context.
   void navigateToWithArguments(
       BuildContext context, String path, Map<String, dynamic> arguments) {
     GoRouter.of(context).go(path, extra: arguments);
