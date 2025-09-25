@@ -15,12 +15,19 @@ _$PriceRuleListResponseImpl _$$PriceRuleListResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$PriceRuleListResponseImplToJson(
-        _$PriceRuleListResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.priceRules?.map((e) => e.toJson()).toList()
-          case final value?)
-        'price_rules': value,
-    };
+    _$PriceRuleListResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'price_rules', instance.priceRules?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
     _$PriceRuleImpl(
@@ -71,59 +78,54 @@ _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.valueType case final value?) 'value_type': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.customerSelection case final value?)
-        'customer_selection': value,
-      if (instance.targetType case final value?) 'target_type': value,
-      if (instance.targetSelection case final value?) 'target_selection': value,
-      if (instance.allocationMethod case final value?)
-        'allocation_method': value,
-      if (instance.allocationLimit case final value?) 'allocation_limit': value,
-      if (instance.oncePerCustomer case final value?)
-        'once_per_customer': value,
-      if (instance.usageLimit case final value?) 'usage_limit': value,
-      if (instance.startsAt case final value?) 'starts_at': value,
-      if (instance.endsAt case final value?) 'ends_at': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.entitledProductIds case final value?)
-        'entitled_product_ids': value,
-      if (instance.entitledVariantIds case final value?)
-        'entitled_variant_ids': value,
-      if (instance.entitledCollectionIds case final value?)
-        'entitled_collection_ids': value,
-      if (instance.entitledCountryIds case final value?)
-        'entitled_country_ids': value,
-      if (instance.prerequisiteProductIds case final value?)
-        'prerequisite_product_ids': value,
-      if (instance.prerequisiteVariantIds case final value?)
-        'prerequisite_variant_ids': value,
-      if (instance.prerequisiteCollectionIds case final value?)
-        'prerequisite_collection_ids': value,
-      if (instance.customerSegmentPrerequisiteIds case final value?)
-        'customer_segment_prerequisite_ids': value,
-      if (instance.prerequisiteCustomerIds case final value?)
-        'prerequisite_customer_ids': value,
-      if (instance.prerequisiteSubtotalRange case final value?)
-        'prerequisite_subtotal_range': value,
-      if (instance.prerequisiteQuantityRange case final value?)
-        'prerequisite_quantity_range': value,
-      if (instance.prerequisiteShippingPriceRange case final value?)
-        'prerequisite_shipping_price_range': value,
-      if (instance.prerequisiteToEntitlementQuantityRatio?.toJson()
-          case final value?)
-        'prerequisite_to_entitlement_quantity_ratio': value,
-      if (instance.prerequisiteToEntitlementPurchase?.toJson()
-          case final value?)
-        'prerequisite_to_entitlement_purchase': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('value_type', instance.valueType);
+  writeNotNull('value', instance.value);
+  writeNotNull('customer_selection', instance.customerSelection);
+  writeNotNull('target_type', instance.targetType);
+  writeNotNull('target_selection', instance.targetSelection);
+  writeNotNull('allocation_method', instance.allocationMethod);
+  writeNotNull('allocation_limit', instance.allocationLimit);
+  writeNotNull('once_per_customer', instance.oncePerCustomer);
+  writeNotNull('usage_limit', instance.usageLimit);
+  writeNotNull('starts_at', instance.startsAt);
+  writeNotNull('ends_at', instance.endsAt);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('entitled_product_ids', instance.entitledProductIds);
+  writeNotNull('entitled_variant_ids', instance.entitledVariantIds);
+  writeNotNull('entitled_collection_ids', instance.entitledCollectionIds);
+  writeNotNull('entitled_country_ids', instance.entitledCountryIds);
+  writeNotNull('prerequisite_product_ids', instance.prerequisiteProductIds);
+  writeNotNull('prerequisite_variant_ids', instance.prerequisiteVariantIds);
+  writeNotNull(
+      'prerequisite_collection_ids', instance.prerequisiteCollectionIds);
+  writeNotNull('customer_segment_prerequisite_ids',
+      instance.customerSegmentPrerequisiteIds);
+  writeNotNull('prerequisite_customer_ids', instance.prerequisiteCustomerIds);
+  writeNotNull(
+      'prerequisite_subtotal_range', instance.prerequisiteSubtotalRange);
+  writeNotNull(
+      'prerequisite_quantity_range', instance.prerequisiteQuantityRange);
+  writeNotNull('prerequisite_shipping_price_range',
+      instance.prerequisiteShippingPriceRange);
+  writeNotNull('prerequisite_to_entitlement_quantity_ratio',
+      instance.prerequisiteToEntitlementQuantityRatio?.toJson());
+  writeNotNull('prerequisite_to_entitlement_purchase',
+      instance.prerequisiteToEntitlementPurchase?.toJson());
+  writeNotNull('title', instance.title);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}
 
 _$PrerequisiteToEntitlementPurchaseImpl
     _$$PrerequisiteToEntitlementPurchaseImplFromJson(
@@ -133,11 +135,18 @@ _$PrerequisiteToEntitlementPurchaseImpl
         );
 
 Map<String, dynamic> _$$PrerequisiteToEntitlementPurchaseImplToJson(
-        _$PrerequisiteToEntitlementPurchaseImpl instance) =>
-    <String, dynamic>{
-      if (instance.prerequisiteAmount case final value?)
-        'prerequisite_amount': value,
-    };
+    _$PrerequisiteToEntitlementPurchaseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('prerequisite_amount', instance.prerequisiteAmount);
+  return val;
+}
 
 _$PrerequisiteToEntitlementQuantityRatioImpl
     _$$PrerequisiteToEntitlementQuantityRatioImplFromJson(
@@ -148,10 +157,16 @@ _$PrerequisiteToEntitlementQuantityRatioImpl
         );
 
 Map<String, dynamic> _$$PrerequisiteToEntitlementQuantityRatioImplToJson(
-        _$PrerequisiteToEntitlementQuantityRatioImpl instance) =>
-    <String, dynamic>{
-      if (instance.prerequisiteQuantity case final value?)
-        'prerequisite_quantity': value,
-      if (instance.entitledQuantity case final value?)
-        'entitled_quantity': value,
-    };
+    _$PrerequisiteToEntitlementQuantityRatioImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('prerequisite_quantity', instance.prerequisiteQuantity);
+  writeNotNull('entitled_quantity', instance.entitledQuantity);
+  return val;
+}

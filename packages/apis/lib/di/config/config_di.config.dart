@@ -209,118 +209,118 @@ import 'package:apis/network/remote/shopify/rest/webhooks/webhook/abstract/webho
     as _i352;
 import 'package:apis/network/remote/shopify/rest/webhooks/webhook/api/api_webhook_service.dart'
     as _i827;
+import 'package:apis/network/remote/woocommerce/admin_api/coupons/abstract/coupons_service.dart'
+    as _i373;
+import 'package:apis/network/remote/woocommerce/admin_api/coupons/api/api_coupons_service.dart'
+    as _i1029;
+import 'package:apis/network/remote/woocommerce/admin_api/customers/abstract/customers_service.dart'
+    as _i660;
+import 'package:apis/network/remote/woocommerce/admin_api/customers/api/api_customers_service.dart'
+    as _i98;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/continents/abstract/continents_service.dart'
+    as _i727;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/continents/api/api_continents_service.dart'
+    as _i755;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/countries/abstract/countries_service.dart'
+    as _i128;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/countries/api/api_countries_service.dart'
+    as _i751;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/currencies/abstract/currencies_service.dart'
+    as _i1013;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/currencies/api/api_currencies_service.dart'
+    as _i730;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/data/abstract/data_service.dart'
+    as _i558;
+import 'package:apis/network/remote/woocommerce/admin_api/datas/data/api/api_data_service.dart'
+    as _i1067;
+import 'package:apis/network/remote/woocommerce/admin_api/orders/abstract/orders_service.dart'
+    as _i402;
+import 'package:apis/network/remote/woocommerce/admin_api/orders/api/api_orders_service.dart'
+    as _i150;
+import 'package:apis/network/remote/woocommerce/admin_api/orders/order_id/notes/abstract/order_notes_service.dart'
+    as _i961;
+import 'package:apis/network/remote/woocommerce/admin_api/orders/order_id/notes/api/api_order_notes_service.dart'
+    as _i490;
+import 'package:apis/network/remote/woocommerce/admin_api/payment_gateways/abstract/payment_gateways_service.dart'
+    as _i1052;
+import 'package:apis/network/remote/woocommerce/admin_api/payment_gateways/api/api_payment_gateways_service.dart'
+    as _i329;
+import 'package:apis/network/remote/woocommerce/admin_api/products/attribute_terms/abstract/product_attribute_terms_service.dart'
+    as _i515;
+import 'package:apis/network/remote/woocommerce/admin_api/products/attribute_terms/api/api_product_attribute_terms_service.dart'
+    as _i44;
+import 'package:apis/network/remote/woocommerce/admin_api/products/attributes/abstract/product_attributes_service.dart'
+    as _i947;
+import 'package:apis/network/remote/woocommerce/admin_api/products/attributes/api/api_product_attributes_service.dart'
+    as _i831;
+import 'package:apis/network/remote/woocommerce/admin_api/products/categories/abstract/product_categories_service.dart'
+    as _i527;
+import 'package:apis/network/remote/woocommerce/admin_api/products/categories/api/api_product_categories_service.dart'
+    as _i259;
+import 'package:apis/network/remote/woocommerce/admin_api/products/product/abstract/products_service.dart'
+    as _i588;
+import 'package:apis/network/remote/woocommerce/admin_api/products/product/api/api_products_service.dart'
+    as _i235;
+import 'package:apis/network/remote/woocommerce/admin_api/products/reviews/abstract/product_reviews_service.dart'
+    as _i218;
+import 'package:apis/network/remote/woocommerce/admin_api/products/reviews/api/api_product_reviews_service.dart'
+    as _i619;
+import 'package:apis/network/remote/woocommerce/admin_api/products/shipping_classes/abstract/product_shipping_classes_service.dart'
+    as _i163;
+import 'package:apis/network/remote/woocommerce/admin_api/products/shipping_classes/api/api_product_shipping_classes_service.dart'
+    as _i515;
+import 'package:apis/network/remote/woocommerce/admin_api/products/tags/abstract/product_tags_service.dart'
+    as _i486;
+import 'package:apis/network/remote/woocommerce/admin_api/products/tags/api/api_product_tags_service.dart'
+    as _i533;
+import 'package:apis/network/remote/woocommerce/admin_api/products/variations/abstract/product_variations_service.dart'
+    as _i680;
+import 'package:apis/network/remote/woocommerce/admin_api/products/variations/api/api_product_variations_service.dart'
+    as _i262;
+import 'package:apis/network/remote/woocommerce/admin_api/refunds/abstract/refunds_service.dart'
+    as _i288;
+import 'package:apis/network/remote/woocommerce/admin_api/refunds/api/api_refunds_service.dart'
+    as _i472;
+import 'package:apis/network/remote/woocommerce/admin_api/reports/abstract/reports_service.dart'
+    as _i973;
+import 'package:apis/network/remote/woocommerce/admin_api/reports/api/api_reports_service.dart'
+    as _i1029;
+import 'package:apis/network/remote/woocommerce/admin_api/settings/abstract/settings_service.dart'
+    as _i950;
+import 'package:apis/network/remote/woocommerce/admin_api/settings/api/api_settings_service.dart'
+    as _i330;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_methods/abstract/shipping_methods_service.dart'
+    as _i241;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_methods/api/api_shipping_methods_service.dart'
+    as _i665;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_zones/method/abstract/shipping_zone_methods_service.dart'
+    as _i93;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_zones/method/api/api_shipping_zone_methods_service.dart'
+    as _i350;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_zones/shipping_zone/abstract/shipping_zones_service.dart'
+    as _i351;
+import 'package:apis/network/remote/woocommerce/admin_api/shipping_zones/shipping_zone/api/api_shipping_zones_service.dart'
+    as _i604;
+import 'package:apis/network/remote/woocommerce/admin_api/system_status/abstract/system_status_service.dart'
+    as _i330;
+import 'package:apis/network/remote/woocommerce/admin_api/system_status/api/api_system_status_service.dart'
+    as _i997;
+import 'package:apis/network/remote/woocommerce/admin_api/taxes/classes/abstract/taxes_classes_service.dart'
+    as _i447;
+import 'package:apis/network/remote/woocommerce/admin_api/taxes/classes/api/api_taxes_classes_service.dart'
+    as _i156;
+import 'package:apis/network/remote/woocommerce/admin_api/taxes/rates/abstract/taxes_rates_service.dart'
+    as _i574;
+import 'package:apis/network/remote/woocommerce/admin_api/taxes/rates/api/api_taxes_rates_service.dart'
+    as _i842;
+import 'package:apis/network/remote/woocommerce/admin_api/webhooks/abstract/webhooks_service.dart'
+    as _i813;
+import 'package:apis/network/remote/woocommerce/admin_api/webhooks/api/api_webhooks_service.dart'
+    as _i331;
 import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.dart'
     as _i28;
 import 'package:apis/network/remote/woocommerce/auth/api/api_woo_auth_service.dart'
     as _i916;
-import 'package:apis/network/remote/woocommerce/coupons/abstract/coupons_service.dart'
-    as _i218;
-import 'package:apis/network/remote/woocommerce/coupons/api/api_coupons_service.dart'
-    as _i470;
-import 'package:apis/network/remote/woocommerce/customers/abstract/customers_service.dart'
-    as _i977;
-import 'package:apis/network/remote/woocommerce/customers/api/api_customers_service.dart'
-    as _i708;
-import 'package:apis/network/remote/woocommerce/datas/continents/abstract/continents_service.dart'
-    as _i543;
-import 'package:apis/network/remote/woocommerce/datas/continents/api/api_continents_service.dart'
-    as _i352;
-import 'package:apis/network/remote/woocommerce/datas/countries/abstract/countries_service.dart'
-    as _i61;
-import 'package:apis/network/remote/woocommerce/datas/countries/api/api_countries_service.dart'
-    as _i516;
-import 'package:apis/network/remote/woocommerce/datas/currencies/abstract/currencies_service.dart'
-    as _i607;
-import 'package:apis/network/remote/woocommerce/datas/currencies/api/api_currencies_service.dart'
-    as _i999;
-import 'package:apis/network/remote/woocommerce/datas/data/abstract/data_service.dart'
-    as _i1043;
-import 'package:apis/network/remote/woocommerce/datas/data/api/api_data_service.dart'
-    as _i724;
-import 'package:apis/network/remote/woocommerce/orders/abstract/orders_service.dart'
-    as _i674;
-import 'package:apis/network/remote/woocommerce/orders/api/api_orders_service.dart'
-    as _i576;
-import 'package:apis/network/remote/woocommerce/orders/order_id/notes/abstract/order_notes_service.dart'
-    as _i123;
-import 'package:apis/network/remote/woocommerce/orders/order_id/notes/api/api_order_notes_service.dart'
-    as _i650;
-import 'package:apis/network/remote/woocommerce/payment_gateways/abstract/payment_gateways_service.dart'
-    as _i803;
-import 'package:apis/network/remote/woocommerce/payment_gateways/api/api_payment_gateways_service.dart'
-    as _i69;
-import 'package:apis/network/remote/woocommerce/products/attribute_terms/abstract/product_attribute_terms_service.dart'
-    as _i373;
-import 'package:apis/network/remote/woocommerce/products/attribute_terms/api/api_product_attribute_terms_service.dart'
-    as _i315;
-import 'package:apis/network/remote/woocommerce/products/attributes/abstract/product_attributes_service.dart'
-    as _i220;
-import 'package:apis/network/remote/woocommerce/products/attributes/api/api_product_attributes_service.dart'
-    as _i687;
-import 'package:apis/network/remote/woocommerce/products/categories/abstract/product_categories_service.dart'
-    as _i60;
-import 'package:apis/network/remote/woocommerce/products/categories/api/api_product_categories_service.dart'
-    as _i715;
-import 'package:apis/network/remote/woocommerce/products/product/abstract/products_service.dart'
-    as _i354;
-import 'package:apis/network/remote/woocommerce/products/product/api/api_products_service.dart'
-    as _i914;
-import 'package:apis/network/remote/woocommerce/products/reviews/abstract/product_reviews_service.dart'
-    as _i1007;
-import 'package:apis/network/remote/woocommerce/products/reviews/api/api_product_reviews_service.dart'
-    as _i484;
-import 'package:apis/network/remote/woocommerce/products/shipping_classes/abstract/product_shipping_classes_service.dart'
-    as _i870;
-import 'package:apis/network/remote/woocommerce/products/shipping_classes/api/api_product_shipping_classes_service.dart'
-    as _i2;
-import 'package:apis/network/remote/woocommerce/products/tags/abstract/product_tags_service.dart'
-    as _i117;
-import 'package:apis/network/remote/woocommerce/products/tags/api/api_product_tags_service.dart'
-    as _i588;
-import 'package:apis/network/remote/woocommerce/products/variations/abstract/product_variations_service.dart'
-    as _i409;
-import 'package:apis/network/remote/woocommerce/products/variations/api/api_product_variations_service.dart'
-    as _i22;
-import 'package:apis/network/remote/woocommerce/refunds/abstract/refunds_service.dart'
-    as _i359;
-import 'package:apis/network/remote/woocommerce/refunds/api/api_refunds_service.dart'
-    as _i570;
-import 'package:apis/network/remote/woocommerce/reports/abstract/reports_service.dart'
-    as _i1040;
-import 'package:apis/network/remote/woocommerce/reports/api/api_reports_service.dart'
-    as _i635;
-import 'package:apis/network/remote/woocommerce/settings/abstract/settings_service.dart'
-    as _i154;
-import 'package:apis/network/remote/woocommerce/settings/api/api_settings_service.dart'
-    as _i192;
-import 'package:apis/network/remote/woocommerce/shipping_methods/abstract/shipping_methods_service.dart'
-    as _i361;
-import 'package:apis/network/remote/woocommerce/shipping_methods/api/api_shipping_methods_service.dart'
-    as _i369;
-import 'package:apis/network/remote/woocommerce/shipping_zones/method/abstract/shipping_zone_methods_service.dart'
-    as _i613;
-import 'package:apis/network/remote/woocommerce/shipping_zones/method/api/api_shipping_zone_methods_service.dart'
-    as _i612;
-import 'package:apis/network/remote/woocommerce/shipping_zones/shipping_zone/abstract/shipping_zones_service.dart'
-    as _i767;
-import 'package:apis/network/remote/woocommerce/shipping_zones/shipping_zone/api/api_shipping_zones_service.dart'
-    as _i786;
-import 'package:apis/network/remote/woocommerce/system_status/abstract/system_status_service.dart'
-    as _i155;
-import 'package:apis/network/remote/woocommerce/system_status/api/api_system_status_service.dart'
-    as _i1071;
-import 'package:apis/network/remote/woocommerce/taxes/classes/abstract/taxes_classes_service.dart'
-    as _i249;
-import 'package:apis/network/remote/woocommerce/taxes/classes/api/api_taxes_classes_service.dart'
-    as _i612;
-import 'package:apis/network/remote/woocommerce/taxes/rates/abstract/taxes_rates_service.dart'
-    as _i800;
-import 'package:apis/network/remote/woocommerce/taxes/rates/api/api_taxes_rates_service.dart'
-    as _i5;
-import 'package:apis/network/remote/woocommerce/webhooks/abstract/webhooks_service.dart'
-    as _i921;
-import 'package:apis/network/remote/woocommerce/webhooks/api/api_webhooks_service.dart'
-    as _i648;
 import 'package:apis/network/remote/woocommerce/wishlist/abstract/woo_wishlist_service.dart'
     as _i671;
 import 'package:apis/network/remote/woocommerce/wishlist/api/api_woo_wishlist_service.dart'
@@ -347,31 +347,43 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.singleton<_i974.Logger>(() => dioLoggerModule.logger);
     gh.singleton<_i361.Dio>(() => dioModule.dio());
-    gh.factory<_i1040.ReportsService>(
-        () => _i635.ApiReportsService(gh<_i361.Dio>()));
-    gh.factory<_i803.PaymentGatewaysService>(
-        () => _i69.ApiPaymentGatewaysService(gh<_i361.Dio>()));
-    gh.factory<_i123.OrderNotesService>(
-        () => _i650.OrderNotesServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i361.ShippingMethodsService>(
-        () => _i369.ApiShippingMethodsService(gh<_i361.Dio>()));
+    gh.factory<_i1013.CurrenciesService>(
+        () => _i730.ApiCurrenciesService(gh<_i361.Dio>()));
+    gh.factory<_i947.ProductAttributesService>(
+        () => _i831.ProductAttributesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i163.ProductShippingClassesService>(
+        () => _i515.ProductShippingClassesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i1052.PaymentGatewaysService>(
+        () => _i329.ApiPaymentGatewaysService(gh<_i361.Dio>()));
+    gh.factory<_i288.RefundsService>(
+        () => _i472.ApiRefundsService(gh<_i361.Dio>()));
+    gh.factory<_i402.OrdersService>(
+        () => _i150.OrdersServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i588.ProductsService>(
+        () => _i235.ProductsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i351.ShippingZonesService>(
+        () => _i604.ShippingZonesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i973.ReportsService>(
+        () => _i1029.ApiReportsService(gh<_i361.Dio>()));
+    gh.factory<_i574.TaxesRatesService>(
+        () => _i842.TaxesRatesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i515.ProductAttributeTermsService>(
+        () => _i44.ProductAttributeTermsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i611.ShopService>(
         () => _i169.ShopServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i154.SettingsService>(
-        () => _i192.SettingsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i813.WebhooksService>(
+        () => _i331.WebhooksServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i330.SystemStatusService>(
+        () => _i997.SystemStatusServiceClient(gh<_i361.Dio>()));
     gh.singleton<_i724.ApiBaseLogger>(
         () => _i584.ApiDioLogger(logger: gh<_i974.Logger>()));
-    gh.factory<_i921.WebhooksService>(
-        () => _i648.WebhooksServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i220.ProductAttributesService>(
-        () => _i687.ProductAttributesServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i359.RefundsService>(
-        () => _i570.ApiRefundsService(gh<_i361.Dio>()));
-    gh.factory<_i249.TaxesClassesService>(
-        () => _i612.TaxesClassesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i447.TaxesClassesService>(
+        () => _i156.TaxesClassesServiceClient(gh<_i361.Dio>()));
     gh.singleton<_i661.ApiBaseClient>(() => _i1004.ApiDioClient());
     gh.factory<_i1035.TransactionService>(
         () => _i709.TransactionServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i950.SettingsService>(
+        () => _i330.SettingsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i300.CountryService>(
         () => _i882.CountryServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i24.MarketingEventEvents>(
@@ -380,10 +392,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1034.GiftCardServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i722.StorefrontAccessTokenService>(
         () => _i644.StorefrontAccessTokenClient(gh<_i661.ApiBaseClient>()));
-    gh.factory<_i409.ProductVariationsService>(
-        () => _i22.ProductVariationsServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i800.TaxesRatesService>(
-        () => _i5.TaxesRatesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i293.CurrencyService>(
         () => _i474.CurrencyServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i171.CollectionService>(
@@ -394,6 +402,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i627.RefundServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i967.RetrievesListOfEvents>(
         () => _i208.RetrievesListOfEventsClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i93.ShippingZoneMethodsService>(
+        () => _i350.ShippingZoneMethodsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i527.ProductCategoriesService>(
+        () => _i259.ProductCategoriesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i99.PageService>(
         () => _i619.PageServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i887.ProductImageService>(
@@ -404,25 +416,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i916.ApiWooAuthService(gh<_i361.Dio>()));
     gh.factory<_i459.WooAuthManager>(
         () => _i459.WooAuthManager(gh<_i28.WooAuthService>()));
-    gh.factory<_i870.ProductShippingClassesService>(
-        () => _i2.ProductShippingClassesServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i1007.ProductReviewsService>(
-        () => _i484.ProductReviewsServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i354.ProductsService>(
-        () => _i914.ProductsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i195.AssetService>(
         () => _i966.AssetServiceClient(gh<_i661.ApiBaseClient>()));
-    gh.factory<_i60.ProductCategoriesService>(
-        () => _i715.ProductCategoriesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i727.ContinentsService>(
+        () => _i755.ApiContinentsService(gh<_i361.Dio>()));
+    gh.factory<_i558.DataService>(() => _i1067.ApiDataService(gh<_i361.Dio>()));
     gh.factory<_i655.CommentService>(
         () => _i744.CommentServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i931.RecurringApplicationChargeService>(() =>
         _i617.RecurringApplicationChargeServiceClient(
             gh<_i661.ApiBaseClient>()));
-    gh.factory<_i977.CustomersService>(
-        () => _i708.CustomersServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i218.CouponsService>(
-        () => _i470.CouponsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i197.CustomerService>(
         () => _i1017.CustomerServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i620.InventoryLevelService>(
@@ -433,44 +436,41 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i827.WebhookServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i448.ProductVariantService>(
         () => _i938.ProductVariantServiceClient(gh<_i661.ApiBaseClient>()));
-    gh.factory<_i767.ShippingZonesService>(
-        () => _i786.ShippingZonesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i342.LocationService>(
         () => _i395.LocationServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i128.CountriesService>(
+        () => _i751.ApiCountriesService(gh<_i361.Dio>()));
     gh.singleton<_i661.GraphQLBaseClient>(() => _i1051.ShopifyGraphQLClient());
-    gh.factory<_i1043.DataService>(() => _i724.ApiDataService(gh<_i361.Dio>()));
-    gh.factory<_i613.ShippingZoneMethodsService>(
-        () => _i612.ShippingZoneMethodsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i967.RetrievesCountEvents>(
         () => _i208.RetrievesCountEventsClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i982.OrderService>(
         () => _i85.OrderServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i307.ApplicationCreditService>(
         () => _i903.ApplicationCreditServiceClient(gh<_i661.ApiBaseClient>()));
-    gh.factory<_i61.CountriesService>(
-        () => _i516.ApiCountriesService(gh<_i361.Dio>()));
-    gh.factory<_i155.SystemStatusService>(
-        () => _i1071.SystemStatusServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i117.ProductTagsService>(
-        () => _i588.ProductTagsServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i543.ContinentsService>(
-        () => _i352.ApiContinentsService(gh<_i361.Dio>()));
-    gh.factory<_i373.ProductAttributeTermsService>(
-        () => _i315.ProductAttributeTermsServiceClient(gh<_i361.Dio>()));
-    gh.factory<_i607.CurrenciesService>(
-        () => _i999.ApiCurrenciesService(gh<_i361.Dio>()));
-    gh.factory<_i674.OrdersService>(
-        () => _i576.OrdersServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i373.CouponsService>(
+        () => _i1029.CouponsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i961.OrderNotesService>(
+        () => _i490.OrderNotesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i241.ShippingMethodsService>(
+        () => _i665.ApiShippingMethodsService(gh<_i361.Dio>()));
+    gh.factory<_i660.CustomersService>(
+        () => _i98.CustomersServiceClient(gh<_i361.Dio>()));
     gh.factory<_i654.ShippingZoneService>(
         () => _i120.ShippingZoneServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i6.CustomerGraphQLService>(
         () => _i381.CustomerGraphQLServiceImpl(gh<_i661.GraphQLBaseClient>()));
     gh.factory<_i920.WebhooksGraphQLService>(
         () => _i65.ApiWebhooksService(gh<_i661.GraphQLBaseClient>()));
+    gh.factory<_i680.ProductVariationsService>(
+        () => _i262.ProductVariationsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i194.PriceRuleService>(
         () => _i47.PriceRuleServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i526.SmartCollectionService>(
         () => _i49.ApiSmartCollectionService(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i486.ProductTagsService>(
+        () => _i533.ProductTagsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i218.ProductReviewsService>(
+        () => _i619.ProductReviewsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i429.UsageChargeService>(
         () => _i681.UsageChargeServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i676.ApplicationChargeService>(

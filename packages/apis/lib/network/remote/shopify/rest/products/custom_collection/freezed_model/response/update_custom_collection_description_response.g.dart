@@ -17,11 +17,18 @@ _$UpdateCustomCollectionDescriptionResponseImpl
         );
 
 Map<String, dynamic> _$$UpdateCustomCollectionDescriptionResponseImplToJson(
-        _$UpdateCustomCollectionDescriptionResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$UpdateCustomCollectionDescriptionResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -39,17 +46,24 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.sortOrder case final value?) 'sort_order': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.publishedScope case final value?) 'published_scope': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('title', instance.title);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('id', instance.id);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('sort_order', instance.sortOrder);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('published_scope', instance.publishedScope);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

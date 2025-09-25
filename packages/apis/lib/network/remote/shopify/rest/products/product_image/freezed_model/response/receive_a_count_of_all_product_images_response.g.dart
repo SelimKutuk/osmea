@@ -14,7 +14,15 @@ _$ReceiveACountOfAllProductImagesResponseImpl
         );
 
 Map<String, dynamic> _$$ReceiveACountOfAllProductImagesResponseImplToJson(
-        _$ReceiveACountOfAllProductImagesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$ReceiveACountOfAllProductImagesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

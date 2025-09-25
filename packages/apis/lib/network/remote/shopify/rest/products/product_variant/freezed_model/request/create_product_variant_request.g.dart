@@ -15,10 +15,18 @@ _$CreateProductVariantRequestImpl _$$CreateProductVariantRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateProductVariantRequestImplToJson(
-        _$CreateProductVariantRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.variant?.toJson() case final value?) 'variant': value,
-    };
+    _$CreateProductVariantRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('variant', instance.variant?.toJson());
+  return val;
+}
 
 _$ProductVariantImpl _$$ProductVariantImplFromJson(Map<String, dynamic> json) =>
     _$ProductVariantImpl(
@@ -49,40 +57,40 @@ _$ProductVariantImpl _$$ProductVariantImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$ProductVariantImplToJson(
-        _$ProductVariantImpl instance) =>
-    <String, dynamic>{
-      if (instance.option1 case final value?) 'option1': value,
-      if (instance.option2 case final value?) 'option2': value,
-      if (instance.option3 case final value?) 'option3': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.compareAtPrice case final value?) 'compare_at_price': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.inventoryPolicy case final value?) 'inventory_policy': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.inventoryManagement case final value?)
-        'inventory_management': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.barcode case final value?) 'barcode': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.imageId case final value?) 'image_id': value,
-      if (instance.weight case final value?) 'weight': value,
-      if (instance.weightUnit case final value?) 'weight_unit': value,
-      if (instance.inventoryItemId case final value?)
-        'inventory_item_id': value,
-      if (instance.inventoryQuantity case final value?)
-        'inventory_quantity': value,
-      if (instance.oldInventoryQuantity case final value?)
-        'old_inventory_quantity': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.presentmentPrices?.map((e) => e.toJson()).toList()
-          case final value?)
-        'presentment_prices': value,
-    };
+    _$ProductVariantImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('option1', instance.option1);
+  writeNotNull('option2', instance.option2);
+  writeNotNull('option3', instance.option3);
+  writeNotNull('price', instance.price);
+  writeNotNull('compare_at_price', instance.compareAtPrice);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('position', instance.position);
+  writeNotNull('inventory_policy', instance.inventoryPolicy);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('inventory_management', instance.inventoryManagement);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('barcode', instance.barcode);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('image_id', instance.imageId);
+  writeNotNull('weight', instance.weight);
+  writeNotNull('weight_unit', instance.weightUnit);
+  writeNotNull('inventory_item_id', instance.inventoryItemId);
+  writeNotNull('inventory_quantity', instance.inventoryQuantity);
+  writeNotNull('old_inventory_quantity', instance.oldInventoryQuantity);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('presentment_prices',
+      instance.presentmentPrices?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$PresentmentPriceImpl _$$PresentmentPriceImplFromJson(
         Map<String, dynamic> json) =>
@@ -96,20 +104,35 @@ _$PresentmentPriceImpl _$$PresentmentPriceImplFromJson(
     );
 
 Map<String, dynamic> _$$PresentmentPriceImplToJson(
-        _$PresentmentPriceImpl instance) =>
-    <String, dynamic>{
-      if (instance.price?.toJson() case final value?) 'price': value,
-      if (instance.compareAtPrice?.toJson() case final value?)
-        'compare_at_price': value,
-    };
+    _$PresentmentPriceImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price', instance.price?.toJson());
+  writeNotNull('compare_at_price', instance.compareAtPrice?.toJson());
+  return val;
+}
 
 _$MoneyImpl _$$MoneyImplFromJson(Map<String, dynamic> json) => _$MoneyImpl(
       amount: json['amount'] as String?,
       currencyCode: json['currency_code'] as String?,
     );
 
-Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currencyCode case final value?) 'currency_code': value,
-    };
+Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency_code', instance.currencyCode);
+  return val;
+}

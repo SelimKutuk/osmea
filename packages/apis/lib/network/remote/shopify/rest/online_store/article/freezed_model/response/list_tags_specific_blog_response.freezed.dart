@@ -24,12 +24,8 @@ mixin _$ListTagsSpecificBlogResponse {
   @JsonKey(name: "tags")
   List<String>? get tags => throw _privateConstructorUsedError;
 
-  /// Serializes this ListTagsSpecificBlogResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListTagsSpecificBlogResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListTagsSpecificBlogResponseCopyWith<ListTagsSpecificBlogResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$ListTagsSpecificBlogResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListTagsSpecificBlogResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$ListTagsSpecificBlogResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListTagsSpecificBlogResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListTagsSpecificBlogResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,14 +138,12 @@ class _$ListTagsSpecificBlogResponseImpl
             const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  /// Create a copy of ListTagsSpecificBlogResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListTagsSpecificBlogResponseImplCopyWith<
@@ -181,11 +171,8 @@ abstract class _ListTagsSpecificBlogResponse
   @override
   @JsonKey(name: "tags")
   List<String>? get tags;
-
-  /// Create a copy of ListTagsSpecificBlogResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListTagsSpecificBlogResponseImplCopyWith<
           _$ListTagsSpecificBlogResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

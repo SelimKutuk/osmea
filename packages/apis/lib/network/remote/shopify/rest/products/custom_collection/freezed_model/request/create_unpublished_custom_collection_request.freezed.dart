@@ -25,12 +25,8 @@ mixin _$CreateUnpublishedCustomCollectionRequest {
   @JsonKey(name: "custom_collection")
   CustomCollection? get customCollection => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateUnpublishedCustomCollectionRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateUnpublishedCustomCollectionRequestCopyWith<
           CreateUnpublishedCustomCollectionRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -62,8 +58,6 @@ class _$CreateUnpublishedCustomCollectionRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,8 +71,6 @@ class _$CreateUnpublishedCustomCollectionRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomCollectionCopyWith<$Res>? get customCollection {
@@ -118,8 +110,6 @@ class __$$CreateUnpublishedCustomCollectionRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateUnpublishedCustomCollectionRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,13 +153,11 @@ class _$CreateUnpublishedCustomCollectionRequestImpl
                 other.customCollection == customCollection));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customCollection);
 
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateUnpublishedCustomCollectionRequestImplCopyWith<
@@ -200,11 +188,8 @@ abstract class _CreateUnpublishedCustomCollectionRequest
   @override
   @JsonKey(name: "custom_collection")
   CustomCollection? get customCollection;
-
-  /// Create a copy of CreateUnpublishedCustomCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateUnpublishedCustomCollectionRequestImplCopyWith<
           _$CreateUnpublishedCustomCollectionRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -221,12 +206,8 @@ mixin _$CustomCollection {
   @JsonKey(name: "published")
   bool? get published => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomCollectionCopyWith<CustomCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -252,8 +233,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -294,8 +273,6 @@ class __$$CustomCollectionImplCopyWithImpl<$Res>
       $Res Function(_$CustomCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -347,13 +324,11 @@ class _$CustomCollectionImpl implements _CustomCollection {
                 other.published == published));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, published);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
@@ -383,11 +358,8 @@ abstract class _CustomCollection implements CustomCollection {
   @override
   @JsonKey(name: "published")
   bool? get published;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

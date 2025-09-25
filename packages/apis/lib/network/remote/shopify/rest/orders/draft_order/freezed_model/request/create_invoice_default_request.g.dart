@@ -16,11 +16,18 @@ _$CreateInvoiceDefaultRequestImpl _$$CreateInvoiceDefaultRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateInvoiceDefaultRequestImplToJson(
-        _$CreateInvoiceDefaultRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrderInvoice?.toJson() case final value?)
-        'draft_order_invoice': value,
-    };
+    _$CreateInvoiceDefaultRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order_invoice', instance.draftOrderInvoice?.toJson());
+  return val;
+}
 
 _$DraftOrderInvoiceImpl _$$DraftOrderInvoiceImplFromJson(
         Map<String, dynamic> json) =>
@@ -33,11 +40,19 @@ _$DraftOrderInvoiceImpl _$$DraftOrderInvoiceImplFromJson(
     );
 
 Map<String, dynamic> _$$DraftOrderInvoiceImplToJson(
-        _$DraftOrderInvoiceImpl instance) =>
-    <String, dynamic>{
-      if (instance.to case final value?) 'to': value,
-      if (instance.from case final value?) 'from': value,
-      if (instance.bcc case final value?) 'bcc': value,
-      if (instance.subject case final value?) 'subject': value,
-      if (instance.customMessage case final value?) 'custom_message': value,
-    };
+    _$DraftOrderInvoiceImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('to', instance.to);
+  writeNotNull('from', instance.from);
+  writeNotNull('bcc', instance.bcc);
+  writeNotNull('subject', instance.subject);
+  writeNotNull('custom_message', instance.customMessage);
+  return val;
+}

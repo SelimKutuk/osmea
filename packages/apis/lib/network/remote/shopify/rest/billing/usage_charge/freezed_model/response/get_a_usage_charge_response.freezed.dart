@@ -24,12 +24,8 @@ mixin _$GetAUsageChargeResponse {
   @JsonKey(name: "usage_charge")
   UsageCharge? get usageCharge => throw _privateConstructorUsedError;
 
-  /// Serializes this GetAUsageChargeResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAUsageChargeResponseCopyWith<GetAUsageChargeResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$GetAUsageChargeResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$GetAUsageChargeResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UsageChargeCopyWith<$Res>? get usageCharge {
@@ -111,8 +103,6 @@ class __$$GetAUsageChargeResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAUsageChargeResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,13 +144,11 @@ class _$GetAUsageChargeResponseImpl implements _GetAUsageChargeResponse {
                 other.usageCharge == usageCharge));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, usageCharge);
 
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAUsageChargeResponseImplCopyWith<_$GetAUsageChargeResponseImpl>
@@ -186,11 +174,8 @@ abstract class _GetAUsageChargeResponse implements GetAUsageChargeResponse {
   @override
   @JsonKey(name: "usage_charge")
   UsageCharge? get usageCharge;
-
-  /// Create a copy of GetAUsageChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAUsageChargeResponseImplCopyWith<_$GetAUsageChargeResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -14,7 +14,15 @@ _$DestroyMultipleCustomerAddressesResponseImpl
         );
 
 Map<String, dynamic> _$$DestroyMultipleCustomerAddressesResponseImplToJson(
-        _$DestroyMultipleCustomerAddressesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.errors case final value?) 'errors': value,
-    };
+    _$DestroyMultipleCustomerAddressesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  return val;
+}

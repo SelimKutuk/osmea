@@ -24,12 +24,8 @@ mixin _$CountMetafieldResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this CountMetafieldResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CountMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CountMetafieldResponseCopyWith<CountMetafieldResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$CountMetafieldResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CountMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$CountMetafieldResponseImplCopyWithImpl<$Res>
       $Res Function(_$CountMetafieldResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CountMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,13 +125,11 @@ class _$CountMetafieldResponseImpl implements _CountMetafieldResponse {
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of CountMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountMetafieldResponseImplCopyWith<_$CountMetafieldResponseImpl>
@@ -165,11 +155,8 @@ abstract class _CountMetafieldResponse implements CountMetafieldResponse {
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of CountMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CountMetafieldResponseImplCopyWith<_$CountMetafieldResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

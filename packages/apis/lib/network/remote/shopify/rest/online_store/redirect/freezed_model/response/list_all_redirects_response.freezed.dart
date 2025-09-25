@@ -24,12 +24,8 @@ mixin _$ListAllRedirectsResponse {
   @JsonKey(name: "redirects")
   List<Redirect>? get redirects => throw _privateConstructorUsedError;
 
-  /// Serializes this ListAllRedirectsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListAllRedirectsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListAllRedirectsResponseCopyWith<ListAllRedirectsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$ListAllRedirectsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListAllRedirectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$ListAllRedirectsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListAllRedirectsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListAllRedirectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,14 +135,12 @@ class _$ListAllRedirectsResponseImpl implements _ListAllRedirectsResponse {
                 .equals(other._redirects, _redirects));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_redirects));
 
-  /// Create a copy of ListAllRedirectsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListAllRedirectsResponseImplCopyWith<_$ListAllRedirectsResponseImpl>
@@ -176,11 +166,8 @@ abstract class _ListAllRedirectsResponse implements ListAllRedirectsResponse {
   @override
   @JsonKey(name: "redirects")
   List<Redirect>? get redirects;
-
-  /// Create a copy of ListAllRedirectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListAllRedirectsResponseImplCopyWith<_$ListAllRedirectsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -198,12 +185,8 @@ mixin _$Redirect {
   @JsonKey(name: "target")
   String? get target => throw _privateConstructorUsedError;
 
-  /// Serializes this Redirect to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RedirectCopyWith<Redirect> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -229,8 +212,6 @@ class _$RedirectCopyWithImpl<$Res, $Val extends Redirect>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -277,8 +258,6 @@ class __$$RedirectImplCopyWithImpl<$Res>
       _$RedirectImpl _value, $Res Function(_$RedirectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -339,13 +318,11 @@ class _$RedirectImpl implements _Redirect {
             (identical(other.target, target) || other.target == target));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, path, target);
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RedirectImplCopyWith<_$RedirectImpl> get copyWith =>
@@ -377,11 +354,8 @@ abstract class _Redirect implements Redirect {
   @override
   @JsonKey(name: "target")
   String? get target;
-
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RedirectImplCopyWith<_$RedirectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,12 +24,8 @@ mixin _$UpdateSmartCollectionRequest {
   @JsonKey(name: "smart_collection")
   SmartCollection? get smartCollection => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateSmartCollectionRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateSmartCollectionRequestCopyWith<UpdateSmartCollectionRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -59,8 +55,6 @@ class _$UpdateSmartCollectionRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,8 +68,6 @@ class _$UpdateSmartCollectionRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SmartCollectionCopyWith<$Res>? get smartCollection {
@@ -115,8 +107,6 @@ class __$$UpdateSmartCollectionRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateSmartCollectionRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,13 +150,11 @@ class _$UpdateSmartCollectionRequestImpl
                 other.smartCollection == smartCollection));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, smartCollection);
 
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateSmartCollectionRequestImplCopyWith<
@@ -195,11 +183,8 @@ abstract class _UpdateSmartCollectionRequest
   @override
   @JsonKey(name: "smart_collection")
   SmartCollection? get smartCollection;
-
-  /// Create a copy of UpdateSmartCollectionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateSmartCollectionRequestImplCopyWith<
           _$UpdateSmartCollectionRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -230,12 +215,8 @@ mixin _$SmartCollection {
   @JsonKey(name: "published_scope")
   String? get publishedScope => throw _privateConstructorUsedError;
 
-  /// Serializes this SmartCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SmartCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SmartCollectionCopyWith<SmartCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -268,8 +249,6 @@ class _$SmartCollectionCopyWithImpl<$Res, $Val extends SmartCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SmartCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -352,8 +331,6 @@ class __$$SmartCollectionImplCopyWithImpl<$Res>
       _$SmartCollectionImpl _value, $Res Function(_$SmartCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SmartCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -488,7 +465,7 @@ class _$SmartCollectionImpl implements _SmartCollection {
                 other.publishedScope == publishedScope));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -502,9 +479,7 @@ class _$SmartCollectionImpl implements _SmartCollection {
       const DeepCollectionEquality().hash(_rules),
       publishedScope);
 
-  /// Create a copy of SmartCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SmartCollectionImplCopyWith<_$SmartCollectionImpl> get copyWith =>
@@ -562,11 +537,8 @@ abstract class _SmartCollection implements SmartCollection {
   @override
   @JsonKey(name: "published_scope")
   String? get publishedScope;
-
-  /// Create a copy of SmartCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SmartCollectionImplCopyWith<_$SmartCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -584,12 +556,8 @@ mixin _$Rule {
   @JsonKey(name: "condition")
   String? get condition => throw _privateConstructorUsedError;
 
-  /// Serializes this Rule to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Rule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RuleCopyWith<Rule> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -614,8 +582,6 @@ class _$RuleCopyWithImpl<$Res, $Val extends Rule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Rule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -660,8 +626,6 @@ class __$$RuleImplCopyWithImpl<$Res>
   __$$RuleImplCopyWithImpl(_$RuleImpl _value, $Res Function(_$RuleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Rule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -724,13 +688,11 @@ class _$RuleImpl implements _Rule {
                 other.condition == condition));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, column, relation, condition);
 
-  /// Create a copy of Rule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RuleImplCopyWith<_$RuleImpl> get copyWith =>
@@ -761,11 +723,8 @@ abstract class _Rule implements Rule {
   @override
   @JsonKey(name: "condition")
   String? get condition;
-
-  /// Create a copy of Rule
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RuleImplCopyWith<_$RuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

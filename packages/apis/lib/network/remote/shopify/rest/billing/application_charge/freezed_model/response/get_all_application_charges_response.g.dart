@@ -17,9 +17,16 @@ _$GetAllApplicationChargesResponseImpl
         );
 
 Map<String, dynamic> _$$GetAllApplicationChargesResponseImplToJson(
-        _$GetAllApplicationChargesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.applicationCharges?.map((e) => e.toJson()).toList()
-          case final value?)
-        'application_charges': value,
-    };
+    _$GetAllApplicationChargesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('application_charges',
+      instance.applicationCharges?.map((e) => e.toJson()).toList());
+  return val;
+}

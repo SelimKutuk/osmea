@@ -25,12 +25,8 @@ mixin _$CreateInvoiceCustomizedRequest {
   DraftOrderInvoice? get draftOrderInvoice =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this CreateInvoiceCustomizedRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateInvoiceCustomizedRequestCopyWith<CreateInvoiceCustomizedRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -61,8 +57,6 @@ class _$CreateInvoiceCustomizedRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,8 +70,6 @@ class _$CreateInvoiceCustomizedRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DraftOrderInvoiceCopyWith<$Res>? get draftOrderInvoice {
@@ -118,8 +110,6 @@ class __$$CreateInvoiceCustomizedRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateInvoiceCustomizedRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,13 +153,11 @@ class _$CreateInvoiceCustomizedRequestImpl
                 other.draftOrderInvoice == draftOrderInvoice));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, draftOrderInvoice);
 
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateInvoiceCustomizedRequestImplCopyWith<
@@ -198,11 +186,8 @@ abstract class _CreateInvoiceCustomizedRequest
   @override
   @JsonKey(name: "draft_order_invoice")
   DraftOrderInvoice? get draftOrderInvoice;
-
-  /// Create a copy of CreateInvoiceCustomizedRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateInvoiceCustomizedRequestImplCopyWith<
           _$CreateInvoiceCustomizedRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -225,12 +210,8 @@ mixin _$DraftOrderInvoice {
   @JsonKey(name: "custom_message")
   String? get customMessage => throw _privateConstructorUsedError;
 
-  /// Serializes this DraftOrderInvoice to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DraftOrderInvoice
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DraftOrderInvoiceCopyWith<DraftOrderInvoice> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -259,8 +240,6 @@ class _$DraftOrderInvoiceCopyWithImpl<$Res, $Val extends DraftOrderInvoice>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DraftOrderInvoice
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,8 +298,6 @@ class __$$DraftOrderInvoiceImplCopyWithImpl<$Res>
       $Res Function(_$DraftOrderInvoiceImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DraftOrderInvoice
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -411,14 +388,12 @@ class _$DraftOrderInvoiceImpl implements _DraftOrderInvoice {
                 other.customMessage == customMessage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, to, from,
       const DeepCollectionEquality().hash(_bcc), subject, customMessage);
 
-  /// Create a copy of DraftOrderInvoice
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DraftOrderInvoiceImplCopyWith<_$DraftOrderInvoiceImpl> get copyWith =>
@@ -460,11 +435,8 @@ abstract class _DraftOrderInvoice implements DraftOrderInvoice {
   @override
   @JsonKey(name: "custom_message")
   String? get customMessage;
-
-  /// Create a copy of DraftOrderInvoice
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DraftOrderInvoiceImplCopyWith<_$DraftOrderInvoiceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

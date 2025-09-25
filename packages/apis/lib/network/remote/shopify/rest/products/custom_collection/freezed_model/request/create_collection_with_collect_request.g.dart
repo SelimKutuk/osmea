@@ -17,11 +17,18 @@ _$CreateCollectionWithCollectRequestImpl
         );
 
 Map<String, dynamic> _$$CreateCollectionWithCollectRequestImplToJson(
-        _$CreateCollectionWithCollectRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$CreateCollectionWithCollectRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -33,19 +40,34 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.collects?.map((e) => e.toJson()).toList() case final value?)
-        'collects': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('collects', instance.collects?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$CollectImpl _$$CollectImplFromJson(Map<String, dynamic> json) =>
     _$CollectImpl(
       productId: (json['product_id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) =>
-    <String, dynamic>{
-      if (instance.productId case final value?) 'product_id': value,
-    };
+Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product_id', instance.productId);
+  return val;
+}

@@ -17,11 +17,19 @@ _$CreateNewStorefrontAccessTokenRequestImpl
         );
 
 Map<String, dynamic> _$$CreateNewStorefrontAccessTokenRequestImplToJson(
-        _$CreateNewStorefrontAccessTokenRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.storefrontAccessToken?.toJson() case final value?)
-        'storefront_access_token': value,
-    };
+    _$CreateNewStorefrontAccessTokenRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'storefront_access_token', instance.storefrontAccessToken?.toJson());
+  return val;
+}
 
 _$CreateNewStorefrontAccessTokenRequestBodyImpl
     _$$CreateNewStorefrontAccessTokenRequestBodyImplFromJson(
@@ -31,7 +39,15 @@ _$CreateNewStorefrontAccessTokenRequestBodyImpl
         );
 
 Map<String, dynamic> _$$CreateNewStorefrontAccessTokenRequestBodyImplToJson(
-        _$CreateNewStorefrontAccessTokenRequestBodyImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-    };
+    _$CreateNewStorefrontAccessTokenRequestBodyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  return val;
+}

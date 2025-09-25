@@ -22,16 +22,24 @@ _$RestoreRemovedCommentResponseImpl
         );
 
 Map<String, dynamic> _$$RestoreRemovedCommentResponseImplToJson(
-        _$RestoreRemovedCommentResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.body case final value?) 'body': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.articleId case final value?) 'article_id': value,
-      if (instance.blogId case final value?) 'blog_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.userAgent case final value?) 'user_agent': value,
-    };
+    _$RestoreRemovedCommentResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('status', instance.status);
+  writeNotNull('id', instance.id);
+  writeNotNull('body', instance.body);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('article_id', instance.articleId);
+  writeNotNull('blog_id', instance.blogId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('user_agent', instance.userAgent);
+  return val;
+}

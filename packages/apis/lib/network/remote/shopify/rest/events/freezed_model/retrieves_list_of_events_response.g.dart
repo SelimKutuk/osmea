@@ -15,11 +15,18 @@ _$RetrievesListOfEventsResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesListOfEventsResponseImplToJson(
-        _$RetrievesListOfEventsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.events?.map((e) => e.toJson()).toList() case final value?)
-        'events': value,
-    };
+    _$RetrievesListOfEventsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('events', instance.events?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$EventImpl _$$EventImplFromJson(Map<String, dynamic> json) => _$EventImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -35,17 +42,25 @@ _$EventImpl _$$EventImplFromJson(Map<String, dynamic> json) => _$EventImpl(
       path: json['path'] as String?,
     );
 
-Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.subjectId case final value?) 'subject_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.subjectType case final value?) 'subject_type': value,
-      if (instance.verb case final value?) 'verb': value,
-      if (instance.arguments case final value?) 'arguments': value,
-      if (instance.body case final value?) 'body': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.description case final value?) 'description': value,
-      if (instance.path case final value?) 'path': value,
-    };
+Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('subject_id', instance.subjectId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('subject_type', instance.subjectType);
+  writeNotNull('verb', instance.verb);
+  writeNotNull('arguments', instance.arguments);
+  writeNotNull('body', instance.body);
+  writeNotNull('message', instance.message);
+  writeNotNull('author', instance.author);
+  writeNotNull('description', instance.description);
+  writeNotNull('path', instance.path);
+  return val;
+}

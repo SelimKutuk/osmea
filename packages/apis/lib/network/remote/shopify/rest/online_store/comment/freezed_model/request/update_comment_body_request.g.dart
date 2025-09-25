@@ -15,10 +15,18 @@ _$UpdateCommentBodyRequestImpl _$$UpdateCommentBodyRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateCommentBodyRequestImplToJson(
-        _$UpdateCommentBodyRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.comment?.toJson() case final value?) 'comment': value,
-    };
+    _$UpdateCommentBodyRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('comment', instance.comment?.toJson());
+  return val;
+}
 
 _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
     _$CommentImpl(
@@ -29,11 +37,19 @@ _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
       publishedAt: json['published_at'] as String?,
     );
 
-Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.body case final value?) 'body': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.email case final value?) 'email': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-    };
+Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('body', instance.body);
+  writeNotNull('author', instance.author);
+  writeNotNull('email', instance.email);
+  writeNotNull('published_at', instance.publishedAt);
+  return val;
+}

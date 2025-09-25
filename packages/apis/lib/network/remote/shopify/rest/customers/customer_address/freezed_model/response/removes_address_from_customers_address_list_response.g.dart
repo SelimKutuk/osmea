@@ -17,16 +17,32 @@ _$RemovesAddressFromCustomersAddressListResponseImpl
 
 Map<String, dynamic>
     _$$RemovesAddressFromCustomersAddressListResponseImplToJson(
-            _$RemovesAddressFromCustomersAddressListResponseImpl instance) =>
-        <String, dynamic>{
-          if (instance.errors?.toJson() case final value?) 'errors': value,
-        };
+        _$RemovesAddressFromCustomersAddressListResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors?.toJson());
+  return val;
+}
 
 _$ErrorsImpl _$$ErrorsImplFromJson(Map<String, dynamic> json) => _$ErrorsImpl(
       base: (json['base'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) =>
-    <String, dynamic>{
-      if (instance.base case final value?) 'base': value,
-    };
+Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('base', instance.base);
+  return val;
+}

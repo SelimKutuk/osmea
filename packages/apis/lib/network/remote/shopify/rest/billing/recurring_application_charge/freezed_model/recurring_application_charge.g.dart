@@ -29,23 +29,32 @@ _$RecurringApplicationChargeImpl _$$RecurringApplicationChargeImplFromJson(
     );
 
 Map<String, dynamic> _$$RecurringApplicationChargeImplToJson(
-        _$RecurringApplicationChargeImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'price': instance.price,
-      'status': instance.status,
-      'return_url': instance.returnUrl,
-      if (instance.cappedAmount case final value?) 'capped_amount': value,
-      if (instance.terms case final value?) 'terms': value,
-      if (instance.trialDays case final value?) 'trial_days': value,
-      if (instance.activatedOn case final value?) 'activated_on': value,
-      if (instance.billingOn case final value?) 'billing_on': value,
-      if (instance.cancelledOn case final value?) 'cancelled_on': value,
-      if (instance.trialEndsOn case final value?) 'trial_ends_on': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.confirmationUrl case final value?) 'confirmation_url': value,
-    };
+    _$RecurringApplicationChargeImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'name': instance.name,
+    'price': instance.price,
+    'status': instance.status,
+    'return_url': instance.returnUrl,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('capped_amount', instance.cappedAmount);
+  writeNotNull('terms', instance.terms);
+  writeNotNull('trial_days', instance.trialDays);
+  writeNotNull('activated_on', instance.activatedOn);
+  writeNotNull('billing_on', instance.billingOn);
+  writeNotNull('cancelled_on', instance.cancelledOn);
+  writeNotNull('trial_ends_on', instance.trialEndsOn);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('test', instance.test);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('confirmation_url', instance.confirmationUrl);
+  return val;
+}

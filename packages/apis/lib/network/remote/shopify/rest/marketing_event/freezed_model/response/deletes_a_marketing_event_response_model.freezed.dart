@@ -21,7 +21,6 @@ DeletesAMarketingEventResponseModel
 
 /// @nodoc
 mixin _$DeletesAMarketingEventResponseModel {
-  /// Serializes this DeletesAMarketingEventResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -44,9 +43,6 @@ class _$DeletesAMarketingEventResponseModelCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of DeletesAMarketingEventResponseModel
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -66,9 +62,6 @@ class __$$DeletesAMarketingEventResponseModelImplCopyWithImpl<$Res>
       _$DeletesAMarketingEventResponseModelImpl _value,
       $Res Function(_$DeletesAMarketingEventResponseModelImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of DeletesAMarketingEventResponseModel
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -93,7 +86,7 @@ class _$DeletesAMarketingEventResponseModelImpl
             other is _$DeletesAMarketingEventResponseModelImpl);
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 

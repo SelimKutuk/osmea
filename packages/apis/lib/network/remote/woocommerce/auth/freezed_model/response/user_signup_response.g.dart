@@ -19,14 +19,23 @@ _$UserSignUpResponseImpl _$$UserSignUpResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UserSignUpResponseImplToJson(
-        _$UserSignUpResponseImpl instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-      if (instance.error case final value?) 'error': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$UserSignUpResponseImpl instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('error', instance.error);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
 
 _$UserSignUpDataImpl _$$UserSignUpDataImplFromJson(Map<String, dynamic> json) =>
     _$UserSignUpDataImpl(
@@ -45,19 +54,25 @@ _$UserSignUpDataImpl _$$UserSignUpDataImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$UserSignUpDataImplToJson(
-        _$UserSignUpDataImpl instance) =>
-    <String, dynamic>{
-      'user_id': instance.userId,
-      'email': instance.email,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.requiresVerification case final value?)
-        'requires_verification': value,
-      if (instance.verificationToken case final value?)
-        'verification_token': value,
-      if (instance.createdAt?.toIso8601String() case final value?)
-        'created_at': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$UserSignUpDataImpl instance) {
+  final val = <String, dynamic>{
+    'user_id': instance.userId,
+    'email': instance.email,
+    'first_name': instance.firstName,
+    'last_name': instance.lastName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('phone', instance.phone);
+  writeNotNull('company', instance.company);
+  writeNotNull('requires_verification', instance.requiresVerification);
+  writeNotNull('verification_token', instance.verificationToken);
+  writeNotNull('created_at', instance.createdAt?.toIso8601String());
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

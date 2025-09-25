@@ -15,10 +15,18 @@ _$SingleLocationByIdResponseImpl _$$SingleLocationByIdResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$SingleLocationByIdResponseImplToJson(
-        _$SingleLocationByIdResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.location?.toJson() case final value?) 'location': value,
-    };
+    _$SingleLocationByIdResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location', instance.location?.toJson());
+  return val;
+}
 
 _$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
     _$LocationImpl(
@@ -41,24 +49,31 @@ _$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.address1 case final value?) 'address1': value,
-      if (instance.address2 case final value?) 'address2': value,
-      if (instance.city case final value?) 'city': value,
-      if (instance.zip case final value?) 'zip': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.legacy case final value?) 'legacy': value,
-      if (instance.active case final value?) 'active': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('address1', instance.address1);
+  writeNotNull('address2', instance.address2);
+  writeNotNull('city', instance.city);
+  writeNotNull('zip', instance.zip);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('legacy', instance.legacy);
+  writeNotNull('active', instance.active);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

@@ -15,10 +15,18 @@ _$CreateNewGiftCardRequestImpl _$$CreateNewGiftCardRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateNewGiftCardRequestImplToJson(
-        _$CreateNewGiftCardRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.giftCard?.toJson() case final value?) 'gift_card': value,
-    };
+    _$CreateNewGiftCardRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gift_card', instance.giftCard?.toJson());
+  return val;
+}
 
 _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
     _$GiftCardImpl(
@@ -27,9 +35,17 @@ _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
       currency: json['currency'] as String?,
     );
 
-Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) =>
-    <String, dynamic>{
-      if (instance.initialValue case final value?) 'initial_value': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.currency case final value?) 'currency': value,
-    };
+Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('initial_value', instance.initialValue);
+  writeNotNull('note', instance.note);
+  writeNotNull('currency', instance.currency);
+  return val;
+}

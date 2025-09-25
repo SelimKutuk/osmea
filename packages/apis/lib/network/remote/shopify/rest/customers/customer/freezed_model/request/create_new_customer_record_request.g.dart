@@ -18,11 +18,19 @@ _$CreateNewCustomerRecordRequestImpl
         );
 
 Map<String, dynamic> _$$CreateNewCustomerRecordRequestImplToJson(
-        _$CreateNewCustomerRecordRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customer?.toJson() case final value?) 'customer': value,
-      if (instance.errors?.toJson() case final value?) 'errors': value,
-    };
+    _$CreateNewCustomerRecordRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer', instance.customer?.toJson());
+  writeNotNull('errors', instance.errors?.toJson());
+  return val;
+}
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
@@ -36,16 +44,24 @@ _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
-    <String, dynamic>{
-      if (instance.firstName case final value?) 'first_name': value,
-      if (instance.lastName case final value?) 'last_name': value,
-      if (instance.email case final value?) 'email': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.verifiedEmail case final value?) 'verified_email': value,
-      if (instance.addresses?.map((e) => e.toJson()).toList() case final value?)
-        'addresses': value,
-    };
+Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('verified_email', instance.verifiedEmail);
+  writeNotNull(
+      'addresses', instance.addresses?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
     _$AddressImpl(
@@ -59,23 +75,39 @@ _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
       country: json['country'] as String?,
     );
 
-Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.address1 case final value?) 'address1': value,
-      if (instance.city case final value?) 'city': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.zip case final value?) 'zip': value,
-      if (instance.lastName case final value?) 'last_name': value,
-      if (instance.firstName case final value?) 'first_name': value,
-      if (instance.country case final value?) 'country': value,
-    };
+Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address1', instance.address1);
+  writeNotNull('city', instance.city);
+  writeNotNull('province', instance.province);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('zip', instance.zip);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('country', instance.country);
+  return val;
+}
 
 _$ErrorsImpl _$$ErrorsImplFromJson(Map<String, dynamic> json) => _$ErrorsImpl(
       base: (json['base'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) =>
-    <String, dynamic>{
-      if (instance.base case final value?) 'base': value,
-    };
+Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('base', instance.base);
+  return val;
+}

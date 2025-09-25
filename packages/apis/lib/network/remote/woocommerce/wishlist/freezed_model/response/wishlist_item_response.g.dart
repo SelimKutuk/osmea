@@ -25,19 +25,27 @@ _$WishlistItemResponseImpl _$$WishlistItemResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$WishlistItemResponseImplToJson(
-        _$WishlistItemResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.groupId case final value?) 'group_id': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.variationId case final value?) 'variation_id': value,
-      if (instance.addedAt case final value?) 'added_at': value,
-      if (instance.metadata case final value?) 'metadata': value,
-      if (instance.productName case final value?) 'product_name': value,
-      if (instance.productSlug case final value?) 'product_slug': value,
-      if (instance.productPrice case final value?) 'product_price': value,
-      if (instance.productImage case final value?) 'product_image': value,
-      if (instance.productStatus case final value?) 'product_status': value,
-    };
+    _$WishlistItemResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('group_id', instance.groupId);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('variation_id', instance.variationId);
+  writeNotNull('added_at', instance.addedAt);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('product_name', instance.productName);
+  writeNotNull('product_slug', instance.productSlug);
+  writeNotNull('product_price', instance.productPrice);
+  writeNotNull('product_image', instance.productImage);
+  writeNotNull('product_status', instance.productStatus);
+  return val;
+}

@@ -16,10 +16,18 @@ _$UpdatePostalCodeOfCustomerAddressRequestImpl
         );
 
 Map<String, dynamic> _$$UpdatePostalCodeOfCustomerAddressRequestImplToJson(
-        _$UpdatePostalCodeOfCustomerAddressRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.address?.toJson() case final value?) 'address': value,
-    };
+    _$UpdatePostalCodeOfCustomerAddressRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address', instance.address?.toJson());
+  return val;
+}
 
 _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
     _$AddressImpl(
@@ -27,8 +35,16 @@ _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
       zip: json['zip'] as String?,
     );
 
-Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.zip case final value?) 'zip': value,
-    };
+Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('zip', instance.zip);
+  return val;
+}

@@ -48,12 +48,8 @@ mixin _$Collect {
   @JsonKey(name: "sort_value")
   String? get sortValue => throw _privateConstructorUsedError;
 
-  /// Serializes this Collect to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CollectCopyWith<Collect> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -82,8 +78,6 @@ class _$CollectCopyWithImpl<$Res, $Val extends Collect>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,8 +147,6 @@ class __$$CollectImplCopyWithImpl<$Res>
       _$CollectImpl _value, $Res Function(_$CollectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -274,14 +266,12 @@ class _$CollectImpl implements _Collect {
                 other.sortValue == sortValue));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, collectionId, productId,
       createdAt, updatedAt, position, sortValue);
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CollectImplCopyWith<_$CollectImpl> get copyWith =>
@@ -307,45 +297,43 @@ abstract class _Collect implements Collect {
 
   factory _Collect.fromJson(Map<String, dynamic> json) = _$CollectImpl.fromJson;
 
-  /// The ID of the collect
   @override
+
+  /// The ID of the collect
   @JsonKey(name: "id")
   int? get id;
+  @override
 
   /// The ID of the collection that the product is being added to
-  @override
   @JsonKey(name: "collection_id")
   int? get collectionId;
+  @override
 
   /// The ID of the product being added to the collection
-  @override
   @JsonKey(name: "product_id")
   int? get productId;
+  @override
 
   /// The date and time when the collect was created
-  @override
   @JsonKey(name: "created_at")
   String? get createdAt;
+  @override
 
   /// The date and time when the collect was last updated
-  @override
   @JsonKey(name: "updated_at")
   String? get updatedAt;
+  @override
 
   /// The position of the product in the collection
-  @override
   @JsonKey(name: "position")
   int? get position;
+  @override
 
   /// The sort value for the product in the collection
-  @override
   @JsonKey(name: "sort_value")
   String? get sortValue;
-
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CollectImplCopyWith<_$CollectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -16,12 +16,19 @@ _$DiscountCodeListCreationResponseImpl
         );
 
 Map<String, dynamic> _$$DiscountCodeListCreationResponseImplToJson(
-        _$DiscountCodeListCreationResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.discountCodes?.map((e) => e.toJson()).toList()
-          case final value?)
-        'discount_codes': value,
-    };
+    _$DiscountCodeListCreationResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('discount_codes',
+      instance.discountCodes?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$DiscountCodeImpl _$$DiscountCodeImplFromJson(Map<String, dynamic> json) =>
     _$DiscountCodeImpl(
@@ -32,12 +39,20 @@ _$DiscountCodeImpl _$$DiscountCodeImplFromJson(Map<String, dynamic> json) =>
           : Errors.fromJson(json['errors'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DiscountCodeImplToJson(_$DiscountCodeImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.errors?.toJson() case final value?) 'errors': value,
-    };
+Map<String, dynamic> _$$DiscountCodeImplToJson(_$DiscountCodeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('code', instance.code);
+  writeNotNull('errors', instance.errors?.toJson());
+  return val;
+}
 
 _$ErrorsImpl _$$ErrorsImplFromJson(Map<String, dynamic> json) => _$ErrorsImpl();
 

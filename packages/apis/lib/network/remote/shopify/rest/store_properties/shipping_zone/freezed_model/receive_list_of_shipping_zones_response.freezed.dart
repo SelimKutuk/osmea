@@ -24,12 +24,8 @@ mixin _$ReceiveListOfShippingZonesResponse {
   @JsonKey(name: "shipping_zones")
   List<ShippingZone>? get shippingZones => throw _privateConstructorUsedError;
 
-  /// Serializes this ReceiveListOfShippingZonesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ReceiveListOfShippingZonesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ReceiveListOfShippingZonesResponseCopyWith<
           ReceiveListOfShippingZonesResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -58,8 +54,6 @@ class _$ReceiveListOfShippingZonesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ReceiveListOfShippingZonesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,8 +91,6 @@ class __$$ReceiveListOfShippingZonesResponseImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveListOfShippingZonesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ReceiveListOfShippingZonesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,14 +143,12 @@ class _$ReceiveListOfShippingZonesResponseImpl
                 .equals(other._shippingZones, _shippingZones));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_shippingZones));
 
-  /// Create a copy of ReceiveListOfShippingZonesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveListOfShippingZonesResponseImplCopyWith<
@@ -188,11 +178,8 @@ abstract class _ReceiveListOfShippingZonesResponse
   @override
   @JsonKey(name: "shipping_zones")
   List<ShippingZone>? get shippingZones;
-
-  /// Create a copy of ReceiveListOfShippingZonesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReceiveListOfShippingZonesResponseImplCopyWith<
           _$ReceiveListOfShippingZonesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -226,12 +213,8 @@ mixin _$ShippingZone {
   List<dynamic>? get carrierShippingRateProviders =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this ShippingZone to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ShippingZone
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ShippingZoneCopyWith<ShippingZone> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -267,8 +250,6 @@ class _$ShippingZoneCopyWithImpl<$Res, $Val extends ShippingZone>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ShippingZone
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -354,8 +335,6 @@ class __$$ShippingZoneImplCopyWithImpl<$Res>
       _$ShippingZoneImpl _value, $Res Function(_$ShippingZoneImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ShippingZone
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -525,7 +504,7 @@ class _$ShippingZoneImpl implements _ShippingZone {
                 _carrierShippingRateProviders));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -539,9 +518,7 @@ class _$ShippingZoneImpl implements _ShippingZone {
       const DeepCollectionEquality().hash(_priceBasedShippingRates),
       const DeepCollectionEquality().hash(_carrierShippingRateProviders));
 
-  /// Create a copy of ShippingZone
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ShippingZoneImplCopyWith<_$ShippingZoneImpl> get copyWith =>
@@ -600,11 +577,8 @@ abstract class _ShippingZone implements ShippingZone {
   @override
   @JsonKey(name: "carrier_shipping_rate_providers")
   List<dynamic>? get carrierShippingRateProviders;
-
-  /// Create a copy of ShippingZone
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ShippingZoneImplCopyWith<_$ShippingZoneImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -630,12 +604,8 @@ mixin _$Country {
   @JsonKey(name: "provinces")
   List<Province>? get provinces => throw _privateConstructorUsedError;
 
-  /// Serializes this Country to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CountryCopyWith<Country> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -664,8 +634,6 @@ class _$CountryCopyWithImpl<$Res, $Val extends Country>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -735,8 +703,6 @@ class __$$CountryImplCopyWithImpl<$Res>
       _$CountryImpl _value, $Res Function(_$CountryImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -847,14 +813,12 @@ class _$CountryImpl implements _Country {
                 .equals(other._provinces, _provinces));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, tax, code, taxName,
       shippingZoneId, const DeepCollectionEquality().hash(_provinces));
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountryImplCopyWith<_$CountryImpl> get copyWith =>
@@ -902,11 +866,8 @@ abstract class _Country implements Country {
   @override
   @JsonKey(name: "provinces")
   List<Province>? get provinces;
-
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CountryImplCopyWith<_$CountryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -936,12 +897,8 @@ mixin _$Province {
   @JsonKey(name: "shipping_zone_id")
   int? get shippingZoneId => throw _privateConstructorUsedError;
 
-  /// Serializes this Province to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProvinceCopyWith<Province> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -973,8 +930,6 @@ class _$ProvinceCopyWithImpl<$Res, $Val extends Province>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1057,8 +1012,6 @@ class __$$ProvinceImplCopyWithImpl<$Res>
       _$ProvinceImpl _value, $Res Function(_$ProvinceImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1182,14 +1135,12 @@ class _$ProvinceImpl implements _Province {
                 other.shippingZoneId == shippingZoneId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, countryId, name, code, tax,
       taxName, taxType, taxPercentage, shippingZoneId);
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProvinceImplCopyWith<_$ProvinceImpl> get copyWith =>
@@ -1246,11 +1197,8 @@ abstract class _Province implements Province {
   @override
   @JsonKey(name: "shipping_zone_id")
   int? get shippingZoneId;
-
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProvinceImplCopyWith<_$ProvinceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1275,12 +1223,8 @@ mixin _$PriceBasedShippingRate {
   @JsonKey(name: "max_order_subtotal")
   dynamic get maxOrderSubtotal => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceBasedShippingRate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceBasedShippingRate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceBasedShippingRateCopyWith<PriceBasedShippingRate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1311,8 +1255,6 @@ class _$PriceBasedShippingRateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceBasedShippingRate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1380,8 +1322,6 @@ class __$$PriceBasedShippingRateImplCopyWithImpl<$Res>
       $Res Function(_$PriceBasedShippingRateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceBasedShippingRate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1475,7 +1415,7 @@ class _$PriceBasedShippingRateImpl implements _PriceBasedShippingRate {
                 .equals(other.maxOrderSubtotal, maxOrderSubtotal));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1486,9 +1426,7 @@ class _$PriceBasedShippingRateImpl implements _PriceBasedShippingRate {
       const DeepCollectionEquality().hash(minOrderSubtotal),
       const DeepCollectionEquality().hash(maxOrderSubtotal));
 
-  /// Create a copy of PriceBasedShippingRate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceBasedShippingRateImplCopyWith<_$PriceBasedShippingRateImpl>
@@ -1534,11 +1472,8 @@ abstract class _PriceBasedShippingRate implements PriceBasedShippingRate {
   @override
   @JsonKey(name: "max_order_subtotal")
   dynamic get maxOrderSubtotal;
-
-  /// Create a copy of PriceBasedShippingRate
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceBasedShippingRateImplCopyWith<_$PriceBasedShippingRateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

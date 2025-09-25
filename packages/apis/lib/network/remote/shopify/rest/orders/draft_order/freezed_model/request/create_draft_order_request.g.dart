@@ -15,10 +15,18 @@ _$CreateDraftOrderRequestImpl _$$CreateDraftOrderRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateDraftOrderRequestImplToJson(
-        _$CreateDraftOrderRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$CreateDraftOrderRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
@@ -41,25 +49,33 @@ _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
       totalTax: json['total_tax'] as String?,
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.email case final value?) 'email': value,
-      if (instance.taxesIncluded case final value?) 'taxes_included': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.taxExempt case final value?) 'tax_exempt': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.allowDiscountCodesInCheckout case final value?)
-        'allow_discount_codes_in_checkout?': value,
-      if (instance.b2B case final value?) 'b2b?': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.totalPrice case final value?) 'total_price': value,
-      if (instance.subtotalPrice case final value?) 'subtotal_price': value,
-      if (instance.totalTax case final value?) 'total_tax': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email', instance.email);
+  writeNotNull('taxes_included', instance.taxesIncluded);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('note', instance.note);
+  writeNotNull('tax_exempt', instance.taxExempt);
+  writeNotNull('name', instance.name);
+  writeNotNull('allow_discount_codes_in_checkout?',
+      instance.allowDiscountCodesInCheckout);
+  writeNotNull('b2b?', instance.b2B);
+  writeNotNull('status', instance.status);
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('total_price', instance.totalPrice);
+  writeNotNull('subtotal_price', instance.subtotalPrice);
+  writeNotNull('total_tax', instance.totalTax);
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -82,27 +98,32 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.variantId case final value?) 'variant_id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.giftCard case final value?) 'gift_card': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.taxLines?.map((e) => e.toJson()).toList() case final value?)
-        'tax_lines': value,
-      if (instance.custom case final value?) 'custom': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.name case final value?) 'name': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('variant_id', instance.variantId);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('title', instance.title);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('gift_card', instance.giftCard);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('tax_lines', instance.taxLines?.map((e) => e.toJson()).toList());
+  writeNotNull('custom', instance.custom);
+  writeNotNull('price', instance.price);
+  writeNotNull('name', instance.name);
+  return val;
+}
 
 _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
     _$TaxLineImpl(
@@ -111,9 +132,17 @@ _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
       price: json['price'] as String?,
     );
 
-Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) =>
-    <String, dynamic>{
-      if (instance.rate case final value?) 'rate': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.price case final value?) 'price': value,
-    };
+Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('rate', instance.rate);
+  writeNotNull('title', instance.title);
+  writeNotNull('price', instance.price);
+  return val;
+}

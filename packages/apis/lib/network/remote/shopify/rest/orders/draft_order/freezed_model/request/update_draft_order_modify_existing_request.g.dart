@@ -17,10 +17,18 @@ _$UpdateDraftOrderModifyExistingRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateDraftOrderModifyExistingRequestImplToJson(
-        _$UpdateDraftOrderModifyExistingRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$UpdateDraftOrderModifyExistingRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
@@ -40,18 +48,24 @@ _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
               json['applied_discount'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.email case final value?) 'email': value,
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-      if (instance.shippingAddress?.toJson() case final value?)
-        'shipping_address': value,
-      if (instance.appliedDiscount?.toJson() case final value?)
-        'applied_discount': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('note', instance.note);
+  writeNotNull('email', instance.email);
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('shipping_address', instance.shippingAddress?.toJson());
+  writeNotNull('applied_discount', instance.appliedDiscount?.toJson());
+  return val;
+}
 
 _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
         Map<String, dynamic> json) =>
@@ -60,10 +74,18 @@ _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
     );
 
 Map<String, dynamic> _$$AppliedDiscountImplToJson(
-        _$AppliedDiscountImpl instance) =>
-    <String, dynamic>{
-      if (instance.description case final value?) 'description': value,
-    };
+    _$AppliedDiscountImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -72,12 +94,20 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
       quantity: (json['quantity'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.quantity case final value?) 'quantity': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('quantity', instance.quantity);
+  return val;
+}
 
 _$ShippingAddressImpl _$$ShippingAddressImplFromJson(
         Map<String, dynamic> json) =>
@@ -86,7 +116,15 @@ _$ShippingAddressImpl _$$ShippingAddressImplFromJson(
     );
 
 Map<String, dynamic> _$$ShippingAddressImplToJson(
-        _$ShippingAddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.zip case final value?) 'zip': value,
-    };
+    _$ShippingAddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('zip', instance.zip);
+  return val;
+}
