@@ -1238,7 +1238,6 @@ extension UtilityExtension$Mutation$WebhookSubscriptionUpdate$webhookSubscriptio
             this,
             (i) => i,
           );
-
   _T when<_T>({
     required _T Function(
             Mutation$WebhookSubscriptionUpdate$webhookSubscriptionUpdate$webhookSubscription$endpoint$$WebhookHttpEndpoint)

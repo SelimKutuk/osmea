@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:apis/apis.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core/core.dart';
 import '../../services/handlers/woocommerce/auth_handlers/jwt_auth_test_handler.dart';
 import '../../services/handlers/woocommerce/auth_handlers/user_signup_handler.dart';
@@ -192,11 +191,13 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   // Step persistence methods
   Future<void> _saveWizardStep() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('wizard_current_step', _currentStep);
-      await prefs.setString(
+      final storage = LocalStorageHelper();
+      await storage.init();
+      await storage.setItem('wizard_current_step', _currentStep.toString());
+      await storage.setItem(
           'wizard_selected_platform', _selectedPlatform ?? '');
-      debugPrint('✅ Wizard step saved: $_currentStep');
+      debugPrint(
+          '✅ Wizard step saved: $_currentStep using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error saving wizard step: $e');
     }
@@ -204,18 +205,23 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   Future<void> _restoreWizardStep() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final savedStep = prefs.getInt('wizard_current_step');
-      final savedPlatform = prefs.getString('wizard_selected_platform');
+      final storage = LocalStorageHelper();
+      await storage.init();
+      final savedStepString = await storage.getItem('wizard_current_step');
+      final savedPlatform = await storage.getItem('wizard_selected_platform');
 
-      if (savedStep != null && savedStep >= 0 && savedStep <= 2) {
-        setState(() {
-          _currentStep = savedStep;
-          if (savedPlatform != null && savedPlatform.isNotEmpty) {
-            _selectedPlatform = savedPlatform;
-          }
-        });
-        debugPrint('✅ Wizard step restored: $_currentStep');
+      if (savedStepString != null) {
+        final savedStep = int.tryParse(savedStepString);
+        if (savedStep != null && savedStep >= 0 && savedStep <= 2) {
+          setState(() {
+            _currentStep = savedStep;
+            if (savedPlatform != null && savedPlatform.isNotEmpty) {
+              _selectedPlatform = savedPlatform;
+            }
+          });
+          debugPrint(
+              '✅ Wizard step restored: $_currentStep using Core LocalStorageHelper');
+        }
       }
     } catch (e) {
       debugPrint('❌ Error restoring wizard step: $e');
@@ -224,10 +230,11 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
 
   Future<void> _clearWizardStep() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove('wizard_current_step');
-      await prefs.remove('wizard_selected_platform');
-      debugPrint('✅ Wizard state cleared');
+      final storage = LocalStorageHelper();
+      await storage.init();
+      await storage.removeItem('wizard_current_step');
+      await storage.removeItem('wizard_selected_platform');
+      debugPrint('✅ Wizard state cleared using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error clearing wizard step: $e');
     }
