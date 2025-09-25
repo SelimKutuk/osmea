@@ -1,31 +1,30 @@
-library master_view_cubit;
+library master_view_hydrated_cubit;
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/src/helper/grid_helper.dart';
 
-part 'master_view_cubit_enums.dart';
-part 'master_view_cubit_mixins.dart';
+part 'master_view_hydrated_cubit_enums.dart';
+part 'master_view_hydrated_cubit_mixins.dart';
 
-/// Cubit-based Master View
-abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
-    extends StatelessWidget with MasterViewCubitMixin {
+/// Hydrated Cubit-based Master View
+abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, S>
+    extends StatelessWidget with MasterViewHydratedCubitMixin {
   final Map<String, dynamic> arguments;
-  final MasterViewCubitTypes currentView;
+  final MasterViewHydratedCubitTypes currentView;
   final Function snackBarFunction;
   final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
   final Function(String path) goRoute;
 
-  /// Optional bottom navigation bar widget for the Scaffold.
   final Widget? bottomNavigationBar;
 
-  MasterViewCubit({
+  MasterViewHydratedCubit({
     super.key,
     this.arguments = const {},
-    this.currentView = MasterViewCubitTypes.content,
+    this.currentView = MasterViewHydratedCubitTypes.content,
     this.snackBarFunction = defaultSnackBarFunction,
     this.coreAppBar,
     this.coreBottomBar,
@@ -42,20 +41,17 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
-  // Ensures initialContent is called only once per widget instance
   final ValueNotifier<bool> _didCallInitial = ValueNotifier<bool>(false);
 
-  /// UI content
   Widget viewContent(BuildContext context, V viewModel, S state);
 
-  /// Called when ViewModel is ready with a BuildContext
   void initialContent(V viewModel, BuildContext context);
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('MasterViewCubit build. -> View Type: $currentView');
+    debugPrint('MasterViewHydratedCubit build. -> View Type: $currentView');
 
-    if (currentView != MasterViewCubitTypes.content) {
+    if (currentView != MasterViewHydratedCubitTypes.content) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         try {
           final snackBar = _createSnackBar(currentView);
@@ -69,11 +65,11 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     try {
       return _scaffold(context);
     } on Exception catch (e, s) {
-      debugPrint('Exception in MasterViewCubit build: $e');
+      debugPrint('Exception in MasterViewHydratedCubit build: $e');
       debugPrintStack(stackTrace: s);
       return _buildErrorScaffold(context, 'Exception: $e');
     } catch (e, s) {
-      debugPrint('Unknown error in MasterViewCubit build: $e');
+      debugPrint('Unknown error in MasterViewHydratedCubit build: $e');
       debugPrintStack(stackTrace: s);
       return _buildErrorScaffold(context, 'Unknown error: $e');
     }
@@ -81,14 +77,12 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
 
   Widget _scaffold(BuildContext context) {
     return _handleScaffoldErrors(() {
-      return BaseViewCubit<V, S>(
+      return BaseViewHydratedCubit<V, S>(
         onViewModelReady: (viewModel) {
-          // Defer until after first frame to ensure we have a valid BuildContext
           if (!_didCallInitial.value) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (!_didCallInitial.value) {
                 try {
-                  // Use the closest available context from the builder phase
                   final ctx = _scaffoldMessengerKey.currentContext;
                   if (ctx != null) {
                     initialContent(viewModel, ctx);
@@ -157,35 +151,35 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     );
   }
 
-  String _getSnackbarMessage(MasterViewCubitTypes state) {
+  String _getSnackbarMessage(MasterViewHydratedCubitTypes state) {
     final message = _getMessageForState(state);
     return message.isNotEmpty
         ? message
         : 'An unexpected error occurred. Please try again later.';
   }
 
-  String _getMessageForState(MasterViewCubitTypes state) {
+  String _getMessageForState(MasterViewHydratedCubitTypes state) {
     switch (state) {
-      case MasterViewCubitTypes.loading:
+      case MasterViewHydratedCubitTypes.loading:
         return resources.loading;
-      case MasterViewCubitTypes.webview:
+      case MasterViewHydratedCubitTypes.webview:
         return resources.webview;
-      case MasterViewCubitTypes.error:
+      case MasterViewHydratedCubitTypes.error:
         return resources.error;
-      case MasterViewCubitTypes.maintenance:
+      case MasterViewHydratedCubitTypes.maintenance:
         return resources.maintenance;
-      case MasterViewCubitTypes.empty:
+      case MasterViewHydratedCubitTypes.empty:
         return resources.empty;
-      case MasterViewCubitTypes.unauthorized:
+      case MasterViewHydratedCubitTypes.unauthorized:
         return resources.unauthorized;
-      case MasterViewCubitTypes.timeout:
+      case MasterViewHydratedCubitTypes.timeout:
         return resources.timeout;
       default:
         return '';
     }
   }
 
-  SnackBar _createSnackBar(MasterViewCubitTypes viewType) {
+  SnackBar _createSnackBar(MasterViewHydratedCubitTypes viewType) {
     final message = _getSnackbarMessage(viewType);
     return SnackBar(
       behavior: SnackBarBehavior.floating,
@@ -223,3 +217,5 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     GoRouter.of(context).go(path, extra: arguments);
   }
 }
+
+
