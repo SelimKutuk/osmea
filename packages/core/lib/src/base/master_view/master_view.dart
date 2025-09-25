@@ -1,9 +1,9 @@
 library master_view; // Define a library name
 
 import 'package:core/core.dart';
+import 'package:core/src/base/widgets/master_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:core/src/helper/grid_helper.dart';
 
 part 'master_view_enums.dart'; // Include the enums part
 part 'master_view_mixins.dart'; // Include the mixins part
@@ -48,6 +48,23 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
+  final bool extendBody;
+  final bool extendBodyBehindAppBar;
+
+  // Layout configuration - external values
+  final SpacerVisibility? navbarSpacer;
+  final SpacerVisibility? footerSpacer;
+  final PaddingVisibility? horizontalPadding;
+
+  // Spacer types - custom overrides default
+  final CoreSpacerType? customNavbarSpacerType;
+  final CoreSpacerType? customFooterSpacerType;
+  final CoreSpacerType defaultNavbarSpacerType;
+  final CoreSpacerType defaultFooterSpacerType;
+
+  // Padding values - custom overrides default
+  final double? customHorizontalPadding;
+  final double defaultHorizontalPadding;
 
   /// Optional bottom navigation bar widget for the Scaffold.
   final Widget? bottomNavigationBar;
@@ -61,8 +78,18 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
     this.coreBottomBar, // New: function to build bottom bar
     this.showDevGrid = true,
     this.bottomNavigationBar, // Optional bottom navigation bar
-  })  : assert(arguments.isNotEmpty,
-            'Arguments must not be empty') {
+    this.extendBody = true,
+    this.extendBodyBehindAppBar = true,
+    this.navbarSpacer,
+    this.footerSpacer,
+    this.horizontalPadding,
+    this.customNavbarSpacerType,
+    this.customFooterSpacerType,
+    this.defaultNavbarSpacerType = CoreSpacerType.navbar,
+    this.defaultFooterSpacerType = CoreSpacerType.footer,
+    this.customHorizontalPadding,
+    this.defaultHorizontalPadding = 16.0,
+  }) : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
     // Global Flutter error handler
     FlutterError.onError = (FlutterErrorDetails details) {
       debugPrint(
@@ -115,32 +142,24 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
       return BaseView<V, E, S>(
         onViewModelReady: initialContent,
         builder: (viewModel, context, state) {
-          return Scaffold(
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            key: _scaffoldMessengerKey,
+          return MasterScaffoldWidget(
+            scaffoldMessengerKey: _scaffoldMessengerKey,
             appBar: coreAppBar?.call(context, viewModel),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  // Always a spacer below the navbar
-                  const CoreSpacer(CoreSpacerType.navbar),
-                  // Main content from the view
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: GridHelper.defaultMargin),
-                      child: viewContent(context, viewModel, state),
-                    ),
-                  ),
-                  // Always footer top spacer
-                  const CoreSpacer(CoreSpacerType.footer),
-                ],
-              ),
-            ),
+            body: viewContent(context, viewModel, state),
             bottomNavigationBar: coreBottomBar != null
                 ? coreBottomBar!.call(context, viewModel)
                 : bottomNavigationBar,
+            extendBody: extendBody,
+            extendBodyBehindAppBar: extendBodyBehindAppBar,
+            navbarSpacer: navbarSpacer,
+            footerSpacer: footerSpacer,
+            horizontalPadding: horizontalPadding,
+            customNavbarSpacerType: customNavbarSpacerType,
+            customFooterSpacerType: customFooterSpacerType,
+            defaultNavbarSpacerType: defaultNavbarSpacerType,
+            defaultFooterSpacerType: defaultFooterSpacerType,
+            customHorizontalPadding: customHorizontalPadding,
+            defaultHorizontalPadding: defaultHorizontalPadding,
           );
         },
       );
