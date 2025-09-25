@@ -4,6 +4,7 @@ import 'file_download_helper_example.dart';
 import 'package:camera/camera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
+import '../utils/permission_navigation_helper.dart';
 
 class PermissionHandlerExample extends StatefulWidget {
   const PermissionHandlerExample({super.key});
@@ -48,31 +49,29 @@ class _PermissionHandlerExampleState extends State<PermissionHandlerExample> {
 
   Future<void> _request(AppPermission permission) async {
     setState(() => _isLoading = true);
-    final granted = await _permissionHelper.requestPermission(permission);
-    final status = await _permissionHelper.getPermissionStatusString(permission);
-    _statusTextByPermission[permission] = status;
-    setState(() => _isLoading = false);
-
-    if (!granted) {
-      final isPermanentlyDenied = await _permissionHelper.isPermanentlyDenied(permission);
-      if (isPermanentlyDenied && mounted) {
-        // Offer to open settings
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${_label(permission)} permission permanently denied. Open settings.'),
-            action: SnackBarAction(
-              label: 'Settings',
-              onPressed: () => _permissionHelper.openAppSettings(),
-            ),
-          ),
-        );
-      }
+    
+    // Use the new navigation helper to check and redirect if needed
+    final granted = await PermissionNavigationHelper.checkPermissionWithDialog(
+      context, 
+      permission
+    );
+    
+    if (granted) {
+      // Permission was granted, refresh status
+      final status = await _permissionHelper.getPermissionStatusString(permission);
+      _statusTextByPermission[permission] = status;
+    } else {
+      // User was redirected to permissions screen or denied
+      // Refresh status when they return
+      await _refreshAllStatuses();
     }
+    
+    setState(() => _isLoading = false);
   }
 
   Future<void> _check(AppPermission permission) async {
     setState(() => _isLoading = true);
+    final isAllowed = await _permissionHelper.checkPermission(permission);
     final status = await _permissionHelper.getPermissionStatusString(permission);
     _statusTextByPermission[permission] = status;
     setState(() => _isLoading = false);
@@ -82,25 +81,49 @@ class _PermissionHandlerExampleState extends State<PermissionHandlerExample> {
     // Trigger real device features
     switch (permission) {
       case AppPermission.microphone:
-        await _toggleMicRecording();
+        if (isAllowed) await _toggleMicRecording();
         break;
       case AppPermission.storage:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const FileDownloadHelperExample()),
-        );
+        if (isAllowed) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const FileDownloadHelperExample()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Storage denied. Enable permission first.')),
+          );
+        }
         break;
       case AppPermission.photos:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const FileDownloadHelperExample()),
-        );
+        if (isAllowed) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const FileDownloadHelperExample()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Photos denied. Enable permission first.')),
+          );
+        }
         break;
       case AppPermission.notifications:
-        await _showDeviceNotification();
+        if (isAllowed) {
+          await _showDeviceNotification();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Notifications denied. Enable permission first.')),
+          );
+        }
         break;
       case AppPermission.camera:
-        await _openCameraPreview();
+        if (isAllowed) {
+          await _openCameraPreview();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Camera denied. Enable permission first.')),
+          );
+        }
         break;
       default:
         break;
@@ -150,6 +173,15 @@ class _PermissionHandlerExampleState extends State<PermissionHandlerExample> {
 
   Future<void> _showDeviceNotification() async {
     try {
+      // Respect permission: block if notifications are denied
+      final allowed = await _permissionHelper.checkPermission(AppPermission.notifications);
+      if (!allowed) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Notifications denied. Enable permission first.')),
+        );
+        return;
+      }
       await _notifChannel.invokeMethod('showNotification', {
         'title': 'OSMEA',
         'body': 'Test notification from Permissions Helper',
