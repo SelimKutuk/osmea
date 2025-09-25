@@ -153,6 +153,35 @@ class WooCartTokenInterceptor extends Interceptor {
             data['id'] as String?;
       }
 
+      // For WooCommerce Store API, cart token might be in cookies
+      if (cartToken == null) {
+        final cookies = response.headers['set-cookie'];
+        if (cookies != null && cookies.isNotEmpty) {
+          for (final cookie in cookies) {
+            if (cookie.contains('woocommerce_cart_hash') ||
+                cookie.contains('cart_token') ||
+                cookie.contains('wp_woocommerce_session')) {
+              // Extract cart token from cookie
+              final cookieParts = cookie.split(';');
+              for (final part in cookieParts) {
+                if (part.contains('=')) {
+                  final keyValue = part.split('=');
+                  if (keyValue.length == 2) {
+                    final key = keyValue[0].trim();
+                    final value = keyValue[1].trim();
+                    if (key.contains('cart') || key.contains('token')) {
+                      cartToken = value;
+                      break;
+                    }
+                  }
+                }
+              }
+              if (cartToken != null) break;
+            }
+          }
+        }
+      }
+
       // Save cart token if found
       if (cartToken != null && cartToken.isNotEmpty) {
         await _saveCartToken(

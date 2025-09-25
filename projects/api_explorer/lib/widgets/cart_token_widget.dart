@@ -1,221 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:core/core.dart';
 import 'package:apis/apis.dart';
+import 'package:get_it/get_it.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 
-/// 🛒 Cart Token Display Widget
+/// 🛒 Cart Token Widget
 ///
-/// Shows current cart token information and provides management options
+/// Gets cart token from WooCommerce Store API cart endpoint
 class CartTokenWidget extends StatefulWidget {
-  final VoidCallback? onTokenCopied;
-  final VoidCallback? onTokenCleared;
-
-  const CartTokenWidget({
-    super.key,
-    this.onTokenCopied,
-    this.onTokenCleared,
-  });
+  const CartTokenWidget({super.key});
 
   @override
   State<CartTokenWidget> createState() => _CartTokenWidgetState();
 }
 
 class _CartTokenWidgetState extends State<CartTokenWidget> {
-  WooCartToken? _cartToken;
-  bool _isLoading = true;
-  bool _isExpanded = false;
+  bool _isCreating = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadCartToken();
-  }
-
-  /// 🔍 Load cart token from storage
-  Future<void> _loadCartToken() async {
+  /// Get cart token from cart API call
+  Future<void> _getCartToken() async {
     try {
       setState(() {
-        _isLoading = true;
+        _isCreating = true;
       });
 
-      final token = await WooCartTokenStorage.loadCartToken();
+      // Make cart API call to get cart token
+      final cartService = GetIt.I<CartService>();
+      final response = await cartService.getCart(
+        apiVersion: WooNetwork.apiVersion,
+      );
 
-      if (mounted) {
-        setState(() {
-          _cartToken = token;
-          _isLoading = false;
-        });
-      }
-    } catch (e) {
-      debugPrint('❌ Error loading cart token: $e');
-      if (mounted) {
-        setState(() {
-          _cartToken = null;
-          _isLoading = false;
-        });
-      }
-    }
-  }
+      debugPrint('🛒 Cart API response received: ${response.toJson()}');
 
-  /// 📋 Copy cart token to clipboard
-  Future<void> _copyTokenToClipboard() async {
-    try {
-      if (_cartToken != null && _cartToken!.cartToken.isNotEmpty) {
-        await Clipboard.setData(ClipboardData(text: _cartToken!.cartToken));
-        widget.onTokenCopied?.call();
+      // Cart token should be automatically saved by interceptor
+      // Check if cart token was saved
+      final cartToken = await WooCartTokenStorage.loadCartToken();
 
+      if (cartToken != null) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: OsmeaComponents.text('✅ Cart token copied to clipboard'),
+              content:
+                  OsmeaComponents.text('✅ Cart token retrieved successfully!'),
               backgroundColor: OsmeaColors.forestHeart,
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 3),
             ),
           );
         }
+        debugPrint('✅ Cart token retrieved: ${cartToken.cartToken}');
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  OsmeaComponents.text('⚠️ Cart token not found in response'),
+              backgroundColor: OsmeaColors.amberFlame,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+        debugPrint('⚠️ Cart token not found in response');
       }
     } catch (e) {
-      debugPrint('❌ Failed to copy cart token: $e');
+      debugPrint('❌ Error getting cart token: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: OsmeaComponents.text('❌ Failed to copy cart token'),
+            content: OsmeaComponents.text('❌ Error getting cart token: $e'),
             backgroundColor: OsmeaColors.slate,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(seconds: 3),
           ),
         );
       }
-    }
-  }
-
-  /// 🗑️ Clear cart token
-  Future<void> _clearCartToken() async {
-    try {
-      await WooCartTokenStorage.clearCartToken();
-      widget.onTokenCleared?.call();
-
+    } finally {
       if (mounted) {
         setState(() {
-          _cartToken = null;
+          _isCreating = false;
         });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: OsmeaComponents.text('✅ Cart token cleared'),
-            backgroundColor: OsmeaColors.forestHeart,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint('❌ Failed to clear cart token: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: OsmeaComponents.text('❌ Failed to clear cart token'),
-            backgroundColor: OsmeaColors.slate,
-            duration: const Duration(seconds: 2),
-          ),
-        );
       }
     }
-  }
-
-  /// 🔄 Refresh cart token
-  Future<void> _refreshCartToken() async {
-    await _loadCartToken();
   }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    if (_isLoading) {
-      return OsmeaComponents.container(
-        padding: EdgeInsets.all(context.spacing16),
-        decoration: BoxDecoration(
-          color: isDark
-              ? OsmeaColors.deepSea.withValues(alpha: 0.1)
-              : OsmeaColors.snow,
-          borderRadius: context.borderRadiusMinStandard,
-          border: Border.all(
-            color: isDark
-                ? OsmeaColors.deepSea.withValues(alpha: 0.2)
-                : OsmeaColors.silver.withValues(alpha: 0.3),
-            width: 1,
-          ),
-        ),
-        child: OsmeaComponents.row(
-          children: [
-            OsmeaComponents.sizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  isDark ? Colors.white : OsmeaColors.nordicBlue,
-                ),
-              ),
-            ),
-            OsmeaComponents.sizedBox(width: context.spacing12),
-            OsmeaComponents.text(
-              'Loading cart token...',
-              variant: OsmeaTextVariant.bodyMedium,
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.9)
-                  : OsmeaColors.steel,
-            ),
-          ],
-        ),
-      );
-    }
-
-    if (_cartToken == null) {
-      return OsmeaComponents.container(
-        padding: EdgeInsets.all(context.spacing16),
-        decoration: BoxDecoration(
-          color: isDark
-              ? OsmeaColors.deepSea.withValues(alpha: 0.1)
-              : OsmeaColors.snow,
-          borderRadius: context.borderRadiusMinStandard,
-          border: Border.all(
-            color: isDark
-                ? OsmeaColors.deepSea.withValues(alpha: 0.2)
-                : OsmeaColors.silver.withValues(alpha: 0.3),
-            width: 1,
-          ),
-        ),
-        child: OsmeaComponents.column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            OsmeaComponents.row(
-              children: [
-                Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 20,
-                  color: isDark ? Colors.white : OsmeaColors.steel,
-                ),
-                OsmeaComponents.sizedBox(width: context.spacing8),
-                OsmeaComponents.text(
-                  'No Cart Token',
-                  variant: OsmeaTextVariant.titleMedium,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? Colors.white : OsmeaColors.steel,
-                ),
-              ],
-            ),
-            OsmeaComponents.sizedBox(height: context.spacing8),
-            OsmeaComponents.text(
-              'No cart token found. Cart tokens are automatically managed when making cart-related API requests.',
-              variant: OsmeaTextVariant.bodySmall,
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.7)
-                  : OsmeaColors.steel.withValues(alpha: 0.7),
-            ),
-          ],
-        ),
-      );
-    }
 
     return OsmeaComponents.container(
       padding: EdgeInsets.all(context.spacing16),
@@ -234,13 +102,12 @@ class _CartTokenWidgetState extends State<CartTokenWidget> {
       child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header with title and actions
           OsmeaComponents.row(
             children: [
               Icon(
-                Icons.shopping_cart,
+                Icons.science,
                 size: 20,
-                color: OsmeaColors.forestHeart,
+                color: OsmeaColors.amberFlame,
               ),
               OsmeaComponents.sizedBox(width: context.spacing8),
               OsmeaComponents.text(
@@ -249,146 +116,37 @@ class _CartTokenWidgetState extends State<CartTokenWidget> {
                 fontWeight: FontWeight.w600,
                 color: isDark ? Colors.white : OsmeaColors.steel,
               ),
-              const Spacer(),
-              // Copy button
-              OsmeaComponents.iconButton(
-                icon: Icon(
-                  Icons.content_copy_rounded,
-                  size: 16,
-                  color: isDark ? Colors.white : OsmeaColors.steel,
-                ),
-                onPressed: _copyTokenToClipboard,
-                variant: ButtonVariant.ghost,
-                size: ButtonSize.small,
-                tooltip: 'Copy cart token',
-              ),
-              OsmeaComponents.sizedBox(width: context.spacing4),
-              // Refresh button
-              OsmeaComponents.iconButton(
-                icon: Icon(
-                  Icons.refresh_rounded,
-                  size: 16,
-                  color: isDark ? Colors.white : OsmeaColors.steel,
-                ),
-                onPressed: _refreshCartToken,
-                variant: ButtonVariant.ghost,
-                size: ButtonSize.small,
-                tooltip: 'Refresh cart token',
-              ),
-              OsmeaComponents.sizedBox(width: context.spacing4),
-              // Clear button
-              OsmeaComponents.iconButton(
-                icon: Icon(
-                  Icons.clear_rounded,
-                  size: 16,
-                  color: OsmeaColors.slate,
-                ),
-                onPressed: _clearCartToken,
-                variant: ButtonVariant.ghost,
-                size: ButtonSize.small,
-                tooltip: 'Clear cart token',
-              ),
-              OsmeaComponents.sizedBox(width: context.spacing4),
-              // Expand button
-              OsmeaComponents.iconButton(
-                icon: Icon(
-                  _isExpanded ? Icons.expand_less : Icons.expand_more,
-                  size: 16,
-                  color: isDark ? Colors.white : OsmeaColors.steel,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isExpanded = !_isExpanded;
-                  });
-                },
-                variant: ButtonVariant.ghost,
-                size: ButtonSize.small,
-                tooltip: _isExpanded ? 'Collapse details' : 'Expand details',
-              ),
             ],
           ),
-
           OsmeaComponents.sizedBox(height: context.spacing12),
-
-          // Cart token display
-          OsmeaComponents.container(
-            padding: EdgeInsets.all(context.spacing12),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? Colors.black.withValues(alpha: 0.2)
-                  : OsmeaColors.silver.withValues(alpha: 0.1),
-              borderRadius: context.borderRadiusMinStandard,
-              border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : OsmeaColors.silver.withValues(alpha: 0.2),
-                width: 1,
-              ),
-            ),
-            child: OsmeaComponents.text(
-              _cartToken!.cartToken,
-              variant: OsmeaTextVariant.bodySmall,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              color: isDark ? Colors.white : OsmeaColors.steel,
-            ),
-          ),
-
-          // Expanded details
-          if (_isExpanded) ...[
-            OsmeaComponents.sizedBox(height: context.spacing16),
-            OsmeaComponents.text(
-              'Token Details',
-              variant: OsmeaTextVariant.titleSmall,
-              fontWeight: FontWeight.w600,
-              color: isDark ? Colors.white : OsmeaColors.steel,
-            ),
-            OsmeaComponents.sizedBox(height: context.spacing8),
-            _buildDetailRow('Store URL', _cartToken!.storeUrl),
-            _buildDetailRow(
-                'Issued At', _cartToken!.issuedAt.toIso8601String()),
-            if (_cartToken!.expiresAt != null)
-              _buildDetailRow(
-                  'Expires At', _cartToken!.expiresAt!.toIso8601String()),
-            if (_cartToken!.lastRefreshed != null)
-              _buildDetailRow('Last Refreshed',
-                  _cartToken!.lastRefreshed!.toIso8601String()),
-            if (_cartToken!.cartId != null)
-              _buildDetailRow('Cart ID', _cartToken!.cartId!),
-            if (_cartToken!.userId != null)
-              _buildDetailRow('User ID', _cartToken!.userId!),
-          ],
-        ],
-      ),
-    );
-  }
-
-  /// Build a detail row
-  Widget _buildDetailRow(String label, String value) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Padding(
-      padding: EdgeInsets.only(bottom: context.spacing4),
-      child: OsmeaComponents.row(
-        children: [
           OsmeaComponents.text(
-            '$label:',
+            'Get cart token from WooCommerce Store API cart endpoint.',
             variant: OsmeaTextVariant.bodySmall,
-            fontWeight: FontWeight.w500,
             color: isDark
-                ? Colors.white.withValues(alpha: 0.8)
-                : OsmeaColors.steel.withValues(alpha: 0.8),
+                ? Colors.white.withValues(alpha: 0.7)
+                : OsmeaColors.steel.withValues(alpha: 0.7),
           ),
-          OsmeaComponents.sizedBox(width: context.spacing8),
-          OsmeaComponents.expanded(
-            child: OsmeaComponents.text(
-              value,
-              variant: OsmeaTextVariant.bodySmall,
-              fontSize: 11,
-              fontFamily: 'monospace',
-              color: isDark ? Colors.white : OsmeaColors.steel,
-              overflow: TextOverflow.ellipsis,
-            ),
+          OsmeaComponents.sizedBox(height: context.spacing16),
+          OsmeaComponents.button(
+            text: _isCreating ? 'Getting...' : 'Get Cart Token',
+            variant: ButtonVariant.primary,
+            size: ButtonSize.medium,
+            onPressed: _isCreating ? null : _getCartToken,
+            icon: _isCreating
+                ? OsmeaComponents.sizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                : Icon(
+                    Icons.add_circle_outline,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+            backgroundColor: OsmeaColors.amberFlame,
           ),
         ],
       ),
