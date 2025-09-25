@@ -9,9 +9,13 @@ export 'package:core/src/base/base_view_model.dart';
 
 // 🧠 Exports the base cubit class View Models
 export 'package:core/src/base/base_view_model_cubit.dart';
+// 🧠 Exports the hydrated base cubit class View Models
+export 'package:core/src/base/base_view_model_hydrated_cubit.dart';
 
 // 🧠 Exports the base cubit class View Models
 export 'package:core/src/base/base_view_cubit.dart';
+// 🧠 Exports the hydrated base view cubit widget
+export 'package:core/src/base/base_view_hydrated_cubit.dart';
 
 // 🧩 Exports the base class for Master App
 export 'package:core/src/base/master_view/master_app.dart';
@@ -21,6 +25,11 @@ export 'package:core/src/base/master_view/master_view.dart';
 
 // 🧩 Exports the base class for Master View Cubit
 export 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
+// 🧩 Exports the hydrated class for Master View Cubit
+export 'package:core/src/base/master_view_hydrated_cubit/master_view_hydrated_cubit.dart';
+
+// 🧩 Exports hydration initializer
+export 'package:core/src/base/master_view_hydrated_cubit/hydrated/hydrated_bloc_init.dart';
 
 // 🧩 Exports the generated resources about translations
 export 'package:core/src/resources/resources.g.dart';
@@ -84,6 +93,14 @@ export 'package:core/src/models/onboarding_models.dart';
 export 'package:core/src/views/onboarding/onboarding_view.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
 export 'package:core/src/views/onboarding/cubit/onboarding_state.dart';
+
+// 🚀 Exports the splash models
+export 'package:core/src/models/splash_models.dart';
+
+// 🚀 Exports the splash view, view model and related modules
+export 'package:core/src/views/splash/splash_view.dart';
+export 'package:core/src/views/splash/cubit/splash_cubit.dart';
+export 'package:core/src/views/splash/cubit/splash_state.dart';
 
 // 🚨 Exports the error handling models
 export 'package:core/src/models/error_handling_models.dart';

@@ -89,8 +89,7 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
               if (!_didCallInitial.value) {
                 try {
                   // Use the closest available context from the builder phase
-                  final ctx = _scaffoldMessengerKey.currentContext ??
-                      BaseViewCubit.navigatorKey.currentContext;
+                  final ctx = _scaffoldMessengerKey.currentContext;
                   if (ctx != null) {
                     initialContent(viewModel, ctx);
                   }
