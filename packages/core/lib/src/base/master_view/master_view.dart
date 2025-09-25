@@ -48,13 +48,14 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
   final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
-  final bool extendBody;
-  final bool extendBodyBehindAppBar;
+  final bool? extendBody;
+  final bool? extendBodyBehindAppBar;
 
   // Layout configuration - external values
   final SpacerVisibility? navbarSpacer;
   final SpacerVisibility? footerSpacer;
   final PaddingVisibility? horizontalPadding;
+  final bool? useSafeArea;
 
   // Spacer types - custom overrides default
   final CoreSpacerType? customNavbarSpacerType;
@@ -78,11 +79,12 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
     this.coreBottomBar, // New: function to build bottom bar
     this.showDevGrid = true,
     this.bottomNavigationBar, // Optional bottom navigation bar
-    this.extendBody = true,
-    this.extendBodyBehindAppBar = true,
+    this.extendBody,
+    this.extendBodyBehindAppBar,
     this.navbarSpacer,
     this.footerSpacer,
     this.horizontalPadding,
+    this.useSafeArea,
     this.customNavbarSpacerType,
     this.customFooterSpacerType,
     this.defaultNavbarSpacerType = CoreSpacerType.navbar,
@@ -154,6 +156,7 @@ abstract class MasterView<V extends BaseViewModelBloc<E, S>, E, S>
             navbarSpacer: navbarSpacer,
             footerSpacer: footerSpacer,
             horizontalPadding: horizontalPadding,
+            useSafeArea: useSafeArea,
             customNavbarSpacerType: customNavbarSpacerType,
             customFooterSpacerType: customFooterSpacerType,
             defaultNavbarSpacerType: defaultNavbarSpacerType,

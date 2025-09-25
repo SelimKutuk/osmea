@@ -10,13 +10,14 @@ class MasterScaffoldWidget extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget body;
   final Widget? bottomNavigationBar;
-  final bool extendBody;
-  final bool extendBodyBehindAppBar;
+  final bool? extendBody;
+  final bool? extendBodyBehindAppBar;
 
   // Layout configuration via custom value options
   final SpacerVisibility? navbarSpacer;
   final SpacerVisibility? footerSpacer;
   final PaddingVisibility? horizontalPadding;
+  final bool? useSafeArea;
 
   // Spacer types - custom overrides default
   final CoreSpacerType? customNavbarSpacerType;
@@ -34,11 +35,12 @@ class MasterScaffoldWidget extends StatelessWidget {
     this.appBar,
     required this.body,
     this.bottomNavigationBar,
-    this.extendBody = true,
-    this.extendBodyBehindAppBar = true,
+    this.extendBody,
+    this.extendBodyBehindAppBar,
     this.navbarSpacer,
     this.footerSpacer,
     this.horizontalPadding,
+    this.useSafeArea,
     this.customNavbarSpacerType,
     this.customFooterSpacerType,
     this.defaultNavbarSpacerType = CoreSpacerType.navbar,
@@ -66,34 +68,57 @@ class MasterScaffoldWidget extends StatelessWidget {
     );
 
     return Scaffold(
-      extendBody: extendBody,
-      extendBodyBehindAppBar: extendBodyBehindAppBar,
+      extendBody: extendBody ?? true,
+      extendBodyBehindAppBar: extendBodyBehindAppBar ?? true,
       key: scaffoldMessengerKey,
       appBar: appBar,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Navbar spacer - based on configuration
-            if (config.navbarSpacer.isEnabled)
-              CoreSpacer(config.navbarSpacer.type),
+      body: (useSafeArea ?? true)
+          ? SafeArea(
+              child: Column(
+                children: [
+                  // Navbar spacer - based on configuration
+                  if (config.navbarSpacer.isEnabled)
+                    CoreSpacer(config.navbarSpacer.type),
 
-            // Main content with configurable padding
-            Expanded(
-              child: config.horizontalPadding.isEnabled
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: config.horizontalPadding.value),
-                      child: body,
-                    )
-                  : body,
+                  // Main content with configurable padding
+                  Expanded(
+                    child: config.horizontalPadding.isEnabled
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: config.horizontalPadding.value),
+                            child: body,
+                          )
+                        : body,
+                  ),
+
+                  // Footer spacer - based on configuration
+                  if (config.footerSpacer.isEnabled)
+                    CoreSpacer(config.footerSpacer.type),
+                ],
+              ),
+            )
+          : Column(
+              children: [
+                // Navbar spacer - based on configuration
+                if (config.navbarSpacer.isEnabled)
+                  CoreSpacer(config.navbarSpacer.type),
+
+                // Main content with configurable padding
+                Expanded(
+                  child: config.horizontalPadding.isEnabled
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: config.horizontalPadding.value),
+                          child: body,
+                        )
+                      : body,
+                ),
+
+                // Footer spacer - based on configuration
+                if (config.footerSpacer.isEnabled)
+                  CoreSpacer(config.footerSpacer.type),
+              ],
             ),
-
-            // Footer spacer - based on configuration
-            if (config.footerSpacer.isEnabled)
-              CoreSpacer(config.footerSpacer.type),
-          ],
-        ),
-      ),
       bottomNavigationBar: bottomNavigationBar,
     );
   }

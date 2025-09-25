@@ -18,13 +18,14 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
   final Function(String path) goRoute;
-  final bool extendBody;
-  final bool extendBodyBehindAppBar;
+  final bool? extendBody;
+  final bool? extendBodyBehindAppBar;
 
   // Layout configuration - external values
   final SpacerVisibility? navbarSpacer;
   final SpacerVisibility? footerSpacer;
   final PaddingVisibility? horizontalPadding;
+  final bool? useSafeArea;
 
   // Spacer types - custom overrides default
   final CoreSpacerType? customNavbarSpacerType;
@@ -47,11 +48,12 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
     this.coreBottomBar,
     this.showDevGrid = true,
     this.bottomNavigationBar,
-    this.extendBody = true,
-    this.extendBodyBehindAppBar = true,
+    this.extendBody,
+    this.extendBodyBehindAppBar,
     this.navbarSpacer,
     this.footerSpacer,
     this.horizontalPadding,
+    this.useSafeArea,
     this.customNavbarSpacerType,
     this.customFooterSpacerType,
     this.defaultNavbarSpacerType = CoreSpacerType.navbar,
@@ -138,6 +140,7 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>,
             navbarSpacer: navbarSpacer,
             footerSpacer: footerSpacer,
             horizontalPadding: horizontalPadding,
+            useSafeArea: useSafeArea,
             customNavbarSpacerType: customNavbarSpacerType,
             customFooterSpacerType: customFooterSpacerType,
             defaultNavbarSpacerType: defaultNavbarSpacerType,
