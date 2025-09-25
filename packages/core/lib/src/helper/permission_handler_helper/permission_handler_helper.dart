@@ -477,9 +477,14 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       
       // In iOS simulator, if there's an error, assume granted for testing
       if (Platform.isIOS) {
-        coreDebugPrint('📱 iOS Simulator - treating error as granted for testing');
-        await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
-        return true;
+        final isSimulator = !(await DeviceInfoHelper.instance.platformDevicePhysical());
+        if (isSimulator) {
+          coreDebugPrint('📱 iOS Simulator - treating error as granted for testing');
+          await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          return true;
+        } else {
+          coreDebugPrint('📱 iOS Real Device - error occurred, returning false');
+        }
       }
       
       return false;
@@ -520,9 +525,14 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       
       // In iOS simulator, if there's an error, assume granted for testing
       if (Platform.isIOS) {
-        coreDebugPrint('📱 iOS Simulator - treating error as granted for testing');
-        await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
-        return true;
+        final isSimulator = !(await DeviceInfoHelper.instance.platformDevicePhysical());
+        if (isSimulator) {
+          coreDebugPrint('📱 iOS Simulator - treating error as granted for testing');
+          await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          return true;
+        } else {
+          coreDebugPrint('📱 iOS Real Device - error occurred, returning false');
+        }
       }
       
       return false;
@@ -620,12 +630,18 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     } catch (e) {
       coreDebugPrint('🔴 Error requesting multiple permissions (direct): $e');
       
-      // Return granted status for all permissions in iOS simulator
+      // Return granted status for all permissions in iOS simulator only
       final result = <AppPermission, ph.PermissionStatus>{};
       for (final appPermission in appPermissions) {
         if (Platform.isIOS) {
-          result[appPermission] = ph.PermissionStatus.granted;
-          await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          final isSimulator = !(await DeviceInfoHelper.instance.platformDevicePhysical());
+          if (isSimulator) {
+            result[appPermission] = ph.PermissionStatus.granted;
+            await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          } else {
+            result[appPermission] = ph.PermissionStatus.denied;
+            await _cachePermissionStatus(appPermission, ph.PermissionStatus.denied);
+          }
         } else {
           result[appPermission] = ph.PermissionStatus.denied;
           await _cachePermissionStatus(appPermission, ph.PermissionStatus.denied);
@@ -647,6 +663,9 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       case AppPermission.locationWhenInUse:
         return ph.Permission.locationWhenInUse;
       case AppPermission.storage:
+        if (Platform.isIOS) {
+          return ph.Permission.photos;
+        }
         return ph.Permission.storage;
       case AppPermission.photos:
         return ph.Permission.photos;
@@ -666,6 +685,10 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
   /// Handle storage permission based on Android API level
   Future<bool> _requestStoragePermissionSmart(AppPermission appPermission) async {
     if (!Platform.isAndroid) {
+      // iOS'ta storage permission'ı photos permission'ı olarak handle et
+      if (Platform.isIOS && appPermission == AppPermission.storage) {
+        return _requestPermissionDirect(AppPermission.photos);
+      }
       return _requestPermissionDirect(appPermission);
     }
 
@@ -711,6 +734,10 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     final soft = await _getSoftPermission(appPermission);
     if (soft != null) return soft;
     if (!Platform.isAndroid) {
+
+      if (Platform.isIOS && appPermission == AppPermission.storage) {
+        return _checkPermissionDirect(AppPermission.photos);
+      }
       return _checkPermissionDirect(appPermission);
     }
 
@@ -753,6 +780,10 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       return PermissionResult.fromStatus(appPermission, status);
     }
     if (!Platform.isAndroid) {
+
+      if (Platform.isIOS && appPermission == AppPermission.storage) {
+        return _getPermissionStatusDirect(AppPermission.photos);
+      }
       return _getPermissionStatusDirect(appPermission);
     }
 
@@ -916,6 +947,12 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     }
 
     try {
+    
+      if (Platform.isIOS) {
+        await clearPermissionCache(appPermission);
+        coreDebugPrint('🧹 iOS: Cleared cache for ${appPermission.name} before request');
+      }
+      
       // When soft override exists, respect it but don't auto-grant
       final soft = await _getSoftPermission(appPermission);
       if (soft != null) {
@@ -937,6 +974,15 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         coreDebugPrint('✅ $permissionName permission granted');
       } else {
         coreDebugPrint('❌ $permissionName permission denied: $status');
+        
+        if (Platform.isIOS && status == ph.PermissionStatus.permanentlyDenied) {
+          final isSimulator = !(await DeviceInfoHelper.instance.platformDevicePhysical());
+          if (!isSimulator) {
+            coreDebugPrint('📱 iOS Real Device - permission permanently denied, user needs to enable in settings');
+    
+            // await openAppSettings();
+          }
+        }
       }
       
       return isGranted;
@@ -958,6 +1004,12 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     }
 
     try {
+    
+      if (Platform.isIOS) {
+        await clearPermissionCache(appPermission);
+        coreDebugPrint('🧹 iOS: Cleared cache for ${appPermission.name} before check');
+      }
+      
       // Soft override takes precedence if present (but not for storage)
       final soft = await _getSoftPermission(appPermission);
       if (soft != null) {
@@ -966,6 +1018,19 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
       }
       final permissionName = _getPermissionName(appPermission);
       
+   
+      if (Platform.isIOS) {
+        final permission = _mapToPermission(appPermission);
+        final status = await permission.status;
+        
+        // Cache the result
+        await _cachePermissionStatus(appPermission, status);
+        
+        final isGranted = status == ph.PermissionStatus.granted;
+        coreDebugPrint('🔍 $permissionName permission status (iOS fresh): $status (granted: $isGranted)');
+        return isGranted;
+      }
+     
       // Check cache first
       final cachedStatus = await _getCachedPermissionStatus(appPermission);
       if (cachedStatus != null) {
@@ -1003,6 +1068,12 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
     }
 
     try {
+      
+      if (Platform.isIOS) {
+        await clearPermissionCache(appPermission);
+        coreDebugPrint('🧹 iOS: Cleared cache for ${appPermission.name} before status check');
+      }
+      
       // Soft override takes precedence if present
       final soft = await _getSoftPermission(appPermission);
       if (soft != null) {
@@ -1012,7 +1083,20 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         return overridden;
       }
       final permissionName = _getPermissionName(appPermission);
+
+      if (Platform.isIOS) {
+        final permission = _mapToPermission(appPermission);
+        final status = await permission.status;
+        
+        // Cache the result
+        await _cachePermissionStatus(appPermission, status);
+        
+        final result = PermissionResult.fromStatus(appPermission, status);
+        coreDebugPrint('📊 $permissionName permission detailed status (iOS fresh): $result');
+        return result;
+      }
       
+      // Android için cache logic'i koru
       // Check cache first
       final cachedStatus = await _getCachedPermissionStatus(appPermission);
       if (cachedStatus != null) {
@@ -1061,9 +1145,16 @@ class PermissionHandlerHelper implements IPermissionHandlerBase {
         
         // Handle iOS simulator case
         if (Platform.isIOS && status == ph.PermissionStatus.permanentlyDenied) {
-          coreDebugPrint('📱 iOS Simulator detected - treating permanently denied as granted for testing');
-          result[appPermission] = ph.PermissionStatus.granted;
-          await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          final isSimulator = !(await DeviceInfoHelper.instance.platformDevicePhysical());
+          if (isSimulator) {
+            coreDebugPrint('📱 iOS Simulator detected - treating permanently denied as granted for testing');
+            result[appPermission] = ph.PermissionStatus.granted;
+            await _cachePermissionStatus(appPermission, ph.PermissionStatus.granted);
+          } else {
+            coreDebugPrint('📱 iOS Real Device - permission permanently denied, keeping status');
+            result[appPermission] = status;
+            await _cachePermissionStatus(appPermission, status);
+          }
         } else {
           result[appPermission] = status;
           await _cachePermissionStatus(appPermission, status);
