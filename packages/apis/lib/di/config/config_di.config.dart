@@ -321,6 +321,10 @@ import 'package:apis/network/remote/woocommerce/auth/abstract/woo_auth_service.d
     as _i28;
 import 'package:apis/network/remote/woocommerce/auth/api/api_woo_auth_service.dart'
     as _i916;
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart'
+    as _i654;
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/api/api_cart_service.dart'
+    as _i845;
 import 'package:apis/network/remote/woocommerce/wishlist/abstract/woo_wishlist_service.dart'
     as _i671;
 import 'package:apis/network/remote/woocommerce/wishlist/api/api_woo_wishlist_service.dart'
@@ -373,6 +377,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i169.ShopServiceClient(gh<_i361.Dio>()));
     gh.factory<_i813.WebhooksService>(
         () => _i331.WebhooksServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i654.CartService>(
+        () => _i845.CartServiceClient(gh<_i361.Dio>()));
     gh.factory<_i330.SystemStatusService>(
         () => _i997.SystemStatusServiceClient(gh<_i361.Dio>()));
     gh.singleton<_i724.ApiBaseLogger>(

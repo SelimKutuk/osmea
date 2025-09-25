@@ -1609,6 +1609,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Taxes';
       case ApiCategory.woocommerceWishlist:
         return 'WooCommerce Wishlist';
+      case ApiCategory.woocommerceCart:
+        return 'WooCommerce Cart';
     }
   }
 
