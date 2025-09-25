@@ -1,6 +1,7 @@
 // 📦 Importing core module dependencies
 import 'package:core/src/di/config/config_di.config.dart';
 import 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
+import 'package:core/src/views/permissions/cubit/permissions_cubit.dart';
 import 'package:core/src/views/splash/cubit/splash_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -23,6 +24,9 @@ Future<GetIt> configureDependencies() async {
 
   // Register OnboardingCubit in core package
   getIt.registerFactory<OnboardingCubit>(() => OnboardingCubit());
+
+  // Register PermissionsCubit in core package
+  getIt.registerFactory<PermissionsCubit>(() => PermissionsCubit());
 
   return result;
 }
