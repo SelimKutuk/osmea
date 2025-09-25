@@ -2,8 +2,8 @@ library master_view_hydrated_cubit;
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:core/src/base/widgets/master_scaffold_widget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:core/src/helper/grid_helper.dart';
 
 part 'master_view_hydrated_cubit_enums.dart';
 part 'master_view_hydrated_cubit_mixins.dart';
@@ -45,6 +45,24 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, 
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
   final Function(String path) goRoute;
+  final bool? extendBody;
+  final bool? extendBodyBehindAppBar;
+
+  // Layout configuration - external values
+  final SpacerVisibility? navbarSpacer;
+  final SpacerVisibility? footerSpacer;
+  final PaddingVisibility? horizontalPadding;
+  final bool? useSafeArea;
+
+  // Spacer types - custom overrides default
+  final CoreSpacerType? customNavbarSpacerType;
+  final CoreSpacerType? customFooterSpacerType;
+  final CoreSpacerType defaultNavbarSpacerType;
+  final CoreSpacerType defaultFooterSpacerType;
+
+  // Padding values - custom overrides default
+  final double? customHorizontalPadding;
+  final double defaultHorizontalPadding;
 
   final Widget? bottomNavigationBar;
 
@@ -57,6 +75,18 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, 
     this.coreBottomBar,
     this.showDevGrid = true,
     this.bottomNavigationBar,
+    this.extendBody,
+    this.extendBodyBehindAppBar,
+    this.navbarSpacer,
+    this.footerSpacer,
+    this.horizontalPadding,
+    this.useSafeArea,
+    this.customNavbarSpacerType,
+    this.customFooterSpacerType,
+    this.defaultNavbarSpacerType = CoreSpacerType.navbar,
+    this.defaultFooterSpacerType = CoreSpacerType.footer,
+    this.customHorizontalPadding,
+    this.defaultHorizontalPadding = 16.0,
     required this.goRoute,
   }) : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
     FlutterError.onError = (FlutterErrorDetails details) {
@@ -133,29 +163,25 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, 
           }
         },
         builder: (viewModel, context, state) {
-          return Scaffold(
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            key: _scaffoldMessengerKey,
+          return MasterScaffoldWidget(
+            scaffoldMessengerKey: _scaffoldMessengerKey,
             appBar: coreAppBar?.call(context, viewModel),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  const CoreSpacer(CoreSpacerType.navbar),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: GridHelper.defaultMargin),
-                      child: viewContent(context, viewModel, state),
-                    ),
-                  ),
-                  const CoreSpacer(CoreSpacerType.footer),
-                ],
-              ),
-            ),
+            body: viewContent(context, viewModel, state),
             bottomNavigationBar: coreBottomBar != null
                 ? coreBottomBar!.call(context, viewModel)
                 : bottomNavigationBar,
+            extendBody: extendBody,
+            extendBodyBehindAppBar: extendBodyBehindAppBar,
+            navbarSpacer: navbarSpacer,
+            footerSpacer: footerSpacer,
+            horizontalPadding: horizontalPadding,
+            useSafeArea: useSafeArea,
+            customNavbarSpacerType: customNavbarSpacerType,
+            customFooterSpacerType: customFooterSpacerType,
+            defaultNavbarSpacerType: defaultNavbarSpacerType,
+            defaultFooterSpacerType: defaultFooterSpacerType,
+            customHorizontalPadding: customHorizontalPadding,
+            defaultHorizontalPadding: defaultHorizontalPadding,
           );
         },
       );
@@ -164,7 +190,8 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, 
 
   /// Wraps scaffold construction to surface unexpected errors in a fallback UI
   /// instead of crashing the app tree.
-  Widget _handleScaffoldErrors(Function() scaffoldBuilder, BuildContext context) {
+  Widget _handleScaffoldErrors(
+      Function() scaffoldBuilder, BuildContext context) {
     try {
       return scaffoldBuilder();
     } catch (e, s) {
@@ -267,5 +294,3 @@ abstract class MasterViewHydratedCubit<V extends BaseViewModelHydratedCubit<S>, 
     GoRouter.of(context).go(path, extra: arguments);
   }
 }
-
-
