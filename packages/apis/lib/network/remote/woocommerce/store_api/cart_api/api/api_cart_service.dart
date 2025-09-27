@@ -2,6 +2,7 @@ import 'package:apis/apis.dart';
 import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/apply_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/update_item_response.dart';
@@ -65,5 +66,16 @@ abstract class CartServiceClient implements CartService {
     @Header('Authorization') required String jwtToken,
     @Query('key') required String key,
     @Query('quantity') required int quantity,
+  });
+
+  /// 🎫 Apply coupon to cart using WooCommerce Store API
+  /// Requires JWT authentication and cart token headers! 🔑
+  @override
+  @POST('/wp-json/wc/store/{api_version}/cart/apply-coupon')
+  Future<ApplyCouponResponse> applyCoupon({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+    @Query('code') required String code,
   });
 }

@@ -1,5 +1,6 @@
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/request/add_item_request.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/apply_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/update_item_response.dart';
@@ -40,5 +41,14 @@ abstract class CartService {
     required String jwtToken,
     required String key,
     required int quantity,
+  });
+
+  /// 🎫 Applies a coupon to the cart using WooCommerce Store API.
+  /// Requires JWT authentication and cart token for proper authorization.
+  Future<ApplyCouponResponse> applyCoupon({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required String code,
   });
 }
