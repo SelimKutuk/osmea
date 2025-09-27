@@ -4053,6 +4053,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: AddItemHandler(),
     ),
+    ApiService(
+      name: 'Remove Item from Cart',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveItemHandler(),
+    ),
   ];
 
   static void initialize() {}
