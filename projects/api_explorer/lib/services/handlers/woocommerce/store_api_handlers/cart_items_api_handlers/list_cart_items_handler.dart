@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstract/cart_items_service.dart';
-import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/freezed_model/response/cart_item.dart';
 
 ///*******************************************************************
 //************** 📋 LIST CART ITEMS HANDLER ************************
