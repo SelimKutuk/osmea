@@ -2,6 +2,7 @@ import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/update_item_response.dart';
 
 /// 🔑 Abstract contract for WooCommerce Store API Cart Service
 /// Implement this to fetch cart from WooCommerce Store API! 🌐
@@ -29,5 +30,15 @@ abstract class CartService {
     required String cartToken,
     required String jwtToken,
     required String key,
+  });
+
+  /// 📝 Updates an item in the cart using WooCommerce Store API.
+  /// Requires JWT authentication and cart token for proper authorization.
+  Future<UpdateItemResponse> updateItem({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required String key,
+    required int quantity,
   });
 }
