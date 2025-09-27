@@ -4074,6 +4074,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: ApplyCouponHandler(),
     ),
+    ApiService(
+      name: 'Remove Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveCouponHandler(),
+    ),
   ];
 
   static void initialize() {}
