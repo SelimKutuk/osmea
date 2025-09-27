@@ -5,6 +5,7 @@ import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_coupon_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/select_shipping_rate_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/update_customer_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/update_item_response.dart';
 
@@ -71,5 +72,15 @@ abstract class CartService {
     required String cartToken,
     required String jwtToken,
     required UpdateCustomerRequest request,
+  });
+
+  /// 🚚 Selects a shipping rate for a package in the cart using WooCommerce Store API.
+  /// Requires JWT authentication and cart token for proper authorization.
+  Future<SelectShippingRateResponse> selectShippingRate({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required int packageId,
+    required String rateId,
   });
 }
