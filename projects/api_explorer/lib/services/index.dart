@@ -24,6 +24,7 @@ export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/select_shippin
 
 // 📋 WooCommerce Store API Cart Items Handlers
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/list_cart_items_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/get_single_cart_item_handler.dart';
 
 // 🚀 GraphQL Handlers - Modular Structure
 
