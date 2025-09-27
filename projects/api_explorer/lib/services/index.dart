@@ -22,6 +22,9 @@ export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/remove_coupon_
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/update_customer_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/select_shipping_rate_handler.dart';
 
+// 📋 WooCommerce Store API Cart Items Handlers
+export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/list_cart_items_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers

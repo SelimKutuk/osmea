@@ -4095,6 +4095,15 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: SelectShippingRateHandler(),
     ),
+
+    // 📋 WooCommerce Cart Items API Handler - Store API
+    ApiService(
+      name: 'List Cart Items',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: ListCartItemsHandler(),
+    ),
   ];
 
   static void initialize() {}
