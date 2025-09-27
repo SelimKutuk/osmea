@@ -45,6 +45,50 @@ class _CartServiceClient implements CartServiceClient {
     return _value;
   }
 
+  @override
+  Future<AddItemResponse> addItem({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required int id,
+    required int quantity,
+    List<dynamic>? variation,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'CART_TOKEN': cartToken,
+      r'Authorization': jwtToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'id': id,
+      'quantity': quantity,
+      'variation': variation,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AddItemResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/wp-json/wc/store/${apiVersion}/cart/add-item',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AddItemResponse.fromJson(_result.data!);
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

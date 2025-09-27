@@ -1,6 +1,7 @@
 import 'package:apis/apis.dart';
 import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -26,5 +27,18 @@ abstract class CartServiceClient implements CartService {
   @GET('/wp-json/wc/store/{api_version}/cart')
   Future<GetCartResponse> getCart({
     @Path('api_version') required String apiVersion,
+  });
+
+  /// 🛍️ Add item to cart using WooCommerce Store API
+  /// Requires JWT authentication and cart token headers! 🔑
+  @override
+  @POST('/wp-json/wc/store/{api_version}/cart/add-item')
+  Future<AddItemResponse> addItem({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+    @Field('id') required int id,
+    @Field('quantity') required int quantity,
+    @Field('variation') List<dynamic>? variation,
   });
 }
