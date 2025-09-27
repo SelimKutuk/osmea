@@ -27,9 +27,17 @@ _$GiftCardUpdateImpl _$$GiftCardUpdateImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$GiftCardUpdateImplToJson(
-        _$GiftCardUpdateImpl instance) =>
-    <String, dynamic>{
-      if (instance.note case final value?) 'note': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.expiresOn case final value?) 'expires_on': value,
-    };
+    _$GiftCardUpdateImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('note', instance.note);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('expires_on', instance.expiresOn);
+  return val;
+}

@@ -24,12 +24,8 @@ mixin _$RetrievesCountEventsResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesCountEventsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesCountEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesCountEventsResponseCopyWith<RetrievesCountEventsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$RetrievesCountEventsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesCountEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$RetrievesCountEventsResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesCountEventsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesCountEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,13 +130,11 @@ class _$RetrievesCountEventsResponseImpl
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of RetrievesCountEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesCountEventsResponseImplCopyWith<
@@ -172,11 +162,8 @@ abstract class _RetrievesCountEventsResponse
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of RetrievesCountEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesCountEventsResponseImplCopyWith<
           _$RetrievesCountEventsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

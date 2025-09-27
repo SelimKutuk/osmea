@@ -24,12 +24,8 @@ mixin _$CountCustomCollectionsResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this CountCustomCollectionsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CountCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CountCustomCollectionsResponseCopyWith<CountCustomCollectionsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$CountCustomCollectionsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CountCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$CountCustomCollectionsResponseImplCopyWithImpl<$Res>
       $Res Function(_$CountCustomCollectionsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CountCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,13 +130,11 @@ class _$CountCustomCollectionsResponseImpl
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of CountCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountCustomCollectionsResponseImplCopyWith<
@@ -172,11 +162,8 @@ abstract class _CountCustomCollectionsResponse
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of CountCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CountCustomCollectionsResponseImplCopyWith<
           _$CountCustomCollectionsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

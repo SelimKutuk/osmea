@@ -24,12 +24,8 @@ mixin _$ListMostPopularTagsResponse {
   @JsonKey(name: "tags")
   List<String>? get tags => throw _privateConstructorUsedError;
 
-  /// Serializes this ListMostPopularTagsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListMostPopularTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListMostPopularTagsResponseCopyWith<ListMostPopularTagsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$ListMostPopularTagsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListMostPopularTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$ListMostPopularTagsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListMostPopularTagsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListMostPopularTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,14 +138,12 @@ class _$ListMostPopularTagsResponseImpl
             const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  /// Create a copy of ListMostPopularTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListMostPopularTagsResponseImplCopyWith<_$ListMostPopularTagsResponseImpl>
@@ -180,11 +170,8 @@ abstract class _ListMostPopularTagsResponse
   @override
   @JsonKey(name: "tags")
   List<String>? get tags;
-
-  /// Create a copy of ListMostPopularTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListMostPopularTagsResponseImplCopyWith<_$ListMostPopularTagsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -16,10 +16,18 @@ _$UpdateExistingPageCompletelyRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateExistingPageCompletelyRequestImplToJson(
-        _$UpdateExistingPageCompletelyRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$UpdateExistingPageCompletelyRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -29,11 +37,19 @@ _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       handle: json['handle'] as String?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.handle case final value?) 'handle': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('author', instance.author);
+  writeNotNull('title', instance.title);
+  writeNotNull('handle', instance.handle);
+  return val;
+}

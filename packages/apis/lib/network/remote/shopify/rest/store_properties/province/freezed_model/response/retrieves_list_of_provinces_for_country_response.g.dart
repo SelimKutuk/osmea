@@ -16,11 +16,19 @@ _$RetrievesListOfProvincesForCountryResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesListOfProvincesForCountryResponseImplToJson(
-        _$RetrievesListOfProvincesForCountryResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.provinces?.map((e) => e.toJson()).toList() case final value?)
-        'provinces': value,
-    };
+    _$RetrievesListOfProvincesForCountryResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'provinces', instance.provinces?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$ProvinceImpl _$$ProvinceImplFromJson(Map<String, dynamic> json) =>
     _$ProvinceImpl(
@@ -35,15 +43,23 @@ _$ProvinceImpl _$$ProvinceImplFromJson(Map<String, dynamic> json) =>
       taxPercentage: (json['tax_percentage'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$ProvinceImplToJson(_$ProvinceImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.countryId case final value?) 'country_id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.taxName case final value?) 'tax_name': value,
-      if (instance.taxType case final value?) 'tax_type': value,
-      if (instance.shippingZoneId case final value?) 'shipping_zone_id': value,
-      if (instance.tax case final value?) 'tax': value,
-      if (instance.taxPercentage case final value?) 'tax_percentage': value,
-    };
+Map<String, dynamic> _$$ProvinceImplToJson(_$ProvinceImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('country_id', instance.countryId);
+  writeNotNull('name', instance.name);
+  writeNotNull('code', instance.code);
+  writeNotNull('tax_name', instance.taxName);
+  writeNotNull('tax_type', instance.taxType);
+  writeNotNull('shipping_zone_id', instance.shippingZoneId);
+  writeNotNull('tax', instance.tax);
+  writeNotNull('tax_percentage', instance.taxPercentage);
+  return val;
+}

@@ -19,11 +19,19 @@ _$CreateUnpublishedArticleBlogResponseImpl
         );
 
 Map<String, dynamic> _$$CreateUnpublishedArticleBlogResponseImplToJson(
-        _$CreateUnpublishedArticleBlogResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.article?.toJson() case final value?) 'article': value,
-      if (instance.errors?.toJson() case final value?) 'errors': value,
-    };
+    _$CreateUnpublishedArticleBlogResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('article', instance.article?.toJson());
+  writeNotNull('errors', instance.errors?.toJson());
+  return val;
+}
 
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
@@ -43,31 +51,46 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.blogId case final value?) 'blog_id': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.summaryHtml case final value?) 'summary_html': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('blog_id', instance.blogId);
+  writeNotNull('author', instance.author);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('summary_html', instance.summaryHtml);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}
 
 _$ErrorsImpl _$$ErrorsImplFromJson(Map<String, dynamic> json) => _$ErrorsImpl(
       title:
           (json['title'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-    };
+Map<String, dynamic> _$$ErrorsImplToJson(_$ErrorsImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  return val;
+}

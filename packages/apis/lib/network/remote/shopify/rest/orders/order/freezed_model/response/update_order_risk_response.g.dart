@@ -15,10 +15,18 @@ _$UpdateOrderRiskResponseImpl _$$UpdateOrderRiskResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateOrderRiskResponseImplToJson(
-        _$UpdateOrderRiskResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.risk?.toJson() case final value?) 'risk': value,
-    };
+    _$UpdateOrderRiskResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('risk', instance.risk?.toJson());
+  return val;
+}
 
 _$RiskImpl _$$RiskImplFromJson(Map<String, dynamic> json) => _$RiskImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -33,16 +41,24 @@ _$RiskImpl _$$RiskImplFromJson(Map<String, dynamic> json) => _$RiskImpl(
       merchantMessage: json['merchant_message'] as String?,
     );
 
-Map<String, dynamic> _$$RiskImplToJson(_$RiskImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.orderId case final value?) 'order_id': value,
-      if (instance.checkoutId case final value?) 'checkout_id': value,
-      if (instance.source case final value?) 'source': value,
-      if (instance.score case final value?) 'score': value,
-      if (instance.recommendation case final value?) 'recommendation': value,
-      if (instance.display case final value?) 'display': value,
-      if (instance.causeCancel case final value?) 'cause_cancel': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.merchantMessage case final value?) 'merchant_message': value,
-    };
+Map<String, dynamic> _$$RiskImplToJson(_$RiskImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('checkout_id', instance.checkoutId);
+  writeNotNull('source', instance.source);
+  writeNotNull('score', instance.score);
+  writeNotNull('recommendation', instance.recommendation);
+  writeNotNull('display', instance.display);
+  writeNotNull('cause_cancel', instance.causeCancel);
+  writeNotNull('message', instance.message);
+  writeNotNull('merchant_message', instance.merchantMessage);
+  return val;
+}

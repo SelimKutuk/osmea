@@ -23,12 +23,8 @@ PriceRuleCountResponse _$PriceRuleCountResponseFromJson(
 mixin _$PriceRuleCountResponse {
   int get count => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceRuleCountResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceRuleCountResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceRuleCountResponseCopyWith<PriceRuleCountResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,8 +49,6 @@ class _$PriceRuleCountResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceRuleCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,8 +85,6 @@ class __$$PriceRuleCountResponseImplCopyWithImpl<$Res>
       $Res Function(_$PriceRuleCountResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceRuleCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,13 +123,11 @@ class _$PriceRuleCountResponseImpl implements _PriceRuleCountResponse {
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of PriceRuleCountResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceRuleCountResponseImplCopyWith<_$PriceRuleCountResponseImpl>
@@ -161,11 +151,8 @@ abstract class _PriceRuleCountResponse implements PriceRuleCountResponse {
 
   @override
   int get count;
-
-  /// Create a copy of PriceRuleCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceRuleCountResponseImplCopyWith<_$PriceRuleCountResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

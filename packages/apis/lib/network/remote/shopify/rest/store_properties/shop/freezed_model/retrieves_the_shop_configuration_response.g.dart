@@ -16,10 +16,18 @@ _$RetrievesTheShopConfigurationResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesTheShopConfigurationResponseImplToJson(
-        _$RetrievesTheShopConfigurationResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.shop?.toJson() case final value?) 'shop': value,
-    };
+    _$RetrievesTheShopConfigurationResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shop', instance.shop?.toJson());
+  return val;
+}
 
 _$ShopImpl _$$ShopImplFromJson(Map<String, dynamic> json) => _$ShopImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -84,76 +92,73 @@ _$ShopImpl _$$ShopImplFromJson(Map<String, dynamic> json) => _$ShopImpl(
       transactionalSmsDisabled: json['transactional_sms_disabled'] as bool?,
     );
 
-Map<String, dynamic> _$$ShopImplToJson(_$ShopImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.email case final value?) 'email': value,
-      if (instance.domain case final value?) 'domain': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.address1 case final value?) 'address1': value,
-      if (instance.zip case final value?) 'zip': value,
-      if (instance.city case final value?) 'city': value,
-      if (instance.source case final value?) 'source': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.latitude case final value?) 'latitude': value,
-      if (instance.longitude case final value?) 'longitude': value,
-      if (instance.primaryLocale case final value?) 'primary_locale': value,
-      if (instance.address2 case final value?) 'address2': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.customerEmail case final value?) 'customer_email': value,
-      if (instance.timezone case final value?) 'timezone': value,
-      if (instance.ianaTimezone case final value?) 'iana_timezone': value,
-      if (instance.shopOwner case final value?) 'shop_owner': value,
-      if (instance.moneyFormat case final value?) 'money_format': value,
-      if (instance.moneyWithCurrencyFormat case final value?)
-        'money_with_currency_format': value,
-      if (instance.weightUnit case final value?) 'weight_unit': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.taxesIncluded case final value?) 'taxes_included': value,
-      if (instance.autoConfigureTaxInclusivity case final value?)
-        'auto_configure_tax_inclusivity': value,
-      if (instance.taxShipping case final value?) 'tax_shipping': value,
-      if (instance.countyTaxes case final value?) 'county_taxes': value,
-      if (instance.planDisplayName case final value?)
-        'plan_display_name': value,
-      if (instance.planName case final value?) 'plan_name': value,
-      if (instance.hasDiscounts case final value?) 'has_discounts': value,
-      if (instance.hasGiftCards case final value?) 'has_gift_cards': value,
-      if (instance.myshopifyDomain case final value?) 'myshopify_domain': value,
-      if (instance.googleAppsDomain case final value?)
-        'google_apps_domain': value,
-      if (instance.googleAppsLoginEnabled case final value?)
-        'google_apps_login_enabled': value,
-      if (instance.moneyInEmailsFormat case final value?)
-        'money_in_emails_format': value,
-      if (instance.moneyWithCurrencyInEmailsFormat case final value?)
-        'money_with_currency_in_emails_format': value,
-      if (instance.eligibleForPayments case final value?)
-        'eligible_for_payments': value,
-      if (instance.requiresExtraPaymentsAgreement case final value?)
-        'requires_extra_payments_agreement': value,
-      if (instance.passwordEnabled case final value?) 'password_enabled': value,
-      if (instance.hasStorefront case final value?) 'has_storefront': value,
-      if (instance.finances case final value?) 'finances': value,
-      if (instance.primaryLocationId case final value?)
-        'primary_location_id': value,
-      if (instance.checkoutApiSupported case final value?)
-        'checkout_api_supported': value,
-      if (instance.multiLocationEnabled case final value?)
-        'multi_location_enabled': value,
-      if (instance.setupRequired case final value?) 'setup_required': value,
-      if (instance.preLaunchEnabled case final value?)
-        'pre_launch_enabled': value,
-      if (instance.enabledPresentmentCurrencies case final value?)
-        'enabled_presentment_currencies': value,
-      if (instance.marketingSmsConsentEnabledAtCheckout case final value?)
-        'marketing_sms_consent_enabled_at_checkout': value,
-      if (instance.transactionalSmsDisabled case final value?)
-        'transactional_sms_disabled': value,
-    };
+Map<String, dynamic> _$$ShopImplToJson(_$ShopImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('email', instance.email);
+  writeNotNull('domain', instance.domain);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('address1', instance.address1);
+  writeNotNull('zip', instance.zip);
+  writeNotNull('city', instance.city);
+  writeNotNull('source', instance.source);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('latitude', instance.latitude);
+  writeNotNull('longitude', instance.longitude);
+  writeNotNull('primary_locale', instance.primaryLocale);
+  writeNotNull('address2', instance.address2);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('customer_email', instance.customerEmail);
+  writeNotNull('timezone', instance.timezone);
+  writeNotNull('iana_timezone', instance.ianaTimezone);
+  writeNotNull('shop_owner', instance.shopOwner);
+  writeNotNull('money_format', instance.moneyFormat);
+  writeNotNull('money_with_currency_format', instance.moneyWithCurrencyFormat);
+  writeNotNull('weight_unit', instance.weightUnit);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('taxes_included', instance.taxesIncluded);
+  writeNotNull(
+      'auto_configure_tax_inclusivity', instance.autoConfigureTaxInclusivity);
+  writeNotNull('tax_shipping', instance.taxShipping);
+  writeNotNull('county_taxes', instance.countyTaxes);
+  writeNotNull('plan_display_name', instance.planDisplayName);
+  writeNotNull('plan_name', instance.planName);
+  writeNotNull('has_discounts', instance.hasDiscounts);
+  writeNotNull('has_gift_cards', instance.hasGiftCards);
+  writeNotNull('myshopify_domain', instance.myshopifyDomain);
+  writeNotNull('google_apps_domain', instance.googleAppsDomain);
+  writeNotNull('google_apps_login_enabled', instance.googleAppsLoginEnabled);
+  writeNotNull('money_in_emails_format', instance.moneyInEmailsFormat);
+  writeNotNull('money_with_currency_in_emails_format',
+      instance.moneyWithCurrencyInEmailsFormat);
+  writeNotNull('eligible_for_payments', instance.eligibleForPayments);
+  writeNotNull('requires_extra_payments_agreement',
+      instance.requiresExtraPaymentsAgreement);
+  writeNotNull('password_enabled', instance.passwordEnabled);
+  writeNotNull('has_storefront', instance.hasStorefront);
+  writeNotNull('finances', instance.finances);
+  writeNotNull('primary_location_id', instance.primaryLocationId);
+  writeNotNull('checkout_api_supported', instance.checkoutApiSupported);
+  writeNotNull('multi_location_enabled', instance.multiLocationEnabled);
+  writeNotNull('setup_required', instance.setupRequired);
+  writeNotNull('pre_launch_enabled', instance.preLaunchEnabled);
+  writeNotNull(
+      'enabled_presentment_currencies', instance.enabledPresentmentCurrencies);
+  writeNotNull('marketing_sms_consent_enabled_at_checkout',
+      instance.marketingSmsConsentEnabledAtCheckout);
+  writeNotNull('transactional_sms_disabled', instance.transactionalSmsDisabled);
+  return val;
+}

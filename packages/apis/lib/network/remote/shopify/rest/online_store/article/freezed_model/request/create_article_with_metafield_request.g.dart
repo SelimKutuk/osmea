@@ -16,10 +16,18 @@ _$CreateArticleWithMetafieldRequestImpl
         );
 
 Map<String, dynamic> _$$CreateArticleWithMetafieldRequestImplToJson(
-        _$CreateArticleWithMetafieldRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.article?.toJson() case final value?) 'article': value,
-    };
+    _$CreateArticleWithMetafieldRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('article', instance.article?.toJson());
+  return val;
+}
 
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
@@ -33,17 +41,24 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.metafields?.map((e) => e.toJson()).toList()
-          case final value?)
-        'metafields': value,
-    };
+Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('author', instance.author);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull(
+      'metafields', instance.metafields?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
     _$MetafieldImpl(
@@ -53,10 +68,18 @@ _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
       namespace: json['namespace'] as String?,
     );
 
-Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) =>
-    <String, dynamic>{
-      if (instance.key case final value?) 'key': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.type case final value?) 'type': value,
-      if (instance.namespace case final value?) 'namespace': value,
-    };
+Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('key', instance.key);
+  writeNotNull('value', instance.value);
+  writeNotNull('type', instance.type);
+  writeNotNull('namespace', instance.namespace);
+  return val;
+}

@@ -43,12 +43,8 @@ mixin _$TenderTransaction {
   Map<String, dynamic>? get paymentDetails =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this TenderTransaction to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TenderTransaction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $TenderTransactionCopyWith<TenderTransaction> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -82,8 +78,6 @@ class _$TenderTransactionCopyWithImpl<$Res, $Val extends TenderTransaction>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TenderTransaction
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -172,8 +166,6 @@ class __$$TenderTransactionImplCopyWithImpl<$Res>
       $Res Function(_$TenderTransactionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TenderTransaction
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,7 +311,7 @@ class _$TenderTransactionImpl implements _TenderTransaction {
                 .equals(other._paymentDetails, _paymentDetails));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -334,9 +326,7 @@ class _$TenderTransactionImpl implements _TenderTransaction {
       paymentMethod,
       const DeepCollectionEquality().hash(_paymentDetails));
 
-  /// Create a copy of TenderTransaction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TenderTransactionImplCopyWith<_$TenderTransactionImpl> get copyWith =>
@@ -391,19 +381,15 @@ abstract class _TenderTransaction implements TenderTransaction {
   String get processedAt;
   @override
   @JsonKey(name: "remote_reference")
-  String?
-      get remoteReference; // Made nullable - could be null for some payment types
-  @override
+  String? get remoteReference;
+  @override // Made nullable - could be null for some payment types
   @JsonKey(name: "payment_method")
   String get paymentMethod;
   @override
   @JsonKey(name: "payment_details")
   Map<String, dynamic>? get paymentDetails;
-
-  /// Create a copy of TenderTransaction
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$TenderTransactionImplCopyWith<_$TenderTransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

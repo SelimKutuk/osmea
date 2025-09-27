@@ -16,8 +16,15 @@ _$GetAnApplicationCreditResponseImpl
         );
 
 Map<String, dynamic> _$$GetAnApplicationCreditResponseImplToJson(
-        _$GetAnApplicationCreditResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.applicationCredit?.toJson() case final value?)
-        'application_credit': value,
-    };
+    _$GetAnApplicationCreditResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('application_credit', instance.applicationCredit?.toJson());
+  return val;
+}

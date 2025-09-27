@@ -17,11 +17,18 @@ _$UpdatesAMarketingEventRequestModelImpl
         );
 
 Map<String, dynamic> _$$UpdatesAMarketingEventRequestModelImplToJson(
-        _$UpdatesAMarketingEventRequestModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.marketingEvent?.toJson() case final value?)
-        'marketing_event': value,
-    };
+    _$UpdatesAMarketingEventRequestModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('marketing_event', instance.marketingEvent?.toJson());
+  return val;
+}
 
 _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     _$MarketingEventImpl(
@@ -41,20 +48,27 @@ _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$MarketingEventImplToJson(
-        _$MarketingEventImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.remoteId case final value?) 'remote_id': value,
-      if (instance.startedAt case final value?) 'started_at': value,
-      if (instance.endedAt case final value?) 'ended_at': value,
-      if (instance.scheduledToEndAt case final value?)
-        'scheduled_to_end_at': value,
-      if (instance.budget case final value?) 'budget': value,
-      if (instance.budgetType case final value?) 'budget_type': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.utmCampaign case final value?) 'utm_campaign': value,
-      if (instance.utmSource case final value?) 'utm_source': value,
-      if (instance.utmMedium case final value?) 'utm_medium': value,
-      if (instance.eventType case final value?) 'event_type': value,
-      if (instance.referringDomain case final value?) 'referring_domain': value,
-    };
+    _$MarketingEventImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('remote_id', instance.remoteId);
+  writeNotNull('started_at', instance.startedAt);
+  writeNotNull('ended_at', instance.endedAt);
+  writeNotNull('scheduled_to_end_at', instance.scheduledToEndAt);
+  writeNotNull('budget', instance.budget);
+  writeNotNull('budget_type', instance.budgetType);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('utm_campaign', instance.utmCampaign);
+  writeNotNull('utm_source', instance.utmSource);
+  writeNotNull('utm_medium', instance.utmMedium);
+  writeNotNull('event_type', instance.eventType);
+  writeNotNull('referring_domain', instance.referringDomain);
+  return val;
+}

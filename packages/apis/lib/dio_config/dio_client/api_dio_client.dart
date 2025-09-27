@@ -91,6 +91,15 @@ class ApiDioClient implements ApiBaseClient {
       dio.interceptors.add(cookieJar);
     }
 
+    // 🛒 Add cart token interceptor for cart operations
+    try {
+      final cartTokenInterceptor = WooCartTokenInterceptor();
+      dio.interceptors.add(cartTokenInterceptor);
+      debugPrint('🛒 Cart token interceptor enabled for WooCommerce');
+    } catch (e) {
+      debugPrint('⚠️ Failed to add cart token interceptor: $e');
+    }
+
     _proxySettingsForQA(dio);
     return dio;
   }

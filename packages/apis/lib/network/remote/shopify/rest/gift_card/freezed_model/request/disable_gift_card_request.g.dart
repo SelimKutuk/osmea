@@ -15,17 +15,33 @@ _$DisableGiftCardRequestImpl _$$DisableGiftCardRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$DisableGiftCardRequestImplToJson(
-        _$DisableGiftCardRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.giftCard?.toJson() case final value?) 'gift_card': value,
-    };
+    _$DisableGiftCardRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gift_card', instance.giftCard?.toJson());
+  return val;
+}
 
 _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
     _$GiftCardImpl(
       id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-    };
+Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  return val;
+}

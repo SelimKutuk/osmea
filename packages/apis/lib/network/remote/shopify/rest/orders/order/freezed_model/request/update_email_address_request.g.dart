@@ -15,18 +15,34 @@ _$UpdateEmailAddressRequestImpl _$$UpdateEmailAddressRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateEmailAddressRequestImplToJson(
-        _$UpdateEmailAddressRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.order?.toJson() case final value?) 'order': value,
-    };
+    _$UpdateEmailAddressRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order?.toJson());
+  return val;
+}
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       email: json['email'] as String?,
       id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.email case final value?) 'email': value,
-      if (instance.id case final value?) 'id': value,
-    };
+Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email', instance.email);
+  writeNotNull('id', instance.id);
+  return val;
+}

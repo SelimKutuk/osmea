@@ -13,7 +13,15 @@ _$CountAllPagesResponseImpl _$$CountAllPagesResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$CountAllPagesResponseImplToJson(
-        _$CountAllPagesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$CountAllPagesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

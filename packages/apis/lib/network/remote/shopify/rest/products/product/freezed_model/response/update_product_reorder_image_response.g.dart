@@ -16,10 +16,18 @@ _$UpdateProductReorderImageResponseImpl
         );
 
 Map<String, dynamic> _$$UpdateProductReorderImageResponseImplToJson(
-        _$UpdateProductReorderImageResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.product?.toJson() case final value?) 'product': value,
-    };
+    _$UpdateProductReorderImageResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product?.toJson());
+  return val;
+}
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
@@ -47,30 +55,35 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       image: json['image'],
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.productType case final value?) 'product_type': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.publishedScope case final value?) 'published_scope': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.variants?.map((e) => e.toJson()).toList() case final value?)
-        'variants': value,
-      if (instance.options?.map((e) => e.toJson()).toList() case final value?)
-        'options': value,
-      if (instance.images case final value?) 'images': value,
-      if (instance.image case final value?) 'image': value,
-    };
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('product_type', instance.productType);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('published_scope', instance.publishedScope);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('status', instance.status);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('variants', instance.variants?.map((e) => e.toJson()).toList());
+  writeNotNull('options', instance.options?.map((e) => e.toJson()).toList());
+  writeNotNull('images', instance.images);
+  writeNotNull('image', instance.image);
+  return val;
+}
 
 _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -81,14 +94,22 @@ _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
           (json['values'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.values case final value?) 'values': value,
-    };
+Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('name', instance.name);
+  writeNotNull('position', instance.position);
+  writeNotNull('values', instance.values);
+  return val;
+}
 
 _$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
     _$VariantImpl(
@@ -120,39 +141,40 @@ _$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
       imageId: json['image_id'],
     );
 
-Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.inventoryPolicy case final value?) 'inventory_policy': value,
-      if (instance.compareAtPrice case final value?) 'compare_at_price': value,
-      if (instance.option1 case final value?) 'option1': value,
-      if (instance.option2 case final value?) 'option2': value,
-      if (instance.option3 case final value?) 'option3': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.barcode case final value?) 'barcode': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.inventoryManagement case final value?)
-        'inventory_management': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.weight case final value?) 'weight': value,
-      if (instance.weightUnit case final value?) 'weight_unit': value,
-      if (instance.inventoryItemId case final value?)
-        'inventory_item_id': value,
-      if (instance.inventoryQuantity case final value?)
-        'inventory_quantity': value,
-      if (instance.oldInventoryQuantity case final value?)
-        'old_inventory_quantity': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.imageId case final value?) 'image_id': value,
-    };
+Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('title', instance.title);
+  writeNotNull('price', instance.price);
+  writeNotNull('position', instance.position);
+  writeNotNull('inventory_policy', instance.inventoryPolicy);
+  writeNotNull('compare_at_price', instance.compareAtPrice);
+  writeNotNull('option1', instance.option1);
+  writeNotNull('option2', instance.option2);
+  writeNotNull('option3', instance.option3);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('barcode', instance.barcode);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('inventory_management', instance.inventoryManagement);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('weight', instance.weight);
+  writeNotNull('weight_unit', instance.weightUnit);
+  writeNotNull('inventory_item_id', instance.inventoryItemId);
+  writeNotNull('inventory_quantity', instance.inventoryQuantity);
+  writeNotNull('old_inventory_quantity', instance.oldInventoryQuantity);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('image_id', instance.imageId);
+  return val;
+}

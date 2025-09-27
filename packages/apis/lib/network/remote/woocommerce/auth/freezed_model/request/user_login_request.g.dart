@@ -18,12 +18,21 @@ _$UserLoginRequestImpl _$$UserLoginRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UserLoginRequestImplToJson(
-        _$UserLoginRequestImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'remember_me': instance.rememberMe,
-      if (instance.deviceId case final value?) 'device_id': value,
-      if (instance.deviceName case final value?) 'device_name': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$UserLoginRequestImpl instance) {
+  final val = <String, dynamic>{
+    'email': instance.email,
+    'password': instance.password,
+    'remember_me': instance.rememberMe,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('device_name', instance.deviceName);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

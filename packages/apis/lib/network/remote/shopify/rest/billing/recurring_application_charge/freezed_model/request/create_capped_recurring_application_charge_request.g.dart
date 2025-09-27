@@ -35,12 +35,21 @@ _$CappedRecurringApplicationChargeDataImpl
         );
 
 Map<String, dynamic> _$$CappedRecurringApplicationChargeDataImplToJson(
-        _$CappedRecurringApplicationChargeDataImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'price': instance.price,
-      'return_url': instance.returnUrl,
-      'capped_amount': instance.cappedAmount,
-      'terms': instance.terms,
-      if (instance.test case final value?) 'test': value,
-    };
+    _$CappedRecurringApplicationChargeDataImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'price': instance.price,
+    'return_url': instance.returnUrl,
+    'capped_amount': instance.cappedAmount,
+    'terms': instance.terms,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('test', instance.test);
+  return val;
+}

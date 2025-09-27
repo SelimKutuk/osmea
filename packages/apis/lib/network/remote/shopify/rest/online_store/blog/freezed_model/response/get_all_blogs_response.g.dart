@@ -15,11 +15,18 @@ _$GetAllBlogsResponseImpl _$$GetAllBlogsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetAllBlogsResponseImplToJson(
-        _$GetAllBlogsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.blogs?.map((e) => e.toJson()).toList() case final value?)
-        'blogs': value,
-    };
+    _$GetAllBlogsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('blogs', instance.blogs?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$BlogImpl _$$BlogImplFromJson(Map<String, dynamic> json) => _$BlogImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -35,19 +42,25 @@ _$BlogImpl _$$BlogImplFromJson(Map<String, dynamic> json) => _$BlogImpl(
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.commentable case final value?) 'commentable': value,
-      if (instance.feedburner case final value?) 'feedburner': value,
-      if (instance.feedburnerLocation case final value?)
-        'feedburner_location': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('title', instance.title);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('commentable', instance.commentable);
+  writeNotNull('feedburner', instance.feedburner);
+  writeNotNull('feedburner_location', instance.feedburnerLocation);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

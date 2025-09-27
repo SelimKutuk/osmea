@@ -26,12 +26,8 @@ mixin _$CreateCommentTextileMarkupResponse {
   @JsonKey(name: "errors")
   Errors? get errors => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCommentTextileMarkupResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCommentTextileMarkupResponseCopyWith<
           CreateCommentTextileMarkupResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -64,8 +60,6 @@ class _$CreateCommentTextileMarkupResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -84,8 +78,6 @@ class _$CreateCommentTextileMarkupResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CommentCopyWith<$Res>? get comment {
@@ -98,8 +90,6 @@ class _$CreateCommentTextileMarkupResponseCopyWithImpl<$Res,
     });
   }
 
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ErrorsCopyWith<$Res>? get errors {
@@ -142,8 +132,6 @@ class __$$CreateCommentTextileMarkupResponseImplCopyWithImpl<$Res>
       $Res Function(_$CreateCommentTextileMarkupResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,13 +184,11 @@ class _$CreateCommentTextileMarkupResponseImpl
             (identical(other.errors, errors) || other.errors == errors));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, comment, errors);
 
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCommentTextileMarkupResponseImplCopyWith<
@@ -235,11 +221,8 @@ abstract class _CreateCommentTextileMarkupResponse
   @override
   @JsonKey(name: "errors")
   Errors? get errors;
-
-  /// Create a copy of CreateCommentTextileMarkupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCommentTextileMarkupResponseImplCopyWith<
           _$CreateCommentTextileMarkupResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -272,12 +255,8 @@ mixin _$Comment {
   @JsonKey(name: "published_at")
   dynamic get publishedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this Comment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -309,8 +288,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -398,8 +375,6 @@ class __$$CommentImplCopyWithImpl<$Res>
       _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -535,7 +510,7 @@ class _$CommentImpl implements _Comment {
                 .equals(other.publishedAt, publishedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -550,9 +525,7 @@ class _$CommentImpl implements _Comment {
       const DeepCollectionEquality().hash(userAgent),
       const DeepCollectionEquality().hash(publishedAt));
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
@@ -612,11 +585,8 @@ abstract class _Comment implements Comment {
   @override
   @JsonKey(name: "published_at")
   dynamic get publishedAt;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -634,12 +604,8 @@ mixin _$Errors {
   @JsonKey(name: "email")
   List<String>? get email => throw _privateConstructorUsedError;
 
-  /// Serializes this Errors to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ErrorsCopyWith<Errors> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -664,8 +630,6 @@ class _$ErrorsCopyWithImpl<$Res, $Val extends Errors>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -711,8 +675,6 @@ class __$$ErrorsImplCopyWithImpl<$Res>
       _$ErrorsImpl _value, $Res Function(_$ErrorsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -799,7 +761,7 @@ class _$ErrorsImpl implements _Errors {
             const DeepCollectionEquality().equals(other._email, _email));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -807,9 +769,7 @@ class _$ErrorsImpl implements _Errors {
       const DeepCollectionEquality().hash(_body),
       const DeepCollectionEquality().hash(_email));
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorsImplCopyWith<_$ErrorsImpl> get copyWith =>
@@ -840,11 +800,8 @@ abstract class _Errors implements Errors {
   @override
   @JsonKey(name: "email")
   List<String>? get email;
-
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ErrorsImplCopyWith<_$ErrorsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

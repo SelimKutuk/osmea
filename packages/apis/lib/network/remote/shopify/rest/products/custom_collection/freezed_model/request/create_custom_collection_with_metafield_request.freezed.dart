@@ -25,12 +25,8 @@ mixin _$CreateCustomCollectionWithMetafieldRequest {
   @JsonKey(name: "custom_collection")
   CustomCollection get customCollection => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCustomCollectionWithMetafieldRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCustomCollectionWithMetafieldRequestCopyWith<
           CreateCustomCollectionWithMetafieldRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -62,8 +58,6 @@ class _$CreateCustomCollectionWithMetafieldRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,8 +71,6 @@ class _$CreateCustomCollectionWithMetafieldRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomCollectionCopyWith<$Res> get customCollection {
@@ -115,8 +107,6 @@ class __$$CreateCustomCollectionWithMetafieldRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateCustomCollectionWithMetafieldRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -160,13 +150,11 @@ class _$CreateCustomCollectionWithMetafieldRequestImpl
                 other.customCollection == customCollection));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customCollection);
 
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCustomCollectionWithMetafieldRequestImplCopyWith<
@@ -198,11 +186,8 @@ abstract class _CreateCustomCollectionWithMetafieldRequest
   @override
   @JsonKey(name: "custom_collection")
   CustomCollection get customCollection;
-
-  /// Create a copy of CreateCustomCollectionWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCustomCollectionWithMetafieldRequestImplCopyWith<
           _$CreateCustomCollectionWithMetafieldRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -219,12 +204,8 @@ mixin _$CustomCollection {
   @JsonKey(name: "metafields")
   List<Metafield> get metafields => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomCollectionCopyWith<CustomCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -250,8 +231,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -292,8 +271,6 @@ class __$$CustomCollectionImplCopyWithImpl<$Res>
       $Res Function(_$CustomCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -351,14 +328,12 @@ class _$CustomCollectionImpl implements _CustomCollection {
                 .equals(other._metafields, _metafields));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, const DeepCollectionEquality().hash(_metafields));
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
@@ -388,11 +363,8 @@ abstract class _CustomCollection implements CustomCollection {
   @override
   @JsonKey(name: "metafields")
   List<Metafield> get metafields;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -412,12 +384,8 @@ mixin _$Metafield {
   @JsonKey(name: "namespace")
   String get namespace => throw _privateConstructorUsedError;
 
-  /// Serializes this Metafield to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MetafieldCopyWith<Metafield> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -444,8 +412,6 @@ class _$MetafieldCopyWithImpl<$Res, $Val extends Metafield>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -498,8 +464,6 @@ class __$$MetafieldImplCopyWithImpl<$Res>
       _$MetafieldImpl _value, $Res Function(_$MetafieldImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -571,13 +535,11 @@ class _$MetafieldImpl implements _Metafield {
                 other.namespace == namespace));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, key, value, type, namespace);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
@@ -614,11 +576,8 @@ abstract class _Metafield implements Metafield {
   @override
   @JsonKey(name: "namespace")
   String get namespace;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

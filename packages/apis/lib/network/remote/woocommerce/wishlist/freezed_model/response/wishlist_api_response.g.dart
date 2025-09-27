@@ -22,15 +22,22 @@ _$WishlistApiResponseImpl<T> _$$WishlistApiResponseImplFromJson<T>(
 Map<String, dynamic> _$$WishlistApiResponseImplToJson<T>(
   _$WishlistApiResponseImpl<T> instance,
   Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      if (instance.success case final value?) 'success': value,
-      if (instance.message case final value?) 'message': value,
-      if (_$nullableGenericToJson(instance.data, toJsonT) case final value?)
-        'data': value,
-      if (instance.errorCode case final value?) 'error_code': value,
-      if (instance.errors case final value?) 'errors': value,
-    };
+) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('success', instance.success);
+  writeNotNull('message', instance.message);
+  writeNotNull('data', _$nullableGenericToJson(instance.data, toJsonT));
+  writeNotNull('error_code', instance.errorCode);
+  writeNotNull('errors', instance.errors);
+  return val;
+}
 
 T? _$nullableGenericFromJson<T>(
   Object? input,
@@ -64,15 +71,23 @@ _$WishlistPaginatedResponseImpl<T> _$$WishlistPaginatedResponseImplFromJson<T>(
 Map<String, dynamic> _$$WishlistPaginatedResponseImplToJson<T>(
   _$WishlistPaginatedResponseImpl<T> instance,
   Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      if (instance.success case final value?) 'success': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.map(toJsonT).toList() case final value?) 'data': value,
-      if (instance.currentPage case final value?) 'current_page': value,
-      if (instance.perPage case final value?) 'per_page': value,
-      if (instance.totalItems case final value?) 'total_items': value,
-      if (instance.totalPages case final value?) 'total_pages': value,
-      if (instance.errorCode case final value?) 'error_code': value,
-      if (instance.errors case final value?) 'errors': value,
-    };
+) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('success', instance.success);
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.map(toJsonT).toList());
+  writeNotNull('current_page', instance.currentPage);
+  writeNotNull('per_page', instance.perPage);
+  writeNotNull('total_items', instance.totalItems);
+  writeNotNull('total_pages', instance.totalPages);
+  writeNotNull('error_code', instance.errorCode);
+  writeNotNull('errors', instance.errors);
+  return val;
+}

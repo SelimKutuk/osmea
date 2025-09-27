@@ -26,12 +26,8 @@ mixin _$InventoryItemToLocationRequest {
   @JsonKey(name: "inventory_item_id")
   int? get inventoryItemId => throw _privateConstructorUsedError;
 
-  /// Serializes this InventoryItemToLocationRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InventoryItemToLocationRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InventoryItemToLocationRequestCopyWith<InventoryItemToLocationRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -60,8 +56,6 @@ class _$InventoryItemToLocationRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InventoryItemToLocationRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,8 +99,6 @@ class __$$InventoryItemToLocationRequestImplCopyWithImpl<$Res>
       $Res Function(_$InventoryItemToLocationRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InventoryItemToLocationRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,13 +153,11 @@ class _$InventoryItemToLocationRequestImpl
                 other.inventoryItemId == inventoryItemId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, locationId, inventoryItemId);
 
-  /// Create a copy of InventoryItemToLocationRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InventoryItemToLocationRequestImplCopyWith<
@@ -199,11 +189,8 @@ abstract class _InventoryItemToLocationRequest
   @override
   @JsonKey(name: "inventory_item_id")
   int? get inventoryItemId;
-
-  /// Create a copy of InventoryItemToLocationRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InventoryItemToLocationRequestImplCopyWith<
           _$InventoryItemToLocationRequestImpl>
       get copyWith => throw _privateConstructorUsedError;

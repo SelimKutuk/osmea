@@ -16,10 +16,18 @@ _$CreateProductMultiVariantsOptionsRequestImpl
         );
 
 Map<String, dynamic> _$$CreateProductMultiVariantsOptionsRequestImplToJson(
-        _$CreateProductMultiVariantsOptionsRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.product?.toJson() case final value?) 'product': value,
-    };
+    _$CreateProductMultiVariantsOptionsRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product?.toJson());
+  return val;
+}
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
@@ -35,17 +43,23 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.productType case final value?) 'product_type': value,
-      if (instance.variants?.map((e) => e.toJson()).toList() case final value?)
-        'variants': value,
-      if (instance.options?.map((e) => e.toJson()).toList() case final value?)
-        'options': value,
-    };
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('product_type', instance.productType);
+  writeNotNull('variants', instance.variants?.map((e) => e.toJson()).toList());
+  writeNotNull('options', instance.options?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
       name: json['name'] as String?,
@@ -53,11 +67,19 @@ _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
           (json['values'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) =>
-    <String, dynamic>{
-      if (instance.name case final value?) 'name': value,
-      if (instance.values case final value?) 'values': value,
-    };
+Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('values', instance.values);
+  return val;
+}
 
 _$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
     _$VariantImpl(
@@ -65,8 +87,16 @@ _$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
       option2: json['option2'] as String?,
     );
 
-Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) =>
-    <String, dynamic>{
-      if (instance.option1 case final value?) 'option1': value,
-      if (instance.option2 case final value?) 'option2': value,
-    };
+Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('option1', instance.option1);
+  writeNotNull('option2', instance.option2);
+  return val;
+}

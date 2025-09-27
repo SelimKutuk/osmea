@@ -14,8 +14,17 @@ _$CreateWishlistGroupRequestImpl _$$CreateWishlistGroupRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateWishlistGroupRequestImplToJson(
-        _$CreateWishlistGroupRequestImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      if (instance.description case final value?) 'description': value,
-    };
+    _$CreateWishlistGroupRequestImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  return val;
+}

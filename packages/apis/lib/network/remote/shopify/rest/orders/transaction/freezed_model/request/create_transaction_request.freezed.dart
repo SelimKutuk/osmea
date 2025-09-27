@@ -24,12 +24,8 @@ mixin _$CreateTransactionRequest {
   @JsonKey(name: "transaction")
   Transaction? get transaction => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateTransactionRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateTransactionRequestCopyWith<CreateTransactionRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$CreateTransactionRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$CreateTransactionRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TransactionCopyWith<$Res>? get transaction {
@@ -111,8 +103,6 @@ class __$$CreateTransactionRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateTransactionRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,13 +144,11 @@ class _$CreateTransactionRequestImpl implements _CreateTransactionRequest {
                 other.transaction == transaction));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, transaction);
 
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateTransactionRequestImplCopyWith<_$CreateTransactionRequestImpl>
@@ -186,11 +174,8 @@ abstract class _CreateTransactionRequest implements CreateTransactionRequest {
   @override
   @JsonKey(name: "transaction")
   Transaction? get transaction;
-
-  /// Create a copy of CreateTransactionRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateTransactionRequestImplCopyWith<_$CreateTransactionRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -214,12 +199,8 @@ mixin _$Transaction {
   @JsonKey(name: "source")
   String? get source => throw _privateConstructorUsedError;
 
-  /// Serializes this Transaction to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Transaction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $TransactionCopyWith<Transaction> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -249,8 +230,6 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Transaction
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -315,8 +294,6 @@ class __$$TransactionImplCopyWithImpl<$Res>
       _$TransactionImpl _value, $Res Function(_$TransactionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Transaction
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -408,14 +385,12 @@ class _$TransactionImpl implements _Transaction {
             (identical(other.source, source) || other.source == source));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, kind, amount, currency, gateway, test, source);
 
-  /// Create a copy of Transaction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TransactionImplCopyWith<_$TransactionImpl> get copyWith =>
@@ -459,11 +434,8 @@ abstract class _Transaction implements Transaction {
   @override
   @JsonKey(name: "source")
   String? get source;
-
-  /// Create a copy of Transaction
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$TransactionImplCopyWith<_$TransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

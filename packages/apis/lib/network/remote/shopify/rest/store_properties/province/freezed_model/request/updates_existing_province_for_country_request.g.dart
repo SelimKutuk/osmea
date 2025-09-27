@@ -29,10 +29,18 @@ _$ProvinceUpdateImpl _$$ProvinceUpdateImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$ProvinceUpdateImplToJson(
-        _$ProvinceUpdateImpl instance) =>
-    <String, dynamic>{
-      if (instance.name case final value?) 'name': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.taxName case final value?) 'tax_name': value,
-      if (instance.tax case final value?) 'tax': value,
-    };
+    _$ProvinceUpdateImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('code', instance.code);
+  writeNotNull('tax_name', instance.taxName);
+  writeNotNull('tax', instance.tax);
+  return val;
+}

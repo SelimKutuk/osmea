@@ -24,12 +24,8 @@ mixin _$CreateCommentTextileMarkupRequest {
   @JsonKey(name: "comment")
   Comment? get comment => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCommentTextileMarkupRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCommentTextileMarkupRequestCopyWith<CreateCommentTextileMarkupRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateCommentTextileMarkupRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateCommentTextileMarkupRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CommentCopyWith<$Res>? get comment {
@@ -113,8 +105,6 @@ class __$$CreateCommentTextileMarkupRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateCommentTextileMarkupRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$CreateCommentTextileMarkupRequestImpl
             (identical(other.comment, comment) || other.comment == comment));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, comment);
 
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCommentTextileMarkupRequestImplCopyWith<
@@ -192,11 +180,8 @@ abstract class _CreateCommentTextileMarkupRequest
   @override
   @JsonKey(name: "comment")
   Comment? get comment;
-
-  /// Create a copy of CreateCommentTextileMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCommentTextileMarkupRequestImplCopyWith<
           _$CreateCommentTextileMarkupRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -221,12 +206,8 @@ mixin _$Comment {
   @JsonKey(name: "article_id")
   int? get articleId => throw _privateConstructorUsedError;
 
-  /// Serializes this Comment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -254,8 +235,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,8 +298,6 @@ class __$$CommentImplCopyWithImpl<$Res>
       _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -412,14 +389,12 @@ class _$CommentImpl implements _Comment {
                 other.articleId == articleId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, body, author, email, ip, blogId, articleId);
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
@@ -462,11 +437,8 @@ abstract class _Comment implements Comment {
   @override
   @JsonKey(name: "article_id")
   int? get articleId;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

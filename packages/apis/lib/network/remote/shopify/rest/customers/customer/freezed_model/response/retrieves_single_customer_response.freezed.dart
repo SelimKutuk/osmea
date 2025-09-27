@@ -24,12 +24,8 @@ mixin _$RetrievesSingleCustomerResponse {
   @JsonKey(name: "customer")
   Customer? get customer => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesSingleCustomerResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesSingleCustomerResponseCopyWith<RetrievesSingleCustomerResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$RetrievesSingleCustomerResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$RetrievesSingleCustomerResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomerCopyWith<$Res>? get customer {
@@ -113,8 +105,6 @@ class __$$RetrievesSingleCustomerResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesSingleCustomerResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$RetrievesSingleCustomerResponseImpl
                 other.customer == customer));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customer);
 
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesSingleCustomerResponseImplCopyWith<
@@ -192,11 +180,8 @@ abstract class _RetrievesSingleCustomerResponse
   @override
   @JsonKey(name: "customer")
   Customer? get customer;
-
-  /// Create a copy of RetrievesSingleCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesSingleCustomerResponseImplCopyWith<
           _$RetrievesSingleCustomerResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -251,12 +236,8 @@ mixin _$Customer {
   @JsonKey(name: "default_address")
   DefaultAddress? get defaultAddress => throw _privateConstructorUsedError;
 
-  /// Serializes this Customer to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomerCopyWith<Customer> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -305,8 +286,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -415,8 +394,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
     ) as $Val);
   }
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $EmailMarketingConsentCopyWith<$Res>? get emailMarketingConsent {
@@ -430,8 +407,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
     });
   }
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SmsMarketingConsentCopyWith<$Res>? get smsMarketingConsent {
@@ -445,8 +420,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
     });
   }
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DefaultAddressCopyWith<$Res>? get defaultAddress {
@@ -508,8 +481,6 @@ class __$$CustomerImplCopyWithImpl<$Res>
       _$CustomerImpl _value, $Res Function(_$CustomerImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -774,7 +745,7 @@ class _$CustomerImpl implements _Customer {
                 other.defaultAddress == defaultAddress));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -800,9 +771,7 @@ class _$CustomerImpl implements _Customer {
         defaultAddress
       ]);
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
@@ -905,11 +874,8 @@ abstract class _Customer implements Customer {
   @override
   @JsonKey(name: "default_address")
   DefaultAddress? get defaultAddress;
-
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -939,12 +905,8 @@ mixin _$Address {
   @JsonKey(name: "default")
   bool? get addressDefault => throw _privateConstructorUsedError;
 
-  /// Serializes this Address to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -975,8 +937,6 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1058,8 +1018,6 @@ class __$$AddressImplCopyWithImpl<$Res>
       _$AddressImpl _value, $Res Function(_$AddressImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1186,7 +1144,7 @@ class _$AddressImpl implements _Address {
                 other.addressDefault == addressDefault));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1200,9 +1158,7 @@ class _$AddressImpl implements _Address {
       countryName,
       addressDefault);
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
@@ -1257,11 +1213,8 @@ abstract class _Address implements Address {
   @override
   @JsonKey(name: "default")
   bool? get addressDefault;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1291,12 +1244,8 @@ mixin _$DefaultAddress {
   @JsonKey(name: "default")
   bool? get defaultAddressDefault => throw _privateConstructorUsedError;
 
-  /// Serializes this DefaultAddress to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DefaultAddress
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DefaultAddressCopyWith<DefaultAddress> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1329,8 +1278,6 @@ class _$DefaultAddressCopyWithImpl<$Res, $Val extends DefaultAddress>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DefaultAddress
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1413,8 +1360,6 @@ class __$$DefaultAddressImplCopyWithImpl<$Res>
       _$DefaultAddressImpl _value, $Res Function(_$DefaultAddressImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DefaultAddress
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1541,7 +1486,7 @@ class _$DefaultAddressImpl implements _DefaultAddress {
                 other.defaultAddressDefault == defaultAddressDefault));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1555,9 +1500,7 @@ class _$DefaultAddressImpl implements _DefaultAddress {
       countryName,
       defaultAddressDefault);
 
-  /// Create a copy of DefaultAddress
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DefaultAddressImplCopyWith<_$DefaultAddressImpl> get copyWith =>
@@ -1615,11 +1558,8 @@ abstract class _DefaultAddress implements DefaultAddress {
   @override
   @JsonKey(name: "default")
   bool? get defaultAddressDefault;
-
-  /// Create a copy of DefaultAddress
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DefaultAddressImplCopyWith<_$DefaultAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1638,12 +1578,8 @@ mixin _$EmailMarketingConsent {
   @JsonKey(name: "consent_updated_at")
   dynamic get consentUpdatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this EmailMarketingConsent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of EmailMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $EmailMarketingConsentCopyWith<EmailMarketingConsent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1671,8 +1607,6 @@ class _$EmailMarketingConsentCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of EmailMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1721,8 +1655,6 @@ class __$$EmailMarketingConsentImplCopyWithImpl<$Res>
       $Res Function(_$EmailMarketingConsentImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of EmailMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1785,14 +1717,12 @@ class _$EmailMarketingConsentImpl implements _EmailMarketingConsent {
                 .equals(other.consentUpdatedAt, consentUpdatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, state, optInLevel,
       const DeepCollectionEquality().hash(consentUpdatedAt));
 
-  /// Create a copy of EmailMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$EmailMarketingConsentImplCopyWith<_$EmailMarketingConsentImpl>
@@ -1826,11 +1756,8 @@ abstract class _EmailMarketingConsent implements EmailMarketingConsent {
   @override
   @JsonKey(name: "consent_updated_at")
   dynamic get consentUpdatedAt;
-
-  /// Create a copy of EmailMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$EmailMarketingConsentImplCopyWith<_$EmailMarketingConsentImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1850,12 +1777,8 @@ mixin _$SmsMarketingConsent {
   @JsonKey(name: "consent_collected_from")
   String? get consentCollectedFrom => throw _privateConstructorUsedError;
 
-  /// Serializes this SmsMarketingConsent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SmsMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SmsMarketingConsentCopyWith<SmsMarketingConsent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1883,8 +1806,6 @@ class _$SmsMarketingConsentCopyWithImpl<$Res, $Val extends SmsMarketingConsent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SmsMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1937,8 +1858,6 @@ class __$$SmsMarketingConsentImplCopyWithImpl<$Res>
       $Res Function(_$SmsMarketingConsentImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SmsMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2012,7 +1931,7 @@ class _$SmsMarketingConsentImpl implements _SmsMarketingConsent {
                 other.consentCollectedFrom == consentCollectedFrom));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2021,9 +1940,7 @@ class _$SmsMarketingConsentImpl implements _SmsMarketingConsent {
       const DeepCollectionEquality().hash(consentUpdatedAt),
       consentCollectedFrom);
 
-  /// Create a copy of SmsMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SmsMarketingConsentImplCopyWith<_$SmsMarketingConsentImpl> get copyWith =>
@@ -2061,11 +1978,8 @@ abstract class _SmsMarketingConsent implements SmsMarketingConsent {
   @override
   @JsonKey(name: "consent_collected_from")
   String? get consentCollectedFrom;
-
-  /// Create a copy of SmsMarketingConsent
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SmsMarketingConsentImplCopyWith<_$SmsMarketingConsentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

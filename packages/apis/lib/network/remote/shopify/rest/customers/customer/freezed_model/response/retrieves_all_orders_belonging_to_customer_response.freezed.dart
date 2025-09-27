@@ -25,12 +25,8 @@ mixin _$RetrievesAllOrdersBelongingToCustomerResponse {
   @JsonKey(name: "orders")
   List<dynamic>? get orders => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesAllOrdersBelongingToCustomerResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesAllOrdersBelongingToCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesAllOrdersBelongingToCustomerResponseCopyWith<
           RetrievesAllOrdersBelongingToCustomerResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$RetrievesAllOrdersBelongingToCustomerResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesAllOrdersBelongingToCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,8 +94,6 @@ class __$$RetrievesAllOrdersBelongingToCustomerResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesAllOrdersBelongingToCustomerResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesAllOrdersBelongingToCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,14 +144,12 @@ class _$RetrievesAllOrdersBelongingToCustomerResponseImpl
             const DeepCollectionEquality().equals(other._orders, _orders));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_orders));
 
-  /// Create a copy of RetrievesAllOrdersBelongingToCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesAllOrdersBelongingToCustomerResponseImplCopyWith<
@@ -190,11 +180,8 @@ abstract class _RetrievesAllOrdersBelongingToCustomerResponse
   @override
   @JsonKey(name: "orders")
   List<dynamic>? get orders;
-
-  /// Create a copy of RetrievesAllOrdersBelongingToCustomerResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesAllOrdersBelongingToCustomerResponseImplCopyWith<
           _$RetrievesAllOrdersBelongingToCustomerResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

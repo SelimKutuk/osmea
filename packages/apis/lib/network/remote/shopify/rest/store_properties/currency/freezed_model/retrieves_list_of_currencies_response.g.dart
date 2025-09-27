@@ -14,7 +14,15 @@ _$RetrievesListOfCurrenciesResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesListOfCurrenciesResponseImplToJson(
-        _$RetrievesListOfCurrenciesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.currencies case final value?) 'currencies': value,
-    };
+    _$RetrievesListOfCurrenciesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('currencies', instance.currencies);
+  return val;
+}

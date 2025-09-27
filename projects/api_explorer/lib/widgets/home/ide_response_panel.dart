@@ -683,6 +683,11 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
       return _buildEmptyState(isTablet, isMobile, isNarrow);
     }
 
+    // Check if this is a cart API response with cart token
+    final hasCartToken = widget.responseData?.containsKey('cart_token') == true;
+    final cartToken = widget.responseData?['cart_token'] as String?;
+    final cartId = widget.responseData?['cart_id'] as String?;
+
     // Show response data in JSON format
     return OsmeaComponents.container(
       color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
@@ -690,15 +695,26 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
         builder: (context, constraints) {
           final showLineNumbers = constraints.maxWidth > 300;
 
-          return OsmeaComponents.row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          return OsmeaComponents.column(
             children: [
-              // Line numbers
-              if (showLineNumbers) _buildResponseLineNumbers(isNarrow),
-
-              // Response content
+              // Cart Token Display Section (if available)
+              if (hasCartToken && cartToken != null)
+                _buildCartTokenSection(cartToken, cartId, isNarrow),
+              
+              // Main response content
               Expanded(
-                child: _buildResponseData(isNarrow),
+                child: OsmeaComponents.row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Line numbers
+                    if (showLineNumbers) _buildResponseLineNumbers(isNarrow),
+
+                    // Response content
+                    Expanded(
+                      child: _buildResponseData(isNarrow),
+                    ),
+                  ],
+                ),
               ),
             ],
           );
@@ -768,6 +784,114 @@ class _IdeResponsePanelState extends State<IdeResponsePanel>
     // Format as JSON with proper indentation
     final encoder = JsonEncoder.withIndent('  ');
     return encoder.convert(widget.responseData);
+  }
+
+  /// 🛒 Build cart token display section
+  Widget _buildCartTokenSection(String cartToken, String? cartId, bool isNarrow) {
+    return OsmeaComponents.container(
+      margin: EdgeInsets.all(isNarrow ? 8 : 12),
+      padding: EdgeInsets.all(isNarrow ? 12 : 16),
+      decoration: BoxDecoration(
+        color: _ideTheme ? OsmeaColors.shark : OsmeaColors.snow,
+        borderRadius: BorderRadius.circular(isNarrow ? 8 : 12),
+        border: Border.all(
+          color: OsmeaColors.deepSea,
+          width: 1.5,
+        ),
+      ),
+      child: OsmeaComponents.column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          OsmeaComponents.row(
+            children: [
+              Icon(
+                Icons.shopping_cart_rounded,
+                color: OsmeaColors.deepSea,
+                size: isNarrow ? 16 : 20,
+              ),
+              OsmeaComponents.sizedBox(width: 8),
+              OsmeaComponents.text(
+                'Cart Token',
+                variant: OsmeaTextVariant.titleSmall,
+                color: _ideTheme ? OsmeaColors.white : OsmeaColors.shark,
+                fontSize: isNarrow ? 12 : 14,
+                fontWeight: FontWeight.w600,
+              ),
+              OsmeaComponents.spacer(),
+              // Copy button
+              GestureDetector(
+                onTap: () {
+                  Clipboard.setData(ClipboardData(text: cartToken));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Cart token copied to clipboard!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+                child: OsmeaComponents.container(
+                  padding: EdgeInsets.all(isNarrow ? 4 : 6),
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.deepSea.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Icon(
+                    Icons.copy_rounded,
+                    color: OsmeaColors.deepSea,
+                    size: isNarrow ? 12 : 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          OsmeaComponents.sizedBox(height: isNarrow ? 8 : 12),
+          
+          // Cart Token Value
+          OsmeaComponents.container(
+            width: double.infinity,
+            padding: EdgeInsets.all(isNarrow ? 8 : 12),
+            decoration: BoxDecoration(
+              color: _ideTheme ? OsmeaColors.eclipse : OsmeaColors.white,
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                color: _ideTheme ? OsmeaColors.thunder : OsmeaColors.platinum,
+              ),
+            ),
+            child: SelectableText(
+              cartToken,
+              style: OsmeaTextStyle.bodySmall(context).copyWith(
+                color: _ideTheme ? OsmeaColors.snow : OsmeaColors.shark,
+                fontSize: isNarrow ? 10 : 11,
+                fontFamily: 'monospace',
+                height: 1.4,
+              ),
+            ),
+          ),
+          
+          // Cart ID (if available)
+          if (cartId != null && cartId.isNotEmpty) ...[
+            OsmeaComponents.sizedBox(height: isNarrow ? 8 : 12),
+            OsmeaComponents.text(
+              'Cart ID: $cartId',
+              variant: OsmeaTextVariant.bodySmall,
+              color: _ideTheme ? OsmeaColors.slate : OsmeaColors.steel,
+              fontSize: isNarrow ? 10 : 11,
+            ),
+          ],
+          
+          // Info text
+          OsmeaComponents.sizedBox(height: isNarrow ? 6 : 8),
+          OsmeaComponents.text(
+            'This token is automatically stored in local storage and refreshed on each request.',
+            variant: OsmeaTextVariant.bodySmall,
+            color: _ideTheme ? OsmeaColors.slate : OsmeaColors.steel,
+            fontSize: isNarrow ? 9 : 10,
+            fontStyle: FontStyle.italic,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildLoadingState(bool isTablet, bool isMobile, bool isNarrow) {

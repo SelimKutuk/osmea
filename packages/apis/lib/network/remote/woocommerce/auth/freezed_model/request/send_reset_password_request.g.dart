@@ -15,9 +15,18 @@ _$SendResetPasswordRequestImpl _$$SendResetPasswordRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$SendResetPasswordRequestImplToJson(
-        _$SendResetPasswordRequestImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      if (instance.resetUrl case final value?) 'reset_url': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$SendResetPasswordRequestImpl instance) {
+  final val = <String, dynamic>{
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reset_url', instance.resetUrl);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
