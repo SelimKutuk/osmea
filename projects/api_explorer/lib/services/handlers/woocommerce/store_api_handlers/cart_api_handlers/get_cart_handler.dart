@@ -33,12 +33,20 @@ class GetCartHandler implements ApiRequestHandler {
 
       // Try to get cart token from current storage
       try {
+        debugPrint('🔍 Loading cart token from storage...');
         final storedToken = await WooCartTokenStorage.loadCartToken();
         cartToken = storedToken?.cartToken;
         cartId = storedToken?.cartId;
+
+        if (cartToken != null) {
+          debugPrint(
+              '🛒 Cart token loaded from storage: ${cartToken.length > 20 ? cartToken.substring(0, 20) + "..." : cartToken}');
+        } else {
+          debugPrint('⚠️ No cart token found in storage');
+        }
       } catch (e) {
         // If we can't load from storage, that's okay - we'll continue without it
-        debugPrint('Could not load cart token from storage: $e');
+        debugPrint('❌ Could not load cart token from storage: $e');
       }
 
       return {

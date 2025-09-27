@@ -15,10 +15,10 @@ class WooCartTokenInterceptor extends Interceptor {
   final _dioLogger = GetIt.I.get<ApiBaseLogger>();
 
   // Cart token header names
-  static const String _cartTokenHeaderName = 'X-Cart-Token';
-  static const String _cartTokenResponseHeaderName = 'X-Cart-Token';
-  static const String _cartIdHeaderName = 'X-Cart-ID';
-  static const String _cartIdResponseHeaderName = 'X-Cart-ID';
+  static const String _cartTokenHeaderName = 'Cart-Token';
+  static const String _cartTokenResponseHeaderName = 'Cart-Token';
+  static const String _cartIdHeaderName = 'Cart-ID';
+  static const String _cartIdResponseHeaderName = 'Cart-ID';
 
   @override
   void onRequest(
@@ -117,8 +117,8 @@ class WooCartTokenInterceptor extends Interceptor {
   /// 🛒 Extract cart token from response headers and save to storage
   Future<void> _extractCartTokenFromResponse(Response response) async {
     try {
-      // Only process cart-related responses
-      if (!_isCartEndpoint(response.requestOptions.path)) {
+      // Process all WooCommerce Store API responses
+      if (!_isWooCommerceStoreApiEndpoint(response.requestOptions.path)) {
         return;
       }
 
@@ -126,41 +126,56 @@ class WooCartTokenInterceptor extends Interceptor {
       String? cartToken;
       String? cartId;
 
+      debugPrint('🔍 Extracting cart token from response...');
+      debugPrint('🔍 Response path: ${response.requestOptions.path}');
+      debugPrint('🔍 Response headers: ${headers.map.keys.toList()}');
+
       // Extract cart token from response headers
       final cartTokenHeader =
           headers[_cartTokenResponseHeaderName.toLowerCase()];
       if (cartTokenHeader != null && cartTokenHeader.isNotEmpty) {
         cartToken = cartTokenHeader.first;
+        debugPrint('🛒 Found cart token in X-Cart-Token header');
       }
 
       // Extract cart ID from response headers
       final cartIdHeader = headers[_cartIdResponseHeaderName.toLowerCase()];
       if (cartIdHeader != null && cartIdHeader.isNotEmpty) {
         cartId = cartIdHeader.first;
+        debugPrint('🆔 Found cart ID in X-Cart-ID header');
       }
 
       // Extract cart token from response data if not in headers
       if (cartToken == null && response.data is Map<String, dynamic>) {
         final data = response.data as Map<String, dynamic>;
+        debugPrint('🔍 Checking response data for cart token...');
 
         // Check various possible cart token fields
         cartToken = data['cart_token'] as String? ??
             data['cartToken'] as String? ??
-            data['token'] as String?;
+            data['token'] as String? ??
+            data['nonce'] as String? ??
+            data['woocommerce_cart_hash'] as String?;
 
         cartId = data['cart_id'] as String? ??
             data['cartId'] as String? ??
             data['id'] as String?;
+
+        if (cartToken != null) {
+          debugPrint('🛒 Found cart token in response data');
+        }
       }
 
       // For WooCommerce Store API, cart token might be in cookies
       if (cartToken == null) {
         final cookies = response.headers['set-cookie'];
         if (cookies != null && cookies.isNotEmpty) {
+          debugPrint('🔍 Checking cookies for cart token...');
           for (final cookie in cookies) {
             if (cookie.contains('woocommerce_cart_hash') ||
                 cookie.contains('cart_token') ||
-                cookie.contains('wp_woocommerce_session')) {
+                cookie.contains('wp_woocommerce_session') ||
+                cookie.contains('woocommerce_session')) {
               // Extract cart token from cookie
               final cookieParts = cookie.split(';');
               for (final part in cookieParts) {
@@ -169,8 +184,11 @@ class WooCartTokenInterceptor extends Interceptor {
                   if (keyValue.length == 2) {
                     final key = keyValue[0].trim();
                     final value = keyValue[1].trim();
-                    if (key.contains('cart') || key.contains('token')) {
+                    if (key.contains('cart') ||
+                        key.contains('token') ||
+                        key.contains('session')) {
                       cartToken = value;
+                      debugPrint('🛒 Found cart token in cookie: $key');
                       break;
                     }
                   }
@@ -188,6 +206,8 @@ class WooCartTokenInterceptor extends Interceptor {
             cartToken, cartId, response.requestOptions.uri.toString());
         debugPrint(
             '🛒 Cart token extracted and saved: ${cartToken.length > 20 ? cartToken.substring(0, 20) + "..." : cartToken}');
+      } else {
+        debugPrint('⚠️ No cart token found in response');
       }
     } catch (e) {
       debugPrint('❌ Error extracting cart token from response: $e');
@@ -248,9 +268,16 @@ class WooCartTokenInterceptor extends Interceptor {
       '/wp-json/wc/store',
       '/wp-json/wc/v3/cart',
       '/wp-json/wc/v2/cart',
+      '/wp-json/wc/store/v1', // WooCommerce Store API v1
+      '/wp-json/wc/store/v2', // WooCommerce Store API v2
     ];
 
     return cartPaths.any((cartPath) => path.contains(cartPath));
+  }
+
+  /// 🔍 Check if the endpoint is WooCommerce Store API
+  bool _isWooCommerceStoreApiEndpoint(String path) {
+    return path.contains('/wp-json/wc/store/');
   }
 
   /// 🔄 Refresh cart token (if needed)
