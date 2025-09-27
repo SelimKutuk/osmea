@@ -4067,6 +4067,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: UpdateItemHandler(),
     ),
+    ApiService(
+      name: 'Apply Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/apply-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: ApplyCouponHandler(),
+    ),
   ];
 
   static void initialize() {}
