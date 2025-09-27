@@ -3,6 +3,7 @@ import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/get_cart_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/remove_item_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -40,5 +41,16 @@ abstract class CartServiceClient implements CartService {
     @Field('id') required int id,
     @Field('quantity') required int quantity,
     @Field('variation') List<dynamic>? variation,
+  });
+
+  /// 🗑️ Remove item from cart using WooCommerce Store API
+  /// Requires JWT authentication and cart token headers! 🔑
+  @override
+  @POST('/wp-json/wc/store/{api_version}/cart/remove-item')
+  Future<RemoveItemResponse> removeItem({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+    @Query('key') required String key,
   });
 }
