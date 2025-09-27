@@ -4047,18 +4047,25 @@ class ApiServiceRegistry {
       handler: GetCartHandler(),
     ),
     ApiService(
-      name: 'Add Item to Cart',
+      name: 'Add Item',
       endpoint: '/wp-json/wc/store/v1/cart/add-item',
       category: ApiCategory.woocommerceCart,
       subcategory: 'Cart API',
       handler: AddItemHandler(),
     ),
     ApiService(
-      name: 'Remove Item from Cart',
+      name: 'Remove Item',
       endpoint: '/wp-json/wc/store/v1/cart/remove-item',
       category: ApiCategory.woocommerceCart,
       subcategory: 'Cart API',
       handler: RemoveItemHandler(),
+    ),
+    ApiService(
+      name: 'Update Item',
+      endpoint: '/wp-json/wc/store/v1/cart/update-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateItemHandler(),
     ),
   ];
 
