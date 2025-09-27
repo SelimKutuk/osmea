@@ -1,4 +1,3 @@
-import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/request/add_item_request.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/request/update_customer_request.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/add_item_response.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/freezed_model/response/apply_coupon_response.dart';
