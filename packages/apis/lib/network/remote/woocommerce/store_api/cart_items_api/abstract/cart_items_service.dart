@@ -9,4 +9,14 @@ abstract class CartItemsService {
   Future<List<CartItem>> listCartItems({
     required String apiVersion,
   });
+
+  /// 🛒 Get a single cart item by its key from WooCommerce Store API.
+  /// Requires JWT authentication and cart token headers for proper authorization.
+  /// Returns List<CartItem> because API always returns array format, even for single item.
+  Future<List<CartItem>> getSingleCartItem({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required String key,
+  });
 }

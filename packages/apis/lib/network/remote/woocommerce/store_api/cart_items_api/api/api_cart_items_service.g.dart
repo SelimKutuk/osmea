@@ -47,6 +47,44 @@ class _CartItemsServiceClient implements CartItemsServiceClient {
     return _value;
   }
 
+  @override
+  Future<List<CartItem>> getSingleCartItem({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+    required String key,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'key': key};
+    final _headers = <String, dynamic>{
+      r'CART_TOKEN': cartToken,
+      r'Authorization': jwtToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<CartItem>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/wp-json/wc/store/${apiVersion}/cart/items',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => CartItem.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
