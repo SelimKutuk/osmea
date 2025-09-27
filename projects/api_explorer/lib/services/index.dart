@@ -14,6 +14,7 @@ export 'handlers/woocommerce/auth_handlers/delete_user_handler.dart';
 
 // 🛒 WooCommerce Store API Cart Handlers
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/get_cart_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/add_item_handler.dart';
 
 // 🚀 GraphQL Handlers - Modular Structure
 
