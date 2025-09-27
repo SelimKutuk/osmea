@@ -34,6 +34,9 @@ export 'package:core/src/base/master_view_hydrated_cubit/hydrated/hydrated_bloc_
 // 🧩 Exports the generated resources about translations
 export 'package:core/src/resources/resources.g.dart';
 
+// 🧩 Exports the common Master Scaffold Widget
+export 'package:core/src/base/widgets/master_scaffold_widget.dart';
+
 // 🧩 Exports the helper for local storage
 export 'package:core/src/helper/local_storage/local_storage_helper.dart';
 
