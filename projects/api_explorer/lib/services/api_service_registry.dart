@@ -4081,6 +4081,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: RemoveCouponHandler(),
     ),
+    ApiService(
+      name: 'Update Customer',
+      endpoint: '/wp-json/wc/store/v1/cart/update-customer',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateCartCustomerHandler(),
+    ),
   ];
 
   static void initialize() {}
