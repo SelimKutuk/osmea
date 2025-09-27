@@ -1,6 +1,7 @@
 import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 import 'package:api_explorer/services/api_request_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 
@@ -26,9 +27,25 @@ class GetCartHandler implements ApiRequestHandler {
         apiVersion: WooNetwork.apiVersion,
       );
 
+      // Extract cart token from response headers if available
+      String? cartToken;
+      String? cartId;
+
+      // Try to get cart token from current storage
+      try {
+        final storedToken = await WooCartTokenStorage.loadCartToken();
+        cartToken = storedToken?.cartToken;
+        cartId = storedToken?.cartId;
+      } catch (e) {
+        // If we can't load from storage, that's okay - we'll continue without it
+        debugPrint('Could not load cart token from storage: $e');
+      }
+
       return {
         "status": "success",
         "cart": response.toJson(),
+        "cart_token": cartToken,
+        "cart_id": cartId,
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
