@@ -4088,6 +4088,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: UpdateCartCustomerHandler(),
     ),
+    ApiService(
+      name: 'Select Shipping Rate',
+      endpoint: '/wp-json/wc/store/v1/cart/select-shipping-rate',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: SelectShippingRateHandler(),
+    ),
   ];
 
   static void initialize() {}
