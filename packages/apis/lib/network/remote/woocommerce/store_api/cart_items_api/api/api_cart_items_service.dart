@@ -3,6 +3,8 @@ import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstract/cart_items_service.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/freezed_model/response/cart_item.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/freezed_model/response/single_cart_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/freezed_model/response/add_cart_item_response.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/freezed_model/response/edit_single_cart_item_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -42,5 +44,32 @@ abstract class CartItemsServiceClient implements CartItemsService {
     @Header('CART_TOKEN') required String cartToken,
     @Header('Authorization') required String jwtToken,
     @Query('key') required String key,
+  });
+
+  /// 🛒 Add an item to the cart via WooCommerce Store API
+  /// Requires JWT authentication and cart token headers for proper authorization.
+  /// POST request with id, quantity and optional variation parameters.
+  @override
+  @POST('/wp-json/wc/store/{api_version}/cart/items')
+  Future<AddCartItemResponse> addCartItem({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+    @Field('id') required int id,
+    @Field('quantity') required int quantity,
+    @Field('variation') List<Map<String, dynamic>>? variation,
+  });
+
+  /// 🛒 Edit a single cart item by its key via WooCommerce Store API
+  /// Requires JWT authentication and cart token headers for proper authorization.
+  /// PUT request with key path parameter and quantity query parameter.
+  @override
+  @PUT('/wp-json/wc/store/{api_version}/cart/items/{key}')
+  Future<EditSingleCartItemResponse> editSingleCartItem({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+    @Path('key') required String key,
+    @Query('quantity') required int quantity,
   });
 }
