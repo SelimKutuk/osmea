@@ -16,10 +16,18 @@ _$UpdateProductVariantResponseImpl _$$UpdateProductVariantResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateProductVariantResponseImplToJson(
-        _$UpdateProductVariantResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.variant?.toJson() case final value?) 'variant': value,
-    };
+    _$UpdateProductVariantResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('variant', instance.variant?.toJson());
+  return val;
+}
 
 _$UpdatedProductVariantResponseImpl
     _$$UpdatedProductVariantResponseImplFromJson(Map<String, dynamic> json) =>
@@ -58,45 +66,45 @@ _$UpdatedProductVariantResponseImpl
         );
 
 Map<String, dynamic> _$$UpdatedProductVariantResponseImplToJson(
-        _$UpdatedProductVariantResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.inventoryPolicy case final value?) 'inventory_policy': value,
-      if (instance.compareAtPrice case final value?) 'compare_at_price': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.inventoryManagement case final value?)
-        'inventory_management': value,
-      if (instance.option1 case final value?) 'option1': value,
-      if (instance.option2 case final value?) 'option2': value,
-      if (instance.option3 case final value?) 'option3': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.barcode case final value?) 'barcode': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.imageId case final value?) 'image_id': value,
-      if (instance.weight case final value?) 'weight': value,
-      if (instance.weightUnit case final value?) 'weight_unit': value,
-      if (instance.inventoryItemId case final value?)
-        'inventory_item_id': value,
-      if (instance.inventoryQuantity case final value?)
-        'inventory_quantity': value,
-      if (instance.oldInventoryQuantity case final value?)
-        'old_inventory_quantity': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.presentmentPrices?.map((e) => e.toJson()).toList()
-          case final value?)
-        'presentment_prices': value,
-    };
+    _$UpdatedProductVariantResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('title', instance.title);
+  writeNotNull('price', instance.price);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('position', instance.position);
+  writeNotNull('inventory_policy', instance.inventoryPolicy);
+  writeNotNull('compare_at_price', instance.compareAtPrice);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('inventory_management', instance.inventoryManagement);
+  writeNotNull('option1', instance.option1);
+  writeNotNull('option2', instance.option2);
+  writeNotNull('option3', instance.option3);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('barcode', instance.barcode);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('image_id', instance.imageId);
+  writeNotNull('weight', instance.weight);
+  writeNotNull('weight_unit', instance.weightUnit);
+  writeNotNull('inventory_item_id', instance.inventoryItemId);
+  writeNotNull('inventory_quantity', instance.inventoryQuantity);
+  writeNotNull('old_inventory_quantity', instance.oldInventoryQuantity);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('presentment_prices',
+      instance.presentmentPrices?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$UpdatedPresentmentPriceResponseImpl
     _$$UpdatedPresentmentPriceResponseImplFromJson(Map<String, dynamic> json) =>
@@ -112,12 +120,19 @@ _$UpdatedPresentmentPriceResponseImpl
         );
 
 Map<String, dynamic> _$$UpdatedPresentmentPriceResponseImplToJson(
-        _$UpdatedPresentmentPriceResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.price?.toJson() case final value?) 'price': value,
-      if (instance.compareAtPrice?.toJson() case final value?)
-        'compare_at_price': value,
-    };
+    _$UpdatedPresentmentPriceResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price', instance.price?.toJson());
+  writeNotNull('compare_at_price', instance.compareAtPrice?.toJson());
+  return val;
+}
 
 _$UpdatedMoneyResponseImpl _$$UpdatedMoneyResponseImplFromJson(
         Map<String, dynamic> json) =>
@@ -127,8 +142,16 @@ _$UpdatedMoneyResponseImpl _$$UpdatedMoneyResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdatedMoneyResponseImplToJson(
-        _$UpdatedMoneyResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currencyCode case final value?) 'currency_code': value,
-    };
+    _$UpdatedMoneyResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency_code', instance.currencyCode);
+  return val;
+}

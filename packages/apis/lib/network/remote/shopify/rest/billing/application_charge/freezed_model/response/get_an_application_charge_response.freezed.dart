@@ -25,12 +25,8 @@ mixin _$GetAnApplicationChargeResponse {
   ApplicationCharge? get applicationCharge =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this GetAnApplicationChargeResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAnApplicationChargeResponseCopyWith<GetAnApplicationChargeResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -61,8 +57,6 @@ class _$GetAnApplicationChargeResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,8 +70,6 @@ class _$GetAnApplicationChargeResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ApplicationChargeCopyWith<$Res>? get applicationCharge {
@@ -118,8 +110,6 @@ class __$$GetAnApplicationChargeResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAnApplicationChargeResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,13 +153,11 @@ class _$GetAnApplicationChargeResponseImpl
                 other.applicationCharge == applicationCharge));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, applicationCharge);
 
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAnApplicationChargeResponseImplCopyWith<
@@ -198,11 +186,8 @@ abstract class _GetAnApplicationChargeResponse
   @override
   @JsonKey(name: "application_charge")
   ApplicationCharge? get applicationCharge;
-
-  /// Create a copy of GetAnApplicationChargeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAnApplicationChargeResponseImplCopyWith<
           _$GetAnApplicationChargeResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

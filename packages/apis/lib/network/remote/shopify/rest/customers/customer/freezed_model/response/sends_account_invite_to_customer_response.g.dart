@@ -17,11 +17,18 @@ _$SendsAccountInviteToCustomerResponseImpl
         );
 
 Map<String, dynamic> _$$SendsAccountInviteToCustomerResponseImplToJson(
-        _$SendsAccountInviteToCustomerResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.customerInvite?.toJson() case final value?)
-        'customer_invite': value,
-    };
+    _$SendsAccountInviteToCustomerResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_invite', instance.customerInvite?.toJson());
+  return val;
+}
 
 _$CustomerInviteImpl _$$CustomerInviteImplFromJson(Map<String, dynamic> json) =>
     _$CustomerInviteImpl(
@@ -33,11 +40,19 @@ _$CustomerInviteImpl _$$CustomerInviteImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$CustomerInviteImplToJson(
-        _$CustomerInviteImpl instance) =>
-    <String, dynamic>{
-      if (instance.to case final value?) 'to': value,
-      if (instance.from case final value?) 'from': value,
-      if (instance.subject case final value?) 'subject': value,
-      if (instance.customMessage case final value?) 'custom_message': value,
-      if (instance.bcc case final value?) 'bcc': value,
-    };
+    _$CustomerInviteImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('to', instance.to);
+  writeNotNull('from', instance.from);
+  writeNotNull('subject', instance.subject);
+  writeNotNull('custom_message', instance.customMessage);
+  writeNotNull('bcc', instance.bcc);
+  return val;
+}

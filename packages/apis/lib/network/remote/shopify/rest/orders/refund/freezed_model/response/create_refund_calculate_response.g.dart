@@ -15,10 +15,18 @@ _$CreateRefundCalculateResponseImpl
         );
 
 Map<String, dynamic> _$$CreateRefundCalculateResponseImplToJson(
-        _$CreateRefundCalculateResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.refund?.toJson() case final value?) 'refund': value,
-    };
+    _$CreateRefundCalculateResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refund', instance.refund?.toJson());
+  return val;
+}
 
 _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
       duties: json['duties'] as List<dynamic>?,
@@ -36,20 +44,25 @@ _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
       currency: json['currency'] as String?,
     );
 
-Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) =>
-    <String, dynamic>{
-      if (instance.duties case final value?) 'duties': value,
-      if (instance.totalDutiesSet?.toJson() case final value?)
-        'total_duties_set': value,
-      if (instance.refundReturn case final value?) 'return': value,
-      if (instance.shipping?.toJson() case final value?) 'shipping': value,
-      if (instance.refundShippingLines case final value?)
-        'refund_shipping_lines': value,
-      if (instance.refundLineItems case final value?)
-        'refund_line_items': value,
-      if (instance.transactions case final value?) 'transactions': value,
-      if (instance.currency case final value?) 'currency': value,
-    };
+Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('duties', instance.duties);
+  writeNotNull('total_duties_set', instance.totalDutiesSet?.toJson());
+  writeNotNull('return', instance.refundReturn);
+  writeNotNull('shipping', instance.shipping?.toJson());
+  writeNotNull('refund_shipping_lines', instance.refundShippingLines);
+  writeNotNull('refund_line_items', instance.refundLineItems);
+  writeNotNull('transactions', instance.transactions);
+  writeNotNull('currency', instance.currency);
+  return val;
+}
 
 _$ShippingImpl _$$ShippingImplFromJson(Map<String, dynamic> json) =>
     _$ShippingImpl(
@@ -58,13 +71,20 @@ _$ShippingImpl _$$ShippingImplFromJson(Map<String, dynamic> json) =>
       maximumRefundable: json['maximum_refundable'] as String?,
     );
 
-Map<String, dynamic> _$$ShippingImplToJson(_$ShippingImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.tax case final value?) 'tax': value,
-      if (instance.maximumRefundable case final value?)
-        'maximum_refundable': value,
-    };
+Map<String, dynamic> _$$ShippingImplToJson(_$ShippingImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('tax', instance.tax);
+  writeNotNull('maximum_refundable', instance.maximumRefundable);
+  return val;
+}
 
 _$TotalDutiesSetImpl _$$TotalDutiesSetImplFromJson(Map<String, dynamic> json) =>
     _$TotalDutiesSetImpl(
@@ -77,20 +97,35 @@ _$TotalDutiesSetImpl _$$TotalDutiesSetImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$TotalDutiesSetImplToJson(
-        _$TotalDutiesSetImpl instance) =>
-    <String, dynamic>{
-      if (instance.shopMoney?.toJson() case final value?) 'shop_money': value,
-      if (instance.presentmentMoney?.toJson() case final value?)
-        'presentment_money': value,
-    };
+    _$TotalDutiesSetImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shop_money', instance.shopMoney?.toJson());
+  writeNotNull('presentment_money', instance.presentmentMoney?.toJson());
+  return val;
+}
 
 _$MoneyImpl _$$MoneyImplFromJson(Map<String, dynamic> json) => _$MoneyImpl(
       amount: json['amount'] as String?,
       currencyCode: json['currency_code'] as String?,
     );
 
-Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currencyCode case final value?) 'currency_code': value,
-    };
+Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency_code', instance.currencyCode);
+  return val;
+}

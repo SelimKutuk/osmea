@@ -42,12 +42,8 @@ mixin _$RestoreRemovedCommentResponse {
   @JsonKey(name: "user_agent")
   dynamic get userAgent => throw _privateConstructorUsedError;
 
-  /// Serializes this RestoreRemovedCommentResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RestoreRemovedCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RestoreRemovedCommentResponseCopyWith<RestoreRemovedCommentResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -84,8 +80,6 @@ class _$RestoreRemovedCommentResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RestoreRemovedCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,8 +171,6 @@ class __$$RestoreRemovedCommentResponseImplCopyWithImpl<$Res>
       $Res Function(_$RestoreRemovedCommentResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RestoreRemovedCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -316,7 +308,7 @@ class _$RestoreRemovedCommentResponseImpl
             const DeepCollectionEquality().equals(other.userAgent, userAgent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -331,9 +323,7 @@ class _$RestoreRemovedCommentResponseImpl
       updatedAt,
       const DeepCollectionEquality().hash(userAgent));
 
-  /// Create a copy of RestoreRemovedCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RestoreRemovedCommentResponseImplCopyWith<
@@ -397,11 +387,8 @@ abstract class _RestoreRemovedCommentResponse
   @override
   @JsonKey(name: "user_agent")
   dynamic get userAgent;
-
-  /// Create a copy of RestoreRemovedCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RestoreRemovedCommentResponseImplCopyWith<
           _$RestoreRemovedCommentResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

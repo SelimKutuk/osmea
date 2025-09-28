@@ -24,12 +24,8 @@ mixin _$UpdateCommentBodyRequest {
   @JsonKey(name: "comment")
   Comment? get comment => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateCommentBodyRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateCommentBodyRequestCopyWith<UpdateCommentBodyRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdateCommentBodyRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdateCommentBodyRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CommentCopyWith<$Res>? get comment {
@@ -111,8 +103,6 @@ class __$$UpdateCommentBodyRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateCommentBodyRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,13 +143,11 @@ class _$UpdateCommentBodyRequestImpl implements _UpdateCommentBodyRequest {
             (identical(other.comment, comment) || other.comment == comment));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, comment);
 
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateCommentBodyRequestImplCopyWith<_$UpdateCommentBodyRequestImpl>
@@ -185,11 +173,8 @@ abstract class _UpdateCommentBodyRequest implements UpdateCommentBodyRequest {
   @override
   @JsonKey(name: "comment")
   Comment? get comment;
-
-  /// Create a copy of UpdateCommentBodyRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateCommentBodyRequestImplCopyWith<_$UpdateCommentBodyRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -211,12 +196,8 @@ mixin _$Comment {
   @JsonKey(name: "published_at")
   String? get publishedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this Comment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -243,8 +224,6 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -302,8 +281,6 @@ class __$$CommentImplCopyWithImpl<$Res>
       _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -385,14 +362,12 @@ class _$CommentImpl implements _Comment {
                 other.publishedAt == publishedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, body, author, email, publishedAt);
 
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
@@ -432,11 +407,8 @@ abstract class _Comment implements Comment {
   @override
   @JsonKey(name: "published_at")
   String? get publishedAt;
-
-  /// Create a copy of Comment
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -15,10 +15,18 @@ _$GetSingleThemeResponseImpl _$$GetSingleThemeResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetSingleThemeResponseImplToJson(
-        _$GetSingleThemeResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.theme?.toJson() case final value?) 'theme': value,
-    };
+    _$GetSingleThemeResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('theme', instance.theme?.toJson());
+  return val;
+}
 
 _$ThemeImpl _$$ThemeImplFromJson(Map<String, dynamic> json) => _$ThemeImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -32,16 +40,23 @@ _$ThemeImpl _$$ThemeImplFromJson(Map<String, dynamic> json) => _$ThemeImpl(
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.role case final value?) 'role': value,
-      if (instance.themeStoreId case final value?) 'theme_store_id': value,
-      if (instance.previewable case final value?) 'previewable': value,
-      if (instance.processing case final value?) 'processing': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('role', instance.role);
+  writeNotNull('theme_store_id', instance.themeStoreId);
+  writeNotNull('previewable', instance.previewable);
+  writeNotNull('processing', instance.processing);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

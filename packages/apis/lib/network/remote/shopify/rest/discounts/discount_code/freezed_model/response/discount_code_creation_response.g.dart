@@ -16,11 +16,19 @@ _$DiscountCodeCreationResponseImpl _$$DiscountCodeCreationResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$DiscountCodeCreationResponseImplToJson(
-        _$DiscountCodeCreationResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.discountCodeCreation?.toJson() case final value?)
-        'discount_code_creation': value,
-    };
+    _$DiscountCodeCreationResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'discount_code_creation', instance.discountCodeCreation?.toJson());
+  return val;
+}
 
 _$DiscountCodeCreationImpl _$$DiscountCodeCreationImplFromJson(
         Map<String, dynamic> json) =>
@@ -39,17 +47,25 @@ _$DiscountCodeCreationImpl _$$DiscountCodeCreationImplFromJson(
     );
 
 Map<String, dynamic> _$$DiscountCodeCreationImplToJson(
-        _$DiscountCodeCreationImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.priceRuleId case final value?) 'price_rule_id': value,
-      if (instance.startedAt case final value?) 'started_at': value,
-      if (instance.completedAt case final value?) 'completed_at': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.codesCount case final value?) 'codes_count': value,
-      if (instance.importedCount case final value?) 'imported_count': value,
-      if (instance.failedCount case final value?) 'failed_count': value,
-      if (instance.logs case final value?) 'logs': value,
-    };
+    _$DiscountCodeCreationImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('price_rule_id', instance.priceRuleId);
+  writeNotNull('started_at', instance.startedAt);
+  writeNotNull('completed_at', instance.completedAt);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('status', instance.status);
+  writeNotNull('codes_count', instance.codesCount);
+  writeNotNull('imported_count', instance.importedCount);
+  writeNotNull('failed_count', instance.failedCount);
+  writeNotNull('logs', instance.logs);
+  return val;
+}

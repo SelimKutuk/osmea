@@ -22,7 +22,6 @@ UpdatesOrderingTypeOfProductsSmartCollection
 
 /// @nodoc
 mixin _$UpdatesOrderingTypeOfProductsSmartCollection {
-  /// Serializes this UpdatesOrderingTypeOfProductsSmartCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -46,9 +45,6 @@ class _$UpdatesOrderingTypeOfProductsSmartCollectionCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of UpdatesOrderingTypeOfProductsSmartCollection
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -71,9 +67,6 @@ class __$$UpdatesOrderingTypeOfProductsSmartCollectionImplCopyWithImpl<$Res>
       _$UpdatesOrderingTypeOfProductsSmartCollectionImpl _value,
       $Res Function(_$UpdatesOrderingTypeOfProductsSmartCollectionImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of UpdatesOrderingTypeOfProductsSmartCollection
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -98,7 +91,7 @@ class _$UpdatesOrderingTypeOfProductsSmartCollectionImpl
             other is _$UpdatesOrderingTypeOfProductsSmartCollectionImpl);
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 

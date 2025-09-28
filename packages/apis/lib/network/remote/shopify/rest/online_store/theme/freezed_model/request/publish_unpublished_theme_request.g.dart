@@ -15,18 +15,34 @@ _$PublishUnpublishedThemeRequestImpl
         );
 
 Map<String, dynamic> _$$PublishUnpublishedThemeRequestImplToJson(
-        _$PublishUnpublishedThemeRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.theme?.toJson() case final value?) 'theme': value,
-    };
+    _$PublishUnpublishedThemeRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('theme', instance.theme?.toJson());
+  return val;
+}
 
 _$ThemeImpl _$$ThemeImplFromJson(Map<String, dynamic> json) => _$ThemeImpl(
       id: (json['id'] as num?)?.toInt(),
       role: json['role'] as String?,
     );
 
-Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.role case final value?) 'role': value,
-    };
+Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('role', instance.role);
+  return val;
+}

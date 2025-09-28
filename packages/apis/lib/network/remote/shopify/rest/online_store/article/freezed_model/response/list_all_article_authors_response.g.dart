@@ -15,7 +15,15 @@ _$ListAllArticleAuthorsResponseImpl
         );
 
 Map<String, dynamic> _$$ListAllArticleAuthorsResponseImplToJson(
-        _$ListAllArticleAuthorsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.authors case final value?) 'authors': value,
-    };
+    _$ListAllArticleAuthorsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authors', instance.authors);
+  return val;
+}

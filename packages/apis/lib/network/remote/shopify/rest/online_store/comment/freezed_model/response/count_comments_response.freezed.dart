@@ -24,12 +24,8 @@ mixin _$CountCommentsResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this CountCommentsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CountCommentsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CountCommentsResponseCopyWith<CountCommentsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$CountCommentsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CountCommentsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,8 +85,6 @@ class __$$CountCommentsResponseImplCopyWithImpl<$Res>
       $Res Function(_$CountCommentsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CountCommentsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,13 +124,11 @@ class _$CountCommentsResponseImpl implements _CountCommentsResponse {
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of CountCommentsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountCommentsResponseImplCopyWith<_$CountCommentsResponseImpl>
@@ -163,11 +153,8 @@ abstract class _CountCommentsResponse implements CountCommentsResponse {
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of CountCommentsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CountCommentsResponseImplCopyWith<_$CountCommentsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

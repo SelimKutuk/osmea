@@ -13,7 +13,15 @@ _$RetrievesCountEventsResponseImpl _$$RetrievesCountEventsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$RetrievesCountEventsResponseImplToJson(
-        _$RetrievesCountEventsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$RetrievesCountEventsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

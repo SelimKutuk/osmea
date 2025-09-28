@@ -16,8 +16,15 @@ _$GetAllWishlistGroupsResponseImpl _$$GetAllWishlistGroupsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetAllWishlistGroupsResponseImplToJson(
-        _$GetAllWishlistGroupsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.groups?.map((e) => e.toJson()).toList() case final value?)
-        'groups': value,
-    };
+    _$GetAllWishlistGroupsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('groups', instance.groups?.map((e) => e.toJson()).toList());
+  return val;
+}

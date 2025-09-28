@@ -23,12 +23,8 @@ mixin _$CreateWebhookRequest {
   @JsonKey(name: "webhook")
   WebhookData get webhook => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateWebhookRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateWebhookRequestCopyWith<CreateWebhookRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,8 +51,6 @@ class _$CreateWebhookRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -70,8 +64,6 @@ class _$CreateWebhookRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WebhookDataCopyWith<$Res> get webhook {
@@ -103,8 +95,6 @@ class __$$CreateWebhookRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateWebhookRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,13 +135,11 @@ class _$CreateWebhookRequestImpl implements _CreateWebhookRequest {
             (identical(other.webhook, webhook) || other.webhook == webhook));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, webhook);
 
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateWebhookRequestImplCopyWith<_$CreateWebhookRequestImpl>
@@ -178,11 +166,8 @@ abstract class _CreateWebhookRequest implements CreateWebhookRequest {
   @override
   @JsonKey(name: "webhook")
   WebhookData get webhook;
-
-  /// Create a copy of CreateWebhookRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateWebhookRequestImplCopyWith<_$CreateWebhookRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -200,12 +185,8 @@ mixin _$WebhookData {
   @JsonKey(name: "format")
   String get format => throw _privateConstructorUsedError;
 
-  /// Serializes this WebhookData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of WebhookData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $WebhookDataCopyWith<WebhookData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -232,8 +213,6 @@ class _$WebhookDataCopyWithImpl<$Res, $Val extends WebhookData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of WebhookData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,8 +259,6 @@ class __$$WebhookDataImplCopyWithImpl<$Res>
       _$WebhookDataImpl _value, $Res Function(_$WebhookDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of WebhookData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -342,13 +319,11 @@ class _$WebhookDataImpl implements _WebhookData {
             (identical(other.format, format) || other.format == format));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, topic, address, format);
 
-  /// Create a copy of WebhookData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$WebhookDataImplCopyWith<_$WebhookDataImpl> get copyWith =>
@@ -381,11 +356,8 @@ abstract class _WebhookData implements WebhookData {
   @override
   @JsonKey(name: "format")
   String get format;
-
-  /// Create a copy of WebhookData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$WebhookDataImplCopyWith<_$WebhookDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

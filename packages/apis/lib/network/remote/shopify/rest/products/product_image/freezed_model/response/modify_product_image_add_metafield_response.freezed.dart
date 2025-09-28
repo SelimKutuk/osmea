@@ -25,12 +25,8 @@ mixin _$ModifyProductImageAddMetafieldResponse {
   @JsonKey(name: "image")
   Image? get image => throw _privateConstructorUsedError;
 
-  /// Serializes this ModifyProductImageAddMetafieldResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ModifyProductImageAddMetafieldResponseCopyWith<
           ModifyProductImageAddMetafieldResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -60,8 +56,6 @@ class _$ModifyProductImageAddMetafieldResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,8 +69,6 @@ class _$ModifyProductImageAddMetafieldResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ImageCopyWith<$Res>? get image {
@@ -115,8 +107,6 @@ class __$$ModifyProductImageAddMetafieldResponseImplCopyWithImpl<$Res>
       $Res Function(_$ModifyProductImageAddMetafieldResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,13 +149,11 @@ class _$ModifyProductImageAddMetafieldResponseImpl
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, image);
 
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ModifyProductImageAddMetafieldResponseImplCopyWith<
@@ -195,11 +183,8 @@ abstract class _ModifyProductImageAddMetafieldResponse
   @override
   @JsonKey(name: "image")
   Image? get image;
-
-  /// Create a copy of ModifyProductImageAddMetafieldResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ModifyProductImageAddMetafieldResponseImplCopyWith<
           _$ModifyProductImageAddMetafieldResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -234,12 +219,8 @@ mixin _$Image {
   @JsonKey(name: "variant_ids")
   List<dynamic>? get variantIds => throw _privateConstructorUsedError;
 
-  /// Serializes this Image to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -272,8 +253,6 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -367,8 +346,6 @@ class __$$ImageImplCopyWithImpl<$Res>
       _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -523,7 +500,7 @@ class _$ImageImpl implements _Image {
                 .equals(other._variantIds, _variantIds));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -539,9 +516,7 @@ class _$ImageImpl implements _Image {
       src,
       const DeepCollectionEquality().hash(_variantIds));
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
@@ -605,11 +580,8 @@ abstract class _Image implements Image {
   @override
   @JsonKey(name: "variant_ids")
   List<dynamic>? get variantIds;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

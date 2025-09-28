@@ -24,12 +24,8 @@ mixin _$SingleLocationByIdResponse {
   @JsonKey(name: "location")
   Location? get location => throw _privateConstructorUsedError;
 
-  /// Serializes this SingleLocationByIdResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SingleLocationByIdResponseCopyWith<SingleLocationByIdResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -57,8 +53,6 @@ class _$SingleLocationByIdResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -72,8 +66,6 @@ class _$SingleLocationByIdResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LocationCopyWith<$Res>? get location {
@@ -112,8 +104,6 @@ class __$$SingleLocationByIdResponseImplCopyWithImpl<$Res>
       $Res Function(_$SingleLocationByIdResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,13 +146,11 @@ class _$SingleLocationByIdResponseImpl implements _SingleLocationByIdResponse {
                 other.location == location));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, location);
 
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SingleLocationByIdResponseImplCopyWith<_$SingleLocationByIdResponseImpl>
@@ -189,11 +177,8 @@ abstract class _SingleLocationByIdResponse
   @override
   @JsonKey(name: "location")
   Location? get location;
-
-  /// Create a copy of SingleLocationByIdResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SingleLocationByIdResponseImplCopyWith<_$SingleLocationByIdResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -239,12 +224,8 @@ mixin _$Location {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this Location to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LocationCopyWith<Location> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -284,8 +265,6 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -416,8 +395,6 @@ class __$$LocationImplCopyWithImpl<$Res>
       _$LocationImpl _value, $Res Function(_$LocationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -626,7 +603,7 @@ class _$LocationImpl implements _Location {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -648,9 +625,7 @@ class _$LocationImpl implements _Location {
       active,
       adminGraphqlApiId);
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
@@ -739,11 +714,8 @@ abstract class _Location implements Location {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,12 +24,8 @@ mixin _$UpdateOrderRiskResponse {
   @JsonKey(name: "risk")
   Risk? get risk => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateOrderRiskResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateOrderRiskResponseCopyWith<UpdateOrderRiskResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdateOrderRiskResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdateOrderRiskResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $RiskCopyWith<$Res>? get risk {
@@ -111,8 +103,6 @@ class __$$UpdateOrderRiskResponseImplCopyWithImpl<$Res>
       $Res Function(_$UpdateOrderRiskResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,13 +142,11 @@ class _$UpdateOrderRiskResponseImpl implements _UpdateOrderRiskResponse {
             (identical(other.risk, risk) || other.risk == risk));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, risk);
 
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateOrderRiskResponseImplCopyWith<_$UpdateOrderRiskResponseImpl>
@@ -184,11 +172,8 @@ abstract class _UpdateOrderRiskResponse implements UpdateOrderRiskResponse {
   @override
   @JsonKey(name: "risk")
   Risk? get risk;
-
-  /// Create a copy of UpdateOrderRiskResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateOrderRiskResponseImplCopyWith<_$UpdateOrderRiskResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -220,12 +205,8 @@ mixin _$Risk {
   @JsonKey(name: "merchant_message")
   String? get merchantMessage => throw _privateConstructorUsedError;
 
-  /// Serializes this Risk to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RiskCopyWith<Risk> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -257,8 +238,6 @@ class _$RiskCopyWithImpl<$Res, $Val extends Risk>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -345,8 +324,6 @@ class __$$RiskImplCopyWithImpl<$Res>
   __$$RiskImplCopyWithImpl(_$RiskImpl _value, $Res Function(_$RiskImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -481,7 +458,7 @@ class _$RiskImpl implements _Risk {
                 other.merchantMessage == merchantMessage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -496,9 +473,7 @@ class _$RiskImpl implements _Risk {
       message,
       merchantMessage);
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RiskImplCopyWith<_$RiskImpl> get copyWith =>
@@ -558,11 +533,8 @@ abstract class _Risk implements Risk {
   @override
   @JsonKey(name: "merchant_message")
   String? get merchantMessage;
-
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RiskImplCopyWith<_$RiskImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

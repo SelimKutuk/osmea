@@ -15,18 +15,34 @@ _$UpdateBodyHtmlOfPageRequestImpl _$$UpdateBodyHtmlOfPageRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateBodyHtmlOfPageRequestImplToJson(
-        _$UpdateBodyHtmlOfPageRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$UpdateBodyHtmlOfPageRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       id: (json['id'] as num?)?.toInt(),
       bodyHtml: json['body_html'] as String?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('body_html', instance.bodyHtml);
+  return val;
+}

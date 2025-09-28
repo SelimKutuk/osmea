@@ -17,11 +17,18 @@ _$UpdatesAMarketingEventResponseModelImpl
         );
 
 Map<String, dynamic> _$$UpdatesAMarketingEventResponseModelImplToJson(
-        _$UpdatesAMarketingEventResponseModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.marketingEvent?.toJson() case final value?)
-        'marketing_event': value,
-    };
+    _$UpdatesAMarketingEventResponseModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('marketing_event', instance.marketingEvent?.toJson());
+  return val;
+}
 
 _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     _$MarketingEventImpl(
@@ -56,35 +63,37 @@ _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$MarketingEventImplToJson(
-        _$MarketingEventImpl instance) =>
-    <String, dynamic>{
-      if (instance.startedAt?.toIso8601String() case final value?)
-        'started_at': value,
-      if (instance.endedAt?.toIso8601String() case final value?)
-        'ended_at': value,
-      if (instance.scheduledToEndAt?.toIso8601String() case final value?)
-        'scheduled_to_end_at': value,
-      if (instance.remoteId case final value?) 'remote_id': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.budget case final value?) 'budget': value,
-      if (instance.budgetType case final value?) 'budget_type': value,
-      if (instance.eventType case final value?) 'event_type': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.manageUrl case final value?) 'manage_url': value,
-      if (instance.previewUrl case final value?) 'preview_url': value,
-      if (instance.utmCampaign case final value?) 'utm_campaign': value,
-      if (instance.utmSource case final value?) 'utm_source': value,
-      if (instance.utmMedium case final value?) 'utm_medium': value,
-      if (instance.description case final value?) 'description': value,
-      if (instance.marketingChannel case final value?)
-        'marketing_channel': value,
-      if (instance.paid case final value?) 'paid': value,
-      if (instance.referringDomain case final value?) 'referring_domain': value,
-      if (instance.breadcrumbId case final value?) 'breadcrumb_id': value,
-      if (instance.marketingActivityId case final value?)
-        'marketing_activity_id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.marketedResources case final value?)
-        'marketed_resources': value,
-    };
+    _$MarketingEventImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('started_at', instance.startedAt?.toIso8601String());
+  writeNotNull('ended_at', instance.endedAt?.toIso8601String());
+  writeNotNull(
+      'scheduled_to_end_at', instance.scheduledToEndAt?.toIso8601String());
+  writeNotNull('remote_id', instance.remoteId);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('budget', instance.budget);
+  writeNotNull('budget_type', instance.budgetType);
+  writeNotNull('event_type', instance.eventType);
+  writeNotNull('id', instance.id);
+  writeNotNull('manage_url', instance.manageUrl);
+  writeNotNull('preview_url', instance.previewUrl);
+  writeNotNull('utm_campaign', instance.utmCampaign);
+  writeNotNull('utm_source', instance.utmSource);
+  writeNotNull('utm_medium', instance.utmMedium);
+  writeNotNull('description', instance.description);
+  writeNotNull('marketing_channel', instance.marketingChannel);
+  writeNotNull('paid', instance.paid);
+  writeNotNull('referring_domain', instance.referringDomain);
+  writeNotNull('breadcrumb_id', instance.breadcrumbId);
+  writeNotNull('marketing_activity_id', instance.marketingActivityId);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('marketed_resources', instance.marketedResources);
+  return val;
+}

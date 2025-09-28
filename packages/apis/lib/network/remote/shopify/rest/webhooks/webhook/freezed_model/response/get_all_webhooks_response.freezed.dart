@@ -24,12 +24,8 @@ mixin _$GetAllWebhooksResponse {
   @JsonKey(name: "webhooks")
   List<Webhook>? get webhooks => throw _privateConstructorUsedError;
 
-  /// Serializes this GetAllWebhooksResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAllWebhooksResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAllWebhooksResponseCopyWith<GetAllWebhooksResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$GetAllWebhooksResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllWebhooksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$GetAllWebhooksResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAllWebhooksResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllWebhooksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,14 +134,12 @@ class _$GetAllWebhooksResponseImpl implements _GetAllWebhooksResponse {
             const DeepCollectionEquality().equals(other._webhooks, _webhooks));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_webhooks));
 
-  /// Create a copy of GetAllWebhooksResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAllWebhooksResponseImplCopyWith<_$GetAllWebhooksResponseImpl>
@@ -175,11 +165,8 @@ abstract class _GetAllWebhooksResponse implements GetAllWebhooksResponse {
   @override
   @JsonKey(name: "webhooks")
   List<Webhook>? get webhooks;
-
-  /// Create a copy of GetAllWebhooksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAllWebhooksResponseImplCopyWith<_$GetAllWebhooksResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

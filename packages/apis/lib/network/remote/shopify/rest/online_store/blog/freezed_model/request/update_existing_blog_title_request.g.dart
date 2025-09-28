@@ -15,10 +15,18 @@ _$UpdateExistingBlogTitleRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateExistingBlogTitleRequestImplToJson(
-        _$UpdateExistingBlogTitleRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.blog?.toJson() case final value?) 'blog': value,
-    };
+    _$UpdateExistingBlogTitleRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('blog', instance.blog?.toJson());
+  return val;
+}
 
 _$BlogImpl _$$BlogImplFromJson(Map<String, dynamic> json) => _$BlogImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -27,10 +35,18 @@ _$BlogImpl _$$BlogImplFromJson(Map<String, dynamic> json) => _$BlogImpl(
       commentable: json['commentable'] as String?,
     );
 
-Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.commentable case final value?) 'commentable': value,
-    };
+Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('commentable', instance.commentable);
+  return val;
+}

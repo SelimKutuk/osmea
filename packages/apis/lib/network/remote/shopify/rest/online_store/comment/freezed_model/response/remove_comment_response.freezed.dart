@@ -42,12 +42,8 @@ mixin _$RemoveCommentResponse {
   @JsonKey(name: "user_agent")
   dynamic get userAgent => throw _privateConstructorUsedError;
 
-  /// Serializes this RemoveCommentResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RemoveCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RemoveCommentResponseCopyWith<RemoveCommentResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -82,8 +78,6 @@ class _$RemoveCommentResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RemoveCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -174,8 +168,6 @@ class __$$RemoveCommentResponseImplCopyWithImpl<$Res>
       $Res Function(_$RemoveCommentResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RemoveCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -311,7 +303,7 @@ class _$RemoveCommentResponseImpl implements _RemoveCommentResponse {
             const DeepCollectionEquality().equals(other.userAgent, userAgent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -326,9 +318,7 @@ class _$RemoveCommentResponseImpl implements _RemoveCommentResponse {
       updatedAt,
       const DeepCollectionEquality().hash(userAgent));
 
-  /// Create a copy of RemoveCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RemoveCommentResponseImplCopyWith<_$RemoveCommentResponseImpl>
@@ -390,11 +380,8 @@ abstract class _RemoveCommentResponse implements RemoveCommentResponse {
   @override
   @JsonKey(name: "user_agent")
   dynamic get userAgent;
-
-  /// Create a copy of RemoveCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RemoveCommentResponseImplCopyWith<_$RemoveCommentResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

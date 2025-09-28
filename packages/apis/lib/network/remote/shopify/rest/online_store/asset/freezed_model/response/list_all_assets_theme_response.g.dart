@@ -15,11 +15,18 @@ _$ListAllAssetsThemeResponseImpl _$$ListAllAssetsThemeResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$ListAllAssetsThemeResponseImplToJson(
-        _$ListAllAssetsThemeResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.assets?.map((e) => e.toJson()).toList() case final value?)
-        'assets': value,
-    };
+    _$ListAllAssetsThemeResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('assets', instance.assets?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       key: json['key'] as String?,
@@ -32,14 +39,22 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       themeId: (json['theme_id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
-    <String, dynamic>{
-      if (instance.key case final value?) 'key': value,
-      if (instance.publicUrl case final value?) 'public_url': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.contentType case final value?) 'content_type': value,
-      if (instance.size case final value?) 'size': value,
-      if (instance.checksum case final value?) 'checksum': value,
-      if (instance.themeId case final value?) 'theme_id': value,
-    };
+Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('key', instance.key);
+  writeNotNull('public_url', instance.publicUrl);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('content_type', instance.contentType);
+  writeNotNull('size', instance.size);
+  writeNotNull('checksum', instance.checksum);
+  writeNotNull('theme_id', instance.themeId);
+  return val;
+}

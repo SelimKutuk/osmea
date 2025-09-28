@@ -15,18 +15,34 @@ _$UpdateThemeNameRequestImpl _$$UpdateThemeNameRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateThemeNameRequestImplToJson(
-        _$UpdateThemeNameRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.theme?.toJson() case final value?) 'theme': value,
-    };
+    _$UpdateThemeNameRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('theme', instance.theme?.toJson());
+  return val;
+}
 
 _$ThemeImpl _$$ThemeImplFromJson(Map<String, dynamic> json) => _$ThemeImpl(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-    };
+Map<String, dynamic> _$$ThemeImplToJson(_$ThemeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  return val;
+}

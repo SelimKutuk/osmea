@@ -15,9 +15,16 @@ _$GetAllUsageChargesResponseImpl _$$GetAllUsageChargesResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetAllUsageChargesResponseImplToJson(
-        _$GetAllUsageChargesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.usageCharges?.map((e) => e.toJson()).toList()
-          case final value?)
-        'usage_charges': value,
-    };
+    _$GetAllUsageChargesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'usage_charges', instance.usageCharges?.map((e) => e.toJson()).toList());
+  return val;
+}

@@ -19,14 +19,23 @@ _$UserLoginResponseImpl _$$UserLoginResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UserLoginResponseImplToJson(
-        _$UserLoginResponseImpl instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-      if (instance.error case final value?) 'error': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$UserLoginResponseImpl instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('error', instance.error);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
 
 _$UserLoginDataImpl _$$UserLoginDataImplFromJson(Map<String, dynamic> json) =>
     _$UserLoginDataImpl(
@@ -47,20 +56,26 @@ _$UserLoginDataImpl _$$UserLoginDataImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['expires_at'] as String),
     );
 
-Map<String, dynamic> _$$UserLoginDataImplToJson(_$UserLoginDataImpl instance) =>
-    <String, dynamic>{
-      if (instance.jwt case final value?) 'jwt': value,
-      if (instance.accessToken case final value?) 'access_token': value,
-      if (instance.tokenType case final value?) 'token_type': value,
-      if (instance.expiresIn case final value?) 'expires_in': value,
-      if (instance.refreshToken case final value?) 'refresh_token': value,
-      if (instance.scope case final value?) 'scope': value,
-      if (instance.user?.toJson() case final value?) 'user': value,
-      if (instance.issuedAt?.toIso8601String() case final value?)
-        'issued_at': value,
-      if (instance.expiresAt?.toIso8601String() case final value?)
-        'expires_at': value,
-    };
+Map<String, dynamic> _$$UserLoginDataImplToJson(_$UserLoginDataImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('jwt', instance.jwt);
+  writeNotNull('access_token', instance.accessToken);
+  writeNotNull('token_type', instance.tokenType);
+  writeNotNull('expires_in', instance.expiresIn);
+  writeNotNull('refresh_token', instance.refreshToken);
+  writeNotNull('scope', instance.scope);
+  writeNotNull('user', instance.user?.toJson());
+  writeNotNull('issued_at', instance.issuedAt?.toIso8601String());
+  writeNotNull('expires_at', instance.expiresAt?.toIso8601String());
+  return val;
+}
 
 _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
     _$UserInfoImpl(
@@ -88,24 +103,29 @@ _$UserInfoImpl _$$UserInfoImplFromJson(Map<String, dynamic> json) =>
       isVerified: json['is_verified'] as bool?,
     );
 
-Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.email case final value?) 'email': value,
-      if (instance.firstName case final value?) 'first_name': value,
-      if (instance.lastName case final value?) 'last_name': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.avatar case final value?) 'avatar': value,
-      if (instance.roles case final value?) 'roles': value,
-      if (instance.billing case final value?) 'billing': value,
-      if (instance.shipping case final value?) 'shipping': value,
-      if (instance.createdAt?.toIso8601String() case final value?)
-        'created_at': value,
-      if (instance.updatedAt?.toIso8601String() case final value?)
-        'updated_at': value,
-      if (instance.lastLoginAt?.toIso8601String() case final value?)
-        'last_login_at': value,
-      if (instance.isActive case final value?) 'is_active': value,
-      if (instance.isVerified case final value?) 'is_verified': value,
-    };
+Map<String, dynamic> _$$UserInfoImplToJson(_$UserInfoImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('email', instance.email);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('company', instance.company);
+  writeNotNull('avatar', instance.avatar);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('billing', instance.billing);
+  writeNotNull('shipping', instance.shipping);
+  writeNotNull('created_at', instance.createdAt?.toIso8601String());
+  writeNotNull('updated_at', instance.updatedAt?.toIso8601String());
+  writeNotNull('last_login_at', instance.lastLoginAt?.toIso8601String());
+  writeNotNull('is_active', instance.isActive);
+  writeNotNull('is_verified', instance.isVerified);
+  return val;
+}

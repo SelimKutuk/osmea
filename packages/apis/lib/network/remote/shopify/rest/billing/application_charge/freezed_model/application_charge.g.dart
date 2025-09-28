@@ -25,19 +25,28 @@ _$ApplicationChargeImpl _$$ApplicationChargeImplFromJson(
     );
 
 Map<String, dynamic> _$$ApplicationChargeImplToJson(
-        _$ApplicationChargeImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'api_client_id': instance.apiClientId,
-      'price': instance.price,
-      'status': instance.status,
-      'return_url': instance.returnUrl,
-      'test': instance.test,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-      'currency': instance.currency,
-      if (instance.chargeType case final value?) 'charge_type': value,
-      'decorated_return_url': instance.decoratedReturnUrl,
-      if (instance.confirmationUrl case final value?) 'confirmation_url': value,
-    };
+    _$ApplicationChargeImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'name': instance.name,
+    'api_client_id': instance.apiClientId,
+    'price': instance.price,
+    'status': instance.status,
+    'return_url': instance.returnUrl,
+    'test': instance.test,
+    'created_at': instance.createdAt,
+    'updated_at': instance.updatedAt,
+    'currency': instance.currency,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('charge_type', instance.chargeType);
+  val['decorated_return_url'] = instance.decoratedReturnUrl;
+  writeNotNull('confirmation_url', instance.confirmationUrl);
+  return val;
+}

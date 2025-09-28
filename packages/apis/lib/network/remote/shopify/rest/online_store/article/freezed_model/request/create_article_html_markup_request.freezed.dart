@@ -24,12 +24,8 @@ mixin _$CreateArticleHtmlMarkupRequest {
   @JsonKey(name: "article")
   Article? get article => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateArticleHtmlMarkupRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateArticleHtmlMarkupRequestCopyWith<CreateArticleHtmlMarkupRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateArticleHtmlMarkupRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateArticleHtmlMarkupRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ArticleCopyWith<$Res>? get article {
@@ -113,8 +105,6 @@ class __$$CreateArticleHtmlMarkupRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateArticleHtmlMarkupRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$CreateArticleHtmlMarkupRequestImpl
             (identical(other.article, article) || other.article == article));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, article);
 
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateArticleHtmlMarkupRequestImplCopyWith<
@@ -191,11 +179,8 @@ abstract class _CreateArticleHtmlMarkupRequest
   @override
   @JsonKey(name: "article")
   Article? get article;
-
-  /// Create a copy of CreateArticleHtmlMarkupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateArticleHtmlMarkupRequestImplCopyWith<
           _$CreateArticleHtmlMarkupRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -218,12 +203,8 @@ mixin _$Article {
   @JsonKey(name: "published_at")
   String? get publishedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this Article to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ArticleCopyWith<Article> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -250,8 +231,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -309,8 +288,6 @@ class __$$ArticleImplCopyWithImpl<$Res>
       _$ArticleImpl _value, $Res Function(_$ArticleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -393,14 +370,12 @@ class _$ArticleImpl implements _Article {
                 other.publishedAt == publishedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, title, author, tags, bodyHtml, publishedAt);
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
@@ -440,11 +415,8 @@ abstract class _Article implements Article {
   @override
   @JsonKey(name: "published_at")
   String? get publishedAt;
-
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

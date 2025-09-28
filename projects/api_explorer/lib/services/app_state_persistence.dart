@@ -1,5 +1,5 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
+import 'package:core/core.dart';
 
 class AppStatePersistence {
   static const String _currentApiQueryKey = 'current_api_query';
@@ -11,6 +11,9 @@ class AppStatePersistence {
   static const String _rawBodyKey = 'raw_body';
   static const String _currentApiUrlKey = 'current_api_url';
 
+  // Core package's LocalStorageHelper instance
+  static final LocalStorageHelper _storage = LocalStorageHelper();
+
   static Future<void> saveCurrentApiQuery({
     required String query,
     required String service,
@@ -20,23 +23,25 @@ class AppStatePersistence {
     String? currentApiUrl,
   }) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-      await prefs.setString(_currentApiQueryKey, query);
-      await prefs.setString(_selectedServiceKey, service);
-      await prefs.setString(_selectedMethodKey, method);
-      await prefs.setString(_currentApiUrlKey, currentApiUrl ?? '');
+      await _storage.setItem(_currentApiQueryKey, query);
+      await _storage.setItem(_selectedServiceKey, service);
+      await _storage.setItem(_selectedMethodKey, method);
+      await _storage.setItem(_currentApiUrlKey, currentApiUrl ?? '');
 
       // Save parameters as JSON string
       final paramsJson =
           parameters.entries.map((e) => '${e.key}:${e.value}').join('|');
-      await prefs.setString(_apiParametersKey, paramsJson);
+      await _storage.setItem(_apiParametersKey, paramsJson);
 
       if (rawBody != null) {
-        await prefs.setString(_rawBodyKey, rawBody);
+        await _storage.setItem(_rawBodyKey, rawBody);
       }
 
-      debugPrint('✅ App state saved successfully');
+      debugPrint(
+          '✅ App state saved successfully using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error saving app state: $e');
     }
@@ -44,14 +49,15 @@ class AppStatePersistence {
 
   static Future<Map<String, dynamic>?> loadCurrentApiQuery() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-      final query = prefs.getString(_currentApiQueryKey);
-      final service = prefs.getString(_selectedServiceKey);
-      final method = prefs.getString(_selectedMethodKey);
-      final currentApiUrl = prefs.getString(_currentApiUrlKey);
-      final paramsJson = prefs.getString(_apiParametersKey);
-      final rawBody = prefs.getString(_rawBodyKey);
+      final query = await _storage.getItem(_currentApiQueryKey);
+      final service = await _storage.getItem(_selectedServiceKey);
+      final method = await _storage.getItem(_selectedMethodKey);
+      final currentApiUrl = await _storage.getItem(_currentApiUrlKey);
+      final paramsJson = await _storage.getItem(_apiParametersKey);
+      final rawBody = await _storage.getItem(_rawBodyKey);
 
       if (query == null || service == null || method == null) {
         return null;
@@ -85,9 +91,10 @@ class AppStatePersistence {
 
   static Future<void> saveCurrentStep(int step) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt(_currentStepKey, step);
-      debugPrint('✅ Current step saved: $step');
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+      await _storage.setItem(_currentStepKey, step.toString());
+      debugPrint('✅ Current step saved: $step using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error saving current step: $e');
     }
@@ -95,8 +102,10 @@ class AppStatePersistence {
 
   static Future<int?> loadCurrentStep() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      return prefs.getInt(_currentStepKey);
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+      final stepString = await _storage.getItem(_currentStepKey);
+      return stepString != null ? int.tryParse(stepString) : null;
     } catch (e) {
       debugPrint('❌ Error loading current step: $e');
       return null;
@@ -105,9 +114,11 @@ class AppStatePersistence {
 
   static Future<void> saveLastVisitedPage(String pageName) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_lastVisitedPageKey, pageName);
-      debugPrint('✅ Last visited page saved: $pageName');
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+      await _storage.setItem(_lastVisitedPageKey, pageName);
+      debugPrint(
+          '✅ Last visited page saved: $pageName using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error saving last visited page: $e');
     }
@@ -115,8 +126,9 @@ class AppStatePersistence {
 
   static Future<String?> loadLastVisitedPage() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      return prefs.getString(_lastVisitedPageKey);
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+      return await _storage.getItem(_lastVisitedPageKey);
     } catch (e) {
       debugPrint('❌ Error loading last visited page: $e');
       return null;
@@ -125,18 +137,20 @@ class AppStatePersistence {
 
   static Future<void> clearAppState() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
 
-      await prefs.remove(_currentApiQueryKey);
-      await prefs.remove(_selectedServiceKey);
-      await prefs.remove(_selectedMethodKey);
-      await prefs.remove(_currentStepKey);
-      await prefs.remove(_lastVisitedPageKey);
-      await prefs.remove(_apiParametersKey);
-      await prefs.remove(_rawBodyKey);
-      await prefs.remove(_currentApiUrlKey);
+      await _storage.removeItem(_currentApiQueryKey);
+      await _storage.removeItem(_selectedServiceKey);
+      await _storage.removeItem(_selectedMethodKey);
+      await _storage.removeItem(_currentStepKey);
+      await _storage.removeItem(_lastVisitedPageKey);
+      await _storage.removeItem(_apiParametersKey);
+      await _storage.removeItem(_rawBodyKey);
+      await _storage.removeItem(_currentApiUrlKey);
 
-      debugPrint('✅ App state cleared successfully');
+      debugPrint(
+          '✅ App state cleared successfully using Core LocalStorageHelper');
     } catch (e) {
       debugPrint('❌ Error clearing app state: $e');
     }
@@ -144,14 +158,20 @@ class AppStatePersistence {
 
   static Future<Map<String, dynamic>> getAppStateSummary() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      // Initialize Core package's LocalStorageHelper if not already done
+      await _storage.init();
+
+      final query = await _storage.getItem(_currentApiQueryKey);
+      final service = await _storage.getItem(_selectedServiceKey);
+      final step = await _storage.getItem(_currentStepKey);
+      final page = await _storage.getItem(_lastVisitedPageKey);
 
       return {
-        'hasApiQuery': prefs.getString(_currentApiQueryKey) != null,
-        'hasSelectedService': prefs.getString(_selectedServiceKey) != null,
-        'hasCurrentStep': prefs.getInt(_currentStepKey) != null,
-        'hasLastVisitedPage': prefs.getString(_lastVisitedPageKey) != null,
-        'totalKeys': prefs.getKeys().length,
+        'hasApiQuery': query != null,
+        'hasSelectedService': service != null,
+        'hasCurrentStep': step != null,
+        'hasLastVisitedPage': page != null,
+        'storageType': 'Core LocalStorageHelper',
       };
     } catch (e) {
       debugPrint('❌ Error getting app state summary: $e');

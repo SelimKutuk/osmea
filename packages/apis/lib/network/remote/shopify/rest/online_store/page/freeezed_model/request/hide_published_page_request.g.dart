@@ -15,18 +15,34 @@ _$HidePublishedPageRequestImpl _$$HidePublishedPageRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$HidePublishedPageRequestImplToJson(
-        _$HidePublishedPageRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$HidePublishedPageRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       id: (json['id'] as num?)?.toInt(),
       published: json['published'] as bool?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.published case final value?) 'published': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('published', instance.published);
+  return val;
+}

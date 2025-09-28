@@ -15,10 +15,18 @@ _$SingleCollectionResponseImpl _$$SingleCollectionResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$SingleCollectionResponseImplToJson(
-        _$SingleCollectionResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.collection?.toJson() case final value?) 'collection': value,
-    };
+    _$SingleCollectionResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('collection', instance.collection?.toJson());
+  return val;
+}
 
 _$CollectionImpl _$$CollectionImplFromJson(Map<String, dynamic> json) =>
     _$CollectionImpl(
@@ -36,19 +44,26 @@ _$CollectionImpl _$$CollectionImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$CollectionImplToJson(_$CollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.sortOrder case final value?) 'sort_order': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.productsCount case final value?) 'products_count': value,
-      if (instance.collectionType case final value?) 'collection_type': value,
-      if (instance.publishedScope case final value?) 'published_scope': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$CollectionImplToJson(_$CollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('title', instance.title);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('sort_order', instance.sortOrder);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('products_count', instance.productsCount);
+  writeNotNull('collection_type', instance.collectionType);
+  writeNotNull('published_scope', instance.publishedScope);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

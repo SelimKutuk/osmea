@@ -24,12 +24,8 @@ mixin _$CreatesMarketingEventRequestModel {
   @JsonKey(name: "marketing_event")
   MarketingEvent? get marketingEvent => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatesMarketingEventRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatesMarketingEventRequestModelCopyWith<CreatesMarketingEventRequestModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreatesMarketingEventRequestModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreatesMarketingEventRequestModelCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MarketingEventCopyWith<$Res>? get marketingEvent {
@@ -113,8 +105,6 @@ class __$$CreatesMarketingEventRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$CreatesMarketingEventRequestModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$CreatesMarketingEventRequestModelImpl
                 other.marketingEvent == marketingEvent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, marketingEvent);
 
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatesMarketingEventRequestModelImplCopyWith<
@@ -194,11 +182,8 @@ abstract class _CreatesMarketingEventRequestModel
   @override
   @JsonKey(name: "marketing_event")
   MarketingEvent? get marketingEvent;
-
-  /// Create a copy of CreatesMarketingEventRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatesMarketingEventRequestModelImplCopyWith<
           _$CreatesMarketingEventRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -227,12 +212,8 @@ mixin _$MarketingEvent {
   @JsonKey(name: "paid")
   bool? get paid => throw _privateConstructorUsedError;
 
-  /// Serializes this MarketingEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MarketingEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MarketingEventCopyWith<MarketingEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -264,8 +245,6 @@ class _$MarketingEventCopyWithImpl<$Res, $Val extends MarketingEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MarketingEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -342,8 +321,6 @@ class __$$MarketingEventImplCopyWithImpl<$Res>
       _$MarketingEventImpl _value, $Res Function(_$MarketingEventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MarketingEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -461,14 +438,12 @@ class _$MarketingEventImpl implements _MarketingEvent {
             (identical(other.paid, paid) || other.paid == paid));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, startedAt, utmCampaign,
       utmSource, utmMedium, eventType, referringDomain, marketingChannel, paid);
 
-  /// Create a copy of MarketingEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MarketingEventImplCopyWith<_$MarketingEventImpl> get copyWith =>
@@ -521,11 +496,8 @@ abstract class _MarketingEvent implements MarketingEvent {
   @override
   @JsonKey(name: "paid")
   bool? get paid;
-
-  /// Create a copy of MarketingEvent
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MarketingEventImplCopyWith<_$MarketingEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -14,7 +14,15 @@ _$RetrievesCountOfSmartCollectionsResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesCountOfSmartCollectionsResponseImplToJson(
-        _$RetrievesCountOfSmartCollectionsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$RetrievesCountOfSmartCollectionsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

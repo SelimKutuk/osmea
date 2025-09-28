@@ -23,17 +23,26 @@ _$UserSignUpRequestImpl _$$UserSignUpRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UserSignUpRequestImplToJson(
-        _$UserSignUpRequestImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'AUTH_KEY': instance.authKey,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.company case final value?) 'company': value,
-      'accept_terms': instance.acceptTerms,
-      'subscribe_newsletter': instance.subscribeNewsletter,
-      if (instance.referralCode case final value?) 'referral_code': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$UserSignUpRequestImpl instance) {
+  final val = <String, dynamic>{
+    'email': instance.email,
+    'password': instance.password,
+    'AUTH_KEY': instance.authKey,
+    'first_name': instance.firstName,
+    'last_name': instance.lastName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('phone', instance.phone);
+  writeNotNull('company', instance.company);
+  val['accept_terms'] = instance.acceptTerms;
+  val['subscribe_newsletter'] = instance.subscribeNewsletter;
+  writeNotNull('referral_code', instance.referralCode);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

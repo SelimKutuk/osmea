@@ -24,12 +24,8 @@ mixin _$CreatePriceRuleFreeShippingRequest {
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatePriceRuleFreeShippingRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatePriceRuleFreeShippingRequestCopyWith<
           CreatePriceRuleFreeShippingRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$CreatePriceRuleFreeShippingRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,8 +68,6 @@ class _$CreatePriceRuleFreeShippingRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PriceRuleCopyWith<$Res>? get priceRule {
@@ -114,8 +106,6 @@ class __$$CreatePriceRuleFreeShippingRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreatePriceRuleFreeShippingRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,13 +149,11 @@ class _$CreatePriceRuleFreeShippingRequestImpl
                 other.priceRule == priceRule));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, priceRule);
 
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatePriceRuleFreeShippingRequestImplCopyWith<
@@ -194,11 +182,8 @@ abstract class _CreatePriceRuleFreeShippingRequest
   @override
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule;
-
-  /// Create a copy of CreatePriceRuleFreeShippingRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatePriceRuleFreeShippingRequestImplCopyWith<
           _$CreatePriceRuleFreeShippingRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -232,12 +217,8 @@ mixin _$PriceRule {
   @JsonKey(name: "starts_at")
   String? get startsAt => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceRule to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceRuleCopyWith<PriceRule> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -273,8 +254,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -333,8 +312,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
     ) as $Val);
   }
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PrerequisiteSubtotalRangeCopyWith<$Res>? get prerequisiteSubtotalRange {
@@ -382,8 +359,6 @@ class __$$PriceRuleImplCopyWithImpl<$Res>
       _$PriceRuleImpl _value, $Res Function(_$PriceRuleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -524,7 +499,7 @@ class _$PriceRuleImpl implements _PriceRule {
                 other.startsAt == startsAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -539,9 +514,7 @@ class _$PriceRuleImpl implements _PriceRule {
       prerequisiteSubtotalRange,
       startsAt);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
@@ -602,11 +575,8 @@ abstract class _PriceRule implements PriceRule {
   @override
   @JsonKey(name: "starts_at")
   String? get startsAt;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -621,12 +591,8 @@ mixin _$PrerequisiteSubtotalRange {
   @JsonKey(name: "greater_than_or_equal_to")
   String? get greaterThanOrEqualTo => throw _privateConstructorUsedError;
 
-  /// Serializes this PrerequisiteSubtotalRange to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PrerequisiteSubtotalRange
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PrerequisiteSubtotalRangeCopyWith<PrerequisiteSubtotalRange> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -653,8 +619,6 @@ class _$PrerequisiteSubtotalRangeCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PrerequisiteSubtotalRange
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -693,8 +657,6 @@ class __$$PrerequisiteSubtotalRangeImplCopyWithImpl<$Res>
       $Res Function(_$PrerequisiteSubtotalRangeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PrerequisiteSubtotalRange
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -736,13 +698,11 @@ class _$PrerequisiteSubtotalRangeImpl implements _PrerequisiteSubtotalRange {
                 other.greaterThanOrEqualTo == greaterThanOrEqualTo));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, greaterThanOrEqualTo);
 
-  /// Create a copy of PrerequisiteSubtotalRange
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PrerequisiteSubtotalRangeImplCopyWith<_$PrerequisiteSubtotalRangeImpl>
@@ -768,11 +728,8 @@ abstract class _PrerequisiteSubtotalRange implements PrerequisiteSubtotalRange {
   @override
   @JsonKey(name: "greater_than_or_equal_to")
   String? get greaterThanOrEqualTo;
-
-  /// Create a copy of PrerequisiteSubtotalRange
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PrerequisiteSubtotalRangeImplCopyWith<_$PrerequisiteSubtotalRangeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

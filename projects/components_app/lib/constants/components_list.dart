@@ -47,6 +47,7 @@ import '../components/switch_button_example.dart';
 import '../components/tabbar_example.dart';
 import '../components/text_example.dart';
 import '../components/text_field_example.dart';
+import '../components/phone_picker_example.dart';
 import '../components/ticket_widget_example.dart';
 import '../components/toast_example.dart';
 import '../components/url_launcher_example.dart';
@@ -283,6 +284,11 @@ final List<Map<String, dynamic>> components = [
     'title': 'Input',
     'icon': Icons.input_outlined,
     'route': () => const TextFieldExample(),
+  },
+  {
+    'title': 'Phone Picker',
+    'icon': Icons.phone_outlined,
+    'route': () => const PhonePickerExample(),
   },
   {
     'title': 'Ticket',

@@ -25,12 +25,8 @@ mixin _$RetrievesCountOfSmartCollectionsResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesCountOfSmartCollectionsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesCountOfSmartCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesCountOfSmartCollectionsResponseCopyWith<
           RetrievesCountOfSmartCollectionsResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$RetrievesCountOfSmartCollectionsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesCountOfSmartCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,8 +91,6 @@ class __$$RetrievesCountOfSmartCollectionsResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesCountOfSmartCollectionsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesCountOfSmartCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,13 +133,11 @@ class _$RetrievesCountOfSmartCollectionsResponseImpl
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of RetrievesCountOfSmartCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesCountOfSmartCollectionsResponseImplCopyWith<
@@ -177,11 +167,8 @@ abstract class _RetrievesCountOfSmartCollectionsResponse
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of RetrievesCountOfSmartCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesCountOfSmartCollectionsResponseImplCopyWith<
           _$RetrievesCountOfSmartCollectionsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

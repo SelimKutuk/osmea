@@ -19,14 +19,23 @@ _$PasswordUpdateResponseImpl _$$PasswordUpdateResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$PasswordUpdateResponseImplToJson(
-        _$PasswordUpdateResponseImpl instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      if (instance.message case final value?) 'message': value,
-      if (instance.error case final value?) 'error': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$PasswordUpdateResponseImpl instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('error', instance.error);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
 
 _$PasswordUpdateDataImpl _$$PasswordUpdateDataImplFromJson(
         Map<String, dynamic> json) =>
@@ -39,10 +48,17 @@ _$PasswordUpdateDataImpl _$$PasswordUpdateDataImplFromJson(
     );
 
 Map<String, dynamic> _$$PasswordUpdateDataImplToJson(
-        _$PasswordUpdateDataImpl instance) =>
-    <String, dynamic>{
-      if (instance.email case final value?) 'email': value,
-      'password_updated': instance.passwordUpdated,
-      if (instance.updatedAt?.toIso8601String() case final value?)
-        'updated_at': value,
-    };
+    _$PasswordUpdateDataImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email', instance.email);
+  val['password_updated'] = instance.passwordUpdated;
+  writeNotNull('updated_at', instance.updatedAt?.toIso8601String());
+  return val;
+}

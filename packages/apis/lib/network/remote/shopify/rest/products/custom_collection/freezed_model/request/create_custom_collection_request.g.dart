@@ -16,11 +16,18 @@ _$CreateCustomCollectionRequestImpl
         );
 
 Map<String, dynamic> _$$CreateCustomCollectionRequestImplToJson(
-        _$CreateCustomCollectionRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$CreateCustomCollectionRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -29,7 +36,15 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  return val;
+}

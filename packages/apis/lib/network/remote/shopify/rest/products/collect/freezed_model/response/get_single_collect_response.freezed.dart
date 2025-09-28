@@ -24,12 +24,8 @@ mixin _$GetSingleCollectResponse {
   @JsonKey(name: "collect")
   Collect? get collect => throw _privateConstructorUsedError;
 
-  /// Serializes this GetSingleCollectResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetSingleCollectResponseCopyWith<GetSingleCollectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$GetSingleCollectResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$GetSingleCollectResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CollectCopyWith<$Res>? get collect {
@@ -111,8 +103,6 @@ class __$$GetSingleCollectResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetSingleCollectResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,13 +143,11 @@ class _$GetSingleCollectResponseImpl implements _GetSingleCollectResponse {
             (identical(other.collect, collect) || other.collect == collect));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, collect);
 
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetSingleCollectResponseImplCopyWith<_$GetSingleCollectResponseImpl>
@@ -185,11 +173,8 @@ abstract class _GetSingleCollectResponse implements GetSingleCollectResponse {
   @override
   @JsonKey(name: "collect")
   Collect? get collect;
-
-  /// Create a copy of GetSingleCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetSingleCollectResponseImplCopyWith<_$GetSingleCollectResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

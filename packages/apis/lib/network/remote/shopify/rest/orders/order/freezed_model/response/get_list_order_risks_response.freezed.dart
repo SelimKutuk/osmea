@@ -24,12 +24,8 @@ mixin _$GetListOrderRisksResponse {
   @JsonKey(name: "risks")
   List<Risk>? get risks => throw _privateConstructorUsedError;
 
-  /// Serializes this GetListOrderRisksResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetListOrderRisksResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetListOrderRisksResponseCopyWith<GetListOrderRisksResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$GetListOrderRisksResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetListOrderRisksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$GetListOrderRisksResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetListOrderRisksResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetListOrderRisksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,14 +134,12 @@ class _$GetListOrderRisksResponseImpl implements _GetListOrderRisksResponse {
             const DeepCollectionEquality().equals(other._risks, _risks));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_risks));
 
-  /// Create a copy of GetListOrderRisksResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetListOrderRisksResponseImplCopyWith<_$GetListOrderRisksResponseImpl>
@@ -175,11 +165,8 @@ abstract class _GetListOrderRisksResponse implements GetListOrderRisksResponse {
   @override
   @JsonKey(name: "risks")
   List<Risk>? get risks;
-
-  /// Create a copy of GetListOrderRisksResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetListOrderRisksResponseImplCopyWith<_$GetListOrderRisksResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -211,12 +198,8 @@ mixin _$Risk {
   @JsonKey(name: "merchant_message")
   String? get merchantMessage => throw _privateConstructorUsedError;
 
-  /// Serializes this Risk to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RiskCopyWith<Risk> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -248,8 +231,6 @@ class _$RiskCopyWithImpl<$Res, $Val extends Risk>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -336,8 +317,6 @@ class __$$RiskImplCopyWithImpl<$Res>
   __$$RiskImplCopyWithImpl(_$RiskImpl _value, $Res Function(_$RiskImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -472,7 +451,7 @@ class _$RiskImpl implements _Risk {
                 other.merchantMessage == merchantMessage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -487,9 +466,7 @@ class _$RiskImpl implements _Risk {
       message,
       merchantMessage);
 
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RiskImplCopyWith<_$RiskImpl> get copyWith =>
@@ -549,11 +526,8 @@ abstract class _Risk implements Risk {
   @override
   @JsonKey(name: "merchant_message")
   String? get merchantMessage;
-
-  /// Create a copy of Risk
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RiskImplCopyWith<_$RiskImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

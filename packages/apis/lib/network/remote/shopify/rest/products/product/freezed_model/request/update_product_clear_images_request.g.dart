@@ -15,10 +15,18 @@ _$UpdateProductClearImagesRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateProductClearImagesRequestImplToJson(
-        _$UpdateProductClearImagesRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.product?.toJson() case final value?) 'product': value,
-    };
+    _$UpdateProductClearImagesRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product?.toJson());
+  return val;
+}
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
@@ -26,8 +34,16 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       images: json['images'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.images case final value?) 'images': value,
-    };
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('images', instance.images);
+  return val;
+}
