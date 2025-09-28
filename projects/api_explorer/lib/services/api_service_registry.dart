@@ -4125,6 +4125,13 @@ class ApiServiceRegistry {
       subcategory: 'Cart Items API',
       handler: EditSingleCartItemHandler(),
     ),
+    ApiService(
+      name: 'Delete All Cart Items',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: DeleteAllCartItemsHandler(),
+    ),
   ];
 
   static void initialize() {}
