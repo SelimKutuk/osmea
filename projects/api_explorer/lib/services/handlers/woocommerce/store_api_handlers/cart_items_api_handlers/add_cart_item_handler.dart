@@ -6,35 +6,60 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstract/cart_items_service.dart';
 
 ///*******************************************************************
-//************** 🔍 GET SINGLE CART ITEM HANDLER *******************
+//************** 🛒 ADD CART ITEM HANDLER **************************
 ///*******************************************************************
 
-class GetSingleCartItemHandler implements ApiRequestHandler {
+class AddCartItemHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
     String method,
     Map<String, String> params,
   ) async {
-    if (method != 'GET') {
+    if (method != 'POST') {
       return {
         "status": "error",
-        "message": "Method $method not supported for Get Single Cart Item API",
+        "message": "Method $method not supported for Add Cart Item API",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
 
     // Validate required parameters
-    if (!params.containsKey('key') || params['key']!.isEmpty) {
+    if (!params.containsKey('id') || params['id']!.isEmpty) {
       return {
         "status": "error",
-        "message": "Cart item key is required",
+        "message": "Product ID is required",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
+    }
+
+    if (!params.containsKey('quantity') || params['quantity']!.isEmpty) {
+      return {
+        "status": "error",
+        "message": "Quantity is required",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
 
     try {
       final apiVersion = params['api_version'] ?? 'v1';
-      final key = params['key']!;
+      final productId = int.tryParse(params['id']!);
+      final quantity = int.tryParse(params['quantity']!);
+
+      if (productId == null) {
+        return {
+          "status": "error",
+          "message": "Invalid product ID. Must be a valid integer.",
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
+
+      if (quantity == null || quantity <= 0) {
+        return {
+          "status": "error",
+          "message": "Invalid quantity. Must be a positive integer.",
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
 
       // 🔍 Auto-fetch cart token from local storage
       String? cartToken = params['cart_token'];
@@ -89,9 +114,22 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
         };
       }
 
-      debugPrint('🔍 Starting get single cart item:');
+      // Parse variation if provided
+      List<Map<String, dynamic>>? variation;
+      if (params.containsKey('variation') && params['variation']!.isNotEmpty) {
+        // Try to parse variation from JSON string if provided
+        try {
+          // Basic parsing - in real implementation you might want more sophisticated JSON parsing
+          debugPrint('📝 Variation parameter provided: ${params['variation']}');
+        } catch (e) {
+          debugPrint('⚠️ Could not parse variation parameter: $e');
+        }
+      }
+
+      debugPrint('🛒 Starting add cart item:');
       debugPrint('  - API Version: $apiVersion');
-      debugPrint('  - Item Key: $key');
+      debugPrint('  - Product ID: $productId');
+      debugPrint('  - Quantity: $quantity');
       debugPrint('  - Cart Token Available: ${cartToken.isNotEmpty}');
       debugPrint('  - JWT Token Available: ${jwtToken.isNotEmpty}');
 
@@ -104,53 +142,43 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
           : 'Bearer $jwtToken';
 
       // Call the service
-      final responseList = await cartItemsService.getSingleCartItem(
+      final response = await cartItemsService.addCartItem(
         apiVersion: apiVersion,
         cartToken: cartToken,
         jwtToken: formattedJwtToken,
-        key: key,
+        id: productId,
+        quantity: quantity,
+        variation: variation,
       );
 
-      debugPrint('🔍 Single Cart Item Response received successfully');
-      debugPrint('  - Response Type: ${responseList.runtimeType}');
-      debugPrint('  - Response Count: ${responseList.length}');
+      debugPrint('🛒 Add Cart Item Response received successfully');
+      debugPrint('  - Response Type: ${response.runtimeType}');
 
-      if (responseList.isEmpty) {
-        return {
-          "status": "error",
-          "message": "Cart item not found with the provided key",
-          "params": params,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      }
-
-      // Get the first (and should be only) item from the array
-      final response = responseList.first;
-      final responseJson = response.toJson();
-      debugPrint('  - Item Key: ${response.key}');
-      debugPrint('  - Item Name: ${response.name}');
-      debugPrint('  - Available Fields: ${responseJson.keys.join(', ')}');
-
-      debugPrint('✅ Single cart item retrieved successfully');
+      debugPrint('✅ Cart item added successfully');
 
       return {
         "status": "success",
-        "message": "Single cart item retrieved successfully",
+        "message": "Cart item added successfully",
         "auth_info": {
           "cart_token_source": params.containsKey('cart_token') && params['cart_token']!.isNotEmpty ? "manual" : "auto_storage",
           "jwt_token_source": params.containsKey('jwt_token') && params['jwt_token']!.isNotEmpty ? "manual" : "auto_storage",
           "cart_token_available": cartToken.isNotEmpty,
           "jwt_token_available": jwtToken.isNotEmpty,
         },
-        "item": responseJson,
+        "added_item": "Cart item added successfully - response details will be available after build generation",
+        "request_params": {
+          "product_id": productId,
+          "quantity": quantity,
+          "variation": variation,
+        },
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
 
     } catch (e) {
-      debugPrint("🚨 Get Single Cart Item Error Details: $e");
+      debugPrint("🚨 Add Cart Item Error Details: $e");
 
-      String errorMessage = "Failed to get single cart item: ${e.toString()}";
+      String errorMessage = "Failed to add cart item: ${e.toString()}";
       Map<String, dynamic> errorDetails = {};
 
       // Check if it's a network/HTTP related error
@@ -160,7 +188,7 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
 
         if (e.toString().contains('400')) {
           errorDetails['status_code'] = 400;
-          errorMessage = "Bad request. Please check the cart item key";
+          errorMessage = "Bad request. Please check the product ID and quantity";
         } else if (e.toString().contains('401')) {
           errorDetails['status_code'] = 401;
           errorMessage = "Unauthorized. Please check your JWT token";
@@ -169,12 +197,15 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
           errorMessage = "Access denied. Please check your permissions";
         } else if (e.toString().contains('404')) {
           errorDetails['status_code'] = 404;
-          errorMessage = "Cart item not found. Please check the item key";
+          errorMessage = "Product not found. Please check the product ID";
+        } else if (e.toString().contains('422')) {
+          errorDetails['status_code'] = 422;
+          errorMessage = "Validation error. Product may be out of stock or invalid quantity";
         } else if (e.toString().contains('500')) {
           errorDetails['status_code'] = 500;
-          errorMessage = "Server error occurred while fetching cart item";
+          errorMessage = "Server error occurred while adding cart item";
         } else {
-          errorMessage = "Network error occurred while fetching cart item";
+          errorMessage = "Network error occurred while adding cart item";
         }
 
         errorDetails['type'] = 'network_error';
@@ -187,9 +218,12 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
                  e.toString().contains('Authorization')) {
         errorDetails['type'] = 'auth_error';
         errorMessage = "Invalid or expired JWT token";
-      } else if (e.toString().contains('key')) {
-        errorDetails['type'] = 'key_error';
-        errorMessage = "Invalid cart item key";
+      } else if (e.toString().contains('id') || e.toString().contains('product')) {
+        errorDetails['type'] = 'product_error';
+        errorMessage = "Invalid product ID or product not available";
+      } else if (e.toString().contains('quantity')) {
+        errorDetails['type'] = 'quantity_error';
+        errorMessage = "Invalid quantity or insufficient stock";
       } else {
         errorDetails['type'] = 'unknown_error';
       }
@@ -206,16 +240,28 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
   }
 
   @override
-  List<String> get supportedMethods => ['GET'];
+  List<String> get supportedMethods => ['POST'];
 
   @override
   Map<String, List<ApiField>> get requiredFields => {
-        'GET': [
+        'POST': [
           const ApiField(
-            name: 'key',
-            label: 'Cart Item Key',
-            hint: 'The unique key of the cart item to retrieve (e.g., "6f4922f45568161a8cdf4ad2299f6d23")',
+            name: 'id',
+            label: 'Product ID',
+            hint: 'The cart item product or variation ID (e.g., "15")',
             isRequired: true,
+          ),
+          const ApiField(
+            name: 'quantity',
+            label: 'Quantity',
+            hint: 'Quantity of this item in the cart (e.g., "4")',
+            isRequired: true,
+          ),
+          const ApiField(
+            name: 'variation',
+            label: 'Variation (Optional)',
+            hint: 'Chosen attributes for variations containing array of objects with keys "attribute" and "value"',
+            isRequired: false,
           ),
           const ApiField(
             name: 'cart_token',

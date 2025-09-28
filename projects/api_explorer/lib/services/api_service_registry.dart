@@ -4111,6 +4111,20 @@ class ApiServiceRegistry {
       subcategory: 'Cart Items API',
       handler: GetSingleCartItemHandler(),
     ),
+    ApiService(
+      name: 'Add Cart Item',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: AddCartItemHandler(),
+    ),
+    ApiService(
+      name: 'Edit Single Cart Item',
+      endpoint: '/wp-json/wc/store/v1/cart/items/{key}?quantity=',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: EditSingleCartItemHandler(),
+    ),
   ];
 
   static void initialize() {}

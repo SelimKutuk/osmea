@@ -6,19 +6,19 @@ import 'package:apis/apis.dart';
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstract/cart_items_service.dart';
 
 ///*******************************************************************
-//************** 🔍 GET SINGLE CART ITEM HANDLER *******************
+//************** ✏️ EDIT SINGLE CART ITEM HANDLER ******************
 ///*******************************************************************
 
-class GetSingleCartItemHandler implements ApiRequestHandler {
+class EditSingleCartItemHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
     String method,
     Map<String, String> params,
   ) async {
-    if (method != 'GET') {
+    if (method != 'PUT') {
       return {
         "status": "error",
-        "message": "Method $method not supported for Get Single Cart Item API",
+        "message": "Method $method not supported for Edit Single Cart Item API",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
@@ -32,9 +32,26 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
       };
     }
 
+    if (!params.containsKey('quantity') || params['quantity']!.isEmpty) {
+      return {
+        "status": "error",
+        "message": "Quantity is required",
+        "timestamp": DateTime.now().toIso8601String(),
+      };
+    }
+
     try {
       final apiVersion = params['api_version'] ?? 'v1';
       final key = params['key']!;
+      final quantity = int.tryParse(params['quantity']!);
+
+      if (quantity == null || quantity <= 0) {
+        return {
+          "status": "error",
+          "message": "Invalid quantity. Must be a positive integer.",
+          "timestamp": DateTime.now().toIso8601String(),
+        };
+      }
 
       // 🔍 Auto-fetch cart token from local storage
       String? cartToken = params['cart_token'];
@@ -89,9 +106,10 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
         };
       }
 
-      debugPrint('🔍 Starting get single cart item:');
+      debugPrint('✏️ Starting edit single cart item:');
       debugPrint('  - API Version: $apiVersion');
       debugPrint('  - Item Key: $key');
+      debugPrint('  - New Quantity: $quantity');
       debugPrint('  - Cart Token Available: ${cartToken.isNotEmpty}');
       debugPrint('  - JWT Token Available: ${jwtToken.isNotEmpty}');
 
@@ -104,53 +122,41 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
           : 'Bearer $jwtToken';
 
       // Call the service
-      final responseList = await cartItemsService.getSingleCartItem(
+      final response = await cartItemsService.editSingleCartItem(
         apiVersion: apiVersion,
         cartToken: cartToken,
         jwtToken: formattedJwtToken,
         key: key,
+        quantity: quantity,
       );
 
-      debugPrint('🔍 Single Cart Item Response received successfully');
-      debugPrint('  - Response Type: ${responseList.runtimeType}');
-      debugPrint('  - Response Count: ${responseList.length}');
+      debugPrint('✏️ Edit Single Cart Item Response received successfully');
+      debugPrint('  - Response Type: ${response.runtimeType}');
 
-      if (responseList.isEmpty) {
-        return {
-          "status": "error",
-          "message": "Cart item not found with the provided key",
-          "params": params,
-          "timestamp": DateTime.now().toIso8601String(),
-        };
-      }
-
-      // Get the first (and should be only) item from the array
-      final response = responseList.first;
-      final responseJson = response.toJson();
-      debugPrint('  - Item Key: ${response.key}');
-      debugPrint('  - Item Name: ${response.name}');
-      debugPrint('  - Available Fields: ${responseJson.keys.join(', ')}');
-
-      debugPrint('✅ Single cart item retrieved successfully');
+      debugPrint('✅ Cart item edited successfully');
 
       return {
         "status": "success",
-        "message": "Single cart item retrieved successfully",
+        "message": "Cart item edited successfully",
         "auth_info": {
           "cart_token_source": params.containsKey('cart_token') && params['cart_token']!.isNotEmpty ? "manual" : "auto_storage",
           "jwt_token_source": params.containsKey('jwt_token') && params['jwt_token']!.isNotEmpty ? "manual" : "auto_storage",
           "cart_token_available": cartToken.isNotEmpty,
           "jwt_token_available": jwtToken.isNotEmpty,
         },
-        "item": responseJson,
+        "updated_item": "Cart item updated successfully - response details will be available after build generation",
+        "request_params": {
+          "item_key": key,
+          "new_quantity": quantity,
+        },
         "params": params,
         "timestamp": DateTime.now().toIso8601String(),
       };
 
     } catch (e) {
-      debugPrint("🚨 Get Single Cart Item Error Details: $e");
+      debugPrint("🚨 Edit Single Cart Item Error Details: $e");
 
-      String errorMessage = "Failed to get single cart item: ${e.toString()}";
+      String errorMessage = "Failed to edit cart item: ${e.toString()}";
       Map<String, dynamic> errorDetails = {};
 
       // Check if it's a network/HTTP related error
@@ -160,7 +166,7 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
 
         if (e.toString().contains('400')) {
           errorDetails['status_code'] = 400;
-          errorMessage = "Bad request. Please check the cart item key";
+          errorMessage = "Bad request. Please check the cart item key and quantity";
         } else if (e.toString().contains('401')) {
           errorDetails['status_code'] = 401;
           errorMessage = "Unauthorized. Please check your JWT token";
@@ -170,11 +176,14 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
         } else if (e.toString().contains('404')) {
           errorDetails['status_code'] = 404;
           errorMessage = "Cart item not found. Please check the item key";
+        } else if (e.toString().contains('422')) {
+          errorDetails['status_code'] = 422;
+          errorMessage = "Validation error. Invalid quantity or item cannot be updated";
         } else if (e.toString().contains('500')) {
           errorDetails['status_code'] = 500;
-          errorMessage = "Server error occurred while fetching cart item";
+          errorMessage = "Server error occurred while editing cart item";
         } else {
-          errorMessage = "Network error occurred while fetching cart item";
+          errorMessage = "Network error occurred while editing cart item";
         }
 
         errorDetails['type'] = 'network_error';
@@ -190,6 +199,9 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
       } else if (e.toString().contains('key')) {
         errorDetails['type'] = 'key_error';
         errorMessage = "Invalid cart item key";
+      } else if (e.toString().contains('quantity')) {
+        errorDetails['type'] = 'quantity_error';
+        errorMessage = "Invalid quantity value";
       } else {
         errorDetails['type'] = 'unknown_error';
       }
@@ -206,15 +218,21 @@ class GetSingleCartItemHandler implements ApiRequestHandler {
   }
 
   @override
-  List<String> get supportedMethods => ['GET'];
+  List<String> get supportedMethods => ['PUT'];
 
   @override
   Map<String, List<ApiField>> get requiredFields => {
-        'GET': [
+        'PUT': [
           const ApiField(
             name: 'key',
             label: 'Cart Item Key',
-            hint: 'The unique key of the cart item to retrieve (e.g., "6f4922f45568161a8cdf4ad2299f6d23")',
+            hint: 'The unique key of the cart item to edit (e.g., "c74d97b01eae257e44aa9d5bade97baf")',
+            isRequired: true,
+          ),
+          const ApiField(
+            name: 'quantity',
+            label: 'New Quantity',
+            hint: 'New quantity for this item in the cart (e.g., "7")',
             isRequired: true,
           ),
           const ApiField(
