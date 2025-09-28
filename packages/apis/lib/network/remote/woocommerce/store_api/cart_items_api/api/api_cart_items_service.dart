@@ -72,4 +72,15 @@ abstract class CartItemsServiceClient implements CartItemsService {
     @Path('key') required String key,
     @Query('quantity') required int quantity,
   });
+
+  /// 🗑️ Delete all cart items from the cart via WooCommerce Store API
+  /// Requires JWT authentication and cart token headers for proper authorization.
+  /// DELETE request returns empty array when successful.
+  @override
+  @DELETE('/wp-json/wc/store/{api_version}/cart/items')
+  Future<List<CartItem>> deleteAllCartItems({
+    @Path('api_version') required String apiVersion,
+    @Header('CART_TOKEN') required String cartToken,
+    @Header('Authorization') required String jwtToken,
+  });
 }

@@ -44,4 +44,13 @@ abstract class CartItemsService {
     required String key,
     required int quantity,
   });
+
+  /// 🗑️ Delete all cart items from the cart via WooCommerce Store API.
+  /// Requires JWT authentication and cart token headers for proper authorization.
+  /// Returns empty List<CartItem> when successful (cart becomes empty).
+  Future<List<CartItem>> deleteAllCartItems({
+    required String apiVersion,
+    required String cartToken,
+    required String jwtToken,
+  });
 }
