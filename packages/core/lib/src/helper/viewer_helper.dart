@@ -41,6 +41,7 @@ class ViewerHelper {
     void Function(String? url, Map<String, String> attributes)? onLinkTap,
     Widget? loadingWidget,
     Widget? errorWidget,
+    double? height,
     bool useOsmeaComponents = true,
   }) {
     return _HtmlViewer(
@@ -49,6 +50,7 @@ class ViewerHelper {
       onLinkTap: onLinkTap,
       loadingWidget: loadingWidget,
       errorWidget: errorWidget,
+      height: height,
     );
   }
 
@@ -68,6 +70,8 @@ class ViewerHelper {
   static Widget url(
     String url, {
     bool showNavigationControls = false,
+    double? height,
+    bool enableFullscreen = false,
     InAppWebViewSettings? initialSettings,
     Widget? loadingWidget,
     Widget? errorWidget,
@@ -97,6 +101,8 @@ class ViewerHelper {
     return _WebViewer(
       url: url,
       showNavigationControls: showNavigationControls,
+      height: height,
+      enableFullscreen: enableFullscreen,
       initialSettings: initialSettings,
       loadingWidget: loadingWidget,
       errorWidget: errorWidget,
@@ -122,13 +128,18 @@ class ViewerHelper {
   static Widget auto(
     String content, {
     bool? isUrl,
+    double? height,
+    bool enableFullscreen = false,
   }) {
     final bool isUrlContent = isUrl ?? _isUrl(content);
 
     if (isUrlContent) {
-      return url(content, showNavigationControls: true);
+      return url(content,
+          showNavigationControls: true,
+          height: height,
+          enableFullscreen: enableFullscreen);
     } else {
-      return html(content);
+      return html(content, height: height);
     }
   }
 
@@ -309,6 +320,7 @@ class _HtmlViewer extends StatelessWidget {
     this.onLinkTap,
     this.loadingWidget,
     this.errorWidget,
+    this.height,
   });
 
   final String htmlContent;
@@ -316,6 +328,7 @@ class _HtmlViewer extends StatelessWidget {
   final void Function(String? url, Map<String, String> attributes)? onLinkTap;
   final Widget? loadingWidget;
   final Widget? errorWidget;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -330,13 +343,17 @@ class _HtmlViewer extends StatelessWidget {
                     child: OsmeaComponents.loading(
                         type: LoadingType.circularFade)),
             error: (message) => errorWidget ?? _buildErrorWidget(message),
-            content: (html) => SingleChildScrollView(
-              child: Html(
-                data: html,
-                style: customStyle ?? _getDefaultStyle(),
-                onLinkTap: onLinkTap != null
-                    ? (url, attributes, element) => onLinkTap!(url, attributes)
-                    : null,
+            content: (html) => SizedBox(
+              height: height,
+              child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                  style: customStyle ?? _getDefaultStyle(),
+                  onLinkTap: onLinkTap != null
+                      ? (url, attributes, element) =>
+                          onLinkTap!(url, attributes)
+                      : null,
+                ),
               ),
             ),
           );
@@ -419,6 +436,8 @@ class _WebViewer extends StatefulWidget {
   const _WebViewer({
     required this.url,
     this.showNavigationControls = false,
+    this.height,
+    this.enableFullscreen = false,
     this.initialSettings,
     this.loadingWidget,
     this.errorWidget,
@@ -435,6 +454,8 @@ class _WebViewer extends StatefulWidget {
 
   final String url;
   final bool showNavigationControls;
+  final double? height;
+  final bool enableFullscreen;
   final InAppWebViewSettings? initialSettings;
   final Widget? loadingWidget;
   final Widget? errorWidget;
@@ -475,6 +496,14 @@ class _WebViewerState extends State<_WebViewer> {
       _cubit.emit(BaseViewState.content(widget.url));
     }
     // Mobilde content'e zorlamıyoruz; yüklemeyi controller hazır olunca başlatacağız.
+  }
+
+  @override
+  void didUpdateWidget(covariant _WebViewer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.url != widget.url && widget.url.isNotEmpty) {
+      _cubit.loadUrl(widget.url);
+    }
   }
 
   @override
@@ -539,17 +568,49 @@ class _WebViewerState extends State<_WebViewer> {
             icon: Icon(Icons.stop),
             onPressed: _cubit.isLoading ? () => _cubit.stopLoading() : null,
           ),
+          if (widget.enableFullscreen)
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.fullscreen),
+              onPressed: _openFullscreen,
+            ),
           OsmeaComponents.expanded(
             child: OsmeaComponents.padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: OsmeaComponents.text(
-                _cubit.currentUrl,
+                (_cubit.currentUrl.isNotEmpty ? _cubit.currentUrl : widget.url),
                 fontSize: 12,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _openFullscreen() {
+    final current =
+        _cubit.currentUrl.isNotEmpty ? _cubit.currentUrl : widget.url;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => Scaffold(
+          backgroundColor: OsmeaColors.white,
+          appBar: AppBar(
+            title: const Text('WebView'),
+          ),
+          body: SafeArea(
+            child: OsmeaComponents.container(
+              margin: const EdgeInsets.all(0),
+              child: ViewerHelper.url(
+                current,
+                showNavigationControls: true,
+                // Fullscreen sayfada tekrar fullscreen tuşu göstermeyelim
+                enableFullscreen: false,
+                height: null,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -596,7 +657,7 @@ class _WebViewerState extends State<_WebViewer> {
   /// Web platformu için iframe tabanlı WebView
   Widget _buildWebIframe() {
     return OsmeaComponents.container(
-      height: 400,
+      height: widget.height,
       decoration: BoxDecoration(
         border: Border.all(color: OsmeaColors.ash),
         borderRadius: BorderRadius.circular(8),
@@ -673,7 +734,7 @@ class _WebViewerState extends State<_WebViewer> {
   /// Mobil platformlar için gerçek InAppWebView
   Widget _buildInAppWebView() {
     return OsmeaComponents.container(
-      height: 400,
+      height: widget.height,
       decoration: BoxDecoration(
         border: Border.all(color: OsmeaColors.ash),
         borderRadius: BorderRadius.circular(8),

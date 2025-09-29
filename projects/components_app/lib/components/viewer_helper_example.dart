@@ -246,6 +246,7 @@ class _ViewerHelperExampleState extends State<ViewerHelperExample> {
               ),
               child: ViewerHelper.html(
                 _sampleHtml,
+                height: 500, // Daha büyük yükseklik
                 loadingWidget: OsmeaComponents.center(
                   child: OsmeaComponents.column(
                     children: [
@@ -316,6 +317,8 @@ class _ViewerHelperExampleState extends State<ViewerHelperExample> {
               child: ViewerHelper.url(
                 _sampleUrls[_currentUrlIndex],
                 showNavigationControls: true,
+                height: 500, // Daha büyük yükseklik
+                enableFullscreen: true, // Fullscreen özelliği
                 loadingWidget: OsmeaComponents.center(
                   child: OsmeaComponents.column(
                     children: [
@@ -451,6 +454,8 @@ class _ViewerHelperExampleState extends State<ViewerHelperExample> {
                 ),
                 child: ViewerHelper.auto(
                   _autoDetectContent,
+                  height: 500, // Daha büyük yükseklik
+                  enableFullscreen: true, // Fullscreen özelliği
                 ),
               ),
             ),
