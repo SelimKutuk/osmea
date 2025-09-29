@@ -16,10 +16,18 @@ _$CreateGiftCardWithCustomCodeRequestImpl
         );
 
 Map<String, dynamic> _$$CreateGiftCardWithCustomCodeRequestImplToJson(
-        _$CreateGiftCardWithCustomCodeRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.giftCard?.toJson() case final value?) 'gift_card': value,
-    };
+    _$CreateGiftCardWithCustomCodeRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gift_card', instance.giftCard?.toJson());
+  return val;
+}
 
 _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
     _$GiftCardImpl(
@@ -29,10 +37,18 @@ _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
       templateSuffix: json['template_suffix'] as String?,
     );
 
-Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) =>
-    <String, dynamic>{
-      if (instance.note case final value?) 'note': value,
-      if (instance.initialValue case final value?) 'initial_value': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-    };
+Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('note', instance.note);
+  writeNotNull('initial_value', instance.initialValue);
+  writeNotNull('code', instance.code);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  return val;
+}

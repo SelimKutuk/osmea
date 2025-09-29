@@ -33,10 +33,19 @@ _$BasicRecurringApplicationChargeDataImpl
         );
 
 Map<String, dynamic> _$$BasicRecurringApplicationChargeDataImplToJson(
-        _$BasicRecurringApplicationChargeDataImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'price': instance.price,
-      'return_url': instance.returnUrl,
-      if (instance.test case final value?) 'test': value,
-    };
+    _$BasicRecurringApplicationChargeDataImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'price': instance.price,
+    'return_url': instance.returnUrl,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('test', instance.test);
+  return val;
+}

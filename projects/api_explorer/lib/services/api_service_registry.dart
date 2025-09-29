@@ -66,7 +66,10 @@ enum ApiCategory {
   woocommerceRefunds,
   woocommerceSetting,
   woocommerceTaxes,
+  //WooCommerce Store API
+  //TODO: Add other Store API categories here
   woocommerceWishlist,
+  woocommerceCart,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -172,8 +175,11 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Settings';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes APIs';
+      // WooCommerce Store API
       case ApiCategory.woocommerceWishlist:
         return 'Wishlist APIs';
+      case ApiCategory.woocommerceCart:
+        return 'Cart API';
     }
   }
 }
@@ -4031,6 +4037,64 @@ class ApiServiceRegistry {
       subcategory: 'Wishlist Items',
       handler: DeleteWishlistItemHandler(),
     ),
+
+    // 🛒 WooCommerce Store API Cart
+    ApiService(
+      name: 'Get Cart',
+      endpoint: '/wp-json/wc/store/v1/cart',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: GetCartHandler(),
+    ),
+    ApiService(
+      name: 'Add Item',
+      endpoint: '/wp-json/wc/store/v1/cart/add-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: AddItemHandler(),
+    ),
+    ApiService(
+      name: 'Remove Item',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveItemHandler(),
+    ),
+    ApiService(
+      name: 'Update Item',
+      endpoint: '/wp-json/wc/store/v1/cart/update-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateItemHandler(),
+    ),
+    ApiService(
+      name: 'Apply Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/apply-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: ApplyCouponHandler(),
+    ),
+    ApiService(
+      name: 'Remove Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveCouponHandler(),
+    ),
+    ApiService(
+      name: 'Update Customer',
+      endpoint: '/wp-json/wc/store/v1/cart/update-customer',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateCartCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Select Shipping Rate',
+      endpoint: '/wp-json/wc/store/v1/cart/select-shipping-rate',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: SelectShippingRateHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4144,6 +4208,7 @@ class ApiServiceRegistry {
   static List<ApiCategory> getWooCommerceCustomerCategories() {
     return [
       ApiCategory.woocommerceWishlist,
+      ApiCategory.woocommerceCart,
     ];
   }
 
@@ -4316,6 +4381,8 @@ class ApiServiceRegistry {
         return 'Taxes';
       case ApiCategory.woocommerceWishlist:
         return 'Wishlist';
+      case ApiCategory.woocommerceCart:
+        return 'Cart';
     }
   }
 
@@ -4420,6 +4487,8 @@ class ApiServiceRegistry {
         return Icons.receipt_long_rounded;
       case ApiCategory.woocommerceWishlist:
         return Icons.favorite_border_rounded;
+      case ApiCategory.woocommerceCart:
+        return Icons.shopping_cart_rounded;
     }
   }
 }

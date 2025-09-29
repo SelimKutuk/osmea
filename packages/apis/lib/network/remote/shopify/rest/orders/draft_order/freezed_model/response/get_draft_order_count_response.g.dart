@@ -13,7 +13,15 @@ _$GetDraftOrderCountResponseImpl _$$GetDraftOrderCountResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetDraftOrderCountResponseImplToJson(
-        _$GetDraftOrderCountResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$GetDraftOrderCountResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

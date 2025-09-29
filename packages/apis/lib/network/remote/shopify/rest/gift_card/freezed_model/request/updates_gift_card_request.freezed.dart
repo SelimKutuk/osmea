@@ -24,12 +24,8 @@ mixin _$UpdatesGiftCardRequest {
   @JsonKey(name: "gift_card")
   GiftCardUpdate get giftCard => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdatesGiftCardRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdatesGiftCardRequestCopyWith<UpdatesGiftCardRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdatesGiftCardRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdatesGiftCardRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GiftCardUpdateCopyWith<$Res> get giftCard {
@@ -107,8 +99,6 @@ class __$$UpdatesGiftCardRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdatesGiftCardRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,13 +140,11 @@ class _$UpdatesGiftCardRequestImpl implements _UpdatesGiftCardRequest {
                 other.giftCard == giftCard));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, giftCard);
 
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdatesGiftCardRequestImplCopyWith<_$UpdatesGiftCardRequestImpl>
@@ -182,11 +170,8 @@ abstract class _UpdatesGiftCardRequest implements UpdatesGiftCardRequest {
   @override
   @JsonKey(name: "gift_card")
   GiftCardUpdate get giftCard;
-
-  /// Create a copy of UpdatesGiftCardRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdatesGiftCardRequestImplCopyWith<_$UpdatesGiftCardRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -204,12 +189,8 @@ mixin _$GiftCardUpdate {
   @JsonKey(name: "expires_on")
   String? get expiresOn => throw _privateConstructorUsedError;
 
-  /// Serializes this GiftCardUpdate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GiftCardUpdate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GiftCardUpdateCopyWith<GiftCardUpdate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -236,8 +217,6 @@ class _$GiftCardUpdateCopyWithImpl<$Res, $Val extends GiftCardUpdate>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GiftCardUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -284,8 +263,6 @@ class __$$GiftCardUpdateImplCopyWithImpl<$Res>
       _$GiftCardUpdateImpl _value, $Res Function(_$GiftCardUpdateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GiftCardUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -348,13 +325,11 @@ class _$GiftCardUpdateImpl implements _GiftCardUpdate {
                 other.expiresOn == expiresOn));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, note, templateSuffix, expiresOn);
 
-  /// Create a copy of GiftCardUpdate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GiftCardUpdateImplCopyWith<_$GiftCardUpdateImpl> get copyWith =>
@@ -388,11 +363,8 @@ abstract class _GiftCardUpdate implements GiftCardUpdate {
   @override
   @JsonKey(name: "expires_on")
   String? get expiresOn;
-
-  /// Create a copy of GiftCardUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GiftCardUpdateImplCopyWith<_$GiftCardUpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

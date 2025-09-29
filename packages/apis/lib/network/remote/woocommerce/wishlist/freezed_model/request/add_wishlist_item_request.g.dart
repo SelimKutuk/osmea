@@ -17,11 +17,20 @@ _$AddWishlistItemRequestImpl _$$AddWishlistItemRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$AddWishlistItemRequestImplToJson(
-        _$AddWishlistItemRequestImpl instance) =>
-    <String, dynamic>{
-      'product_id': instance.productId,
-      'group_id': instance.groupId,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.variationId case final value?) 'variation_id': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$AddWishlistItemRequestImpl instance) {
+  final val = <String, dynamic>{
+    'product_id': instance.productId,
+    'group_id': instance.groupId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('variation_id', instance.variationId);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

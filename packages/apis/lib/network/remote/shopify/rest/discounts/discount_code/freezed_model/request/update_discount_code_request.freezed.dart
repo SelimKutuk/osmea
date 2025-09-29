@@ -24,12 +24,8 @@ mixin _$UpdateDiscountCodeRequest {
   @JsonKey(name: "discount_code")
   DiscountCode? get discountCode => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateDiscountCodeRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateDiscountCodeRequestCopyWith<UpdateDiscountCodeRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdateDiscountCodeRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdateDiscountCodeRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DiscountCodeCopyWith<$Res>? get discountCode {
@@ -111,8 +103,6 @@ class __$$UpdateDiscountCodeRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateDiscountCodeRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,13 +144,11 @@ class _$UpdateDiscountCodeRequestImpl implements _UpdateDiscountCodeRequest {
                 other.discountCode == discountCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, discountCode);
 
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateDiscountCodeRequestImplCopyWith<_$UpdateDiscountCodeRequestImpl>
@@ -186,11 +174,8 @@ abstract class _UpdateDiscountCodeRequest implements UpdateDiscountCodeRequest {
   @override
   @JsonKey(name: "discount_code")
   DiscountCode? get discountCode;
-
-  /// Create a copy of UpdateDiscountCodeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateDiscountCodeRequestImplCopyWith<_$UpdateDiscountCodeRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -214,12 +199,8 @@ mixin _$DiscountCode {
   @JsonKey(name: "updated_at")
   String? get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this DiscountCode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DiscountCode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DiscountCodeCopyWith<DiscountCode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -249,8 +230,6 @@ class _$DiscountCodeCopyWithImpl<$Res, $Val extends DiscountCode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DiscountCode
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -315,8 +294,6 @@ class __$$DiscountCodeImplCopyWithImpl<$Res>
       _$DiscountCodeImpl _value, $Res Function(_$DiscountCodeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DiscountCode
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -411,14 +388,12 @@ class _$DiscountCodeImpl implements _DiscountCode {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, priceRuleId, code, usageCount, createdAt, updatedAt);
 
-  /// Create a copy of DiscountCode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DiscountCodeImplCopyWith<_$DiscountCodeImpl> get copyWith =>
@@ -463,11 +438,8 @@ abstract class _DiscountCode implements DiscountCode {
   @override
   @JsonKey(name: "updated_at")
   String? get updatedAt;
-
-  /// Create a copy of DiscountCode
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DiscountCodeImplCopyWith<_$DiscountCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

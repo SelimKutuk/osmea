@@ -17,12 +17,20 @@ _$CreateWishlistGroupResponseImpl _$$CreateWishlistGroupResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateWishlistGroupResponseImplToJson(
-        _$CreateWishlistGroupResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.success case final value?) 'success': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-    };
+    _$CreateWishlistGroupResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('success', instance.success);
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.toJson());
+  return val;
+}
 
 _$WishlistGroupDataImpl _$$WishlistGroupDataImplFromJson(
         Map<String, dynamic> json) =>
@@ -36,12 +44,20 @@ _$WishlistGroupDataImpl _$$WishlistGroupDataImplFromJson(
     );
 
 Map<String, dynamic> _$$WishlistGroupDataImplToJson(
-        _$WishlistGroupDataImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.description case final value?) 'description': value,
-      if (instance.isDefault case final value?) 'is_default': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-    };
+    _$WishlistGroupDataImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('description', instance.description);
+  writeNotNull('is_default', instance.isDefault);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('created_at', instance.createdAt);
+  return val;
+}

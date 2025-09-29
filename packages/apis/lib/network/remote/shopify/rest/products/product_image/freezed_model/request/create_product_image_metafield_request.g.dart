@@ -29,15 +29,22 @@ _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       filename: json['filename'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.position case final value?) 'position': value,
-      if (instance.metafields?.map((e) => e.toJson()).toList()
-          case final value?)
-        'metafields': value,
-      if (instance.attachment case final value?) 'attachment': value,
-      if (instance.filename case final value?) 'filename': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('position', instance.position);
+  writeNotNull(
+      'metafields', instance.metafields?.map((e) => e.toJson()).toList());
+  writeNotNull('attachment', instance.attachment);
+  writeNotNull('filename', instance.filename);
+  return val;
+}
 
 _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
     _$MetafieldImpl(
@@ -47,10 +54,18 @@ _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
       namespace: json['namespace'] as String?,
     );
 
-Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) =>
-    <String, dynamic>{
-      if (instance.key case final value?) 'key': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.type case final value?) 'type': value,
-      if (instance.namespace case final value?) 'namespace': value,
-    };
+Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('key', instance.key);
+  writeNotNull('value', instance.value);
+  writeNotNull('type', instance.type);
+  writeNotNull('namespace', instance.namespace);
+  return val;
+}

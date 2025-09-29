@@ -24,12 +24,8 @@ mixin _$UpdateInventoryItemSkuRequest {
   @JsonKey(name: "inventory_item")
   InventoryItem? get inventoryItem => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateInventoryItemSkuRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateInventoryItemSkuRequestCopyWith<UpdateInventoryItemSkuRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$UpdateInventoryItemSkuRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$UpdateInventoryItemSkuRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InventoryItemCopyWith<$Res>? get inventoryItem {
@@ -113,8 +105,6 @@ class __$$UpdateInventoryItemSkuRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateInventoryItemSkuRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$UpdateInventoryItemSkuRequestImpl
                 other.inventoryItem == inventoryItem));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, inventoryItem);
 
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateInventoryItemSkuRequestImplCopyWith<
@@ -193,11 +181,8 @@ abstract class _UpdateInventoryItemSkuRequest
   @override
   @JsonKey(name: "inventory_item")
   InventoryItem? get inventoryItem;
-
-  /// Create a copy of UpdateInventoryItemSkuRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateInventoryItemSkuRequestImplCopyWith<
           _$UpdateInventoryItemSkuRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -214,12 +199,8 @@ mixin _$InventoryItem {
   @JsonKey(name: "sku")
   String? get sku => throw _privateConstructorUsedError;
 
-  /// Serializes this InventoryItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InventoryItemCopyWith<InventoryItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -243,8 +224,6 @@ class _$InventoryItemCopyWithImpl<$Res, $Val extends InventoryItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -283,8 +262,6 @@ class __$$InventoryItemImplCopyWithImpl<$Res>
       _$InventoryItemImpl _value, $Res Function(_$InventoryItemImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -334,13 +311,11 @@ class _$InventoryItemImpl implements _InventoryItem {
             (identical(other.sku, sku) || other.sku == sku));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, sku);
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
@@ -368,11 +343,8 @@ abstract class _InventoryItem implements InventoryItem {
   @override
   @JsonKey(name: "sku")
   String? get sku;
-
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

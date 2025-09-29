@@ -16,11 +16,18 @@ _$UpdateInventoryItemSkuRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateInventoryItemSkuRequestImplToJson(
-        _$UpdateInventoryItemSkuRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.inventoryItem?.toJson() case final value?)
-        'inventory_item': value,
-    };
+    _$UpdateInventoryItemSkuRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('inventory_item', instance.inventoryItem?.toJson());
+  return val;
+}
 
 _$InventoryItemImpl _$$InventoryItemImplFromJson(Map<String, dynamic> json) =>
     _$InventoryItemImpl(
@@ -28,8 +35,16 @@ _$InventoryItemImpl _$$InventoryItemImplFromJson(Map<String, dynamic> json) =>
       sku: json['sku'] as String?,
     );
 
-Map<String, dynamic> _$$InventoryItemImplToJson(_$InventoryItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.sku case final value?) 'sku': value,
-    };
+Map<String, dynamic> _$$InventoryItemImplToJson(_$InventoryItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('sku', instance.sku);
+  return val;
+}

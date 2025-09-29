@@ -15,10 +15,18 @@ _$CreateOrderRiskRequestImpl _$$CreateOrderRiskRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateOrderRiskRequestImplToJson(
-        _$CreateOrderRiskRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.risk?.toJson() case final value?) 'risk': value,
-    };
+    _$CreateOrderRiskRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('risk', instance.risk?.toJson());
+  return val;
+}
 
 _$RiskImpl _$$RiskImplFromJson(Map<String, dynamic> json) => _$RiskImpl(
       message: json['message'] as String?,
@@ -29,12 +37,20 @@ _$RiskImpl _$$RiskImplFromJson(Map<String, dynamic> json) => _$RiskImpl(
       display: json['display'] as bool?,
     );
 
-Map<String, dynamic> _$$RiskImplToJson(_$RiskImpl instance) =>
-    <String, dynamic>{
-      if (instance.message case final value?) 'message': value,
-      if (instance.recommendation case final value?) 'recommendation': value,
-      if (instance.score case final value?) 'score': value,
-      if (instance.source case final value?) 'source': value,
-      if (instance.causeCancel case final value?) 'cause_cancel': value,
-      if (instance.display case final value?) 'display': value,
-    };
+Map<String, dynamic> _$$RiskImplToJson(_$RiskImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('recommendation', instance.recommendation);
+  writeNotNull('score', instance.score);
+  writeNotNull('source', instance.source);
+  writeNotNull('cause_cancel', instance.causeCancel);
+  writeNotNull('display', instance.display);
+  return val;
+}

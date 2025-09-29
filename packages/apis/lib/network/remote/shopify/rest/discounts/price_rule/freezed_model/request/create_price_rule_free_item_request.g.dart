@@ -15,10 +15,18 @@ _$CreatePriceRuleFreeItemRequestImpl
         );
 
 Map<String, dynamic> _$$CreatePriceRuleFreeItemRequestImplToJson(
-        _$CreatePriceRuleFreeItemRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.priceRule?.toJson() case final value?) 'price_rule': value,
-    };
+    _$CreatePriceRuleFreeItemRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price_rule', instance.priceRule?.toJson());
+  return val;
+}
 
 _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
     _$PriceRuleImpl(
@@ -46,27 +54,31 @@ _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
       allocationLimit: (json['allocation_limit'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.valueType case final value?) 'value_type': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.customerSelection case final value?)
-        'customer_selection': value,
-      if (instance.targetType case final value?) 'target_type': value,
-      if (instance.targetSelection case final value?) 'target_selection': value,
-      if (instance.allocationMethod case final value?)
-        'allocation_method': value,
-      if (instance.startsAt case final value?) 'starts_at': value,
-      if (instance.prerequisiteCollectionIds case final value?)
-        'prerequisite_collection_ids': value,
-      if (instance.entitledProductIds case final value?)
-        'entitled_product_ids': value,
-      if (instance.prerequisiteToEntitlementQuantityRatio?.toJson()
-          case final value?)
-        'prerequisite_to_entitlement_quantity_ratio': value,
-      if (instance.allocationLimit case final value?) 'allocation_limit': value,
-    };
+Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('value_type', instance.valueType);
+  writeNotNull('value', instance.value);
+  writeNotNull('customer_selection', instance.customerSelection);
+  writeNotNull('target_type', instance.targetType);
+  writeNotNull('target_selection', instance.targetSelection);
+  writeNotNull('allocation_method', instance.allocationMethod);
+  writeNotNull('starts_at', instance.startsAt);
+  writeNotNull(
+      'prerequisite_collection_ids', instance.prerequisiteCollectionIds);
+  writeNotNull('entitled_product_ids', instance.entitledProductIds);
+  writeNotNull('prerequisite_to_entitlement_quantity_ratio',
+      instance.prerequisiteToEntitlementQuantityRatio?.toJson());
+  writeNotNull('allocation_limit', instance.allocationLimit);
+  return val;
+}
 
 _$PrerequisiteToEntitlementQuantityRatioImpl
     _$$PrerequisiteToEntitlementQuantityRatioImplFromJson(
@@ -78,10 +90,16 @@ _$PrerequisiteToEntitlementQuantityRatioImpl
         );
 
 Map<String, dynamic> _$$PrerequisiteToEntitlementQuantityRatioImplToJson(
-        _$PrerequisiteToEntitlementQuantityRatioImpl instance) =>
-    <String, dynamic>{
-      if (instance.prerequisiteQuantity case final value?)
-        'prerequisite_quantity': value,
-      if (instance.entitledQuantity case final value?)
-        'entitled_quantity': value,
-    };
+    _$PrerequisiteToEntitlementQuantityRatioImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('prerequisite_quantity', instance.prerequisiteQuantity);
+  writeNotNull('entitled_quantity', instance.entitledQuantity);
+  return val;
+}

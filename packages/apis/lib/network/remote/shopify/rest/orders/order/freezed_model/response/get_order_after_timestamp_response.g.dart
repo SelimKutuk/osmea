@@ -15,11 +15,18 @@ _$GetOrderAfterTimestampResponseImpl
         );
 
 Map<String, dynamic> _$$GetOrderAfterTimestampResponseImplToJson(
-        _$GetOrderAfterTimestampResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.orders?.map((e) => e.toJson()).toList() case final value?)
-        'orders': value,
-    };
+    _$GetOrderAfterTimestampResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('orders', instance.orders?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -154,130 +161,109 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       shippingLines: json['shipping_lines'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.appId case final value?) 'app_id': value,
-      if (instance.browserIp case final value?) 'browser_ip': value,
-      if (instance.buyerAcceptsMarketing case final value?)
-        'buyer_accepts_marketing': value,
-      if (instance.cancelReason case final value?) 'cancel_reason': value,
-      if (instance.cancelledAt case final value?) 'cancelled_at': value,
-      if (instance.cartToken case final value?) 'cart_token': value,
-      if (instance.checkoutId case final value?) 'checkout_id': value,
-      if (instance.checkoutToken case final value?) 'checkout_token': value,
-      if (instance.clientDetails?.toJson() case final value?)
-        'client_details': value,
-      if (instance.closedAt case final value?) 'closed_at': value,
-      if (instance.confirmationNumber case final value?)
-        'confirmation_number': value,
-      if (instance.confirmed case final value?) 'confirmed': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.currentSubtotalPrice case final value?)
-        'current_subtotal_price': value,
-      if (instance.currentSubtotalPriceSet?.toJson() case final value?)
-        'current_subtotal_price_set': value,
-      if (instance.currentTotalAdditionalFeesSet case final value?)
-        'current_total_additional_fees_set': value,
-      if (instance.currentTotalDiscounts case final value?)
-        'current_total_discounts': value,
-      if (instance.currentTotalDiscountsSet?.toJson() case final value?)
-        'current_total_discounts_set': value,
-      if (instance.currentTotalDutiesSet case final value?)
-        'current_total_duties_set': value,
-      if (instance.currentTotalPrice case final value?)
-        'current_total_price': value,
-      if (instance.currentTotalPriceSet?.toJson() case final value?)
-        'current_total_price_set': value,
-      if (instance.currentTotalTax case final value?)
-        'current_total_tax': value,
-      if (instance.currentTotalTaxSet?.toJson() case final value?)
-        'current_total_tax_set': value,
-      if (instance.customerLocale case final value?) 'customer_locale': value,
-      if (instance.deviceId case final value?) 'device_id': value,
-      if (instance.discountCodes case final value?) 'discount_codes': value,
-      if (instance.estimatedTaxes case final value?) 'estimated_taxes': value,
-      if (instance.financialStatus case final value?) 'financial_status': value,
-      if (instance.fulfillmentStatus case final value?)
-        'fulfillment_status': value,
-      if (instance.landingSite case final value?) 'landing_site': value,
-      if (instance.landingSiteRef case final value?) 'landing_site_ref': value,
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.merchantOfRecordAppId case final value?)
-        'merchant_of_record_app_id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.noteAttributes?.map((e) => e.toJson()).toList()
-          case final value?)
-        'note_attributes': value,
-      if (instance.number case final value?) 'number': value,
-      if (instance.orderNumber case final value?) 'order_number': value,
-      if (instance.originalTotalAdditionalFeesSet case final value?)
-        'original_total_additional_fees_set': value,
-      if (instance.originalTotalDutiesSet case final value?)
-        'original_total_duties_set': value,
-      if (instance.paymentGatewayNames case final value?)
-        'payment_gateway_names': value,
-      if (instance.poNumber case final value?) 'po_number': value,
-      if (instance.presentmentCurrency case final value?)
-        'presentment_currency': value,
-      if (instance.processedAt case final value?) 'processed_at': value,
-      if (instance.reference case final value?) 'reference': value,
-      if (instance.referringSite case final value?) 'referring_site': value,
-      if (instance.sourceIdentifier case final value?)
-        'source_identifier': value,
-      if (instance.sourceName case final value?) 'source_name': value,
-      if (instance.sourceUrl case final value?) 'source_url': value,
-      if (instance.subtotalPrice case final value?) 'subtotal_price': value,
-      if (instance.subtotalPriceSet?.toJson() case final value?)
-        'subtotal_price_set': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.taxExempt case final value?) 'tax_exempt': value,
-      if (instance.taxLines?.map((e) => e.toJson()).toList() case final value?)
-        'tax_lines': value,
-      if (instance.taxesIncluded case final value?) 'taxes_included': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.token case final value?) 'token': value,
-      if (instance.totalDiscounts case final value?) 'total_discounts': value,
-      if (instance.totalDiscountsSet?.toJson() case final value?)
-        'total_discounts_set': value,
-      if (instance.totalLineItemsPrice case final value?)
-        'total_line_items_price': value,
-      if (instance.totalLineItemsPriceSet?.toJson() case final value?)
-        'total_line_items_price_set': value,
-      if (instance.totalOutstanding case final value?)
-        'total_outstanding': value,
-      if (instance.totalPrice case final value?) 'total_price': value,
-      if (instance.totalPriceSet?.toJson() case final value?)
-        'total_price_set': value,
-      if (instance.totalShippingPriceSet?.toJson() case final value?)
-        'total_shipping_price_set': value,
-      if (instance.totalTax case final value?) 'total_tax': value,
-      if (instance.totalTaxSet?.toJson() case final value?)
-        'total_tax_set': value,
-      if (instance.totalTipReceived case final value?)
-        'total_tip_received': value,
-      if (instance.totalWeight case final value?) 'total_weight': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.billingAddress?.toJson() case final value?)
-        'billing_address': value,
-      if (instance.customer?.toJson() case final value?) 'customer': value,
-      if (instance.discountApplications case final value?)
-        'discount_applications': value,
-      if (instance.fulfillments case final value?) 'fulfillments': value,
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-      if (instance.paymentTerms case final value?) 'payment_terms': value,
-      if (instance.refunds?.map((e) => e.toJson()).toList() case final value?)
-        'refunds': value,
-      if (instance.shippingAddress?.toJson() case final value?)
-        'shipping_address': value,
-      if (instance.shippingLines case final value?) 'shipping_lines': value,
-    };
+Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('app_id', instance.appId);
+  writeNotNull('browser_ip', instance.browserIp);
+  writeNotNull('buyer_accepts_marketing', instance.buyerAcceptsMarketing);
+  writeNotNull('cancel_reason', instance.cancelReason);
+  writeNotNull('cancelled_at', instance.cancelledAt);
+  writeNotNull('cart_token', instance.cartToken);
+  writeNotNull('checkout_id', instance.checkoutId);
+  writeNotNull('checkout_token', instance.checkoutToken);
+  writeNotNull('client_details', instance.clientDetails?.toJson());
+  writeNotNull('closed_at', instance.closedAt);
+  writeNotNull('confirmation_number', instance.confirmationNumber);
+  writeNotNull('confirmed', instance.confirmed);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('current_subtotal_price', instance.currentSubtotalPrice);
+  writeNotNull(
+      'current_subtotal_price_set', instance.currentSubtotalPriceSet?.toJson());
+  writeNotNull('current_total_additional_fees_set',
+      instance.currentTotalAdditionalFeesSet);
+  writeNotNull('current_total_discounts', instance.currentTotalDiscounts);
+  writeNotNull('current_total_discounts_set',
+      instance.currentTotalDiscountsSet?.toJson());
+  writeNotNull('current_total_duties_set', instance.currentTotalDutiesSet);
+  writeNotNull('current_total_price', instance.currentTotalPrice);
+  writeNotNull(
+      'current_total_price_set', instance.currentTotalPriceSet?.toJson());
+  writeNotNull('current_total_tax', instance.currentTotalTax);
+  writeNotNull('current_total_tax_set', instance.currentTotalTaxSet?.toJson());
+  writeNotNull('customer_locale', instance.customerLocale);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('discount_codes', instance.discountCodes);
+  writeNotNull('estimated_taxes', instance.estimatedTaxes);
+  writeNotNull('financial_status', instance.financialStatus);
+  writeNotNull('fulfillment_status', instance.fulfillmentStatus);
+  writeNotNull('landing_site', instance.landingSite);
+  writeNotNull('landing_site_ref', instance.landingSiteRef);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('merchant_of_record_app_id', instance.merchantOfRecordAppId);
+  writeNotNull('name', instance.name);
+  writeNotNull('note', instance.note);
+  writeNotNull('note_attributes',
+      instance.noteAttributes?.map((e) => e.toJson()).toList());
+  writeNotNull('number', instance.number);
+  writeNotNull('order_number', instance.orderNumber);
+  writeNotNull('original_total_additional_fees_set',
+      instance.originalTotalAdditionalFeesSet);
+  writeNotNull('original_total_duties_set', instance.originalTotalDutiesSet);
+  writeNotNull('payment_gateway_names', instance.paymentGatewayNames);
+  writeNotNull('po_number', instance.poNumber);
+  writeNotNull('presentment_currency', instance.presentmentCurrency);
+  writeNotNull('processed_at', instance.processedAt);
+  writeNotNull('reference', instance.reference);
+  writeNotNull('referring_site', instance.referringSite);
+  writeNotNull('source_identifier', instance.sourceIdentifier);
+  writeNotNull('source_name', instance.sourceName);
+  writeNotNull('source_url', instance.sourceUrl);
+  writeNotNull('subtotal_price', instance.subtotalPrice);
+  writeNotNull('subtotal_price_set', instance.subtotalPriceSet?.toJson());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('tax_exempt', instance.taxExempt);
+  writeNotNull('tax_lines', instance.taxLines?.map((e) => e.toJson()).toList());
+  writeNotNull('taxes_included', instance.taxesIncluded);
+  writeNotNull('test', instance.test);
+  writeNotNull('token', instance.token);
+  writeNotNull('total_discounts', instance.totalDiscounts);
+  writeNotNull('total_discounts_set', instance.totalDiscountsSet?.toJson());
+  writeNotNull('total_line_items_price', instance.totalLineItemsPrice);
+  writeNotNull(
+      'total_line_items_price_set', instance.totalLineItemsPriceSet?.toJson());
+  writeNotNull('total_outstanding', instance.totalOutstanding);
+  writeNotNull('total_price', instance.totalPrice);
+  writeNotNull('total_price_set', instance.totalPriceSet?.toJson());
+  writeNotNull(
+      'total_shipping_price_set', instance.totalShippingPriceSet?.toJson());
+  writeNotNull('total_tax', instance.totalTax);
+  writeNotNull('total_tax_set', instance.totalTaxSet?.toJson());
+  writeNotNull('total_tip_received', instance.totalTipReceived);
+  writeNotNull('total_weight', instance.totalWeight);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('billing_address', instance.billingAddress?.toJson());
+  writeNotNull('customer', instance.customer?.toJson());
+  writeNotNull('discount_applications', instance.discountApplications);
+  writeNotNull('fulfillments', instance.fulfillments);
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('payment_terms', instance.paymentTerms);
+  writeNotNull('refunds', instance.refunds?.map((e) => e.toJson()).toList());
+  writeNotNull('shipping_address', instance.shippingAddress?.toJson());
+  writeNotNull('shipping_lines', instance.shippingLines);
+  return val;
+}
 
 _$IngAddressImpl _$$IngAddressImplFromJson(Map<String, dynamic> json) =>
     _$IngAddressImpl(
@@ -287,13 +273,21 @@ _$IngAddressImpl _$$IngAddressImplFromJson(Map<String, dynamic> json) =>
       provinceCode: json['province_code'] as String?,
     );
 
-Map<String, dynamic> _$$IngAddressImplToJson(_$IngAddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-    };
+Map<String, dynamic> _$$IngAddressImplToJson(_$IngAddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('province_code', instance.provinceCode);
+  return val;
+}
 
 _$ClientDetailsImpl _$$ClientDetailsImplFromJson(Map<String, dynamic> json) =>
     _$ClientDetailsImpl(
@@ -305,15 +299,23 @@ _$ClientDetailsImpl _$$ClientDetailsImplFromJson(Map<String, dynamic> json) =>
       userAgent: json['user_agent'],
     );
 
-Map<String, dynamic> _$$ClientDetailsImplToJson(_$ClientDetailsImpl instance) =>
-    <String, dynamic>{
-      if (instance.acceptLanguage case final value?) 'accept_language': value,
-      if (instance.browserHeight case final value?) 'browser_height': value,
-      if (instance.browserIp case final value?) 'browser_ip': value,
-      if (instance.browserWidth case final value?) 'browser_width': value,
-      if (instance.sessionHash case final value?) 'session_hash': value,
-      if (instance.userAgent case final value?) 'user_agent': value,
-    };
+Map<String, dynamic> _$$ClientDetailsImplToJson(_$ClientDetailsImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('accept_language', instance.acceptLanguage);
+  writeNotNull('browser_height', instance.browserHeight);
+  writeNotNull('browser_ip', instance.browserIp);
+  writeNotNull('browser_width', instance.browserWidth);
+  writeNotNull('session_hash', instance.sessionHash);
+  writeNotNull('user_agent', instance.userAgent);
+  return val;
+}
 
 _$SetImpl _$$SetImplFromJson(Map<String, dynamic> json) => _$SetImpl(
       shopMoney: json['shop_money'] == null
@@ -324,22 +326,38 @@ _$SetImpl _$$SetImplFromJson(Map<String, dynamic> json) => _$SetImpl(
           : Money.fromJson(json['presentment_money'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$SetImplToJson(_$SetImpl instance) => <String, dynamic>{
-      if (instance.shopMoney?.toJson() case final value?) 'shop_money': value,
-      if (instance.presentmentMoney?.toJson() case final value?)
-        'presentment_money': value,
-    };
+Map<String, dynamic> _$$SetImplToJson(_$SetImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shop_money', instance.shopMoney?.toJson());
+  writeNotNull('presentment_money', instance.presentmentMoney?.toJson());
+  return val;
+}
 
 _$MoneyImpl _$$MoneyImplFromJson(Map<String, dynamic> json) => _$MoneyImpl(
       amount: json['amount'] as String?,
       currencyCode: json['currency_code'] as String?,
     );
 
-Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currencyCode case final value?) 'currency_code': value,
-    };
+Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency_code', instance.currencyCode);
+  return val;
+}
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
@@ -369,29 +387,33 @@ _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
               json['default_address'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.state case final value?) 'state': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.verifiedEmail case final value?) 'verified_email': value,
-      if (instance.multipassIdentifier case final value?)
-        'multipass_identifier': value,
-      if (instance.taxExempt case final value?) 'tax_exempt': value,
-      if (instance.emailMarketingConsent?.toJson() case final value?)
-        'email_marketing_consent': value,
-      if (instance.smsMarketingConsent?.toJson() case final value?)
-        'sms_marketing_consent': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.taxExemptions case final value?) 'tax_exemptions': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.defaultAddress?.toJson() case final value?)
-        'default_address': value,
-    };
+Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('state', instance.state);
+  writeNotNull('note', instance.note);
+  writeNotNull('verified_email', instance.verifiedEmail);
+  writeNotNull('multipass_identifier', instance.multipassIdentifier);
+  writeNotNull('tax_exempt', instance.taxExempt);
+  writeNotNull(
+      'email_marketing_consent', instance.emailMarketingConsent?.toJson());
+  writeNotNull('sms_marketing_consent', instance.smsMarketingConsent?.toJson());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('tax_exemptions', instance.taxExemptions);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('default_address', instance.defaultAddress?.toJson());
+  return val;
+}
 
 _$DefaultAddressImpl _$$DefaultAddressImplFromJson(Map<String, dynamic> json) =>
     _$DefaultAddressImpl(
@@ -407,18 +429,26 @@ _$DefaultAddressImpl _$$DefaultAddressImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DefaultAddressImplToJson(
-        _$DefaultAddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.customerId case final value?) 'customer_id': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.defaultAddressDefault case final value?) 'default': value,
-    };
+    _$DefaultAddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('company', instance.company);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('default', instance.defaultAddressDefault);
+  return val;
+}
 
 _$EmailMarketingConsentImpl _$$EmailMarketingConsentImplFromJson(
         Map<String, dynamic> json) =>
@@ -429,13 +459,20 @@ _$EmailMarketingConsentImpl _$$EmailMarketingConsentImplFromJson(
     );
 
 Map<String, dynamic> _$$EmailMarketingConsentImplToJson(
-        _$EmailMarketingConsentImpl instance) =>
-    <String, dynamic>{
-      if (instance.state case final value?) 'state': value,
-      if (instance.optInLevel case final value?) 'opt_in_level': value,
-      if (instance.consentUpdatedAt case final value?)
-        'consent_updated_at': value,
-    };
+    _$EmailMarketingConsentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('state', instance.state);
+  writeNotNull('opt_in_level', instance.optInLevel);
+  writeNotNull('consent_updated_at', instance.consentUpdatedAt);
+  return val;
+}
 
 _$SmsMarketingConsentImpl _$$SmsMarketingConsentImplFromJson(
         Map<String, dynamic> json) =>
@@ -447,15 +484,21 @@ _$SmsMarketingConsentImpl _$$SmsMarketingConsentImplFromJson(
     );
 
 Map<String, dynamic> _$$SmsMarketingConsentImplToJson(
-        _$SmsMarketingConsentImpl instance) =>
-    <String, dynamic>{
-      if (instance.state case final value?) 'state': value,
-      if (instance.optInLevel case final value?) 'opt_in_level': value,
-      if (instance.consentUpdatedAt case final value?)
-        'consent_updated_at': value,
-      if (instance.consentCollectedFrom case final value?)
-        'consent_collected_from': value,
-    };
+    _$SmsMarketingConsentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('state', instance.state);
+  writeNotNull('opt_in_level', instance.optInLevel);
+  writeNotNull('consent_updated_at', instance.consentUpdatedAt);
+  writeNotNull('consent_collected_from', instance.consentCollectedFrom);
+  return val;
+}
 
 _$LineItemElementImpl _$$LineItemElementImplFromJson(
         Map<String, dynamic> json) =>
@@ -499,48 +542,47 @@ _$LineItemElementImpl _$$LineItemElementImplFromJson(
     );
 
 Map<String, dynamic> _$$LineItemElementImplToJson(
-        _$LineItemElementImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.attributedStaffs case final value?)
-        'attributed_staffs': value,
-      if (instance.currentQuantity case final value?) 'current_quantity': value,
-      if (instance.fulfillableQuantity case final value?)
-        'fulfillable_quantity': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.fulfillmentStatus case final value?)
-        'fulfillment_status': value,
-      if (instance.giftCard case final value?) 'gift_card': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.priceSet?.toJson() case final value?) 'price_set': value,
-      if (instance.productExists case final value?) 'product_exists': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.properties case final value?) 'properties': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.totalDiscount case final value?) 'total_discount': value,
-      if (instance.totalDiscountSet?.toJson() case final value?)
-        'total_discount_set': value,
-      if (instance.variantId case final value?) 'variant_id': value,
-      if (instance.variantInventoryManagement case final value?)
-        'variant_inventory_management': value,
-      if (instance.variantTitle case final value?) 'variant_title': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.taxLines?.map((e) => e.toJson()).toList() case final value?)
-        'tax_lines': value,
-      if (instance.duties case final value?) 'duties': value,
-      if (instance.discountAllocations case final value?)
-        'discount_allocations': value,
-    };
+    _$LineItemElementImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('attributed_staffs', instance.attributedStaffs);
+  writeNotNull('current_quantity', instance.currentQuantity);
+  writeNotNull('fulfillable_quantity', instance.fulfillableQuantity);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('fulfillment_status', instance.fulfillmentStatus);
+  writeNotNull('gift_card', instance.giftCard);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('name', instance.name);
+  writeNotNull('price', instance.price);
+  writeNotNull('price_set', instance.priceSet?.toJson());
+  writeNotNull('product_exists', instance.productExists);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('properties', instance.properties);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('title', instance.title);
+  writeNotNull('total_discount', instance.totalDiscount);
+  writeNotNull('total_discount_set', instance.totalDiscountSet?.toJson());
+  writeNotNull('variant_id', instance.variantId);
+  writeNotNull(
+      'variant_inventory_management', instance.variantInventoryManagement);
+  writeNotNull('variant_title', instance.variantTitle);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('tax_lines', instance.taxLines?.map((e) => e.toJson()).toList());
+  writeNotNull('duties', instance.duties);
+  writeNotNull('discount_allocations', instance.discountAllocations);
+  return val;
+}
 
 _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
     _$TaxLineImpl(
@@ -553,14 +595,22 @@ _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
       channelLiable: json['channel_liable'] as bool?,
     );
 
-Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) =>
-    <String, dynamic>{
-      if (instance.price case final value?) 'price': value,
-      if (instance.rate case final value?) 'rate': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.priceSet?.toJson() case final value?) 'price_set': value,
-      if (instance.channelLiable case final value?) 'channel_liable': value,
-    };
+Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price', instance.price);
+  writeNotNull('rate', instance.rate);
+  writeNotNull('title', instance.title);
+  writeNotNull('price_set', instance.priceSet?.toJson());
+  writeNotNull('channel_liable', instance.channelLiable);
+  return val;
+}
 
 _$NoteAttributeImpl _$$NoteAttributeImplFromJson(Map<String, dynamic> json) =>
     _$NoteAttributeImpl(
@@ -568,11 +618,19 @@ _$NoteAttributeImpl _$$NoteAttributeImplFromJson(Map<String, dynamic> json) =>
       value: json['value'] as String?,
     );
 
-Map<String, dynamic> _$$NoteAttributeImplToJson(_$NoteAttributeImpl instance) =>
-    <String, dynamic>{
-      if (instance.name case final value?) 'name': value,
-      if (instance.value case final value?) 'value': value,
-    };
+Map<String, dynamic> _$$NoteAttributeImplToJson(_$NoteAttributeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('value', instance.value);
+  return val;
+}
 
 _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -598,30 +656,33 @@ _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
       duties: json['duties'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.orderId case final value?) 'order_id': value,
-      if (instance.processedAt case final value?) 'processed_at': value,
-      if (instance.restock case final value?) 'restock': value,
-      if (instance.totalDutiesSet?.toJson() case final value?)
-        'total_duties_set': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.orderAdjustments?.map((e) => e.toJson()).toList()
-          case final value?)
-        'order_adjustments': value,
-      if (instance.transactions?.map((e) => e.toJson()).toList()
-          case final value?)
-        'transactions': value,
-      if (instance.refundLineItems?.map((e) => e.toJson()).toList()
-          case final value?)
-        'refund_line_items': value,
-      if (instance.duties case final value?) 'duties': value,
-    };
+Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('note', instance.note);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('processed_at', instance.processedAt);
+  writeNotNull('restock', instance.restock);
+  writeNotNull('total_duties_set', instance.totalDutiesSet?.toJson());
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('order_adjustments',
+      instance.orderAdjustments?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'transactions', instance.transactions?.map((e) => e.toJson()).toList());
+  writeNotNull('refund_line_items',
+      instance.refundLineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('duties', instance.duties);
+  return val;
+}
 
 _$OrderAdjustmentImpl _$$OrderAdjustmentImplFromJson(
         Map<String, dynamic> json) =>
@@ -642,19 +703,26 @@ _$OrderAdjustmentImpl _$$OrderAdjustmentImplFromJson(
     );
 
 Map<String, dynamic> _$$OrderAdjustmentImplToJson(
-        _$OrderAdjustmentImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.amountSet?.toJson() case final value?) 'amount_set': value,
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.orderId case final value?) 'order_id': value,
-      if (instance.reason case final value?) 'reason': value,
-      if (instance.refundId case final value?) 'refund_id': value,
-      if (instance.taxAmount case final value?) 'tax_amount': value,
-      if (instance.taxAmountSet?.toJson() case final value?)
-        'tax_amount_set': value,
-    };
+    _$OrderAdjustmentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('amount_set', instance.amountSet?.toJson());
+  writeNotNull('kind', instance.kind);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('reason', instance.reason);
+  writeNotNull('refund_id', instance.refundId);
+  writeNotNull('tax_amount', instance.taxAmount);
+  writeNotNull('tax_amount_set', instance.taxAmountSet?.toJson());
+  return val;
+}
 
 _$RefundLineItemImpl _$$RefundLineItemImplFromJson(Map<String, dynamic> json) =>
     _$RefundLineItemImpl(
@@ -678,21 +746,27 @@ _$RefundLineItemImpl _$$RefundLineItemImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$RefundLineItemImplToJson(
-        _$RefundLineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.lineItemId case final value?) 'line_item_id': value,
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.restockType case final value?) 'restock_type': value,
-      if (instance.subtotal case final value?) 'subtotal': value,
-      if (instance.subtotalSet?.toJson() case final value?)
-        'subtotal_set': value,
-      if (instance.totalTax case final value?) 'total_tax': value,
-      if (instance.totalTaxSet?.toJson() case final value?)
-        'total_tax_set': value,
-      if (instance.lineItem?.toJson() case final value?) 'line_item': value,
-    };
+    _$RefundLineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('line_item_id', instance.lineItemId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('restock_type', instance.restockType);
+  writeNotNull('subtotal', instance.subtotal);
+  writeNotNull('subtotal_set', instance.subtotalSet?.toJson());
+  writeNotNull('total_tax', instance.totalTax);
+  writeNotNull('total_tax_set', instance.totalTaxSet?.toJson());
+  writeNotNull('line_item', instance.lineItem?.toJson());
+  return val;
+}
 
 _$RefundLineItemLineItemImpl _$$RefundLineItemLineItemImplFromJson(
         Map<String, dynamic> json) =>
@@ -736,48 +810,47 @@ _$RefundLineItemLineItemImpl _$$RefundLineItemLineItemImplFromJson(
     );
 
 Map<String, dynamic> _$$RefundLineItemLineItemImplToJson(
-        _$RefundLineItemLineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.attributedStaffs case final value?)
-        'attributed_staffs': value,
-      if (instance.currentQuantity case final value?) 'current_quantity': value,
-      if (instance.fulfillableQuantity case final value?)
-        'fulfillable_quantity': value,
-      if (instance.fulfillmentService case final value?)
-        'fulfillment_service': value,
-      if (instance.fulfillmentStatus case final value?)
-        'fulfillment_status': value,
-      if (instance.giftCard case final value?) 'gift_card': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.priceSet?.toJson() case final value?) 'price_set': value,
-      if (instance.productExists case final value?) 'product_exists': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.properties case final value?) 'properties': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.taxable case final value?) 'taxable': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.totalDiscount case final value?) 'total_discount': value,
-      if (instance.totalDiscountSet?.toJson() case final value?)
-        'total_discount_set': value,
-      if (instance.variantId case final value?) 'variant_id': value,
-      if (instance.variantInventoryManagement case final value?)
-        'variant_inventory_management': value,
-      if (instance.variantTitle case final value?) 'variant_title': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.taxLines?.map((e) => e.toJson()).toList() case final value?)
-        'tax_lines': value,
-      if (instance.duties case final value?) 'duties': value,
-      if (instance.discountAllocations case final value?)
-        'discount_allocations': value,
-    };
+    _$RefundLineItemLineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('attributed_staffs', instance.attributedStaffs);
+  writeNotNull('current_quantity', instance.currentQuantity);
+  writeNotNull('fulfillable_quantity', instance.fulfillableQuantity);
+  writeNotNull('fulfillment_service', instance.fulfillmentService);
+  writeNotNull('fulfillment_status', instance.fulfillmentStatus);
+  writeNotNull('gift_card', instance.giftCard);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('name', instance.name);
+  writeNotNull('price', instance.price);
+  writeNotNull('price_set', instance.priceSet?.toJson());
+  writeNotNull('product_exists', instance.productExists);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('properties', instance.properties);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('taxable', instance.taxable);
+  writeNotNull('title', instance.title);
+  writeNotNull('total_discount', instance.totalDiscount);
+  writeNotNull('total_discount_set', instance.totalDiscountSet?.toJson());
+  writeNotNull('variant_id', instance.variantId);
+  writeNotNull(
+      'variant_inventory_management', instance.variantInventoryManagement);
+  writeNotNull('variant_title', instance.variantTitle);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('tax_lines', instance.taxLines?.map((e) => e.toJson()).toList());
+  writeNotNull('duties', instance.duties);
+  writeNotNull('discount_allocations', instance.discountAllocations);
+  return val;
+}
 
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
@@ -806,31 +879,38 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       userId: (json['user_id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.authorization case final value?) 'authorization': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.deviceId case final value?) 'device_id': value,
-      if (instance.errorCode case final value?) 'error_code': value,
-      if (instance.gateway case final value?) 'gateway': value,
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.orderId case final value?) 'order_id': value,
-      if (instance.parentId case final value?) 'parent_id': value,
-      if (instance.paymentId case final value?) 'payment_id': value,
-      if (instance.processedAt case final value?) 'processed_at': value,
-      if (instance.receipt?.toJson() case final value?) 'receipt': value,
-      if (instance.sourceName case final value?) 'source_name': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.userId case final value?) 'user_id': value,
-    };
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('authorization', instance.authorization);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('error_code', instance.errorCode);
+  writeNotNull('gateway', instance.gateway);
+  writeNotNull('kind', instance.kind);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('message', instance.message);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('parent_id', instance.parentId);
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('processed_at', instance.processedAt);
+  writeNotNull('receipt', instance.receipt?.toJson());
+  writeNotNull('source_name', instance.sourceName);
+  writeNotNull('status', instance.status);
+  writeNotNull('test', instance.test);
+  writeNotNull('user_id', instance.userId);
+  return val;
+}
 
 _$ReceiptImpl _$$ReceiptImplFromJson(Map<String, dynamic> json) =>
     _$ReceiptImpl();

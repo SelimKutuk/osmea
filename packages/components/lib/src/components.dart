@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:osmea_components/src/components/phone_picker/models/country.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
 // Component imports
@@ -34,6 +35,7 @@ import 'package:osmea_components/src/components/stack/stack.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/components/text_field/otp_text_field.dart';
+import 'package:osmea_components/src/components/phone_picker/phone_picker.dart';
 import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
@@ -2029,7 +2031,98 @@ class OsmeaComponents {
     );
   }
 
-  /// 🔢 **OSMEA OTP TextField** - One-Time Password input component
+  /// � **OSMEA Phone Picker** - Phone number input with country selection
+  ///
+  /// Creates a specialized phone number input field with:
+  /// - Country flag dropdown
+  /// - Automatic dial code insertion
+  /// - Phone number validation
+  /// - Customizable appearance and behavior
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.phonePicker(
+  ///   controller: phoneController,
+  ///   label: 'Phone Number',
+  ///   hint: 'Enter your phone number',
+  ///   variant: TextFieldVariant.outlined,
+  ///   size: TextFieldSize.medium,
+  ///   onCountryChanged: (country) => handleCountryChange(country),
+  /// )
+  /// ```
+  static Widget phonePicker({
+    Key? key,
+    TextEditingController? controller,
+    String? label,
+    String? hint,
+    String? helperText,
+    String? errorText,
+    Widget? suffixIcon,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    TextFieldState state = TextFieldState.enabled,
+    bool isRequired = false,
+    String? Function(String?)? validator,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    GestureTapCallback? onTap,
+    String initialCountryCode = 'US',
+    ValueChanged<String>? onCountryChanged,
+    ValueChanged<String>? onPhoneChanged,
+    bool showCountryFlag = true,
+    double countryDropdownWidth = 120.0,
+    double flagSize = 20.0,
+    String searchHint = 'Search country',
+    bool enableSearch = true,
+    double maxDropdownHeight = 300.0,
+    List<Country>? customCountries,
+    BoxDecoration? dropdownDecoration,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? hintColor,
+    Color? labelColor,
+    bool fullWidth = true,
+  }) {
+    return OsmeaPhonePicker(
+      key: key,
+      controller: controller,
+      label: label,
+      hint: hint,
+      helperText: helperText,
+      errorText: errorText,
+      suffixIcon: suffixIcon,
+      size: size,
+      variant: variant,
+      state: state,
+      isRequired: isRequired,
+      validator: validator,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      onTap: onTap,
+      initialCountryCode: initialCountryCode,
+      onCountryChanged: onCountryChanged,
+      onPhoneChanged: onPhoneChanged,
+      showCountryFlag: showCountryFlag,
+      countryDropdownWidth: countryDropdownWidth,
+      flagSize: flagSize,
+      searchHint: searchHint,
+      enableSearch: enableSearch,
+      maxDropdownHeight: maxDropdownHeight,
+      customCountries: customCountries,
+      dropdownDecoration: dropdownDecoration,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      hintColor: hintColor,
+      labelColor: labelColor,
+      fullWidth: fullWidth,
+    );
+  }
+
+  /// �🔢 **OSMEA OTP TextField** - One-Time Password input component
   ///
   /// Creates a specialized input for OTP codes with:
   /// - Individual digit fields with auto-navigation

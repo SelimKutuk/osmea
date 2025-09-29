@@ -16,12 +16,19 @@ _$ReceiveListOfShippingZonesResponseImpl
         );
 
 Map<String, dynamic> _$$ReceiveListOfShippingZonesResponseImplToJson(
-        _$ReceiveListOfShippingZonesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.shippingZones?.map((e) => e.toJson()).toList()
-          case final value?)
-        'shipping_zones': value,
-    };
+    _$ReceiveListOfShippingZonesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shipping_zones',
+      instance.shippingZones?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$ShippingZoneImpl _$$ShippingZoneImplFromJson(Map<String, dynamic> json) =>
     _$ShippingZoneImpl(
@@ -44,25 +51,30 @@ _$ShippingZoneImpl _$$ShippingZoneImplFromJson(Map<String, dynamic> json) =>
           json['carrier_shipping_rate_providers'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$ShippingZoneImplToJson(_$ShippingZoneImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.profileId case final value?) 'profile_id': value,
-      if (instance.locationGroupId case final value?)
-        'location_group_id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.countries?.map((e) => e.toJson()).toList() case final value?)
-        'countries': value,
-      if (instance.weightBasedShippingRates case final value?)
-        'weight_based_shipping_rates': value,
-      if (instance.priceBasedShippingRates?.map((e) => e.toJson()).toList()
-          case final value?)
-        'price_based_shipping_rates': value,
-      if (instance.carrierShippingRateProviders case final value?)
-        'carrier_shipping_rate_providers': value,
-    };
+Map<String, dynamic> _$$ShippingZoneImplToJson(_$ShippingZoneImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('profile_id', instance.profileId);
+  writeNotNull('location_group_id', instance.locationGroupId);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull(
+      'countries', instance.countries?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'weight_based_shipping_rates', instance.weightBasedShippingRates);
+  writeNotNull('price_based_shipping_rates',
+      instance.priceBasedShippingRates?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'carrier_shipping_rate_providers', instance.carrierShippingRateProviders);
+  return val;
+}
 
 _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
     _$CountryImpl(
@@ -77,17 +89,25 @@ _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$CountryImplToJson(_$CountryImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.tax case final value?) 'tax': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.taxName case final value?) 'tax_name': value,
-      if (instance.shippingZoneId case final value?) 'shipping_zone_id': value,
-      if (instance.provinces?.map((e) => e.toJson()).toList() case final value?)
-        'provinces': value,
-    };
+Map<String, dynamic> _$$CountryImplToJson(_$CountryImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('tax', instance.tax);
+  writeNotNull('code', instance.code);
+  writeNotNull('tax_name', instance.taxName);
+  writeNotNull('shipping_zone_id', instance.shippingZoneId);
+  writeNotNull(
+      'provinces', instance.provinces?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$ProvinceImpl _$$ProvinceImplFromJson(Map<String, dynamic> json) =>
     _$ProvinceImpl(
@@ -102,18 +122,26 @@ _$ProvinceImpl _$$ProvinceImplFromJson(Map<String, dynamic> json) =>
       shippingZoneId: (json['shipping_zone_id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$ProvinceImplToJson(_$ProvinceImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.countryId case final value?) 'country_id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.tax case final value?) 'tax': value,
-      if (instance.taxName case final value?) 'tax_name': value,
-      if (instance.taxType case final value?) 'tax_type': value,
-      if (instance.taxPercentage case final value?) 'tax_percentage': value,
-      if (instance.shippingZoneId case final value?) 'shipping_zone_id': value,
-    };
+Map<String, dynamic> _$$ProvinceImplToJson(_$ProvinceImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('country_id', instance.countryId);
+  writeNotNull('name', instance.name);
+  writeNotNull('code', instance.code);
+  writeNotNull('tax', instance.tax);
+  writeNotNull('tax_name', instance.taxName);
+  writeNotNull('tax_type', instance.taxType);
+  writeNotNull('tax_percentage', instance.taxPercentage);
+  writeNotNull('shipping_zone_id', instance.shippingZoneId);
+  return val;
+}
 
 _$PriceBasedShippingRateImpl _$$PriceBasedShippingRateImplFromJson(
         Map<String, dynamic> json) =>
@@ -127,14 +155,20 @@ _$PriceBasedShippingRateImpl _$$PriceBasedShippingRateImplFromJson(
     );
 
 Map<String, dynamic> _$$PriceBasedShippingRateImplToJson(
-        _$PriceBasedShippingRateImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.shippingZoneId case final value?) 'shipping_zone_id': value,
-      if (instance.minOrderSubtotal case final value?)
-        'min_order_subtotal': value,
-      if (instance.maxOrderSubtotal case final value?)
-        'max_order_subtotal': value,
-    };
+    _$PriceBasedShippingRateImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('price', instance.price);
+  writeNotNull('shipping_zone_id', instance.shippingZoneId);
+  writeNotNull('min_order_subtotal', instance.minOrderSubtotal);
+  writeNotNull('max_order_subtotal', instance.maxOrderSubtotal);
+  return val;
+}

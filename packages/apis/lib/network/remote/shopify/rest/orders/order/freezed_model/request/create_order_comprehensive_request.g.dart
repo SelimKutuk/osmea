@@ -15,10 +15,18 @@ _$CreateOrderComprehensiveRequestImpl
         );
 
 Map<String, dynamic> _$$CreateOrderComprehensiveRequestImplToJson(
-        _$CreateOrderComprehensiveRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.order?.toJson() case final value?) 'order': value,
-    };
+    _$CreateOrderComprehensiveRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order?.toJson());
+  return val;
+}
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       lineItems: (json['line_items'] as List<dynamic>?)
@@ -31,16 +39,23 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       currency: json['currency'] as String?,
     );
 
-Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-      if (instance.transactions?.map((e) => e.toJson()).toList()
-          case final value?)
-        'transactions': value,
-      if (instance.totalTax case final value?) 'total_tax': value,
-      if (instance.currency case final value?) 'currency': value,
-    };
+Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'transactions', instance.transactions?.map((e) => e.toJson()).toList());
+  writeNotNull('total_tax', instance.totalTax);
+  writeNotNull('currency', instance.currency);
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -53,15 +68,22 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.grams case final value?) 'grams': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.taxLines?.map((e) => e.toJson()).toList() case final value?)
-        'tax_lines': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('price', instance.price);
+  writeNotNull('grams', instance.grams);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('tax_lines', instance.taxLines?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
     _$TaxLineImpl(
@@ -70,12 +92,20 @@ _$TaxLineImpl _$$TaxLineImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
     );
 
-Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) =>
-    <String, dynamic>{
-      if (instance.price case final value?) 'price': value,
-      if (instance.rate case final value?) 'rate': value,
-      if (instance.title case final value?) 'title': value,
-    };
+Map<String, dynamic> _$$TaxLineImplToJson(_$TaxLineImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price', instance.price);
+  writeNotNull('rate', instance.rate);
+  writeNotNull('title', instance.title);
+  return val;
+}
 
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
@@ -84,9 +114,17 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       amount: (json['amount'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
-    <String, dynamic>{
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.amount case final value?) 'amount': value,
-    };
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('kind', instance.kind);
+  writeNotNull('status', instance.status);
+  writeNotNull('amount', instance.amount);
+  return val;
+}

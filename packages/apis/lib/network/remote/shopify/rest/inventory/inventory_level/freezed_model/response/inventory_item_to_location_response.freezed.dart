@@ -26,12 +26,8 @@ mixin _$InventoryItemToLocationResponse {
   @JsonKey(name: "errors")
   List<String>? get errors => throw _privateConstructorUsedError;
 
-  /// Serializes this InventoryItemToLocationResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InventoryItemToLocationResponseCopyWith<InventoryItemToLocationResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -62,8 +58,6 @@ class _$InventoryItemToLocationResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,8 +76,6 @@ class _$InventoryItemToLocationResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InventoryLevelCopyWith<$Res>? get inventoryLevel {
@@ -124,8 +116,6 @@ class __$$InventoryItemToLocationResponseImplCopyWithImpl<$Res>
       $Res Function(_$InventoryItemToLocationResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -187,14 +177,12 @@ class _$InventoryItemToLocationResponseImpl
             const DeepCollectionEquality().equals(other._errors, _errors));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, inventoryLevel,
       const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InventoryItemToLocationResponseImplCopyWith<
@@ -226,11 +214,8 @@ abstract class _InventoryItemToLocationResponse
   @override
   @JsonKey(name: "errors")
   List<String>? get errors;
-
-  /// Create a copy of InventoryItemToLocationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InventoryItemToLocationResponseImplCopyWith<
           _$InventoryItemToLocationResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -253,12 +238,8 @@ mixin _$InventoryLevel {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this InventoryLevel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InventoryLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InventoryLevelCopyWith<InventoryLevel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -287,8 +268,6 @@ class _$InventoryLevelCopyWithImpl<$Res, $Val extends InventoryLevel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InventoryLevel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -347,8 +326,6 @@ class __$$InventoryLevelImplCopyWithImpl<$Res>
       _$InventoryLevelImpl _value, $Res Function(_$InventoryLevelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InventoryLevel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -434,14 +411,12 @@ class _$InventoryLevelImpl implements _InventoryLevel {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, inventoryItemId, locationId,
       available, updatedAt, adminGraphqlApiId);
 
-  /// Create a copy of InventoryLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InventoryLevelImplCopyWith<_$InventoryLevelImpl> get copyWith =>
@@ -483,11 +458,8 @@ abstract class _InventoryLevel implements InventoryLevel {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of InventoryLevel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InventoryLevelImplCopyWith<_$InventoryLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

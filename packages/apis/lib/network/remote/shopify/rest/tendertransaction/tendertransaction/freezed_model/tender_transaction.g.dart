@@ -22,16 +22,25 @@ _$TenderTransactionImpl _$$TenderTransactionImplFromJson(
     );
 
 Map<String, dynamic> _$$TenderTransactionImplToJson(
-        _$TenderTransactionImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'order_id': instance.orderId,
-      'amount': instance.amount,
-      'currency': instance.currency,
-      if (instance.userId case final value?) 'user_id': value,
-      'test': instance.test,
-      'processed_at': instance.processedAt,
-      if (instance.remoteReference case final value?) 'remote_reference': value,
-      'payment_method': instance.paymentMethod,
-      if (instance.paymentDetails case final value?) 'payment_details': value,
-    };
+    _$TenderTransactionImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'order_id': instance.orderId,
+    'amount': instance.amount,
+    'currency': instance.currency,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('user_id', instance.userId);
+  val['test'] = instance.test;
+  val['processed_at'] = instance.processedAt;
+  writeNotNull('remote_reference', instance.remoteReference);
+  val['payment_method'] = instance.paymentMethod;
+  writeNotNull('payment_details', instance.paymentDetails);
+  return val;
+}

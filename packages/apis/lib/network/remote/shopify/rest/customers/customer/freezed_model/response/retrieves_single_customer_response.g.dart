@@ -15,10 +15,18 @@ _$RetrievesSingleCustomerResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesSingleCustomerResponseImplToJson(
-        _$RetrievesSingleCustomerResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.customer?.toJson() case final value?) 'customer': value,
-    };
+    _$RetrievesSingleCustomerResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer', instance.customer?.toJson());
+  return val;
+}
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
@@ -55,35 +63,39 @@ _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
               json['default_address'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.ordersCount case final value?) 'orders_count': value,
-      if (instance.state case final value?) 'state': value,
-      if (instance.totalSpent case final value?) 'total_spent': value,
-      if (instance.lastOrderId case final value?) 'last_order_id': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.verifiedEmail case final value?) 'verified_email': value,
-      if (instance.multipassIdentifier case final value?)
-        'multipass_identifier': value,
-      if (instance.taxExempt case final value?) 'tax_exempt': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.lastOrderName case final value?) 'last_order_name': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.addresses?.map((e) => e.toJson()).toList() case final value?)
-        'addresses': value,
-      if (instance.taxExemptions case final value?) 'tax_exemptions': value,
-      if (instance.emailMarketingConsent?.toJson() case final value?)
-        'email_marketing_consent': value,
-      if (instance.smsMarketingConsent?.toJson() case final value?)
-        'sms_marketing_consent': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.defaultAddress?.toJson() case final value?)
-        'default_address': value,
-    };
+Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('orders_count', instance.ordersCount);
+  writeNotNull('state', instance.state);
+  writeNotNull('total_spent', instance.totalSpent);
+  writeNotNull('last_order_id', instance.lastOrderId);
+  writeNotNull('note', instance.note);
+  writeNotNull('verified_email', instance.verifiedEmail);
+  writeNotNull('multipass_identifier', instance.multipassIdentifier);
+  writeNotNull('tax_exempt', instance.taxExempt);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('last_order_name', instance.lastOrderName);
+  writeNotNull('currency', instance.currency);
+  writeNotNull(
+      'addresses', instance.addresses?.map((e) => e.toJson()).toList());
+  writeNotNull('tax_exemptions', instance.taxExemptions);
+  writeNotNull(
+      'email_marketing_consent', instance.emailMarketingConsent?.toJson());
+  writeNotNull('sms_marketing_consent', instance.smsMarketingConsent?.toJson());
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('default_address', instance.defaultAddress?.toJson());
+  return val;
+}
 
 _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
     _$AddressImpl(
@@ -98,18 +110,26 @@ _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
       addressDefault: json['default'] as bool?,
     );
 
-Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.customerId case final value?) 'customer_id': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.addressDefault case final value?) 'default': value,
-    };
+Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('company', instance.company);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('default', instance.addressDefault);
+  return val;
+}
 
 _$DefaultAddressImpl _$$DefaultAddressImplFromJson(Map<String, dynamic> json) =>
     _$DefaultAddressImpl(
@@ -125,18 +145,26 @@ _$DefaultAddressImpl _$$DefaultAddressImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DefaultAddressImplToJson(
-        _$DefaultAddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.customerId case final value?) 'customer_id': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.defaultAddressDefault case final value?) 'default': value,
-    };
+    _$DefaultAddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('company', instance.company);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('default', instance.defaultAddressDefault);
+  return val;
+}
 
 _$EmailMarketingConsentImpl _$$EmailMarketingConsentImplFromJson(
         Map<String, dynamic> json) =>
@@ -147,13 +175,20 @@ _$EmailMarketingConsentImpl _$$EmailMarketingConsentImplFromJson(
     );
 
 Map<String, dynamic> _$$EmailMarketingConsentImplToJson(
-        _$EmailMarketingConsentImpl instance) =>
-    <String, dynamic>{
-      if (instance.state case final value?) 'state': value,
-      if (instance.optInLevel case final value?) 'opt_in_level': value,
-      if (instance.consentUpdatedAt case final value?)
-        'consent_updated_at': value,
-    };
+    _$EmailMarketingConsentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('state', instance.state);
+  writeNotNull('opt_in_level', instance.optInLevel);
+  writeNotNull('consent_updated_at', instance.consentUpdatedAt);
+  return val;
+}
 
 _$SmsMarketingConsentImpl _$$SmsMarketingConsentImplFromJson(
         Map<String, dynamic> json) =>
@@ -165,12 +200,18 @@ _$SmsMarketingConsentImpl _$$SmsMarketingConsentImplFromJson(
     );
 
 Map<String, dynamic> _$$SmsMarketingConsentImplToJson(
-        _$SmsMarketingConsentImpl instance) =>
-    <String, dynamic>{
-      if (instance.state case final value?) 'state': value,
-      if (instance.optInLevel case final value?) 'opt_in_level': value,
-      if (instance.consentUpdatedAt case final value?)
-        'consent_updated_at': value,
-      if (instance.consentCollectedFrom case final value?)
-        'consent_collected_from': value,
-    };
+    _$SmsMarketingConsentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('state', instance.state);
+  writeNotNull('opt_in_level', instance.optInLevel);
+  writeNotNull('consent_updated_at', instance.consentUpdatedAt);
+  writeNotNull('consent_collected_from', instance.consentCollectedFrom);
+  return val;
+}

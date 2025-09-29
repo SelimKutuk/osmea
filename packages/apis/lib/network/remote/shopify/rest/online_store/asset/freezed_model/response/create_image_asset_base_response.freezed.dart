@@ -24,12 +24,8 @@ mixin _$CreateImageAssetBaseResponse {
   @JsonKey(name: "asset")
   Asset? get asset => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateImageAssetBaseResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateImageAssetBaseResponseCopyWith<CreateImageAssetBaseResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateImageAssetBaseResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateImageAssetBaseResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AssetCopyWith<$Res>? get asset {
@@ -113,8 +105,6 @@ class __$$CreateImageAssetBaseResponseImplCopyWithImpl<$Res>
       $Res Function(_$CreateImageAssetBaseResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$CreateImageAssetBaseResponseImpl
             (identical(other.asset, asset) || other.asset == asset));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, asset);
 
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateImageAssetBaseResponseImplCopyWith<
@@ -191,11 +179,8 @@ abstract class _CreateImageAssetBaseResponse
   @override
   @JsonKey(name: "asset")
   Asset? get asset;
-
-  /// Create a copy of CreateImageAssetBaseResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateImageAssetBaseResponseImplCopyWith<
           _$CreateImageAssetBaseResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -224,12 +209,8 @@ mixin _$Asset {
   @JsonKey(name: "theme_id")
   int? get themeId => throw _privateConstructorUsedError;
 
-  /// Serializes this Asset to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Asset
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AssetCopyWith<Asset> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -259,8 +240,6 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Asset
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -336,8 +315,6 @@ class __$$AssetImplCopyWithImpl<$Res>
       _$AssetImpl _value, $Res Function(_$AssetImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Asset
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -453,14 +430,12 @@ class _$AssetImpl implements _Asset {
             (identical(other.themeId, themeId) || other.themeId == themeId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, key, publicUrl, createdAt,
       updatedAt, contentType, size, checksum, themeId);
 
-  /// Create a copy of Asset
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
@@ -511,11 +486,8 @@ abstract class _Asset implements Asset {
   @override
   @JsonKey(name: "theme_id")
   int? get themeId;
-
-  /// Create a copy of Asset
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

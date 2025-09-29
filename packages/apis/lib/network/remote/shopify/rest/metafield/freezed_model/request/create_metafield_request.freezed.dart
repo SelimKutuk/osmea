@@ -24,12 +24,8 @@ mixin _$CreateMetafieldRequest {
   @JsonKey(name: "metafield")
   Metafield get metafield => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateMetafieldRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateMetafieldRequestCopyWith<CreateMetafieldRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$CreateMetafieldRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$CreateMetafieldRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MetafieldCopyWith<$Res> get metafield {
@@ -107,8 +99,6 @@ class __$$CreateMetafieldRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateMetafieldRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,13 +140,11 @@ class _$CreateMetafieldRequestImpl implements _CreateMetafieldRequest {
                 other.metafield == metafield));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, metafield);
 
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateMetafieldRequestImplCopyWith<_$CreateMetafieldRequestImpl>
@@ -182,11 +170,8 @@ abstract class _CreateMetafieldRequest implements CreateMetafieldRequest {
   @override
   @JsonKey(name: "metafield")
   Metafield get metafield;
-
-  /// Create a copy of CreateMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateMetafieldRequestImplCopyWith<_$CreateMetafieldRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -206,12 +191,8 @@ mixin _$Metafield {
   @JsonKey(name: "value")
   String get value => throw _privateConstructorUsedError;
 
-  /// Serializes this Metafield to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MetafieldCopyWith<Metafield> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -238,8 +219,6 @@ class _$MetafieldCopyWithImpl<$Res, $Val extends Metafield>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -292,8 +271,6 @@ class __$$MetafieldImplCopyWithImpl<$Res>
       _$MetafieldImpl _value, $Res Function(_$MetafieldImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -365,13 +342,11 @@ class _$MetafieldImpl implements _Metafield {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, namespace, key, type, value);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
@@ -407,11 +382,8 @@ abstract class _Metafield implements Metafield {
   @override
   @JsonKey(name: "value")
   String get value;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,12 +24,8 @@ mixin _$RetrievesTheShopConfigurationResponse {
   @JsonKey(name: "shop")
   Shop? get shop => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesTheShopConfigurationResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesTheShopConfigurationResponseCopyWith<
           RetrievesTheShopConfigurationResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$RetrievesTheShopConfigurationResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,8 +68,6 @@ class _$RetrievesTheShopConfigurationResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ShopCopyWith<$Res>? get shop {
@@ -114,8 +106,6 @@ class __$$RetrievesTheShopConfigurationResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesTheShopConfigurationResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$RetrievesTheShopConfigurationResponseImpl
             (identical(other.shop, shop) || other.shop == shop));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, shop);
 
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesTheShopConfigurationResponseImplCopyWith<
@@ -193,11 +181,8 @@ abstract class _RetrievesTheShopConfigurationResponse
   @override
   @JsonKey(name: "shop")
   Shop? get shop;
-
-  /// Create a copy of RetrievesTheShopConfigurationResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesTheShopConfigurationResponseImplCopyWith<
           _$RetrievesTheShopConfigurationResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -322,12 +307,8 @@ mixin _$Shop {
   @JsonKey(name: "transactional_sms_disabled")
   bool? get transactionalSmsDisabled => throw _privateConstructorUsedError;
 
-  /// Serializes this Shop to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Shop
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ShopCopyWith<Shop> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -411,8 +392,6 @@ class _$ShopCopyWithImpl<$Res, $Val extends Shop>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Shop
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -773,8 +752,6 @@ class __$$ShopImplCopyWithImpl<$Res>
   __$$ShopImplCopyWithImpl(_$ShopImpl _value, $Res Function(_$ShopImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Shop
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1400,7 +1377,7 @@ class _$ShopImpl implements _Shop {
             (identical(other.transactionalSmsDisabled, transactionalSmsDisabled) || other.transactionalSmsDisabled == transactionalSmsDisabled));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1460,9 +1437,7 @@ class _$ShopImpl implements _Shop {
         transactionalSmsDisabled
       ]);
 
-  /// Create a copy of Shop
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ShopImplCopyWith<_$ShopImpl> get copyWith =>
@@ -1706,11 +1681,8 @@ abstract class _Shop implements Shop {
   @override
   @JsonKey(name: "transactional_sms_disabled")
   bool? get transactionalSmsDisabled;
-
-  /// Create a copy of Shop
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ShopImplCopyWith<_$ShopImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

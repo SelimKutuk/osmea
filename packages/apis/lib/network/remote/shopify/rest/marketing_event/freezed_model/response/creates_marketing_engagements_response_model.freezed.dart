@@ -25,12 +25,8 @@ mixin _$CreatesMarketingEngagementsResponseModel {
   @JsonKey(name: "engagements")
   List<Engagement>? get engagements => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatesMarketingEngagementsResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatesMarketingEngagementsResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatesMarketingEngagementsResponseModelCopyWith<
           CreatesMarketingEngagementsResponseModel>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$CreatesMarketingEngagementsResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatesMarketingEngagementsResponseModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,8 +91,6 @@ class __$$CreatesMarketingEngagementsResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$CreatesMarketingEngagementsResponseModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatesMarketingEngagementsResponseModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,14 +142,12 @@ class _$CreatesMarketingEngagementsResponseModelImpl
                 .equals(other._engagements, _engagements));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_engagements));
 
-  /// Create a copy of CreatesMarketingEngagementsResponseModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatesMarketingEngagementsResponseModelImplCopyWith<
@@ -187,11 +177,8 @@ abstract class _CreatesMarketingEngagementsResponseModel
   @override
   @JsonKey(name: "engagements")
   List<Engagement>? get engagements;
-
-  /// Create a copy of CreatesMarketingEngagementsResponseModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatesMarketingEngagementsResponseModelImplCopyWith<
           _$CreatesMarketingEngagementsResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -240,12 +227,8 @@ mixin _$Engagement {
   @JsonKey(name: "utc_offset")
   dynamic get utcOffset => throw _privateConstructorUsedError;
 
-  /// Serializes this Engagement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $EngagementCopyWith<Engagement> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -287,8 +270,6 @@ class _$EngagementCopyWithImpl<$Res, $Val extends Engagement>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -425,8 +406,6 @@ class __$$EngagementImplCopyWithImpl<$Res>
       _$EngagementImpl _value, $Res Function(_$EngagementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -652,7 +631,7 @@ class _$EngagementImpl implements _Engagement {
             const DeepCollectionEquality().equals(other.utcOffset, utcOffset));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -675,9 +654,7 @@ class _$EngagementImpl implements _Engagement {
       const DeepCollectionEquality().hash(uniqueClicksCount),
       const DeepCollectionEquality().hash(utcOffset));
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$EngagementImplCopyWith<_$EngagementImpl> get copyWith =>
@@ -769,11 +746,8 @@ abstract class _Engagement implements Engagement {
   @override
   @JsonKey(name: "utc_offset")
   dynamic get utcOffset;
-
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$EngagementImplCopyWith<_$EngagementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

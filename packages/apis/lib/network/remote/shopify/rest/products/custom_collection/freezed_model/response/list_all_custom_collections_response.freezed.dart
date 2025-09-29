@@ -25,12 +25,8 @@ mixin _$ListAllCustomCollectionsResponse {
   List<CustomCollection>? get customCollections =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this ListAllCustomCollectionsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListAllCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListAllCustomCollectionsResponseCopyWith<ListAllCustomCollectionsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -59,8 +55,6 @@ class _$ListAllCustomCollectionsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListAllCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,8 +93,6 @@ class __$$ListAllCustomCollectionsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListAllCustomCollectionsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListAllCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,14 +146,12 @@ class _$ListAllCustomCollectionsResponseImpl
                 .equals(other._customCollections, _customCollections));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_customCollections));
 
-  /// Create a copy of ListAllCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListAllCustomCollectionsResponseImplCopyWith<
@@ -191,11 +181,8 @@ abstract class _ListAllCustomCollectionsResponse
   @override
   @JsonKey(name: "custom_collections")
   List<CustomCollection>? get customCollections;
-
-  /// Create a copy of ListAllCustomCollectionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListAllCustomCollectionsResponseImplCopyWith<
           _$ListAllCustomCollectionsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -228,12 +215,8 @@ mixin _$CustomCollection {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomCollectionCopyWith<CustomCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -267,8 +250,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -357,8 +338,6 @@ class __$$CustomCollectionImplCopyWithImpl<$Res>
       $Res Function(_$CustomCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -495,7 +474,7 @@ class _$CustomCollectionImpl implements _CustomCollection {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -510,9 +489,7 @@ class _$CustomCollectionImpl implements _CustomCollection {
       publishedScope,
       adminGraphqlApiId);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
@@ -574,11 +551,8 @@ abstract class _CustomCollection implements CustomCollection {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

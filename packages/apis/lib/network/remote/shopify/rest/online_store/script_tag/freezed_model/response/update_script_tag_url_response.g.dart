@@ -15,10 +15,18 @@ _$UpdateScriptTagUrlResponseImpl _$$UpdateScriptTagUrlResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateScriptTagUrlResponseImplToJson(
-        _$UpdateScriptTagUrlResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.scriptTag?.toJson() case final value?) 'script_tag': value,
-    };
+    _$UpdateScriptTagUrlResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('script_tag', instance.scriptTag?.toJson());
+  return val;
+}
 
 _$ScriptTagImpl _$$ScriptTagImplFromJson(Map<String, dynamic> json) =>
     _$ScriptTagImpl(
@@ -31,13 +39,21 @@ _$ScriptTagImpl _$$ScriptTagImplFromJson(Map<String, dynamic> json) =>
       cache: json['cache'] as bool?,
     );
 
-Map<String, dynamic> _$$ScriptTagImplToJson(_$ScriptTagImpl instance) =>
-    <String, dynamic>{
-      if (instance.src case final value?) 'src': value,
-      if (instance.displayScope case final value?) 'display_scope': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.event case final value?) 'event': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.cache case final value?) 'cache': value,
-    };
+Map<String, dynamic> _$$ScriptTagImplToJson(_$ScriptTagImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('src', instance.src);
+  writeNotNull('display_scope', instance.displayScope);
+  writeNotNull('id', instance.id);
+  writeNotNull('event', instance.event);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('cache', instance.cache);
+  return val;
+}

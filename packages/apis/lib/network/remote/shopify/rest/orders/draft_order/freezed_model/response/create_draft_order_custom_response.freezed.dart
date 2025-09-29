@@ -24,12 +24,8 @@ mixin _$CreateDraftOrderCustomResponse {
   @JsonKey(name: "draft_order")
   DraftOrder? get draftOrder => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateDraftOrderCustomResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateDraftOrderCustomResponseCopyWith<CreateDraftOrderCustomResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateDraftOrderCustomResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateDraftOrderCustomResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DraftOrderCopyWith<$Res>? get draftOrder {
@@ -113,8 +105,6 @@ class __$$CreateDraftOrderCustomResponseImplCopyWithImpl<$Res>
       $Res Function(_$CreateDraftOrderCustomResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$CreateDraftOrderCustomResponseImpl
                 other.draftOrder == draftOrder));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, draftOrder);
 
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateDraftOrderCustomResponseImplCopyWith<
@@ -192,11 +180,8 @@ abstract class _CreateDraftOrderCustomResponse
   @override
   @JsonKey(name: "draft_order")
   DraftOrder? get draftOrder;
-
-  /// Create a copy of CreateDraftOrderCustomResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateDraftOrderCustomResponseImplCopyWith<
           _$CreateDraftOrderCustomResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -263,12 +248,8 @@ mixin _$DraftOrder {
   @JsonKey(name: "customer")
   Customer? get customer => throw _privateConstructorUsedError;
 
-  /// Serializes this DraftOrder to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DraftOrderCopyWith<DraftOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -323,8 +304,6 @@ class _$DraftOrderCopyWithImpl<$Res, $Val extends DraftOrder>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -468,8 +447,6 @@ class _$DraftOrderCopyWithImpl<$Res, $Val extends DraftOrder>
     ) as $Val);
   }
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res>? get shippingAddress {
@@ -482,8 +459,6 @@ class _$DraftOrderCopyWithImpl<$Res, $Val extends DraftOrder>
     });
   }
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res>? get billingAddress {
@@ -496,8 +471,6 @@ class _$DraftOrderCopyWithImpl<$Res, $Val extends DraftOrder>
     });
   }
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomerCopyWith<$Res>? get customer {
@@ -564,8 +537,6 @@ class __$$DraftOrderImplCopyWithImpl<$Res>
       _$DraftOrderImpl _value, $Res Function(_$DraftOrderImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -912,7 +883,7 @@ class _$DraftOrderImpl implements _DraftOrder {
                 other.customer == customer));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -945,9 +916,7 @@ class _$DraftOrderImpl implements _DraftOrder {
         customer
       ]);
 
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DraftOrderImplCopyWith<_$DraftOrderImpl> get copyWith =>
@@ -1075,11 +1044,8 @@ abstract class _DraftOrder implements DraftOrder {
   @override
   @JsonKey(name: "customer")
   Customer? get customer;
-
-  /// Create a copy of DraftOrder
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DraftOrderImplCopyWith<_$DraftOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1129,12 +1095,8 @@ mixin _$Address {
   @JsonKey(name: "default")
   bool? get addressDefault => throw _privateConstructorUsedError;
 
-  /// Serializes this Address to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1175,8 +1137,6 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1318,8 +1278,6 @@ class __$$AddressImplCopyWithImpl<$Res>
       _$AddressImpl _value, $Res Function(_$AddressImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1548,7 +1506,7 @@ class _$AddressImpl implements _Address {
                 other.addressDefault == addressDefault));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1573,9 +1531,7 @@ class _$AddressImpl implements _Address {
         addressDefault
       ]);
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
@@ -1670,11 +1626,8 @@ abstract class _Address implements Address {
   @override
   @JsonKey(name: "default")
   bool? get addressDefault;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1734,12 +1687,8 @@ mixin _$Customer {
   @JsonKey(name: "default_address")
   Address? get defaultAddress => throw _privateConstructorUsedError;
 
-  /// Serializes this Customer to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomerCopyWith<Customer> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1789,8 +1738,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1919,8 +1866,6 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
     ) as $Val);
   }
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res>? get defaultAddress {
@@ -1981,8 +1926,6 @@ class __$$CustomerImplCopyWithImpl<$Res>
       _$CustomerImpl _value, $Res Function(_$CustomerImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2282,7 +2225,7 @@ class _$CustomerImpl implements _Customer {
                 other.defaultAddress == defaultAddress));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -2312,9 +2255,7 @@ class _$CustomerImpl implements _Customer {
         defaultAddress
       ]);
 
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
@@ -2433,11 +2374,8 @@ abstract class _Customer implements Customer {
   @override
   @JsonKey(name: "default_address")
   Address? get defaultAddress;
-
-  /// Create a copy of Customer
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomerImplCopyWith<_$CustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2487,12 +2425,8 @@ mixin _$LineItem {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this LineItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LineItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LineItemCopyWith<LineItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2534,8 +2468,6 @@ class _$LineItemCopyWithImpl<$Res, $Val extends LineItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LineItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2678,8 +2610,6 @@ class __$$LineItemImplCopyWithImpl<$Res>
       _$LineItemImpl _value, $Res Function(_$LineItemImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LineItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2926,7 +2856,7 @@ class _$LineItemImpl implements _LineItem {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -2951,9 +2881,7 @@ class _$LineItemImpl implements _LineItem {
         adminGraphqlApiId
       ]);
 
-  /// Create a copy of LineItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LineItemImplCopyWith<_$LineItemImpl> get copyWith =>
@@ -3050,11 +2978,8 @@ abstract class _LineItem implements LineItem {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of LineItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LineItemImplCopyWith<_$LineItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

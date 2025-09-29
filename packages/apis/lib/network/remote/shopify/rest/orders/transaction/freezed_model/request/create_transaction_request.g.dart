@@ -15,11 +15,18 @@ _$CreateTransactionRequestImpl _$$CreateTransactionRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateTransactionRequestImplToJson(
-        _$CreateTransactionRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.transaction?.toJson() case final value?)
-        'transaction': value,
-    };
+    _$CreateTransactionRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('transaction', instance.transaction?.toJson());
+  return val;
+}
 
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
@@ -31,12 +38,20 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       source: json['source'] as String?,
     );
 
-Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
-    <String, dynamic>{
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.gateway case final value?) 'gateway': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.source case final value?) 'source': value,
-    };
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('kind', instance.kind);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('gateway', instance.gateway);
+  writeNotNull('test', instance.test);
+  writeNotNull('source', instance.source);
+  return val;
+}

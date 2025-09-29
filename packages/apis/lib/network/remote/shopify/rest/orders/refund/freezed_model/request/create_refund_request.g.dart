@@ -15,10 +15,18 @@ _$CreateRefundRequestImpl _$$CreateRefundRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateRefundRequestImplToJson(
-        _$CreateRefundRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.refund?.toJson() case final value?) 'refund': value,
-    };
+    _$CreateRefundRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refund', instance.refund?.toJson());
+  return val;
+}
 
 _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
       note: json['note'] as String?,
@@ -32,18 +40,24 @@ _$RefundImpl _$$RefundImplFromJson(Map<String, dynamic> json) => _$RefundImpl(
           .toList(),
     );
 
-Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) =>
-    <String, dynamic>{
-      if (instance.note case final value?) 'note': value,
-      if (instance.notify case final value?) 'notify': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.refundLineItems?.map((e) => e.toJson()).toList()
-          case final value?)
-        'refund_line_items': value,
-      if (instance.transactions?.map((e) => e.toJson()).toList()
-          case final value?)
-        'transactions': value,
-    };
+Map<String, dynamic> _$$RefundImplToJson(_$RefundImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('note', instance.note);
+  writeNotNull('notify', instance.notify);
+  writeNotNull('test', instance.test);
+  writeNotNull('refund_line_items',
+      instance.refundLineItems?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'transactions', instance.transactions?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$RefundLineItemImpl _$$RefundLineItemImplFromJson(Map<String, dynamic> json) =>
     _$RefundLineItemImpl(
@@ -54,13 +68,21 @@ _$RefundLineItemImpl _$$RefundLineItemImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$RefundLineItemImplToJson(
-        _$RefundLineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.lineItemId case final value?) 'line_item_id': value,
-      if (instance.quantity case final value?) 'quantity': value,
-      if (instance.restockType case final value?) 'restock_type': value,
-      if (instance.locationId case final value?) 'location_id': value,
-    };
+    _$RefundLineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('line_item_id', instance.lineItemId);
+  writeNotNull('quantity', instance.quantity);
+  writeNotNull('restock_type', instance.restockType);
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}
 
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
@@ -70,10 +92,18 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       parentId: json['parent_id'],
     );
 
-Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
-    <String, dynamic>{
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.gateway case final value?) 'gateway': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.parentId case final value?) 'parent_id': value,
-    };
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('kind', instance.kind);
+  writeNotNull('gateway', instance.gateway);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('parent_id', instance.parentId);
+  return val;
+}

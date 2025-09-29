@@ -15,19 +15,34 @@ _$UpdateChangeWhetherRequestImpl _$$UpdateChangeWhetherRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateChangeWhetherRequestImplToJson(
-        _$UpdateChangeWhetherRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.order?.toJson() case final value?) 'order': value,
-    };
+    _$UpdateChangeWhetherRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order?.toJson());
+  return val;
+}
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       id: (json['id'] as num?)?.toInt(),
       buyerAcceptsMarketing: json['buyer_accepts_marketing'] as bool?,
     );
 
-Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.buyerAcceptsMarketing case final value?)
-        'buyer_accepts_marketing': value,
-    };
+Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('buyer_accepts_marketing', instance.buyerAcceptsMarketing);
+  return val;
+}

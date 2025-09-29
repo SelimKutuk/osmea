@@ -24,12 +24,8 @@ mixin _$CreateUsageChargeRequest {
   @JsonKey(name: "usage_charge")
   UsageChargeData get usageCharge => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateUsageChargeRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateUsageChargeRequestCopyWith<CreateUsageChargeRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$CreateUsageChargeRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$CreateUsageChargeRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UsageChargeDataCopyWith<$Res> get usageCharge {
@@ -107,8 +99,6 @@ class __$$CreateUsageChargeRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateUsageChargeRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,13 +140,11 @@ class _$CreateUsageChargeRequestImpl implements _CreateUsageChargeRequest {
                 other.usageCharge == usageCharge));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, usageCharge);
 
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateUsageChargeRequestImplCopyWith<_$CreateUsageChargeRequestImpl>
@@ -183,11 +171,8 @@ abstract class _CreateUsageChargeRequest implements CreateUsageChargeRequest {
   @override
   @JsonKey(name: "usage_charge")
   UsageChargeData get usageCharge;
-
-  /// Create a copy of CreateUsageChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateUsageChargeRequestImplCopyWith<_$CreateUsageChargeRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -203,12 +188,8 @@ mixin _$UsageChargeData {
   @JsonKey(name: "price")
   String get price => throw _privateConstructorUsedError;
 
-  /// Serializes this UsageChargeData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UsageChargeData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UsageChargeDataCopyWith<UsageChargeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -234,8 +215,6 @@ class _$UsageChargeDataCopyWithImpl<$Res, $Val extends UsageChargeData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UsageChargeData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -276,8 +255,6 @@ class __$$UsageChargeDataImplCopyWithImpl<$Res>
       _$UsageChargeDataImpl _value, $Res Function(_$UsageChargeDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UsageChargeData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -329,13 +306,11 @@ class _$UsageChargeDataImpl implements _UsageChargeData {
             (identical(other.price, price) || other.price == price));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, description, price);
 
-  /// Create a copy of UsageChargeData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UsageChargeDataImplCopyWith<_$UsageChargeDataImpl> get copyWith =>
@@ -365,11 +340,8 @@ abstract class _UsageChargeData implements UsageChargeData {
   @override
   @JsonKey(name: "price")
   String get price;
-
-  /// Create a copy of UsageChargeData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UsageChargeDataImplCopyWith<_$UsageChargeDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
