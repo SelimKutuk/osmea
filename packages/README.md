@@ -212,6 +212,7 @@ OsmeaComponents.container(
 | **🔍 SearchHelper** | Search and filtering utilities | Text search, filtering, sorting algorithms |
 | **📊 AnalyticsHelper** | Analytics and tracking utilities | Event tracking, user behavior analysis |
 | **🔐 SecurityHelper** | Security and encryption utilities | Data encryption, secure storage, key management |
+| **🌐 ViewerHelper** | Unified HTML and WebView rendering | Single helper with tilde (~) syntax for easy URL calling |
 
 #### 🛠️ **Technology Stack**
 - **Flutter 3.19+** - Latest Flutter framework
@@ -224,6 +225,8 @@ OsmeaComponents.container(
 - **Firebase Remote Config** - Dynamic configuration
 - **SQFlite** - Local database storage
 - **Shared Preferences** - Lightweight key-value storage
+- **Flutter HTML** - HTML rendering for CoreRawDataViewer (MIT License)
+- **InAppWebView** - WebView functionality for CoreWebViewViewer (Apache License 2.0)
 
 #### 🚀 **Quick Start**
 ```yaml
@@ -267,6 +270,30 @@ class MyView extends BaseViewBloc<MyCubit, MyState> {
         },
       ),
     );
+  }
+}
+
+// Use unified viewer helper with tilde syntax
+class ArticleView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ViewerHelper.html('<p>Hello <strong>World</strong>!</p>');
+  }
+}
+
+class WebPageView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Using tilde syntax for easy URL calling
+    return viewerHelperTilde('https://example.com');
+  }
+}
+
+// Auto-detect content type
+class SmartViewer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ViewerHelper.auto('https://example.com'); // Auto-detects as URL
   }
 }
 ```
