@@ -17,6 +17,9 @@ export 'package:core/src/base/base_view_cubit.dart';
 // 🧠 Exports the hydrated base view cubit widget
 export 'package:core/src/base/base_view_hydrated_cubit.dart';
 
+// 🎯 Exports the base view state for consistent state management
+export 'package:core/src/base/base_view_state.dart';
+
 // 🧩 Exports the base class for Master App
 export 'package:core/src/base/master_view/master_app.dart';
 
@@ -79,6 +82,9 @@ export 'package:core/src/helper/permission_handler_helper/abstract/permission_ha
 
 // 📱 Exports the device info helper for device information access
 export 'package:core/src/helper/device_info_helper.dart';
+
+// 🌐 Exports the unified viewer helper for HTML and WebView rendering
+export 'package:core/src/helper/viewer_helper.dart';
 
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/layout/grid.dart';
