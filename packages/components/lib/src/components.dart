@@ -20,6 +20,7 @@ import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/divider/divider.dart';
 import 'package:osmea_components/src/components/dot_indicator/dot_indicator.dart';
+import 'package:osmea_components/src/enums/dot_indicator_enums.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -2733,6 +2734,14 @@ class OsmeaComponents {
     CarouselIndicatorType indicatorType = CarouselIndicatorType.dot,
     Widget Function(BuildContext, int, int)? customIndicator,
     Widget Function(BuildContext, bool isLeft)? customArrowBuilder,
+    bool useDotIndicatorWidget = false,
+    DotIndicatorVariant? dotVariant,
+    DotIndicatorSize? dotIndicatorSize,
+    DotIndicatorShape? dotShape,
+    DotIndicatorStyle? dotStyle,
+    DotIndicatorAnimation? dotAnimation,
+    Color? dotCustomActiveColor,
+    Color? dotCustomInactiveColor,
   }) {
     return OsmeaCarousel(
       key: key,
@@ -2771,6 +2780,14 @@ class OsmeaComponents {
       indicatorType: indicatorType,
       customIndicator: customIndicator,
       customArrowBuilder: customArrowBuilder,
+      useDotIndicatorWidget: useDotIndicatorWidget,
+      dotVariant: dotVariant,
+      dotIndicatorSize: dotIndicatorSize,
+      dotShape: dotShape,
+      dotStyle: dotStyle,
+      dotAnimation: dotAnimation,
+      dotCustomActiveColor: dotCustomActiveColor,
+      dotCustomInactiveColor: dotCustomInactiveColor,
     );
   }
 
