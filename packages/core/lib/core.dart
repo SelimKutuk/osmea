@@ -83,8 +83,8 @@ export 'package:core/src/helper/permission_handler_helper/abstract/permission_ha
 // 📱 Exports the device info helper for device information access
 export 'package:core/src/helper/device_info_helper.dart';
 
-// 🌐 Exports the unified viewer helper for HTML and WebView rendering
-export 'package:core/src/helper/viewer_helper.dart';
+// 🌐 Exports the unified web viewer helper for HTML and WebView rendering
+export 'package:core/src/helper/web_viewer_helper.dart';
 
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/layout/grid.dart';

@@ -7,7 +7,7 @@ import 'package:osmea_components/osmea_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// 🌐 Unified Viewer Helper
+/// 🌐 Unified Web Viewer Helper
 ///
 /// This helper provides a single interface for both HTML content rendering
 /// and web page viewing with tilde (~) syntax for easy URL calling.
@@ -15,15 +15,15 @@ import 'package:url_launcher/url_launcher.dart';
 /// Usage Examples:
 /// ```dart
 /// // For HTML content
-/// ViewerHelper.html('<p>Hello World!</p>')
+/// WebViewerHelper.html('<p>Hello World!</p>')
 ///
 /// // For web URLs
-/// ViewerHelper.url('https://example.com')
+/// WebViewerHelper.url('https://example.com')
 ///
 /// // With tilde syntax
-/// ViewerHelper~('https://example.com')
+/// WebViewerHelper~('https://example.com')
 /// ```
-class ViewerHelper {
+class WebViewerHelper {
   /// 📄 Create HTML content viewer with OSMEA Components integration
   ///
   /// Parameters:
@@ -160,10 +160,10 @@ class ViewerHelper {
 ///
 /// This provides a convenient syntax for creating web viewers:
 /// ```dart
-/// ViewerHelper~('https://example.com')
+/// WebViewerHelper~('https://example.com')
 /// ```
-Widget viewerHelperTilde(String url) {
-  return ViewerHelper.url(url, showNavigationControls: true);
+Widget webViewerHelperTilde(String url) {
+  return WebViewerHelper.url(url, showNavigationControls: true);
 }
 
 /// 🧑‍💻 Cubit for managing HTML viewer state
@@ -601,7 +601,7 @@ class _WebViewerState extends State<_WebViewer> {
           body: SafeArea(
             child: OsmeaComponents.container(
               margin: const EdgeInsets.all(0),
-              child: ViewerHelper.url(
+              child: WebViewerHelper.url(
                 current,
                 showNavigationControls: true,
                 // Fullscreen sayfada tekrar fullscreen tuşu göstermeyelim
@@ -862,3 +862,5 @@ class _WebViewerState extends State<_WebViewer> {
     );
   }
 }
+
+

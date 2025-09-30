@@ -103,7 +103,7 @@ class HelpersScreen extends StatelessWidget {
         'isComingSoon': false,
       },
       {
-        'title': 'ViewerHelper',
+        'title': 'WebViewerHelper',
         'icon': Icons.web_outlined,
         'description':
             'Unified HTML and WebView rendering with OSMEA Components',
