@@ -15,11 +15,19 @@ _$ListAllRedirectsResponseImpl _$$ListAllRedirectsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$ListAllRedirectsResponseImplToJson(
-        _$ListAllRedirectsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.redirects?.map((e) => e.toJson()).toList() case final value?)
-        'redirects': value,
-    };
+    _$ListAllRedirectsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'redirects', instance.redirects?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$RedirectImpl _$$RedirectImplFromJson(Map<String, dynamic> json) =>
     _$RedirectImpl(
@@ -28,9 +36,17 @@ _$RedirectImpl _$$RedirectImplFromJson(Map<String, dynamic> json) =>
       target: json['target'] as String?,
     );
 
-Map<String, dynamic> _$$RedirectImplToJson(_$RedirectImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.path case final value?) 'path': value,
-      if (instance.target case final value?) 'target': value,
-    };
+Map<String, dynamic> _$$RedirectImplToJson(_$RedirectImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('path', instance.path);
+  writeNotNull('target', instance.target);
+  return val;
+}

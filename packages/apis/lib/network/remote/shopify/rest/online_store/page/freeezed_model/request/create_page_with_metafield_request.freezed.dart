@@ -24,12 +24,8 @@ mixin _$CreatePageWithMetafieldRequest {
   @JsonKey(name: "page")
   Page? get page => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatePageWithMetafieldRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatePageWithMetafieldRequestCopyWith<CreatePageWithMetafieldRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreatePageWithMetafieldRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreatePageWithMetafieldRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PageCopyWith<$Res>? get page {
@@ -113,8 +105,6 @@ class __$$CreatePageWithMetafieldRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreatePageWithMetafieldRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$CreatePageWithMetafieldRequestImpl
             (identical(other.page, page) || other.page == page));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, page);
 
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatePageWithMetafieldRequestImplCopyWith<
@@ -191,11 +179,8 @@ abstract class _CreatePageWithMetafieldRequest
   @override
   @JsonKey(name: "page")
   Page? get page;
-
-  /// Create a copy of CreatePageWithMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatePageWithMetafieldRequestImplCopyWith<
           _$CreatePageWithMetafieldRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -214,12 +199,8 @@ mixin _$Page {
   @JsonKey(name: "metafields")
   List<Metafield>? get metafields => throw _privateConstructorUsedError;
 
-  /// Serializes this Page to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PageCopyWith<Page> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -244,8 +225,6 @@ class _$PageCopyWithImpl<$Res, $Val extends Page>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -290,8 +269,6 @@ class __$$PageImplCopyWithImpl<$Res>
   __$$PageImplCopyWithImpl(_$PageImpl _value, $Res Function(_$PageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -362,14 +339,12 @@ class _$PageImpl implements _Page {
                 .equals(other._metafields, _metafields));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, bodyHtml,
       const DeepCollectionEquality().hash(_metafields));
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
@@ -401,11 +376,8 @@ abstract class _Page implements Page {
   @override
   @JsonKey(name: "metafields")
   List<Metafield>? get metafields;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -425,12 +397,8 @@ mixin _$Metafield {
   @JsonKey(name: "namespace")
   String? get namespace => throw _privateConstructorUsedError;
 
-  /// Serializes this Metafield to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MetafieldCopyWith<Metafield> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -457,8 +425,6 @@ class _$MetafieldCopyWithImpl<$Res, $Val extends Metafield>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -511,8 +477,6 @@ class __$$MetafieldImplCopyWithImpl<$Res>
       _$MetafieldImpl _value, $Res Function(_$MetafieldImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -584,13 +548,11 @@ class _$MetafieldImpl implements _Metafield {
                 other.namespace == namespace));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, key, value, type, namespace);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
@@ -626,11 +588,8 @@ abstract class _Metafield implements Metafield {
   @override
   @JsonKey(name: "namespace")
   String? get namespace;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

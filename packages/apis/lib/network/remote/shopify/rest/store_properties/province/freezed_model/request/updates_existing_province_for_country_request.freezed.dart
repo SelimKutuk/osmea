@@ -25,12 +25,8 @@ mixin _$UpdatesExistingProvinceForCountryRequest {
   @JsonKey(name: 'province')
   ProvinceUpdate get province => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdatesExistingProvinceForCountryRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdatesExistingProvinceForCountryRequestCopyWith<
           UpdatesExistingProvinceForCountryRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -61,8 +57,6 @@ class _$UpdatesExistingProvinceForCountryRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,8 +70,6 @@ class _$UpdatesExistingProvinceForCountryRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProvinceUpdateCopyWith<$Res> get province {
@@ -112,8 +104,6 @@ class __$$UpdatesExistingProvinceForCountryRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdatesExistingProvinceForCountryRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$UpdatesExistingProvinceForCountryRequestImpl
                 other.province == province));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, province);
 
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdatesExistingProvinceForCountryRequestImplCopyWith<
@@ -193,11 +181,8 @@ abstract class _UpdatesExistingProvinceForCountryRequest
   @override
   @JsonKey(name: 'province')
   ProvinceUpdate get province;
-
-  /// Create a copy of UpdatesExistingProvinceForCountryRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdatesExistingProvinceForCountryRequestImplCopyWith<
           _$UpdatesExistingProvinceForCountryRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -218,12 +203,8 @@ mixin _$ProvinceUpdate {
   @JsonKey(name: "tax")
   double? get tax => throw _privateConstructorUsedError;
 
-  /// Serializes this ProvinceUpdate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ProvinceUpdate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProvinceUpdateCopyWith<ProvinceUpdate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -251,8 +232,6 @@ class _$ProvinceUpdateCopyWithImpl<$Res, $Val extends ProvinceUpdate>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ProvinceUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -305,8 +284,6 @@ class __$$ProvinceUpdateImplCopyWithImpl<$Res>
       _$ProvinceUpdateImpl _value, $Res Function(_$ProvinceUpdateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProvinceUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -377,13 +354,11 @@ class _$ProvinceUpdateImpl implements _ProvinceUpdate {
             (identical(other.tax, tax) || other.tax == tax));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, code, taxName, tax);
 
-  /// Create a copy of ProvinceUpdate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProvinceUpdateImplCopyWith<_$ProvinceUpdateImpl> get copyWith =>
@@ -420,11 +395,8 @@ abstract class _ProvinceUpdate implements ProvinceUpdate {
   @override
   @JsonKey(name: "tax")
   double? get tax;
-
-  /// Create a copy of ProvinceUpdate
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProvinceUpdateImplCopyWith<_$ProvinceUpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

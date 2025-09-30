@@ -24,12 +24,8 @@ mixin _$GetSingleRedirectResponse {
   @JsonKey(name: "redirect")
   Redirect? get redirect => throw _privateConstructorUsedError;
 
-  /// Serializes this GetSingleRedirectResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetSingleRedirectResponseCopyWith<GetSingleRedirectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$GetSingleRedirectResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$GetSingleRedirectResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $RedirectCopyWith<$Res>? get redirect {
@@ -111,8 +103,6 @@ class __$$GetSingleRedirectResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetSingleRedirectResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,13 +144,11 @@ class _$GetSingleRedirectResponseImpl implements _GetSingleRedirectResponse {
                 other.redirect == redirect));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, redirect);
 
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetSingleRedirectResponseImplCopyWith<_$GetSingleRedirectResponseImpl>
@@ -186,11 +174,8 @@ abstract class _GetSingleRedirectResponse implements GetSingleRedirectResponse {
   @override
   @JsonKey(name: "redirect")
   Redirect? get redirect;
-
-  /// Create a copy of GetSingleRedirectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetSingleRedirectResponseImplCopyWith<_$GetSingleRedirectResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -208,12 +193,8 @@ mixin _$Redirect {
   @JsonKey(name: "target")
   String? get target => throw _privateConstructorUsedError;
 
-  /// Serializes this Redirect to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RedirectCopyWith<Redirect> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -239,8 +220,6 @@ class _$RedirectCopyWithImpl<$Res, $Val extends Redirect>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,8 +266,6 @@ class __$$RedirectImplCopyWithImpl<$Res>
       _$RedirectImpl _value, $Res Function(_$RedirectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -349,13 +326,11 @@ class _$RedirectImpl implements _Redirect {
             (identical(other.target, target) || other.target == target));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, path, target);
 
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RedirectImplCopyWith<_$RedirectImpl> get copyWith =>
@@ -387,11 +362,8 @@ abstract class _Redirect implements Redirect {
   @override
   @JsonKey(name: "target")
   String? get target;
-
-  /// Create a copy of Redirect
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RedirectImplCopyWith<_$RedirectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

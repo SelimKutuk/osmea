@@ -16,12 +16,19 @@ _$CreatesMarketingEngagementsResponseModelImpl
         );
 
 Map<String, dynamic> _$$CreatesMarketingEngagementsResponseModelImplToJson(
-        _$CreatesMarketingEngagementsResponseModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.engagements?.map((e) => e.toJson()).toList()
-          case final value?)
-        'engagements': value,
-    };
+    _$CreatesMarketingEngagementsResponseModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'engagements', instance.engagements?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$EngagementImpl _$$EngagementImplFromJson(Map<String, dynamic> json) =>
     _$EngagementImpl(
@@ -47,29 +54,32 @@ _$EngagementImpl _$$EngagementImplFromJson(Map<String, dynamic> json) =>
       utcOffset: json['utc_offset'],
     );
 
-Map<String, dynamic> _$$EngagementImplToJson(_$EngagementImpl instance) =>
-    <String, dynamic>{
-      if (instance.occurredOn?.toIso8601String() case final value?)
-        'occurred_on': value,
-      if (instance.fetchedAt case final value?) 'fetched_at': value,
-      if (instance.viewsCount case final value?) 'views_count': value,
-      if (instance.impressionsCount case final value?)
-        'impressions_count': value,
-      if (instance.clicksCount case final value?) 'clicks_count': value,
-      if (instance.favoritesCount case final value?) 'favorites_count': value,
-      if (instance.commentsCount case final value?) 'comments_count': value,
-      if (instance.sharesCount case final value?) 'shares_count': value,
-      if (instance.adSpend case final value?) 'ad_spend': value,
-      if (instance.currencyCode case final value?) 'currency_code': value,
-      if (instance.isCumulative case final value?) 'is_cumulative': value,
-      if (instance.unsubscribesCount case final value?)
-        'unsubscribes_count': value,
-      if (instance.complaintsCount case final value?) 'complaints_count': value,
-      if (instance.failsCount case final value?) 'fails_count': value,
-      if (instance.sendsCount case final value?) 'sends_count': value,
-      if (instance.uniqueViewsCount case final value?)
-        'unique_views_count': value,
-      if (instance.uniqueClicksCount case final value?)
-        'unique_clicks_count': value,
-      if (instance.utcOffset case final value?) 'utc_offset': value,
-    };
+Map<String, dynamic> _$$EngagementImplToJson(_$EngagementImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('occurred_on', instance.occurredOn?.toIso8601String());
+  writeNotNull('fetched_at', instance.fetchedAt);
+  writeNotNull('views_count', instance.viewsCount);
+  writeNotNull('impressions_count', instance.impressionsCount);
+  writeNotNull('clicks_count', instance.clicksCount);
+  writeNotNull('favorites_count', instance.favoritesCount);
+  writeNotNull('comments_count', instance.commentsCount);
+  writeNotNull('shares_count', instance.sharesCount);
+  writeNotNull('ad_spend', instance.adSpend);
+  writeNotNull('currency_code', instance.currencyCode);
+  writeNotNull('is_cumulative', instance.isCumulative);
+  writeNotNull('unsubscribes_count', instance.unsubscribesCount);
+  writeNotNull('complaints_count', instance.complaintsCount);
+  writeNotNull('fails_count', instance.failsCount);
+  writeNotNull('sends_count', instance.sendsCount);
+  writeNotNull('unique_views_count', instance.uniqueViewsCount);
+  writeNotNull('unique_clicks_count', instance.uniqueClicksCount);
+  writeNotNull('utc_offset', instance.utcOffset);
+  return val;
+}

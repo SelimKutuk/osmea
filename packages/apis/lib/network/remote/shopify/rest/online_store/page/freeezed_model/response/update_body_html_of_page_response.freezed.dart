@@ -24,12 +24,8 @@ mixin _$UpdateBodyHtmlOfPageResponse {
   @JsonKey(name: "page")
   Page? get page => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateBodyHtmlOfPageResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateBodyHtmlOfPageResponseCopyWith<UpdateBodyHtmlOfPageResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$UpdateBodyHtmlOfPageResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$UpdateBodyHtmlOfPageResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PageCopyWith<$Res>? get page {
@@ -113,8 +105,6 @@ class __$$UpdateBodyHtmlOfPageResponseImplCopyWithImpl<$Res>
       $Res Function(_$UpdateBodyHtmlOfPageResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,13 +146,11 @@ class _$UpdateBodyHtmlOfPageResponseImpl
             (identical(other.page, page) || other.page == page));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, page);
 
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateBodyHtmlOfPageResponseImplCopyWith<
@@ -190,11 +178,8 @@ abstract class _UpdateBodyHtmlOfPageResponse
   @override
   @JsonKey(name: "page")
   Page? get page;
-
-  /// Create a copy of UpdateBodyHtmlOfPageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateBodyHtmlOfPageResponseImplCopyWith<
           _$UpdateBodyHtmlOfPageResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -229,12 +214,8 @@ mixin _$Page {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this Page to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PageCopyWith<Page> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -267,8 +248,6 @@ class _$PageCopyWithImpl<$Res, $Val extends Page>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -361,8 +340,6 @@ class __$$PageImplCopyWithImpl<$Res>
   __$$PageImplCopyWithImpl(_$PageImpl _value, $Res Function(_$PageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -509,7 +486,7 @@ class _$PageImpl implements _Page {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -525,9 +502,7 @@ class _$PageImpl implements _Page {
       templateSuffix,
       adminGraphqlApiId);
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
@@ -591,11 +566,8 @@ abstract class _Page implements Page {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

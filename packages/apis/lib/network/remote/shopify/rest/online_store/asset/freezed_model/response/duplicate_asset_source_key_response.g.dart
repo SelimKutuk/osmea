@@ -29,14 +29,23 @@ _$AssetImpl _$$AssetImplFromJson(Map<String, dynamic> json) => _$AssetImpl(
       themeId: (json['theme_id'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) =>
-    <String, dynamic>{
-      'key': instance.key,
-      if (instance.publicUrl case final value?) 'public_url': value,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-      'content_type': instance.contentType,
-      'size': instance.size,
-      'checksum': instance.checksum,
-      'theme_id': instance.themeId,
-    };
+Map<String, dynamic> _$$AssetImplToJson(_$AssetImpl instance) {
+  final val = <String, dynamic>{
+    'key': instance.key,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('public_url', instance.publicUrl);
+  val['created_at'] = instance.createdAt;
+  val['updated_at'] = instance.updatedAt;
+  val['content_type'] = instance.contentType;
+  val['size'] = instance.size;
+  val['checksum'] = instance.checksum;
+  val['theme_id'] = instance.themeId;
+  return val;
+}

@@ -24,12 +24,8 @@ mixin _$CreateApplicationChargeRequest {
   @JsonKey(name: "application_charge")
   ApplicationCharge get applicationCharge => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateApplicationChargeRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateApplicationChargeRequestCopyWith<CreateApplicationChargeRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -60,8 +56,6 @@ class _$CreateApplicationChargeRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,8 +69,6 @@ class _$CreateApplicationChargeRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ApplicationChargeCopyWith<$Res> get applicationCharge {
@@ -113,8 +105,6 @@ class __$$CreateApplicationChargeRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateApplicationChargeRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,13 +148,11 @@ class _$CreateApplicationChargeRequestImpl
                 other.applicationCharge == applicationCharge));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, applicationCharge);
 
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateApplicationChargeRequestImplCopyWith<
@@ -193,11 +181,8 @@ abstract class _CreateApplicationChargeRequest
   @override
   @JsonKey(name: "application_charge")
   ApplicationCharge get applicationCharge;
-
-  /// Create a copy of CreateApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateApplicationChargeRequestImplCopyWith<
           _$CreateApplicationChargeRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -229,12 +214,8 @@ mixin _$ApplicationCharge {
   @JsonKey(name: "currency")
   String? get currency => throw _privateConstructorUsedError;
 
-  /// Serializes this ApplicationCharge to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ApplicationChargeCopyWith<ApplicationCharge> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -263,8 +244,6 @@ class _$ApplicationChargeCopyWithImpl<$Res, $Val extends ApplicationCharge>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -323,8 +302,6 @@ class __$$ApplicationChargeImplCopyWithImpl<$Res>
       $Res Function(_$ApplicationChargeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -416,14 +393,12 @@ class _$ApplicationChargeImpl implements _ApplicationCharge {
                 other.currency == currency));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name,
       const DeepCollectionEquality().hash(price), returnUrl, test, currency);
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ApplicationChargeImplCopyWith<_$ApplicationChargeImpl> get copyWith =>
@@ -450,35 +425,33 @@ abstract class _ApplicationCharge implements ApplicationCharge {
   factory _ApplicationCharge.fromJson(Map<String, dynamic> json) =
       _$ApplicationChargeImpl.fromJson;
 
-  /// The name of the application charge
   @override
+
+  /// The name of the application charge
   @JsonKey(name: "name")
   String get name;
+  @override
 
   /// The price as a string or number
-  @override
   @JsonKey(name: "price")
   dynamic get price;
+  @override
 
   /// URL where the customer is redirected after accepting/declining the charge
-  @override
   @JsonKey(name: "return_url")
   String get returnUrl;
+  @override
 
   /// Whether this is a test charge (true) or a real charge (false)
-  @override
   @JsonKey(name: "test")
   bool? get test;
+  @override
 
   /// The 3-letter currency code (e.g., "USD", "EUR", "GBP")
-  @override
   @JsonKey(name: "currency")
   String? get currency;
-
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ApplicationChargeImplCopyWith<_$ApplicationChargeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

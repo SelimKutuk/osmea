@@ -25,12 +25,8 @@ mixin _$CreatesMarketingEngagementsRequestModel {
   @JsonKey(name: "engagements")
   List<Engagement>? get engagements => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatesMarketingEngagementsRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatesMarketingEngagementsRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatesMarketingEngagementsRequestModelCopyWith<
           CreatesMarketingEngagementsRequestModel>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$CreatesMarketingEngagementsRequestModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatesMarketingEngagementsRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,8 +91,6 @@ class __$$CreatesMarketingEngagementsRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$CreatesMarketingEngagementsRequestModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatesMarketingEngagementsRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,14 +142,12 @@ class _$CreatesMarketingEngagementsRequestModelImpl
                 .equals(other._engagements, _engagements));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_engagements));
 
-  /// Create a copy of CreatesMarketingEngagementsRequestModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatesMarketingEngagementsRequestModelImplCopyWith<
@@ -187,11 +177,8 @@ abstract class _CreatesMarketingEngagementsRequestModel
   @override
   @JsonKey(name: "engagements")
   List<Engagement>? get engagements;
-
-  /// Create a copy of CreatesMarketingEngagementsRequestModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatesMarketingEngagementsRequestModelImplCopyWith<
           _$CreatesMarketingEngagementsRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -216,12 +203,8 @@ mixin _$Engagement {
   @JsonKey(name: "is_cumulative")
   bool? get isCumulative => throw _privateConstructorUsedError;
 
-  /// Serializes this Engagement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $EngagementCopyWith<Engagement> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -251,8 +234,6 @@ class _$EngagementCopyWithImpl<$Res, $Val extends Engagement>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -317,8 +298,6 @@ class __$$EngagementImplCopyWithImpl<$Res>
       _$EngagementImpl _value, $Res Function(_$EngagementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -414,14 +393,12 @@ class _$EngagementImpl implements _Engagement {
                 other.isCumulative == isCumulative));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, occurredOn, viewsCount,
       clicksCount, favoritesCount, adSpend, isCumulative);
 
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$EngagementImplCopyWith<_$EngagementImpl> get copyWith =>
@@ -466,11 +443,8 @@ abstract class _Engagement implements Engagement {
   @override
   @JsonKey(name: "is_cumulative")
   bool? get isCumulative;
-
-  /// Create a copy of Engagement
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$EngagementImplCopyWith<_$EngagementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

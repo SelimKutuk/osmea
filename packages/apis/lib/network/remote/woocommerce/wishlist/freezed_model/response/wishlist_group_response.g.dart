@@ -20,14 +20,22 @@ _$WishlistGroupResponseImpl _$$WishlistGroupResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$WishlistGroupResponseImplToJson(
-        _$WishlistGroupResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.description case final value?) 'description': value,
-      if (instance.isDefault case final value?) 'is_default': value,
-      if (instance.itemCount case final value?) 'item_count': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.userId case final value?) 'user_id': value,
-    };
+    _$WishlistGroupResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('description', instance.description);
+  writeNotNull('is_default', instance.isDefault);
+  writeNotNull('item_count', instance.itemCount);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('user_id', instance.userId);
+  return val;
+}

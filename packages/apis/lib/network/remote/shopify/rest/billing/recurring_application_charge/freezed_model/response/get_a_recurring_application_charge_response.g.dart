@@ -18,8 +18,16 @@ _$GetARecurringApplicationChargeResponseImpl
         );
 
 Map<String, dynamic> _$$GetARecurringApplicationChargeResponseImplToJson(
-        _$GetARecurringApplicationChargeResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.recurringApplicationCharge?.toJson() case final value?)
-        'recurring_application_charge': value,
-    };
+    _$GetARecurringApplicationChargeResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('recurring_application_charge',
+      instance.recurringApplicationCharge?.toJson());
+  return val;
+}

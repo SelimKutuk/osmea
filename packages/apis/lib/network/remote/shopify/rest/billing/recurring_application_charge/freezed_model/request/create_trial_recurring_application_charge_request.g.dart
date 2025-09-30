@@ -34,11 +34,20 @@ _$TrialRecurringApplicationChargeDataImpl
         );
 
 Map<String, dynamic> _$$TrialRecurringApplicationChargeDataImplToJson(
-        _$TrialRecurringApplicationChargeDataImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'price': instance.price,
-      'return_url': instance.returnUrl,
-      'trial_days': instance.trialDays,
-      if (instance.test case final value?) 'test': value,
-    };
+    _$TrialRecurringApplicationChargeDataImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'price': instance.price,
+    'return_url': instance.returnUrl,
+    'trial_days': instance.trialDays,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('test', instance.test);
+  return val;
+}

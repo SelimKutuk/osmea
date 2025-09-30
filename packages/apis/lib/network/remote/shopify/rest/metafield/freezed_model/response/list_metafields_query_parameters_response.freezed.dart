@@ -24,12 +24,8 @@ mixin _$ListMetafieldsQueryParametersResponse {
   @JsonKey(name: "metafields")
   List<Metafield>? get metafields => throw _privateConstructorUsedError;
 
-  /// Serializes this ListMetafieldsQueryParametersResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListMetafieldsQueryParametersResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListMetafieldsQueryParametersResponseCopyWith<
           ListMetafieldsQueryParametersResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -57,8 +53,6 @@ class _$ListMetafieldsQueryParametersResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListMetafieldsQueryParametersResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,8 +89,6 @@ class __$$ListMetafieldsQueryParametersResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListMetafieldsQueryParametersResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListMetafieldsQueryParametersResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,14 +140,12 @@ class _$ListMetafieldsQueryParametersResponseImpl
                 .equals(other._metafields, _metafields));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_metafields));
 
-  /// Create a copy of ListMetafieldsQueryParametersResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListMetafieldsQueryParametersResponseImplCopyWith<
@@ -184,11 +174,8 @@ abstract class _ListMetafieldsQueryParametersResponse
   @override
   @JsonKey(name: "metafields")
   List<Metafield>? get metafields;
-
-  /// Create a copy of ListMetafieldsQueryParametersResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListMetafieldsQueryParametersResponseImplCopyWith<
           _$ListMetafieldsQueryParametersResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -223,12 +210,8 @@ mixin _$Metafield {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this Metafield to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MetafieldCopyWith<Metafield> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -262,8 +245,6 @@ class _$MetafieldCopyWithImpl<$Res, $Val extends Metafield>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -358,8 +339,6 @@ class __$$MetafieldImplCopyWithImpl<$Res>
       _$MetafieldImpl _value, $Res Function(_$MetafieldImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -506,7 +485,7 @@ class _$MetafieldImpl implements _Metafield {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -522,9 +501,7 @@ class _$MetafieldImpl implements _Metafield {
       type,
       adminGraphqlApiId);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
@@ -589,11 +566,8 @@ abstract class _Metafield implements Metafield {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

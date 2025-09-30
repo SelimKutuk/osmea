@@ -25,12 +25,8 @@ mixin _$ReceiveACountOfAllProductImagesResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this ReceiveACountOfAllProductImagesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ReceiveACountOfAllProductImagesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ReceiveACountOfAllProductImagesResponseCopyWith<
           ReceiveACountOfAllProductImagesResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$ReceiveACountOfAllProductImagesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ReceiveACountOfAllProductImagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,8 +91,6 @@ class __$$ReceiveACountOfAllProductImagesResponseImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveACountOfAllProductImagesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ReceiveACountOfAllProductImagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,13 +133,11 @@ class _$ReceiveACountOfAllProductImagesResponseImpl
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of ReceiveACountOfAllProductImagesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveACountOfAllProductImagesResponseImplCopyWith<
@@ -177,11 +167,8 @@ abstract class _ReceiveACountOfAllProductImagesResponse
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of ReceiveACountOfAllProductImagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReceiveACountOfAllProductImagesResponseImplCopyWith<
           _$ReceiveACountOfAllProductImagesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

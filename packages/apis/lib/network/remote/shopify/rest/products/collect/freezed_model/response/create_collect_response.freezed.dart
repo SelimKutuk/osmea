@@ -24,12 +24,8 @@ mixin _$CreateCollectResponse {
   /// The newly created collect
   Collect? get collect => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCollectResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCollectResponseCopyWith<CreateCollectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$CreateCollectResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$CreateCollectResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CollectCopyWith<$Res>? get collect {
@@ -110,8 +102,6 @@ class __$$CreateCollectResponseImplCopyWithImpl<$Res>
       $Res Function(_$CreateCollectResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,13 +141,11 @@ class _$CreateCollectResponseImpl implements _CreateCollectResponse {
             (identical(other.collect, collect) || other.collect == collect));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, collect);
 
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCollectResponseImplCopyWith<_$CreateCollectResponseImpl>
@@ -179,14 +167,12 @@ abstract class _CreateCollectResponse implements CreateCollectResponse {
   factory _CreateCollectResponse.fromJson(Map<String, dynamic> json) =
       _$CreateCollectResponseImpl.fromJson;
 
-  /// The newly created collect
   @override
-  Collect? get collect;
 
-  /// Create a copy of CreateCollectResponse
-  /// with the given fields replaced by the non-null parameter values.
+  /// The newly created collect
+  Collect? get collect;
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCollectResponseImplCopyWith<_$CreateCollectResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

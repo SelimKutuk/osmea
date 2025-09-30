@@ -16,11 +16,18 @@ _$UpdateInventoryItemSkuResponseImpl
         );
 
 Map<String, dynamic> _$$UpdateInventoryItemSkuResponseImplToJson(
-        _$UpdateInventoryItemSkuResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.inventoryItem?.toJson() case final value?)
-        'inventory_item': value,
-    };
+    _$UpdateInventoryItemSkuResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('inventory_item', instance.inventoryItem?.toJson());
+  return val;
+}
 
 _$InventoryItemImpl _$$InventoryItemImplFromJson(Map<String, dynamic> json) =>
     _$InventoryItemImpl(
@@ -39,24 +46,27 @@ _$InventoryItemImpl _$$InventoryItemImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$InventoryItemImplToJson(_$InventoryItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.sku case final value?) 'sku': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.requiresShipping case final value?)
-        'requires_shipping': value,
-      if (instance.cost case final value?) 'cost': value,
-      if (instance.countryCodeOfOrigin case final value?)
-        'country_code_of_origin': value,
-      if (instance.provinceCodeOfOrigin case final value?)
-        'province_code_of_origin': value,
-      if (instance.harmonizedSystemCode case final value?)
-        'harmonized_system_code': value,
-      if (instance.tracked case final value?) 'tracked': value,
-      if (instance.countryHarmonizedSystemCodes case final value?)
-        'country_harmonized_system_codes': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$InventoryItemImplToJson(_$InventoryItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('sku', instance.sku);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('requires_shipping', instance.requiresShipping);
+  writeNotNull('cost', instance.cost);
+  writeNotNull('country_code_of_origin', instance.countryCodeOfOrigin);
+  writeNotNull('province_code_of_origin', instance.provinceCodeOfOrigin);
+  writeNotNull('harmonized_system_code', instance.harmonizedSystemCode);
+  writeNotNull('tracked', instance.tracked);
+  writeNotNull(
+      'country_harmonized_system_codes', instance.countryHarmonizedSystemCodes);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

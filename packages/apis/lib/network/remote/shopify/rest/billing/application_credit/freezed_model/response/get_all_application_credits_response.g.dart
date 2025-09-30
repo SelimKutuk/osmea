@@ -17,9 +17,16 @@ _$GetAllApplicationCreditsResponseImpl
         );
 
 Map<String, dynamic> _$$GetAllApplicationCreditsResponseImplToJson(
-        _$GetAllApplicationCreditsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.applicationCredits?.map((e) => e.toJson()).toList()
-          case final value?)
-        'application_credits': value,
-    };
+    _$GetAllApplicationCreditsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('application_credits',
+      instance.applicationCredits?.map((e) => e.toJson()).toList());
+  return val;
+}

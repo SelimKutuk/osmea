@@ -42,12 +42,8 @@ mixin _$MarkCommentNotSpamRestoreResponse {
   @JsonKey(name: "user_agent")
   dynamic get userAgent => throw _privateConstructorUsedError;
 
-  /// Serializes this MarkCommentNotSpamRestoreResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MarkCommentNotSpamRestoreResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MarkCommentNotSpamRestoreResponseCopyWith<MarkCommentNotSpamRestoreResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -84,8 +80,6 @@ class _$MarkCommentNotSpamRestoreResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MarkCommentNotSpamRestoreResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,8 +171,6 @@ class __$$MarkCommentNotSpamRestoreResponseImplCopyWithImpl<$Res>
       $Res Function(_$MarkCommentNotSpamRestoreResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MarkCommentNotSpamRestoreResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -316,7 +308,7 @@ class _$MarkCommentNotSpamRestoreResponseImpl
             const DeepCollectionEquality().equals(other.userAgent, userAgent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -331,9 +323,7 @@ class _$MarkCommentNotSpamRestoreResponseImpl
       updatedAt,
       const DeepCollectionEquality().hash(userAgent));
 
-  /// Create a copy of MarkCommentNotSpamRestoreResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MarkCommentNotSpamRestoreResponseImplCopyWith<
@@ -398,11 +388,8 @@ abstract class _MarkCommentNotSpamRestoreResponse
   @override
   @JsonKey(name: "user_agent")
   dynamic get userAgent;
-
-  /// Create a copy of MarkCommentNotSpamRestoreResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MarkCommentNotSpamRestoreResponseImplCopyWith<
           _$MarkCommentNotSpamRestoreResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

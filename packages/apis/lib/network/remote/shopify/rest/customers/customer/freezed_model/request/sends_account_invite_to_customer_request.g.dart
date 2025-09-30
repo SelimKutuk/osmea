@@ -29,8 +29,16 @@ _$CustomerInviteImpl _$$CustomerInviteImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$CustomerInviteImplToJson(
-        _$CustomerInviteImpl instance) =>
-    <String, dynamic>{
-      if (instance.subject case final value?) 'subject': value,
-      if (instance.customMessage case final value?) 'custom_message': value,
-    };
+    _$CustomerInviteImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('subject', instance.subject);
+  writeNotNull('custom_message', instance.customMessage);
+  return val;
+}

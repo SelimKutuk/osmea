@@ -32,6 +32,10 @@ export 'src/utils/counter_extensions.dart';
 
 // 🧩 Components
 export 'src/components.dart';
+// 📱 Phone Picker (public API)
+export 'src/components/phone_picker/models/country.dart';
+export 'src/components/phone_picker/cubit/phone_picker_cubit.dart';
+export 'src/components/phone_picker/cubit/phone_picker_state.dart';
 
 // 📏 FittedBox Components
 export 'src/components/fitted_box/fitted_box.dart';

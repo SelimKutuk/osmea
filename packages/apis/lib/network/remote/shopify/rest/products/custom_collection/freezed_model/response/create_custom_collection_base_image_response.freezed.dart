@@ -27,12 +27,8 @@ mixin _$CreateCustomCollectionBaseImageResponse {
   @JsonKey(name: "errors")
   Errors? get errors => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCustomCollectionBaseImageResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCustomCollectionBaseImageResponseCopyWith<
           CreateCustomCollectionBaseImageResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -66,8 +62,6 @@ class _$CreateCustomCollectionBaseImageResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,8 +80,6 @@ class _$CreateCustomCollectionBaseImageResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomCollectionCopyWith<$Res>? get customCollection {
@@ -100,8 +92,6 @@ class _$CreateCustomCollectionBaseImageResponseCopyWithImpl<$Res,
     });
   }
 
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ErrorsCopyWith<$Res>? get errors {
@@ -144,8 +134,6 @@ class __$$CreateCustomCollectionBaseImageResponseImplCopyWithImpl<$Res>
       $Res Function(_$CreateCustomCollectionBaseImageResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -199,13 +187,11 @@ class _$CreateCustomCollectionBaseImageResponseImpl
             (identical(other.errors, errors) || other.errors == errors));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customCollection, errors);
 
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCustomCollectionBaseImageResponseImplCopyWith<
@@ -240,11 +226,8 @@ abstract class _CreateCustomCollectionBaseImageResponse
   @override
   @JsonKey(name: "errors")
   Errors? get errors;
-
-  /// Create a copy of CreateCustomCollectionBaseImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCustomCollectionBaseImageResponseImplCopyWith<
           _$CreateCustomCollectionBaseImageResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -279,12 +262,8 @@ mixin _$CustomCollection {
   @JsonKey(name: "image")
   Image? get image => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomCollectionCopyWith<CustomCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -321,8 +300,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -386,8 +363,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
     ) as $Val);
   }
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ImageCopyWith<$Res>? get image {
@@ -434,8 +409,6 @@ class __$$CustomCollectionImplCopyWithImpl<$Res>
       $Res Function(_$CustomCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -582,7 +555,7 @@ class _$CustomCollectionImpl implements _CustomCollection {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -598,9 +571,7 @@ class _$CustomCollectionImpl implements _CustomCollection {
       adminGraphqlApiId,
       image);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
@@ -665,11 +636,8 @@ abstract class _CustomCollection implements CustomCollection {
   @override
   @JsonKey(name: "image")
   Image? get image;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -691,12 +659,8 @@ mixin _$Image {
   @JsonKey(name: "src")
   String? get src => throw _privateConstructorUsedError;
 
-  /// Serializes this Image to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -723,8 +687,6 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -782,8 +744,6 @@ class __$$ImageImplCopyWithImpl<$Res>
       _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -865,14 +825,12 @@ class _$ImageImpl implements _Image {
             (identical(other.src, src) || other.src == src));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, createdAt, alt, width, height, src);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
@@ -911,11 +869,8 @@ abstract class _Image implements Image {
   @override
   @JsonKey(name: "src")
   String? get src;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -929,12 +884,8 @@ mixin _$Errors {
   @JsonKey(name: "title")
   List<String>? get title => throw _privateConstructorUsedError;
 
-  /// Serializes this Errors to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ErrorsCopyWith<Errors> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -956,8 +907,6 @@ class _$ErrorsCopyWithImpl<$Res, $Val extends Errors>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -990,8 +939,6 @@ class __$$ErrorsImplCopyWithImpl<$Res>
       _$ErrorsImpl _value, $Res Function(_$ErrorsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1039,14 +986,12 @@ class _$ErrorsImpl implements _Errors {
             const DeepCollectionEquality().equals(other._title, _title));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_title));
 
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorsImplCopyWith<_$ErrorsImpl> get copyWith =>
@@ -1069,11 +1014,8 @@ abstract class _Errors implements Errors {
   @override
   @JsonKey(name: "title")
   List<String>? get title;
-
-  /// Create a copy of Errors
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ErrorsImplCopyWith<_$ErrorsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

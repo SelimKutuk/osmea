@@ -15,7 +15,15 @@ _$CreateCollectResponseImpl _$$CreateCollectResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateCollectResponseImplToJson(
-        _$CreateCollectResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.collect?.toJson() case final value?) 'collect': value,
-    };
+    _$CreateCollectResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('collect', instance.collect?.toJson());
+  return val;
+}

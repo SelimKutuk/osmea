@@ -17,12 +17,19 @@ _$InventoryItemAtLocationResponseImpl
         );
 
 Map<String, dynamic> _$$InventoryItemAtLocationResponseImplToJson(
-        _$InventoryItemAtLocationResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.inventoryLevel?.toJson() case final value?)
-        'inventory_level': value,
-      if (instance.errors case final value?) 'errors': value,
-    };
+    _$InventoryItemAtLocationResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('inventory_level', instance.inventoryLevel?.toJson());
+  writeNotNull('errors', instance.errors);
+  return val;
+}
 
 _$InventoryLevelImpl _$$InventoryLevelImplFromJson(Map<String, dynamic> json) =>
     _$InventoryLevelImpl(
@@ -34,13 +41,19 @@ _$InventoryLevelImpl _$$InventoryLevelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$InventoryLevelImplToJson(
-        _$InventoryLevelImpl instance) =>
-    <String, dynamic>{
-      if (instance.inventoryItemId case final value?)
-        'inventory_item_id': value,
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.available case final value?) 'available': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+    _$InventoryLevelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('inventory_item_id', instance.inventoryItemId);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('available', instance.available);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

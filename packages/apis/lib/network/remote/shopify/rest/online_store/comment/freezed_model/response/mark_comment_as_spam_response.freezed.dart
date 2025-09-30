@@ -42,12 +42,8 @@ mixin _$MarkCommentAsSpamResponse {
   @JsonKey(name: "user_agent")
   dynamic get userAgent => throw _privateConstructorUsedError;
 
-  /// Serializes this MarkCommentAsSpamResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MarkCommentAsSpamResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MarkCommentAsSpamResponseCopyWith<MarkCommentAsSpamResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -82,8 +78,6 @@ class _$MarkCommentAsSpamResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MarkCommentAsSpamResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -175,8 +169,6 @@ class __$$MarkCommentAsSpamResponseImplCopyWithImpl<$Res>
       $Res Function(_$MarkCommentAsSpamResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MarkCommentAsSpamResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -312,7 +304,7 @@ class _$MarkCommentAsSpamResponseImpl implements _MarkCommentAsSpamResponse {
             const DeepCollectionEquality().equals(other.userAgent, userAgent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -327,9 +319,7 @@ class _$MarkCommentAsSpamResponseImpl implements _MarkCommentAsSpamResponse {
       updatedAt,
       const DeepCollectionEquality().hash(userAgent));
 
-  /// Create a copy of MarkCommentAsSpamResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MarkCommentAsSpamResponseImplCopyWith<_$MarkCommentAsSpamResponseImpl>
@@ -391,11 +381,8 @@ abstract class _MarkCommentAsSpamResponse implements MarkCommentAsSpamResponse {
   @override
   @JsonKey(name: "user_agent")
   dynamic get userAgent;
-
-  /// Create a copy of MarkCommentAsSpamResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MarkCommentAsSpamResponseImplCopyWith<_$MarkCommentAsSpamResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

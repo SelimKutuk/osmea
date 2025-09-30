@@ -19,14 +19,23 @@ _$DeleteUserResponseImpl _$$DeleteUserResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$DeleteUserResponseImplToJson(
-        _$DeleteUserResponseImpl instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-      if (instance.error case final value?) 'error': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$DeleteUserResponseImpl instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('error', instance.error);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
 
 _$DeleteUserDataImpl _$$DeleteUserDataImplFromJson(Map<String, dynamic> json) =>
     _$DeleteUserDataImpl(
@@ -42,14 +51,22 @@ _$DeleteUserDataImpl _$$DeleteUserDataImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DeleteUserDataImplToJson(
-        _$DeleteUserDataImpl instance) =>
-    <String, dynamic>{
-      'id': instance.userId,
-      if (instance.email case final value?) 'email': value,
-      if (instance.deletedAt?.toIso8601String() case final value?)
-        'deleted_at': value,
-      if (instance.reason case final value?) 'reason': value,
-      if (instance.ordersDeleted case final value?) 'orders_deleted': value,
-      if (instance.reviewsDeleted case final value?) 'reviews_deleted': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$DeleteUserDataImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.userId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email', instance.email);
+  writeNotNull('deleted_at', instance.deletedAt?.toIso8601String());
+  writeNotNull('reason', instance.reason);
+  writeNotNull('orders_deleted', instance.ordersDeleted);
+  writeNotNull('reviews_deleted', instance.reviewsDeleted);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

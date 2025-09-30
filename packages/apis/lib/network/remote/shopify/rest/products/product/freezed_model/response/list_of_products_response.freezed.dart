@@ -24,12 +24,8 @@ mixin _$ListOfProductsResponse {
   @JsonKey(name: "products")
   List<Product>? get products => throw _privateConstructorUsedError;
 
-  /// Serializes this ListOfProductsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListOfProductsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListOfProductsResponseCopyWith<ListOfProductsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$ListOfProductsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListOfProductsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$ListOfProductsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListOfProductsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListOfProductsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,14 +134,12 @@ class _$ListOfProductsResponseImpl implements _ListOfProductsResponse {
             const DeepCollectionEquality().equals(other._products, _products));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_products));
 
-  /// Create a copy of ListOfProductsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListOfProductsResponseImplCopyWith<_$ListOfProductsResponseImpl>
@@ -175,11 +165,8 @@ abstract class _ListOfProductsResponse implements ListOfProductsResponse {
   @override
   @JsonKey(name: "products")
   List<Product>? get products;
-
-  /// Create a copy of ListOfProductsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListOfProductsResponseImplCopyWith<_$ListOfProductsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -227,12 +214,8 @@ mixin _$Product {
   @JsonKey(name: "image")
   PurpleImage? get image => throw _privateConstructorUsedError;
 
-  /// Serializes this Product to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -274,8 +257,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -374,8 +355,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     ) as $Val);
   }
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PurpleImageCopyWith<$Res>? get image {
@@ -428,8 +407,6 @@ class __$$ProductImplCopyWithImpl<$Res>
       _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -675,7 +652,7 @@ class _$ProductImpl implements _Product {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -698,9 +675,7 @@ class _$ProductImpl implements _Product {
       const DeepCollectionEquality().hash(_images),
       image);
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
@@ -791,11 +766,8 @@ abstract class _Product implements Product {
   @override
   @JsonKey(name: "image")
   PurpleImage? get image;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -829,12 +801,8 @@ mixin _$PurpleImage {
   @JsonKey(name: "variant_ids")
   List<dynamic>? get variantIds => throw _privateConstructorUsedError;
 
-  /// Serializes this PurpleImage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PurpleImage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PurpleImageCopyWith<PurpleImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -869,8 +837,6 @@ class _$PurpleImageCopyWithImpl<$Res, $Val extends PurpleImage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PurpleImage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -965,8 +931,6 @@ class __$$PurpleImageImplCopyWithImpl<$Res>
       _$PurpleImageImpl _value, $Res Function(_$PurpleImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PurpleImage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1121,7 +1085,7 @@ class _$PurpleImageImpl implements _PurpleImage {
                 .equals(other._variantIds, _variantIds));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1137,9 +1101,7 @@ class _$PurpleImageImpl implements _PurpleImage {
       src,
       const DeepCollectionEquality().hash(_variantIds));
 
-  /// Create a copy of PurpleImage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PurpleImageImplCopyWith<_$PurpleImageImpl> get copyWith =>
@@ -1204,11 +1166,8 @@ abstract class _PurpleImage implements PurpleImage {
   @override
   @JsonKey(name: "variant_ids")
   List<dynamic>? get variantIds;
-
-  /// Create a copy of PurpleImage
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PurpleImageImplCopyWith<_$PurpleImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1242,12 +1201,8 @@ mixin _$ImageElement {
   @JsonKey(name: "variant_ids")
   List<int>? get variantIds => throw _privateConstructorUsedError;
 
-  /// Serializes this ImageElement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ImageElement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ImageElementCopyWith<ImageElement> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1282,8 +1237,6 @@ class _$ImageElementCopyWithImpl<$Res, $Val extends ImageElement>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ImageElement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1378,8 +1331,6 @@ class __$$ImageElementImplCopyWithImpl<$Res>
       _$ImageElementImpl _value, $Res Function(_$ImageElementImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ImageElement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1534,7 +1485,7 @@ class _$ImageElementImpl implements _ImageElement {
                 .equals(other._variantIds, _variantIds));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1550,9 +1501,7 @@ class _$ImageElementImpl implements _ImageElement {
       src,
       const DeepCollectionEquality().hash(_variantIds));
 
-  /// Create a copy of ImageElement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageElementImplCopyWith<_$ImageElementImpl> get copyWith =>
@@ -1617,11 +1566,8 @@ abstract class _ImageElement implements ImageElement {
   @override
   @JsonKey(name: "variant_ids")
   List<int>? get variantIds;
-
-  /// Create a copy of ImageElement
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ImageElementImplCopyWith<_$ImageElementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1643,12 +1589,8 @@ mixin _$Option {
   @JsonKey(name: "values")
   List<String>? get values => throw _privateConstructorUsedError;
 
-  /// Serializes this Option to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Option
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $OptionCopyWith<Option> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1675,8 +1617,6 @@ class _$OptionCopyWithImpl<$Res, $Val extends Option>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Option
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1734,8 +1674,6 @@ class __$$OptionImplCopyWithImpl<$Res>
       _$OptionImpl _value, $Res Function(_$OptionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Option
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1826,14 +1764,12 @@ class _$OptionImpl implements _Option {
             const DeepCollectionEquality().equals(other._values, _values));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, productId, name, position,
       const DeepCollectionEquality().hash(_values));
 
-  /// Create a copy of Option
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OptionImplCopyWith<_$OptionImpl> get copyWith =>
@@ -1872,11 +1808,8 @@ abstract class _Option implements Option {
   @override
   @JsonKey(name: "values")
   List<String>? get values;
-
-  /// Create a copy of Option
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$OptionImplCopyWith<_$OptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1940,12 +1873,8 @@ mixin _$Variant {
   @JsonKey(name: "image_id")
   int? get imageId => throw _privateConstructorUsedError;
 
-  /// Serializes this Variant to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Variant
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $VariantCopyWith<Variant> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1993,8 +1922,6 @@ class _$VariantCopyWithImpl<$Res, $Val extends Variant>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Variant
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2178,8 +2105,6 @@ class __$$VariantImplCopyWithImpl<$Res>
       _$VariantImpl _value, $Res Function(_$VariantImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Variant
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2484,7 +2409,7 @@ class _$VariantImpl implements _Variant {
             (identical(other.imageId, imageId) || other.imageId == imageId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -2516,9 +2441,7 @@ class _$VariantImpl implements _Variant {
         imageId
       ]);
 
-  /// Create a copy of Variant
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
@@ -2641,11 +2564,8 @@ abstract class _Variant implements Variant {
   @override
   @JsonKey(name: "image_id")
   int? get imageId;
-
-  /// Create a copy of Variant
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

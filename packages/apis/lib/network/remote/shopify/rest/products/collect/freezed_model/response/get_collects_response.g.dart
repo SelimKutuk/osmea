@@ -15,8 +15,15 @@ _$GetCollectsResponseImpl _$$GetCollectsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetCollectsResponseImplToJson(
-        _$GetCollectsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.collects?.map((e) => e.toJson()).toList() case final value?)
-        'collects': value,
-    };
+    _$GetCollectsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('collects', instance.collects?.map((e) => e.toJson()).toList());
+  return val;
+}

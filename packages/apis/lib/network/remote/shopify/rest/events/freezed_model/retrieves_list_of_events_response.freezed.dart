@@ -24,12 +24,8 @@ mixin _$RetrievesListOfEventsResponse {
   @JsonKey(name: "events")
   List<Event>? get events => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesListOfEventsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesListOfEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesListOfEventsResponseCopyWith<RetrievesListOfEventsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$RetrievesListOfEventsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesListOfEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$RetrievesListOfEventsResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesListOfEventsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesListOfEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,14 +138,12 @@ class _$RetrievesListOfEventsResponseImpl
             const DeepCollectionEquality().equals(other._events, _events));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
 
-  /// Create a copy of RetrievesListOfEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesListOfEventsResponseImplCopyWith<
@@ -181,11 +171,8 @@ abstract class _RetrievesListOfEventsResponse
   @override
   @JsonKey(name: "events")
   List<Event>? get events;
-
-  /// Create a copy of RetrievesListOfEventsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesListOfEventsResponseImplCopyWith<
           _$RetrievesListOfEventsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -220,12 +207,8 @@ mixin _$Event {
   @JsonKey(name: "path")
   String? get path => throw _privateConstructorUsedError;
 
-  /// Serializes this Event to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $EventCopyWith<Event> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -258,8 +241,6 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -353,8 +334,6 @@ class __$$EventImplCopyWithImpl<$Res>
       _$EventImpl _value, $Res Function(_$EventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -509,7 +488,7 @@ class _$EventImpl implements _Event {
             (identical(other.path, path) || other.path == path));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -525,9 +504,7 @@ class _$EventImpl implements _Event {
       description,
       path);
 
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$EventImplCopyWith<_$EventImpl> get copyWith =>
@@ -590,11 +567,8 @@ abstract class _Event implements Event {
   @override
   @JsonKey(name: "path")
   String? get path;
-
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$EventImplCopyWith<_$EventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

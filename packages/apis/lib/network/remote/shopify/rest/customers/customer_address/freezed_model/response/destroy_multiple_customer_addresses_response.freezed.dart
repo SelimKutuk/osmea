@@ -26,12 +26,8 @@ mixin _$DestroyMultipleCustomerAddressesResponse {
 // (especially for default address deletion attempts)
   String? get errors => throw _privateConstructorUsedError;
 
-  /// Serializes this DestroyMultipleCustomerAddressesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DestroyMultipleCustomerAddressesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $DestroyMultipleCustomerAddressesResponseCopyWith<
           DestroyMultipleCustomerAddressesResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -60,8 +56,6 @@ class _$DestroyMultipleCustomerAddressesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of DestroyMultipleCustomerAddressesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,8 +92,6 @@ class __$$DestroyMultipleCustomerAddressesResponseImplCopyWithImpl<$Res>
       $Res Function(_$DestroyMultipleCustomerAddressesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of DestroyMultipleCustomerAddressesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,13 +134,11 @@ class _$DestroyMultipleCustomerAddressesResponseImpl
             (identical(other.errors, errors) || other.errors == errors));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, errors);
 
-  /// Create a copy of DestroyMultipleCustomerAddressesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$DestroyMultipleCustomerAddressesResponseImplCopyWith<
@@ -174,15 +164,11 @@ abstract class _DestroyMultipleCustomerAddressesResponse
           Map<String, dynamic> json) =
       _$DestroyMultipleCustomerAddressesResponseImpl.fromJson;
 
-// Shopify returns errors in this format when deletion fails
+  @override // Shopify returns errors in this format when deletion fails
 // (especially for default address deletion attempts)
-  @override
   String? get errors;
-
-  /// Create a copy of DestroyMultipleCustomerAddressesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$DestroyMultipleCustomerAddressesResponseImplCopyWith<
           _$DestroyMultipleCustomerAddressesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

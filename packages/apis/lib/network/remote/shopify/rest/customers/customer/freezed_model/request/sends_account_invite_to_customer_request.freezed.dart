@@ -24,12 +24,8 @@ mixin _$SendsAccountInviteToCustomerRequest {
   @JsonKey(name: "customer_invite")
   CustomerInvite get customerInvite => throw _privateConstructorUsedError;
 
-  /// Serializes this SendsAccountInviteToCustomerRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SendsAccountInviteToCustomerRequestCopyWith<
           SendsAccountInviteToCustomerRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$SendsAccountInviteToCustomerRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,8 +68,6 @@ class _$SendsAccountInviteToCustomerRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomerInviteCopyWith<$Res> get customerInvite {
@@ -110,8 +102,6 @@ class __$$SendsAccountInviteToCustomerRequestImplCopyWithImpl<$Res>
       $Res Function(_$SendsAccountInviteToCustomerRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,13 +146,11 @@ class _$SendsAccountInviteToCustomerRequestImpl
                 other.customerInvite == customerInvite));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customerInvite);
 
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SendsAccountInviteToCustomerRequestImplCopyWith<
@@ -192,11 +180,8 @@ abstract class _SendsAccountInviteToCustomerRequest
   @override
   @JsonKey(name: "customer_invite")
   CustomerInvite get customerInvite;
-
-  /// Create a copy of SendsAccountInviteToCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SendsAccountInviteToCustomerRequestImplCopyWith<
           _$SendsAccountInviteToCustomerRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -213,12 +198,8 @@ mixin _$CustomerInvite {
   @JsonKey(name: "custom_message")
   String? get customMessage => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomerInvite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomerInvite
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomerInviteCopyWith<CustomerInvite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -244,8 +225,6 @@ class _$CustomerInviteCopyWithImpl<$Res, $Val extends CustomerInvite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomerInvite
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -286,8 +265,6 @@ class __$$CustomerInviteImplCopyWithImpl<$Res>
       _$CustomerInviteImpl _value, $Res Function(_$CustomerInviteImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomerInvite
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -339,13 +316,11 @@ class _$CustomerInviteImpl implements _CustomerInvite {
                 other.customMessage == customMessage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, subject, customMessage);
 
-  /// Create a copy of CustomerInvite
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomerInviteImplCopyWith<_$CustomerInviteImpl> get copyWith =>
@@ -375,11 +350,8 @@ abstract class _CustomerInvite implements CustomerInvite {
   @override
   @JsonKey(name: "custom_message")
   String? get customMessage;
-
-  /// Create a copy of CustomerInvite
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomerInviteImplCopyWith<_$CustomerInviteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

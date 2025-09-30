@@ -24,12 +24,8 @@ mixin _$ReceiveListOfCountriesResponse {
   @JsonKey(name: "countries")
   List<Country>? get countries => throw _privateConstructorUsedError;
 
-  /// Serializes this ReceiveListOfCountriesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ReceiveListOfCountriesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ReceiveListOfCountriesResponseCopyWith<ReceiveListOfCountriesResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$ReceiveListOfCountriesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ReceiveListOfCountriesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$ReceiveListOfCountriesResponseImplCopyWithImpl<$Res>
       $Res Function(_$ReceiveListOfCountriesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ReceiveListOfCountriesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,14 +139,12 @@ class _$ReceiveListOfCountriesResponseImpl
                 .equals(other._countries, _countries));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_countries));
 
-  /// Create a copy of ReceiveListOfCountriesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiveListOfCountriesResponseImplCopyWith<
@@ -182,11 +172,8 @@ abstract class _ReceiveListOfCountriesResponse
   @override
   @JsonKey(name: "countries")
   List<Country>? get countries;
-
-  /// Create a copy of ReceiveListOfCountriesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReceiveListOfCountriesResponseImplCopyWith<
           _$ReceiveListOfCountriesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -211,12 +198,8 @@ mixin _$Country {
   @JsonKey(name: "provinces")
   List<Province>? get provinces => throw _privateConstructorUsedError;
 
-  /// Serializes this Country to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CountryCopyWith<Country> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -244,8 +227,6 @@ class _$CountryCopyWithImpl<$Res, $Val extends Country>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -309,8 +290,6 @@ class __$$CountryImplCopyWithImpl<$Res>
       _$CountryImpl _value, $Res Function(_$CountryImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -410,14 +389,12 @@ class _$CountryImpl implements _Country {
                 .equals(other._provinces, _provinces));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, code, taxName, tax,
       const DeepCollectionEquality().hash(_provinces));
 
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CountryImplCopyWith<_$CountryImpl> get copyWith =>
@@ -461,11 +438,8 @@ abstract class _Country implements Country {
   @override
   @JsonKey(name: "provinces")
   List<Province>? get provinces;
-
-  /// Create a copy of Country
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CountryImplCopyWith<_$CountryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -495,12 +469,8 @@ mixin _$Province {
   @JsonKey(name: "tax_percentage")
   int? get taxPercentage => throw _privateConstructorUsedError;
 
-  /// Serializes this Province to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProvinceCopyWith<Province> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -532,8 +502,6 @@ class _$ProvinceCopyWithImpl<$Res, $Val extends Province>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -616,8 +584,6 @@ class __$$ProvinceImplCopyWithImpl<$Res>
       _$ProvinceImpl _value, $Res Function(_$ProvinceImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -741,7 +707,7 @@ class _$ProvinceImpl implements _Province {
                 other.taxPercentage == taxPercentage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -755,9 +721,7 @@ class _$ProvinceImpl implements _Province {
       tax,
       taxPercentage);
 
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProvinceImplCopyWith<_$ProvinceImpl> get copyWith =>
@@ -814,11 +778,8 @@ abstract class _Province implements Province {
   @override
   @JsonKey(name: "tax_percentage")
   int? get taxPercentage;
-
-  /// Create a copy of Province
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProvinceImplCopyWith<_$ProvinceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

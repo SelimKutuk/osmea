@@ -17,13 +17,21 @@ _$CollectImpl _$$CollectImplFromJson(Map<String, dynamic> json) =>
       sortValue: json['sort_value'] as String?,
     );
 
-Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.collectionId case final value?) 'collection_id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.sortValue case final value?) 'sort_value': value,
-    };
+Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('collection_id', instance.collectionId);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('position', instance.position);
+  writeNotNull('sort_value', instance.sortValue);
+  return val;
+}

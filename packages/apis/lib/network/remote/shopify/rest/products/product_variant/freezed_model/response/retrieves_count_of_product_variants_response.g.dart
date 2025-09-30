@@ -14,7 +14,15 @@ _$RetrievesCountOfProductVariantsResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesCountOfProductVariantsResponseImplToJson(
-        _$RetrievesCountOfProductVariantsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$RetrievesCountOfProductVariantsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

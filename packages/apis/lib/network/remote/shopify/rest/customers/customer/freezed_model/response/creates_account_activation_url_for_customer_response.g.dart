@@ -18,9 +18,16 @@ _$CreatesAccountActivationUrlForCustomerResponseImpl
 
 Map<String, dynamic>
     _$$CreatesAccountActivationUrlForCustomerResponseImplToJson(
-            _$CreatesAccountActivationUrlForCustomerResponseImpl instance) =>
-        <String, dynamic>{
-          if (instance.accountActivationUrl case final value?)
-            'account_activation_url': value,
-          if (instance.errors case final value?) 'errors': value,
-        };
+        _$CreatesAccountActivationUrlForCustomerResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('account_activation_url', instance.accountActivationUrl);
+  writeNotNull('errors', instance.errors);
+  return val;
+}

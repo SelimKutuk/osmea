@@ -24,11 +24,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   
-  # Add any assets or fonts your package needs here
-  # assets:
-  #   - assets/images/
-  # fonts:
-  #   - family: YourFont
-  #     fonts:
-  #       - asset: fonts/YourFont-Regular.ttf
-
+  # Assets for phone picker country flags
+  assets:
+    - assets/flags/

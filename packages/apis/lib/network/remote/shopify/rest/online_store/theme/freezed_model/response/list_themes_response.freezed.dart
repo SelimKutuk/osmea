@@ -23,12 +23,8 @@ mixin _$ListThemesResponse {
   @JsonKey(name: "themes")
   List<Theme>? get themes => throw _privateConstructorUsedError;
 
-  /// Serializes this ListThemesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListThemesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListThemesResponseCopyWith<ListThemesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,8 +48,6 @@ class _$ListThemesResponseCopyWithImpl<$Res, $Val extends ListThemesResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListThemesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,8 +81,6 @@ class __$$ListThemesResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListThemesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListThemesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,14 +129,12 @@ class _$ListThemesResponseImpl implements _ListThemesResponse {
             const DeepCollectionEquality().equals(other._themes, _themes));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_themes));
 
-  /// Create a copy of ListThemesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListThemesResponseImplCopyWith<_$ListThemesResponseImpl> get copyWith =>
@@ -170,11 +160,8 @@ abstract class _ListThemesResponse implements ListThemesResponse {
   @override
   @JsonKey(name: "themes")
   List<Theme>? get themes;
-
-  /// Create a copy of ListThemesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListThemesResponseImplCopyWith<_$ListThemesResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -204,12 +191,8 @@ mixin _$Theme {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this Theme to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Theme
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ThemeCopyWith<Theme> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -240,8 +223,6 @@ class _$ThemeCopyWithImpl<$Res, $Val extends Theme>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Theme
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -323,8 +304,6 @@ class __$$ThemeImplCopyWithImpl<$Res>
       _$ThemeImpl _value, $Res Function(_$ThemeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Theme
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -451,14 +430,12 @@ class _$ThemeImpl implements _Theme {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, createdAt, updatedAt,
       role, themeStoreId, previewable, processing, adminGraphqlApiId);
 
-  /// Create a copy of Theme
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ThemeImplCopyWith<_$ThemeImpl> get copyWith =>
@@ -514,11 +491,8 @@ abstract class _Theme implements Theme {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of Theme
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ThemeImplCopyWith<_$ThemeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
