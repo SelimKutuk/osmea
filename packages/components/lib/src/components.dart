@@ -2472,6 +2472,9 @@ class OsmeaComponents {
   ///   subtitle: 'Nature Photography',
   ///   imageUrl: 'https://example.com/image.jpg',
   ///   height: 200,
+  ///   titleMaxLines: 2,
+  ///   textOverflow: TextOverflow.ellipsis,
+  ///   maintainAspectRatio: true,
   ///   imagePosition: ImagePosition.top,
   ///   onTap: () => print('Image card tapped'),
   /// )
@@ -2516,6 +2519,13 @@ class OsmeaComponents {
     BadgePosition badgePosition = BadgePosition.topRight,
     BorderRadius? imageBorderRadius,
     Widget? child,
+    // Text overflow control parameters
+    int? titleMaxLines = 2,
+    int? subtitleMaxLines = 1,
+    int? contentMaxLines = 3,
+    TextOverflow textOverflow = TextOverflow.ellipsis,
+    double? textAreaHeight,
+    bool maintainAspectRatio = false,
   }) {
     return OsmeaImageCard(
       key: key,
@@ -2557,6 +2567,12 @@ class OsmeaComponents {
       badgePosition: badgePosition,
       imageBorderRadius: imageBorderRadius,
       child: child,
+      titleMaxLines: titleMaxLines,
+      subtitleMaxLines: subtitleMaxLines,
+      contentMaxLines: contentMaxLines,
+      textOverflow: textOverflow,
+      textAreaHeight: textAreaHeight,
+      maintainAspectRatio: maintainAspectRatio,
     );
   }
 
