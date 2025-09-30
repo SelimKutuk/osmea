@@ -37,6 +37,9 @@ dependencies:
   path_provider: ^2.1.5 # Path provider for file storage
   permission_handler: ^11.2.0 # Runtime permissions handler
   share_plus: ^10.1.4 # Sharing text/files across platforms
+  flutter_html: ^3.0.0 # HTML rendering for CoreRawDataViewer
+  flutter_inappwebview: ^6.1.5 # WebView functionality for CoreWebViewViewer
+  webview_flutter: ^4.10.0 # Native WebView for mobile platforms
   osmea_components:
     git:
       url: https://github.com/masterfabric-mobile/osmea.git
