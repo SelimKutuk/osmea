@@ -619,6 +619,7 @@ extension UtilityExtension$Query$WebhookSubscription$webhookSubscription$endpoin
             this,
             (i) => i,
           );
+
   _T when<_T>({
     required _T Function(
             Query$WebhookSubscription$webhookSubscription$endpoint$$WebhookHttpEndpoint)

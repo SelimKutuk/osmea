@@ -1059,6 +1059,7 @@ extension UtilityExtension$Query$WebhookSubscriptions$webhookSubscriptions$edges
             this,
             (i) => i,
           );
+
   _T when<_T>({
     required _T Function(
             Query$WebhookSubscriptions$webhookSubscriptions$edges$node$endpoint$$WebhookHttpEndpoint)
