@@ -2415,6 +2415,7 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
@@ -2441,6 +2442,7 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,
@@ -2504,6 +2506,7 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
@@ -2552,6 +2555,7 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,
@@ -2628,6 +2632,7 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
@@ -2668,6 +2673,7 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,

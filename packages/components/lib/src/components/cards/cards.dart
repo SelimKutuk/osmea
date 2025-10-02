@@ -74,6 +74,7 @@ class _OsmeaBaseCard extends CoreContainer {
     this.shadowColor,
     this.isClickable = false,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     this.height,
     super.child,
@@ -229,6 +230,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
@@ -445,6 +447,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
@@ -988,6 +991,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
