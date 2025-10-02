@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
+import 'package:core/src/views/routes.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -11,11 +12,10 @@ final GoRouter appRouter = GoRouter(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return SplashView(
-          goRoute: (String routeName) {
-            debugPrint('🧭 Navigating to: $routeName');
-            if (routeName == 'home') {
+          goRoute: (String path) {
+            if (path.contains(Routes.home.name)) {
               context.go('/home');
-            } else if (routeName == 'onboarding') {
+            } else if (path.contains(Routes.onboarding.name)) {
               context.go('/onboarding');
             } else {
               context.go('/home'); // Default fallback
@@ -29,7 +29,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/onboarding',
       builder: (BuildContext context, GoRouterState state) {
-        return OnboardingScreen(
+        return OnboardingView(
+          goRoute: (String path) {
+            if (path.contains(Routes.home.name)) {
+              context.go('/home');
+            } else {
+              context.go('/home'); // Default fallback
+            }
+          },
           onCompleted: () {
             debugPrint('🎉 Onboarding completed!');
             context.go('/home');
