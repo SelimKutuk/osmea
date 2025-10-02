@@ -18,7 +18,7 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _filteredComponents = components;
   }
 
@@ -230,22 +230,22 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
   }
 
   List<Map<String, dynamic>> _getDisplayComponents() {
-      return _filteredComponents
-          .where((c) => [
-                'Text',
-                'Rich Text',
-                'Image',
-                'Avatar',
-                'Badge',
-                'Card',
-                'Chips',
-                'Progress',
-                'Loading',
-                'Toast',
-                'Snackbar'
-              ].contains(c['title']))
-          .toList();
-    }
+    return _filteredComponents
+        .where((c) => [
+              'Text',
+              'Rich Text',
+              'Image',
+              'Avatar',
+              'Badge',
+              'Card',
+              'Chips',
+              'Progress',
+              'Loading',
+              'Toast',
+              'Snackbar'
+            ].contains(c['title']))
+        .toList();
+  }
 
   Widget _buildSearchResults() {
     if (_filteredComponents.isEmpty) {
