@@ -27,6 +27,9 @@ export 'src/components/text_field/controllers/text_field_controller.dart';
 export 'src/components/radio_button/radio_button.dart';
 export 'src/components/login_button/login_button.dart';
 
+// 📱 AppBar with SearchBar
+export 'src/components/appbar_searchbar/appbar_searchbar_action.dart';
+
 // 🔢 Counter
 export 'src/utils/counter_extensions.dart';
 
