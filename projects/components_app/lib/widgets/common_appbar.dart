@@ -87,28 +87,36 @@ class _OsmeaComponentsAppBarState extends State<OsmeaComponentsAppBar> {
     return screenKey
         .replaceAll('_', ' ')
         .split(' ')
-        .map((word) => word.isNotEmpty ? '${word[0].toUpperCase()}${word.substring(1)}' : '')
+        .map((word) => word.isNotEmpty
+            ? '${word[0].toUpperCase()}${word.substring(1)}'
+            : '')
         .join(' ');
   }
 
   Widget _buildBackButton() {
-    return OsmeaComponents.container(
-      margin: const EdgeInsets.only(left: 8),
-      child: OsmeaComponents.button(
-        variant: ButtonVariant.ghost,
-        size: ButtonSize.small,
-        icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-        iconPosition: IconPosition.only,
-        onPressed: () {
-          // Go back to components page with GoRouter
-          if (context.canPop()) {
-            context.pop();
-          } else {
-            context.go('/components');
-          }
-        },
-        backgroundColor: OsmeaColors.transparent,
-        padding: const EdgeInsets.all(8),
+    return Container(
+      margin: const EdgeInsets.only(left: 4),
+      child: Material(
+        color: OsmeaColors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () {
+            // Go back to components page with GoRouter
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/components');
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              size: 20,
+              color: OsmeaColors.black,
+            ),
+          ),
+        ),
       ),
     );
   }

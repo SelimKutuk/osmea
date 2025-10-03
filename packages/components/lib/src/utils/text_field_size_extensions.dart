@@ -53,6 +53,22 @@ class TextFieldSizeConfig {
 /// ```
 
 extension TextFieldSizeExtension on TextFieldSize {
+  /// Get the height for this TextField size
+  double get height {
+    switch (this) {
+      case TextFieldSize.extraSmall:
+        return 32.0;
+      case TextFieldSize.small:
+        return 36.0;
+      case TextFieldSize.medium:
+        return 44.0;
+      case TextFieldSize.large:
+        return 52.0;
+      case TextFieldSize.extraLarge:
+        return 60.0;
+    }
+  }
+
   TextFieldSizeConfig getConfig(BuildContext context) {
     switch (this) {
       case TextFieldSize.extraSmall:

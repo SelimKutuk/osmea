@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:osmea_components/osmea_components.dart';
-import 'package:osmea_components/src/components/phone_picker/models/country.dart';
 import 'package:osmea_components/src/components/toast/toast.dart'
     show ToastManager;
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
+import 'package:osmea_components/src/components/appbar_searchbar/appbar_searchbar.dart';
+import 'package:osmea_components/src/components/appbar_searchbar/appbar_searchbar_action.dart';
 import 'package:osmea_components/src/components/avatar/avatar.dart';
 import 'package:osmea_components/src/components/badge/badge.dart';
 import 'package:osmea_components/src/components/bottom_sheet/bottom_sheet.dart';
@@ -20,7 +21,6 @@ import 'package:osmea_components/src/components/column/column.dart';
 import 'package:osmea_components/src/components/container/container.dart';
 import 'package:osmea_components/src/components/divider/divider.dart';
 import 'package:osmea_components/src/components/dot_indicator/dot_indicator.dart';
-import 'package:osmea_components/src/enums/dot_indicator_enums.dart';
 import 'package:osmea_components/src/components/expanded/expanded.dart';
 import 'package:osmea_components/src/components/flexible/flexible.dart';
 import 'package:osmea_components/src/components/padding/padding.dart';
@@ -43,7 +43,6 @@ import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/counter/counter.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
-import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
@@ -1914,6 +1913,199 @@ class OsmeaComponents {
       drawerEnableOpenDragGesture: drawerEnableOpenDragGesture,
       endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture,
       restorationId: restorationId,
+    );
+  }
+
+  /// 🎯 **OSMEA AppBar with SearchBar** - Comprehensive application bar with integrated search
+  ///
+  /// Creates a complete AppBar component with integrated SearchBar functionality.
+  /// Perfect for apps that need both navigation and search in a unified interface.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.appBarWithSearchBar(
+  ///   title: Text('My App'),
+  ///   searchHint: 'Search products...',
+  ///   onSearch: (query) => performSearch(query),
+  ///   actions: [
+  ///     AppBarWithSearchBarAction(
+  ///       icon: Icon(Icons.notifications),
+  ///       onPressed: () => showNotifications(),
+  ///     ),
+  ///   ],
+  /// )
+  /// ```
+  static PreferredSizeWidget appBarWithSearchBar({
+    Key? key,
+    Widget? title,
+    Widget? subtitle,
+    Widget? leading,
+    List<AppBarWithSearchBarAction> actions = const [],
+    AppBarSize appBarSize = AppBarSize.standard,
+    AppBarVariant appBarVariant = AppBarVariant.standard,
+    AppBarType appBarType = AppBarType.fixed,
+    AppBarStyle appBarStyle = AppBarStyle.sharp,
+    SearchbarVariant searchBarVariant = SearchbarVariant.outlined,
+    SearchbarStyle searchBarStyle = SearchbarStyle.standard,
+    Color? appBarBackgroundColor,
+    Color? appBarForegroundColor,
+    Color? appBarShadowColor,
+    Color? appBarSurfaceTintColor,
+    Color? appBarTitleTextColor,
+    Color? appBarSubtitleTextColor,
+    Color? appBarIconColor,
+    Color? appBarActionColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? appBarAnimationDuration,
+    double? appBarElevation,
+    BorderRadius? appBarBorderRadius,
+    bool centerTitle = false,
+    AppBarTitleAlignment titleAlignment = AppBarTitleAlignment.left,
+    double? titleSpacing,
+    double toolbarOpacity = 1.0,
+    double bottomOpacity = 1.0,
+    double? leadingWidth,
+    bool automaticallyImplyLeading = true,
+    bool excludeHeaderSemantics = false,
+    bool primary = true,
+    double? scrolledUnderElevation,
+    ScrollNotificationPredicate? notificationPredicate,
+    VoidCallback? onTitleTap,
+    VoidCallback? onLeadingTap,
+    PreferredSizeWidget? appBarBottom,
+    Widget? flexibleSpace,
+    // SearchBar specific properties
+    String? searchHint,
+    TextEditingController? searchController,
+    FocusNode? searchFocusNode,
+    ValueChanged<String>? onSearch,
+    ValueChanged<String>? onSearchChanged,
+    ValueChanged<String>? onSearchSubmitted,
+    VoidCallback? onSearchClear,
+    VoidCallback? onSearchBack,
+    Future<List<String>> Function(String query)? searchSuggestionProvider,
+    Future<List<dynamic>> Function(String query)? searchProvider,
+    int maxHistoryItems = 10,
+    int minQueryLength = 2,
+    Duration debounceDuration = const Duration(milliseconds: 300),
+    bool showClearButton = true,
+    bool showBackButton = false,
+    bool showSearchIcon = true,
+    bool showSuggestions = true,
+    Widget? searchIcon,
+    Widget? clearIcon,
+    Widget? backIcon,
+    BorderRadius? searchBarBorderRadius,
+    Duration? transitionDuration,
+    Curve transitionCurve = Curves.easeInOut,
+    ValueChanged<bool>? onSearchFocusChanged,
+    ValueChanged<bool>? onSearchHoverChanged,
+    List<String> initialHistory = const [],
+    bool enableHoverEffect = true,
+    Duration? hoverAnimationDuration,
+    EdgeInsetsGeometry searchBarPadding =
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    EdgeInsetsGeometry searchBarMargin = EdgeInsets.zero,
+    Color? searchBarBackgroundColor,
+    Color? searchBarBorderColor,
+    Color? searchBarFocusColor,
+    Color? searchBarErrorColor,
+    Color? searchBarHintColor,
+    Color? searchBarTextColor,
+    TextStyle? searchBarTextStyle,
+    TextFieldSize searchBarSize = TextFieldSize.medium,
+    TextFieldState searchBarState = TextFieldState.enabled,
+    TextAlign searchBarTextAlign = TextAlign.start,
+    TextCapitalization searchBarTextCapitalization = TextCapitalization.none,
+    TextInputType searchBarKeyboardType = TextInputType.text,
+    TextInputAction searchBarTextInputAction = TextInputAction.search,
+    bool searchBarFullWidth = true,
+    Duration? searchBarAnimationDuration,
+  }) {
+    return OsmeaAppBarWithSearchBar(
+      key: key,
+      title: title,
+      subtitle: subtitle,
+      leading: leading,
+      actions: actions,
+      appBarSize: appBarSize,
+      appBarVariant: appBarVariant,
+      appBarType: appBarType,
+      appBarStyle: appBarStyle,
+      searchBarVariant: searchBarVariant,
+      searchBarStyle: searchBarStyle,
+      appBarBackgroundColor: appBarBackgroundColor,
+      appBarForegroundColor: appBarForegroundColor,
+      appBarShadowColor: appBarShadowColor,
+      appBarSurfaceTintColor: appBarSurfaceTintColor,
+      appBarTitleTextColor: appBarTitleTextColor,
+      appBarSubtitleTextColor: appBarSubtitleTextColor,
+      appBarIconColor: appBarIconColor,
+      appBarActionColor: appBarActionColor,
+      appBarAnimationDuration: appBarAnimationDuration,
+      appBarElevation: appBarElevation,
+      appBarBorderRadius: appBarBorderRadius,
+      centerTitle: centerTitle,
+      titleAlignment: titleAlignment,
+      titleSpacing: titleSpacing,
+      toolbarOpacity: toolbarOpacity,
+      bottomOpacity: bottomOpacity,
+      leadingWidth: leadingWidth,
+      automaticallyImplyLeading: automaticallyImplyLeading,
+      excludeHeaderSemantics: excludeHeaderSemantics,
+      primary: primary,
+      scrolledUnderElevation: scrolledUnderElevation,
+      notificationPredicate: notificationPredicate,
+      onTitleTap: onTitleTap,
+      onLeadingTap: onLeadingTap,
+      appBarBottom: appBarBottom,
+      flexibleSpace: flexibleSpace,
+      searchHint: searchHint,
+      searchController: searchController,
+      searchFocusNode: searchFocusNode,
+      onSearch: onSearch,
+      onSearchChanged: onSearchChanged,
+      onSearchSubmitted: onSearchSubmitted,
+      onSearchClear: onSearchClear,
+      onSearchBack: onSearchBack,
+      searchSuggestionProvider: searchSuggestionProvider,
+      searchProvider: searchProvider,
+      maxHistoryItems: maxHistoryItems,
+      minQueryLength: minQueryLength,
+      debounceDuration: debounceDuration,
+      showClearButton: showClearButton,
+      showBackButton: showBackButton,
+      showSearchIcon: showSearchIcon,
+      showSuggestions: showSuggestions,
+      searchIcon: searchIcon,
+      clearIcon: clearIcon,
+      backIcon: backIcon,
+      searchBarBorderRadius: searchBarBorderRadius,
+      transitionDuration: transitionDuration,
+      transitionCurve: transitionCurve,
+      onSearchFocusChanged: onSearchFocusChanged,
+      onSearchHoverChanged: onSearchHoverChanged,
+      initialHistory: initialHistory,
+      enableHoverEffect: enableHoverEffect,
+      hoverAnimationDuration: hoverAnimationDuration,
+      searchBarPadding: searchBarPadding,
+      searchBarMargin: searchBarMargin,
+      searchBarBackgroundColor: searchBarBackgroundColor,
+      searchBarBorderColor: searchBarBorderColor,
+      searchBarFocusColor: searchBarFocusColor,
+      searchBarErrorColor: searchBarErrorColor,
+      searchBarHintColor: searchBarHintColor,
+      searchBarTextColor: searchBarTextColor,
+      searchBarTextStyle: searchBarTextStyle,
+      searchBarSize: searchBarSize,
+      searchBarState: searchBarState,
+      searchBarTextAlign: searchBarTextAlign,
+      searchBarTextCapitalization: searchBarTextCapitalization,
+      searchBarKeyboardType: searchBarKeyboardType,
+      searchBarTextInputAction: searchBarTextInputAction,
+      searchBarFullWidth: searchBarFullWidth,
+      searchBarAnimationDuration: searchBarAnimationDuration,
     );
   }
 

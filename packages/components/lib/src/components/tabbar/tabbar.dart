@@ -10,7 +10,6 @@ import 'package:osmea_components/src/components/text/text.dart';
 import 'tabbar_cubit.dart';
 import 'tabbar_state.dart';
 
-
 /// 📑 **OSMEA TabBar Component**
 ///
 /// Copyright (c) 2025, OSMEA Team
@@ -292,7 +291,8 @@ class OsmeaTabBar extends CoreTabBarContainer {
     return tabs.asMap().entries.map((entry) {
       final index = entry.key;
       final tab = entry.value;
-      final isActive = index == state.selectedIndex || tab.state == TabState.active;
+      final isActive =
+          index == state.selectedIndex || tab.state == TabState.active;
 
       return _buildTabWidget(
         context,
@@ -304,11 +304,11 @@ class OsmeaTabBar extends CoreTabBarContainer {
   }
 
   /// 🎯 Build individual tab widget
-  Widget _buildTabWidget(BuildContext context, TabItem tab, int index, TabBarState state) {
+  Widget _buildTabWidget(
+      BuildContext context, TabItem tab, int index, TabBarState state) {
     final isActive = tab.state == TabState.active;
     final isDisabled = tab.state == TabState.disabled || !tab.enabled;
     final isLoading = tab.state == TabState.loading;
-
 
     // Get effective colors
     final effectiveTextColor = _getEffectiveTextColor(context, isActive);
@@ -359,8 +359,10 @@ class OsmeaTabBar extends CoreTabBarContainer {
 
     // Simple tap handling for better compatibility
     Widget tappableTab;
-    
-    if (tab.isDropdown && tab.dropdownItems != null && tab.dropdownItems!.isNotEmpty) {
+
+    if (tab.isDropdown &&
+        tab.dropdownItems != null &&
+        tab.dropdownItems!.isNotEmpty) {
       // Dropdown tab with simple gesture detection
       tappableTab = GestureDetector(
         onTap: isDisabled || isLoading
@@ -376,7 +378,8 @@ class OsmeaTabBar extends CoreTabBarContainer {
             // Handle dropdown selection with Cubit
             context.read<TabBarCubit>().selectDropdownItem(value);
           },
-          itemBuilder: (context) => tab.dropdownItems!.cast<PopupMenuEntry<String>>(),
+          itemBuilder: (context) =>
+              tab.dropdownItems!.cast<PopupMenuEntry<String>>(),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
@@ -433,7 +436,6 @@ class OsmeaTabBar extends CoreTabBarContainer {
     bool isActive,
     bool isLoading,
   ) {
-  
     final List<Widget> children = [];
 
     // Add icon if present and should show
@@ -468,7 +470,7 @@ class OsmeaTabBar extends CoreTabBarContainer {
             fontSize: 12, // Smaller for mobile
             fontWeight: isActive ? FontWeight.w500 : FontWeight.w400,
             color: textColor,
-            height: 1.1, 
+            height: 1.1,
             letterSpacing: 0.05,
           ),
           maxLines: 1,
@@ -502,24 +504,32 @@ class OsmeaTabBar extends CoreTabBarContainer {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: children.map((child) => 
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: children.length > 1 ? 1 : 0),
-            child: child,
-          ),
-        ).toList(),
+        children: children
+            .map(
+              (child) => Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: children.length > 1 ? 1 : 0),
+                child: child,
+              ),
+            )
+            .toList(),
       );
     } else {
       return Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: children.map((child) => 
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: children.length > 1 ? 2 : 0),
-            child: child,
-          ),
-        ).toList(),
+        children: children
+            .map(
+              (child) => Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: children.length > 1 ? 2 : 0),
+                  child: child,
+                ),
+              ),
+            )
+            .toList(),
       );
     }
   }
@@ -527,14 +537,13 @@ class OsmeaTabBar extends CoreTabBarContainer {
   /// 🎨 Get tab background color based on indicator style
   Color _getTabBackgroundColor(BuildContext context, bool isActive) {
     // For line, dot, and none indicators, keep tabs transparent
-    if (indicatorStyle == TabBarIndicatorStyle.line || 
+    if (indicatorStyle == TabBarIndicatorStyle.line ||
         indicatorStyle == TabBarIndicatorStyle.dot ||
         indicatorStyle == TabBarIndicatorStyle.none ||
-        indicatorStyle == TabBarIndicatorStyle.border
-        ) {
+        indicatorStyle == TabBarIndicatorStyle.border) {
       return OsmeaColors.transparent;
     }
-    
+
     // For fill indicator, use custom fill color or default indicator color
     if (indicatorStyle == TabBarIndicatorStyle.fill) {
       if (isActive) {
@@ -542,7 +551,7 @@ class OsmeaTabBar extends CoreTabBarContainer {
       }
       return OsmeaColors.transparent;
     }
-    
+
     return OsmeaColors.transparent;
   }
 
@@ -552,36 +561,46 @@ class OsmeaTabBar extends CoreTabBarContainer {
     if (!isActive && inactiveTextColor != null) return inactiveTextColor!;
     if (textColor != null) return textColor!;
 
-   
-    
     // For line, dot, border, and none indicators, use consistent text colors
-    if (indicatorStyle == TabBarIndicatorStyle.line || 
+    if (indicatorStyle == TabBarIndicatorStyle.line ||
         indicatorStyle == TabBarIndicatorStyle.dot ||
         indicatorStyle == TabBarIndicatorStyle.border ||
         indicatorStyle == TabBarIndicatorStyle.none) {
       switch (variant) {
         case TabBarVariant.primary:
-          return isActive ? OsmeaColors.white : OsmeaColors.white.withValues(alpha: 0.7);
+          return isActive
+              ? OsmeaColors.white
+              : OsmeaColors.white.withValues(alpha: 0.7);
         case TabBarVariant.secondary:
-          return isActive ? OsmeaColors.nordicBlue : OsmeaColors.pewter.withValues(alpha: 0.6);
+          return isActive
+              ? OsmeaColors.nordicBlue
+              : OsmeaColors.pewter.withValues(alpha: 0.6);
         case TabBarVariant.outlined:
         case TabBarVariant.glass:
         case TabBarVariant.transparent:
-          return isActive ? OsmeaColors.nordicBlue : OsmeaColors.pewter.withValues(alpha: 0.7);
+          return isActive
+              ? OsmeaColors.nordicBlue
+              : OsmeaColors.pewter.withValues(alpha: 0.7);
       }
     }
-    
+
     // For fill and border indicators, use contrasting colors
     switch (variant) {
       case TabBarVariant.primary:
         // For primary variant, active tabs should have dark text on white background
-        return isActive ? OsmeaColors.nordicBlue : OsmeaColors.white.withValues(alpha: 0.8);
+        return isActive
+            ? OsmeaColors.nordicBlue
+            : OsmeaColors.white.withValues(alpha: 0.8);
       case TabBarVariant.secondary:
-        return isActive ? OsmeaColors.nordicBlue : OsmeaColors.white.withValues(alpha: 0.6);
+        return isActive
+            ? OsmeaColors.nordicBlue
+            : OsmeaColors.white.withValues(alpha: 0.6);
       case TabBarVariant.outlined:
       case TabBarVariant.glass:
       case TabBarVariant.transparent:
-        return isActive ? OsmeaColors.nordicBlue : OsmeaColors.white.withValues(alpha: 0.7);
+        return isActive
+            ? OsmeaColors.nordicBlue
+            : OsmeaColors.white.withValues(alpha: 0.7);
     }
   }
 
@@ -598,10 +617,9 @@ class OsmeaTabBar extends CoreTabBarContainer {
   BoxConstraints _getTabConstraints(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    
     // Mobile-friendly calculations
     final tabCount = tabs.length;
-    
+
     switch (position) {
       case TabBarPosition.top:
       case TabBarPosition.bottom:
@@ -616,8 +634,9 @@ class OsmeaTabBar extends CoreTabBarContainer {
         } else {
           // Fixed tabs need to fit in screen
           final availableWidth = screenWidth - 32; // Account for padding
-          final maxTabWidth = (availableWidth / tabCount) - 8; // Account for spacing
-          
+          final maxTabWidth =
+              (availableWidth / tabCount) - 8; // Account for spacing
+
           return BoxConstraints(
             minWidth: 60,
             maxWidth: math.max(maxTabWidth, 60),
@@ -631,7 +650,7 @@ class OsmeaTabBar extends CoreTabBarContainer {
   /// 📊 Build indicator widget
   Widget _buildIndicator(BuildContext context) {
     final indicatorColor = getEffectiveIndicatorColor(context);
-    
+
     switch (indicatorStyle) {
       case TabBarIndicatorStyle.line:
         return Positioned(
@@ -658,7 +677,8 @@ class OsmeaTabBar extends CoreTabBarContainer {
           ),
         );
       case TabBarIndicatorStyle.fill:
-        return const SizedBox.shrink(); // Fill indicator is handled by tab background
+        return const SizedBox
+            .shrink(); // Fill indicator is handled by tab background
       case TabBarIndicatorStyle.border:
         return Positioned.fill(
           child: Container(
@@ -673,7 +693,6 @@ class OsmeaTabBar extends CoreTabBarContainer {
         return const SizedBox.shrink();
     }
   }
-
 }
 
 /// Internal TabBar Row implementation
@@ -692,5 +711,4 @@ class _TabBarRow extends CoreTabBarRow {
     super.physics,
     required super.children,
   });
-
-} 
+}

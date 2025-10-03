@@ -240,10 +240,13 @@ class _OsmeaSearchbarView extends StatelessWidget {
     return BlocBuilder<SearchbarCubit, SearchbarCubitState>(
       builder: (context, state) {
         return Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             _buildSearchbarField(context, state),
-            if (state.shouldShowSuggestions) _buildSuggestions(context, state),
+            if (state.shouldShowSuggestions)
+              Flexible(
+                child: _buildSuggestions(context, state),
+              ),
             if (state.hasError) _buildError(context, state),
           ],
         );
@@ -256,6 +259,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
 
     return Container(
       width: searchbar.fullWidth ? double.infinity : null,
+      height: _getSearchbarHeight(),
       decoration: _buildDecoration(context, state),
       child: Row(
         children: [
@@ -385,7 +389,7 @@ class _OsmeaSearchbarView extends StatelessWidget {
         vertical: 12.0,
       ),
       prefixIcon: searchbar.showSearchIcon
-          ?  Icon(
+          ? Icon(
               Icons.search,
               size: 20,
               color: Colors.grey[600],
@@ -430,19 +434,24 @@ class _OsmeaSearchbarView extends StatelessWidget {
     }
 
     return OsmeaContainer(
-      child: ListView.builder(
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        itemCount: state.suggestions.length,
-        itemBuilder: (context, index) {
-          final suggestion = state.suggestions[index];
-          return ListTile(
-            dense: true,
-            title: Text(suggestion),
-            onTap: () =>
-                context.read<SearchbarCubit>().selectSuggestion(suggestion),
-          );
-        },
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxHeight: 200.0, 
+        ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          itemCount: state.suggestions.length,
+          itemBuilder: (context, index) {
+            final suggestion = state.suggestions[index];
+            return ListTile(
+              dense: true,
+              title: Text(suggestion),
+              onTap: () =>
+                  context.read<SearchbarCubit>().selectSuggestion(suggestion),
+            );
+          },
+        ),
       ),
     );
   }
@@ -463,5 +472,21 @@ class _OsmeaSearchbarView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// 📏 Get searchbar height based on size
+  double _getSearchbarHeight() {
+    switch (searchbar.size) {
+      case TextFieldSize.extraSmall:
+        return 32.0;
+      case TextFieldSize.small:
+        return 36.0;
+      case TextFieldSize.medium:
+        return 44.0;
+      case TextFieldSize.large:
+        return 52.0;
+      case TextFieldSize.extraLarge:
+        return 60.0;
+    }
   }
 }
