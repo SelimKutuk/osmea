@@ -3,11 +3,11 @@ import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/abstract/store_product_categories_service.dart';
 import 'package:get_it/get_it.dart';
 
-class ProductCategoriesHandler extends ApiRequestHandler {
-  String get serviceName => 'Product Categories';
+class StoreListProductCategoriesHandler extends ApiRequestHandler {
+  String get serviceName => 'List Product Categories';
 
   String get serviceDescription =>
-      'Manage product categories in WooCommerce store';
+      'Retrieve a list of product categories from WooCommerce store';
 
   String get serviceCategory => 'WooCommerce Store API';
 
@@ -32,13 +32,6 @@ class ProductCategoriesHandler extends ApiRequestHandler {
             name: 'context',
             label: 'Context',
             hint: 'view or edit (default: view)',
-          ),
-          const ApiField(
-            name: 'category_id',
-            label: 'Category ID',
-            hint:
-                'ID of the category to retrieve (for single category endpoint)',
-            type: ApiFieldType.number,
           ),
           const ApiField(
             name: 'page',
@@ -113,21 +106,15 @@ class ProductCategoriesHandler extends ApiRequestHandler {
       };
 
   String get documentation => '''
-# Product Categories API
+# List Product Categories API
 
-The Product Categories API allows you to manage product categories in your WooCommerce store.
+Retrieve a paginated list of product categories from your WooCommerce store.
 
-## Endpoints
+## Endpoint
 
-### List Product Categories
 - **Method**: GET
 - **Endpoint**: `/wp-json/wc/store/{api_version}/products/categories`
 - **Description**: Retrieve a list of product categories
-
-### Retrieve Product Category
-- **Method**: GET
-- **Endpoint**: `/wp-json/wc/store/{api_version}/products/categories/{category_id}`
-- **Description**: Retrieve a single product category by ID
 
 ## Parameters
 
@@ -163,6 +150,17 @@ The Product Categories API allows you to manage product categories in your WooCo
     "image": null,
     "review_count": 0,
     "permalink": "https://example.com/product-category/clothing/"
+  },
+  {
+    "id": 16,
+    "name": "Electronics",
+    "slug": "electronics",
+    "description": "Electronic products",
+    "parent": 0,
+    "count": 25,
+    "image": null,
+    "review_count": 0,
+    "permalink": "https://example.com/product-category/electronics/"
   }
 ]
 ```
@@ -183,6 +181,11 @@ GET /wp-json/wc/store/v1/products/categories?search=clothing
 ```
 GET /wp-json/wc/store/v1/products/categories?page=2&per_page=20
 ```
+
+### Get categories by parent
+```
+GET /wp-json/wc/store/v1/products/categories?parent=15
+```
 ''';
 
   @override
@@ -195,91 +198,61 @@ GET /wp-json/wc/store/v1/products/categories?page=2&per_page=20
       final service = GetIt.I<StoreProductCategoriesService>();
 
       if (method == 'GET') {
-        // Check if we have a category_id parameter for single retrieval
-        final categoryId = params['category_id'];
+        // Parse parameters
+        final context = params['context'];
+        final page =
+            params['page'] != null ? int.tryParse(params['page']!) : null;
+        final perPage = params['per_page'] != null
+            ? int.tryParse(params['per_page']!)
+            : null;
+        final search = params['search'];
+        final exclude = params['exclude']
+            ?.split(',')
+            .map(int.tryParse)
+            .where((e) => e != null)
+            .cast<int>()
+            .toList();
+        final include = params['include']
+            ?.split(',')
+            .map(int.tryParse)
+            .where((e) => e != null)
+            .cast<int>()
+            .toList();
+        final offset =
+            params['offset'] != null ? int.tryParse(params['offset']!) : null;
+        final order = params['order'];
+        final orderby = params['orderby'];
+        final hideEmpty = params['hide_empty']?.toLowerCase() == 'true';
+        final parent =
+            params['parent'] != null ? int.tryParse(params['parent']!) : null;
+        final product =
+            params['product'] != null ? int.tryParse(params['product']!) : null;
+        final slug = params['slug'];
 
-        if (categoryId != null) {
-          // Retrieve single category
-          final categoryIdInt = int.tryParse(categoryId);
-          if (categoryIdInt == null) {
-            return {
-              'success': false,
-              'error': 'Invalid category_id. Must be a number.',
-            };
-          }
+        // Call the service
+        final categories = await service.listProductCategories(
+          apiVersion: apiVersion,
+          context: context,
+          page: page,
+          perPage: perPage,
+          search: search,
+          exclude: exclude,
+          include: include,
+          offset: offset,
+          order: order,
+          orderby: orderby,
+          hideEmpty: hideEmpty,
+          parent: parent,
+          product: product,
+          slug: slug,
+        );
 
-          final context = params['context'];
-
-          final category = await service.retrieveProductCategory(
-            apiVersion: apiVersion,
-            categoryId: categoryIdInt,
-            context: context,
-          );
-
-          return {
-            'success': true,
-            'data': category.toJson(),
-            'message': 'Product category retrieved successfully',
-          };
-        } else {
-          // List all categories
-          // Parse parameters
-          final context = params['context'];
-          final page =
-              params['page'] != null ? int.tryParse(params['page']!) : null;
-          final perPage = params['per_page'] != null
-              ? int.tryParse(params['per_page']!)
-              : null;
-          final search = params['search'];
-          final exclude = params['exclude']
-              ?.split(',')
-              .map(int.tryParse)
-              .where((e) => e != null)
-              .cast<int>()
-              .toList();
-          final include = params['include']
-              ?.split(',')
-              .map(int.tryParse)
-              .where((e) => e != null)
-              .cast<int>()
-              .toList();
-          final offset =
-              params['offset'] != null ? int.tryParse(params['offset']!) : null;
-          final order = params['order'];
-          final orderby = params['orderby'];
-          final hideEmpty = params['hide_empty']?.toLowerCase() == 'true';
-          final parent =
-              params['parent'] != null ? int.tryParse(params['parent']!) : null;
-          final product = params['product'] != null
-              ? int.tryParse(params['product']!)
-              : null;
-          final slug = params['slug'];
-
-          // Call the service
-          final categories = await service.listProductCategories(
-            apiVersion: apiVersion,
-            context: context,
-            page: page,
-            perPage: perPage,
-            search: search,
-            exclude: exclude,
-            include: include,
-            offset: offset,
-            order: order,
-            orderby: orderby,
-            hideEmpty: hideEmpty,
-            parent: parent,
-            product: product,
-            slug: slug,
-          );
-
-          return {
-            'success': true,
-            'data': categories.map((category) => category.toJson()).toList(),
-            'message': 'Product categories retrieved successfully',
-            'count': categories.length,
-          };
-        }
+        return {
+          'success': true,
+          'data': categories.map((category) => category.toJson()).toList(),
+          'message': 'Product categories retrieved successfully',
+          'count': categories.length,
+        };
       }
 
       return {
