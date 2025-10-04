@@ -333,6 +333,10 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
     as _i125;
+import 'package:apis/network/remote/woocommerce/store_api/product_reviews_api/abstract/store_product_reviews_service.dart'
+    as _i667;
+import 'package:apis/network/remote/woocommerce/store_api/product_reviews_api/api/api_store_product_reviews_service.dart'
+    as _i535;
 import 'package:apis/network/remote/woocommerce/store_api/product_tags_api/abstract/store_product_tags_service.dart'
     as _i197;
 import 'package:apis/network/remote/woocommerce/store_api/product_tags_api/api/api_store_product_tags_service.dart'
@@ -379,6 +383,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i235.ProductsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i351.ShippingZonesService>(
         () => _i604.ShippingZonesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i667.StoreProductReviewsService>(
+        () => _i535.StoreProductReviewsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i973.ReportsService>(
         () => _i1029.ApiReportsService(gh<_i361.Dio>()));
     gh.factory<_i574.TaxesRatesService>(
