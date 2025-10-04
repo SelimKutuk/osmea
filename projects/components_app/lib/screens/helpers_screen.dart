@@ -1,8 +1,9 @@
+import 'package:components_app/components/application_share_helper_example.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import '../components/url_launcher_example.dart';
 import '../components/file_download_helper_example.dart';
-import '../components/application_share_helper_example.dart';
+import '../components/viewer_helper_example.dart';
 import '../components/permission_handler_example.dart';
 
 /// 🔧 **Helpers Screen**
@@ -21,7 +22,7 @@ class HelpersScreen extends StatelessWidget {
           children: [
             // Modern header
             _buildModernHeader(),
-            
+
             // Content area
             OsmeaComponents.expanded(
               child: _buildHelpersGrid(),
@@ -49,7 +50,8 @@ class HelpersScreen extends StatelessWidget {
               ),
               const Spacer(),
               OsmeaComponents.container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: OsmeaColors.black.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(16),
@@ -63,9 +65,9 @@ class HelpersScreen extends StatelessWidget {
               ),
             ],
           ),
-          
+
           OsmeaComponents.sizedBox(height: 8),
-          
+
           OsmeaComponents.text(
             'Utility functions and helper tools for common tasks',
             variant: OsmeaTextVariant.bodyMedium,
@@ -82,7 +84,8 @@ class HelpersScreen extends StatelessWidget {
       {
         'title': 'URL Launcher',
         'icon': Icons.launch,
-        'description': 'Test URL launching functionality with various protocols and platforms',
+        'description':
+            'Test URL launching functionality with various protocols and platforms',
         'route': () => const UrlLauncherExample(),
         'isComingSoon': false,
       },
@@ -98,6 +101,14 @@ class HelpersScreen extends StatelessWidget {
         'icon': Icons.share,
         'description': 'Test sharing text, URLs, and files',
         'route': () => const ApplicationShareHelperExample(),
+        'isComingSoon': false,
+      },
+      {
+        'title': 'WebViewerHelper',
+        'icon': Icons.web_outlined,
+        'description':
+            'Unified HTML and WebView rendering with OSMEA Components',
+        'route': () => const ViewerHelperExample(),
         'isComingSoon': false,
       },
       {
@@ -143,7 +154,7 @@ class HelpersScreen extends StatelessWidget {
 
   Widget _buildModernCard(BuildContext context, Map<String, dynamic> helper) {
     final isComingSoon = helper['isComingSoon'] as bool;
-    
+
     return OsmeaComponents.container(
       decoration: BoxDecoration(
         color: OsmeaColors.white,
@@ -181,7 +192,7 @@ class HelpersScreen extends StatelessWidget {
               Icon(
                 helper['icon'],
                 size: 24,
-                color: isComingSoon 
+                color: isComingSoon
                     ? OsmeaColors.black.withValues(alpha: 0.4)
                     : OsmeaColors.black.withValues(alpha: 0.7),
               ),
@@ -194,13 +205,12 @@ class HelpersScreen extends StatelessWidget {
                   OsmeaComponents.text(
                     helper['title'],
                     variant: OsmeaTextVariant.bodyMedium,
-                    color: isComingSoon 
+                    color: isComingSoon
                         ? OsmeaColors.black.withValues(alpha: 0.5)
                         : OsmeaColors.black,
                     fontWeight: FontWeight.w500,
                     textAlign: TextAlign.center,
                   ),
-                  
                   if (isComingSoon) ...[
                     OsmeaComponents.sizedBox(height: 4),
                     OsmeaComponents.container(

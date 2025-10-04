@@ -18,6 +18,7 @@ class _ModernLoginScreenState extends State<ModernLoginScreen> {
       child: OsmeaComponents.padding(
         padding: context.paddingNormal,
         child: OsmeaComponents.column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Logo Header
             const LogoHeaderWidget(),
