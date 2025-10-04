@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 ///*******************************************************************
-//******************* 🔍 RETRIEVE PRODUCT HANDLER ******************
+//******************* 🔍 RETRIEVE PRODUCT BY SLUG HANDLER ***********
 ///*******************************************************************
 
-class StoreRetrieveProductHandler implements ApiRequestHandler {
+class StoreRetrieveProductBySlugHandler implements ApiRequestHandler {
   @override
   Future<Map<String, dynamic>> handleRequest(
     String method,
@@ -17,7 +17,8 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
     if (method != 'GET') {
       return {
         "status": "error",
-        "message": "Method $method not supported for Retrieve Product API",
+        "message":
+            "Method $method not supported for Retrieve Product By Slug API",
         "timestamp": DateTime.now().toIso8601String(),
       };
     }
@@ -25,31 +26,32 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
     try {
       // Extract parameters
       final apiVersion = params['api_version'] ?? 'v1';
-      final productId = int.tryParse(params['product_id'] ?? '');
+      final productSlug = params['product_slug'];
 
-      if (productId == null) {
+      if (productSlug == null || productSlug.isEmpty) {
         return {
           "status": "error",
-          "message": "Product ID is required and must be a valid integer",
+          "message": "Product slug is required and cannot be empty",
           "timestamp": DateTime.now().toIso8601String(),
         };
       }
 
-      debugPrint('🔍 Starting retrieve product:');
+      debugPrint('🔍 Starting retrieve product by slug:');
       debugPrint('  - API Version: $apiVersion');
-      debugPrint('  - Product ID: $productId');
+      debugPrint('  - Product Slug: $productSlug');
 
       // Get ProductService from DI
       final productService = GetIt.I<ProductService>();
 
       // Call the service
-      final product = await productService.retrieveProduct(
+      final product = await productService.retrieveProductBySlug(
         apiVersion: apiVersion,
-        productId: productId,
+        productSlug: productSlug,
       );
 
-      debugPrint('✅ Product retrieved successfully');
-      debugPrint('   - Product: ${product.name} (ID: ${product.id})');
+      debugPrint('✅ Product retrieved by slug successfully');
+      debugPrint(
+          '   - Product: ${product.name} (ID: ${product.id}, Slug: ${product.slug})');
 
       // Calculate summary statistics
       double? productValue;
@@ -74,10 +76,11 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
 
       return {
         "status": "success",
-        "message": "Product retrieved successfully",
+        "message": "Product retrieved by slug successfully",
         "product_summary": {
           "id": product.id,
           "name": product.name,
+          "slug": product.slug,
           "type": product.type,
           "sku": product.sku,
           "on_sale": product.onSale,
@@ -86,6 +89,7 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
           "sold_individually": product.soldIndividually,
           "has_options": product.hasOptions,
           "product_value": productValue,
+          "permalink": product.permalink,
           "currency_info": currencyCode != null
               ? {
                   "currency_code": currencyCode,
@@ -161,9 +165,10 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
         "timestamp": DateTime.now().toIso8601String(),
       };
     } catch (e) {
-      debugPrint("🚨 Retrieve Product Error Details: $e");
+      debugPrint("🚨 Retrieve Product By Slug Error Details: $e");
 
-      String errorMessage = "Failed to retrieve product: ${e.toString()}";
+      String errorMessage =
+          "Failed to retrieve product by slug: ${e.toString()}";
       Map<String, dynamic> errorDetails = {};
 
       // Check if it's a network/HTTP related error
@@ -174,7 +179,7 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
         if (e.toString().contains('400')) {
           errorDetails['status_code'] = 400;
           errorMessage =
-              "Bad request. Please check your API configuration and product ID";
+              "Bad request. Please check your API configuration and product slug";
         } else if (e.toString().contains('401')) {
           errorDetails['status_code'] = 401;
           errorMessage = "Unauthorized. Please check your authentication";
@@ -183,7 +188,7 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
           errorMessage = "Access denied. Please check your permissions";
         } else if (e.toString().contains('404')) {
           errorDetails['status_code'] = 404;
-          errorMessage = "Product not found. Please check the product ID";
+          errorMessage = "Product not found. Please check the product slug";
         } else if (e.toString().contains('500')) {
           errorDetails['status_code'] = 500;
           errorMessage = "Server error occurred while retrieving the product";
@@ -227,9 +232,10 @@ class StoreRetrieveProductHandler implements ApiRequestHandler {
             hint: 'WooCommerce Store API version (default: v1)',
           ),
           const ApiField(
-            name: 'product_id',
-            label: 'Product ID',
-            hint: 'The ID of the product to retrieve',
+            name: 'product_slug',
+            label: 'Product Slug',
+            hint:
+                'The slug of the product to retrieve (e.g., "my-awesome-product")',
           ),
         ],
       };
