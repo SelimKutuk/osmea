@@ -1,0 +1,289 @@
+import 'package:api_explorer/services/api_request_handler.dart';
+import 'package:api_explorer/services/api_service_registry.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/abstract/store_product_categories_service.dart';
+import 'package:get_it/get_it.dart';
+
+class ProductCategoriesHandler extends ApiRequestHandler {
+  String get serviceName => 'Product Categories';
+
+  String get serviceDescription =>
+      'Manage product categories in WooCommerce store';
+
+  String get serviceCategory => 'WooCommerce Store API';
+
+  @override
+  List<String> get supportedMethods => ['GET'];
+
+  @override
+  Map<String, List<ApiField>> get requiredFields => {
+        'GET': [
+          const ApiField(
+            name: 'api_version',
+            label: 'API Version',
+            hint: 'e.g., v1',
+            isRequired: true,
+          ),
+        ],
+      };
+
+  Map<String, List<ApiField>> get optionalFields => {
+        'GET': [
+          const ApiField(
+            name: 'context',
+            label: 'Context',
+            hint: 'view or edit (default: view)',
+          ),
+          const ApiField(
+            name: 'page',
+            label: 'Page',
+            hint: 'Current page of the collection (default: 1)',
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'per_page',
+            label: 'Per Page',
+            hint:
+                'Maximum number of items to be returned (default: 10, max: 100)',
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'search',
+            label: 'Search',
+            hint: 'Search by category name',
+          ),
+          const ApiField(
+            name: 'exclude',
+            label: 'Exclude',
+            hint: 'Ensure result set excludes specific IDs (comma-separated)',
+          ),
+          const ApiField(
+            name: 'include',
+            label: 'Include',
+            hint: 'Limit result set to specific IDs (comma-separated)',
+          ),
+          const ApiField(
+            name: 'offset',
+            label: 'Offset',
+            hint: 'Offset the result set by a specific number of items',
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'order',
+            label: 'Order',
+            hint: 'Order sort attribute ascending or descending (default: asc)',
+          ),
+          const ApiField(
+            name: 'orderby',
+            label: 'Order By',
+            hint: 'Sort collection by object attribute (default: name)',
+          ),
+          const ApiField(
+            name: 'hide_empty',
+            label: 'Hide Empty',
+            hint:
+                'Whether to hide resources not assigned to any products (default: false)',
+            type: ApiFieldType.boolean,
+          ),
+          const ApiField(
+            name: 'parent',
+            label: 'Parent',
+            hint: 'Limit result set to resources assigned to a specific parent',
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'product',
+            label: 'Product ID',
+            hint:
+                'Limit result set to resources assigned to a specific product',
+            type: ApiFieldType.number,
+          ),
+          const ApiField(
+            name: 'slug',
+            label: 'Slug',
+            hint: 'Limit result set to resources with a specific slug',
+          ),
+        ],
+      };
+
+  String get documentation => '''
+# Product Categories API
+
+The Product Categories API allows you to manage product categories in your WooCommerce store.
+
+## Endpoints
+
+### List Product Categories
+- **Method**: GET
+- **Endpoint**: `/wp-json/wc/store/{api_version}/products/categories`
+- **Description**: Retrieve a list of product categories
+
+### Retrieve Product Category
+- **Method**: GET
+- **Endpoint**: `/wp-json/wc/store/{api_version}/products/categories/{category_id}`
+- **Description**: Retrieve a single product category by ID
+
+## Parameters
+
+### Required Parameters
+- **api_version**: API version (e.g., "v1")
+
+### Optional Parameters
+- **context**: Response context (view, edit)
+- **page**: Current page number (default: 1)
+- **per_page**: Items per page (default: 10, max: 100)
+- **search**: Search term
+- **exclude**: Exclude specific IDs (comma-separated)
+- **include**: Include specific IDs (comma-separated)
+- **offset**: Offset value
+- **order**: Sort order (asc, desc)
+- **orderby**: Sort by attribute (name, count, etc.)
+- **hide_empty**: Hide empty categories (true/false)
+- **parent**: Parent category ID
+- **product**: Product ID
+- **slug**: Category slug
+
+## Example Response
+
+```json
+[
+  {
+    "id": 15,
+    "name": "Clothing",
+    "slug": "clothing",
+    "description": "Clothing products",
+    "parent": 0,
+    "count": 42,
+    "image": null,
+    "review_count": 0,
+    "permalink": "https://example.com/product-category/clothing/"
+  }
+]
+```
+
+## Usage Examples
+
+### List all categories
+```
+GET /wp-json/wc/store/v1/products/categories
+```
+
+### Search categories
+```
+GET /wp-json/wc/store/v1/products/categories?search=clothing
+```
+
+### Get categories with pagination
+```
+GET /wp-json/wc/store/v1/products/categories?page=2&per_page=20
+```
+''';
+
+  @override
+  Future<Map<String, dynamic>> handleRequest(
+      String method, Map<String, String> params) async {
+    try {
+      final apiVersion = params['api_version']!;
+
+      // Get the service from GetIt
+      final service = GetIt.I<StoreProductCategoriesService>();
+
+      if (method == 'GET') {
+        // Check if we have a category_id parameter for single retrieval
+        final categoryId = params['category_id'];
+
+        if (categoryId != null) {
+          // Retrieve single category
+          final categoryIdInt = int.tryParse(categoryId);
+          if (categoryIdInt == null) {
+            return {
+              'success': false,
+              'error': 'Invalid category_id. Must be a number.',
+            };
+          }
+
+          final context = params['context'];
+
+          final category = await service.retrieveProductCategory(
+            apiVersion: apiVersion,
+            categoryId: categoryIdInt,
+            context: context,
+          );
+
+          return {
+            'success': true,
+            'data': category.toJson(),
+            'message': 'Product category retrieved successfully',
+          };
+        } else {
+          // List all categories
+          // Parse parameters
+          final context = params['context'];
+          final page =
+              params['page'] != null ? int.tryParse(params['page']!) : null;
+          final perPage = params['per_page'] != null
+              ? int.tryParse(params['per_page']!)
+              : null;
+          final search = params['search'];
+          final exclude = params['exclude']
+              ?.split(',')
+              .map(int.tryParse)
+              .where((e) => e != null)
+              .cast<int>()
+              .toList();
+          final include = params['include']
+              ?.split(',')
+              .map(int.tryParse)
+              .where((e) => e != null)
+              .cast<int>()
+              .toList();
+          final offset =
+              params['offset'] != null ? int.tryParse(params['offset']!) : null;
+          final order = params['order'];
+          final orderby = params['orderby'];
+          final hideEmpty = params['hide_empty']?.toLowerCase() == 'true';
+          final parent =
+              params['parent'] != null ? int.tryParse(params['parent']!) : null;
+          final product = params['product'] != null
+              ? int.tryParse(params['product']!)
+              : null;
+          final slug = params['slug'];
+
+          // Call the service
+          final categories = await service.listProductCategories(
+            apiVersion: apiVersion,
+            context: context,
+            page: page,
+            perPage: perPage,
+            search: search,
+            exclude: exclude,
+            include: include,
+            offset: offset,
+            order: order,
+            orderby: orderby,
+            hideEmpty: hideEmpty,
+            parent: parent,
+            product: product,
+            slug: slug,
+          );
+
+          return {
+            'success': true,
+            'data': categories.map((category) => category.toJson()).toList(),
+            'message': 'Product categories retrieved successfully',
+            'count': categories.length,
+          };
+        }
+      }
+
+      return {
+        'success': false,
+        'error': 'Unsupported method: $method',
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'error': 'Failed to handle request: $e',
+      };
+    }
+  }
+}
