@@ -333,6 +333,10 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
     as _i125;
+import 'package:apis/network/remote/woocommerce/store_api/product_attributes_api/abstract/store_product_attributes_service.dart'
+    as _i739;
+import 'package:apis/network/remote/woocommerce/store_api/product_attributes_api/api/api_store_product_attributes_service.dart'
+    as _i260;
 import 'package:apis/network/remote/woocommerce/store_api/product_brands_api/abstract/store_product_brands_service.dart'
     as _i286;
 import 'package:apis/network/remote/woocommerce/store_api/product_brands_api/api/api_store_product_brands_service.dart'
@@ -460,6 +464,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i125.ProductServiceClient(gh<_i361.Dio>()));
     gh.factory<_i195.AssetService>(
         () => _i966.AssetServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i739.StoreProductAttributesService>(
+        () => _i260.StoreProductAttributesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i727.ContinentsService>(
         () => _i755.ApiContinentsService(gh<_i361.Dio>()));
     gh.factory<_i558.DataService>(() => _i1067.ApiDataService(gh<_i361.Dio>()));
