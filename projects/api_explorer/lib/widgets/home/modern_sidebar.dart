@@ -1697,6 +1697,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Product Collection Data';
       case ApiCategory.woocommerceStoreProductCategories:
         return 'WooCommerce Product Categories';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'WooCommerce Product Brands';
     }
   }
 
@@ -1791,6 +1793,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceStoreProductReviews:
         case ApiCategory.woocommerceStoreProductCollectionData:
         case ApiCategory.woocommerceStoreProductCategories:
+        case ApiCategory.woocommerceStoreProductBrands:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1858,6 +1861,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceStoreProductReviews:
         case ApiCategory.woocommerceStoreProductCollectionData:
         case ApiCategory.woocommerceStoreProductCategories:
+        case ApiCategory.woocommerceStoreProductBrands:
           platform = 'WooCommerce';
           break;
         default:
