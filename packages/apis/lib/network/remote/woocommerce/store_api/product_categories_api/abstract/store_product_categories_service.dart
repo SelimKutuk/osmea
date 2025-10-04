@@ -1,4 +1,5 @@
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/freezed_model/response/list_product_categories_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/freezed_model/response/retrieve_product_category_response_model.dart';
 
 abstract class StoreProductCategoriesService {
   /// List all product categories
@@ -20,7 +21,7 @@ abstract class StoreProductCategoriesService {
   });
 
   /// Retrieve a single product category by ID
-  Future<ListProductCategoriesResponseModel> retrieveProductCategory({
+  Future<RetrieveProductCategoryResponseModel> retrieveProductCategory({
     required String apiVersion,
     required int categoryId,
     String? context,
