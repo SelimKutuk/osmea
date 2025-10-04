@@ -32,6 +32,7 @@ class StoreListAllProductsHandler implements ApiRequestHandler {
       final order = params['order'];
       final category = int.tryParse(params['category'] ?? '');
       final tag = int.tryParse(params['tag'] ?? '');
+      final type = params['type'];
       final onSale = params['on_sale'] == 'true';
       final inStock = params['in_stock'] == 'true';
       final minPrice = params['min_price'];
@@ -46,6 +47,7 @@ class StoreListAllProductsHandler implements ApiRequestHandler {
       debugPrint('  - Order: $order');
       debugPrint('  - Category: $category');
       debugPrint('  - Tag: $tag');
+      debugPrint('  - Type: $type');
       debugPrint('  - On Sale: $onSale');
       debugPrint('  - In Stock: $inStock');
       debugPrint('  - Min Price: $minPrice');
@@ -62,6 +64,7 @@ class StoreListAllProductsHandler implements ApiRequestHandler {
         order: order,
         category: category,
         tag: tag,
+        type: type,
         onSale: onSale,
         minPrice: minPrice,
         maxPrice: maxPrice,
@@ -217,6 +220,13 @@ class StoreListAllProductsHandler implements ApiRequestHandler {
             name: 'tag',
             label: 'Tag ID',
             hint: 'Limit results to products with a specific tag ID.',
+            isRequired: false,
+          ),
+          const ApiField(
+            name: 'type',
+            label: 'Product Type',
+            hint:
+                'Filter by product type (simple, variable, grouped, external).',
             isRequired: false,
           ),
           const ApiField(
