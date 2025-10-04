@@ -333,6 +333,10 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
     as _i125;
+import 'package:apis/network/remote/woocommerce/store_api/product_attribute_terms/abstract/store_product_attribute_terms_service.dart'
+    as _i601;
+import 'package:apis/network/remote/woocommerce/store_api/product_attribute_terms/api/api_store_product_attribute_terms_service.dart'
+    as _i91;
 import 'package:apis/network/remote/woocommerce/store_api/product_attributes_api/abstract/store_product_attributes_service.dart'
     as _i739;
 import 'package:apis/network/remote/woocommerce/store_api/product_attributes_api/api/api_store_product_attributes_service.dart'
@@ -389,6 +393,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i831.ProductAttributesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i163.ProductShippingClassesService>(
         () => _i515.ProductShippingClassesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i601.StoreProductAttributeTermsService>(
+        () => _i91.StoreProductAttributeTermsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i1052.PaymentGatewaysService>(
         () => _i329.ApiPaymentGatewaysService(gh<_i361.Dio>()));
     gh.factory<_i288.RefundsService>(
