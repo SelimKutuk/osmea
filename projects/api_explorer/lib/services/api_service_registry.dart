@@ -4213,6 +4213,25 @@ class ApiServiceRegistry {
       subcategory: 'Product Categories API',
       handler: ProductCategoriesHandler(),
     ),
+
+    // 📋 WooCommerce Store API List Product Categories
+    ApiService(
+      name: 'List Product Categories',
+      endpoint: '/wp-json/wc/store/{api_version}/products/categories',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: StoreListProductCategoriesHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Category
+    ApiService(
+      name: 'Retrieve Product Category',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/categories/{category_id}',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: StoreRetrieveProductCategoryHandler(),
+    ),
   ];
 
   static void initialize() {}
