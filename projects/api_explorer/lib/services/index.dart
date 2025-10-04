@@ -35,6 +35,9 @@ export 'handlers/woocommerce/store_api_handlers/product_api_handlers/retrieve_pr
 export 'handlers/woocommerce/store_api_handlers/product_api_handlers/retrieve_product_by_slug_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/product_api_handlers/list_variations_by_type_handler.dart';
 
+// 🏷️ WooCommerce Store API Product Tags Handlers
+export 'handlers/woocommerce/store_api/product_tags_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers
