@@ -333,6 +333,22 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
     as _i125;
+import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/abstract/store_product_categories_service.dart'
+    as _i694;
+import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/api/api_store_product_categories_service.dart'
+    as _i900;
+import 'package:apis/network/remote/woocommerce/store_api/product_collection_data_api/abstract/store_product_collection_data_service.dart'
+    as _i913;
+import 'package:apis/network/remote/woocommerce/store_api/product_collection_data_api/api/api_store_product_collection_data_service.dart'
+    as _i948;
+import 'package:apis/network/remote/woocommerce/store_api/product_reviews_api/abstract/store_product_reviews_service.dart'
+    as _i667;
+import 'package:apis/network/remote/woocommerce/store_api/product_reviews_api/api/api_store_product_reviews_service.dart'
+    as _i535;
+import 'package:apis/network/remote/woocommerce/store_api/product_tags_api/abstract/store_product_tags_service.dart'
+    as _i197;
+import 'package:apis/network/remote/woocommerce/store_api/product_tags_api/api/api_store_product_tags_service.dart'
+    as _i1053;
 import 'package:apis/network/remote/woocommerce/wishlist/abstract/woo_wishlist_service.dart'
     as _i671;
 import 'package:apis/network/remote/woocommerce/wishlist/api/api_woo_wishlist_service.dart'
@@ -375,6 +391,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i235.ProductsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i351.ShippingZonesService>(
         () => _i604.ShippingZonesServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i667.StoreProductReviewsService>(
+        () => _i535.StoreProductReviewsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i913.StoreProductCollectionDataService>(
+        () => _i948.StoreProductCollectionDataServiceClient(gh<_i361.Dio>()));
     gh.factory<_i973.ReportsService>(
         () => _i1029.ApiReportsService(gh<_i361.Dio>()));
     gh.factory<_i574.TaxesRatesService>(
@@ -385,6 +405,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i169.ShopServiceClient(gh<_i361.Dio>()));
     gh.factory<_i813.WebhooksService>(
         () => _i331.WebhooksServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i197.StoreProductTagsService>(
+        () => _i1053.StoreProductTagsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i654.CartService>(
         () => _i845.CartServiceClient(gh<_i361.Dio>()));
     gh.factory<_i330.SystemStatusService>(
@@ -463,6 +485,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i85.OrderServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i307.ApplicationCreditService>(
         () => _i903.ApplicationCreditServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i694.StoreProductCategoriesService>(
+        () => _i900.StoreProductCategoriesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i240.CartItemsService>(
         () => _i977.CartItemsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i373.CouponsService>(
