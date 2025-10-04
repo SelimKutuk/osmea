@@ -952,7 +952,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                 ),
 
               // Admin APIs Section Header
-              if (_currentStore != null && _isCurrentStoreComplete && widget.expanded)
+              if (_currentStore != null &&
+                  _isCurrentStoreComplete &&
+                  widget.expanded)
                 OsmeaComponents.container(
                   margin: EdgeInsets.symmetric(
                     horizontal: isNarrow ? 12 : 16,
@@ -961,12 +963,15 @@ class _ModernSidebarState extends State<ModernSidebar>
                   padding: EdgeInsets.all(isNarrow ? 12 : 16),
                   decoration: BoxDecoration(
                     gradient: OsmeaAppTheme.createGradient(
-                      OsmeaColors.red[50]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.05),
-                      OsmeaColors.red[100]?.withValues(alpha: 0.1) ?? Colors.red.withValues(alpha: 0.02),
+                      OsmeaColors.red[50]?.withValues(alpha: 0.3) ??
+                          Colors.red.withValues(alpha: 0.05),
+                      OsmeaColors.red[100]?.withValues(alpha: 0.1) ??
+                          Colors.red.withValues(alpha: 0.02),
                     ),
                     borderRadius: context.borderRadiusMinStandard,
                     border: Border.all(
-                      color: OsmeaColors.red[200]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.3),
+                      color: OsmeaColors.red[200]?.withValues(alpha: 0.3) ??
+                          Colors.red.withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -975,7 +980,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                       OsmeaComponents.container(
                         padding: EdgeInsets.all(isNarrow ? 8 : 10),
                         decoration: BoxDecoration(
-                          color: OsmeaColors.red[100]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.1),
+                          color: OsmeaColors.red[100]?.withValues(alpha: 0.3) ??
+                              Colors.red.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -1001,7 +1007,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                               'Management and configuration APIs for administrators',
                               variant: OsmeaTextVariant.bodySmall,
                               fontSize: isNarrow ? 11 : 12,
-                              color: OsmeaColors.red[600]?.withValues(alpha: 0.8) ?? Colors.red[600]?.withValues(alpha: 0.8),
+                              color: OsmeaColors.red[600]
+                                      ?.withValues(alpha: 0.8) ??
+                                  Colors.red[600]?.withValues(alpha: 0.8),
                               maxLines: 2,
                             ),
                           ],
@@ -1013,7 +1021,8 @@ class _ModernSidebarState extends State<ModernSidebar>
                           vertical: isNarrow ? 2 : 4,
                         ),
                         decoration: BoxDecoration(
-                          color: OsmeaColors.red[600]?.withValues(alpha: 0.1) ?? Colors.red[600]?.withValues(alpha: 0.1),
+                          color: OsmeaColors.red[600]?.withValues(alpha: 0.1) ??
+                              Colors.red[600]?.withValues(alpha: 0.1),
                           borderRadius: context.borderRadiusMinStandard,
                         ),
                         child: OsmeaComponents.text(
@@ -1478,8 +1487,8 @@ class _ModernSidebarState extends State<ModernSidebar>
               ),
 
               // Customer APIs Section
-              if (_currentStore != null && 
-                  _isCurrentStoreComplete && 
+              if (_currentStore != null &&
+                  _isCurrentStoreComplete &&
                   widget.expanded &&
                   _selectedMainCategory == ApiCategory.woocommerce)
                 _buildCustomerApisSection(isNarrow, isMobile, context),
@@ -1611,6 +1620,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Wishlist';
       case ApiCategory.woocommerceCart:
         return 'WooCommerce Cart';
+      case ApiCategory.woocommerceStoreProducts:
+        return 'WooCommerce Products';
     }
   }
 
@@ -1699,6 +1710,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
+        case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceStoreProducts:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1760,6 +1773,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
+        case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceStoreProducts:
           platform = 'WooCommerce';
           break;
         default:
@@ -1812,9 +1827,11 @@ class _ModernSidebarState extends State<ModernSidebar>
   }
 
   // Build Customer APIs section for WooCommerce
-  Widget _buildCustomerApisSection(bool isNarrow, bool isMobile, BuildContext context) {
-    final customerCategories = ApiServiceRegistry.getWooCommerceCustomerCategories();
-    
+  Widget _buildCustomerApisSection(
+      bool isNarrow, bool isMobile, BuildContext context) {
+    final customerCategories =
+        ApiServiceRegistry.getWooCommerceCustomerCategories();
+
     return OsmeaComponents.container(
       margin: EdgeInsets.only(
         left: isNarrow ? 16 : 24,
@@ -1866,12 +1883,12 @@ class _ModernSidebarState extends State<ModernSidebar>
               ],
             ),
           ),
-          
+
           // Customer Categories
           ...customerCategories.map((category) {
             final isSelected = _selectedCategory == category;
             final subcategories = _getSubCategoriesForGraphQLCategory(category);
-            
+
             return OsmeaComponents.column(
               children: [
                 // Category Header
@@ -1894,9 +1911,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                     color: isSelected
                         ? OsmeaColors.nordicBlue
                         : Theme.of(context).textTheme.bodyMedium?.color,
-                    fontWeight: isSelected
-                        ? FontWeight.w600
-                        : FontWeight.w500,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                     fontSize: isNarrow ? 12 : 14,
                   ),
                   trailing: subcategories.isNotEmpty
@@ -1929,10 +1944,12 @@ class _ModernSidebarState extends State<ModernSidebar>
                           ),
                           child: OsmeaComponents.column(
                             children: subcategories.map((subcategory) {
-                              final services = ApiServiceRegistry.getBySubcategory(
-                                  category, subcategory);
-                              final isSubSelected = _selectedSubcategory == subcategory;
-                              
+                              final services =
+                                  ApiServiceRegistry.getBySubcategory(
+                                      category, subcategory);
+                              final isSubSelected =
+                                  _selectedSubcategory == subcategory;
+
                               return OsmeaComponents.column(
                                 children: [
                                   // Subcategory Header
@@ -1948,7 +1965,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       fontSize: isNarrow ? 12 : 14,
                                       fontWeight: FontWeight.w500,
                                       color: isSubSelected
-                                          ? Theme.of(context).colorScheme.primary
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
                                           : Theme.of(context)
                                               .textTheme
                                               .bodyMedium
@@ -1964,17 +1983,21 @@ class _ModernSidebarState extends State<ModernSidebar>
                                             .colorScheme
                                             .primary
                                             .withValues(alpha: 0.1),
-                                        borderRadius: context.borderRadiusMinStandard,
+                                        borderRadius:
+                                            context.borderRadiusMinStandard,
                                       ),
                                       child: OsmeaComponents.text(
                                         '${services.length}',
                                         variant: OsmeaTextVariant.labelSmall,
                                         fontSize: isNarrow ? 9 : 10,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    onTap: () => _selectSubcategory(subcategory),
+                                    onTap: () =>
+                                        _selectSubcategory(subcategory),
                                   ),
 
                                   // Services
@@ -1984,7 +2007,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       final service = entry.value;
                                       final isServiceSelected =
                                           widget.selectedService == service;
-                                      
+
                                       return AnimatedContainer(
                                         duration: Duration(
                                             milliseconds: 200 + (index * 50)),
@@ -1997,21 +2020,24 @@ class _ModernSidebarState extends State<ModernSidebar>
                                           child: InkWell(
                                             borderRadius:
                                                 context.borderRadiusMinStandard,
-                                            onTap: () =>
-                                                widget.onServiceSelected(service),
+                                            onTap: () => widget
+                                                .onServiceSelected(service),
                                             child: OsmeaComponents.container(
-                                              padding: EdgeInsets.all(isNarrow ? 6 : 8),
+                                              padding: EdgeInsets.all(
+                                                  isNarrow ? 6 : 8),
                                               decoration: BoxDecoration(
                                                 color: isServiceSelected
                                                     ? OsmeaColors.nordicBlue
                                                         .withValues(alpha: 0.1)
                                                     : OsmeaColors.transparent,
-                                                borderRadius:
-                                                    context.borderRadiusMinStandard,
+                                                borderRadius: context
+                                                    .borderRadiusMinStandard,
                                                 border: isServiceSelected
                                                     ? Border.all(
-                                                        color: OsmeaColors.nordicBlue
-                                                            .withValues(alpha: 0.3),
+                                                        color: OsmeaColors
+                                                            .nordicBlue
+                                                            .withValues(
+                                                                alpha: 0.3),
                                                         width: 1,
                                                       )
                                                     : null,
@@ -2023,8 +2049,10 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                     height: isNarrow ? 12 : 16,
                                                     decoration: BoxDecoration(
                                                       color: isServiceSelected
-                                                          ? OsmeaColors.nordicBlue
-                                                          : OsmeaColors.transparent,
+                                                          ? OsmeaColors
+                                                              .nordicBlue
+                                                          : OsmeaColors
+                                                              .transparent,
                                                       borderRadius: context
                                                           .borderRadiusMinStandard,
                                                     ),
@@ -2036,17 +2064,21 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                       service.name,
                                                       variant: OsmeaTextVariant
                                                           .bodySmall,
-                                                      fontSize: isNarrow ? 11 : 13,
+                                                      fontSize:
+                                                          isNarrow ? 11 : 13,
                                                       color: isServiceSelected
-                                                          ? OsmeaColors.nordicBlue
+                                                          ? OsmeaColors
+                                                              .nordicBlue
                                                           : Theme.of(context)
                                                               .textTheme
                                                               .bodyMedium
                                                               ?.color,
-                                                      fontWeight: isServiceSelected
-                                                          ? FontWeight.w500
-                                                          : FontWeight.w400,
-                                                      maxLines: isNarrow ? 2 : 1,
+                                                      fontWeight:
+                                                          isServiceSelected
+                                                              ? FontWeight.w500
+                                                              : FontWeight.w400,
+                                                      maxLines:
+                                                          isNarrow ? 2 : 1,
                                                     ),
                                                   ),
                                                 ],
