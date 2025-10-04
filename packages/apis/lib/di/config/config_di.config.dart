@@ -333,6 +333,10 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
     as _i125;
+import 'package:apis/network/remote/woocommerce/store_api/product_brands_api/abstract/store_product_brands_service.dart'
+    as _i286;
+import 'package:apis/network/remote/woocommerce/store_api/product_brands_api/api/api_store_product_brands_service.dart'
+    as _i568;
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/abstract/store_product_categories_service.dart'
     as _i694;
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/api/api_store_product_categories_service.dart'
@@ -472,6 +476,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1011.WooJwtAuthService(gh<_i361.Dio>()));
     gh.factory<_i352.WebhookService>(
         () => _i827.WebhookServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i286.StoreProductBrandsService>(
+        () => _i568.StoreProductBrandsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i448.ProductVariantService>(
         () => _i938.ProductVariantServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i342.LocationService>(
