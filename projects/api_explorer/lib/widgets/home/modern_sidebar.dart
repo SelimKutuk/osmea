@@ -1622,6 +1622,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Cart';
       case ApiCategory.woocommerceStoreProducts:
         return 'WooCommerce Products';
+      case ApiCategory.woocommerceStoreProductTags:
+        return 'WooCommerce Product Tags';
     }
   }
 
@@ -1712,6 +1714,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceWishlist:
         case ApiCategory.woocommerceCart:
         case ApiCategory.woocommerceStoreProducts:
+        case ApiCategory.woocommerceStoreProductTags:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1775,6 +1778,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceWishlist:
         case ApiCategory.woocommerceCart:
         case ApiCategory.woocommerceStoreProducts:
+        case ApiCategory.woocommerceStoreProductTags:
           platform = 'WooCommerce';
           break;
         default:
