@@ -32,6 +32,7 @@ export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/delete_a
 // 🛍️ WooCommerce Store API Product Handlers
 export 'handlers/woocommerce/store_api_handlers/product_api_handlers/list_all_products_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/product_api_handlers/retrieve_product_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_api_handlers/retrieve_product_by_slug_handler.dart';
 
 // 🚀 GraphQL Handlers - Modular Structure
 

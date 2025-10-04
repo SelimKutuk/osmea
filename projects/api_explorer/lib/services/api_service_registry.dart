@@ -4151,6 +4151,13 @@ class ApiServiceRegistry {
       subcategory: 'Products API',
       handler: StoreRetrieveProductHandler(),
     ),
+    ApiService(
+      name: 'Retrieve Product By Slug',
+      endpoint: '/wp-json/wc/store/v1/products/{product_slug}',
+      category: ApiCategory.woocommerceStoreProducts,
+      subcategory: 'Products API',
+      handler: StoreRetrieveProductBySlugHandler(),
+    ),
   ];
 
   static void initialize() {}
