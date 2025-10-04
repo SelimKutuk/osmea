@@ -1,6 +1,7 @@
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_all_products_response_model.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_response_model.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_by_slug_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_product_variations_response_model.dart';
 
 /// 🔑 Abstract contract for WooCommerce Store API Product Service
 /// Implement this to fetch products from WooCommerce Store API! 🌐
@@ -89,5 +90,14 @@ abstract class ProductService {
   Future<RetrieveProductBySlugResponseModel> retrieveProductBySlug({
     required String apiVersion,
     required String productSlug,
+  });
+
+  /// 🎨 Fetches all product variations by type from the WooCommerce Store API.
+  ///
+  /// [apiVersion]: The API version to use (e.g., 'v1').
+  /// [type]: The product type to filter variations (e.g., 'simple', 'variable').
+  Future<List<ListProductVariationsResponseModel>> listAllVariationsByType({
+    required String apiVersion,
+    required String type,
   });
 }
