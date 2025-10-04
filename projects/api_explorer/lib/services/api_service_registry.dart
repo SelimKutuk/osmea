@@ -74,6 +74,7 @@ enum ApiCategory {
   woocommerceStoreProductTags,
   woocommerceStoreProductReviews,
   woocommerceStoreProductCollectionData,
+  woocommerceStoreProductCategories,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -192,6 +193,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Product Reviews API';
       case ApiCategory.woocommerceStoreProductCollectionData:
         return 'Product Collection Data API';
+      case ApiCategory.woocommerceStoreProductCategories:
+        return 'Product Categories API';
     }
   }
 }
@@ -4201,6 +4204,15 @@ class ApiServiceRegistry {
       subcategory: 'Product Collection Data API',
       handler: ProductCollectionDataHandler(),
     ),
+
+    // 🏷️ WooCommerce Store API Product Categories
+    ApiService(
+      name: 'Product Categories',
+      endpoint: '/wp-json/wc/store/{api_version}/products/categories',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: ProductCategoriesHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4319,6 +4331,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceStoreProductTags,
       ApiCategory.woocommerceStoreProductReviews,
       ApiCategory.woocommerceStoreProductCollectionData,
+      ApiCategory.woocommerceStoreProductCategories,
     ];
   }
 
@@ -4501,6 +4514,8 @@ class ApiServiceRegistry {
         return 'Product Reviews';
       case ApiCategory.woocommerceStoreProductCollectionData:
         return 'Product Collection Data';
+      case ApiCategory.woocommerceStoreProductCategories:
+        return 'Product Categories';
     }
   }
 
@@ -4615,6 +4630,8 @@ class ApiServiceRegistry {
         return Icons.star_outline;
       case ApiCategory.woocommerceStoreProductCollectionData:
         return Icons.analytics_outlined;
+      case ApiCategory.woocommerceStoreProductCategories:
+        return Icons.category_outlined;
     }
   }
 }
