@@ -41,6 +41,9 @@ export 'handlers/woocommerce/store_api_handlers/product_tags_handlers/product_ta
 // 📝 WooCommerce Store API Product Reviews Handlers
 export 'handlers/woocommerce/store_api_handlers/product_reviews_handlers/product_reviews_handler.dart';
 
+// 📊 WooCommerce Store API Product Collection Data Handlers
+export 'handlers/woocommerce/store_api_handlers/product_collection_data_handlers/product_collection_data_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers
