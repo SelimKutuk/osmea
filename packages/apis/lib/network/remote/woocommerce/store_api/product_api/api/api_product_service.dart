@@ -3,6 +3,7 @@ import 'package:apis/dio_config/dio_client/api_dio_client.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/product_service.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_all_products_response_model.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_by_slug_response_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -65,5 +66,13 @@ abstract class ProductServiceClient implements ProductService {
   Future<RetrieveProductResponseModel> retrieveProduct({
     @Path('api_version') required String apiVersion,
     @Path('product_id') required int productId,
+  });
+
+  /// 🔍 Get a single product by slug from WooCommerce Store API
+  @override
+  @GET('/wp-json/wc/store/{api_version}/products/{product_slug}')
+  Future<RetrieveProductBySlugResponseModel> retrieveProductBySlug({
+    @Path('api_version') required String apiVersion,
+    @Path('product_slug') required String productSlug,
   });
 }
