@@ -172,6 +172,39 @@ class _ProductServiceClient implements ProductServiceClient {
     return _value;
   }
 
+  @override
+  Future<List<ListProductVariationsResponseModel>> listAllVariationsByType({
+    required String apiVersion,
+    required String type,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'type': type};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ListProductVariationsResponseModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/wp-json/wc/store/${apiVersion}/products',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => ListProductVariationsResponseModel.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

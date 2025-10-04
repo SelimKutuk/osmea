@@ -4,6 +4,7 @@ import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/p
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_all_products_response_model.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_response_model.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_by_slug_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_product_variations_response_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -74,5 +75,13 @@ abstract class ProductServiceClient implements ProductService {
   Future<RetrieveProductBySlugResponseModel> retrieveProductBySlug({
     @Path('api_version') required String apiVersion,
     @Path('product_slug') required String productSlug,
+  });
+
+  /// 🎨 Get all product variations by type from WooCommerce Store API
+  @override
+  @GET('/wp-json/wc/store/{api_version}/products')
+  Future<List<ListProductVariationsResponseModel>> listAllVariationsByType({
+    @Path('api_version') required String apiVersion,
+    @Query('type') required String type,
   });
 }
