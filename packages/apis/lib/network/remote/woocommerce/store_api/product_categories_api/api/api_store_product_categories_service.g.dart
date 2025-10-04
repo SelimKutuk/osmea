@@ -80,7 +80,7 @@ class _StoreProductCategoriesServiceClient
   }
 
   @override
-  Future<ListProductCategoriesResponseModel> retrieveProductCategory({
+  Future<RetrieveProductCategoryResponseModel> retrieveProductCategory({
     required String apiVersion,
     required int categoryId,
     String? context,
@@ -91,7 +91,7 @@ class _StoreProductCategoriesServiceClient
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListProductCategoriesResponseModel>(Options(
+        _setStreamType<RetrieveProductCategoryResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -107,7 +107,7 @@ class _StoreProductCategoriesServiceClient
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = ListProductCategoriesResponseModel.fromJson(_result.data!);
+    final _value = RetrieveProductCategoryResponseModel.fromJson(_result.data!);
     return _value;
   }
 

@@ -5,6 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/abstract/store_product_categories_service.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/freezed_model/response/list_product_categories_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_categories_api/freezed_model/response/retrieve_product_category_response_model.dart';
 
 part 'api_store_product_categories_service.g.dart';
 
@@ -40,7 +41,7 @@ abstract class StoreProductCategoriesServiceClient
 
   @override
   @GET('/wp-json/wc/store/{api_version}/products/categories/{category_id}')
-  Future<ListProductCategoriesResponseModel> retrieveProductCategory({
+  Future<RetrieveProductCategoryResponseModel> retrieveProductCategory({
     @Path('api_version') required String apiVersion,
     @Path('category_id') required int categoryId,
     @Query('context') String? context,
