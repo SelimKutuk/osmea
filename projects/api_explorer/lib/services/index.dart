@@ -29,6 +29,10 @@ export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/add_cart
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/edit_single_cart_item_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/delete_all_cart_items_handler.dart';
 
+// 🛍️ WooCommerce Store API Product Handlers
+export 'handlers/woocommerce/store_api_handlers/product_api_handlers/list_all_products_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_api_handlers/retrieve_product_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers
