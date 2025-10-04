@@ -77,6 +77,7 @@ enum ApiCategory {
   woocommerceStoreProductCategories,
   woocommerceStoreProductBrands,
   woocommerceStoreProductAttributes,
+  woocommerceStoreProductAttributeTerms,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -201,6 +202,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Product Brands API';
       case ApiCategory.woocommerceStoreProductAttributes:
         return 'Product Attributes API';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms API';
     }
   }
 }
@@ -4293,6 +4296,16 @@ class ApiServiceRegistry {
       subcategory: 'Product Attributes API',
       handler: StoreRetrieveProductAttributeHandler(),
     ),
+
+    // 🏷️ WooCommerce Store API Product Attribute Terms
+    ApiService(
+      name: 'Product Attribute Terms',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/attributes/{attribute_id}/terms',
+      category: ApiCategory.woocommerceStoreProductAttributeTerms,
+      subcategory: 'Product Attribute Terms API',
+      handler: ProductAttributeTermsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4414,6 +4427,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceStoreProductCategories,
       ApiCategory.woocommerceStoreProductBrands,
       ApiCategory.woocommerceStoreProductAttributes,
+      ApiCategory.woocommerceStoreProductAttributeTerms,
     ];
   }
 
@@ -4602,6 +4616,8 @@ class ApiServiceRegistry {
         return 'Product Brands';
       case ApiCategory.woocommerceStoreProductAttributes:
         return 'Product Attributes';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms';
     }
   }
 
@@ -4722,6 +4738,8 @@ class ApiServiceRegistry {
         return Icons.business_outlined;
       case ApiCategory.woocommerceStoreProductAttributes:
         return Icons.tune_outlined;
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return Icons.label_outlined;
     }
   }
 }
