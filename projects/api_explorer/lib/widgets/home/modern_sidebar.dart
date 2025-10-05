@@ -1691,6 +1691,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Checkout';
       case ApiCategory.woocommerceCheckoutOrder:
         return 'WooCommerce Checkout Order';
+      case ApiCategory.woocommerceOrder:
+        return 'WooCommerce Store Order';
       case ApiCategory.woocommerceStoreProducts:
         return 'WooCommerce Products';
       case ApiCategory.woocommerceStoreProductTags:
@@ -1798,6 +1800,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCart:
         case ApiCategory.woocommerceCheckout:
         case ApiCategory.woocommerceCheckoutOrder:
+        case ApiCategory.woocommerceOrder:
         case ApiCategory.woocommerceStoreProducts:
         case ApiCategory.woocommerceStoreProductTags:
         case ApiCategory.woocommerceStoreProductReviews:
@@ -1870,6 +1873,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceCart:
         case ApiCategory.woocommerceCheckout:
         case ApiCategory.woocommerceCheckoutOrder:
+        case ApiCategory.woocommerceOrder:
         case ApiCategory.woocommerceStoreProducts:
         case ApiCategory.woocommerceStoreProductTags:
         case ApiCategory.woocommerceStoreProductReviews:
@@ -1934,6 +1938,10 @@ class _ModernSidebarState extends State<ModernSidebar>
       bool isNarrow, bool isMobile, BuildContext context) {
     final customerCategories =
         ApiServiceRegistry.getWooCommerceCustomerCategories();
+
+    // Debug: Print categories to console
+    debugPrint(
+        '🔍 Customer Categories: ${customerCategories.map((c) => c.name).toList()}');
 
     return OsmeaComponents.container(
       margin: EdgeInsets.only(
