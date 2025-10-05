@@ -337,6 +337,10 @@ import 'package:apis/network/remote/woocommerce/store_api/checkout_order_api/abs
     as _i616;
 import 'package:apis/network/remote/woocommerce/store_api/checkout_order_api/api/api_checkout_order_service.dart'
     as _i994;
+import 'package:apis/network/remote/woocommerce/store_api/order_api/abstract/order_service.dart'
+    as _i702;
+import 'package:apis/network/remote/woocommerce/store_api/order_api/api/api_order_service.dart'
+    as _i791;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/product_service.dart'
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
@@ -521,6 +525,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i977.CartItemsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i373.CouponsService>(
         () => _i1029.CouponsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i702.OrderService>(
+        () => _i791.OrderServiceClient(gh<_i361.Dio>()));
     gh.factory<_i961.OrderNotesService>(
         () => _i490.OrderNotesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i241.ShippingMethodsService>(
