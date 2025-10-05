@@ -49,6 +49,19 @@ export 'handlers/woocommerce/store_api_handlers/product_categories_handlers/prod
 export 'handlers/woocommerce/store_api_handlers/product_categories_handlers/list_product_categories_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/product_categories_handlers/retrieve_product_category_handler.dart';
 
+// 🏷️ WooCommerce Store API Product Brands Handlers
+export 'handlers/woocommerce/store_api_handlers/product_brands_handlers/product_brands_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_brands_handlers/list_product_brands_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_brands_handlers/retrieve_product_brand_handler.dart';
+
+// 🏷️ WooCommerce Store API Product Attributes Handlers
+export 'handlers/woocommerce/store_api_handlers/product_attributes_handlers/product_attributes_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_attributes_handlers/list_product_attributes_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/product_attributes_handlers/retrieve_product_attribute_handler.dart';
+
+// 🏷️ WooCommerce Store API Product Attribute Terms Handlers
+export 'handlers/woocommerce/store_api_handlers/product_attribute_terms_handlers/product_attribute_terms_handler.dart';
+
 // 🚀 GraphQL Handlers - Modular Structure
 
 // Products GraphQL Handlers

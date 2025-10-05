@@ -75,6 +75,9 @@ enum ApiCategory {
   woocommerceStoreProductReviews,
   woocommerceStoreProductCollectionData,
   woocommerceStoreProductCategories,
+  woocommerceStoreProductBrands,
+  woocommerceStoreProductAttributes,
+  woocommerceStoreProductAttributeTerms,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -195,6 +198,12 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Product Collection Data API';
       case ApiCategory.woocommerceStoreProductCategories:
         return 'Product Categories API';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'Product Brands API';
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return 'Product Attributes API';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms API';
     }
   }
 }
@@ -4232,6 +4241,71 @@ class ApiServiceRegistry {
       subcategory: 'Product Categories API',
       handler: StoreRetrieveProductCategoryHandler(),
     ),
+
+    // 🏷️ WooCommerce Store API Product Brands
+    ApiService(
+      name: 'Product Brands',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: ProductBrandsHandler(),
+    ),
+
+    // 📋 WooCommerce Store API List Product Brands
+    ApiService(
+      name: 'List Product Brands',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: StoreListProductBrandsHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Brand
+    ApiService(
+      name: 'Retrieve Product Brand',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands/{brand_id}',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: StoreRetrieveProductBrandHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Attributes
+    ApiService(
+      name: 'Product Attributes',
+      endpoint: '/wp-json/wc/store/{api_version}/products/attributes',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: ProductAttributesHandler(),
+    ),
+
+    // 📋 WooCommerce Store API List Product Attributes
+    ApiService(
+      name: 'List Product Attributes',
+      endpoint: '/wp-json/wc/store/{api_version}/products/attributes',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: StoreListProductAttributesHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Attribute
+    ApiService(
+      name: 'Retrieve Product Attribute',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/attributes/{attribute_id}',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: StoreRetrieveProductAttributeHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Attribute Terms
+    ApiService(
+      name: 'Product Attribute Terms',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/attributes/{attribute_id}/terms',
+      category: ApiCategory.woocommerceStoreProductAttributeTerms,
+      subcategory: 'Product Attribute Terms API',
+      handler: ProductAttributeTermsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4351,6 +4425,9 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceStoreProductReviews,
       ApiCategory.woocommerceStoreProductCollectionData,
       ApiCategory.woocommerceStoreProductCategories,
+      ApiCategory.woocommerceStoreProductBrands,
+      ApiCategory.woocommerceStoreProductAttributes,
+      ApiCategory.woocommerceStoreProductAttributeTerms,
     ];
   }
 
@@ -4535,6 +4612,12 @@ class ApiServiceRegistry {
         return 'Product Collection Data';
       case ApiCategory.woocommerceStoreProductCategories:
         return 'Product Categories';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'Product Brands';
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return 'Product Attributes';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms';
     }
   }
 
@@ -4651,6 +4734,12 @@ class ApiServiceRegistry {
         return Icons.analytics_outlined;
       case ApiCategory.woocommerceStoreProductCategories:
         return Icons.category_outlined;
+      case ApiCategory.woocommerceStoreProductBrands:
+        return Icons.business_outlined;
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return Icons.tune_outlined;
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return Icons.label_outlined;
     }
   }
 }
