@@ -30,6 +30,9 @@ export 'handlers/woocommerce/store_api_handlers/checkout_data_api_handlers/proce
 // 🛒 WooCommerce Store API Checkout Order Handlers
 export 'handlers/woocommerce/store_api_handlers/checkout_order_api_handlers/process_payment_and_order_handler.dart';
 
+// 📦 WooCommerce Store API Order Handlers
+export 'handlers/woocommerce/store_api_handlers/order_api_handlers/get_order_handler.dart';
+
 // 📋 WooCommerce Store API Cart Items Handlers
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/list_cart_items_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/get_single_cart_item_handler.dart';
