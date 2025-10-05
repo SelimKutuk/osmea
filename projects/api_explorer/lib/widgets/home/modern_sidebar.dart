@@ -1687,6 +1687,8 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Wishlist';
       case ApiCategory.woocommerceCart:
         return 'WooCommerce Cart';
+      case ApiCategory.woocommerceCheckout:
+        return 'WooCommerce Checkout';
       case ApiCategory.woocommerceStoreProducts:
         return 'WooCommerce Products';
       case ApiCategory.woocommerceStoreProductTags:
@@ -1792,6 +1794,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
         case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceCheckout:
         case ApiCategory.woocommerceStoreProducts:
         case ApiCategory.woocommerceStoreProductTags:
         case ApiCategory.woocommerceStoreProductReviews:
@@ -1862,6 +1865,7 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
         case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceCheckout:
         case ApiCategory.woocommerceStoreProducts:
         case ApiCategory.woocommerceStoreProductTags:
         case ApiCategory.woocommerceStoreProductReviews:
