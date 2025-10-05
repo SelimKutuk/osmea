@@ -70,6 +70,7 @@ enum ApiCategory {
   //TODO: Add other Store API categories here
   woocommerceWishlist,
   woocommerceCart,
+  woocommerceCheckout,
   woocommerceStoreProducts,
   woocommerceStoreProductTags,
   woocommerceStoreProductReviews,
@@ -188,6 +189,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Wishlist APIs';
       case ApiCategory.woocommerceCart:
         return 'Cart API';
+      case ApiCategory.woocommerceCheckout:
+        return 'Checkout API';
       case ApiCategory.woocommerceStoreProducts:
         return 'Products API';
       case ApiCategory.woocommerceStoreProductTags:
@@ -4120,6 +4123,15 @@ class ApiServiceRegistry {
       handler: SelectShippingRateHandler(),
     ),
 
+    // 🛒 WooCommerce Store API Checkout Data
+    ApiService(
+      name: 'Get Checkout Data',
+      endpoint: '/wp-json/wc/store/v1/checkout',
+      category: ApiCategory.woocommerceCheckout,
+      subcategory: 'Checkout Data',
+      handler: GetCheckoutDataHandler(),
+    ),
+
     // 📋 WooCommerce Cart Items API Handler - Store API
     ApiService(
       name: 'List Cart Items',
@@ -4398,6 +4410,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceProducts,
       ApiCategory.woocommerceOrders,
       ApiCategory.woocommerceCustomers,
+      ApiCategory.woocommerceCart,
       ApiCategory.woocommerceWebhooks,
       ApiCategory.woocommerceSystemStatus,
       ApiCategory.woocommerceReports,
@@ -4420,6 +4433,7 @@ class ApiServiceRegistry {
     return [
       ApiCategory.woocommerceWishlist,
       ApiCategory.woocommerceCart,
+      ApiCategory.woocommerceCheckout,
       ApiCategory.woocommerceStoreProducts,
       ApiCategory.woocommerceStoreProductTags,
       ApiCategory.woocommerceStoreProductReviews,
@@ -4602,6 +4616,8 @@ class ApiServiceRegistry {
         return 'Wishlist';
       case ApiCategory.woocommerceCart:
         return 'Cart';
+      case ApiCategory.woocommerceCheckout:
+        return 'Checkout';
       case ApiCategory.woocommerceStoreProducts:
         return 'Products';
       case ApiCategory.woocommerceStoreProductTags:
@@ -4724,6 +4740,8 @@ class ApiServiceRegistry {
         return Icons.favorite_border_rounded;
       case ApiCategory.woocommerceCart:
         return Icons.shopping_cart_rounded;
+      case ApiCategory.woocommerceCheckout:
+        return Icons.shopping_cart_checkout_rounded;
       case ApiCategory.woocommerceStoreProducts:
         return Icons.store_rounded;
       case ApiCategory.woocommerceStoreProductTags:
