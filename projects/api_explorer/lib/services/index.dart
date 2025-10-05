@@ -24,6 +24,7 @@ export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/select_shippin
 
 // 🛒 WooCommerce Store API Checkout Data Handlers
 export 'handlers/woocommerce/store_api_handlers/checkout_data_api_handlers/get_checkout_data_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/checkout_data_api_handlers/update_checkout_data_handler.dart';
 
 // 📋 WooCommerce Store API Cart Items Handlers
 export 'handlers/woocommerce/store_api_handlers/cart_items_api_handlers/list_cart_items_handler.dart';

@@ -4131,6 +4131,13 @@ class ApiServiceRegistry {
       subcategory: 'Checkout Data',
       handler: GetCheckoutDataHandler(),
     ),
+    ApiService(
+      name: 'Update Checkout Data',
+      endpoint: '/wp-json/wc/store/v1/checkout',
+      category: ApiCategory.woocommerceCheckout,
+      subcategory: 'Checkout Data',
+      handler: UpdateCheckoutDataHandler(),
+    ),
 
     // 📋 WooCommerce Cart Items API Handler - Store API
     ApiService(
