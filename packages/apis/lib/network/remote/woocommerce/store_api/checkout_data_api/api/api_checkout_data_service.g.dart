@@ -79,6 +79,36 @@ class _CheckoutDataServiceClient implements CheckoutDataServiceClient {
     return _value;
   }
 
+  @override
+  Future<ProcessPaymentAndOrderResponseModel> processPaymentAndOrder({
+    required String apiVersion,
+    required ProcessPaymentAndOrderRequestModel requestData,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = requestData;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ProcessPaymentAndOrderResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/wp-json/wc/store/${apiVersion}/checkout',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProcessPaymentAndOrderResponseModel.fromJson(_result.data!);
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
