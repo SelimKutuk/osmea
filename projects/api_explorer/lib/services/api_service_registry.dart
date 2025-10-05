@@ -71,6 +71,7 @@ enum ApiCategory {
   woocommerceWishlist,
   woocommerceCart,
   woocommerceCheckout,
+  woocommerceCheckoutOrder,
   woocommerceStoreProducts,
   woocommerceStoreProductTags,
   woocommerceStoreProductReviews,
@@ -191,6 +192,8 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Cart API';
       case ApiCategory.woocommerceCheckout:
         return 'Checkout API';
+      case ApiCategory.woocommerceCheckoutOrder:
+        return 'Checkout Order API';
       case ApiCategory.woocommerceStoreProducts:
         return 'Products API';
       case ApiCategory.woocommerceStoreProductTags:
@@ -4145,6 +4148,13 @@ class ApiServiceRegistry {
       subcategory: 'Checkout Data',
       handler: ProcessPaymentAndOrderHandler(),
     ),
+    ApiService(
+      name: 'Process Payment and Order (Order API)',
+      endpoint: '/wp-json/wc/store/v1/checkout/order',
+      category: ApiCategory.woocommerceCheckoutOrder,
+      subcategory: 'Checkout Order API',
+      handler: ProcessPaymentAndOrderOrderHandler(),
+    ),
 
     // 📋 WooCommerce Cart Items API Handler - Store API
     ApiService(
@@ -4448,6 +4458,7 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceWishlist,
       ApiCategory.woocommerceCart,
       ApiCategory.woocommerceCheckout,
+      ApiCategory.woocommerceCheckoutOrder,
       ApiCategory.woocommerceStoreProducts,
       ApiCategory.woocommerceStoreProductTags,
       ApiCategory.woocommerceStoreProductReviews,
@@ -4632,6 +4643,8 @@ class ApiServiceRegistry {
         return 'Cart';
       case ApiCategory.woocommerceCheckout:
         return 'Checkout';
+      case ApiCategory.woocommerceCheckoutOrder:
+        return 'Checkout Order';
       case ApiCategory.woocommerceStoreProducts:
         return 'Products';
       case ApiCategory.woocommerceStoreProductTags:
@@ -4756,6 +4769,8 @@ class ApiServiceRegistry {
         return Icons.shopping_cart_rounded;
       case ApiCategory.woocommerceCheckout:
         return Icons.shopping_cart_checkout_rounded;
+      case ApiCategory.woocommerceCheckoutOrder:
+        return Icons.payment_rounded;
       case ApiCategory.woocommerceStoreProducts:
         return Icons.store_rounded;
       case ApiCategory.woocommerceStoreProductTags:
