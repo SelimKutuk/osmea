@@ -24,3 +24,4 @@ abstract class StoreProductAttributeTermsService {
     String? context,
   });
 }
+

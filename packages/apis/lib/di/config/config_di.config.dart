@@ -329,6 +329,18 @@ import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstrac
     as _i240;
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/api/api_cart_items_service.dart'
     as _i977;
+import 'package:apis/network/remote/woocommerce/store_api/checkout_data_api/abstract/checkout_data_service.dart'
+    as _i209;
+import 'package:apis/network/remote/woocommerce/store_api/checkout_data_api/api/api_checkout_data_service.dart'
+    as _i488;
+import 'package:apis/network/remote/woocommerce/store_api/checkout_order_api/abstract/checkout_order_service.dart'
+    as _i616;
+import 'package:apis/network/remote/woocommerce/store_api/checkout_order_api/api/api_checkout_order_service.dart'
+    as _i994;
+import 'package:apis/network/remote/woocommerce/store_api/order_api/abstract/order_service.dart'
+    as _i702;
+import 'package:apis/network/remote/woocommerce/store_api/order_api/api/api_order_service.dart'
+    as _i791;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/product_service.dart'
     as _i846;
 import 'package:apis/network/remote/woocommerce/store_api/product_api/api/api_product_service.dart'
@@ -438,6 +450,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i882.CountryServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i24.MarketingEventEvents>(
         () => _i707.MarketingEventEventsApi(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i209.CheckoutDataService>(
+        () => _i488.CheckoutDataServiceClient(gh<_i361.Dio>()));
     gh.factory<_i611.GiftCardService>(
         () => _i1034.GiftCardServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i722.StorefrontAccessTokenService>(
@@ -492,6 +506,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i568.StoreProductBrandsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i448.ProductVariantService>(
         () => _i938.ProductVariantServiceClient(gh<_i661.ApiBaseClient>()));
+    gh.factory<_i616.CheckoutOrderService>(
+        () => _i994.CheckoutOrderServiceClient(gh<_i361.Dio>()));
     gh.factory<_i342.LocationService>(
         () => _i395.LocationServiceClient(gh<_i661.ApiBaseClient>()));
     gh.factory<_i128.CountriesService>(
@@ -509,6 +525,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i977.CartItemsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i373.CouponsService>(
         () => _i1029.CouponsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i702.OrderService>(
+        () => _i791.OrderServiceClient(gh<_i361.Dio>()));
     gh.factory<_i961.OrderNotesService>(
         () => _i490.OrderNotesServiceClient(gh<_i361.Dio>()));
     gh.factory<_i241.ShippingMethodsService>(
