@@ -186,9 +186,68 @@
       "url": "https://masterfabric.co"
     }
   },
+  "loading_configuration": {
+    "style": "startup",
+    "show_progress_indicator": true,
+    "progress_indicator_type": "circular",
+    "animation_duration": 300,
+    "fade_in_duration": 200,
+    "fade_out_duration": 200,
+    "primary_color": "#2196F3",
+    "secondary_color": "#FFC107",
+    "background_color": "#FFFFFF",
+    "text_color": "#374151",
+    "show_loading_text": true,
+    "loading_text": "Loading...",
+    "show_percentage": false,
+    "show_dots_animation": true,
+    "dots_count": 3,
+    "dots_animation_speed": 500,
+    "enable_blur_background": false,
+    "blur_intensity": 5.0,
+    "show_logo": true,
+    "logo_size": 48.0,
+    "logo_animation_enabled": true,
+    "logo_animation_type": "pulse",
+    "min_display_duration": 500,
+    "auto_hide_enabled": true,
+    "timeout_seconds": 30,
+    "show_cancel_button": false,
+    "cancel_button_text": "Cancel",
+    "show_retry_on_timeout": true,
+    "retry_button_text": "Retry",
+    "timeout_message": "Loading is taking longer than expected.",
+    "styles": {
+      "startup": {
+        "progress_indicator_type": "circular_fade",
+        "animation_type": "fade_scale",
+        "show_brand_elements": true,
+        "minimal_design": true
+      },
+      "space": {
+        "progress_indicator_type": "orbital",
+        "animation_type": "cosmic_fade",
+        "show_particles": true,
+
+        "background_color": "#F0F2F6FF",
+        "text_color": "#F1F5F9",
+        "primary_color": "#00D4FF"
+      },
+      "enterprise": {
+        "progress_indicator_type": "linear",
+        "animation_type": "professional_slide",
+        "show_progress_bar": true,
+        "corporate_design": true
+      }
+    }
+  },
   "error_handling_configuration": {
-    "style": "style3",
-    "auto_retry_seconds": 5,
+    "style": "enterprise",
+    "errorTitle": "Oops! Something went wrong",
+    "errorDescription": "We encountered an unexpected issue. Please try again or contact our support team if the problem persists.",
+    "background_color": "#F8FAFC",
+    "text_color": "#1F2937",
+    "auto_retry_seconds": null,
     "show_retry_button": true,
     "show_home_button": true,
     "show_support_button": true,

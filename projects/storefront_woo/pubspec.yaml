@@ -23,7 +23,7 @@ dependencies:
   # ────────────────────────────────
   flutter_bloc: ^9.1.1     # BLoC pattern for managing application state
   get_it: ^7.7.0           # Simple service locator (manual DI)
-  injectable: ^2.5.0       # Annotation-based code generation for get_it
+  injectable: ^2.5.1       # Annotation-based code generation for get_it
 
   # ────────────────────────────────
   # ROUTING / NAVIGATION

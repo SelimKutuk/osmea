@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:core/src/base/base_view_model_cubit.dart';
@@ -150,54 +149,45 @@ class SplashCubit extends BaseViewModelCubit<SplashState> {
       final onboardingEnabled =
           _configHelper.getBool('feature_flags.onboarding_enabled', true);
 
-      debugPrint("🔍 Debug - maintenanceMode: $maintenanceMode");
-      debugPrint("🔍 Debug - onboardingEnabled: $onboardingEnabled");
-
       // Check maintenance mode first
       if (maintenanceMode) {
-        debugPrint("🚧 App is in maintenance mode");
-        navigationTarget = '/home'; // Temporary fallback
+        navigationTarget = '/home';
       }
       // Check if onboarding is enabled
       else if (!onboardingEnabled) {
-        debugPrint("🔒 Onboarding disabled, navigating to home");
         navigationTarget = '/home';
       }
       // Check if onboarding has been seen before
       else {
-        debugPrint("📚 Checking onboarding status...");
-
         try {
           final hasSeenOnboarding = await _onboardingHelper.hasSeenOnboarding();
-          debugPrint("🔍 Debug - hasSeenOnboarding: $hasSeenOnboarding");
 
           if (hasSeenOnboarding) {
-            debugPrint("✅ Onboarding already seen, navigating to home");
             navigationTarget = '/home';
           } else {
-            debugPrint("📚 First time user, navigating to onboarding");
-            navigationTarget = '/onboarding';
+            // Onboarding config
+            final onboardingConfig =
+                _configHelper.getAllConfig()?['onboarding_configuration'];
+            if (onboardingConfig == null) {
+              navigationTarget = '/home';
+            } else {
+              navigationTarget = '/onboarding';
+            }
           }
         } catch (e) {
-          debugPrint("❌ Error in hasSeenOnboarding: $e");
           // Fallback to onboarding if we can't check status
           navigationTarget = '/onboarding';
         }
       }
-
-      debugPrint("🧭 Final navigationTarget: $navigationTarget");
 
       // Update state with navigation target
       stateChanger(state.copyWith(
         status: SplashStatus.completed,
         navigationTarget: navigationTarget,
       ));
-
-      debugPrint("🧭 Navigation target determined: $navigationTarget");
     } catch (e) {
       debugPrint("❌ Error determining navigation target: $e");
-      print("❌ Full error details: $e");
-      // Fallback to onboarding instead of home
+      // Fallback to home instead of onboarding
       stateChanger(state.copyWith(
         status: SplashStatus.completed,
         navigationTarget: '/onboarding',

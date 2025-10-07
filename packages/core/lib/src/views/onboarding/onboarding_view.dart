@@ -21,6 +21,9 @@ import 'package:osmea_components/osmea_components.dart';
 /// {@subCategory OnboardingView}
 
 class OnboardingView extends MasterViewCubit<OnboardingCubit, OnboardingState> {
+  /// Callback triggered when onboarding begins
+  final VoidCallback? onStart;
+
   /// Callback to be called when onboarding is completed
   final VoidCallback? onCompleted;
 
@@ -30,12 +33,21 @@ class OnboardingView extends MasterViewCubit<OnboardingCubit, OnboardingState> {
   /// Callback to be called when an error occurs
   final Function(String error)? onError;
 
+  /// Callback triggered when user changes step
+  final void Function(int stepIndex)? onStepChange;
+
+  /// Callback triggered when user presses Continue/Home button
+  final VoidCallback? onContinue;
+
   OnboardingView({
     required Function(String path) goRoute,
     Map<String, dynamic> arguments = const {'onboarding': true},
+    this.onStart,
     this.onCompleted,
     this.onSkipped,
     this.onError,
+    this.onStepChange,
+    this.onContinue,
   }) : super(
           goRoute: goRoute,
           arguments: arguments,
@@ -44,17 +56,25 @@ class OnboardingView extends MasterViewCubit<OnboardingCubit, OnboardingState> {
   @override
   Future<void> initialContent(viewModel, BuildContext context) async {
     debugPrint('🎉 Onboarding View Start!');
+
+    // Trigger onStart callback
+    onStart?.call();
+
     await viewModel.loadOnboardingData();
 
     // Listen for onboarding state changes
     viewModel.stream.listen((state) {
       if (state.status == OnboardingStatus.completed) {
         onCompleted?.call();
+        onContinue?.call(); // Also trigger onContinue when completed
       } else if (state.status == OnboardingStatus.skipped) {
         onSkipped?.call();
       } else if (state.status == OnboardingStatus.error) {
         onError?.call(state.errorMessage ?? 'Unknown error');
       }
+
+      // Trigger step change callback when current page changes
+      onStepChange?.call(state.currentPageIndex);
     });
   }
 

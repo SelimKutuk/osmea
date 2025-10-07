@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 /// 🎯 **OSMEA Onboarding Models**
 ///
@@ -186,7 +187,6 @@ class OnboardingConfigModel {
       // Pages parsing
       List<OnboardingPageModel> pagesList = [];
       final pagesData = json['pages'];
-      debugPrint('🔍 Pages data: $pagesData (type: ${pagesData.runtimeType})');
 
       if (pagesData is List) {
         for (var pageData in pagesData) {
@@ -198,8 +198,18 @@ class OnboardingConfigModel {
             }
           }
         }
+      } else if (pagesData is String) {
+        try {
+          final decoded = jsonDecode(pagesData);
+          if (decoded is List) {
+            final tempJson = Map<String, dynamic>.from(json);
+            tempJson['pages'] = decoded;
+            return OnboardingConfigModel.fromJson(tempJson);
+          }
+        } catch (e) {
+          debugPrint('❌ Failed to decode pages JSON string: $e');
+        }
       }
-      debugPrint('✅ Successfully parsed ${pagesList.length} pages');
 
       return OnboardingConfigModel(
         pages: pagesList,
@@ -216,6 +226,7 @@ class OnboardingConfigModel {
       );
     } catch (e) {
       debugPrint('❌ Error in OnboardingConfigModel.fromJson: $e');
+
       // Fallback: Return with empty pages
       return OnboardingConfigModel(
         pages: [],

@@ -165,6 +165,59 @@
         }
       ]
     },
+    "loading_configuration": {
+      "style": "enterprise",
+      "type": "authentication",
+      "duration_milliseconds": 3000,
+      "step_duration_milliseconds": 750,
+      "background_color": "#FFFFFF",
+      "text_color": "#000000",
+      "progress_color": "#000000",
+      "animation_type": "linear",
+      "show_logo": true,
+      "logo_animation_enabled": true,
+      "auto_dismiss_enabled": true,
+      "tap_to_dismiss_enabled": true,
+      "show_progress_indicator": true,
+      "show_percentage": true,
+      "animation_enabled": true,
+      "haptic_feedback_enabled": true,
+      "steps": [
+        "Mağaza başlatılıyor...",
+        "Ürünler yükleniyor...",
+        "Arayüz hazırlanıyor...",
+        "Hazır!"
+      ],
+      "custom_messages": {
+        "network_error": "Network connection required",
+        "timeout_error": "Operation timed out",
+        "generic_error": "Something went wrong",
+        "retry_message": "Tap to retry",
+        "cancel_message": "Tap to cancel"
+      },
+      "accessibility": {
+        "enabled": true,
+        "announce_steps": true,
+        "voice_over_enabled": true,
+        "semantic_labels": {
+          "loading": "Loading in progress",
+          "progress": "Progress indicator",
+          "step": "Loading step",
+          "cancel": "Cancel loading",
+          "retry": "Retry loading"
+        }
+      }
+    },
+    "error_handling_configuration": {
+      "style": "space",
+      "errorTitle": "Something went wrong..",
+      "animation_duration": 500,
+      "primary_color": "#FAFAFAFF",
+      "secondary_color": "#7B0000FF",
+      "background_color": "#FAFAFAFF",
+      "text_color": "#000000FF"
+      
+    },
     "woocommerce_configuration": {
       "store_url": "https://store.masterfabric.co",
       "consumer_key": "",
