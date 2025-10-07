@@ -8,7 +8,6 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:apis/apis.dart' as _i367;
 import 'package:apis/dio_config/dio_client/abstract/api_base_client.dart'
     as _i661;
 import 'package:apis/dio_config/dio_client/api_dio_client.dart' as _i1004;
@@ -395,9 +394,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    final dioLoggerModule = _$DioLoggerModule();
     final dioModule = _$DioModule();
-    gh.singleton<_i974.Logger>(() => dioLoggerModule.logger);
     gh.singleton<_i361.Dio>(() => dioModule.dio());
     gh.factory<_i1013.CurrenciesService>(
         () => _i730.ApiCurrenciesService(gh<_i361.Dio>()));
@@ -594,7 +591,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
-
-class _$DioLoggerModule extends _i367.DioLoggerModule {}
 
 class _$DioModule extends _i1004.DioModule {}
