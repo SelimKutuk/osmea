@@ -507,982 +507,1058 @@ class _ModernSidebarState extends State<ModernSidebar>
                   ),
                 ),
 
-              // Search Results Section
-              if (_searchQuery.isNotEmpty &&
-                  _groupedFilteredServices.isNotEmpty)
-                OsmeaComponents.container(
-                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: OsmeaColors.nordicBlue.withValues(alpha: 0.2),
-                    ),
-                  ),
+              // Scrollable Content Section
+              Flexible(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: OsmeaComponents.column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Search Results Header
-                      OsmeaComponents.container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: OsmeaColors.nordicBlue.withValues(alpha: 0.05),
-                          borderRadius: BorderRadius.only(
-                            topLeft: context.borderRadiusMinStandard.topLeft,
-                            topRight: context.borderRadiusMinStandard.topRight,
+                      // Search Results Section
+                      if (_searchQuery.isNotEmpty &&
+                          _groupedFilteredServices.isNotEmpty)
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: isNarrow ? 12 : 16),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color:
+                                  OsmeaColors.nordicBlue.withValues(alpha: 0.2),
+                            ),
                           ),
-                        ),
-                        child: OsmeaComponents.row(
-                          children: [
-                            Icon(
-                              Icons.search_rounded,
-                              size: 16,
-                              color: OsmeaColors.nordicBlue,
-                            ),
-                            OsmeaComponents.sizedBox(width: 8),
-                            OsmeaComponents.text(
-                              'Search Results ($_totalFilteredCount)',
-                              variant: OsmeaTextVariant.labelMedium,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: OsmeaColors.nordicBlue,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // Grouped Results List
-                      OsmeaComponents.container(
-                        constraints: BoxConstraints(
-                          maxHeight: constraints.maxHeight *
-                              0.4, // Dynamic height based on screen
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: _groupedFilteredServices.keys.length,
-                          itemBuilder: (context, groupIndex) {
-                            final platform = _groupedFilteredServices.keys
-                                .elementAt(groupIndex);
-                            final services =
-                                _groupedFilteredServices[platform]!;
-
-                            return OsmeaComponents.column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Platform Header
-                                OsmeaComponents.container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 8,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: _getPlatformColor(platform)
-                                        .withValues(alpha: 0.1),
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .outline
-                                            .withValues(alpha: 0.1),
-                                        width: 1,
-                                      ),
-                                    ),
-                                  ),
-                                  child: OsmeaComponents.row(
-                                    children: [
-                                      Icon(
-                                        _getPlatformIcon(platform),
-                                        size: 16,
-                                        color: _getPlatformColor(platform),
-                                      ),
-                                      OsmeaComponents.sizedBox(width: 8),
-                                      OsmeaComponents.text(
-                                        platform,
-                                        variant: OsmeaTextVariant.labelMedium,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        color: _getPlatformColor(platform),
-                                      ),
-                                      OsmeaComponents.sizedBox(width: 4),
-                                      OsmeaComponents.container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 6, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: _getPlatformColor(platform)
-                                              .withValues(alpha: 0.2),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: OsmeaComponents.text(
-                                          '${services.length}',
-                                          variant: OsmeaTextVariant.labelSmall,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w600,
-                                          color: _getPlatformColor(platform),
-                                        ),
-                                      ),
-                                    ],
+                          child: OsmeaComponents.column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Search Results Header
+                              OsmeaComponents.container(
+                                padding: EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: OsmeaColors.nordicBlue
+                                      .withValues(alpha: 0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft:
+                                        context.borderRadiusMinStandard.topLeft,
+                                    topRight: context
+                                        .borderRadiusMinStandard.topRight,
                                   ),
                                 ),
+                                child: OsmeaComponents.row(
+                                  children: [
+                                    Icon(
+                                      Icons.search_rounded,
+                                      size: 16,
+                                      color: OsmeaColors.nordicBlue,
+                                    ),
+                                    OsmeaComponents.sizedBox(width: 8),
+                                    OsmeaComponents.text(
+                                      'Search Results ($_totalFilteredCount)',
+                                      variant: OsmeaTextVariant.labelMedium,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: OsmeaColors.nordicBlue,
+                                    ),
+                                  ],
+                                ),
+                              ),
 
-                                // Platform Services
-                                ...services.map((service) {
-                                  final isSelected =
-                                      widget.selectedService == service;
+                              // Grouped Results List
+                              OsmeaComponents.container(
+                                constraints: BoxConstraints(
+                                  maxHeight: constraints.maxHeight *
+                                      0.4, // Dynamic height based on screen
+                                ),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount:
+                                      _groupedFilteredServices.keys.length,
+                                  itemBuilder: (context, groupIndex) {
+                                    final platform = _groupedFilteredServices
+                                        .keys
+                                        .elementAt(groupIndex);
+                                    final services =
+                                        _groupedFilteredServices[platform]!;
 
-                                  return GestureDetector(
-                                    onTap: () =>
-                                        widget.onServiceSelected(service),
-                                    child: OsmeaComponents.container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 8,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: isSelected
-                                            ? OsmeaColors.nordicBlue
-                                                .withValues(alpha: 0.1)
-                                            : Colors.transparent,
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .outline
-                                                .withValues(alpha: 0.05),
-                                            width: 1,
+                                    return OsmeaComponents.column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // Platform Header
+                                        OsmeaComponents.container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 8,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: _getPlatformColor(platform)
+                                                .withValues(alpha: 0.1),
+                                            border: Border(
+                                              bottom: BorderSide(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .outline
+                                                    .withValues(alpha: 0.1),
+                                                width: 1,
+                                              ),
+                                            ),
+                                          ),
+                                          child: OsmeaComponents.row(
+                                            children: [
+                                              Icon(
+                                                _getPlatformIcon(platform),
+                                                size: 16,
+                                                color:
+                                                    _getPlatformColor(platform),
+                                              ),
+                                              OsmeaComponents.sizedBox(
+                                                  width: 8),
+                                              OsmeaComponents.text(
+                                                platform,
+                                                variant: OsmeaTextVariant
+                                                    .labelMedium,
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w600,
+                                                color:
+                                                    _getPlatformColor(platform),
+                                              ),
+                                              OsmeaComponents.sizedBox(
+                                                  width: 4),
+                                              OsmeaComponents.container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 6, vertical: 2),
+                                                decoration: BoxDecoration(
+                                                  color: _getPlatformColor(
+                                                          platform)
+                                                      .withValues(alpha: 0.2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: OsmeaComponents.text(
+                                                  '${services.length}',
+                                                  variant: OsmeaTextVariant
+                                                      .labelSmall,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: _getPlatformColor(
+                                                      platform),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                      child: OsmeaComponents.row(
-                                        children: [
-                                          Icon(
-                                            ApiServiceRegistry.getCategoryIcon(
-                                                service.category),
-                                            size: 16,
-                                            color: isSelected
-                                                ? OsmeaColors.nordicBlue
-                                                : Theme.of(context)
-                                                    .iconTheme
-                                                    .color
-                                                    ?.withValues(alpha: 0.7),
-                                          ),
-                                          OsmeaComponents.sizedBox(width: 12),
-                                          OsmeaComponents.expanded(
-                                            child: OsmeaComponents.column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                OsmeaComponents.text(
-                                                  service.name,
-                                                  variant: OsmeaTextVariant
-                                                      .bodySmall,
-                                                  fontSize: 12,
-                                                  fontWeight: isSelected
-                                                      ? FontWeight.w600
-                                                      : FontWeight.w500,
-                                                  color: isSelected
-                                                      ? OsmeaColors.nordicBlue
-                                                      : Theme.of(context)
-                                                          .textTheme
-                                                          .bodyMedium
-                                                          ?.color,
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+
+                                        // Platform Services
+                                        ...services.map((service) {
+                                          final isSelected =
+                                              widget.selectedService == service;
+
+                                          return GestureDetector(
+                                            onTap: () => widget
+                                                .onServiceSelected(service),
+                                            child: OsmeaComponents.container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 16,
+                                                vertical: 8,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: isSelected
+                                                    ? OsmeaColors.nordicBlue
+                                                        .withValues(alpha: 0.1)
+                                                    : Colors.transparent,
+                                                border: Border(
+                                                  bottom: BorderSide(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .outline
+                                                        .withValues(
+                                                            alpha: 0.05),
+                                                    width: 1,
+                                                  ),
                                                 ),
-                                                OsmeaComponents.sizedBox(
-                                                    height: 2),
-                                                OsmeaComponents.text(
-                                                  '${service.subcategory} • ${service.supportedMethods.join(', ')}',
-                                                  variant: OsmeaTextVariant
-                                                      .bodySmall,
-                                                  fontSize: 10,
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .bodySmall
-                                                      ?.color
-                                                      ?.withValues(alpha: 0.7),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ],
+                                              ),
+                                              child: OsmeaComponents.row(
+                                                children: [
+                                                  Icon(
+                                                    ApiServiceRegistry
+                                                        .getCategoryIcon(
+                                                            service.category),
+                                                    size: 16,
+                                                    color: isSelected
+                                                        ? OsmeaColors.nordicBlue
+                                                        : Theme.of(context)
+                                                            .iconTheme
+                                                            .color
+                                                            ?.withValues(
+                                                                alpha: 0.7),
+                                                  ),
+                                                  OsmeaComponents.sizedBox(
+                                                      width: 12),
+                                                  OsmeaComponents.expanded(
+                                                    child:
+                                                        OsmeaComponents.column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        OsmeaComponents.text(
+                                                          service.name,
+                                                          variant:
+                                                              OsmeaTextVariant
+                                                                  .bodySmall,
+                                                          fontSize: 12,
+                                                          fontWeight: isSelected
+                                                              ? FontWeight.w600
+                                                              : FontWeight.w500,
+                                                          color: isSelected
+                                                              ? OsmeaColors
+                                                                  .nordicBlue
+                                                              : Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium
+                                                                  ?.color,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        OsmeaComponents
+                                                            .sizedBox(
+                                                                height: 2),
+                                                        OsmeaComponents.text(
+                                                          '${service.subcategory} • ${service.supportedMethods.join(', ')}',
+                                                          variant:
+                                                              OsmeaTextVariant
+                                                                  .bodySmall,
+                                                          fontSize: 10,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodySmall
+                                                                  ?.color
+                                                                  ?.withValues(
+                                                                      alpha:
+                                                                          0.7),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              // No Search Results
-              if (_searchQuery.isNotEmpty && _groupedFilteredServices.isEmpty)
-                OsmeaComponents.container(
-                  margin: EdgeInsets.all(isNarrow ? 12 : 16),
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .outline
-                          .withValues(alpha: 0.2),
-                    ),
-                  ),
-                  child: OsmeaComponents.column(
-                    children: [
-                      Icon(
-                        Icons.search_off_rounded,
-                        size: 32,
-                        color: Theme.of(context)
-                            .iconTheme
-                            .color
-                            ?.withValues(alpha: 0.5),
-                      ),
-                      OsmeaComponents.sizedBox(height: 12),
-                      OsmeaComponents.text(
-                        'No APIs found',
-                        variant: OsmeaTextVariant.titleSmall,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).textTheme.titleMedium?.color,
-                        textAlign: TextAlign.center,
-                      ),
-                      OsmeaComponents.sizedBox(height: 4),
-                      OsmeaComponents.text(
-                        'Try searching with different keywords like "product", "order", or "customer"',
-                        variant: OsmeaTextVariant.bodySmall,
-                        fontSize: 12,
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.color
-                            ?.withValues(alpha: 0.7),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                      ),
-                    ],
-                  ),
-                ),
-
-              // Responsive Get Started Section
-              if (widget.selectedService == null &&
-                  widget.expanded &&
-                  (_currentStore == null || !_isCurrentStoreComplete))
-                OsmeaComponents.container(
-                  margin: EdgeInsets.all(isNarrow ? 12 : 16),
-                  padding: EdgeInsets.all(isNarrow ? 16 : 20),
-                  decoration: BoxDecoration(
-                    gradient: OsmeaAppTheme.createGradient(
-                      OsmeaAppTheme.primaryColor.withValues(alpha: 0.05),
-                      OsmeaAppTheme.primaryVariant.withValues(alpha: 0.02),
-                    ),
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
-                    ),
-                  ),
-                  child: OsmeaComponents.column(
-                    children: [
-                      OsmeaComponents.container(
-                        padding: EdgeInsets.all(isNarrow ? 10 : 12),
-                        decoration: BoxDecoration(
-                          color: OsmeaAppTheme.primaryColor
-                              .withValues(alpha: 0.01),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.touch_app_rounded,
-                          size: isNarrow ? 20 : 24,
-                          color: OsmeaAppTheme.primaryColor,
-                        ),
-                      ),
-                      OsmeaComponents.sizedBox(height: isNarrow ? 8 : 12),
-                      OsmeaComponents.text(
-                        _currentStore == null
-                            ? 'Get Started'
-                            : 'Complete Setup',
-                        variant: OsmeaTextVariant.labelLarge,
-                        fontSize: isNarrow ? 14 : 16,
-                        fontWeight: FontWeight.w600,
-                        color: OsmeaAppTheme.primaryColor,
-                        textAlign: TextAlign.center,
-                      ),
-                      OsmeaComponents.sizedBox(height: isNarrow ? 4 : 6),
-                      OsmeaComponents.text(
-                        _currentStore == null
-                            ? 'Complete the store setup wizard to access APIs'
-                            : 'Complete your store configuration to access APIs',
-                        variant: OsmeaTextVariant.bodySmall,
-                        fontSize: isNarrow ? 11 : 12,
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.color
-                            ?.withValues(alpha: 0.7),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                      ),
-                      OsmeaComponents.sizedBox(height: isNarrow ? 8 : 12),
-                      OsmeaComponents.container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isNarrow ? 8 : 12,
-                          vertical: isNarrow ? 4 : 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              OsmeaAppTheme.primaryColor.withValues(alpha: 0.1),
-                          borderRadius: context.borderRadiusMedium,
-                          border: Border.all(
-                            color: OsmeaAppTheme.primaryColor
-                                .withValues(alpha: 0.2),
+                                          );
+                                        }).toList(),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        child: OsmeaComponents.row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.arrow_downward_rounded,
-                              size: isNarrow ? 12 : 14,
-                              color: OsmeaColors.nordicBlue,
-                            ),
-                            OsmeaComponents.sizedBox(width: isNarrow ? 4 : 6),
-                            OsmeaComponents.text(
-                              _currentStore == null
-                                  ? 'Setup required'
-                                  : 'Configuration needed',
-                              variant: OsmeaTextVariant.labelSmall,
-                              fontSize: isNarrow ? 10 : 11,
-                              fontWeight: FontWeight.w500,
-                              color: OsmeaColors.nordicBlue,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
 
-              // Selection Guidance when category is selected but no subcategory
-              if (_selectedCategory != null &&
-                  _selectedSubcategory == null &&
-                  widget.expanded)
-                OsmeaComponents.container(
-                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
-                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withValues(alpha: 0.05),
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .secondary
-                          .withValues(alpha: 0.2),
-                    ),
-                  ),
-                  child: OsmeaComponents.row(
-                    children: [
-                      Icon(
-                        Icons.info_outline_rounded,
-                        size: isNarrow ? 16 : 18,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
-                      OsmeaComponents.expanded(
-                        child: OsmeaComponents.text(
-                          'Select a subcategory to view available APIs',
-                          variant: OsmeaTextVariant.bodySmall,
-                          fontSize: isNarrow ? 11 : 12,
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontWeight: FontWeight.w500,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              // Service Selection Guidance when subcategory is selected
-              if (_selectedSubcategory != null &&
-                  widget.selectedService == null &&
-                  widget.expanded)
-                OsmeaComponents.container(
-                  margin: EdgeInsets.symmetric(horizontal: isNarrow ? 12 : 16),
-                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
-                  decoration: BoxDecoration(
-                    color: OsmeaAppTheme.successColor.withValues(alpha: 0.05),
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: OsmeaAppTheme.successColor.withValues(alpha: 0.2),
-                    ),
-                  ),
-                  child: OsmeaComponents.row(
-                    children: [
-                      Icon(
-                        Icons.check_circle_outline_rounded,
-                        size: isNarrow ? 16 : 18,
-                        color: OsmeaAppTheme.successColor,
-                      ),
-                      OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
-                      OsmeaComponents.expanded(
-                        child: OsmeaComponents.text(
-                          'Great! Now select an API service to start testing',
-                          variant: OsmeaTextVariant.bodySmall,
-                          fontSize: isNarrow ? 11 : 12,
-                          color: OsmeaAppTheme.successColor,
-                          fontWeight: FontWeight.w500,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              // Admin APIs Section Header
-              if (_currentStore != null && _isCurrentStoreComplete && widget.expanded)
-                OsmeaComponents.container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: isNarrow ? 12 : 16,
-                    vertical: isNarrow ? 8 : 12,
-                  ),
-                  padding: EdgeInsets.all(isNarrow ? 12 : 16),
-                  decoration: BoxDecoration(
-                    gradient: OsmeaAppTheme.createGradient(
-                      OsmeaColors.red[50]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.05),
-                      OsmeaColors.red[100]?.withValues(alpha: 0.1) ?? Colors.red.withValues(alpha: 0.02),
-                    ),
-                    borderRadius: context.borderRadiusMinStandard,
-                    border: Border.all(
-                      color: OsmeaColors.red[200]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.3),
-                      width: 1,
-                    ),
-                  ),
-                  child: OsmeaComponents.row(
-                    children: [
-                      OsmeaComponents.container(
-                        padding: EdgeInsets.all(isNarrow ? 8 : 10),
-                        decoration: BoxDecoration(
-                          color: OsmeaColors.red[100]?.withValues(alpha: 0.3) ?? Colors.red.withValues(alpha: 0.1),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.admin_panel_settings_rounded,
-                          size: isNarrow ? 18 : 20,
-                          color: OsmeaColors.red[600] ?? Colors.red[600],
-                        ),
-                      ),
-                      OsmeaComponents.sizedBox(width: isNarrow ? 8 : 12),
-                      OsmeaComponents.expanded(
-                        child: OsmeaComponents.column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            OsmeaComponents.text(
-                              'Admin APIs',
-                              variant: OsmeaTextVariant.titleSmall,
-                              fontSize: isNarrow ? 14 : 16,
-                              fontWeight: FontWeight.w700,
-                              color: OsmeaColors.red[700] ?? Colors.red[700],
+                      // No Search Results
+                      if (_searchQuery.isNotEmpty &&
+                          _groupedFilteredServices.isEmpty)
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.all(isNarrow ? 12 : 16),
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .outline
+                                  .withValues(alpha: 0.2),
                             ),
-                            OsmeaComponents.sizedBox(height: 2),
-                            OsmeaComponents.text(
-                              'Management and configuration APIs for administrators',
-                              variant: OsmeaTextVariant.bodySmall,
-                              fontSize: isNarrow ? 11 : 12,
-                              color: OsmeaColors.red[600]?.withValues(alpha: 0.8) ?? Colors.red[600]?.withValues(alpha: 0.8),
-                              maxLines: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                      OsmeaComponents.container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isNarrow ? 6 : 8,
-                          vertical: isNarrow ? 2 : 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: OsmeaColors.red[600]?.withValues(alpha: 0.1) ?? Colors.red[600]?.withValues(alpha: 0.1),
-                          borderRadius: context.borderRadiusMinStandard,
-                        ),
-                        child: OsmeaComponents.text(
-                          'Current',
-                          variant: OsmeaTextVariant.labelSmall,
-                          fontSize: isNarrow ? 10 : 11,
-                          fontWeight: FontWeight.w600,
-                          color: OsmeaColors.red[600] ?? Colors.red[600],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              // Categories List
-              OsmeaComponents.expanded(
-                child: Scrollbar(
-                  controller: _scrollController,
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    padding: EdgeInsets.all(isNarrow ? 6 : 8),
-                    itemCount: _currentStore != null && _isCurrentStoreComplete
-                        ? ApiServiceRegistry.categories
-                            .where((cat) => _hasStoreForPlatform(cat))
-                            .length
-                        : 0,
-                    itemBuilder: (context, mainIndex) {
-                      final availableCategories = ApiServiceRegistry.categories
-                          .where((cat) => _hasStoreForPlatform(cat))
-                          .toList();
-                      final mainCategory = availableCategories[mainIndex];
-                      final isMainSelected =
-                          _selectedMainCategory == mainCategory;
-                      final hasStore = _hasStoreForPlatform(mainCategory);
-                      final subCategories = hasStore
-                          ? _getCategoriesForCurrentStore(mainCategory)
-                          : [];
-
-                      return OsmeaComponents.column(
-                        children: [
-                          // Main Category Header
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            decoration: BoxDecoration(
-                              color: isMainSelected
-                                  ? OsmeaColors.nordicBlue
-                                      .withValues(alpha: 0.03)
-                                  : OsmeaColors.transparent,
-                              borderRadius: context.borderRadiusMinStandard,
-                            ),
-                            child: ListTile(
-                              dense: !widget.expanded || isMobile,
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal:
-                                    widget.expanded ? (isNarrow ? 12 : 16) : 8,
-                                vertical: isMobile ? 2 : 4,
+                          ),
+                          child: OsmeaComponents.column(
+                            children: [
+                              Icon(
+                                Icons.search_off_rounded,
+                                size: 32,
+                                color: Theme.of(context)
+                                    .iconTheme
+                                    .color
+                                    ?.withValues(alpha: 0.5),
                               ),
-                              leading: Icon(
-                                ApiServiceRegistry.getCategoryIcon(
-                                    mainCategory),
-                                color: hasStore && _isCurrentStoreComplete
-                                    ? (isMainSelected
-                                        ? OsmeaColors.nordicBlue
-                                        : Theme.of(context).iconTheme.color)
-                                    : Theme.of(context)
-                                        .iconTheme
-                                        .color
-                                        ?.withValues(alpha: 0.4),
-                                size: isNarrow ? 20 : 22,
+                              OsmeaComponents.sizedBox(height: 12),
+                              OsmeaComponents.text(
+                                'No APIs found',
+                                variant: OsmeaTextVariant.titleSmall,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.color,
+                                textAlign: TextAlign.center,
                               ),
-                              title: widget.expanded
-                                  ? OsmeaComponents.text(
-                                      ApiServiceRegistry.getCategoryName(
-                                          mainCategory),
-                                      variant: OsmeaTextVariant.labelMedium,
-                                      color: hasStore && _isCurrentStoreComplete
-                                          ? (isMainSelected
-                                              ? OsmeaColors.nordicBlue
-                                              : Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium
-                                                  ?.color)
-                                          : Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.color
-                                              ?.withValues(alpha: 0.4),
-                                      fontWeight: isMainSelected
-                                          ? FontWeight.w700
-                                          : FontWeight.w600,
-                                      fontSize: isNarrow ? 13 : 15,
-                                    )
-                                  : null,
-                              trailing: widget.expanded
-                                  ? OsmeaComponents.row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (!hasStore ||
-                                            !_isCurrentStoreComplete)
-                                          OsmeaComponents.container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: isNarrow ? 4 : 6,
-                                              vertical: 2,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .error
-                                                  .withValues(alpha: 0.1),
-                                              borderRadius: context
-                                                  .borderRadiusMinStandard,
-                                            ),
-                                            child: OsmeaComponents.text(
-                                              !hasStore
-                                                  ? 'No Store'
-                                                  : 'Incomplete',
-                                              variant:
-                                                  OsmeaTextVariant.labelSmall,
-                                              fontSize: isNarrow ? 8 : 9,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .error,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        if (hasStore &&
-                                            _isCurrentStoreComplete &&
-                                            subCategories.isNotEmpty)
-                                          AnimatedRotation(
-                                            turns: isMainSelected ? 0.25 : 0,
-                                            duration: const Duration(
-                                                milliseconds: 200),
-                                            child: Icon(
-                                              Icons.chevron_right,
-                                              size: isNarrow ? 16 : 18,
-                                              color: isMainSelected
+                              OsmeaComponents.sizedBox(height: 4),
+                              OsmeaComponents.text(
+                                'Try searching with different keywords like "product", "order", or "customer"',
+                                variant: OsmeaTextVariant.bodySmall,
+                                fontSize: 12,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.color
+                                    ?.withValues(alpha: 0.7),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // Responsive Get Started Section
+                      if (widget.selectedService == null &&
+                          widget.expanded &&
+                          (_currentStore == null || !_isCurrentStoreComplete))
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.all(isNarrow ? 12 : 16),
+                          padding: EdgeInsets.all(isNarrow ? 16 : 20),
+                          decoration: BoxDecoration(
+                            gradient: OsmeaAppTheme.createGradient(
+                              OsmeaAppTheme.primaryColor
+                                  .withValues(alpha: 0.05),
+                              OsmeaAppTheme.primaryVariant
+                                  .withValues(alpha: 0.02),
+                            ),
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color: OsmeaAppTheme.primaryColor
+                                  .withValues(alpha: 0.1),
+                            ),
+                          ),
+                          child: OsmeaComponents.column(
+                            children: [
+                              OsmeaComponents.container(
+                                padding: EdgeInsets.all(isNarrow ? 10 : 12),
+                                decoration: BoxDecoration(
+                                  color: OsmeaAppTheme.primaryColor
+                                      .withValues(alpha: 0.01),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.touch_app_rounded,
+                                  size: isNarrow ? 20 : 24,
+                                  color: OsmeaAppTheme.primaryColor,
+                                ),
+                              ),
+                              OsmeaComponents.sizedBox(
+                                  height: isNarrow ? 8 : 12),
+                              OsmeaComponents.text(
+                                _currentStore == null
+                                    ? 'Get Started'
+                                    : 'Complete Setup',
+                                variant: OsmeaTextVariant.labelLarge,
+                                fontSize: isNarrow ? 14 : 16,
+                                fontWeight: FontWeight.w600,
+                                color: OsmeaAppTheme.primaryColor,
+                                textAlign: TextAlign.center,
+                              ),
+                              OsmeaComponents.sizedBox(
+                                  height: isNarrow ? 4 : 6),
+                              OsmeaComponents.text(
+                                _currentStore == null
+                                    ? 'Complete the store setup wizard to access APIs'
+                                    : 'Complete your store configuration to access APIs',
+                                variant: OsmeaTextVariant.bodySmall,
+                                fontSize: isNarrow ? 11 : 12,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color
+                                    ?.withValues(alpha: 0.7),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                              ),
+                              OsmeaComponents.sizedBox(
+                                  height: isNarrow ? 8 : 12),
+                              OsmeaComponents.container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isNarrow ? 8 : 12,
+                                  vertical: isNarrow ? 4 : 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: OsmeaAppTheme.primaryColor
+                                      .withValues(alpha: 0.1),
+                                  borderRadius: context.borderRadiusMedium,
+                                  border: Border.all(
+                                    color: OsmeaAppTheme.primaryColor
+                                        .withValues(alpha: 0.2),
+                                  ),
+                                ),
+                                child: OsmeaComponents.row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_downward_rounded,
+                                      size: isNarrow ? 12 : 14,
+                                      color: OsmeaColors.nordicBlue,
+                                    ),
+                                    OsmeaComponents.sizedBox(
+                                        width: isNarrow ? 4 : 6),
+                                    OsmeaComponents.text(
+                                      _currentStore == null
+                                          ? 'Setup required'
+                                          : 'Configuration needed',
+                                      variant: OsmeaTextVariant.labelSmall,
+                                      fontSize: isNarrow ? 10 : 11,
+                                      fontWeight: FontWeight.w500,
+                                      color: OsmeaColors.nordicBlue,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // Selection Guidance when category is selected but no subcategory
+                      if (_selectedCategory != null &&
+                          _selectedSubcategory == null &&
+                          widget.expanded)
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: isNarrow ? 12 : 16),
+                          padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withValues(alpha: 0.05),
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withValues(alpha: 0.2),
+                            ),
+                          ),
+                          child: OsmeaComponents.row(
+                            children: [
+                              Icon(
+                                Icons.info_outline_rounded,
+                                size: isNarrow ? 16 : 18,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
+                              OsmeaComponents.expanded(
+                                child: OsmeaComponents.text(
+                                  'Select a subcategory to view available APIs',
+                                  variant: OsmeaTextVariant.bodySmall,
+                                  fontSize: isNarrow ? 11 : 12,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w500,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // Service Selection Guidance when subcategory is selected
+                      if (_selectedSubcategory != null &&
+                          widget.selectedService == null &&
+                          widget.expanded)
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: isNarrow ? 12 : 16),
+                          padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                          decoration: BoxDecoration(
+                            color: OsmeaAppTheme.successColor
+                                .withValues(alpha: 0.05),
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color: OsmeaAppTheme.successColor
+                                  .withValues(alpha: 0.2),
+                            ),
+                          ),
+                          child: OsmeaComponents.row(
+                            children: [
+                              Icon(
+                                Icons.check_circle_outline_rounded,
+                                size: isNarrow ? 16 : 18,
+                                color: OsmeaAppTheme.successColor,
+                              ),
+                              OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
+                              OsmeaComponents.expanded(
+                                child: OsmeaComponents.text(
+                                  'Great! Now select an API service to start testing',
+                                  variant: OsmeaTextVariant.bodySmall,
+                                  fontSize: isNarrow ? 11 : 12,
+                                  color: OsmeaAppTheme.successColor,
+                                  fontWeight: FontWeight.w500,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // Admin APIs Section Header
+                      if (_currentStore != null &&
+                          _isCurrentStoreComplete &&
+                          widget.expanded)
+                        OsmeaComponents.container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: isNarrow ? 12 : 16,
+                            vertical: isNarrow ? 8 : 12,
+                          ),
+                          padding: EdgeInsets.all(isNarrow ? 12 : 16),
+                          decoration: BoxDecoration(
+                            gradient: OsmeaAppTheme.createGradient(
+                              OsmeaColors.red[50]?.withValues(alpha: 0.3) ??
+                                  Colors.red.withValues(alpha: 0.05),
+                              OsmeaColors.red[100]?.withValues(alpha: 0.1) ??
+                                  Colors.red.withValues(alpha: 0.02),
+                            ),
+                            borderRadius: context.borderRadiusMinStandard,
+                            border: Border.all(
+                              color: OsmeaColors.red[200]
+                                      ?.withValues(alpha: 0.3) ??
+                                  Colors.red.withValues(alpha: 0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: OsmeaComponents.row(
+                            children: [
+                              OsmeaComponents.container(
+                                padding: EdgeInsets.all(isNarrow ? 8 : 10),
+                                decoration: BoxDecoration(
+                                  color: OsmeaColors.red[100]
+                                          ?.withValues(alpha: 0.3) ??
+                                      Colors.red.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.admin_panel_settings_rounded,
+                                  size: isNarrow ? 18 : 20,
+                                  color:
+                                      OsmeaColors.red[600] ?? Colors.red[600],
+                                ),
+                              ),
+                              OsmeaComponents.sizedBox(
+                                  width: isNarrow ? 8 : 12),
+                              OsmeaComponents.expanded(
+                                child: OsmeaComponents.column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    OsmeaComponents.text(
+                                      'Admin APIs',
+                                      variant: OsmeaTextVariant.titleSmall,
+                                      fontSize: isNarrow ? 14 : 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: OsmeaColors.red[700] ??
+                                          Colors.red[700],
+                                    ),
+                                    OsmeaComponents.sizedBox(height: 2),
+                                    OsmeaComponents.text(
+                                      'Management and configuration APIs for administrators',
+                                      variant: OsmeaTextVariant.bodySmall,
+                                      fontSize: isNarrow ? 11 : 12,
+                                      color: OsmeaColors.red[600]
+                                              ?.withValues(alpha: 0.8) ??
+                                          Colors.red[600]
+                                              ?.withValues(alpha: 0.8),
+                                      maxLines: 2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              OsmeaComponents.container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isNarrow ? 6 : 8,
+                                  vertical: isNarrow ? 2 : 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: OsmeaColors.red[600]
+                                          ?.withValues(alpha: 0.1) ??
+                                      Colors.red[600]?.withValues(alpha: 0.1),
+                                  borderRadius: context.borderRadiusMinStandard,
+                                ),
+                                child: OsmeaComponents.text(
+                                  'Current',
+                                  variant: OsmeaTextVariant.labelSmall,
+                                  fontSize: isNarrow ? 10 : 11,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      OsmeaColors.red[600] ?? Colors.red[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      // Categories List
+                      if (_currentStore != null && _isCurrentStoreComplete)
+                        OsmeaComponents.container(
+                          constraints: BoxConstraints(
+                            maxHeight: constraints.maxHeight * 0.5,
+                          ),
+                          child: Scrollbar(
+                            controller: _scrollController,
+                            child: ListView.builder(
+                              controller: _scrollController,
+                              padding: EdgeInsets.all(isNarrow ? 6 : 8),
+                              itemCount: ApiServiceRegistry.categories
+                                  .where((cat) => _hasStoreForPlatform(cat))
+                                  .length,
+                              itemBuilder: (context, mainIndex) {
+                                final availableCategories = ApiServiceRegistry
+                                    .categories
+                                    .where((cat) => _hasStoreForPlatform(cat))
+                                    .toList();
+                                final mainCategory =
+                                    availableCategories[mainIndex];
+                                final isMainSelected =
+                                    _selectedMainCategory == mainCategory;
+                                final hasStore =
+                                    _hasStoreForPlatform(mainCategory);
+                                final subCategories = hasStore
+                                    ? _getCategoriesForCurrentStore(
+                                        mainCategory)
+                                    : [];
+
+                                return OsmeaComponents.column(
+                                  children: [
+                                    // Main Category Header
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      decoration: BoxDecoration(
+                                        color: isMainSelected
+                                            ? OsmeaColors.nordicBlue
+                                                .withValues(alpha: 0.03)
+                                            : OsmeaColors.transparent,
+                                        borderRadius:
+                                            context.borderRadiusMinStandard,
+                                      ),
+                                      child: ListTile(
+                                        dense: !widget.expanded || isMobile,
+                                        contentPadding: EdgeInsets.symmetric(
+                                          horizontal: widget.expanded
+                                              ? (isNarrow ? 12 : 16)
+                                              : 8,
+                                          vertical: isMobile ? 2 : 4,
+                                        ),
+                                        leading: Icon(
+                                          ApiServiceRegistry.getCategoryIcon(
+                                              mainCategory),
+                                          color: hasStore &&
+                                                  _isCurrentStoreComplete
+                                              ? (isMainSelected
                                                   ? OsmeaColors.nordicBlue
                                                   : Theme.of(context)
                                                       .iconTheme
-                                                      .color,
-                                            ),
-                                          ),
-                                      ],
-                                    )
-                                  : null,
-                              onTap: hasStore &&
-                                      _isCurrentStoreComplete &&
-                                      subCategories.isNotEmpty
-                                  ? () => _selectMainCategory(mainCategory)
-                                  : null,
-                            ),
-                          ),
-
-                          if (isMainSelected &&
-                              widget.expanded &&
-                              hasStore &&
-                              _isCurrentStoreComplete)
-                            AnimatedBuilder(
-                              animation: _categoryAnimation,
-                              builder: (context, child) {
-                                return SizeTransition(
-                                  sizeFactor: _categoryAnimation,
-                                  child: OsmeaComponents.container(
-                                    margin: EdgeInsets.only(
-                                      left: isNarrow ? 16 : 24,
-                                      bottom: isNarrow ? 6 : 8,
-                                    ),
-                                    child: OsmeaComponents.column(
-                                      children: subCategories.map((category) {
-                                        final isSelected =
-                                            _selectedCategory == category;
-                                        final subcategories =
-                                            _getSubCategoriesForGraphQLCategory(
-                                                category);
-                                        return OsmeaComponents.column(
-                                          children: [
-                                            // Category Header
-                                            ListTile(
-                                              dense: true,
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                horizontal: isNarrow ? 12 : 16,
-                                                vertical: isMobile ? 2 : 4,
-                                              ),
-                                              leading: Icon(
+                                                      .color)
+                                              : Theme.of(context)
+                                                  .iconTheme
+                                                  .color
+                                                  ?.withValues(alpha: 0.4),
+                                          size: isNarrow ? 20 : 22,
+                                        ),
+                                        title: widget.expanded
+                                            ? OsmeaComponents.text(
                                                 ApiServiceRegistry
-                                                    .getCategoryIcon(category),
-                                                color: isSelected
-                                                    ? OsmeaColors.nordicBlue
-                                                    : Theme.of(context)
-                                                        .iconTheme
-                                                        .color,
-                                                size: isNarrow ? 18 : 20,
-                                              ),
-                                              title: OsmeaComponents.text(
-                                                _getCategoryDisplayName(
-                                                    category),
+                                                    .getCategoryName(
+                                                        mainCategory),
                                                 variant: OsmeaTextVariant
                                                     .labelMedium,
-                                                color: isSelected
-                                                    ? OsmeaColors.nordicBlue
+                                                color: hasStore &&
+                                                        _isCurrentStoreComplete
+                                                    ? (isMainSelected
+                                                        ? OsmeaColors.nordicBlue
+                                                        : Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium
+                                                            ?.color)
                                                     : Theme.of(context)
                                                         .textTheme
                                                         .bodyMedium
-                                                        ?.color,
-                                                fontWeight: isSelected
-                                                    ? FontWeight.w600
-                                                    : FontWeight.w500,
-                                                fontSize: isNarrow ? 12 : 14,
-                                              ),
-                                              trailing: subcategories.isNotEmpty
-                                                  ? AnimatedRotation(
-                                                      turns:
-                                                          isSelected ? 0.25 : 0,
+                                                        ?.color
+                                                        ?.withValues(
+                                                            alpha: 0.4),
+                                                fontWeight: isMainSelected
+                                                    ? FontWeight.w700
+                                                    : FontWeight.w600,
+                                                fontSize: isNarrow ? 13 : 15,
+                                              )
+                                            : null,
+                                        trailing: widget.expanded
+                                            ? OsmeaComponents.row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  if (!hasStore ||
+                                                      !_isCurrentStoreComplete)
+                                                    OsmeaComponents.container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                        horizontal:
+                                                            isNarrow ? 4 : 6,
+                                                        vertical: 2,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .error
+                                                            .withValues(
+                                                                alpha: 0.1),
+                                                        borderRadius: context
+                                                            .borderRadiusMinStandard,
+                                                      ),
+                                                      child:
+                                                          OsmeaComponents.text(
+                                                        !hasStore
+                                                            ? 'No Store'
+                                                            : 'Incomplete',
+                                                        variant:
+                                                            OsmeaTextVariant
+                                                                .labelSmall,
+                                                        fontSize:
+                                                            isNarrow ? 8 : 9,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .error,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  if (hasStore &&
+                                                      _isCurrentStoreComplete &&
+                                                      subCategories.isNotEmpty)
+                                                    AnimatedRotation(
+                                                      turns: isMainSelected
+                                                          ? 0.25
+                                                          : 0,
                                                       duration: const Duration(
                                                           milliseconds: 200),
                                                       child: Icon(
                                                         Icons.chevron_right,
                                                         size:
-                                                            isNarrow ? 14 : 16,
-                                                        color: isSelected
+                                                            isNarrow ? 16 : 18,
+                                                        color: isMainSelected
                                                             ? OsmeaColors
-                                                                .deepSea
+                                                                .nordicBlue
                                                             : Theme.of(context)
                                                                 .iconTheme
                                                                 .color,
                                                       ),
-                                                    )
-                                                  : null,
-                                              onTap: () =>
-                                                  _selectCategory(category),
-                                            ),
+                                                    ),
+                                                ],
+                                              )
+                                            : null,
+                                        onTap: hasStore &&
+                                                _isCurrentStoreComplete &&
+                                                subCategories.isNotEmpty
+                                            ? () => _selectMainCategory(
+                                                mainCategory)
+                                            : null,
+                                      ),
+                                    ),
 
-                                            // Subcategories with animation
-                                            if (isSelected && widget.expanded)
-                                              AnimatedBuilder(
-                                                animation: _categoryAnimation,
-                                                builder: (context, child) {
-                                                  return SizeTransition(
-                                                    sizeFactor:
-                                                        _categoryAnimation,
-                                                    child: OsmeaComponents
-                                                        .container(
-                                                      margin: EdgeInsets.only(
-                                                        left:
-                                                            isNarrow ? 16 : 24,
-                                                        bottom:
-                                                            isNarrow ? 6 : 8,
-                                                      ),
-                                                      child: OsmeaComponents
-                                                          .column(
-                                                        children: subcategories
-                                                            .map((subcategory) {
-                                                          final services =
-                                                              ApiServiceRegistry
-                                                                  .getBySubcategory(
-                                                                      category,
-                                                                      subcategory);
-                                                          final isSubSelected =
-                                                              _selectedSubcategory ==
-                                                                  subcategory;
-                                                          return OsmeaComponents
-                                                              .column(
-                                                            children: [
-                                                              // Subcategory Header
-                                                              ListTile(
-                                                                dense: true,
-                                                                contentPadding:
-                                                                    EdgeInsets
-                                                                        .symmetric(
-                                                                  horizontal:
-                                                                      isNarrow
-                                                                          ? 12
-                                                                          : 16,
-                                                                  vertical:
-                                                                      isMobile
-                                                                          ? 2
-                                                                          : 4,
-                                                                ),
-                                                                title:
-                                                                    OsmeaComponents
-                                                                        .text(
-                                                                  subcategory,
-                                                                  variant:
-                                                                      OsmeaTextVariant
-                                                                          .labelMedium,
-                                                                  fontSize:
-                                                                      isNarrow
-                                                                          ? 12
-                                                                          : 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: isSubSelected
-                                                                      ? Theme.of(
-                                                                              context)
-                                                                          .colorScheme
-                                                                          .primary
+                                    if (isMainSelected &&
+                                        widget.expanded &&
+                                        hasStore &&
+                                        _isCurrentStoreComplete)
+                                      AnimatedBuilder(
+                                        animation: _categoryAnimation,
+                                        builder: (context, child) {
+                                          return SizeTransition(
+                                            sizeFactor: _categoryAnimation,
+                                            child: OsmeaComponents.container(
+                                              margin: EdgeInsets.only(
+                                                left: isNarrow ? 16 : 24,
+                                                bottom: isNarrow ? 6 : 8,
+                                              ),
+                                              child: OsmeaComponents.column(
+                                                children: subCategories
+                                                    .map((category) {
+                                                  final isSelected =
+                                                      _selectedCategory ==
+                                                          category;
+                                                  final subcategories =
+                                                      _getSubCategoriesForGraphQLCategory(
+                                                          category);
+                                                  return OsmeaComponents.column(
+                                                    children: [
+                                                      // Category Header
+                                                      ListTile(
+                                                        dense: true,
+                                                        contentPadding:
+                                                            EdgeInsets
+                                                                .symmetric(
+                                                          horizontal: isNarrow
+                                                              ? 12
+                                                              : 16,
+                                                          vertical:
+                                                              isMobile ? 2 : 4,
+                                                        ),
+                                                        leading: Icon(
+                                                          ApiServiceRegistry
+                                                              .getCategoryIcon(
+                                                                  category),
+                                                          color: isSelected
+                                                              ? OsmeaColors
+                                                                  .nordicBlue
+                                                              : Theme.of(
+                                                                      context)
+                                                                  .iconTheme
+                                                                  .color,
+                                                          size: isNarrow
+                                                              ? 18
+                                                              : 20,
+                                                        ),
+                                                        title: OsmeaComponents
+                                                            .text(
+                                                          _getCategoryDisplayName(
+                                                              category),
+                                                          variant:
+                                                              OsmeaTextVariant
+                                                                  .labelMedium,
+                                                          color: isSelected
+                                                              ? OsmeaColors
+                                                                  .nordicBlue
+                                                              : Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium
+                                                                  ?.color,
+                                                          fontWeight: isSelected
+                                                              ? FontWeight.w600
+                                                              : FontWeight.w500,
+                                                          fontSize: isNarrow
+                                                              ? 12
+                                                              : 14,
+                                                        ),
+                                                        trailing: subcategories
+                                                                .isNotEmpty
+                                                            ? AnimatedRotation(
+                                                                turns:
+                                                                    isSelected
+                                                                        ? 0.25
+                                                                        : 0,
+                                                                duration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            200),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .chevron_right,
+                                                                  size: isNarrow
+                                                                      ? 14
+                                                                      : 16,
+                                                                  color: isSelected
+                                                                      ? OsmeaColors
+                                                                          .deepSea
                                                                       : Theme.of(
                                                                               context)
-                                                                          .textTheme
-                                                                          .bodyMedium
-                                                                          ?.color,
+                                                                          .iconTheme
+                                                                          .color,
                                                                 ),
-                                                                trailing:
-                                                                    OsmeaComponents
-                                                                        .container(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .symmetric(
-                                                                    horizontal:
-                                                                        isNarrow
-                                                                            ? 6
-                                                                            : 8,
-                                                                    vertical: 2,
-                                                                  ),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .primary
-                                                                        .withValues(
-                                                                            alpha:
-                                                                                0.1),
-                                                                    borderRadius:
-                                                                        context
-                                                                            .borderRadiusMinStandard,
-                                                                  ),
-                                                                  child:
-                                                                      OsmeaComponents
-                                                                          .text(
-                                                                    '${services.length}',
-                                                                    variant:
-                                                                        OsmeaTextVariant
-                                                                            .labelSmall,
-                                                                    fontSize:
-                                                                        isNarrow
-                                                                            ? 10
-                                                                            : 12,
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .primary,
-                                                                  ),
-                                                                ),
-                                                                onTap: () =>
-                                                                    _selectSubcategory(
-                                                                        subcategory),
-                                                              ),
-
-                                                              // Services
-                                                              if (isSubSelected)
-                                                                ...services
-                                                                    .asMap()
-                                                                    .entries
-                                                                    .map(
-                                                                        (entry) {
-                                                                  final index =
-                                                                      entry.key;
-                                                                  final service =
-                                                                      entry
-                                                                          .value;
-                                                                  final isServiceSelected =
-                                                                      widget.selectedService ==
-                                                                          service;
-                                                                  return AnimatedContainer(
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            200 +
-                                                                                (index * 50)),
-                                                                    margin:
-                                                                        EdgeInsets
-                                                                            .only(
-                                                                      left: isNarrow
-                                                                          ? 12
-                                                                          : 16,
-                                                                      bottom:
-                                                                          isNarrow
-                                                                              ? 2
-                                                                              : 4,
-                                                                    ),
-                                                                    child:
-                                                                        Material(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      child:
-                                                                          InkWell(
-                                                                        borderRadius:
-                                                                            context.borderRadiusMinStandard,
-                                                                        onTap: () =>
-                                                                            widget.onServiceSelected(service),
-                                                                        child: OsmeaComponents
-                                                                            .container(
-                                                                          padding: EdgeInsets.all(isNarrow
-                                                                              ? 6
-                                                                              : 8),
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color: isServiceSelected
-                                                                                ? OsmeaColors.nordicBlue.withValues(alpha: 0.1)
-                                                                                : OsmeaColors.transparent,
-                                                                            borderRadius:
-                                                                                context.borderRadiusMinStandard,
-                                                                            border: isServiceSelected
-                                                                                ? Border.all(
-                                                                                    color: OsmeaColors.nordicBlue.withValues(alpha: 0.3),
-                                                                                    width: 1,
-                                                                                  )
-                                                                                : null,
-                                                                          ),
-                                                                          child:
-                                                                              OsmeaComponents.row(
-                                                                            children: [
-                                                                              OsmeaComponents.container(
-                                                                                width: isNarrow ? 3 : 4,
-                                                                                height: isNarrow ? 12 : 16,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : OsmeaColors.transparent,
-                                                                                  borderRadius: context.borderRadiusMinStandard,
-                                                                                ),
-                                                                              ),
-                                                                              OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
-                                                                              OsmeaComponents.expanded(
-                                                                                child: OsmeaComponents.text(
-                                                                                  service.name,
-                                                                                  variant: OsmeaTextVariant.bodySmall,
-                                                                                  fontSize: isNarrow ? 11 : 13,
-                                                                                  color: isServiceSelected ? OsmeaColors.nordicBlue : Theme.of(context).textTheme.bodyMedium?.color,
-                                                                                  fontWeight: isServiceSelected ? FontWeight.w500 : FontWeight.w400,
-                                                                                  maxLines: isNarrow ? 2 : 1,
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }),
-                                                            ],
-                                                          );
-                                                        }).toList(),
+                                                              )
+                                                            : null,
+                                                        onTap: () =>
+                                                            _selectCategory(
+                                                                category),
                                                       ),
-                                                    ),
+
+                                                      // Subcategories with animation
+                                                      if (isSelected &&
+                                                          widget.expanded)
+                                                        AnimatedBuilder(
+                                                          animation:
+                                                              _categoryAnimation,
+                                                          builder:
+                                                              (context, child) {
+                                                            return SizeTransition(
+                                                              sizeFactor:
+                                                                  _categoryAnimation,
+                                                              child:
+                                                                  OsmeaComponents
+                                                                      .container(
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  left: isNarrow
+                                                                      ? 16
+                                                                      : 24,
+                                                                  bottom:
+                                                                      isNarrow
+                                                                          ? 6
+                                                                          : 8,
+                                                                ),
+                                                                child:
+                                                                    OsmeaComponents
+                                                                        .column(
+                                                                  children:
+                                                                      subcategories
+                                                                          .map(
+                                                                              (subcategory) {
+                                                                    final services =
+                                                                        ApiServiceRegistry.getBySubcategory(
+                                                                            category,
+                                                                            subcategory);
+                                                                    final isSubSelected =
+                                                                        _selectedSubcategory ==
+                                                                            subcategory;
+                                                                    return OsmeaComponents
+                                                                        .column(
+                                                                      children: [
+                                                                        // Subcategory Header
+                                                                        ListTile(
+                                                                          dense:
+                                                                              true,
+                                                                          contentPadding:
+                                                                              EdgeInsets.symmetric(
+                                                                            horizontal: isNarrow
+                                                                                ? 12
+                                                                                : 16,
+                                                                            vertical: isMobile
+                                                                                ? 2
+                                                                                : 4,
+                                                                          ),
+                                                                          title:
+                                                                              OsmeaComponents.text(
+                                                                            subcategory,
+                                                                            variant:
+                                                                                OsmeaTextVariant.labelMedium,
+                                                                            fontSize: isNarrow
+                                                                                ? 12
+                                                                                : 14,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            color: isSubSelected
+                                                                                ? Theme.of(context).colorScheme.primary
+                                                                                : Theme.of(context).textTheme.bodyMedium?.color,
+                                                                          ),
+                                                                          trailing:
+                                                                              OsmeaComponents.container(
+                                                                            padding:
+                                                                                EdgeInsets.symmetric(
+                                                                              horizontal: isNarrow ? 6 : 8,
+                                                                              vertical: 2,
+                                                                            ),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                                                                              borderRadius: context.borderRadiusMinStandard,
+                                                                            ),
+                                                                            child:
+                                                                                OsmeaComponents.text(
+                                                                              '${services.length}',
+                                                                              variant: OsmeaTextVariant.labelSmall,
+                                                                              fontSize: isNarrow ? 10 : 12,
+                                                                              color: Theme.of(context).colorScheme.primary,
+                                                                            ),
+                                                                          ),
+                                                                          onTap: () =>
+                                                                              _selectSubcategory(subcategory),
+                                                                        ),
+
+                                                                        // Services
+                                                                        if (isSubSelected)
+                                                                          ...services
+                                                                              .asMap()
+                                                                              .entries
+                                                                              .map((entry) {
+                                                                            final index =
+                                                                                entry.key;
+                                                                            final service =
+                                                                                entry.value;
+                                                                            final isServiceSelected =
+                                                                                widget.selectedService == service;
+                                                                            return AnimatedContainer(
+                                                                              duration: Duration(milliseconds: 200 + (index * 50)),
+                                                                              margin: EdgeInsets.only(
+                                                                                left: isNarrow ? 12 : 16,
+                                                                                bottom: isNarrow ? 2 : 4,
+                                                                              ),
+                                                                              child: Material(
+                                                                                color: Colors.transparent,
+                                                                                child: InkWell(
+                                                                                  borderRadius: context.borderRadiusMinStandard,
+                                                                                  onTap: () => widget.onServiceSelected(service),
+                                                                                  child: OsmeaComponents.container(
+                                                                                    padding: EdgeInsets.all(isNarrow ? 6 : 8),
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: isServiceSelected ? OsmeaColors.nordicBlue.withValues(alpha: 0.1) : OsmeaColors.transparent,
+                                                                                      borderRadius: context.borderRadiusMinStandard,
+                                                                                      border: isServiceSelected
+                                                                                          ? Border.all(
+                                                                                              color: OsmeaColors.nordicBlue.withValues(alpha: 0.3),
+                                                                                              width: 1,
+                                                                                            )
+                                                                                          : null,
+                                                                                    ),
+                                                                                    child: OsmeaComponents.row(
+                                                                                      children: [
+                                                                                        OsmeaComponents.container(
+                                                                                          width: isNarrow ? 3 : 4,
+                                                                                          height: isNarrow ? 12 : 16,
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: isServiceSelected ? OsmeaColors.nordicBlue : OsmeaColors.transparent,
+                                                                                            borderRadius: context.borderRadiusMinStandard,
+                                                                                          ),
+                                                                                        ),
+                                                                                        OsmeaComponents.sizedBox(width: isNarrow ? 6 : 8),
+                                                                                        OsmeaComponents.expanded(
+                                                                                          child: OsmeaComponents.text(
+                                                                                            service.name,
+                                                                                            variant: OsmeaTextVariant.bodySmall,
+                                                                                            fontSize: isNarrow ? 11 : 13,
+                                                                                            color: isServiceSelected ? OsmeaColors.nordicBlue : Theme.of(context).textTheme.bodyMedium?.color,
+                                                                                            fontWeight: isServiceSelected ? FontWeight.w500 : FontWeight.w400,
+                                                                                            maxLines: isNarrow ? 2 : 1,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }),
+                                                                      ],
+                                                                    );
+                                                                  }).toList(),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                    ],
                                                   );
-                                                },
+                                                }).toList(),
                                               ),
-                                          ],
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                  ],
                                 );
                               },
                             ),
-                        ],
-                      );
-                    },
+                          ),
+                        ),
+
+                      // Customer APIs Section
+                      if (_currentStore != null &&
+                          _isCurrentStoreComplete &&
+                          widget.expanded &&
+                          _selectedMainCategory == ApiCategory.woocommerce)
+                        _buildCustomerApisSection(isNarrow, isMobile, context),
+                    ],
                   ),
                 ),
               ),
-
-              // Customer APIs Section
-              if (_currentStore != null && 
-                  _isCurrentStoreComplete && 
-                  widget.expanded &&
-                  _selectedMainCategory == ApiCategory.woocommerce)
-                _buildCustomerApisSection(isNarrow, isMobile, context),
             ],
           ),
         );
@@ -1611,6 +1687,28 @@ class _ModernSidebarState extends State<ModernSidebar>
         return 'WooCommerce Wishlist';
       case ApiCategory.woocommerceCart:
         return 'WooCommerce Cart';
+      case ApiCategory.woocommerceCheckout:
+        return 'WooCommerce Checkout';
+      case ApiCategory.woocommerceCheckoutOrder:
+        return 'WooCommerce Checkout Order';
+      case ApiCategory.woocommerceOrder:
+        return 'WooCommerce Store Order';
+      case ApiCategory.woocommerceStoreProducts:
+        return 'WooCommerce Products';
+      case ApiCategory.woocommerceStoreProductTags:
+        return 'WooCommerce Product Tags';
+      case ApiCategory.woocommerceStoreProductReviews:
+        return 'WooCommerce Product Reviews';
+      case ApiCategory.woocommerceStoreProductCollectionData:
+        return 'WooCommerce Product Collection Data';
+      case ApiCategory.woocommerceStoreProductCategories:
+        return 'WooCommerce Product Categories';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'WooCommerce Product Brands';
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return 'WooCommerce Product Attributes';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'WooCommerce Product Attribute Terms';
     }
   }
 
@@ -1699,6 +1797,18 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
+        case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceCheckout:
+        case ApiCategory.woocommerceCheckoutOrder:
+        case ApiCategory.woocommerceOrder:
+        case ApiCategory.woocommerceStoreProducts:
+        case ApiCategory.woocommerceStoreProductTags:
+        case ApiCategory.woocommerceStoreProductReviews:
+        case ApiCategory.woocommerceStoreProductCollectionData:
+        case ApiCategory.woocommerceStoreProductCategories:
+        case ApiCategory.woocommerceStoreProductBrands:
+        case ApiCategory.woocommerceStoreProductAttributes:
+        case ApiCategory.woocommerceStoreProductAttributeTerms:
           return availableStoreTypes.contains('WooCommerce');
         default:
           return false; // Don't allow other categories if no store configured
@@ -1760,6 +1870,18 @@ class _ModernSidebarState extends State<ModernSidebar>
         case ApiCategory.woocommerceRefunds:
         case ApiCategory.woocommerceTaxes:
         case ApiCategory.woocommerceWishlist:
+        case ApiCategory.woocommerceCart:
+        case ApiCategory.woocommerceCheckout:
+        case ApiCategory.woocommerceCheckoutOrder:
+        case ApiCategory.woocommerceOrder:
+        case ApiCategory.woocommerceStoreProducts:
+        case ApiCategory.woocommerceStoreProductTags:
+        case ApiCategory.woocommerceStoreProductReviews:
+        case ApiCategory.woocommerceStoreProductCollectionData:
+        case ApiCategory.woocommerceStoreProductCategories:
+        case ApiCategory.woocommerceStoreProductBrands:
+        case ApiCategory.woocommerceStoreProductAttributes:
+        case ApiCategory.woocommerceStoreProductAttributeTerms:
           platform = 'WooCommerce';
           break;
         default:
@@ -1812,9 +1934,15 @@ class _ModernSidebarState extends State<ModernSidebar>
   }
 
   // Build Customer APIs section for WooCommerce
-  Widget _buildCustomerApisSection(bool isNarrow, bool isMobile, BuildContext context) {
-    final customerCategories = ApiServiceRegistry.getWooCommerceCustomerCategories();
-    
+  Widget _buildCustomerApisSection(
+      bool isNarrow, bool isMobile, BuildContext context) {
+    final customerCategories =
+        ApiServiceRegistry.getWooCommerceCustomerCategories();
+
+    // Debug: Print categories to console
+    debugPrint(
+        '🔍 Customer Categories: ${customerCategories.map((c) => c.name).toList()}');
+
     return OsmeaComponents.container(
       margin: EdgeInsets.only(
         left: isNarrow ? 16 : 24,
@@ -1866,12 +1994,12 @@ class _ModernSidebarState extends State<ModernSidebar>
               ],
             ),
           ),
-          
+
           // Customer Categories
           ...customerCategories.map((category) {
             final isSelected = _selectedCategory == category;
             final subcategories = _getSubCategoriesForGraphQLCategory(category);
-            
+
             return OsmeaComponents.column(
               children: [
                 // Category Header
@@ -1894,9 +2022,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                     color: isSelected
                         ? OsmeaColors.nordicBlue
                         : Theme.of(context).textTheme.bodyMedium?.color,
-                    fontWeight: isSelected
-                        ? FontWeight.w600
-                        : FontWeight.w500,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                     fontSize: isNarrow ? 12 : 14,
                   ),
                   trailing: subcategories.isNotEmpty
@@ -1929,10 +2055,12 @@ class _ModernSidebarState extends State<ModernSidebar>
                           ),
                           child: OsmeaComponents.column(
                             children: subcategories.map((subcategory) {
-                              final services = ApiServiceRegistry.getBySubcategory(
-                                  category, subcategory);
-                              final isSubSelected = _selectedSubcategory == subcategory;
-                              
+                              final services =
+                                  ApiServiceRegistry.getBySubcategory(
+                                      category, subcategory);
+                              final isSubSelected =
+                                  _selectedSubcategory == subcategory;
+
                               return OsmeaComponents.column(
                                 children: [
                                   // Subcategory Header
@@ -1948,7 +2076,9 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       fontSize: isNarrow ? 12 : 14,
                                       fontWeight: FontWeight.w500,
                                       color: isSubSelected
-                                          ? Theme.of(context).colorScheme.primary
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
                                           : Theme.of(context)
                                               .textTheme
                                               .bodyMedium
@@ -1964,17 +2094,21 @@ class _ModernSidebarState extends State<ModernSidebar>
                                             .colorScheme
                                             .primary
                                             .withValues(alpha: 0.1),
-                                        borderRadius: context.borderRadiusMinStandard,
+                                        borderRadius:
+                                            context.borderRadiusMinStandard,
                                       ),
                                       child: OsmeaComponents.text(
                                         '${services.length}',
                                         variant: OsmeaTextVariant.labelSmall,
                                         fontSize: isNarrow ? 9 : 10,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    onTap: () => _selectSubcategory(subcategory),
+                                    onTap: () =>
+                                        _selectSubcategory(subcategory),
                                   ),
 
                                   // Services
@@ -1984,7 +2118,7 @@ class _ModernSidebarState extends State<ModernSidebar>
                                       final service = entry.value;
                                       final isServiceSelected =
                                           widget.selectedService == service;
-                                      
+
                                       return AnimatedContainer(
                                         duration: Duration(
                                             milliseconds: 200 + (index * 50)),
@@ -1997,21 +2131,24 @@ class _ModernSidebarState extends State<ModernSidebar>
                                           child: InkWell(
                                             borderRadius:
                                                 context.borderRadiusMinStandard,
-                                            onTap: () =>
-                                                widget.onServiceSelected(service),
+                                            onTap: () => widget
+                                                .onServiceSelected(service),
                                             child: OsmeaComponents.container(
-                                              padding: EdgeInsets.all(isNarrow ? 6 : 8),
+                                              padding: EdgeInsets.all(
+                                                  isNarrow ? 6 : 8),
                                               decoration: BoxDecoration(
                                                 color: isServiceSelected
                                                     ? OsmeaColors.nordicBlue
                                                         .withValues(alpha: 0.1)
                                                     : OsmeaColors.transparent,
-                                                borderRadius:
-                                                    context.borderRadiusMinStandard,
+                                                borderRadius: context
+                                                    .borderRadiusMinStandard,
                                                 border: isServiceSelected
                                                     ? Border.all(
-                                                        color: OsmeaColors.nordicBlue
-                                                            .withValues(alpha: 0.3),
+                                                        color: OsmeaColors
+                                                            .nordicBlue
+                                                            .withValues(
+                                                                alpha: 0.3),
                                                         width: 1,
                                                       )
                                                     : null,
@@ -2023,8 +2160,10 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                     height: isNarrow ? 12 : 16,
                                                     decoration: BoxDecoration(
                                                       color: isServiceSelected
-                                                          ? OsmeaColors.nordicBlue
-                                                          : OsmeaColors.transparent,
+                                                          ? OsmeaColors
+                                                              .nordicBlue
+                                                          : OsmeaColors
+                                                              .transparent,
                                                       borderRadius: context
                                                           .borderRadiusMinStandard,
                                                     ),
@@ -2036,17 +2175,21 @@ class _ModernSidebarState extends State<ModernSidebar>
                                                       service.name,
                                                       variant: OsmeaTextVariant
                                                           .bodySmall,
-                                                      fontSize: isNarrow ? 11 : 13,
+                                                      fontSize:
+                                                          isNarrow ? 11 : 13,
                                                       color: isServiceSelected
-                                                          ? OsmeaColors.nordicBlue
+                                                          ? OsmeaColors
+                                                              .nordicBlue
                                                           : Theme.of(context)
                                                               .textTheme
                                                               .bodyMedium
                                                               ?.color,
-                                                      fontWeight: isServiceSelected
-                                                          ? FontWeight.w500
-                                                          : FontWeight.w400,
-                                                      maxLines: isNarrow ? 2 : 1,
+                                                      fontWeight:
+                                                          isServiceSelected
+                                                              ? FontWeight.w500
+                                                              : FontWeight.w400,
+                                                      maxLines:
+                                                          isNarrow ? 2 : 1,
                                                     ),
                                                   ),
                                                 ],

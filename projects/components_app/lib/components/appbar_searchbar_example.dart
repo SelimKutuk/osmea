@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/src/components/appbar_searchbar/appbar_searchbar_action.dart';
 
 /// 🎯 **AppBar with SearchBar Example**
 ///
