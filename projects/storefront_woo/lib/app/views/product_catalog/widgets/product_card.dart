@@ -22,55 +22,39 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OsmeaComponents.basicCard(
-      elevation: 2,
+    return OsmeaComponents.imageCard(
+      title: product.name ?? 'Unknown Product',
+      subtitle: _buildPriceText(context),
+      content: _buildActionButtonsText(context),
+      imageWidget: _buildProductImage(),
+      imageHeight: context.highValue*1.2,
+      imagePosition: ComponentPosition.top,
+      imageFit: fill,
+      imageAlignment: center,
+      showOverlay: false,
+      variant: ComponentAppearance.elevated,
+      size: ComponentSize.small,
+      backgroundColor: OsmeaColors.white,
+      titleColor: OsmeaColors.black,
+      subtitleColor: OsmeaColors.forestHeart,
+      contentColor: OsmeaColors.black,
+      spacing: context.spacing4,
       borderRadius: BorderRadius.circular(12),
-      customContent: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Product Image
-            _buildProductImage(),
-
-            // Product Info
-            OsmeaComponents.container(
-              padding: const EdgeInsets.all(12),
-              child: OsmeaComponents.column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Product Title
-                  _buildProductTitle(context),
-
-                  OsmeaComponents.sizedBox(height: 8),
-
-                  // Product Price
-                  _buildProductPrice(context),
-
-                  OsmeaComponents.sizedBox(height: 12),
-
-                  // Action Buttons
-                  _buildActionButtons(context),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      elevation: 2.0,
+      margin: EdgeInsets.zero,
+      onTap: onTap,
     );
   }
 
   Widget _buildProductImage() {
     return OsmeaComponents.container(
-      height: 200,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
         color: OsmeaColors.grayMaterial[100],
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+      child: OsmeaComponents.clipRRect(
+        borderRadius: BorderRadius.circular(8),
         child: product.images?.isNotEmpty == true
             ? Image.network(
                 product.images!.first.src ?? '',
@@ -94,33 +78,17 @@ class ProductCardWidget extends StatelessWidget {
         child: Icon(
           Icons.image_not_supported,
           color: OsmeaColors.grayMaterial[400],
-          size: 48,
+          size: 32, 
         ),
       ),
     );
   }
 
-  Widget _buildProductTitle(BuildContext context) {
-    return OsmeaComponents.text(
-      product.name ?? 'Unknown Product',
-      color: OsmeaColors.black,
-      textStyle: OsmeaTextStyle.titleMedium(
-        context,
-      ).copyWith(fontWeight: FontWeight.w600, height: 1.2),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  Widget _buildProductPrice(BuildContext context) {
+  String _buildPriceText(BuildContext context) {
     final prices = product.prices;
 
     if (prices == null) {
-      return OsmeaComponents.text(
-        'Price not available',
-        color: OsmeaColors.grayMaterial[500],
-        textStyle: OsmeaTextStyle.bodySmall(context),
-      );
+      return 'Price not available';
     }
 
     final currentPrice = prices.currencyCode != null
@@ -132,61 +100,14 @@ class ProductCardWidget extends StatelessWidget {
     final hasDiscount =
         salePrice != null && salePrice.isNotEmpty && salePrice != prices.price;
 
-    return OsmeaComponents.row(
-      children: [
-        if (hasDiscount) ...[
-          OsmeaComponents.text(
-            currentPrice,
-            color: OsmeaColors.red,
-            textStyle: OsmeaTextStyle.titleLarge(
-              context,
-            ).copyWith(fontWeight: FontWeight.bold),
-          ),
-          OsmeaComponents.sizedBox(width: 8),
-          OsmeaComponents.text(
-            regularPrice ?? prices.price ?? '',
-            color: OsmeaColors.grayMaterial[500],
-            textStyle: OsmeaTextStyle.bodySmall(
-              context,
-            ).copyWith(decoration: TextDecoration.lineThrough),
-          ),
-        ] else ...[
-          OsmeaComponents.text(
-            currentPrice,
-            color: OsmeaColors.black,
-            textStyle: OsmeaTextStyle.titleLarge(
-              context,
-            ).copyWith(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ],
-    );
+    if (hasDiscount) {
+      return '$currentPrice (was $regularPrice)';
+    } else {
+      return currentPrice;
+    }
   }
 
-  Widget _buildActionButtons(BuildContext context) {
-    return OsmeaComponents.row(
-      children: [
-        // Add to Cart Button
-        OsmeaComponents.expanded(
-          child: OsmeaComponents.button(
-            onPressed: onAddToCart,
-            backgroundColor: OsmeaColors.black,
-            textColor: OsmeaColors.white,
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            text: 'Add to Cart',
-            icon: Icon(Icons.shopping_cart, size: 18, color: OsmeaColors.white),
-          ),
-        ),
-
-        OsmeaComponents.sizedBox(width: 8),
-
-        // Wishlist Button
-        OsmeaComponents.iconButton(
-          onPressed: onAddToWishlist,
-          icon: Icon(Icons.favorite_border),
-          backgroundColor: OsmeaColors.grayMaterial[100],
-        ),
-      ],
-    );
+  String _buildActionButtonsText(BuildContext context) {
+    return 'Add to Cart • Wishlist';
   }
 }

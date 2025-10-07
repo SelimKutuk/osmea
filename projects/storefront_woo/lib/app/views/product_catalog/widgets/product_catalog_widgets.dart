@@ -71,7 +71,7 @@ class ProductCatalogContentWidget extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          childAspectRatio: 0.7,
+          mainAxisExtent: 240,
         ),
         itemCount: state.hasMore
             ? state.products.length + 1
