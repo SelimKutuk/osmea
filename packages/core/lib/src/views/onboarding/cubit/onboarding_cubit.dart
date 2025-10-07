@@ -40,35 +40,14 @@ class OnboardingCubit extends BaseViewModelCubit<OnboardingState> {
     try {
       stateChanger(state.copyWith(status: OnboardingStatus.loading));
 
-      debugPrint("📱 Loading onboarding data...");
-
       // Load app config (project-specific first, then core fallback)
-      bool configLoaded = false;
-      try {
-        configLoaded = await _configHelper.loadConfig('assets/app_config.json');
-      } catch (e) {
-        debugPrint("❌ Network error while loading config: $e");
-        // Continue with default values
-        configLoaded = true; // Pretend config loaded to continue with defaults
-      }
+      final configLoaded =
+          await _configHelper.loadConfig('assets/app_config.json') ||
+              await _configHelper.loadConfig();
 
       if (!configLoaded) {
-        debugPrint("❌ Failed to load configuration file");
-        stateChanger(state.copyWith(
-          status: OnboardingStatus.error,
-          errorMessage: "Configuration file could not be loaded",
-        ));
-        return;
-      }
-
-      // Get onboarding data from app config
-      final configData = _configHelper.getAllConfig();
-
-      if (configData == null) {
-        debugPrint("⚠️ Configuration data not found, using fallback defaults");
-        // Use hardcoded defaults instead of failing
+        // Use default config if no config file found
         final defaultConfig = _getDefaultOnboardingConfig();
-
         stateChanger(state.copyWith(
           status: OnboardingStatus.ready,
           config: defaultConfig,
@@ -79,25 +58,40 @@ class OnboardingCubit extends BaseViewModelCubit<OnboardingState> {
         return;
       }
 
-      // Parse onboarding config
-      final onboardingData = configData['onboarding_configuration'];
+      // Get onboarding data from app config
+      final configData = _configHelper.getAllConfig();
+      final onboardingData = configData?['onboarding_configuration'];
+
       if (onboardingData == null) {
-        debugPrint("❌ Onboarding configuration not found");
+        // Use default config if onboarding section not found
+        final defaultConfig = _getDefaultOnboardingConfig();
         stateChanger(state.copyWith(
-          status: OnboardingStatus.error,
-          errorMessage: "Onboarding configuration not found",
+          status: OnboardingStatus.ready,
+          config: defaultConfig,
+          currentPageIndex: 0,
+          totalPages: defaultConfig.pages.length,
+          hasSeenOnboarding: false,
         ));
         return;
       }
 
       final onboardingConfig = OnboardingConfigModel.fromJson(onboardingData);
 
+      // Use defaults if no pages found
+      if (onboardingConfig.pages.isEmpty) {
+        final defaultConfig = _getDefaultOnboardingConfig();
+        stateChanger(state.copyWith(
+          status: OnboardingStatus.ready,
+          config: defaultConfig,
+          currentPageIndex: 0,
+          totalPages: defaultConfig.pages.length,
+          hasSeenOnboarding: false,
+        ));
+        return;
+      }
+
       // Check onboarding seen status
       final hasSeenOnboarding = await _storageHelper.hasSeenOnboarding();
-
-      debugPrint(
-          "✅ Onboarding data loaded successfully. Page count: ${onboardingConfig.pages.length}");
-      debugPrint("👁️ Onboarding seen status: $hasSeenOnboarding");
 
       stateChanger(state.copyWith(
         status: OnboardingStatus.ready,
