@@ -48,3 +48,4 @@ class ProductCatalogAddToWishlistEvent extends ProductCatalogEvent {
 }
 
 
+

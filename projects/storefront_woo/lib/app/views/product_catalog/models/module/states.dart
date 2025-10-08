@@ -60,3 +60,4 @@ class ProductCatalogLoadingMoreState extends ProductCatalogState {
 }
 
 
+
