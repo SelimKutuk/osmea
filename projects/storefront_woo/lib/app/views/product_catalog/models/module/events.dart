@@ -46,3 +46,5 @@ class ProductCatalogAddToWishlistEvent extends ProductCatalogEvent {
 
   ProductCatalogAddToWishlistEvent({required this.productId});
 }
+
+

@@ -58,3 +58,5 @@ class ProductCatalogLoadingMoreState extends ProductCatalogState {
     required this.currentPage,
   });
 }
+
+
