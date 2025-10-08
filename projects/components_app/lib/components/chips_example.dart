@@ -282,6 +282,87 @@ class _ChipsExampleState extends State<ChipsExample> {
 
         OsmeaComponents.sizedBox(height: 20),
 
+        // Shape variations
+        OsmeaComponents.text('● Shape Variations:',
+            fontWeight: FontWeight.w500),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.chips(
+              text: 'Rounded',
+              icon: Icons.rounded_corner,
+              style: ChipsStyle.normal,
+              shape: ChipsShape.rounded,
+              variant: ChipsVariant.primary,
+            ),
+            OsmeaComponents.chips(
+              text: 'Square',
+              icon: Icons.crop_square,
+              style: ChipsStyle.normal,
+              shape: ChipsShape.square,
+              variant: ChipsVariant.secondary,
+            ),
+            OsmeaComponents.chips(
+              text: 'Pill',
+              icon: Icons.medication,
+              style: ChipsStyle.normal,
+              shape: ChipsShape.pill,
+              variant: ChipsVariant.success,
+            ),
+          ],
+        ),
+
+        OsmeaComponents.sizedBox(height: 20),
+
+        // Icon position variations
+        OsmeaComponents.text('● Icon Position Variations:',
+            fontWeight: FontWeight.w500),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.text(
+          'Control where the icon appears with iconPosition parameter:',
+          fontSize: 12,
+          color: OsmeaColors.pewter,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.chips(
+              text: 'Icon Start',
+              icon: Icons.star,
+              iconPosition: ChipsIconPosition.start,
+              style: ChipsStyle.normal,
+              variant: ChipsVariant.primary,
+            ),
+            OsmeaComponents.chips(
+              text: 'Icon End',
+              icon: Icons.arrow_forward,
+              iconPosition: ChipsIconPosition.end,
+              style: ChipsStyle.normal,
+              variant: ChipsVariant.secondary,
+            ),
+            OsmeaComponents.chips(
+              text: 'Download',
+              icon: Icons.download,
+              iconPosition: ChipsIconPosition.end,
+              style: ChipsStyle.outlined,
+              variant: ChipsVariant.success,
+            ),
+            OsmeaComponents.chips(
+              text: 'Next Step',
+              icon: Icons.navigate_next,
+              iconPosition: ChipsIconPosition.end,
+              style: ChipsStyle.soft,
+              variant: ChipsVariant.info,
+            ),
+          ],
+        ),
+
+        OsmeaComponents.sizedBox(height: 20),
+
         // Color variations
         OsmeaComponents.text('● Color Variations:',
             fontWeight: FontWeight.w500),
@@ -345,7 +426,6 @@ class _ChipsExampleState extends State<ChipsExample> {
           alignment: Alignment.centerLeft,
           child: OsmeaComponents.chips(
             text: 'Closable',
-            closable: true,
             onClose: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -433,6 +513,142 @@ class _ChipsExampleState extends State<ChipsExample> {
               );
             },
           ),
+        ),
+
+        OsmeaComponents.sizedBox(height: 20),
+
+        // Pill-style chips showcase
+        OsmeaComponents.text('● Pill Style Examples:',
+            fontWeight: FontWeight.w500),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.text(
+          'Perfect capsule-shaped chips with ChipsShape.pill:',
+          fontSize: 12,
+          color: OsmeaColors.pewter,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
+
+        // Pill style examples with current rounded shape
+        OsmeaComponents.wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            // Small pill-like chip
+            OsmeaComponents.chips(
+              text: 'Small Tag',
+              size: ChipsSize.small,
+              shape: ChipsShape.pill,
+              style: ChipsStyle.soft,
+              variant: ChipsVariant.primary,
+            ),
+
+            // Medium pill chip with icon
+            OsmeaComponents.chips(
+              text: 'Filter',
+              icon: Icons.filter_list,
+              shape: ChipsShape.pill,
+              iconPosition: ChipsIconPosition.end,
+              style: ChipsStyle.outlined,
+              variant: ChipsVariant.secondary,
+            ),
+
+            // Selectable pill chip
+            OsmeaComponents.chips(
+              text: 'Selectable',
+              shape: ChipsShape.pill,
+              style: ChipsStyle.normal,
+              variant: ChipsVariant.success,
+            ),
+
+            // Large pill button
+            OsmeaComponents.chips(
+              text: 'Pill Button',
+              size: ChipsSize.large,
+              shape: ChipsShape.pill,
+              style: ChipsStyle.normal,
+              variant: ChipsVariant.info,
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: OsmeaComponents.text('Pill button tapped!'),
+                    duration: const Duration(seconds: 1),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+
+        OsmeaComponents.sizedBox(height: 20),
+
+        // Icon Position Test
+        OsmeaComponents.text('● Icon Position Debug Test:',
+            fontWeight: FontWeight.w500),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.text(
+          'Testing explicit icon positioning to debug the issue:',
+          fontSize: 12,
+          color: OsmeaColors.pewter,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
+
+        OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.text('Start Position (Default):',
+                fontWeight: FontWeight.w500, fontSize: 14),
+            OsmeaComponents.sizedBox(height: 4),
+            OsmeaComponents.chips(
+              text: 'Start Icon',
+              icon: Icons.star,
+              iconPosition: ChipsIconPosition.start,
+              variant: ChipsVariant.primary,
+              style: ChipsStyle.normal,
+            ),
+            OsmeaComponents.sizedBox(height: 12),
+            OsmeaComponents.text('End Position:',
+                fontWeight: FontWeight.w500, fontSize: 14),
+            OsmeaComponents.sizedBox(height: 4),
+            OsmeaComponents.chips(
+              text: 'End Icon',
+              icon: Icons.arrow_forward,
+              iconPosition: ChipsIconPosition.end,
+              variant: ChipsVariant.secondary,
+              style: ChipsStyle.normal,
+            ),
+            OsmeaComponents.sizedBox(height: 12),
+            OsmeaComponents.text('Multiple End Examples:',
+                fontWeight: FontWeight.w500, fontSize: 14),
+            OsmeaComponents.sizedBox(height: 4),
+            OsmeaComponents.wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                OsmeaComponents.chips(
+                  text: 'Download',
+                  icon: Icons.download,
+                  iconPosition: ChipsIconPosition.end,
+                  variant: ChipsVariant.success,
+                  style: ChipsStyle.outlined,
+                ),
+                OsmeaComponents.chips(
+                  text: 'Next',
+                  icon: Icons.navigate_next,
+                  iconPosition: ChipsIconPosition.end,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  variant: ChipsVariant.info,
+                  style: ChipsStyle.soft,
+                ),
+                OsmeaComponents.chips(
+                  text: 'Send',
+                  icon: Icons.send,
+                  iconPosition: ChipsIconPosition.end,
+                  variant: ChipsVariant.warning,
+                  style: ChipsStyle.normal,
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
