@@ -5,6 +5,7 @@ import 'package:storefront_woo/app/views/product_catalog/product_catalog_view.da
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
+  // Global route configuration
   routes: <RouteBase>[
     // Splash Screen Route
     GoRoute(
@@ -17,8 +18,7 @@ final GoRouter appRouter = GoRouter(
             } else if (path.contains(Routes.onboarding.name)) {
               context.go('/onboarding');
             } else {
-              // Store is auto-configured from environment, go directly to home
-              context.go('/home');
+              context.go('/home'); // Default fallback
             }
           },
         );

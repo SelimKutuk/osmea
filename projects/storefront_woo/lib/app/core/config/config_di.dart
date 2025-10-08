@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:storefront_woo/app/core/config/config_di.config.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -48,57 +49,51 @@ Future<void> _initializeApisPackage(String? environment) async {
 /// Initialize APIs package from environment configuration
 Future<void> _initializeFromEnvironment(String? environment) async {
   try {
-    // Load configuration from assets
-    final AssetConfigHelper configHelper = AssetConfigHelper();
-    await configHelper.loadConfig('assets/app_config.json');
+    // Load .env file
+    await dotenv.load(fileName: ".env");
+    
+    // Get configuration from .env file first, then from environment variables
+    final storeUrl = dotenv.env['WOOCOMMERCE_STORE_URL'] ?? 
+                     Platform.environment['WOOCOMMERCE_STORE_URL'] ?? '';
+    final consumerKey = dotenv.env['WOOCOMMERCE_CONSUMER_KEY'] ?? 
+                        Platform.environment['WOOCOMMERCE_CONSUMER_KEY'] ?? '';
+    final consumerSecret = dotenv.env['WOOCOMMERCE_CONSUMER_SECRET'] ?? 
+                          Platform.environment['WOOCOMMERCE_CONSUMER_SECRET'] ?? '';
+    final apiVersion = dotenv.env['WOOCOMMERCE_API_VERSION'] ?? 
+                      Platform.environment['WOOCOMMERCE_API_VERSION'] ?? 'v1';
 
-    // Get WooCommerce configuration
-    final storeUrl = configHelper.getString(
-      'woocommerce_configuration.store_url',
-      '',
-    );
-
-    // Try to get credentials from environment variables first, then from config
-    String consumerKey =
-        Platform.environment['WOOCOMMERCE_CONSUMER_KEY'] ??
-        configHelper.getString('woocommerce_configuration.consumer_key', '');
-    String consumerSecret =
-        Platform.environment['WOOCOMMERCE_CONSUMER_SECRET'] ??
-        configHelper.getString('woocommerce_configuration.consumer_secret', '');
-
-    final apiVersion = configHelper.getString(
-      'woocommerce_configuration.version',
-      'v1',
-    );
-
-    if (storeUrl.isNotEmpty) {
-      // Initialize WooCommerce network with credentials from environment/config
-      debugPrint('🔧 Initializing WooCommerce with:');
+    if (storeUrl.isNotEmpty &&
+        consumerKey.isNotEmpty &&
+        consumerSecret.isNotEmpty) {
+      // Initialize WooCommerce network with credentials
+      debugPrint('🔧 Initializing WooCommerce:');
       debugPrint('  - Store URL: $storeUrl');
-      debugPrint(
-        '  - Consumer Key: ${consumerKey.isNotEmpty ? '***' : '(empty)'}',
-      );
-      debugPrint(
-        '  - Consumer Secret: ${consumerSecret.isNotEmpty ? '***' : '(empty)'}',
-      );
+      debugPrint('  - Consumer Key: ${consumerKey.substring(0, 8)}...');
+      debugPrint('  - Consumer Secret: ${consumerSecret.substring(0, 8)}...');
       debugPrint('  - API Version: $apiVersion');
-      debugPrint(
-        '  - Source: ${Platform.environment.containsKey('WOOCOMMERCE_CONSUMER_KEY') ? 'Environment' : 'Config'}',
-      );
+      debugPrint('  - Source: ${dotenv.env['WOOCOMMERCE_STORE_URL'] != null ? '.env file' : 'Environment Variables'}');
 
       WooNetwork.init(
         getIt,
         storeUrl: storeUrl,
-        username: consumerKey, // Use consumer_key as username
-        password: consumerSecret, // Use consumer_secret as password
+        username: consumerKey,
+        password: consumerSecret,
         apiVersion: apiVersion,
       );
 
-      debugPrint('✅ WooCommerce network initialized with credentials');
+      debugPrint('✅ WooCommerce network initialized');
     } else {
+      debugPrint('❌ Missing required configuration:');
       debugPrint(
-        '⚠️ WooCommerce store URL not configured. Please check app_config.json',
+        '  - WOOCOMMERCE_STORE_URL: ${storeUrl.isEmpty ? 'MISSING' : 'OK'}',
       );
+      debugPrint(
+        '  - WOOCOMMERCE_CONSUMER_KEY: ${consumerKey.isEmpty ? 'MISSING' : 'OK'}',
+      );
+      debugPrint(
+        '  - WOOCOMMERCE_CONSUMER_SECRET: ${consumerSecret.isEmpty ? 'MISSING' : 'OK'}',
+      );
+      throw Exception('Required WooCommerce configuration is missing');
     }
   } catch (e) {
     debugPrint('❌ Error initializing from environment: $e');
