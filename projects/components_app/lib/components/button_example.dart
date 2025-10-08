@@ -59,6 +59,9 @@ class _ButtonExampleState extends State<ButtonExample> {
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('🎨 Custom Styling'),
             _buildCustomStylingSection(),
+            OsmeaComponents.sizedBox(height: 32),
+            _buildSectionTitle('🎯 Icon Button Examples'),
+            _buildIconButtonSection(),
           ],
         ),
       ),
@@ -426,6 +429,197 @@ class _ButtonExampleState extends State<ButtonExample> {
             OsmeaComponents.button(
               text: 'Shadow',
               onPressed: () => _showSnackBar('Shadow pressed'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIconButtonSection() {
+    return OsmeaComponents.column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSubsectionTitle('Basic Icon Buttons'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(
+                Icons.favorite,
+                color: Colors.blue,
+              ),
+              backgroundColor: OsmeaColors.white,
+              onPressed: () => _showSnackBar('Favorite icon pressed'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.share),
+              variant: ButtonVariant.primary,
+              onPressed: () => _showSnackBar('Share icon pressed'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.delete),
+              variant: ButtonVariant.danger,
+              onPressed: () => _showSnackBar('Delete icon pressed'),
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Different Sizes'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.star),
+              size: ButtonSize.extraSmall,
+              onPressed: () => _showSnackBar('Extra small star'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.star),
+              size: ButtonSize.small,
+              onPressed: () => _showSnackBar('Small star'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.star),
+              size: ButtonSize.medium,
+              onPressed: () => _showSnackBar('Medium star'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.star),
+              size: ButtonSize.large,
+              onPressed: () => _showSnackBar('Large star'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.star),
+              size: ButtonSize.extraLarge,
+              onPressed: () => _showSnackBar('Extra large star'),
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Custom Colors & Background'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.notifications),
+              backgroundColor: OsmeaColors.sunsetGlow,
+              onPressed: () => _showSnackBar('Orange notification'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.message),
+              backgroundColor: OsmeaColors.crystalBay,
+              onPressed: () => _showSnackBar('Blue message'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.phone),
+              backgroundColor: OsmeaColors.forestHeart,
+              onPressed: () => _showSnackBar('Green phone'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.camera),
+              backgroundColor: OsmeaColors.amberFlame,
+              onPressed: () => _showSnackBar('Red camera'),
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Different Variants'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.home),
+              variant: ButtonVariant.primary,
+              onPressed: () => _showSnackBar('Primary home'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.search),
+              variant: ButtonVariant.secondary,
+              onPressed: () => _showSnackBar('Secondary search'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.settings),
+              variant: ButtonVariant.outlined,
+              onPressed: () => _showSnackBar('Outlined settings'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.info),
+              variant: ButtonVariant.ghost,
+              onPressed: () => _showSnackBar('Ghost info'),
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Custom Elevation & Radius'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.cloud),
+              backgroundColor: OsmeaColors.crystalBay,
+              elevation: 0.0, // No shadow
+              onPressed: () => _showSnackBar('Shadowless cloud'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.sunny),
+              backgroundColor: OsmeaColors.sunsetGlow,
+              elevation: 8.0, // High shadow
+              onPressed: () => _showSnackBar('Shadowy sun'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.square),
+              backgroundColor: OsmeaColors.forestHeart,
+              borderRadius: 8.0, // Custom radius
+              onPressed: () => _showSnackBar('Square corners'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.circle),
+              backgroundColor: OsmeaColors.purple,
+              borderRadius: 50.0, // Very rounded
+              onPressed: () => _showSnackBar('Very round circle'),
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Disabled & Loading States'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.block),
+              state: ButtonState.disabled,
+              onPressed: null, // Disabled
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.refresh),
+              state: _isLoading ? ButtonState.loading : ButtonState.enabled,
+              onPressed: _isLoading ? null : _simulateLoading,
+            ),
+          ],
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        _buildSubsectionTitle('Tooltip & Long Press'),
+        OsmeaComponents.wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: [
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.help),
+              tooltip: 'This is a help button',
+              onPressed: () => _showSnackBar('Help button pressed'),
+            ),
+            OsmeaComponents.iconButton(
+              icon: const Icon(Icons.touch_app),
+              tooltip: 'Long pressable',
+              onPressed: () => _showSnackBar('Short press'),
+              onLongPress: () => _showSnackBar('Long press detected!'),
             ),
           ],
         ),

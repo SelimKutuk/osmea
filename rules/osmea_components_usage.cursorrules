@@ -46,6 +46,7 @@ import 'package:osmea_components/osmea_components.dart';
 - `OsmeaComponents.searchbar()` - Search bar component
 
 ### 🎯 Navigation Components
+- `OsmeaComponents.appbar()` - App bar component
 - `OsmeaComponents.navbar()` - Navigation bar
 - `OsmeaComponents.tabbar()` - Tab bar component
 - `OsmeaComponents.stepper()` - Stepper component
@@ -238,7 +239,7 @@ OsmeaComponents.listView(
     return OsmeaComponents.listItem(
       title: OsmeaComponents.text(items[index].title),
       subtitle: OsmeaComponents.text(items[index].subtitle),
-      trailing: OsmeaComponents.icon(Icons.arrow_forward),
+      trailing: Icon(Icons.arrow_forward),
     );
   },
 )
@@ -396,7 +397,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/osmea_components.dart';
-import 'package:pupilica_hackathon/core/helpers/logger/logger.dart';
 // ... other imports
 ```
 
@@ -440,7 +440,6 @@ if (hasError)
   OsmeaComponents.center(
     child: OsmeaComponents.column(
       children: [
-        OsmeaComponents.icon(Icons.error, size: 48),
         OsmeaComponents.sizedBox(height: context.height16),
         OsmeaComponents.text('Something went wrong'),
         OsmeaComponents.sizedBox(height: context.height8),
@@ -495,5 +494,165 @@ When refactoring existing code:
 - Use `OsmeaComponents.toast()` for toast messages
 - Use `OsmeaComponents.snackbar()` for snackbars
 - Use `OsmeaComponents.progress()` for progress indicators
+
+## AppBar Component Usage
+
+### Basic AppBar
+```dart
+// ❌ DON'T use standard AppBar
+AppBar(
+  title: Text('My App'),
+  backgroundColor: Colors.blue,
+)
+
+// ✅ DO use OsmeaComponents.appbar
+OsmeaComponents.appbar(
+  title: 'My App',
+  backgroundColor: OsmeaColors.nordicBlue,
+  titleColor: OsmeaColors.paperWhite,
+)
+```
+
+### AppBar with Actions
+```dart
+OsmeaComponents.appbar(
+  title: 'Product Details',
+  backgroundColor: OsmeaColors.paperWhite,
+  titleColor: OsmeaColors.thunder,
+  showBackButton: true,
+  actions: [
+    IconButton(
+      icon: Icon(Icons.share, color: OsmeaColors.thunder),
+      onPressed: () => _shareProduct(),
+    ),
+    IconButton(
+      icon: Icon(Icons.favorite_border, color: OsmeaColors.crimsonHeart),
+      onPressed: () => _addToWishlist(),
+    ),
+  ],
+)
+```
+
+### AppBar with Search
+```dart
+OsmeaComponents.appbar(
+  title: 'Products',
+  backgroundColor: OsmeaColors.paperWhite,
+  titleColor: OsmeaColors.thunder,
+  showSearchButton: true,
+  onSearchPressed: () => _openSearchView(),
+  actions: [
+    IconButton(
+      icon: Icon(Icons.filter_list, color: OsmeaColors.thunder),
+      onPressed: () => _showFilters(),
+    ),
+  ],
+)
+```
+
+### AppBar with Custom Leading
+```dart
+OsmeaComponents.appbar(
+  title: 'Settings',
+  backgroundColor: OsmeaColors.slate.withOpacity(0.1),
+  titleColor: OsmeaColors.thunder,
+  leading: IconButton(
+    icon: Icon(Icons.menu, color: OsmeaColors.thunder),
+    onPressed: () => Scaffold.of(context).openDrawer(),
+  ),
+)
+```
+
+### AppBar with Bottom TabBar
+```dart
+OsmeaComponents.appbar(
+  title: 'Store',
+  backgroundColor: OsmeaColors.paperWhite,
+  titleColor: OsmeaColors.thunder,
+  bottom: OsmeaComponents.tabbar(
+    tabs: [
+      Tab(text: 'Products'),
+      Tab(text: 'Categories'),
+      Tab(text: 'Orders'),
+    ],
+    activeColor: OsmeaColors.nordicBlue,
+    inactiveColor: OsmeaColors.pewter,
+  ),
+)
+```
+
+### AppBar Variants
+```dart
+// Transparent AppBar
+OsmeaComponents.appbar(
+  title: 'Profile',
+  backgroundColor: Colors.transparent,
+  titleColor: OsmeaColors.paperWhite,
+  elevation: 0,
+)
+
+// Gradient AppBar
+OsmeaComponents.appbar(
+  title: 'Dashboard',
+  gradient: LinearGradient(
+    colors: [OsmeaColors.nordicBlue, OsmeaColors.sapphireBlue],
+  ),
+  titleColor: OsmeaColors.paperWhite,
+)
+
+// Compact AppBar
+OsmeaComponents.appbar(
+  title: 'Orders',
+  variant: AppBarVariant.compact,
+  backgroundColor: OsmeaColors.paperWhite,
+  titleColor: OsmeaColors.thunder,
+)
+```
+
+### AppBar with Badge
+```dart
+OsmeaComponents.appbar(
+  title: 'Store',
+  backgroundColor: OsmeaColors.paperWhite,
+  titleColor: OsmeaColors.thunder,
+  actions: [
+    Stack(
+      children: [
+        IconButton(
+          icon: Icon(Icons.shopping_cart, color: OsmeaColors.thunder),
+          onPressed: () => _openCart(),
+        ),
+        Positioned(
+          right: 8,
+          top: 8,
+          child: OsmeaComponents.badge(
+            count: 3,
+            color: OsmeaColors.crimsonHeart,
+          ),
+        ),
+      ],
+    ),
+  ],
+)
+```
+
+### Scaffold with AppBar
+```dart
+OsmeaComponents.scaffold(
+  appBar: OsmeaComponents.appbar(
+    title: 'My Store',
+    backgroundColor: OsmeaColors.paperWhite,
+    titleColor: OsmeaColors.thunder,
+    showBackButton: true,
+    actions: [
+      IconButton(
+        icon: Icon(Icons.notifications, color: OsmeaColors.thunder),
+        onPressed: () => _showNotifications(),
+      ),
+    ],
+  ),
+  body: _buildBody(),
+)
+```
 
 This comprehensive approach ensures consistent, maintainable, and professional UI throughout your Flutter application using OsmeaComponents.
