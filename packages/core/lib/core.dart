@@ -134,3 +134,8 @@ export 'package:core/src/views/loading/cubit/loading_state.dart';
 
 // 🔄 Exports the loading models
 export 'package:core/src/models/loading_models.dart';
+
+// 📷 Exports the image detail view and cubit
+export 'package:core/src/views/image_detail/image_detail_view.dart';
+export 'package:core/src/views/image_detail/cubit/image_detail_cubit.dart';
+export 'package:core/src/views/image_detail/cubit/image_detail_state.dart';
