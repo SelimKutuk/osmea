@@ -2503,24 +2503,31 @@ class OsmeaComponents {
   /// - All 3 style variants (normal, outlined, soft)
   /// - All states (normal, disabled, selected)
   /// - Interactive selection and deletion support
+  /// - Flexible icon support (IconData, Widget, or asset path)
   /// - Full customization options
   ///
   /// Example:
   /// ```dart
+  /// // With IconData
   /// OsmeaComponents.chips(
   ///   text: 'Technology',
+  ///   icon: Icons.tech_icon,
+  ///   iconPosition: ChipsIconPosition.start,
   ///   variant: ChipsVariant.primary,
-  ///   size: ChipsSize.medium,
-  ///   selected: true,
-  ///   onTap: () => print('Chip tapped'),
-  ///   closable: true,
-  ///   onClose: () => print('Chip removed'),
+  /// )
+  ///
+  /// // With Widget
+  /// OsmeaComponents.chips(
+  ///   text: 'Custom',
+  ///   icon: SvgPicture.asset('assets/icons/custom.svg'),
+  ///   iconPosition: ChipsIconPosition.end,
   /// )
   /// ```
   static Widget chips({
     Key? key,
     String? text,
-    IconData? icon,
+    dynamic icon, // IconData, Widget, or String (asset path)
+    ChipsIconPosition iconPosition = ChipsIconPosition.start,
     Widget? actionWidget,
     Widget? avatar,
     ChipsVariant variant = ChipsVariant.neutral,
@@ -2534,6 +2541,10 @@ class OsmeaComponents {
     Color? backgroundColor,
     Color? textColor,
     Color? borderColor,
+    double? borderWidth,
+    Color? activeColor,
+    Color? inactiveColor,
+    double? radius,
     EdgeInsetsGeometry? padding,
     TextStyle? textStyle,
     ShapeBorder? customShape,
@@ -2547,6 +2558,7 @@ class OsmeaComponents {
       key: key,
       text: text,
       icon: icon,
+      iconPosition: iconPosition,
       actionWidget: actionWidget,
       avatar: avatar,
       variant: variant,
@@ -2560,6 +2572,10 @@ class OsmeaComponents {
       backgroundColor: backgroundColor,
       textColor: textColor,
       borderColor: borderColor,
+      borderWidth: borderWidth,
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      radius: radius,
       padding: padding,
       textStyle: textStyle,
       customShape: customShape,
