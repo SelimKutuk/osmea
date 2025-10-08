@@ -82,6 +82,8 @@ class OsmeaButton extends CoreContainer {
     this.variant = ButtonVariant.primary,
     this.state = ButtonState.enabled,
     this.shape = ButtonShape.rectangle,
+    this.borderRadius,
+    this.elevation = 0.0,
     this.icon,
     this.iconPosition = IconPosition.leading,
     this.textStyle,
@@ -131,6 +133,13 @@ class OsmeaButton extends CoreContainer {
 
   /// 🔲 The shape of the button
   final ButtonShape shape;
+
+  /// � Custom border radius that overrides the default shape border radius
+  final double? borderRadius;
+
+  /// 🌟 Custom elevation (shadow depth). Default is 0.0 (no shadow).
+  /// Set to higher values for more shadow depth.
+  final double elevation;
 
   /// 🔄 The current interactive state of the button
   final ButtonState state;
@@ -247,7 +256,9 @@ class OsmeaButton extends CoreContainer {
     ButtonSizeConfig config,
     _ButtonColors colors,
   ) {
-    final borderRadius = shape.getBorderRadius(context, config.size.height);
+    final effectiveBorderRadius = borderRadius != null
+        ? BorderRadius.circular(borderRadius!)
+        : shape.getBorderRadius(context, config.size.height);
 
     return AnimatedContainer(
       duration: animationDuration ?? context.animationMedium,
@@ -256,7 +267,7 @@ class OsmeaButton extends CoreContainer {
         color: OsmeaColors.transparent,
         elevation: _getElevation(),
         shadowColor: OsmeaColors.shadowDark,
-        borderRadius: borderRadius,
+        borderRadius: effectiveBorderRadius,
         child: InkWell(
           onTap: isEffectivelyDisabled ? null : onPressed,
           onLongPress: isEffectivelyDisabled ? null : onLongPress,
@@ -265,7 +276,7 @@ class OsmeaButton extends CoreContainer {
           autofocus: autofocus,
           splashColor: colors.splash,
           highlightColor: colors.hover,
-          borderRadius: borderRadius,
+          borderRadius: effectiveBorderRadius,
           child: AnimatedContainer(
             duration: animationDuration ?? context.animationMedium,
             curve: easeInOutCubic,
@@ -281,7 +292,7 @@ class OsmeaButton extends CoreContainer {
             padding: _getEffectivePadding(config),
             decoration: BoxDecoration(
               color: colors.background,
-              borderRadius: borderRadius,
+              borderRadius: effectiveBorderRadius,
               border: _getBorder(colors, context),
             ),
             transform: isPressed
@@ -494,15 +505,7 @@ class OsmeaButton extends CoreContainer {
   }
 
   double _getElevation() {
-    if (variant == ButtonVariant.outlined || variant == ButtonVariant.ghost) {
-      return 0;
-    }
-
-    if (isEffectivelyDisabled) return 0;
-
-    if (isPressed) return 1;
-    if (isHovered) return 6;
-    return 2;
+    return elevation;
   }
 
   _ButtonColors _getButtonColors(BuildContext context) {
@@ -723,6 +726,8 @@ class OsmeaTextButton extends OsmeaButton {
     super.variant,
     super.size,
     super.state,
+    super.borderRadius,
+    super.elevation,
     super.onPressed,
     super.onLongPress,
     super.tooltip,
@@ -763,6 +768,8 @@ class OsmeaIconButton extends OsmeaButton {
     super.size,
     super.state,
     ButtonShape? shape, // Custom shape parameter for icon buttons
+    super.borderRadius,
+    super.elevation,
     super.onPressed,
     super.onLongPress,
     super.tooltip,
