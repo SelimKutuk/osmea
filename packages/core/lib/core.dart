@@ -134,3 +134,6 @@ export 'package:core/src/views/loading/cubit/loading_state.dart';
 
 // 🔄 Exports the loading models
 export 'package:core/src/models/loading_models.dart';
+
+// 🔄 Exports the routes
+export 'package:core/src/views/routes.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
-import 'package:core/src/views/routes.dart';
+import 'package:storefront_woo/app/views/product_catalog/product_catalog_view.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -53,81 +53,20 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
-    // Home Page
+    // Home Page - Show products directly
     GoRoute(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
-        return const _MinimalistHomePage();
+        return ProductCatalogView(arguments: const {'product_catalog': true});
+      },
+    ),
+
+    // Product Catalog Route
+    GoRoute(
+      path: '/products',
+      builder: (BuildContext context, GoRouterState state) {
+        return ProductCatalogView(arguments: const {'product_catalog': true});
       },
     ),
   ],
 );
-
-/// 🏠 Default Home Page
-class _MinimalistHomePage extends StatelessWidget {
-  const _MinimalistHomePage();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: OsmeaComponents.text(
-          'Storefront Woo',
-          color: OsmeaColors.black,
-          textStyle: OsmeaTextStyle.titleLarge(
-            context,
-          ).copyWith(fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: OsmeaComponents.container(
-            padding: const EdgeInsets.all(32),
-            child: OsmeaComponents.center(
-              child: OsmeaComponents.column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Welcome Title
-                  OsmeaComponents.text(
-                    'Welcome to Storefront Woo',
-                    color: OsmeaColors.black,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.headlineSmall(
-                      context,
-                    ).copyWith(fontWeight: FontWeight.w600),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 16),
-
-                  // Welcome Subtitle
-                  OsmeaComponents.text(
-                    'Your WooCommerce powered store',
-                    color: OsmeaColors.slate,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.bodyMedium(context),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 48),
-
-                  // Main Content
-                  OsmeaComponents.text(
-                    'This is the default home page. You can customize it according to your needs.',
-                    color: OsmeaColors.pewter,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.bodyMedium(context),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 32),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
