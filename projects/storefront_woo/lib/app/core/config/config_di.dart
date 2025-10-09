@@ -49,18 +49,26 @@ Future<void> _initializeApisPackage(String? environment) async {
 /// Initialize APIs package from environment configuration
 Future<void> _initializeFromEnvironment(String? environment) async {
   try {
-    // Load .env file
-    await dotenv.load(fileName: ".env");
-    
+    // Load .env file from assets
+    await dotenv.load(fileName: "assets/.env");
+
     // Get configuration from .env file first, then from environment variables
-    final storeUrl = dotenv.env['WOOCOMMERCE_STORE_URL'] ?? 
-                     Platform.environment['WOOCOMMERCE_STORE_URL'] ?? '';
-    final consumerKey = dotenv.env['WOOCOMMERCE_CONSUMER_KEY'] ?? 
-                        Platform.environment['WOOCOMMERCE_CONSUMER_KEY'] ?? '';
-    final consumerSecret = dotenv.env['WOOCOMMERCE_CONSUMER_SECRET'] ?? 
-                          Platform.environment['WOOCOMMERCE_CONSUMER_SECRET'] ?? '';
-    final apiVersion = dotenv.env['WOOCOMMERCE_API_VERSION'] ?? 
-                      Platform.environment['WOOCOMMERCE_API_VERSION'] ?? 'v1';
+    final storeUrl =
+        dotenv.env['WOOCOMMERCE_STORE_URL'] ??
+        Platform.environment['WOOCOMMERCE_STORE_URL'] ??
+        '';
+    final consumerKey =
+        dotenv.env['WOOCOMMERCE_CONSUMER_KEY'] ??
+        Platform.environment['WOOCOMMERCE_CONSUMER_KEY'] ??
+        '';
+    final consumerSecret =
+        dotenv.env['WOOCOMMERCE_CONSUMER_SECRET'] ??
+        Platform.environment['WOOCOMMERCE_CONSUMER_SECRET'] ??
+        '';
+    final apiVersion =
+        dotenv.env['WOOCOMMERCE_API_VERSION'] ??
+        Platform.environment['WOOCOMMERCE_API_VERSION'] ??
+        'v1';
 
     if (storeUrl.isNotEmpty &&
         consumerKey.isNotEmpty &&
@@ -71,7 +79,9 @@ Future<void> _initializeFromEnvironment(String? environment) async {
       debugPrint('  - Consumer Key: ${consumerKey.substring(0, 8)}...');
       debugPrint('  - Consumer Secret: ${consumerSecret.substring(0, 8)}...');
       debugPrint('  - API Version: $apiVersion');
-      debugPrint('  - Source: ${dotenv.env['WOOCOMMERCE_STORE_URL'] != null ? '.env file' : 'Environment Variables'}');
+      debugPrint(
+        '  - Source: ${dotenv.env['WOOCOMMERCE_STORE_URL'] != null ? 'assets/.env file' : 'Environment Variables'}',
+      );
 
       WooNetwork.init(
         getIt,
