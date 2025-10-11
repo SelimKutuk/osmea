@@ -15,6 +15,13 @@ export 'handlers/woocommerce/auth_handlers/delete_user_handler.dart';
 // 🛒 WooCommerce Store API Cart Handlers
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/get_cart_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/add_item_handler.dart';
+
+// 🎟️ WooCommerce Store API Cart Coupons Handlers
+export 'handlers/woocommerce/store_api_handlers/cart_coupons_api_handlers/get_cart_coupons_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_coupons_api_handlers/get_cart_coupon_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_coupons_api_handlers/add_cart_coupon_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_coupons_api_handlers/delete_cart_coupon_handler.dart';
+export 'handlers/woocommerce/store_api_handlers/cart_coupons_api_handlers/delete_all_cart_coupons_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/remove_item_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/update_item_handler.dart';
 export 'handlers/woocommerce/store_api_handlers/cart_api_handlers/apply_coupon_handler.dart';

@@ -324,6 +324,10 @@ import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart
     as _i654;
 import 'package:apis/network/remote/woocommerce/store_api/cart_api/api/api_cart_service.dart'
     as _i845;
+import 'package:apis/network/remote/woocommerce/store_api/cart_coupons_api/abstract/cart_coupons_service.dart'
+    as _i441;
+import 'package:apis/network/remote/woocommerce/store_api/cart_coupons_api/api/api_cart_coupons_service.dart'
+    as _i359;
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/abstract/cart_items_service.dart'
     as _i240;
 import 'package:apis/network/remote/woocommerce/store_api/cart_items_api/api/api_cart_items_service.dart'
@@ -430,6 +434,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i331.WebhooksServiceClient(gh<_i361.Dio>()));
     gh.factory<_i197.StoreProductTagsService>(
         () => _i1053.StoreProductTagsServiceClient(gh<_i361.Dio>()));
+    gh.factory<_i441.CartCouponsService>(
+        () => _i359.CartCouponsServiceClient(gh<_i361.Dio>()));
     gh.factory<_i654.CartService>(
         () => _i845.CartServiceClient(gh<_i361.Dio>()));
     gh.factory<_i330.SystemStatusService>(
