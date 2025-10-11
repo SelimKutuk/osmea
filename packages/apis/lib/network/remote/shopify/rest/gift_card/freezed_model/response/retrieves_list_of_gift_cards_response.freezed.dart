@@ -24,12 +24,8 @@ mixin _$RetrievesListOfGiftCardResponse {
   @JsonKey(name: "gift_cards")
   List<GiftCard>? get giftCards => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesListOfGiftCardResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesListOfGiftCardResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesListOfGiftCardResponseCopyWith<RetrievesListOfGiftCardResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$RetrievesListOfGiftCardResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesListOfGiftCardResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$RetrievesListOfGiftCardResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesListOfGiftCardResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesListOfGiftCardResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,14 +139,12 @@ class _$RetrievesListOfGiftCardResponseImpl
                 .equals(other._giftCards, _giftCards));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_giftCards));
 
-  /// Create a copy of RetrievesListOfGiftCardResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesListOfGiftCardResponseImplCopyWith<
@@ -182,11 +172,8 @@ abstract class _RetrievesListOfGiftCardResponse
   @override
   @JsonKey(name: "gift_cards")
   List<GiftCard>? get giftCards;
-
-  /// Create a copy of RetrievesListOfGiftCardResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesListOfGiftCardResponseImplCopyWith<
           _$RetrievesListOfGiftCardResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -231,12 +218,8 @@ mixin _$GiftCard {
   @JsonKey(name: "order_id")
   dynamic get orderId => throw _privateConstructorUsedError;
 
-  /// Serializes this GiftCard to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GiftCard
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GiftCardCopyWith<GiftCard> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -275,8 +258,6 @@ class _$GiftCardCopyWithImpl<$Res, $Val extends GiftCard>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GiftCard
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -401,8 +382,6 @@ class __$$GiftCardImplCopyWithImpl<$Res>
       _$GiftCardImpl _value, $Res Function(_$GiftCardImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GiftCard
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -603,7 +582,7 @@ class _$GiftCardImpl implements _GiftCard {
             const DeepCollectionEquality().equals(other.orderId, orderId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -624,9 +603,7 @@ class _$GiftCardImpl implements _GiftCard {
       lastCharacters,
       const DeepCollectionEquality().hash(orderId));
 
-  /// Create a copy of GiftCard
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GiftCardImplCopyWith<_$GiftCardImpl> get copyWith =>
@@ -710,11 +687,8 @@ abstract class _GiftCard implements GiftCard {
   @override
   @JsonKey(name: "order_id")
   dynamic get orderId;
-
-  /// Create a copy of GiftCard
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GiftCardImplCopyWith<_$GiftCardImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

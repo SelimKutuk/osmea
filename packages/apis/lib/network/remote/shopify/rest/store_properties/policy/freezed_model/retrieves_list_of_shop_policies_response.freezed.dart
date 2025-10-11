@@ -24,12 +24,8 @@ mixin _$RetrievesListOfShopPoliciesResponse {
   @JsonKey(name: "policies")
   List<Policy>? get policies => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesListOfShopPoliciesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesListOfShopPoliciesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesListOfShopPoliciesResponseCopyWith<
           RetrievesListOfShopPoliciesResponse>
       get copyWith => throw _privateConstructorUsedError;
@@ -57,8 +53,6 @@ class _$RetrievesListOfShopPoliciesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesListOfShopPoliciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,8 +89,6 @@ class __$$RetrievesListOfShopPoliciesResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesListOfShopPoliciesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesListOfShopPoliciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,14 +139,12 @@ class _$RetrievesListOfShopPoliciesResponseImpl
             const DeepCollectionEquality().equals(other._policies, _policies));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_policies));
 
-  /// Create a copy of RetrievesListOfShopPoliciesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesListOfShopPoliciesResponseImplCopyWith<
@@ -183,11 +173,8 @@ abstract class _RetrievesListOfShopPoliciesResponse
   @override
   @JsonKey(name: "policies")
   List<Policy>? get policies;
-
-  /// Create a copy of RetrievesListOfShopPoliciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesListOfShopPoliciesResponseImplCopyWith<
           _$RetrievesListOfShopPoliciesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -212,12 +199,8 @@ mixin _$Policy {
   @JsonKey(name: "url")
   String? get url => throw _privateConstructorUsedError;
 
-  /// Serializes this Policy to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Policy
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PolicyCopyWith<Policy> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -245,8 +228,6 @@ class _$PolicyCopyWithImpl<$Res, $Val extends Policy>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Policy
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -310,8 +291,6 @@ class __$$PolicyImplCopyWithImpl<$Res>
       _$PolicyImpl _value, $Res Function(_$PolicyImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Policy
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -404,14 +383,12 @@ class _$PolicyImpl implements _Policy {
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, body, createdAt, updatedAt, handle, title, url);
 
-  /// Create a copy of Policy
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PolicyImplCopyWith<_$PolicyImpl> get copyWith =>
@@ -454,11 +431,8 @@ abstract class _Policy implements Policy {
   @override
   @JsonKey(name: "url")
   String? get url;
-
-  /// Create a copy of Policy
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PolicyImplCopyWith<_$PolicyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

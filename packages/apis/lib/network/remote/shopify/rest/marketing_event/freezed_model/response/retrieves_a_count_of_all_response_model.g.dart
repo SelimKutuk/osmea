@@ -14,7 +14,15 @@ _$RetrievesACountOfAllResponseModelImpl
         );
 
 Map<String, dynamic> _$$RetrievesACountOfAllResponseModelImplToJson(
-        _$RetrievesACountOfAllResponseModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$RetrievesACountOfAllResponseModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

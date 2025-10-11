@@ -9,9 +9,16 @@ export 'package:core/src/base/base_view_model.dart';
 
 // 🧠 Exports the base cubit class View Models
 export 'package:core/src/base/base_view_model_cubit.dart';
+// 🧠 Exports the hydrated base cubit class View Models
+export 'package:core/src/base/base_view_model_hydrated_cubit.dart';
 
 // 🧠 Exports the base cubit class View Models
 export 'package:core/src/base/base_view_cubit.dart';
+// 🧠 Exports the hydrated base view cubit widget
+export 'package:core/src/base/base_view_hydrated_cubit.dart';
+
+// 🎯 Exports the base view state for consistent state management
+export 'package:core/src/base/base_view_state.dart';
 
 // 🧩 Exports the base class for Master App
 export 'package:core/src/base/master_view/master_app.dart';
@@ -21,9 +28,17 @@ export 'package:core/src/base/master_view/master_view.dart';
 
 // 🧩 Exports the base class for Master View Cubit
 export 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
+// 🧩 Exports the hydrated class for Master View Cubit
+export 'package:core/src/base/master_view_hydrated_cubit/master_view_hydrated_cubit.dart';
+
+// 🧩 Exports hydration initializer
+export 'package:core/src/base/master_view_hydrated_cubit/hydrated/hydrated_bloc_init.dart';
 
 // 🧩 Exports the generated resources about translations
 export 'package:core/src/resources/resources.g.dart';
+
+// 🧩 Exports the common Master Scaffold Widget
+export 'package:core/src/base/widgets/master_scaffold_widget.dart';
 
 // 🧩 Exports the helper for local storage
 export 'package:core/src/helper/local_storage/local_storage_helper.dart';
@@ -68,6 +83,9 @@ export 'package:core/src/helper/permission_handler_helper/abstract/permission_ha
 // 📱 Exports the device info helper for device information access
 export 'package:core/src/helper/device_info_helper.dart';
 
+// 🌐 Exports the unified web viewer helper for HTML and WebView rendering
+export 'package:core/src/helper/web_viewer_helper.dart';
+
 // 🧩 Exports the grid class for Master View
 export 'package:core/src/layout/grid.dart';
 
@@ -108,3 +126,14 @@ export 'package:core/src/models/info_models.dart';
 export 'package:core/src/views/info_bottom_sheet/info_bottom_sheet_view.dart';
 export 'package:core/src/views/info_bottom_sheet/cubit/info_bottom_sheet_cubit.dart';
 export 'package:core/src/views/info_bottom_sheet/cubit/info_bottom_sheet_state.dart';
+
+// 🔄 Exports the loading view and cubit
+export 'package:core/src/views/loading/loading_view.dart';
+export 'package:core/src/views/loading/cubit/loading_cubit.dart';
+export 'package:core/src/views/loading/cubit/loading_state.dart';
+
+// 🔄 Exports the loading models
+export 'package:core/src/models/loading_models.dart';
+
+// 🔄 Exports the routes
+export 'package:core/src/views/routes.dart';

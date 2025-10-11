@@ -15,7 +15,15 @@ _$GetAWebhookResponseImpl _$$GetAWebhookResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetAWebhookResponseImplToJson(
-        _$GetAWebhookResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.webhook?.toJson() case final value?) 'webhook': value,
-    };
+    _$GetAWebhookResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('webhook', instance.webhook?.toJson());
+  return val;
+}

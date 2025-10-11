@@ -46,6 +46,14 @@ class OsmeaCarousel extends CoreContainer {
   final bool loop;
   final CarouselArrowStyle arrowStyle;
   final double itemSpacing;
+  final bool useDotIndicatorWidget;
+  final DotIndicatorVariant? dotVariant;
+  final DotIndicatorSize? dotIndicatorSize;
+  final DotIndicatorShape? dotShape;
+  final DotIndicatorStyle? dotStyle;
+  final DotIndicatorAnimation? dotAnimation;
+  final Color? dotCustomActiveColor;
+  final Color? dotCustomInactiveColor;
 
   // Private fields for overridden properties
   final CoreTheme? _customTheme;
@@ -92,6 +100,14 @@ class OsmeaCarousel extends CoreContainer {
     this.loop = false,
     this.arrowStyle = CarouselArrowStyle.modern,
     this.itemSpacing = 12.0,
+    this.useDotIndicatorWidget = false,
+    this.dotVariant,
+    this.dotIndicatorSize,
+    this.dotShape,
+    this.dotStyle,
+    this.dotAnimation,
+    this.dotCustomActiveColor,
+    this.dotCustomInactiveColor,
   })  : _customTheme = customTheme,
         _margin = margin,
         _height = height,
@@ -574,6 +590,31 @@ class _OsmeaCarouselView extends StatelessWidget {
     }
     int activeIndex = state.activeIndex;
     final BorderRadius indicatorRadius = context.borderRadiusMinStandard;
+    if (parent.useDotIndicatorWidget) {
+      // Debug: activeIndex değişimini kontrol et
+      debugPrint(
+          '🔘 DotIndicator - activeIndex: $activeIndex, itemCount: $itemCount');
+      return OsmeaComponents.dotIndicator(
+        key: ValueKey(
+            'carousel_dot_indicator_$activeIndex'), // 🔑 Key ile widget'ı yeniden oluştur
+        itemCount: itemCount,
+        currentIndex: activeIndex,
+        size: parent.dotIndicatorSize ?? DotIndicatorSize.medium,
+        variant: parent.dotVariant ?? DotIndicatorVariant.primary,
+        shape: parent.dotShape ?? DotIndicatorShape.circle,
+        style: parent.dotStyle ?? DotIndicatorStyle.filled,
+        animation: parent.dotAnimation ?? DotIndicatorAnimation.scale,
+        customActiveColor: parent.dotCustomActiveColor,
+        customInactiveColor: parent.dotCustomInactiveColor,
+        onDotTapped: (index) {
+          context.read<CarouselCubit>().jumpTo(index);
+          if (parent.onPageChanged != null) {
+            parent.onPageChanged!(index);
+          }
+        },
+      );
+    }
+
     Widget indicatorRow;
     switch (parent.indicatorType) {
       case CarouselIndicatorType.dot:

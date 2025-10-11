@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:core/src/base/base_view_cubit.dart';
+import 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
 import 'package:core/src/models/onboarding_models.dart';
 import 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
 import 'package:core/src/views/onboarding/cubit/onboarding_state.dart';
@@ -20,7 +20,10 @@ import 'package:osmea_components/osmea_components.dart';
 /// {@category Views}
 /// {@subCategory OnboardingView}
 
-class OnboardingView extends StatelessWidget {
+class OnboardingView extends MasterViewCubit<OnboardingCubit, OnboardingState> {
+  /// Callback triggered when onboarding begins
+  final VoidCallback? onStart;
+
   /// Callback to be called when onboarding is completed
   final VoidCallback? onCompleted;
 
@@ -30,38 +33,56 @@ class OnboardingView extends StatelessWidget {
   /// Callback to be called when an error occurs
   final Function(String error)? onError;
 
-  const OnboardingView({
-    super.key,
+  /// Callback triggered when user changes step
+  final void Function(int stepIndex)? onStepChange;
+
+  /// Callback triggered when user presses Continue/Home button
+  final VoidCallback? onContinue;
+
+  OnboardingView({
+    required Function(String path) goRoute,
+    Map<String, dynamic> arguments = const {'onboarding': true},
+    this.onStart,
     this.onCompleted,
     this.onSkipped,
     this.onError,
-  });
+    this.onStepChange,
+    this.onContinue,
+  }) : super(
+          goRoute: goRoute,
+          arguments: arguments,
+        );
 
   @override
-  Widget build(BuildContext context) {
-    return BaseViewCubit<OnboardingCubit, OnboardingState>(
-      onViewModelReady: (cubit) {
-        cubit.loadOnboardingData();
-      },
-      onStateListener: (context, state) {
-        if (state == null) return;
-        switch (state.status) {
-          case OnboardingStatus.completed:
-            onCompleted?.call();
-            break;
-          case OnboardingStatus.error:
-            onError?.call(state.errorMessage ?? 'Unknown error');
-            break;
-          default:
-            break;
-        }
-      },
-      builder: (cubit, context, state) {
-        return Scaffold(
-          backgroundColor: _getBackgroundColor(context, state),
-          body: _buildBody(context, state, cubit),
-        );
-      },
+  Future<void> initialContent(viewModel, BuildContext context) async {
+    debugPrint('🎉 Onboarding View Start!');
+
+    // Trigger onStart callback
+    onStart?.call();
+
+    await viewModel.loadOnboardingData();
+
+    // Listen for onboarding state changes
+    viewModel.stream.listen((state) {
+      if (state.status == OnboardingStatus.completed) {
+        onCompleted?.call();
+        onContinue?.call(); // Also trigger onContinue when completed
+      } else if (state.status == OnboardingStatus.skipped) {
+        onSkipped?.call();
+      } else if (state.status == OnboardingStatus.error) {
+        onError?.call(state.errorMessage ?? 'Unknown error');
+      }
+
+      // Trigger step change callback when current page changes
+      onStepChange?.call(state.currentPageIndex);
+    });
+  }
+
+  @override
+  Widget viewContent(BuildContext context, viewModel, state) {
+    return Scaffold(
+      backgroundColor: _getBackgroundColor(context, state),
+      body: _buildBody(context, state, viewModel),
     );
   }
 
@@ -223,7 +244,7 @@ class OnboardingView extends StatelessWidget {
 }
 
 /// 🚀 Ready-to-use widget for easy implementation
-/// Uses BaseViewCubit for dependency injection and lifecycle management
+/// Uses MasterViewCubit for dependency injection and lifecycle management
 class OnboardingScreen extends StatelessWidget {
   /// Callback to be called when onboarding is completed
   final VoidCallback? onCompleted;
@@ -234,8 +255,12 @@ class OnboardingScreen extends StatelessWidget {
   /// Callback to be called when an error occurs
   final Function(String error)? onError;
 
+  /// Navigation callback for routing to other pages
+  final Function(String path) goRoute;
+
   const OnboardingScreen({
     super.key,
+    required this.goRoute,
     this.onCompleted,
     this.onSkipped,
     this.onError,
@@ -244,6 +269,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnboardingView(
+      goRoute: goRoute,
       onCompleted: onCompleted,
       onSkipped: onSkipped,
       onError: onError,

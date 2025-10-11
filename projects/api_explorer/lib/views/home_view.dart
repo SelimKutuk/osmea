@@ -12,6 +12,8 @@ import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/services/app_state_persistence.dart';
 import 'package:core/core.dart';
+import 'package:get_it/get_it.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 import 'dart:async';
 
 class HomeView extends StatefulWidget {
@@ -64,6 +66,7 @@ class _HomeViewState extends State<HomeView>
     _loadCurrentStore();
     _listenToStoreChanges();
     _restoreAppState(); // Restore previous state
+    _initializeCartToken(); // Initialize cart token
 
     // Initialize screen width for responsive popup
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -301,6 +304,44 @@ class _HomeViewState extends State<HomeView>
       }
     } catch (e) {
       debugPrint('❌ Error checking configuration: $e');
+    }
+  }
+
+  /// Initialize cart token by making a cart API call
+  Future<void> _initializeCartToken() async {
+    try {
+      // Check if cart token already exists
+      final existingCartToken = await WooCartTokenStorage.loadCartToken();
+      if (existingCartToken != null) {
+        debugPrint(
+            '🛒 Cart token already exists: ${existingCartToken.cartToken}');
+        return;
+      }
+
+      // Check if store is configured
+      if (_selectedStore == null) {
+        debugPrint(
+            '⚠️ No store configured, skipping cart token initialization');
+        return;
+      }
+
+      // Make cart API call to get cart token
+      final cartService = GetIt.I<CartService>();
+      final response = await cartService.getCart(
+        apiVersion: WooNetwork.apiVersion,
+      );
+
+      debugPrint('🛒 Cart API response received: ${response.toJson()}');
+
+      // Check if cart token was saved by interceptor
+      final cartToken = await WooCartTokenStorage.loadCartToken();
+      if (cartToken != null) {
+        debugPrint('✅ Cart token initialized: ${cartToken.cartToken}');
+      } else {
+        debugPrint('⚠️ Cart token not found in response');
+      }
+    } catch (e) {
+      debugPrint('❌ Error initializing cart token: $e');
     }
   }
 
@@ -935,6 +976,8 @@ class _HomeViewState extends State<HomeView>
                   _selectedStore = store;
                 });
                 _updateApiUrlFromStore(store);
+                // Reinitialize cart token for new store
+                _initializeCartToken();
               }
               break;
             case StoreChangeType.updated:

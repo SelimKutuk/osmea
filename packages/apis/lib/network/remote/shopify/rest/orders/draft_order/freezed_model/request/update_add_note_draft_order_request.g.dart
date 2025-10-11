@@ -16,17 +16,33 @@ _$UpdateAddNoteDraftOrderRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateAddNoteDraftOrderRequestImplToJson(
-        _$UpdateAddNoteDraftOrderRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$UpdateAddNoteDraftOrderRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
       note: json['note'] as String?,
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.note case final value?) 'note': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('note', instance.note);
+  return val;
+}

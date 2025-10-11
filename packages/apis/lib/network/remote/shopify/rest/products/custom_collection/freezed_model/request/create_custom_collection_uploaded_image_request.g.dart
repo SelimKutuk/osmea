@@ -17,11 +17,18 @@ _$CreateCustomCollectionUploadedImageRequestImpl
         );
 
 Map<String, dynamic> _$$CreateCustomCollectionUploadedImageRequestImplToJson(
-        _$CreateCustomCollectionUploadedImageRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$CreateCustomCollectionUploadedImageRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -33,19 +40,35 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.image?.toJson() case final value?) 'image': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('image', instance.image?.toJson());
+  return val;
+}
 
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       src: json['src'] as String?,
       alt: json['alt'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.src case final value?) 'src': value,
-      if (instance.alt case final value?) 'alt': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('src', instance.src);
+  writeNotNull('alt', instance.alt);
+  return val;
+}

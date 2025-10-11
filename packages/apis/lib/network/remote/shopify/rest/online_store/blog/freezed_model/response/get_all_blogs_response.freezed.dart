@@ -23,12 +23,8 @@ mixin _$GetAllBlogsResponse {
   @JsonKey(name: "blogs")
   List<Blog>? get blogs => throw _privateConstructorUsedError;
 
-  /// Serializes this GetAllBlogsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAllBlogsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAllBlogsResponseCopyWith<GetAllBlogsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,8 +48,6 @@ class _$GetAllBlogsResponseCopyWithImpl<$Res, $Val extends GetAllBlogsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllBlogsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,8 +81,6 @@ class __$$GetAllBlogsResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAllBlogsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllBlogsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,14 +129,12 @@ class _$GetAllBlogsResponseImpl implements _GetAllBlogsResponse {
             const DeepCollectionEquality().equals(other._blogs, _blogs));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_blogs));
 
-  /// Create a copy of GetAllBlogsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAllBlogsResponseImplCopyWith<_$GetAllBlogsResponseImpl> get copyWith =>
@@ -170,11 +160,8 @@ abstract class _GetAllBlogsResponse implements GetAllBlogsResponse {
   @override
   @JsonKey(name: "blogs")
   List<Blog>? get blogs;
-
-  /// Create a copy of GetAllBlogsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAllBlogsResponseImplCopyWith<_$GetAllBlogsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -208,12 +195,8 @@ mixin _$Blog {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this Blog to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $BlogCopyWith<Blog> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -246,8 +229,6 @@ class _$BlogCopyWithImpl<$Res, $Val extends Blog>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -340,8 +321,6 @@ class __$$BlogImplCopyWithImpl<$Res>
   __$$BlogImplCopyWithImpl(_$BlogImpl _value, $Res Function(_$BlogImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -489,7 +468,7 @@ class _$BlogImpl implements _Blog {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -505,9 +484,7 @@ class _$BlogImpl implements _Blog {
       tags,
       adminGraphqlApiId);
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BlogImplCopyWith<_$BlogImpl> get copyWith =>
@@ -571,11 +548,8 @@ abstract class _Blog implements Blog {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$BlogImplCopyWith<_$BlogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

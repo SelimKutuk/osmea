@@ -29,10 +29,19 @@ _$CollectToCreateImpl _$$CollectToCreateImplFromJson(
     );
 
 Map<String, dynamic> _$$CollectToCreateImplToJson(
-        _$CollectToCreateImpl instance) =>
-    <String, dynamic>{
-      'product_id': instance.productId,
-      'collection_id': instance.collectionId,
-      if (instance.position case final value?) 'position': value,
-      if (instance.sortValue case final value?) 'sort_value': value,
-    };
+    _$CollectToCreateImpl instance) {
+  final val = <String, dynamic>{
+    'product_id': instance.productId,
+    'collection_id': instance.collectionId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('position', instance.position);
+  writeNotNull('sort_value', instance.sortValue);
+  return val;
+}

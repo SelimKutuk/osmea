@@ -47,12 +47,8 @@ mixin _$ApplicationCharge {
   @JsonKey(name: "confirmation_url")
   String? get confirmationUrl => throw _privateConstructorUsedError;
 
-  /// Serializes this ApplicationCharge to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ApplicationChargeCopyWith<ApplicationCharge> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -89,8 +85,6 @@ class _$ApplicationChargeCopyWithImpl<$Res, $Val extends ApplicationCharge>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,8 +191,6 @@ class __$$ApplicationChargeImplCopyWithImpl<$Res>
       $Res Function(_$ApplicationChargeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -367,7 +359,7 @@ class _$ApplicationChargeImpl implements _ApplicationCharge {
                 other.confirmationUrl == confirmationUrl));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -385,9 +377,7 @@ class _$ApplicationChargeImpl implements _ApplicationCharge {
       decoratedReturnUrl,
       confirmationUrl);
 
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ApplicationChargeImplCopyWith<_$ApplicationChargeImpl> get copyWith =>
@@ -462,11 +452,8 @@ abstract class _ApplicationCharge implements ApplicationCharge {
   @override
   @JsonKey(name: "confirmation_url")
   String? get confirmationUrl;
-
-  /// Create a copy of ApplicationCharge
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ApplicationChargeImplCopyWith<_$ApplicationChargeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

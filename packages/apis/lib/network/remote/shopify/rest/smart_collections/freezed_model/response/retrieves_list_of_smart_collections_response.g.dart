@@ -16,12 +16,19 @@ _$RetrievesListOfSmartCollectionsResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesListOfSmartCollectionsResponseImplToJson(
-        _$RetrievesListOfSmartCollectionsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.smartCollections?.map((e) => e.toJson()).toList()
-          case final value?)
-        'smart_collections': value,
-    };
+    _$RetrievesListOfSmartCollectionsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('smart_collections',
+      instance.smartCollections?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$SmartCollectionImpl _$$SmartCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -46,24 +53,30 @@ _$SmartCollectionImpl _$$SmartCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$SmartCollectionImplToJson(
-        _$SmartCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.sortOrder case final value?) 'sort_order': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.disjunctive case final value?) 'disjunctive': value,
-      if (instance.rules?.map((e) => e.toJson()).toList() case final value?)
-        'rules': value,
-      if (instance.publishedScope case final value?) 'published_scope': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.image?.toJson() case final value?) 'image': value,
-    };
+    _$SmartCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('title', instance.title);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('sort_order', instance.sortOrder);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('disjunctive', instance.disjunctive);
+  writeNotNull('rules', instance.rules?.map((e) => e.toJson()).toList());
+  writeNotNull('published_scope', instance.publishedScope);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('image', instance.image?.toJson());
+  return val;
+}
 
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       createdAt: json['created_at'] as String?,
@@ -73,14 +86,22 @@ _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       src: json['src'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.alt case final value?) 'alt': value,
-      if (instance.width case final value?) 'width': value,
-      if (instance.height case final value?) 'height': value,
-      if (instance.src case final value?) 'src': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('alt', instance.alt);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('src', instance.src);
+  return val;
+}
 
 _$RuleImpl _$$RuleImplFromJson(Map<String, dynamic> json) => _$RuleImpl(
       column: json['column'] as String?,
@@ -88,9 +109,17 @@ _$RuleImpl _$$RuleImplFromJson(Map<String, dynamic> json) => _$RuleImpl(
       condition: json['condition'] as String?,
     );
 
-Map<String, dynamic> _$$RuleImplToJson(_$RuleImpl instance) =>
-    <String, dynamic>{
-      if (instance.column case final value?) 'column': value,
-      if (instance.relation case final value?) 'relation': value,
-      if (instance.condition case final value?) 'condition': value,
-    };
+Map<String, dynamic> _$$RuleImplToJson(_$RuleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('column', instance.column);
+  writeNotNull('relation', instance.relation);
+  writeNotNull('condition', instance.condition);
+  return val;
+}

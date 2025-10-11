@@ -44,12 +44,8 @@ mixin _$Webhook {
   @JsonKey(name: "metafield_identifiers")
   List<String> get metafieldIdentifiers => throw _privateConstructorUsedError;
 
-  /// Serializes this Webhook to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Webhook
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $WebhookCopyWith<Webhook> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -84,8 +80,6 @@ class _$WebhookCopyWithImpl<$Res, $Val extends Webhook>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Webhook
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,8 +175,6 @@ class __$$WebhookImplCopyWithImpl<$Res>
       _$WebhookImpl _value, $Res Function(_$WebhookImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Webhook
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -363,7 +355,7 @@ class _$WebhookImpl implements _Webhook {
                 .equals(other._metafieldIdentifiers, _metafieldIdentifiers));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -379,9 +371,7 @@ class _$WebhookImpl implements _Webhook {
       const DeepCollectionEquality().hash(_privateMetafieldNamespaces),
       const DeepCollectionEquality().hash(_metafieldIdentifiers));
 
-  /// Create a copy of Webhook
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$WebhookImplCopyWith<_$WebhookImpl> get copyWith =>
@@ -447,11 +437,8 @@ abstract class _Webhook implements Webhook {
   @override
   @JsonKey(name: "metafield_identifiers")
   List<String> get metafieldIdentifiers;
-
-  /// Create a copy of Webhook
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$WebhookImplCopyWith<_$WebhookImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

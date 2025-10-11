@@ -15,10 +15,18 @@ _$RetrievesSingleGiftCardResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesSingleGiftCardResponseImplToJson(
-        _$RetrievesSingleGiftCardResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.giftCard?.toJson() case final value?) 'gift_card': value,
-    };
+    _$RetrievesSingleGiftCardResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gift_card', instance.giftCard?.toJson());
+  return val;
+}
 
 _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
     _$GiftCardImpl(
@@ -40,22 +48,30 @@ _$GiftCardImpl _$$GiftCardImplFromJson(Map<String, dynamic> json) =>
       orderId: json['order_id'],
     );
 
-Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.balance case final value?) 'balance': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.initialValue case final value?) 'initial_value': value,
-      if (instance.disabledAt case final value?) 'disabled_at': value,
-      if (instance.lineItemId case final value?) 'line_item_id': value,
-      if (instance.apiClientId case final value?) 'api_client_id': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.customerId case final value?) 'customer_id': value,
-      if (instance.note case final value?) 'note': value,
-      if (instance.expiresOn case final value?) 'expires_on': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.lastCharacters case final value?) 'last_characters': value,
-      if (instance.orderId case final value?) 'order_id': value,
-    };
+Map<String, dynamic> _$$GiftCardImplToJson(_$GiftCardImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('balance', instance.balance);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('initial_value', instance.initialValue);
+  writeNotNull('disabled_at', instance.disabledAt);
+  writeNotNull('line_item_id', instance.lineItemId);
+  writeNotNull('api_client_id', instance.apiClientId);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('note', instance.note);
+  writeNotNull('expires_on', instance.expiresOn);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('last_characters', instance.lastCharacters);
+  writeNotNull('order_id', instance.orderId);
+  return val;
+}

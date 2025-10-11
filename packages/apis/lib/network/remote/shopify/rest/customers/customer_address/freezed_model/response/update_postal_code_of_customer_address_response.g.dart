@@ -17,11 +17,18 @@ _$UpdatePostalCodeOfCustomerAddressResponseImpl
         );
 
 Map<String, dynamic> _$$UpdatePostalCodeOfCustomerAddressResponseImplToJson(
-        _$UpdatePostalCodeOfCustomerAddressResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.customerAddress?.toJson() case final value?)
-        'customer_address': value,
-    };
+    _$UpdatePostalCodeOfCustomerAddressResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_address', instance.customerAddress?.toJson());
+  return val;
+}
 
 _$CustomerAddressImpl _$$CustomerAddressImplFromJson(
         Map<String, dynamic> json) =>
@@ -38,15 +45,23 @@ _$CustomerAddressImpl _$$CustomerAddressImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomerAddressImplToJson(
-        _$CustomerAddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.customerId case final value?) 'customer_id': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-      if (instance.customerAddressDefault case final value?) 'default': value,
-    };
+    _$CustomerAddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('customer_id', instance.customerId);
+  writeNotNull('country', instance.country);
+  writeNotNull('province', instance.province);
+  writeNotNull('company', instance.company);
+  writeNotNull('id', instance.id);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  writeNotNull('default', instance.customerAddressDefault);
+  return val;
+}

@@ -16,10 +16,18 @@ _$CreatePriceRuleFreeShippingRequestImpl
         );
 
 Map<String, dynamic> _$$CreatePriceRuleFreeShippingRequestImplToJson(
-        _$CreatePriceRuleFreeShippingRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.priceRule?.toJson() case final value?) 'price_rule': value,
-    };
+    _$CreatePriceRuleFreeShippingRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price_rule', instance.priceRule?.toJson());
+  return val;
+}
 
 _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
     _$PriceRuleImpl(
@@ -38,22 +46,28 @@ _$PriceRuleImpl _$$PriceRuleImplFromJson(Map<String, dynamic> json) =>
       startsAt: json['starts_at'] as String?,
     );
 
-Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.targetType case final value?) 'target_type': value,
-      if (instance.targetSelection case final value?) 'target_selection': value,
-      if (instance.allocationMethod case final value?)
-        'allocation_method': value,
-      if (instance.valueType case final value?) 'value_type': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.usageLimit case final value?) 'usage_limit': value,
-      if (instance.customerSelection case final value?)
-        'customer_selection': value,
-      if (instance.prerequisiteSubtotalRange?.toJson() case final value?)
-        'prerequisite_subtotal_range': value,
-      if (instance.startsAt case final value?) 'starts_at': value,
-    };
+Map<String, dynamic> _$$PriceRuleImplToJson(_$PriceRuleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('target_type', instance.targetType);
+  writeNotNull('target_selection', instance.targetSelection);
+  writeNotNull('allocation_method', instance.allocationMethod);
+  writeNotNull('value_type', instance.valueType);
+  writeNotNull('value', instance.value);
+  writeNotNull('usage_limit', instance.usageLimit);
+  writeNotNull('customer_selection', instance.customerSelection);
+  writeNotNull('prerequisite_subtotal_range',
+      instance.prerequisiteSubtotalRange?.toJson());
+  writeNotNull('starts_at', instance.startsAt);
+  return val;
+}
 
 _$PrerequisiteSubtotalRangeImpl _$$PrerequisiteSubtotalRangeImplFromJson(
         Map<String, dynamic> json) =>
@@ -62,8 +76,15 @@ _$PrerequisiteSubtotalRangeImpl _$$PrerequisiteSubtotalRangeImplFromJson(
     );
 
 Map<String, dynamic> _$$PrerequisiteSubtotalRangeImplToJson(
-        _$PrerequisiteSubtotalRangeImpl instance) =>
-    <String, dynamic>{
-      if (instance.greaterThanOrEqualTo case final value?)
-        'greater_than_or_equal_to': value,
-    };
+    _$PrerequisiteSubtotalRangeImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('greater_than_or_equal_to', instance.greaterThanOrEqualTo);
+  return val;
+}

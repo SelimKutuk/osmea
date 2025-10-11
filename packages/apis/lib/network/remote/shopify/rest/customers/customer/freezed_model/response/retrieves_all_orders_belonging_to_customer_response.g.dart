@@ -14,7 +14,15 @@ _$RetrievesAllOrdersBelongingToCustomerResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesAllOrdersBelongingToCustomerResponseImplToJson(
-        _$RetrievesAllOrdersBelongingToCustomerResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.orders case final value?) 'orders': value,
-    };
+    _$RetrievesAllOrdersBelongingToCustomerResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('orders', instance.orders);
+  return val;
+}

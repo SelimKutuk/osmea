@@ -23,12 +23,8 @@ CreateProductImageMetafieldRequest _$CreateProductImageMetafieldRequestFromJson(
 mixin _$CreateProductImageMetafieldRequest {
   Metafield get metafield => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateProductImageMetafieldRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateProductImageMetafieldRequestCopyWith<
           CreateProductImageMetafieldRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -58,8 +54,6 @@ class _$CreateProductImageMetafieldRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateProductImageMetafieldRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MetafieldCopyWith<$Res> get metafield {
@@ -109,8 +101,6 @@ class __$$CreateProductImageMetafieldRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateProductImageMetafieldRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,13 +142,11 @@ class _$CreateProductImageMetafieldRequestImpl
                 other.metafield == metafield));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, metafield);
 
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateProductImageMetafieldRequestImplCopyWith<
@@ -186,11 +174,8 @@ abstract class _CreateProductImageMetafieldRequest
 
   @override
   Metafield get metafield;
-
-  /// Create a copy of CreateProductImageMetafieldRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateProductImageMetafieldRequestImplCopyWith<
           _$CreateProductImageMetafieldRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -211,12 +196,8 @@ mixin _$Image {
   @JsonKey(name: "filename")
   String? get filename => throw _privateConstructorUsedError;
 
-  /// Serializes this Image to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -242,8 +223,6 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -295,8 +274,6 @@ class __$$ImageImplCopyWithImpl<$Res>
       _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -380,14 +357,12 @@ class _$ImageImpl implements _Image {
                 other.filename == filename));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, position,
       const DeepCollectionEquality().hash(_metafields), attachment, filename);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
@@ -422,11 +397,8 @@ abstract class _Image implements Image {
   @override
   @JsonKey(name: "filename")
   String? get filename;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -446,12 +418,8 @@ mixin _$Metafield {
   @JsonKey(name: "namespace")
   String? get namespace => throw _privateConstructorUsedError;
 
-  /// Serializes this Metafield to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MetafieldCopyWith<Metafield> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -478,8 +446,6 @@ class _$MetafieldCopyWithImpl<$Res, $Val extends Metafield>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -532,8 +498,6 @@ class __$$MetafieldImplCopyWithImpl<$Res>
       _$MetafieldImpl _value, $Res Function(_$MetafieldImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -605,13 +569,11 @@ class _$MetafieldImpl implements _Metafield {
                 other.namespace == namespace));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, key, value, type, namespace);
 
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
@@ -647,11 +609,8 @@ abstract class _Metafield implements Metafield {
   @override
   @JsonKey(name: "namespace")
   String? get namespace;
-
-  /// Create a copy of Metafield
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MetafieldImplCopyWith<_$MetafieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -17,11 +17,18 @@ _$UpdateCustomCollectionAltTextRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateCustomCollectionAltTextRequestImplToJson(
-        _$UpdateCustomCollectionAltTextRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$UpdateCustomCollectionAltTextRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -33,17 +40,33 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.image?.toJson() case final value?) 'image': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('image', instance.image?.toJson());
+  return val;
+}
 
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       alt: json['alt'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.alt case final value?) 'alt': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('alt', instance.alt);
+  return val;
+}

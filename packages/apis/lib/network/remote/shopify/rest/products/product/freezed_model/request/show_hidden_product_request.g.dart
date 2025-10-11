@@ -15,10 +15,18 @@ _$ShowHiddenProductRequestImpl _$$ShowHiddenProductRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$ShowHiddenProductRequestImplToJson(
-        _$ShowHiddenProductRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.product?.toJson() case final value?) 'product': value,
-    };
+    _$ShowHiddenProductRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product', instance.product?.toJson());
+  return val;
+}
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
@@ -26,8 +34,16 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       published: json['published'] as bool?,
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.published case final value?) 'published': value,
-    };
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('published', instance.published);
+  return val;
+}

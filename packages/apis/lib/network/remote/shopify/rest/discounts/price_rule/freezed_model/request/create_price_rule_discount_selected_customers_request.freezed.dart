@@ -25,12 +25,8 @@ mixin _$CreatePriceRuleDiscountSelectedCustomersRequest {
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule => throw _privateConstructorUsedError;
 
-  /// Serializes this CreatePriceRuleDiscountSelectedCustomersRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreatePriceRuleDiscountSelectedCustomersRequestCopyWith<
           CreatePriceRuleDiscountSelectedCustomersRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -61,8 +57,6 @@ class _$CreatePriceRuleDiscountSelectedCustomersRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,8 +70,6 @@ class _$CreatePriceRuleDiscountSelectedCustomersRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PriceRuleCopyWith<$Res>? get priceRule {
@@ -120,8 +112,6 @@ class __$$CreatePriceRuleDiscountSelectedCustomersRequestImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,13 +155,11 @@ class _$CreatePriceRuleDiscountSelectedCustomersRequestImpl
                 other.priceRule == priceRule));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, priceRule);
 
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatePriceRuleDiscountSelectedCustomersRequestImplCopyWith<
@@ -202,11 +190,8 @@ abstract class _CreatePriceRuleDiscountSelectedCustomersRequest
   @override
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule;
-
-  /// Create a copy of CreatePriceRuleDiscountSelectedCustomersRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreatePriceRuleDiscountSelectedCustomersRequestImplCopyWith<
           _$CreatePriceRuleDiscountSelectedCustomersRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -238,12 +223,8 @@ mixin _$PriceRule {
   @JsonKey(name: "starts_at")
   String? get startsAt => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceRule to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceRuleCopyWith<PriceRule> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -276,8 +257,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -361,8 +340,6 @@ class __$$PriceRuleImplCopyWithImpl<$Res>
       _$PriceRuleImpl _value, $Res Function(_$PriceRuleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -502,7 +479,7 @@ class _$PriceRuleImpl implements _PriceRule {
                 other.startsAt == startsAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -516,9 +493,7 @@ class _$PriceRuleImpl implements _PriceRule {
       const DeepCollectionEquality().hash(_prerequisiteSavedSearchIds),
       startsAt);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
@@ -575,11 +550,8 @@ abstract class _PriceRule implements PriceRule {
   @override
   @JsonKey(name: "starts_at")
   String? get startsAt;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

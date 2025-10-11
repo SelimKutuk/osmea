@@ -15,40 +15,43 @@ import 'package:core/src/models/onboarding_models.dart';
 enum OnboardingStatus {
   /// Initial state
   initial,
-  
+
   /// Loading
   loading,
-  
+
   /// Ready
   ready,
-  
+
   /// Error
   error,
-  
+
   /// Completed
   completed,
+
+  /// Skipped
+  skipped,
 }
 
 /// 🎯 Onboarding state class
 class OnboardingState extends Equatable {
   /// Current status
   final OnboardingStatus status;
-  
+
   /// Onboarding configuration
   final OnboardingConfigModel? config;
-  
+
   /// Current page index
   final int currentPageIndex;
-  
+
   /// Total page count
   final int totalPages;
-  
+
   /// Has onboarding been seen before
   final bool hasSeenOnboarding;
-  
+
   /// Error message
   final String? errorMessage;
-  
+
   /// Is auto advance active
   final bool isAutoAdvanceActive;
 

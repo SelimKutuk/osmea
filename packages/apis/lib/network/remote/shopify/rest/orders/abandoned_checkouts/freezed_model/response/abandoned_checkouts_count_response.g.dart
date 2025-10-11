@@ -13,7 +13,15 @@ _$AbandonedCheckoutsCountResponseImpl
         );
 
 Map<String, dynamic> _$$AbandonedCheckoutsCountResponseImplToJson(
-        _$AbandonedCheckoutsCountResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.count case final value?) 'count': value,
-    };
+    _$AbandonedCheckoutsCountResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  return val;
+}

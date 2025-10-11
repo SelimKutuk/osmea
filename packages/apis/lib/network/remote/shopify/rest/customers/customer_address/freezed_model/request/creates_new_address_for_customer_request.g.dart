@@ -16,10 +16,18 @@ _$CreatesNewAddressForCustomerRequestImpl
         );
 
 Map<String, dynamic> _$$CreatesNewAddressForCustomerRequestImplToJson(
-        _$CreatesNewAddressForCustomerRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.address?.toJson() case final value?) 'address': value,
-    };
+    _$CreatesNewAddressForCustomerRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address', instance.address?.toJson());
+  return val;
+}
 
 _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
     _$AddressImpl(
@@ -39,20 +47,28 @@ _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
       countryName: json['country_name'] as String?,
     );
 
-Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
-    <String, dynamic>{
-      if (instance.address1 case final value?) 'address1': value,
-      if (instance.address2 case final value?) 'address2': value,
-      if (instance.city case final value?) 'city': value,
-      if (instance.company case final value?) 'company': value,
-      if (instance.firstName case final value?) 'first_name': value,
-      if (instance.lastName case final value?) 'last_name': value,
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.province case final value?) 'province': value,
-      if (instance.country case final value?) 'country': value,
-      if (instance.zip case final value?) 'zip': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.provinceCode case final value?) 'province_code': value,
-      if (instance.countryCode case final value?) 'country_code': value,
-      if (instance.countryName case final value?) 'country_name': value,
-    };
+Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address1', instance.address1);
+  writeNotNull('address2', instance.address2);
+  writeNotNull('city', instance.city);
+  writeNotNull('company', instance.company);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('province', instance.province);
+  writeNotNull('country', instance.country);
+  writeNotNull('zip', instance.zip);
+  writeNotNull('name', instance.name);
+  writeNotNull('province_code', instance.provinceCode);
+  writeNotNull('country_code', instance.countryCode);
+  writeNotNull('country_name', instance.countryName);
+  return val;
+}

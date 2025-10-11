@@ -23,12 +23,8 @@ mixin _$AccessScopeResponse {
   @JsonKey(name: "access_scopes")
   List<AccessScope> get accessScopes => throw _privateConstructorUsedError;
 
-  /// Serializes this AccessScopeResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AccessScopeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AccessScopeResponseCopyWith<AccessScopeResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,8 +48,6 @@ class _$AccessScopeResponseCopyWithImpl<$Res, $Val extends AccessScopeResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AccessScopeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,8 +81,6 @@ class __$$AccessScopeResponseImplCopyWithImpl<$Res>
       $Res Function(_$AccessScopeResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccessScopeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,14 +129,12 @@ class _$AccessScopeResponseImpl implements _AccessScopeResponse {
                 .equals(other._accessScopes, _accessScopes));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_accessScopes));
 
-  /// Create a copy of AccessScopeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AccessScopeResponseImplCopyWith<_$AccessScopeResponseImpl> get copyWith =>
@@ -171,11 +161,8 @@ abstract class _AccessScopeResponse implements AccessScopeResponse {
   @override
   @JsonKey(name: "access_scopes")
   List<AccessScope> get accessScopes;
-
-  /// Create a copy of AccessScopeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AccessScopeResponseImplCopyWith<_$AccessScopeResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -189,12 +176,8 @@ mixin _$AccessScope {
   @JsonKey(name: "handle")
   String get handle => throw _privateConstructorUsedError;
 
-  /// Serializes this AccessScope to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AccessScope
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AccessScopeCopyWith<AccessScope> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -218,8 +201,6 @@ class _$AccessScopeCopyWithImpl<$Res, $Val extends AccessScope>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AccessScope
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -253,8 +234,6 @@ class __$$AccessScopeImplCopyWithImpl<$Res>
       _$AccessScopeImpl _value, $Res Function(_$AccessScopeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccessScope
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -294,13 +273,11 @@ class _$AccessScopeImpl implements _AccessScope {
             (identical(other.handle, handle) || other.handle == handle));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, handle);
 
-  /// Create a copy of AccessScope
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AccessScopeImplCopyWith<_$AccessScopeImpl> get copyWith =>
@@ -325,11 +302,8 @@ abstract class _AccessScope implements AccessScope {
   @override
   @JsonKey(name: "handle")
   String get handle;
-
-  /// Create a copy of AccessScope
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AccessScopeImplCopyWith<_$AccessScopeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

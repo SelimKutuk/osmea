@@ -17,10 +17,18 @@ _$UpdateSetDiscountOnDraftOrderRequestImpl
         );
 
 Map<String, dynamic> _$$UpdateSetDiscountOnDraftOrderRequestImplToJson(
-        _$UpdateSetDiscountOnDraftOrderRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$UpdateSetDiscountOnDraftOrderRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
@@ -30,11 +38,18 @@ _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
               json['applied_discount'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.appliedDiscount?.toJson() case final value?)
-        'applied_discount': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('applied_discount', instance.appliedDiscount?.toJson());
+  return val;
+}
 
 _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
         Map<String, dynamic> json) =>
@@ -47,11 +62,19 @@ _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
     );
 
 Map<String, dynamic> _$$AppliedDiscountImplToJson(
-        _$AppliedDiscountImpl instance) =>
-    <String, dynamic>{
-      if (instance.description case final value?) 'description': value,
-      if (instance.valueType case final value?) 'value_type': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.title case final value?) 'title': value,
-    };
+    _$AppliedDiscountImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('value_type', instance.valueType);
+  writeNotNull('value', instance.value);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('title', instance.title);
+  return val;
+}

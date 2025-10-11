@@ -15,12 +15,19 @@ _$ListMetafieldsResponseImpl _$$ListMetafieldsResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$ListMetafieldsResponseImplToJson(
-        _$ListMetafieldsResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.metafields?.map((e) => e.toJson()).toList()
-          case final value?)
-        'metafields': value,
-    };
+    _$ListMetafieldsResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'metafields', instance.metafields?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
     _$MetafieldImpl(
@@ -37,18 +44,25 @@ _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.namespace case final value?) 'namespace': value,
-      if (instance.key case final value?) 'key': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.description case final value?) 'description': value,
-      if (instance.ownerId case final value?) 'owner_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.ownerResource case final value?) 'owner_resource': value,
-      if (instance.type case final value?) 'type': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('namespace', instance.namespace);
+  writeNotNull('key', instance.key);
+  writeNotNull('value', instance.value);
+  writeNotNull('description', instance.description);
+  writeNotNull('owner_id', instance.ownerId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('owner_resource', instance.ownerResource);
+  writeNotNull('type', instance.type);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

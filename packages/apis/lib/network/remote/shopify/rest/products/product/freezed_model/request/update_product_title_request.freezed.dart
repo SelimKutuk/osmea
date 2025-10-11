@@ -24,12 +24,8 @@ mixin _$UpdateProductTitleRequest {
   @JsonKey(name: "product")
   Product? get product => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateProductTitleRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateProductTitleRequestCopyWith<UpdateProductTitleRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdateProductTitleRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdateProductTitleRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProductCopyWith<$Res>? get product {
@@ -111,8 +103,6 @@ class __$$UpdateProductTitleRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateProductTitleRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,13 +143,11 @@ class _$UpdateProductTitleRequestImpl implements _UpdateProductTitleRequest {
             (identical(other.product, product) || other.product == product));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, product);
 
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateProductTitleRequestImplCopyWith<_$UpdateProductTitleRequestImpl>
@@ -185,11 +173,8 @@ abstract class _UpdateProductTitleRequest implements UpdateProductTitleRequest {
   @override
   @JsonKey(name: "product")
   Product? get product;
-
-  /// Create a copy of UpdateProductTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateProductTitleRequestImplCopyWith<_$UpdateProductTitleRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -205,12 +190,8 @@ mixin _$Product {
   @JsonKey(name: "title")
   String? get title => throw _privateConstructorUsedError;
 
-  /// Serializes this Product to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -233,8 +214,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -273,8 +252,6 @@ class __$$ProductImplCopyWithImpl<$Res>
       _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -324,13 +301,11 @@ class _$ProductImpl implements _Product {
             (identical(other.title, title) || other.title == title));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title);
 
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
@@ -357,11 +332,8 @@ abstract class _Product implements Product {
   @override
   @JsonKey(name: "title")
   String? get title;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

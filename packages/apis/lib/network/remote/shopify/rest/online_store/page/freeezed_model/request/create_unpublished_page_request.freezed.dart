@@ -24,12 +24,8 @@ mixin _$CreateUnpublishedPageRequest {
   @JsonKey(name: "page")
   Page? get page => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateUnpublishedPageRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateUnpublishedPageRequestCopyWith<CreateUnpublishedPageRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateUnpublishedPageRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateUnpublishedPageRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PageCopyWith<$Res>? get page {
@@ -113,8 +105,6 @@ class __$$CreateUnpublishedPageRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateUnpublishedPageRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,13 +146,11 @@ class _$CreateUnpublishedPageRequestImpl
             (identical(other.page, page) || other.page == page));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, page);
 
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateUnpublishedPageRequestImplCopyWith<
@@ -190,11 +178,8 @@ abstract class _CreateUnpublishedPageRequest
   @override
   @JsonKey(name: "page")
   Page? get page;
-
-  /// Create a copy of CreateUnpublishedPageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateUnpublishedPageRequestImplCopyWith<
           _$CreateUnpublishedPageRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -213,12 +198,8 @@ mixin _$Page {
   @JsonKey(name: "published")
   bool? get published => throw _privateConstructorUsedError;
 
-  /// Serializes this Page to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PageCopyWith<Page> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -243,8 +224,6 @@ class _$PageCopyWithImpl<$Res, $Val extends Page>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -289,8 +268,6 @@ class __$$PageImplCopyWithImpl<$Res>
   __$$PageImplCopyWithImpl(_$PageImpl _value, $Res Function(_$PageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -353,13 +330,11 @@ class _$PageImpl implements _Page {
                 other.published == published));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, bodyHtml, published);
 
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
@@ -390,11 +365,8 @@ abstract class _Page implements Page {
   @override
   @JsonKey(name: "published")
   bool? get published;
-
-  /// Create a copy of Page
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PageImplCopyWith<_$PageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

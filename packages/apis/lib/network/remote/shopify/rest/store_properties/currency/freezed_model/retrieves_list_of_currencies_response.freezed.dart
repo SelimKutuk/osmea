@@ -24,12 +24,8 @@ mixin _$RetrievesListOfCurrenciesResponse {
   @JsonKey(name: "currencies")
   List<dynamic>? get currencies => throw _privateConstructorUsedError;
 
-  /// Serializes this RetrievesListOfCurrenciesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RetrievesListOfCurrenciesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RetrievesListOfCurrenciesResponseCopyWith<RetrievesListOfCurrenciesResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$RetrievesListOfCurrenciesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RetrievesListOfCurrenciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$RetrievesListOfCurrenciesResponseImplCopyWithImpl<$Res>
       $Res Function(_$RetrievesListOfCurrenciesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RetrievesListOfCurrenciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,14 +139,12 @@ class _$RetrievesListOfCurrenciesResponseImpl
                 .equals(other._currencies, _currencies));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_currencies));
 
-  /// Create a copy of RetrievesListOfCurrenciesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RetrievesListOfCurrenciesResponseImplCopyWith<
@@ -183,11 +173,8 @@ abstract class _RetrievesListOfCurrenciesResponse
   @override
   @JsonKey(name: "currencies")
   List<dynamic>? get currencies;
-
-  /// Create a copy of RetrievesListOfCurrenciesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RetrievesListOfCurrenciesResponseImplCopyWith<
           _$RetrievesListOfCurrenciesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

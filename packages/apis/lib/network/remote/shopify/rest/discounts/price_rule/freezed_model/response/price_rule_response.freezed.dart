@@ -23,12 +23,8 @@ mixin _$PriceRuleResponse {
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceRuleResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceRuleResponseCopyWith<PriceRuleResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$PriceRuleResponseCopyWithImpl<$Res, $Val extends PriceRuleResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,8 +63,6 @@ class _$PriceRuleResponseCopyWithImpl<$Res, $Val extends PriceRuleResponse>
     ) as $Val);
   }
 
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PriceRuleCopyWith<$Res>? get priceRule {
@@ -106,8 +98,6 @@ class __$$PriceRuleResponseImplCopyWithImpl<$Res>
       $Res Function(_$PriceRuleResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,13 +138,11 @@ class _$PriceRuleResponseImpl implements _PriceRuleResponse {
                 other.priceRule == priceRule));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, priceRule);
 
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceRuleResponseImplCopyWith<_$PriceRuleResponseImpl> get copyWith =>
@@ -180,11 +168,8 @@ abstract class _PriceRuleResponse implements PriceRuleResponse {
   @override
   @JsonKey(name: "price_rule")
   PriceRule? get priceRule;
-
-  /// Create a copy of PriceRuleResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceRuleResponseImplCopyWith<_$PriceRuleResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -266,12 +251,8 @@ mixin _$PriceRule {
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId => throw _privateConstructorUsedError;
 
-  /// Serializes this PriceRule to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PriceRuleCopyWith<PriceRule> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -341,8 +322,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -503,8 +482,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
     ) as $Val);
   }
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PrerequisiteToEntitlementQuantityRatioCopyWith<$Res>?
@@ -520,8 +497,6 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
     });
   }
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PrerequisiteToEntitlementPurchaseCopyWith<$Res>?
@@ -606,8 +581,6 @@ class __$$PriceRuleImplCopyWithImpl<$Res>
       _$PriceRuleImpl _value, $Res Function(_$PriceRuleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1077,7 +1050,7 @@ class _$PriceRuleImpl implements _PriceRule {
                 other.adminGraphqlApiId == adminGraphqlApiId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1113,9 +1086,7 @@ class _$PriceRuleImpl implements _PriceRule {
         adminGraphqlApiId
       ]);
 
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
@@ -1273,11 +1244,8 @@ abstract class _PriceRule implements PriceRule {
   @override
   @JsonKey(name: "admin_graphql_api_id")
   String? get adminGraphqlApiId;
-
-  /// Create a copy of PriceRule
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1292,12 +1260,8 @@ mixin _$PrerequisiteToEntitlementPurchase {
   @JsonKey(name: "prerequisite_amount")
   dynamic get prerequisiteAmount => throw _privateConstructorUsedError;
 
-  /// Serializes this PrerequisiteToEntitlementPurchase to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PrerequisiteToEntitlementPurchase
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PrerequisiteToEntitlementPurchaseCopyWith<PrerequisiteToEntitlementPurchase>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1324,8 +1288,6 @@ class _$PrerequisiteToEntitlementPurchaseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PrerequisiteToEntitlementPurchase
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1362,8 +1324,6 @@ class __$$PrerequisiteToEntitlementPurchaseImplCopyWithImpl<$Res>
       $Res Function(_$PrerequisiteToEntitlementPurchaseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PrerequisiteToEntitlementPurchase
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1407,14 +1367,12 @@ class _$PrerequisiteToEntitlementPurchaseImpl
                 .equals(other.prerequisiteAmount, prerequisiteAmount));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(prerequisiteAmount));
 
-  /// Create a copy of PrerequisiteToEntitlementPurchase
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PrerequisiteToEntitlementPurchaseImplCopyWith<
@@ -1444,11 +1402,8 @@ abstract class _PrerequisiteToEntitlementPurchase
   @override
   @JsonKey(name: "prerequisite_amount")
   dynamic get prerequisiteAmount;
-
-  /// Create a copy of PrerequisiteToEntitlementPurchase
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PrerequisiteToEntitlementPurchaseImplCopyWith<
           _$PrerequisiteToEntitlementPurchaseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1467,12 +1422,8 @@ mixin _$PrerequisiteToEntitlementQuantityRatio {
   @JsonKey(name: "entitled_quantity")
   dynamic get entitledQuantity => throw _privateConstructorUsedError;
 
-  /// Serializes this PrerequisiteToEntitlementQuantityRatio to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PrerequisiteToEntitlementQuantityRatio
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PrerequisiteToEntitlementQuantityRatioCopyWith<
           PrerequisiteToEntitlementQuantityRatio>
       get copyWith => throw _privateConstructorUsedError;
@@ -1502,8 +1453,6 @@ class _$PrerequisiteToEntitlementQuantityRatioCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PrerequisiteToEntitlementQuantityRatio
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1547,8 +1496,6 @@ class __$$PrerequisiteToEntitlementQuantityRatioImplCopyWithImpl<$Res>
       $Res Function(_$PrerequisiteToEntitlementQuantityRatioImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PrerequisiteToEntitlementQuantityRatio
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1603,16 +1550,14 @@ class _$PrerequisiteToEntitlementQuantityRatioImpl
                 .equals(other.entitledQuantity, entitledQuantity));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(prerequisiteQuantity),
       const DeepCollectionEquality().hash(entitledQuantity));
 
-  /// Create a copy of PrerequisiteToEntitlementQuantityRatio
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PrerequisiteToEntitlementQuantityRatioImplCopyWith<
@@ -1647,11 +1592,8 @@ abstract class _PrerequisiteToEntitlementQuantityRatio
   @override
   @JsonKey(name: "entitled_quantity")
   dynamic get entitledQuantity;
-
-  /// Create a copy of PrerequisiteToEntitlementQuantityRatio
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PrerequisiteToEntitlementQuantityRatioImplCopyWith<
           _$PrerequisiteToEntitlementQuantityRatioImpl>
       get copyWith => throw _privateConstructorUsedError;

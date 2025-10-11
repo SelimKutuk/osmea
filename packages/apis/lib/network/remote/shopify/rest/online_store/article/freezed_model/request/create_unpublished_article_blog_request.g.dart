@@ -16,10 +16,18 @@ _$CreateUnpublishedArticleBlogRequestImpl
         );
 
 Map<String, dynamic> _$$CreateUnpublishedArticleBlogRequestImplToJson(
-        _$CreateUnpublishedArticleBlogRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.article?.toJson() case final value?) 'article': value,
-    };
+    _$CreateUnpublishedArticleBlogRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('article', instance.article?.toJson());
+  return val;
+}
 
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
@@ -30,11 +38,19 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
       published: json['published'] as bool?,
     );
 
-Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.published case final value?) 'published': value,
-    };
+Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('author', instance.author);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published', instance.published);
+  return val;
+}

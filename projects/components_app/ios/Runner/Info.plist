@@ -56,6 +56,13 @@
 	<string>This app needs Face ID access for biometric authentication features.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app needs motion access to test motion-based components and features.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

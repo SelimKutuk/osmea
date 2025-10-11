@@ -147,7 +147,11 @@ abstract class CoreScaffold extends AbstractCoreWidget {
   Widget buildWidget(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      body: body,
+      body: body != null 
+        ? SafeArea(
+            child: body!,
+          )
+        : null,
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: floatingActionButtonLocation,
       floatingActionButtonAnimator: floatingActionButtonAnimator,

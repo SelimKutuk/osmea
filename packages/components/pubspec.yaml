@@ -12,7 +12,7 @@ dependencies:
   equatable: ^2.0.7
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.1.1
+  flutter_bloc: ^9.1.0
   intl: ^0.20.0
   url_launcher: ^6.3.1
 
@@ -24,11 +24,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   
-  # Add any assets or fonts your package needs here
-  # assets:
-  #   - assets/images/
-  # fonts:
-  #   - family: YourFont
-  #     fonts:
-  #       - asset: fonts/YourFont-Regular.ttf
-
+  # Assets for phone picker country flags
+  assets:
+    - assets/flags/

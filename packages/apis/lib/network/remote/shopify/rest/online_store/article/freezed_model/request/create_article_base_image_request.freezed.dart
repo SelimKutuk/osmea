@@ -24,12 +24,8 @@ mixin _$CreateArticleBaseImageRequest {
   @JsonKey(name: "article")
   Article? get article => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateArticleBaseImageRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateArticleBaseImageRequestCopyWith<CreateArticleBaseImageRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$CreateArticleBaseImageRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$CreateArticleBaseImageRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ArticleCopyWith<$Res>? get article {
@@ -113,8 +105,6 @@ class __$$CreateArticleBaseImageRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateArticleBaseImageRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,13 +147,11 @@ class _$CreateArticleBaseImageRequestImpl
             (identical(other.article, article) || other.article == article));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, article);
 
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateArticleBaseImageRequestImplCopyWith<
@@ -191,11 +179,8 @@ abstract class _CreateArticleBaseImageRequest
   @override
   @JsonKey(name: "article")
   Article? get article;
-
-  /// Create a copy of CreateArticleBaseImageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateArticleBaseImageRequestImplCopyWith<
           _$CreateArticleBaseImageRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -220,12 +205,8 @@ mixin _$Article {
   @JsonKey(name: "image")
   Image? get image => throw _privateConstructorUsedError;
 
-  /// Serializes this Article to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ArticleCopyWith<Article> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -255,8 +236,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -295,8 +274,6 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     ) as $Val);
   }
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ImageCopyWith<$Res>? get image {
@@ -337,8 +314,6 @@ class __$$ArticleImplCopyWithImpl<$Res>
       _$ArticleImpl _value, $Res Function(_$ArticleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -431,14 +406,12 @@ class _$ArticleImpl implements _Article {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, author, tags, bodyHtml, publishedAt, image);
 
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
@@ -481,11 +454,8 @@ abstract class _Article implements Article {
   @override
   @JsonKey(name: "image")
   Image? get image;
-
-  /// Create a copy of Article
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ArticleImplCopyWith<_$ArticleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -499,12 +469,8 @@ mixin _$Image {
   @JsonKey(name: "attachment")
   String? get attachment => throw _privateConstructorUsedError;
 
-  /// Serializes this Image to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -526,8 +492,6 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -560,8 +524,6 @@ class __$$ImageImplCopyWithImpl<$Res>
       _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -602,13 +564,11 @@ class _$ImageImpl implements _Image {
                 other.attachment == attachment));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, attachment);
 
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
@@ -631,11 +591,8 @@ abstract class _Image implements Image {
   @override
   @JsonKey(name: "attachment")
   String? get attachment;
-
-  /// Create a copy of Image
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

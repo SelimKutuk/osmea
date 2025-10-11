@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
-import 'package:osmea_components/osmea_components.dart';
 
 /// 🔗 **URL Launcher Test Component**
 ///

@@ -25,12 +25,8 @@ mixin _$AddCollectToCollectionByProductIdRequest {
   @JsonKey(name: "custom_collection")
   CustomCollection? get customCollection => throw _privateConstructorUsedError;
 
-  /// Serializes this AddCollectToCollectionByProductIdRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AddCollectToCollectionByProductIdRequestCopyWith<
           AddCollectToCollectionByProductIdRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -62,8 +58,6 @@ class _$AddCollectToCollectionByProductIdRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,8 +71,6 @@ class _$AddCollectToCollectionByProductIdRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CustomCollectionCopyWith<$Res>? get customCollection {
@@ -118,8 +110,6 @@ class __$$AddCollectToCollectionByProductIdRequestImplCopyWithImpl<$Res>
       $Res Function(_$AddCollectToCollectionByProductIdRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,13 +153,11 @@ class _$AddCollectToCollectionByProductIdRequestImpl
                 other.customCollection == customCollection));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, customCollection);
 
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AddCollectToCollectionByProductIdRequestImplCopyWith<
@@ -200,11 +188,8 @@ abstract class _AddCollectToCollectionByProductIdRequest
   @override
   @JsonKey(name: "custom_collection")
   CustomCollection? get customCollection;
-
-  /// Create a copy of AddCollectToCollectionByProductIdRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AddCollectToCollectionByProductIdRequestImplCopyWith<
           _$AddCollectToCollectionByProductIdRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -221,12 +206,8 @@ mixin _$CustomCollection {
   @JsonKey(name: "collects")
   List<Collect>? get collects => throw _privateConstructorUsedError;
 
-  /// Serializes this CustomCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomCollectionCopyWith<CustomCollection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -252,8 +233,6 @@ class _$CustomCollectionCopyWithImpl<$Res, $Val extends CustomCollection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -294,8 +273,6 @@ class __$$CustomCollectionImplCopyWithImpl<$Res>
       $Res Function(_$CustomCollectionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -354,14 +331,12 @@ class _$CustomCollectionImpl implements _CustomCollection {
             const DeepCollectionEquality().equals(other._collects, _collects));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_collects));
 
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
@@ -391,11 +366,8 @@ abstract class _CustomCollection implements CustomCollection {
   @override
   @JsonKey(name: "collects")
   List<Collect>? get collects;
-
-  /// Create a copy of CustomCollection
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomCollectionImplCopyWith<_$CustomCollectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -411,12 +383,8 @@ mixin _$Collect {
   @JsonKey(name: "position")
   int? get position => throw _privateConstructorUsedError;
 
-  /// Serializes this Collect to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CollectCopyWith<Collect> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -440,8 +408,6 @@ class _$CollectCopyWithImpl<$Res, $Val extends Collect>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -481,8 +447,6 @@ class __$$CollectImplCopyWithImpl<$Res>
       _$CollectImpl _value, $Res Function(_$CollectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -535,13 +499,11 @@ class _$CollectImpl implements _Collect {
                 other.position == position));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, productId, position);
 
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CollectImplCopyWith<_$CollectImpl> get copyWith =>
@@ -568,11 +530,8 @@ abstract class _Collect implements Collect {
   @override
   @JsonKey(name: "position")
   int? get position;
-
-  /// Create a copy of Collect
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CollectImplCopyWith<_$CollectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -23,12 +23,8 @@ mixin _$GetCollectsResponse {
   @JsonKey(name: "collects")
   List<Collect>? get collects => throw _privateConstructorUsedError;
 
-  /// Serializes this GetCollectsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetCollectsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetCollectsResponseCopyWith<GetCollectsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,8 +48,6 @@ class _$GetCollectsResponseCopyWithImpl<$Res, $Val extends GetCollectsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetCollectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,8 +81,6 @@ class __$$GetCollectsResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetCollectsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCollectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,14 +129,12 @@ class _$GetCollectsResponseImpl implements _GetCollectsResponse {
             const DeepCollectionEquality().equals(other._collects, _collects));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_collects));
 
-  /// Create a copy of GetCollectsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetCollectsResponseImplCopyWith<_$GetCollectsResponseImpl> get copyWith =>
@@ -170,11 +160,8 @@ abstract class _GetCollectsResponse implements GetCollectsResponse {
   @override
   @JsonKey(name: "collects")
   List<Collect>? get collects;
-
-  /// Create a copy of GetCollectsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetCollectsResponseImplCopyWith<_$GetCollectsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
