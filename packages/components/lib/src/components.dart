@@ -46,6 +46,8 @@ import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
+import 'package:osmea_components/src/components/sound_dialog/sound_dialog.dart';
+import 'package:osmea_components/src/enums/sound_dialog_enums.dart';
 
 import 'components/collapse/collapse.dart';
 import 'components/dropdown/dropdown.dart';
@@ -4237,6 +4239,66 @@ class OsmeaComponents {
       validator: validator,
       animationDuration: animationDuration,
       debounceDuration: debounceDuration,
+    );
+  }
+// ==================== SOUND DIALOG  ====================
+
+  /// 🎤 **Show OSMEA Sound Dialog**
+  ///
+  /// Opens a self-contained sound recording dialog as a modal pop-up.
+  /// The specific UI is determined by the `variant` parameter.
+  ///
+  /// **Features:**
+  /// - Manages its own state internally via `SoundDialogCubit`.
+  /// - Supports `standard` and `expandable` variants.
+  /// - Provides simple callbacks for completion or cancellation.
+  ///
+  /// **Example:**
+  /// ```dart
+  /// OsmeaComponents.soundDialog(
+  ///   context,
+  ///   variant: SoundDialogVariant.expandable,
+  ///   onConfirm: (path) => print("Saved: $path"),
+  ///   onCancel: () => print("Canceled"),
+  /// );
+  /// ```
+  static Future<void> soundDialog(
+    BuildContext context, {
+    Key? key,
+    SoundDialogVariant variant = SoundDialogVariant.standard,
+    void Function(String filePath)? onConfirm,
+    VoidCallback? onCancel,
+  }) async {
+    return showDialog(
+      context: context,
+      builder: (_) => OsmeaSoundDialog(
+        key: key,
+        variant: variant,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+      ),
+    );
+  }
+
+  /// 🔊 **OSMEA Sound Dialog Widget**
+  ///
+  /// Returns a self-contained sound recording dialog widget.
+  /// This can be used directly inside custom layouts. The UI is determined
+  /// by the `variant` parameter.
+  ///
+  /// **Note:** For most cases, using the `OsmeaComponents.soundDialog()` helper
+  /// to show a modal dialog is recommended.
+  static Widget soundDialogWidget({
+    Key? key,
+    SoundDialogVariant variant = SoundDialogVariant.standard,
+    void Function(String filePath)? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    return OsmeaSoundDialog(
+      key: key,
+      variant: variant,
+      onConfirm: onConfirm,
+      onCancel: onCancel,
     );
   }
 }
