@@ -1,11 +1,9 @@
-import 'dart:io';
 import 'package:core/core.dart';
 import 'package:apis/apis.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:storefront_woo/app/core/config/config_di.config.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -46,67 +44,78 @@ Future<void> _initializeApisPackage(String? environment) async {
   }
 }
 
-/// Initialize APIs package from environment configuration
+/// Initialize APIs package from app configuration
 Future<void> _initializeFromEnvironment(String? environment) async {
   try {
-    // Load .env file from assets
-    await dotenv.load(fileName: "assets/.env");
+    debugPrint('🔧 Initializing WooCommerce from app configuration...');
 
-    // Get configuration from .env file first, then from environment variables
-    final storeUrl =
-        dotenv.env['WOOCOMMERCE_STORE_URL'] ??
-        Platform.environment['WOOCOMMERCE_STORE_URL'] ??
-        '';
-    final consumerKey =
-        dotenv.env['WOOCOMMERCE_CONSUMER_KEY'] ??
-        Platform.environment['WOOCOMMERCE_CONSUMER_KEY'] ??
-        '';
-    final consumerSecret =
-        dotenv.env['WOOCOMMERCE_CONSUMER_SECRET'] ??
-        Platform.environment['WOOCOMMERCE_CONSUMER_SECRET'] ??
-        '';
-    final apiVersion =
-        dotenv.env['WOOCOMMERCE_API_VERSION'] ??
-        Platform.environment['WOOCOMMERCE_API_VERSION'] ??
-        'v1';
+    // Get configuration from app_config.json
+    final AssetConfigHelper configHelper = AssetConfigHelper();
+    await configHelper.loadConfig('assets/app_config.json');
 
-    if (storeUrl.isNotEmpty &&
-        consumerKey.isNotEmpty &&
-        consumerSecret.isNotEmpty) {
-      // Initialize WooCommerce network with credentials
-      debugPrint('🔧 Initializing WooCommerce:');
+    final storeUrl = configHelper.getString(
+      'woocommerce_configuration.store_url',
+      '',
+    );
+    final apiVersion = configHelper.getString(
+      'woocommerce_configuration.version',
+      'v1',
+    );
+    final verifySsl = configHelper.getBool(
+      'woocommerce_configuration.verify_ssl',
+      true,
+    );
+    final queryStringAuth = configHelper.getBool(
+      'woocommerce_configuration.query_string_auth',
+      false,
+    );
+    final productsPerPage = configHelper.getInt(
+      'woocommerce_configuration.products_per_page',
+      20,
+    );
+    final enableReviews = configHelper.getBool(
+      'woocommerce_configuration.enable_reviews',
+      true,
+    );
+    final enableCoupons = configHelper.getBool(
+      'woocommerce_configuration.enable_coupons',
+      true,
+    );
+    final enableGuestCheckout = configHelper.getBool(
+      'woocommerce_configuration.enable_guest_checkout',
+      true,
+    );
+
+    if (storeUrl.isNotEmpty) {
+      // Initialize WooCommerce network for public API access
+      debugPrint('🔧 Initializing WooCommerce (Public API):');
       debugPrint('  - Store URL: $storeUrl');
-      debugPrint('  - Consumer Key: ${consumerKey.substring(0, 8)}...');
-      debugPrint('  - Consumer Secret: ${consumerSecret.substring(0, 8)}...');
       debugPrint('  - API Version: $apiVersion');
-      debugPrint(
-        '  - Source: ${dotenv.env['WOOCOMMERCE_STORE_URL'] != null ? 'assets/.env file' : 'Environment Variables'}',
-      );
+      debugPrint('  - Verify SSL: $verifySsl');
+      debugPrint('  - Query String Auth: $queryStringAuth');
+      debugPrint('  - Products Per Page: $productsPerPage');
+      debugPrint('  - Enable Reviews: $enableReviews');
+      debugPrint('  - Enable Coupons: $enableCoupons');
+      debugPrint('  - Enable Guest Checkout: $enableGuestCheckout');
+      debugPrint('  - Source: app_config.json');
 
+      // Initialize WooCommerce network without authentication for public APIs
       WooNetwork.init(
         getIt,
         storeUrl: storeUrl,
-        username: consumerKey,
-        password: consumerSecret,
+        username: '', // No authentication needed for public APIs
+        password: '', // No authentication needed for public APIs
         apiVersion: apiVersion,
       );
 
-      debugPrint('✅ WooCommerce network initialized');
+      debugPrint('✅ WooCommerce network initialized for public API access');
     } else {
       debugPrint('❌ Missing required configuration:');
-      debugPrint(
-        '  - WOOCOMMERCE_STORE_URL: ${storeUrl.isEmpty ? 'MISSING' : 'OK'}',
-      );
-      debugPrint(
-        '  - WOOCOMMERCE_CONSUMER_KEY: ${consumerKey.isEmpty ? 'MISSING' : 'OK'}',
-      );
-      debugPrint(
-        '  - WOOCOMMERCE_CONSUMER_SECRET: ${consumerSecret.isEmpty ? 'MISSING' : 'OK'}',
-      );
-      throw Exception('Required WooCommerce configuration is missing');
+      debugPrint('  - Store URL: ${storeUrl.isEmpty ? 'MISSING' : 'OK'}');
+      throw Exception('Required WooCommerce store URL is missing');
     }
   } catch (e) {
-    debugPrint('❌ Error initializing from environment: $e');
+    debugPrint('❌ Error initializing from app configuration: $e');
     rethrow;
   }
 }
