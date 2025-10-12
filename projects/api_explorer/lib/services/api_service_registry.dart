@@ -4079,6 +4079,44 @@ class ApiServiceRegistry {
       subcategory: 'Cart API',
       handler: GetCartHandler(),
     ),
+
+    // 🎟️ WooCommerce Store API Cart Coupons
+    ApiService(
+      name: 'Get Cart Coupons',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: GetCartCouponsHandler(),
+    ),
+    ApiService(
+      name: 'Get Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons/{coupon_code}',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: GetCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Add Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: AddCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Delete Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons/{coupon_code}',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: DeleteCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Delete All Cart Coupons',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: DeleteAllCartCouponsHandler(),
+    ),
+
     ApiService(
       name: 'Add Item',
       endpoint: '/wp-json/wc/store/v1/cart/add-item',
