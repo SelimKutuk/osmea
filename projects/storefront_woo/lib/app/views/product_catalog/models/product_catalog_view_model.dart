@@ -3,12 +3,13 @@
  * -----------------------
  * ViewModel for the product catalog view following OSMEA architecture.
  * Uses BLoC pattern with events and states.
+ * Based on admin_dashboard pattern for consistency.
  */
 
-import 'dart:async';
-import 'package:apis/apis.dart';
-import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/product_service.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/list_all_products_response_model.dart';
+import 'package:apis/network/remote/woocommerce/store_api/product_api/abstract/product_service.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -31,28 +32,23 @@ class ProductCatalogViewModel
   }
 
   // Dependencies
+  final ProductService _productService = GetIt.I<ProductService>();
+
+  // Controllers - Simple approach following admin_dashboard pattern
+  final TextEditingController searchController = TextEditingController();
 
   // State variables
   List<ListAllProductsResponseModel> _products = [];
+  List<ListAllProductsResponseModel> _allProducts =
+      []; // Store all products for local filtering
   bool _hasMore = true;
   int _currentPage = 1;
   String? _searchQuery;
   int? _selectedCategoryId;
-  bool _isLoadingMore = false;
+  final int _productsPerPage = 20;
 
-  // Constants
-  static const int _productsPerPage = 20;
-
-  // Public getters
-  List<ListAllProductsResponseModel> get products => _products;
-  bool get hasMore => _hasMore;
-  int get currentPage => _currentPage;
-  String? get searchQuery => _searchQuery;
-  int? get selectedCategoryId => _selectedCategoryId;
-  bool get isLoadingMore => _isLoadingMore;
-
-  // Public trigger functions
-  void loadProducts() => add(ProductCatalogInitialEvent());
+  // Public trigger functions - following admin_dashboard pattern
+  void initial() => add(ProductCatalogInitialEvent());
   void loadMore() => add(ProductCatalogLoadMoreEvent());
   void refresh() => add(ProductCatalogRefreshEvent());
   void search(String query) => add(ProductCatalogSearchEvent(query: query));
@@ -63,6 +59,18 @@ class ProductCatalogViewModel
       add(ProductCatalogAddToCartEvent(productId: productId));
   void addToWishlist(int productId) =>
       add(ProductCatalogAddToWishlistEvent(productId: productId));
+
+  // Restart method to reload all products
+  void restart() {
+    searchController.clear();
+    _searchQuery = null;
+    _selectedCategoryId = null;
+    _currentPage = 1;
+    _products = [];
+    _allProducts = [];
+    _hasMore = true;
+    add(ProductCatalogInitialEvent());
+  }
 
   // Event handlers
   Future<void> _onInitialEvent(
@@ -78,9 +86,7 @@ class ProductCatalogViewModel
       _searchQuery = null;
       _selectedCategoryId = null;
 
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final products = await productService.listAllProducts(
+      final products = await _productService.listAllProducts(
         apiVersion: 'v1',
         page: _currentPage,
         perPage: _productsPerPage,
@@ -89,6 +95,9 @@ class ProductCatalogViewModel
       );
 
       _products = products;
+      _allProducts = List.from(
+        products,
+      ); // Store all products for local filtering
       _hasMore = products.length == _productsPerPage;
 
       emit(
@@ -109,34 +118,21 @@ class ProductCatalogViewModel
     ProductCatalogLoadMoreEvent event,
     Emitter<ProductCatalogState> emit,
   ) async {
-    if (_isLoadingMore || !_hasMore) return;
+    if (!_hasMore) return;
 
     try {
-      _isLoadingMore = true;
-      emit(
-        ProductCatalogLoadingMoreState(
-          products: _products,
-          currentPage: _currentPage,
-        ),
-      );
-
       _currentPage++;
-
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final newProducts = await productService.listAllProducts(
+      final products = await _productService.listAllProducts(
         apiVersion: 'v1',
         page: _currentPage,
         perPage: _productsPerPage,
         status: 'publish',
         stockStatus: 'instock',
-        search: _searchQuery,
-        category: _selectedCategoryId,
       );
 
-      _products = [..._products, ...newProducts];
-      _hasMore = newProducts.length == _productsPerPage;
-      _isLoadingMore = false;
+      _products.addAll(products);
+      _allProducts.addAll(products); // Add to all products cache
+      _hasMore = products.length == _productsPerPage;
 
       emit(
         ProductCatalogLoadedState(
@@ -148,7 +144,6 @@ class ProductCatalogViewModel
         ),
       );
     } catch (e) {
-      _isLoadingMore = false;
       emit(
         ProductCatalogErrorState(message: 'Failed to load more products: $e'),
       );
@@ -159,40 +154,7 @@ class ProductCatalogViewModel
     ProductCatalogRefreshEvent event,
     Emitter<ProductCatalogState> emit,
   ) async {
-    try {
-      emit(ProductCatalogRefreshingState(products: _products));
-
-      _currentPage = 1;
-      _products = [];
-      _hasMore = true;
-
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final products = await productService.listAllProducts(
-        apiVersion: 'v1',
-        page: _currentPage,
-        perPage: _productsPerPage,
-        status: 'publish',
-        stockStatus: 'instock',
-        search: _searchQuery,
-        category: _selectedCategoryId,
-      );
-
-      _products = products;
-      _hasMore = products.length == _productsPerPage;
-
-      emit(
-        ProductCatalogLoadedState(
-          products: _products,
-          hasMore: _hasMore,
-          currentPage: _currentPage,
-          searchQuery: _searchQuery,
-          selectedCategoryId: _selectedCategoryId,
-        ),
-      );
-    } catch (e) {
-      emit(ProductCatalogErrorState(message: 'Failed to refresh products: $e'));
-    }
+    add(ProductCatalogInitialEvent());
   }
 
   Future<void> _onSearchEvent(
@@ -200,33 +162,33 @@ class ProductCatalogViewModel
     Emitter<ProductCatalogState> emit,
   ) async {
     try {
-      emit(ProductCatalogLoadingState());
-
       _searchQuery = event.query;
-      _currentPage = 1;
-      _products = [];
-      _hasMore = true;
 
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final products = await productService.listAllProducts(
-        apiVersion: 'v1',
-        page: _currentPage,
-        perPage: _productsPerPage,
-        status: 'publish',
-        stockStatus: 'instock',
-        search: _searchQuery,
-        category: _selectedCategoryId,
-      );
+      // Update controller text
+      if (searchController.text != event.query) {
+        searchController.text = event.query;
+      }
 
-      _products = products;
-      _hasMore = products.length == _productsPerPage;
+      if (event.query.isEmpty) {
+        // If search is empty, show all products
+        _products = List.from(_allProducts);
+      } else {
+        // Filter products locally
+        _products = _allProducts.where((product) {
+          final productName = product.name?.toLowerCase() ?? '';
+          final productDescription = product.description?.toLowerCase() ?? '';
+          final searchTerm = event.query.toLowerCase();
+
+          return productName.contains(searchTerm) ||
+              productDescription.contains(searchTerm);
+        }).toList();
+      }
 
       emit(
         ProductCatalogLoadedState(
           products: _products,
-          hasMore: _hasMore,
-          currentPage: _currentPage,
+          hasMore: false, // Local filtering doesn't support pagination
+          currentPage: 1,
           searchQuery: _searchQuery,
           selectedCategoryId: _selectedCategoryId,
         ),
@@ -241,32 +203,15 @@ class ProductCatalogViewModel
     Emitter<ProductCatalogState> emit,
   ) async {
     try {
-      emit(ProductCatalogLoadingState());
-
+      searchController.clear();
       _searchQuery = null;
-      _currentPage = 1;
-      _products = [];
-      _hasMore = true;
-
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final products = await productService.listAllProducts(
-        apiVersion: 'v1',
-        page: _currentPage,
-        perPage: _productsPerPage,
-        status: 'publish',
-        stockStatus: 'instock',
-        category: _selectedCategoryId,
-      );
-
-      _products = products;
-      _hasMore = products.length == _productsPerPage;
+      _products = List.from(_allProducts);
 
       emit(
         ProductCatalogLoadedState(
           products: _products,
-          hasMore: _hasMore,
-          currentPage: _currentPage,
+          hasMore: _allProducts.length == _productsPerPage,
+          currentPage: 1,
           searchQuery: _searchQuery,
           selectedCategoryId: _selectedCategoryId,
         ),
@@ -281,33 +226,26 @@ class ProductCatalogViewModel
     Emitter<ProductCatalogState> emit,
   ) async {
     try {
-      emit(ProductCatalogLoadingState());
-
       _selectedCategoryId = event.categoryId;
-      _currentPage = 1;
-      _products = [];
-      _hasMore = true;
 
-      // Use ProductService from GetIt
-      final productService = GetIt.I<ProductService>();
-      final products = await productService.listAllProducts(
-        apiVersion: 'v1',
-        page: _currentPage,
-        perPage: _productsPerPage,
-        status: 'publish',
-        stockStatus: 'instock',
-        search: _searchQuery,
-        category: _selectedCategoryId,
-      );
-
-      _products = products;
-      _hasMore = products.length == _productsPerPage;
+      if (event.categoryId == null) {
+        // Show all products
+        _products = List.from(_allProducts);
+      } else {
+        // Filter by category
+        _products = _allProducts.where((product) {
+          return product.categories?.any(
+                (category) => category.id == event.categoryId,
+              ) ??
+              false;
+        }).toList();
+      }
 
       emit(
         ProductCatalogLoadedState(
           products: _products,
-          hasMore: _hasMore,
-          currentPage: _currentPage,
+          hasMore: false, // Category filtering doesn't support pagination
+          currentPage: 1,
           searchQuery: _searchQuery,
           selectedCategoryId: _selectedCategoryId,
         ),
@@ -323,15 +261,52 @@ class ProductCatalogViewModel
     ProductCatalogAddToCartEvent event,
     Emitter<ProductCatalogState> emit,
   ) async {
-    // TODO: Implement add to cart functionality
-    // This would typically call a cart service
+    try {
+      // TODO: Implement add to cart logic
+      debugPrint('Adding product ${event.productId} to cart');
+
+      // For now, just show success state
+      emit(
+        ProductCatalogLoadedState(
+          products: _products,
+          hasMore: _hasMore,
+          currentPage: _currentPage,
+          searchQuery: _searchQuery,
+          selectedCategoryId: _selectedCategoryId,
+        ),
+      );
+    } catch (e) {
+      emit(ProductCatalogErrorState(message: 'Failed to add to cart: $e'));
+    }
   }
 
   Future<void> _onAddToWishlistEvent(
     ProductCatalogAddToWishlistEvent event,
     Emitter<ProductCatalogState> emit,
   ) async {
-    // TODO: Implement add to wishlist functionality
-    // This would typically call a wishlist service
+    try {
+      // TODO: Implement add to wishlist logic
+      debugPrint('Adding product ${event.productId} to wishlist');
+
+      // For now, just show success state
+      emit(
+        ProductCatalogLoadedState(
+          products: _products,
+          hasMore: _hasMore,
+          currentPage: _currentPage,
+          searchQuery: _searchQuery,
+          selectedCategoryId: _selectedCategoryId,
+        ),
+      );
+    } catch (e) {
+      emit(ProductCatalogErrorState(message: 'Failed to add to wishlist: $e'));
+    }
+  }
+
+  // Dispose method
+  @override
+  Future<void> close() {
+    searchController.dispose();
+    return super.close();
   }
 }

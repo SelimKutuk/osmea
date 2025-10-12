@@ -26,8 +26,11 @@ class ProductCatalogContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return OsmeaComponents.column(
       children: [
-        // Search Bar
-        _buildSearchBar(context),
+        // Search Bar with padding
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: _buildSearchBar(context),
+        ),
 
         // Product Grid
         OsmeaComponents.expanded(child: _buildProductGrid(context)),
@@ -36,24 +39,41 @@ class ProductCatalogContentWidget extends StatelessWidget {
   }
 
   Widget _buildSearchBar(BuildContext context) {
-    return OsmeaComponents.container(
-      padding: const EdgeInsets.all(16),
-      color: OsmeaColors.white,
-      child: OsmeaComponents.textField(
-        hint: 'Search products...',
-        prefixIcon: Icon(Icons.search),
-        suffixIcon: state.searchQuery?.isNotEmpty == true
-            ? Icon(Icons.clear)
-            : null,
-        onChanged: (value) {
-          if (value.isEmpty) {
-            viewModel.clearSearch();
-          } else if (value.length >= 3) {
-            viewModel.search(value);
-          }
-        },
-        borderColor: OsmeaColors.grayMaterial[300],
-        focusColor: OsmeaColors.black,
+    return OsmeaComponents.textField(
+      controller: viewModel.searchController,
+      hint: 'Search products...',
+      prefixIcon: Icon(Icons.search),
+      suffixIcon: state.searchQuery?.isNotEmpty == true
+          ? OsmeaComponents.iconButton(
+              onPressed: () {
+                debugPrint('🔍 Clear search button pressed');
+                viewModel.clearSearch();
+              },
+              icon: Icon(Icons.clear),
+              backgroundColor: OsmeaColors.transparent,
+            )
+          : null,
+      onChanged: (value) {
+        debugPrint('🔍 Search onChanged called with: "$value"');
+        if (value.isEmpty) {
+          debugPrint('🔍 Clearing search...');
+          viewModel.clearSearch();
+        } else if (value.length >= 2) {
+          debugPrint('🔍 Searching for: "$value"');
+          viewModel.search(value);
+        } else {
+          debugPrint('🔍 Search query too short: ${value.length} characters');
+        }
+      },
+      borderColor: OsmeaColors.grayMaterial[300],
+      focusColor: OsmeaColors.black,
+      textAlign: TextAlign.start,
+      textColor: OsmeaColors.black,
+      hintColor: OsmeaColors.grayMaterial[500],
+      textStyle: TextStyle(
+        color: OsmeaColors.black,
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
       ),
     );
   }
@@ -99,16 +119,29 @@ class ProductCatalogContentWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.inventory_2_outlined,
+            state.searchQuery?.isNotEmpty == true
+                ? Icons.search_off
+                : Icons.inventory_2_outlined,
             size: 64,
             color: OsmeaColors.grayMaterial[400],
           ),
           OsmeaComponents.sizedBox(height: 16),
           OsmeaComponents.text(
-            'No products found',
+            state.searchQuery?.isNotEmpty == true
+                ? 'No products found for "${state.searchQuery}"'
+                : 'No products found',
             color: OsmeaColors.grayMaterial[500],
             textStyle: OsmeaTextStyle.titleMedium(context),
           ),
+          if (state.searchQuery?.isNotEmpty == true) ...[
+            OsmeaComponents.sizedBox(height: 8),
+            OsmeaComponents.text(
+              'Try searching with different keywords',
+              color: OsmeaColors.grayMaterial[400],
+              textAlign: TextAlign.center,
+              textStyle: OsmeaTextStyle.bodyMedium(context),
+            ),
+          ],
         ],
       ),
     );
