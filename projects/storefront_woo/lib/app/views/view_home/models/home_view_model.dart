@@ -477,7 +477,7 @@ class HomeViewModel extends BaseViewModelHydratedCubit<HomeState> {
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.65, // More compact to prevent overflow
+          childAspectRatio: 0.7, // Adjusted for larger images
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),
@@ -504,7 +504,7 @@ class HomeViewModel extends BaseViewModelHydratedCubit<HomeState> {
           children: [
             // Image Section - Ultra minimal
             Container(
-              height: 100,
+              height: 140,
               decoration: BoxDecoration(
                 color: OsmeaColors.pewter.withOpacity(0.03),
                 borderRadius: const BorderRadius.only(
@@ -524,25 +524,64 @@ class HomeViewModel extends BaseViewModelHydratedCubit<HomeState> {
                         ? FlutterMaterial.Image.network(
                             product.images!.first.src ?? '',
                             width: double.infinity,
-                            height: 100,
+                            height: 140,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
+                                width: double.infinity,
+                                height: 140,
                                 color: OsmeaColors.pewter.withOpacity(0.05),
-                                child: Icon(
-                                  Icons.image_outlined,
-                                  color: OsmeaColors.pewter.withOpacity(0.3),
-                                  size: 24,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.image_outlined,
+                                      color: OsmeaColors.pewter.withOpacity(
+                                        0.3,
+                                      ),
+                                      size: 28,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      'No Image',
+                                      style: OsmeaTextStyle.bodySmall(context)
+                                          .copyWith(
+                                            color: OsmeaColors.pewter
+                                                .withOpacity(0.5),
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                    ),
+                                  ],
                                 ),
                               );
                             },
                           )
                         : Container(
+                            width: double.infinity,
+                            height: 140,
                             color: OsmeaColors.pewter.withOpacity(0.05),
-                            child: Icon(
-                              Icons.image_outlined,
-                              color: OsmeaColors.pewter.withOpacity(0.3),
-                              size: 24,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.image_outlined,
+                                  color: OsmeaColors.pewter.withOpacity(0.3),
+                                  size: 28,
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'No Image',
+                                  style: OsmeaTextStyle.bodySmall(context)
+                                      .copyWith(
+                                        color: OsmeaColors.pewter.withOpacity(
+                                          0.5,
+                                        ),
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                   ),
@@ -611,7 +650,7 @@ class HomeViewModel extends BaseViewModelHydratedCubit<HomeState> {
                       height: 1.1,
                       fontSize: 12,
                     ),
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
 
@@ -622,30 +661,27 @@ class HomeViewModel extends BaseViewModelHydratedCubit<HomeState> {
 
                   const SizedBox(height: 8),
 
-                  // Add to Cart Button - Ultra minimal
-                  SizedBox(
-                    width: double.infinity,
-                    height: 28,
-                    child: ElevatedButton(
-                      onPressed: () => addProductToCart(product.id ?? 0),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: OsmeaColors.nordicBlue,
-                        foregroundColor: OsmeaColors.white,
-                        elevation: 0,
-                        shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6),
+                  // Minimalist Cart Icon Button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () => addProductToCart(product.id ?? 0),
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: OsmeaColors.nordicBlue.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: OsmeaColors.nordicBlue,
+                            size: 16,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        'Add to Cart',
-                        style: OsmeaTextStyle.bodySmall(context).copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: OsmeaColors.white,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
                 ],
               ),

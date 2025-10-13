@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:osmea_components/osmea_components.dart';
 import 'package:apis/network/remote/woocommerce/store_api/product_api/freezed_model/response/retrieve_product_response_model.dart';
 import 'package:storefront_woo/app/views/view_product_detail/models/product_detail_view_model.dart';
 import 'package:storefront_woo/app/views/view_product_detail/models/module/states.dart';
@@ -24,23 +25,23 @@ class ProductDetailContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return OsmeaComponents.singleChildScrollView(
+      child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Product images
           _buildProductImages(),
 
           // Ultra-elegant product info section
-          Padding(
+          OsmeaComponents.padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: Column(
+            child: OsmeaComponents.column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Product name with stronger typography
-                Text(
+                OsmeaComponents.text(
                   state.product.name ?? 'Unknown Product',
-                  style: OsmeaTextStyle.headlineLarge(context).copyWith(
+                  textStyle: OsmeaTextStyle.headlineLarge(context).copyWith(
                     fontWeight: FontWeight.w300,
                     letterSpacing: -0.8,
                     height: 1.0,
@@ -48,12 +49,12 @@ class ProductDetailContentWidget extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 8),
+                OsmeaComponents.sizedBox(height: 8),
 
                 // Price with vibrant styling
-                Text(
+                OsmeaComponents.text(
                   _formatPrice(state.product.prices),
-                  style: OsmeaTextStyle.headlineSmall(context).copyWith(
+                  textStyle: OsmeaTextStyle.headlineSmall(context).copyWith(
                     color: OsmeaColors.nordicBlue,
                     fontWeight: FontWeight.w500,
                     letterSpacing: -0.5,
@@ -61,26 +62,26 @@ class ProductDetailContentWidget extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                OsmeaComponents.sizedBox(height: 32),
 
                 // Ultra-elegant action section with all actions in same row
                 _buildUltraElegantActionSection(context),
 
-                const SizedBox(height: 32),
+                OsmeaComponents.sizedBox(height: 32),
 
                 // Ultra-minimalist description
                 if (state.product.description?.isNotEmpty == true) ...[
-                  Text(
+                  OsmeaComponents.text(
                     'Details',
-                    style: OsmeaTextStyle.titleSmall(context).copyWith(
+                    textStyle: OsmeaTextStyle.titleSmall(context).copyWith(
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1.0,
                       color: OsmeaColors.thunder.withOpacity(0.8),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  OsmeaComponents.sizedBox(height: 12),
                   _buildDescriptionSection(context, state.product.description!),
-                  const SizedBox(height: 28),
+                  OsmeaComponents.sizedBox(height: 28),
                 ],
               ],
             ),
@@ -93,7 +94,7 @@ class ProductDetailContentWidget extends StatelessWidget {
   /// Builds the product images widget - Simple and clean
   Widget _buildProductImages() {
     if (state.imageUrls.isEmpty) {
-      return Container(
+      return OsmeaComponents.container(
         height: 300,
         width: double.infinity,
         color: OsmeaColors.grayMaterial[100],
@@ -101,7 +102,7 @@ class ProductDetailContentWidget extends StatelessWidget {
       );
     }
 
-    return SizedBox(
+    return OsmeaComponents.sizedBox(
       height: 300,
       child: PageView.builder(
         itemCount: state.imageUrls.length,
@@ -109,15 +110,15 @@ class ProductDetailContentWidget extends StatelessWidget {
           // TODO: Update current image index
         },
         itemBuilder: (context, index) {
-          return Image.network(
-            state.imageUrls[index],
+          return OsmeaComponents.image(
+            imageUrl: state.imageUrls[index],
+            width: double.infinity,
+            height: 300,
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                color: OsmeaColors.grayMaterial[100],
-                child: const Icon(Icons.image, size: 100),
-              );
-            },
+            placeholder: OsmeaComponents.container(
+              color: OsmeaColors.grayMaterial[100],
+              child: const Icon(Icons.image, size: 100),
+            ),
           );
         },
       ),
@@ -128,7 +129,7 @@ class ProductDetailContentWidget extends StatelessWidget {
   /// Ultra-elegant action section with sophisticated design
   /// Ultra-elegant action section with all actions in same row
   Widget _buildUltraElegantActionSection(BuildContext context) {
-    return Row(
+    return OsmeaComponents.row(
       children: [
         // Like button
         _buildMinimalSecondaryButton(
@@ -139,7 +140,7 @@ class ProductDetailContentWidget extends StatelessWidget {
               viewModel.addProductToWishlist(state.product.id ?? 0),
         ),
 
-        const SizedBox(width: 8),
+        OsmeaComponents.sizedBox(width: 8),
 
         // Share button
         _buildMinimalSecondaryButton(
@@ -150,56 +151,36 @@ class ProductDetailContentWidget extends StatelessWidget {
           },
         ),
 
-        const SizedBox(width: 8),
+        OsmeaComponents.sizedBox(width: 8),
 
         // Quantity selector - Fixed width
-        SizedBox(width: 100, child: _buildInlineQuantitySelector(context)),
+        OsmeaComponents.sizedBox(
+          width: 100,
+          child: _buildInlineQuantitySelector(context),
+        ),
 
-        const SizedBox(width: 8),
+        OsmeaComponents.sizedBox(width: 8),
 
         // Add to Cart Button - Flexible
-        Expanded(
-          child: SizedBox(
+        OsmeaComponents.expanded(
+          child: OsmeaComponents.sizedBox(
             height: 44,
-            child: ElevatedButton(
+            child: OsmeaComponents.button(
               onPressed: state.isInCart
                   ? null
                   : () => viewModel.addProductToCart(
                       state.product.id ?? 0,
                       quantity: state.selectedQuantity,
                     ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: state.isInCart
-                    ? OsmeaColors.pewter.withOpacity(0.15)
-                    : OsmeaColors.nordicBlue,
-                foregroundColor: OsmeaColors.white,
-                elevation: 0,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(22),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 16,
-                    color: OsmeaColors.white,
-                  ),
-                  const SizedBox(width: 4),
-                  Flexible(
-                    child: Text(
-                      state.isInCart ? 'In Cart' : 'Add to Cart',
-                      style: OsmeaTextStyle.bodySmall(context).copyWith(
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.2,
-                        color: OsmeaColors.white,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              backgroundColor: state.isInCart
+                  ? OsmeaColors.pewter.withOpacity(0.15)
+                  : OsmeaColors.nordicBlue,
+              borderRadius: 22,
+              text: state.isInCart ? 'In Cart' : 'Add to Cart',
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.2,
+                color: OsmeaColors.white,
               ),
             ),
           ),
@@ -210,7 +191,7 @@ class ProductDetailContentWidget extends StatelessWidget {
 
   /// Inline quantity selector for the action row - Compact version
   Widget _buildInlineQuantitySelector(BuildContext context) {
-    return Container(
+    return OsmeaComponents.container(
       height: 44,
       decoration: BoxDecoration(
         color: OsmeaColors.pewter.withOpacity(0.05),
@@ -220,7 +201,7 @@ class ProductDetailContentWidget extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: Row(
+      child: OsmeaComponents.row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildInlineQuantityButton(
@@ -230,9 +211,9 @@ class ProductDetailContentWidget extends StatelessWidget {
                 ? () => viewModel.updateQuantity(state.selectedQuantity - 1)
                 : null,
           ),
-          Text(
+          OsmeaComponents.text(
             '${state.selectedQuantity}',
-            style: OsmeaTextStyle.bodySmall(
+            textStyle: OsmeaTextStyle.bodySmall(
               context,
             ).copyWith(fontWeight: FontWeight.w500, letterSpacing: 0.2),
           ),
@@ -255,7 +236,7 @@ class ProductDetailContentWidget extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child: OsmeaComponents.container(
         width: 28,
         height: 28,
         decoration: BoxDecoration(
@@ -284,7 +265,7 @@ class ProductDetailContentWidget extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child: OsmeaComponents.container(
         width: 36,
         height: 36,
         decoration: BoxDecoration(
@@ -374,19 +355,19 @@ class ProductDetailErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    return OsmeaComponents.center(
+      child: OsmeaComponents.column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.error_outline, size: 64, color: OsmeaColors.red),
-          const SizedBox(height: 16),
-          Text(
+          OsmeaComponents.sizedBox(height: 16),
+          OsmeaComponents.text(
             message,
-            style: OsmeaTextStyle.bodyMedium(context),
+            textStyle: OsmeaTextStyle.bodyMedium(context),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+          OsmeaComponents.sizedBox(height: 16),
+          OsmeaComponents.button(onPressed: onRetry, text: 'Retry'),
         ],
       ),
     );
@@ -408,11 +389,11 @@ class _DescriptionWidgetState extends State<_DescriptionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Ultra-elegant description content
-        Container(
+        OsmeaComponents.container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: OsmeaColors.pewter.withOpacity(0.01),
@@ -425,15 +406,15 @@ class _DescriptionWidgetState extends State<_DescriptionWidget> {
 
         // Ultra-elegant show more/less button
         if (_shouldShowButton()) ...[
-          const SizedBox(height: 8),
-          Center(
+          OsmeaComponents.sizedBox(height: 8),
+          OsmeaComponents.center(
             child: GestureDetector(
               onTap: () {
                 setState(() {
                   _isExpanded = !_isExpanded;
                 });
               },
-              child: Container(
+              child: OsmeaComponents.container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 6,
@@ -442,9 +423,9 @@ class _DescriptionWidgetState extends State<_DescriptionWidget> {
                   color: OsmeaColors.nordicBlue.withOpacity(0.04),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(
+                child: OsmeaComponents.text(
                   _isExpanded ? 'Show Less' : 'Show More',
-                  style: OsmeaTextStyle.bodySmall(context).copyWith(
+                  textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                     color: OsmeaColors.nordicBlue.withOpacity(0.8),
                     fontWeight: FontWeight.w400,
                     letterSpacing: 0.5,
@@ -562,12 +543,12 @@ class _DescriptionWidgetState extends State<_DescriptionWidget> {
 
   /// Builds ultra-elegant bullet point with sophisticated styling
   Widget _buildBulletPoint(BuildContext context, String text) {
-    return Padding(
+    return OsmeaComponents.padding(
       padding: const EdgeInsets.only(bottom: 6),
-      child: Row(
+      child: OsmeaComponents.row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          OsmeaComponents.container(
             width: 3,
             height: 3,
             margin: const EdgeInsets.only(top: 12, right: 14),
@@ -576,10 +557,10 @@ class _DescriptionWidgetState extends State<_DescriptionWidget> {
               borderRadius: BorderRadius.circular(1.5),
             ),
           ),
-          Expanded(
-            child: Text(
+          OsmeaComponents.expanded(
+            child: OsmeaComponents.text(
               text,
-              style: OsmeaTextStyle.bodySmall(context).copyWith(
+              textStyle: OsmeaTextStyle.bodySmall(context).copyWith(
                 fontSize: 13,
                 height: 1.7,
                 fontWeight: FontWeight.w200,

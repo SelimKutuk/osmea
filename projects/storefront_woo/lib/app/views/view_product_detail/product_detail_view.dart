@@ -7,7 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
-import 'package:osmea_components/osmea_components.dart';
 import 'package:storefront_woo/app/views/view_product_detail/models/product_detail_view_model.dart';
 import 'package:storefront_woo/app/views/view_product_detail/models/module/states.dart';
 import 'package:storefront_woo/app/views/view_product_detail/widgets/product_detail_widgets.dart';

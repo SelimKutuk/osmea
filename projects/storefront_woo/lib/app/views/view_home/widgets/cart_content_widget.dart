@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:osmea_components/osmea_components.dart';
 import 'package:storefront_woo/app/services/cart_service.dart';
 
 class CartContentWidget extends StatelessWidget {
