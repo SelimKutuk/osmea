@@ -89,15 +89,6 @@ AppBar productDetailCoreAppBar(
       icon: Icon(Icons.arrow_back, color: OsmeaColors.thunder),
     ),
     actions: [
-      // Share button
-      OsmeaComponents.iconButton(
-        onPressed: () {
-          // TODO: Implement share functionality
-        },
-        icon: Icon(Icons.share, color: OsmeaColors.thunder),
-        backgroundColor: OsmeaColors.transparent,
-        tooltip: 'Share',
-      ),
       // Cart button with badge
       ListenableBuilder(
         listenable: CartService(),
