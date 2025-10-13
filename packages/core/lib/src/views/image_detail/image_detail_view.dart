@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'package:core/src/base/master_view_cubit/master_view_cubit.dart';
 import 'package:core/src/views/image_detail/cubit/image_detail_cubit.dart';
 import 'package:core/src/views/image_detail/cubit/image_detail_state.dart';
@@ -12,21 +11,31 @@ class ImageDetailView extends MasterViewCubit<ImageDetailCubit, ImageDetailState
   final List<String> imageUrls;
   final int initialIndex;
   final String? heroTag;
+  final Color? backgroundColor;
 
   ImageDetailView({
     required Function(String path) goRoute,
     required this.imageUrls,
     this.initialIndex = 0,
     this.heroTag,
+    this.backgroundColor,
     Map<String, dynamic> arguments = const {},
   }) : super(
           goRoute: goRoute,
           arguments: arguments,
+          useSafeArea: false, // We handle SafeArea manually for better control
         );
 
   @override
   Future<void> initialContent(viewModel, BuildContext context) async {
-    await viewModel.initialize(images: imageUrls, initialIndex: initialIndex, heroTag: heroTag);
+    final media = MediaQuery.of(context);
+    final double screenWidth = media.size.width;
+    await viewModel.initialize(
+      images: imageUrls, 
+      initialIndex: initialIndex, 
+      heroTag: heroTag,
+      screenWidth: screenWidth,
+    );
   }
 
   @override
@@ -34,81 +43,99 @@ class ImageDetailView extends MasterViewCubit<ImageDetailCubit, ImageDetailState
     final hasImages = state.images.isNotEmpty;
     final media = MediaQuery.of(context);
     final double screenWidth = media.size.width;
-    final double screenHeight = media.size.height;
-    const double thumbnailsSectionHeight = 120; // thumbnails + paddings
-    const double verticalPadding = 16;
-    final double safeInsets = media.padding.top + media.padding.bottom;
-    final double computedMainHeight = math.max(
-      0,
-      math.min(
-        screenWidth * 1.1,
-        screenHeight - safeInsets - thumbnailsSectionHeight,
-      ),
-    );
 
-    return Scaffold(
-      backgroundColor: OsmeaColors.white,
-      body: SafeArea(
-        child: hasImages
-            ? OsmeaComponents.padding(
-                padding: const EdgeInsets.all(verticalPadding),
-                child: OsmeaComponents.column(
-                  children: [
-                    // Main carousel - responsive height with dots
-                    OsmeaCarousel(
-                      key: ValueKey('main_carousel_${state.currentIndex}'),
-                      items: state.images.map((imageUrl) {
-                        return Container(
-                          width: screenWidth,
-                          height: computedMainHeight*1.2,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.zero,
-                            color: OsmeaColors.white,
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: InteractiveViewer(
-                            minScale: 0.5,
-                            maxScale: 4.0,
-                            child: OsmeaComponents.image(
-                              imageUrl: imageUrl,
-                              variant: ImageVariant.normal,
-                              size: ImageSize.custom,
-                              width: screenWidth,
-                              height: computedMainHeight*1.2,
-                              fit: BoxFit.cover,
-                              heroTag: state.heroTag,
+    const double thumbnailsHeight = 88; // Fixed thumbnail height
+    const double fixedSpacing = 12; // Fixed 12px padding as per design
+
+    // Update image heights if screen width changed (e.g., orientation change)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (state.status == ImageDetailStatus.ready) {
+        viewModel.updateImageHeights(screenWidth);
+      }
+    });
+
+    return state.status == ImageDetailStatus.loading
+        ? _buildLoadingState(context)
+        : hasImages
+            ? Column(
+                children: [
+                  // Top spacing
+                  SizedBox(height: fixedSpacing),
+
+                  // Main Image - Simple and clean
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.6, // 60% of screen height
+                    child: Stack(
+                      children: [
+                        PageView.builder(
+                          key: ValueKey('pageview_${state.currentIndex}'),
+                          itemCount: state.images.length,
+                          controller: PageController(initialPage: state.currentIndex),
+                          onPageChanged: (index) => viewModel.goTo(index),
+                          itemBuilder: (context, index) {
+                            return InteractiveViewer(
+                              minScale: 0.5,
+                              maxScale: 4.0,
+                              child: Container(
+                                alignment: Alignment.topCenter, // Align content to top
+                                child: OsmeaComponents.image(
+                                  imageUrl: state.images[index],
+                                  variant: ImageVariant.normal,
+                                  size: ImageSize.custom,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.contain,
+                                  heroTag: state.heroTag,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        // Page indicators - positioned at bottom center of main image
+                        if (state.images.length > 1)
+                          Positioned(
+                            bottom: 16,
+                            left: 0,
+                            right: 0,
+                            child: OsmeaComponents.row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(state.images.length, (index) {
+                                return Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 4),
+                                  width: 8,
+                                  height: 8,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: index == state.currentIndex
+                                        ? OsmeaColors.black
+                                        : OsmeaColors.black.withValues(alpha: 0.5),
+                                  ),
+                                );
+                              }),
                             ),
                           ),
-                        );
-                      }).toList(),
-                      variant: CarouselVariant.modern,
-                      size: CarouselSize.large,
-                      height: computedMainHeight*1.2,
-                      width: screenWidth,
-                      showArrows: false,
-                      showIndicators: true,
-                      navigationType: CarouselNavigationType.dots,
-                      indicatorPosition: CarouselIndicatorPosition.bottomCenter,
-                      initialIndex: state.currentIndex,
-                      indicatorType: CarouselIndicatorType.dot,
-                      customPadding: EdgeInsets.zero,
-                      itemSpacing: 0,
-                      viewportFraction: 1.0,
-                      onPageChanged: (index) => viewModel.goTo(index),
+                      ],
                     ),
-                    // Thumbnails carousel
-                    OsmeaComponents.padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: OsmeaCarousel(
-                        variant: CarouselVariant.multi,
-                        size: CarouselSize.large,
-                        height: thumbnailsSectionHeight - 32,
-                        width: screenWidth - 2 * verticalPadding,
-                        showArrows: false,
-                        showIndicators: false,
-                        items: List.generate(state.images.length, (i) {
-                          final isActive = i == state.currentIndex;
-                          return OsmeaComponents.container(
+                  ),
+
+                  // Middle spacing
+                  SizedBox(height: fixedSpacing),
+
+                  // Thumbnails - Simple layout
+                  SizedBox(
+                    height: thumbnailsHeight,
+                    child: OsmeaCarousel(
+                      variant: CarouselVariant.multi,
+                      size: CarouselSize.large,
+                      height: thumbnailsHeight,
+                      width: double.infinity,
+                      showArrows: state.images.length > 5,
+                      showIndicators: true,
+                      items: List.generate(state.images.length, (i) {
+                        final isActive = i == state.currentIndex;
+                        return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          child: OsmeaComponents.container(
                             decoration: BoxDecoration(
                               color: OsmeaColors.white,
                               borderRadius: context.borderRadiusMinStandard,
@@ -123,19 +150,40 @@ class ImageDetailView extends MasterViewCubit<ImageDetailCubit, ImageDetailState
                               variant: ImageVariant.card,
                               size: ImageSize.custom,
                               width: 140,
-                              height: 88,
+                              height: thumbnailsHeight,
                               fit: BoxFit.cover,
                               heroTag: isActive ? state.heroTag : null,
                             ),
-                          );
-                        }),
-                        onItemTaps: List.generate(state.images.length, (i) => () => viewModel.goTo(i)),
-                      ),
+                          ),
+                        );
+                      }),
+                      onItemTaps: List.generate(state.images.length, (i) => () => viewModel.goTo(i)),
                     ),
-                  ],
-                ),
+                  ),
+
+                  // Bottom spacing - larger space as requested
+                  SizedBox(height: fixedSpacing * 2),
+                ],
               )
-            : _buildEmptyState(context),
+            : _buildEmptyState(context);
+  }
+
+  Widget _buildLoadingState(BuildContext context) {
+    return OsmeaComponents.center(
+      child: OsmeaComponents.column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(
+            color: OsmeaColors.black,
+          ),
+          OsmeaComponents.sizedBox(height: 16),
+          OsmeaComponents.text(
+            'Loading images...',
+            variant: OsmeaTextVariant.bodyMedium,
+            color: OsmeaColors.black.withValues(alpha: 0.6),
+            fontWeight: FontWeight.w500,
+          ),
+        ],
       ),
     );
   }
@@ -175,6 +223,7 @@ class ImageDetailScreen extends StatelessWidget {
   final List<String> imageUrls;
   final int initialIndex;
   final String? heroTag;
+  final Color? backgroundColor;
   final Function(String path) goRoute;
 
   const ImageDetailScreen({
@@ -183,6 +232,7 @@ class ImageDetailScreen extends StatelessWidget {
     required this.imageUrls,
     this.initialIndex = 0,
     this.heroTag,
+    this.backgroundColor,
   });
 
   @override
@@ -192,6 +242,7 @@ class ImageDetailScreen extends StatelessWidget {
       imageUrls: imageUrls,
       initialIndex: initialIndex,
       heroTag: heroTag,
+      backgroundColor: backgroundColor,
     );
   }
 }
