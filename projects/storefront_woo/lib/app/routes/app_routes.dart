@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
-import 'package:storefront_woo/app/views/product_catalog/product_catalog_view.dart';
+import 'package:storefront_woo/app/views/view_home/home_view.dart';
+import 'package:storefront_woo/app/views/view_product_detail/product_detail_view.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -57,15 +58,39 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
-        return ProductCatalogView(arguments: const {'product_catalog': true});
+        return HomeView(
+          arguments: const {'home': true},
+          goRoute: (String path) {
+            if (path.contains('products')) {
+              context.go('/products');
+            } else if (path.contains('product-detail')) {
+              context.go('/product-detail');
+            } else {
+              context.go('/home');
+            }
+          },
+        );
       },
     ),
 
-    // Product Catalog Route
+    // Product Detail Route
     GoRoute(
-      path: '/products',
+      path: '/product-detail/:productId',
       builder: (BuildContext context, GoRouterState state) {
-        return ProductCatalogView(arguments: const {'product_catalog': true});
+        final productId = int.tryParse(
+          state.pathParameters['productId'] ?? '0',
+        );
+        return ProductDetailView(
+          productId: productId ?? 0,
+          arguments: const {'productDetail': true},
+          goRoute: (String path) {
+            if (path.contains('home')) {
+              context.go('/home');
+            } else {
+              context.go('/home');
+            }
+          },
+        );
       },
     ),
   ],
