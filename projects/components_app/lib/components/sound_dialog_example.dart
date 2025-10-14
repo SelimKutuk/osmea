@@ -3,8 +3,8 @@
 /// Copyright (c) 2025, OSMEA Team
 /// https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components
 ///
-/// Showcases all available sound recording dialogs with live demo buttons,
-/// demonstrating the simple, encapsulated usage of the OsmeaSoundDialog component.
+/// Showcases all available variants and customization capabilities of the
+/// OsmeaSoundDialog component through practical, scenario-based examples.
 ///
 /// {@category Examples}
 /// {@subCategory Dialog}
@@ -17,47 +17,6 @@ class SoundDialogExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // A list defining all available dialog variants to be displayed.
-    // This makes the example page dynamic and easy to extend.
-    final List<Map<String, dynamic>> dialogTypes = [
-      {
-        'variant': SoundDialogVariant.standard,
-        'label': 'Standard Sound Dialog',
-        'desc':
-            'A minimal, classic dialog for recording voice input. Includes start, pause, stop, and cancel options.',
-        'icon': Icons.mic,
-      },
-      {
-        'variant': SoundDialogVariant.expandable,
-        'label': 'Expandable Sound Dialog',
-        'desc':
-            'An advanced version with dynamic sound wave visualization, pause/resume control, and elegant transitions.',
-        'icon': Icons.graphic_eq,
-      },
-      {
-        'variant': SoundDialogVariant.inlineSearchBar,
-        'label': 'Inline SearchBar Dialog',
-        'desc':
-            'A minimal variant designed to appear inside the search bar for quick voice input.',
-        'icon': Icons.search,
-      },
-      {
-        'variant': SoundDialogVariant.feedbackRecorder,
-        'label': 'Feedback Recorder Dialog',
-        'desc':
-            'Allows users to record, then review and confirm their voice feedback before sending.',
-        'icon': Icons.reviews,
-      }
-    ];
-
-    // Added more colors for the new variants.
-    final List<Color> colors = [
-      OsmeaColors.nordicBlue,
-      OsmeaColors.amberFlame,
-      OsmeaColors.meadow,
-      OsmeaColors.sunsetGlow,
-    ];
-
     void showSnackBar(String message) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -70,20 +29,164 @@ class SoundDialogExample extends StatelessWidget {
       );
     }
 
-    // This function now directly uses the self-contained OsmeaSoundDialog widget.
-    // The component handles its own state internally.
-    void openDialog(SoundDialogVariant variant) {
-      showDialog<void>(
-        context: context,
-        builder: (dialogContext) {
-          return OsmeaComponents.soundDialogWidget(
-            variant: variant,
-            onCancel: () => showSnackBar('Recording Cancelled ❌'),
-            onConfirm: (path) => showSnackBar('Saved/Result: $path ✅'),
+    // --- Data for Example Cards ---
+
+    // 1. Default Variants: Showcasing each variant without any customization.
+    final List<Map<String, dynamic>> defaultExamples = [
+      {
+        'label': 'Standard Dialog',
+        'desc': 'The default, out-of-the-box standard dialog.',
+        'icon': Icons.mic_none,
+        'color': OsmeaColors.nordicBlue,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.standard,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Saved: $path ✅'),
           );
         },
-      );
-    }
+      },
+      {
+        'label': 'Expandable Dialog',
+        'desc': 'The default expandable dialog with sound wave visualization.',
+        'icon': Icons.graphic_eq,
+        'color': OsmeaColors.amberFlame,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.expandable,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Saved: $path ✅'),
+          );
+        },
+      },
+      {
+        'label': 'Inline SearchBar',
+        'desc': 'The default search bar variant for quick voice input.',
+        'icon': Icons.search,
+        'color': OsmeaColors.meadow,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.inlineSearchBar,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Search query: $path ✅'),
+          );
+        },
+      },
+      {
+        'label': 'Feedback Recorder',
+        'desc': 'The default two-step recorder for user feedback.',
+        'icon': Icons.reviews_outlined,
+        'color': OsmeaColors.sunsetGlow,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.feedbackRecorder,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Feedback sent: $path ✅'),
+          );
+        },
+      },
+    ];
+
+    // 2. Customized Examples: Showcasing the power of customization for each variant.
+    final List<Map<String, dynamic>> customizedExamples = [
+      {
+        'label': 'Standard (Dark Theme)',
+        'desc':
+            'A dark mode UI with custom colors and different English texts to show customization.',
+        'icon': Icons.nightlight_round,
+        'color': OsmeaColors.thunder,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.standard,
+            onCancel: () => showSnackBar('Dismissed ❌'),
+            onConfirm: (path) => showSnackBar('Completed: $path ✅'),
+            // --- Customizations ---
+            dialogBackgroundColor: OsmeaColors.eclipse,
+            primaryActionColor: OsmeaColors.azureWave,
+            defaultTextColor: OsmeaColors.silver,
+            statusTextColor: OsmeaColors.pewter,
+            promptTitleText: "Tap the mic to start",
+            recordingTitleText: "Now recording...",
+            pausedTitleText: "Paused",
+            okButtonText: "Done",
+            cancelButtonText: "Dismiss",
+          );
+        },
+      },
+      {
+        'label': 'Expandable (Branded Theme)',
+        'desc':
+            'Demonstrates changing the primary action color (affecting waves & buttons) and icons.',
+        'icon': Icons.color_lens,
+        'color': OsmeaColors.sunsetGlow,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.expandable,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Saved: $path ✅'),
+            // --- Customizations ---
+            primaryActionColor: OsmeaColors.sunsetGlow,
+            secondaryActionColor: OsmeaColors.slate,
+            destructiveActionColor: OsmeaColors.red,
+            startRecordingIcon:
+                const Icon(Icons.record_voice_over, color: Colors.white),
+            pauseRecordingIcon: const Icon(Icons.pause_circle_outline),
+          );
+        },
+      },
+      {
+        'label': 'Search (Branded Colors & Icon)',
+        'desc':
+            'A search bar dialog styled with a unique brand color and a custom action icon.',
+        'icon': Icons.mic_external_on,
+        'color': OsmeaColors.pineGrove,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.inlineSearchBar,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Search query: $path ✅'),
+            // --- Customizations ---
+            primaryActionColor: OsmeaColors.pineGrove,
+            dialogBorderRadius: BorderRadius.circular(8),
+            confirmCheckIcon: Icon(
+              Icons.mic_external_on,
+              color: OsmeaColors.pineGrove,
+              size: 28,
+            ),
+          );
+        },
+      },
+      {
+        'label': 'Feedback (Limited & Themed)',
+        'desc':
+            'A feedback recorder with a 15-second limit and a unique "golden" theme.',
+        'icon': Icons.star,
+        'color': OsmeaColors.goldenHour,
+        'onPressed': () {
+          OsmeaComponents.soundDialog(
+            context,
+            variant: SoundDialogVariant.feedbackRecorder,
+            onCancel: () => showSnackBar('Cancelled ❌'),
+            onConfirm: (path) => showSnackBar('Review sent: $path ✅'),
+            // --- Customizations ---
+            primaryActionColor: OsmeaColors.goldenHour,
+            destructiveActionColor: OsmeaColors.slate,
+            reviewTitleText: 'Confirm Your Review',
+            confirmButtonText: 'Send',
+            retryButtonText: 'Retry',
+            maxRecordingDuration: const Duration(seconds: 15),
+            autoStopOnMaxDuration: true,
+          );
+        },
+      },
+    ];
 
     return OsmeaComponents.scaffold(
       backgroundColor: OsmeaColors.white,
@@ -103,59 +206,111 @@ class SoundDialogExample extends StatelessWidget {
               ),
               OsmeaComponents.sizedBox(height: 12),
               OsmeaComponents.text(
-                'Below are all the sound recording dialogs available in the OSMEA library. Each card demonstrates a unique variant.',
+                'Examples showcasing the default variants and customization capabilities of the sound dialog component.',
                 fontSize: 16,
-                color: OsmeaColors.grey[700],
+                color: OsmeaColors.grey,
               ),
-              OsmeaComponents.sizedBox(height: 24),
-              // The loop now dynamically builds cards for all four variants.
-              for (int i = 0; i < dialogTypes.length; i++)
-                Card(
-                  elevation: 3,
-                  margin: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: OsmeaComponents.padding(
-                    padding: const EdgeInsets.all(20),
-                    child: OsmeaComponents.column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        OsmeaComponents.row(
-                          children: [
-                            Icon(dialogTypes[i]['icon'],
-                                color: colors[i % colors.length], size: 28),
-                            OsmeaComponents.sizedBox(width: 12),
-                            OsmeaComponents.text(
-                              dialogTypes[i]['label'],
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ],
-                        ),
-                        OsmeaComponents.sizedBox(height: 8),
-                        OsmeaComponents.text(
-                          dialogTypes[i]['desc'],
-                          fontSize: 15,
-                          color: OsmeaColors.grey[700],
-                        ),
-                        OsmeaComponents.sizedBox(height: 20),
-                        Center(
-                          child: OsmeaComponents.button(
-                            text: 'Open Dialog',
-                            size: ButtonSize.medium,
-                            variant: ButtonVariant.primary,
-                            icon: Icon(dialogTypes[i]['icon'], size: 18),
-                            onPressed: () =>
-                                openDialog(dialogTypes[i]['variant']),
-                            backgroundColor: colors[i % colors.length],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              const SizedBox(height: 24),
+
+              // --- Section 1: Default Variants ---
+              OsmeaComponents.text(
+                'Default Variants',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              OsmeaComponents.sizedBox(height: 8),
+              for (final example in defaultExamples)
+                _ExampleCard(
+                  label: example['label'],
+                  desc: example['desc'],
+                  icon: example['icon'],
+                  color: example['color'],
+                  onPressed: example['onPressed'],
+                ),
+
+              const SizedBox(height: 32),
+
+              // --- Section 2: Customized Examples ---
+              OsmeaComponents.text(
+                'Customized Examples',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              OsmeaComponents.sizedBox(height: 8),
+              for (final example in customizedExamples)
+                _ExampleCard(
+                  label: example['label'],
+                  desc: example['desc'],
+                  icon: example['icon'],
+                  color: example['color'],
+                  onPressed: example['onPressed'],
                 ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A reusable widget to display an example card, reducing code duplication.
+class _ExampleCard extends StatelessWidget {
+  final String label;
+  final String desc;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onPressed;
+
+  const _ExampleCard({
+    required this.label,
+    required this.desc,
+    required this.icon,
+    required this.color,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: OsmeaComponents.padding(
+        padding: const EdgeInsets.all(20),
+        child: OsmeaComponents.column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OsmeaComponents.row(
+              children: [
+                Icon(icon, color: color, size: 28),
+                OsmeaComponents.sizedBox(width: 12),
+                Expanded(
+                  child: OsmeaComponents.text(
+                    label,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            OsmeaComponents.sizedBox(height: 8),
+            OsmeaComponents.text(
+              desc,
+              fontSize: 15,
+              color: OsmeaColors.pewter,
+            ),
+            OsmeaComponents.sizedBox(height: 20),
+            Center(
+              child: OsmeaComponents.button(
+                text: 'Open Example',
+                size: ButtonSize.medium,
+                variant: ButtonVariant.primary,
+                icon: Icon(icon, size: 18),
+                onPressed: onPressed,
+                backgroundColor: color,
+              ),
+            ),
+          ],
         ),
       ),
     );
