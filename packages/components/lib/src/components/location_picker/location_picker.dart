@@ -31,11 +31,13 @@ class OsmeaLocationPicker extends CoreContainer {
   final String? label;
   final String? hintText;
   final bool isRequired;
+  final String apiKey;
 
   const OsmeaLocationPicker({
     super.key,
     this.initialLocation,
     required this.onLocationChanged,
+    required this.apiKey,
     this.variant = LocationPickerVariant.combined,
     this.size = LocationPickerSize.medium,
     this.style = LocationPickerStyle.outlined,
@@ -47,7 +49,7 @@ class OsmeaLocationPicker extends CoreContainer {
   @override
   Widget buildWidget(BuildContext context) {
     return BlocProvider(
-      create: (context) => LocationPickerCubit(),
+      create: (context) => LocationPickerCubit(apiKey),
       child: _LocationPickerView(
         picker: this,
       ),
@@ -86,7 +88,8 @@ class _LocationPickerView extends StatelessWidget {
                 _buildSearchField(context, state, sizeConfig),
               if (state.suggestions.isNotEmpty)
                 _buildSuggestionsList(context, state),
-              if (picker.variant != LocationPickerVariant.input && state.isMapVisible) ...[
+              if (picker.variant != LocationPickerVariant.input &&
+                  state.isMapVisible) ...[
                 const SizedBox(height: 8),
                 _buildMapView(context, state, sizeConfig),
               ],
@@ -97,7 +100,8 @@ class _LocationPickerView extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchField(BuildContext context, LocationPickerState state, LocationPickerSizeConfig sizeConfig) {
+  Widget _buildSearchField(BuildContext context, LocationPickerState state,
+      LocationPickerSizeConfig sizeConfig) {
     final cubit = context.read<LocationPickerCubit>();
     return OsmeaComponents.textField(
       hint: picker.hintText ?? 'Search for a location...',
@@ -131,7 +135,8 @@ class _LocationPickerView extends StatelessWidget {
     );
   }
 
-  Widget _buildSuggestionsList(BuildContext context, LocationPickerState state) {
+  Widget _buildSuggestionsList(
+      BuildContext context, LocationPickerState state) {
     return Material(
       elevation: 4,
       borderRadius: BorderRadius.circular(8),
@@ -152,7 +157,8 @@ class _LocationPickerView extends StatelessWidget {
     );
   }
 
-  Widget _buildMapView(BuildContext context, LocationPickerState state, LocationPickerSizeConfig sizeConfig) {
+  Widget _buildMapView(BuildContext context, LocationPickerState state,
+      LocationPickerSizeConfig sizeConfig) {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: Container(
