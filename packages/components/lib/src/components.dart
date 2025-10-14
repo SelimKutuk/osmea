@@ -84,6 +84,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.primary,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     Widget? icon,
     IconPosition iconPosition = IconPosition.leading,
     TextStyle? textStyle,
@@ -122,6 +124,8 @@ class OsmeaComponents {
       size: size,
       variant: variant,
       state: state,
+      borderRadius: borderRadius,
+      elevation: elevation,
       icon: icon,
       iconPosition: iconPosition,
       textStyle: textStyle,
@@ -171,6 +175,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.primary,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     VoidCallback? onLongPress,
     String? tooltip,
     bool autofocus = false,
@@ -185,6 +191,8 @@ class OsmeaComponents {
       size: size,
       variant: variant,
       state: state,
+      borderRadius: borderRadius,
+      elevation: elevation,
       onLongPress: onLongPress,
       tooltip: tooltip,
       autofocus: autofocus,
@@ -213,6 +221,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.ghost,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     VoidCallback? onLongPress,
     String? tooltip,
     bool autofocus = false,
@@ -230,6 +240,8 @@ class OsmeaComponents {
       tooltip: tooltip,
       autofocus: autofocus,
       backgroundColor: backgroundColor,
+      borderRadius: borderRadius,
+      elevation: elevation,
     );
   }
 
@@ -2503,24 +2515,31 @@ class OsmeaComponents {
   /// - All 3 style variants (normal, outlined, soft)
   /// - All states (normal, disabled, selected)
   /// - Interactive selection and deletion support
+  /// - Flexible icon support (IconData, Widget, or asset path)
   /// - Full customization options
   ///
   /// Example:
   /// ```dart
+  /// // With IconData
   /// OsmeaComponents.chips(
   ///   text: 'Technology',
+  ///   icon: Icons.tech_icon,
+  ///   iconPosition: ChipsIconPosition.start,
   ///   variant: ChipsVariant.primary,
-  ///   size: ChipsSize.medium,
-  ///   selected: true,
-  ///   onTap: () => print('Chip tapped'),
-  ///   closable: true,
-  ///   onClose: () => print('Chip removed'),
+  /// )
+  ///
+  /// // With Widget
+  /// OsmeaComponents.chips(
+  ///   text: 'Custom',
+  ///   icon: SvgPicture.asset('assets/icons/custom.svg'),
+  ///   iconPosition: ChipsIconPosition.end,
   /// )
   /// ```
   static Widget chips({
     Key? key,
     String? text,
-    IconData? icon,
+    dynamic icon, // IconData, Widget, or String (asset path)
+    ChipsIconPosition iconPosition = ChipsIconPosition.start,
     Widget? actionWidget,
     Widget? avatar,
     ChipsVariant variant = ChipsVariant.neutral,
@@ -2534,6 +2553,10 @@ class OsmeaComponents {
     Color? backgroundColor,
     Color? textColor,
     Color? borderColor,
+    double? borderWidth,
+    Color? activeColor,
+    Color? inactiveColor,
+    double? radius,
     EdgeInsetsGeometry? padding,
     TextStyle? textStyle,
     ShapeBorder? customShape,
@@ -2547,6 +2570,7 @@ class OsmeaComponents {
       key: key,
       text: text,
       icon: icon,
+      iconPosition: iconPosition,
       actionWidget: actionWidget,
       avatar: avatar,
       variant: variant,
@@ -2560,6 +2584,10 @@ class OsmeaComponents {
       backgroundColor: backgroundColor,
       textColor: textColor,
       borderColor: borderColor,
+      borderWidth: borderWidth,
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      radius: radius,
       padding: padding,
       textStyle: textStyle,
       customShape: customShape,
@@ -2679,6 +2707,7 @@ class OsmeaComponents {
     CoreTheme? customTheme,
     String? title,
     String? subtitle,
+    String? subtitle2,
     String? content,
     String? imageUrl,
     String? imageAsset,
@@ -2703,9 +2732,11 @@ class OsmeaComponents {
     double? height,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
+    TextStyle? subtitle2Style,
     TextStyle? contentStyle,
     Color? titleColor,
     Color? subtitleColor,
+    Color? subtitle2Color,
     Color? contentColor,
     double? spacing,
     Widget? loadingWidget,
@@ -2718,6 +2749,7 @@ class OsmeaComponents {
     // Text overflow control parameters
     int? titleMaxLines = 2,
     int? subtitleMaxLines = 1,
+    int? subtitle2MaxLines = 1,
     int? contentMaxLines = 3,
     TextOverflow textOverflow = TextOverflow.ellipsis,
     double? textAreaHeight,
@@ -2728,6 +2760,7 @@ class OsmeaComponents {
       customTheme: customTheme,
       title: title,
       subtitle: subtitle,
+      subtitle2: subtitle2,
       content: content,
       imageUrl: imageUrl,
       imageAsset: imageAsset,
@@ -2752,9 +2785,11 @@ class OsmeaComponents {
       height: height,
       titleStyle: titleStyle,
       subtitleStyle: subtitleStyle,
+      subtitle2Style: subtitle2Style,
       contentStyle: contentStyle,
       titleColor: titleColor,
       subtitleColor: subtitleColor,
+      subtitle2Color: subtitle2Color,
       contentColor: contentColor,
       spacing: spacing,
       loadingWidget: loadingWidget,

@@ -87,7 +87,6 @@ abstract class ApiWooAuthService implements WooAuthService {
   );
 
   /// 🔐 Update Password (PUT + Query) — mirrors Postman
-  /// Example: PUT /?rest_route=/ticimax-auth-login/v1/user/reset_password&email=...&new_password=...
   @PUT('/?rest_route=/{brand_name}-auth-login/v1/user/reset_password')
   @override
   Future<PasswordUpdateResponse> updatePasswordPutQuery(
