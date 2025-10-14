@@ -12,9 +12,8 @@
 class Assets {
   const Assets._();
 
-  static const String aEnv = 'assets/.env';
   static const String appConfig = 'assets/app_config.json';
 
   /// List of all assets
-  static List<String> get values => [aEnv, appConfig];
+  static List<String> get values => [appConfig];
 }
