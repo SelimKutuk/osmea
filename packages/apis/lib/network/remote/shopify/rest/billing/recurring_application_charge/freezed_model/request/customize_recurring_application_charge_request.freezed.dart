@@ -26,12 +26,8 @@ mixin _$CustomizeRecurringApplicationChargeRequest {
   Map<String, dynamic> get recurringApplicationCharge =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this CustomizeRecurringApplicationChargeRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CustomizeRecurringApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CustomizeRecurringApplicationChargeRequestCopyWith<
           CustomizeRecurringApplicationChargeRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -62,8 +58,6 @@ class _$CustomizeRecurringApplicationChargeRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CustomizeRecurringApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,8 +97,6 @@ class __$$CustomizeRecurringApplicationChargeRequestImplCopyWithImpl<$Res>
       $Res Function(_$CustomizeRecurringApplicationChargeRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CustomizeRecurringApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,14 +149,12 @@ class _$CustomizeRecurringApplicationChargeRequestImpl
                 _recurringApplicationCharge));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_recurringApplicationCharge));
 
-  /// Create a copy of CustomizeRecurringApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomizeRecurringApplicationChargeRequestImplCopyWith<
@@ -196,11 +186,8 @@ abstract class _CustomizeRecurringApplicationChargeRequest
   @override
   @JsonKey(name: "recurring_application_charge")
   Map<String, dynamic> get recurringApplicationCharge;
-
-  /// Create a copy of CustomizeRecurringApplicationChargeRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CustomizeRecurringApplicationChargeRequestImplCopyWith<
           _$CustomizeRecurringApplicationChargeRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -216,12 +203,8 @@ mixin _$RecurringApplicationChargeUpdateData {
   @JsonKey(name: "capped_amount")
   String get cappedAmount => throw _privateConstructorUsedError;
 
-  /// Serializes this RecurringApplicationChargeUpdateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RecurringApplicationChargeUpdateData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RecurringApplicationChargeUpdateDataCopyWith<
           RecurringApplicationChargeUpdateData>
       get copyWith => throw _privateConstructorUsedError;
@@ -249,8 +232,6 @@ class _$RecurringApplicationChargeUpdateDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RecurringApplicationChargeUpdateData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,8 +268,6 @@ class __$$RecurringApplicationChargeUpdateDataImplCopyWithImpl<$Res>
       $Res Function(_$RecurringApplicationChargeUpdateDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RecurringApplicationChargeUpdateData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -332,13 +311,11 @@ class _$RecurringApplicationChargeUpdateDataImpl
                 other.cappedAmount == cappedAmount));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, cappedAmount);
 
-  /// Create a copy of RecurringApplicationChargeUpdateData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RecurringApplicationChargeUpdateDataImplCopyWith<
@@ -368,11 +345,8 @@ abstract class _RecurringApplicationChargeUpdateData
   @override
   @JsonKey(name: "capped_amount")
   String get cappedAmount;
-
-  /// Create a copy of RecurringApplicationChargeUpdateData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RecurringApplicationChargeUpdateDataImplCopyWith<
           _$RecurringApplicationChargeUpdateDataImpl>
       get copyWith => throw _privateConstructorUsedError;

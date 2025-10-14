@@ -15,10 +15,18 @@ _$CreateUnpublishedPageRequestImpl _$$CreateUnpublishedPageRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateUnpublishedPageRequestImplToJson(
-        _$CreateUnpublishedPageRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$CreateUnpublishedPageRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       title: json['title'] as String?,
@@ -26,9 +34,17 @@ _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       published: json['published'] as bool?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.published case final value?) 'published': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published', instance.published);
+  return val;
+}

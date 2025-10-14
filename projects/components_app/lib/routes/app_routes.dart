@@ -60,6 +60,7 @@ import '../components/toast_example.dart';
 import '../components/url_launcher_example.dart';
 import '../components/wrap_example.dart';
 import '../components/file_download_helper_example.dart';
+import '../components/phone_picker_example.dart';
 
 class AppRoutes {
   // Route paths - Splash and Intro
@@ -112,6 +113,7 @@ class AppRoutes {
   static const String searchbar = '/component/searchbar';
   static const String singleChildScrollView =
       '/component/single-child-scroll-view';
+  static const String phonePicker = '/component/phone-picker';
   static const String sizedBox = '/component/sized-box';
   static const String snackbar = '/component/snackbar';
   static const String spacer = '/component/spacer';
@@ -128,7 +130,7 @@ class AppRoutes {
 
   // Go Router configuration
   static final GoRouter router = GoRouter(
-    initialLocation: splash, // Start with splash screen 
+    initialLocation: splash, // Start with splash screen
     debugLogDiagnostics: true,
 
     // Global redirect logic
@@ -197,7 +199,7 @@ class AppRoutes {
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
   );
 
-  // Route helper methods - For easy navigation 
+  // Route helper methods - For easy navigation
   static void goToHome(BuildContext context) {
     context.go(home);
   }
@@ -221,7 +223,7 @@ class AppRoutes {
     }
   }
 
-  // Find route path from component name  
+  // Find route path from component name
   static String? _getComponentRoute(String componentName) {
     final routes = {
       'Align': 'align',
@@ -270,6 +272,7 @@ class AppRoutes {
       'Tabs': 'tabbar',
       'Text': 'text',
       'Input': 'text-field',
+      'Phone Picker': 'phone-picker',
       'Ticket': 'ticket-widget',
       'Toast': 'toast',
       'URL Launcher': 'url-launcher',
@@ -279,7 +282,7 @@ class AppRoutes {
     return routes[componentName];
   }
 
-  // Return widget from component name  
+  // Return widget from component name
   static Widget _getComponentWidget(String componentName) {
     final routes = {
       'align': const AlignExample(),
@@ -328,6 +331,7 @@ class AppRoutes {
       'tabbar': const TabBarExample(),
       'text': const TextExample(),
       'text-field': const TextFieldExample(),
+      'phone-picker': const PhonePickerExample(),
       'ticket-widget': const TicketWidgetExample(),
       'toast': const ToastExample(),
       'url-launcher': const UrlLauncherExample(),

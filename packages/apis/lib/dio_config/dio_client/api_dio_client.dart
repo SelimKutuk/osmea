@@ -91,6 +91,15 @@ class ApiDioClient implements ApiBaseClient {
       dio.interceptors.add(cookieJar);
     }
 
+    // 🛒 Add cart token interceptor for cart operations
+    try {
+      final cartTokenInterceptor = WooCartTokenInterceptor();
+      dio.interceptors.add(cartTokenInterceptor);
+      debugPrint('🛒 Cart token interceptor enabled for WooCommerce');
+    } catch (e) {
+      debugPrint('⚠️ Failed to add cart token interceptor: $e');
+    }
+
     _proxySettingsForQA(dio);
     return dio;
   }
@@ -113,6 +122,41 @@ class ApiDioClient implements ApiBaseClient {
     }
 
     _proxySettingsForQA(dio);
+    return dio;
+  }
+
+  /// 🛍️ Creates a basic WooCommerce Dio instance without authentication for public APIs
+  /// Use this for endpoints that don't require authentication like products, categories, etc.
+  static Dio wooPublicDio() {
+    final dio = Dio()
+      ..options = BaseOptions(
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      )
+      ..options.responseType = ResponseType.json;
+
+    // 🍪 Add cookie management based on platform (for session tracking if needed)
+    if (kIsWeb) {
+      // Use web-compatible cookie manager for web platform
+      dio.interceptors.add(webCookieManager);
+    } else {
+      // Use traditional cookie jar for mobile platforms
+      dio.interceptors.add(cookieJar);
+    }
+
+    // 🛒 Add cart token interceptor for cart operations (even public carts need tokens)
+    try {
+      final cartTokenInterceptor = WooCartTokenInterceptor();
+      dio.interceptors.add(cartTokenInterceptor);
+      debugPrint('🛒 Cart token interceptor enabled for public WooCommerce');
+    } catch (e) {
+      debugPrint('⚠️ Failed to add cart token interceptor: $e');
+    }
+
+    _proxySettingsForQA(dio);
+    debugPrint('🛍️ Public WooCommerce Dio client configured (no auth)');
     return dio;
   }
 

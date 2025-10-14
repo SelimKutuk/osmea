@@ -4,6 +4,7 @@ import 'package:api_explorer/widgets/layout/app_header.dart';
 import 'package:api_explorer/widgets/responsive_layout/responsive_content.dart';
 import 'package:api_explorer/widgets/store_management/store_management_dialog.dart';
 import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
+import 'package:api_explorer/widgets/password_update_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:apis/apis.dart';
@@ -11,6 +12,8 @@ import 'package:apis/services/store_change_notifier.dart';
 import 'package:api_explorer/services/api_service_registry.dart';
 import 'package:api_explorer/services/app_state_persistence.dart';
 import 'package:core/core.dart';
+import 'package:get_it/get_it.dart';
+import 'package:apis/network/remote/woocommerce/store_api/cart_api/abstract/cart_service.dart';
 import 'dart:async';
 
 class HomeView extends StatefulWidget {
@@ -40,6 +43,9 @@ class _HomeViewState extends State<HomeView>
   bool _hasShownResponsivePopup = false;
   bool _isAppFullyLoaded = false;
 
+  // Password update state
+  bool _showPasswordUpdate = false;
+
   // Scaffold key for drawer control
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -60,6 +66,7 @@ class _HomeViewState extends State<HomeView>
     _loadCurrentStore();
     _listenToStoreChanges();
     _restoreAppState(); // Restore previous state
+    _initializeCartToken(); // Initialize cart token
 
     // Initialize screen width for responsive popup
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -297,6 +304,44 @@ class _HomeViewState extends State<HomeView>
       }
     } catch (e) {
       debugPrint('❌ Error checking configuration: $e');
+    }
+  }
+
+  /// Initialize cart token by making a cart API call
+  Future<void> _initializeCartToken() async {
+    try {
+      // Check if cart token already exists
+      final existingCartToken = await WooCartTokenStorage.loadCartToken();
+      if (existingCartToken != null) {
+        debugPrint(
+            '🛒 Cart token already exists: ${existingCartToken.cartToken}');
+        return;
+      }
+
+      // Check if store is configured
+      if (_selectedStore == null) {
+        debugPrint(
+            '⚠️ No store configured, skipping cart token initialization');
+        return;
+      }
+
+      // Make cart API call to get cart token
+      final cartService = GetIt.I<CartService>();
+      final response = await cartService.getCart(
+        apiVersion: WooNetwork.apiVersion,
+      );
+
+      debugPrint('🛒 Cart API response received: ${response.toJson()}');
+
+      // Check if cart token was saved by interceptor
+      final cartToken = await WooCartTokenStorage.loadCartToken();
+      if (cartToken != null) {
+        debugPrint('✅ Cart token initialized: ${cartToken.cartToken}');
+      } else {
+        debugPrint('⚠️ Cart token not found in response');
+      }
+    } catch (e) {
+      debugPrint('❌ Error initializing cart token: $e');
     }
   }
 
@@ -578,6 +623,18 @@ class _HomeViewState extends State<HomeView>
   void _onStoreChange() {
     // Show store selector or management dialog
     _showStoreManagementDialog(context);
+  }
+
+  void _showPasswordUpdateDialog() {
+    setState(() {
+      _showPasswordUpdate = true;
+    });
+  }
+
+  void _hidePasswordUpdateDialog() {
+    setState(() {
+      _showPasswordUpdate = false;
+    });
   }
 
   void _updateApiUrlFromStore(StoreConfiguration store) {
@@ -919,6 +976,8 @@ class _HomeViewState extends State<HomeView>
                   _selectedStore = store;
                 });
                 _updateApiUrlFromStore(store);
+                // Reinitialize cart token for new store
+                _initializeCartToken();
               }
               break;
             case StoreChangeType.updated:
@@ -1101,6 +1160,10 @@ class _HomeViewState extends State<HomeView>
                   isDarkMode: _isDarkMode,
                   onProfileTap: _onProfileTap,
                   onStoreChange: _onStoreChange,
+                  onPasswordUpdate: _selectedStore?.platform == 'woocommerce'
+                      ? _showPasswordUpdateDialog
+                      : null,
+                  isProfileEnabled: _selectedStore?.platform == 'woocommerce',
                 ),
                 drawer: Drawer(
                   width: _calculateDrawerWidth(screenWidth),
@@ -1141,6 +1204,65 @@ class _HomeViewState extends State<HomeView>
           onDismiss: _dismissResponsivePopup,
           onUseWebVersion: _openWebVersion,
         ),
+
+        // Password Update Dialog
+        if (_showPasswordUpdate)
+          Container(
+            color: Colors.black54,
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Header
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: OsmeaColors.nordicBlue,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.lock_reset,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                'Password Update',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _hidePasswordUpdateDialog,
+                              icon: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Content
+                      const PasswordUpdateWidget(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

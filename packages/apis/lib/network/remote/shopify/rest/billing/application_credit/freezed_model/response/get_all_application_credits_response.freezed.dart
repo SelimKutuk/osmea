@@ -25,12 +25,8 @@ mixin _$GetAllApplicationCreditsResponse {
   List<ApplicationCredit>? get applicationCredits =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this GetAllApplicationCreditsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAllApplicationCreditsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAllApplicationCreditsResponseCopyWith<GetAllApplicationCreditsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -59,8 +55,6 @@ class _$GetAllApplicationCreditsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllApplicationCreditsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,8 +93,6 @@ class __$$GetAllApplicationCreditsResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAllApplicationCreditsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllApplicationCreditsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,14 +146,12 @@ class _$GetAllApplicationCreditsResponseImpl
                 .equals(other._applicationCredits, _applicationCredits));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_applicationCredits));
 
-  /// Create a copy of GetAllApplicationCreditsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAllApplicationCreditsResponseImplCopyWith<
@@ -191,11 +181,8 @@ abstract class _GetAllApplicationCreditsResponse
   @override
   @JsonKey(name: "application_credits")
   List<ApplicationCredit>? get applicationCredits;
-
-  /// Create a copy of GetAllApplicationCreditsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAllApplicationCreditsResponseImplCopyWith<
           _$GetAllApplicationCreditsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

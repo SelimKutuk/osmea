@@ -15,8 +15,15 @@ _$GetAUsageChargeResponseImpl _$$GetAUsageChargeResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetAUsageChargeResponseImplToJson(
-        _$GetAUsageChargeResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.usageCharge?.toJson() case final value?)
-        'usage_charge': value,
-    };
+    _$GetAUsageChargeResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('usage_charge', instance.usageCharge?.toJson());
+  return val;
+}

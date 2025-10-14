@@ -17,10 +17,18 @@ _$CreateDraftOrderWithDiscountRequestImpl
         );
 
 Map<String, dynamic> _$$CreateDraftOrderWithDiscountRequestImplToJson(
-        _$CreateDraftOrderWithDiscountRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$CreateDraftOrderWithDiscountRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
@@ -37,16 +45,23 @@ _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
       useCustomerDefaultAddress: json['use_customer_default_address'] as bool?,
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-      if (instance.appliedDiscount?.toJson() case final value?)
-        'applied_discount': value,
-      if (instance.customer?.toJson() case final value?) 'customer': value,
-      if (instance.useCustomerDefaultAddress case final value?)
-        'use_customer_default_address': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  writeNotNull('applied_discount', instance.appliedDiscount?.toJson());
+  writeNotNull('customer', instance.customer?.toJson());
+  writeNotNull(
+      'use_customer_default_address', instance.useCustomerDefaultAddress);
+  return val;
+}
 
 _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
         Map<String, dynamic> json) =>
@@ -59,24 +74,40 @@ _$AppliedDiscountImpl _$$AppliedDiscountImplFromJson(
     );
 
 Map<String, dynamic> _$$AppliedDiscountImplToJson(
-        _$AppliedDiscountImpl instance) =>
-    <String, dynamic>{
-      if (instance.description case final value?) 'description': value,
-      if (instance.valueType case final value?) 'value_type': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.title case final value?) 'title': value,
-    };
+    _$AppliedDiscountImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('value_type', instance.valueType);
+  writeNotNull('value', instance.value);
+  writeNotNull('amount', instance.amount);
+  writeNotNull('title', instance.title);
+  return val;
+}
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
       id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-    };
+Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -85,9 +116,17 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
       quantity: (json['quantity'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.price case final value?) 'price': value,
-      if (instance.quantity case final value?) 'quantity': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('price', instance.price);
+  writeNotNull('quantity', instance.quantity);
+  return val;
+}

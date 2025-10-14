@@ -13,7 +13,15 @@ _$ListTagsSpecificBlogResponseImpl _$$ListTagsSpecificBlogResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$ListTagsSpecificBlogResponseImplToJson(
-        _$ListTagsSpecificBlogResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.tags case final value?) 'tags': value,
-    };
+    _$ListTagsSpecificBlogResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tags', instance.tags);
+  return val;
+}

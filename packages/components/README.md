@@ -1,13 +1,18 @@
-# �� OSMEA Components
+# OSMEA Components 🎨
 
 <div align="center">
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.19.0+-blue?logo=flutter)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-2.17.0+-blue?logo=dart)](https://dart.dev)
-[![License](https://img.shields.io/badge/License-GNU%20AGPL%20v3.0-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-2D3748?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1A202C)](https://github.com/masterfabric-mobile/osmea)
+[![Platform](https://img.shields.io/badge/platform-Flutter-2D3748?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1A202C)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-2D3748?style=for-the-badge&logo=dart&logoColor=white&labelColor=1A202C)](https://dart.dev)
+[![UI Kit](https://img.shields.io/badge/UI%20Kit-2D3748?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1A202C)](https://github.com/masterfabric-mobile/osmea)
+[![Components](https://img.shields.io/badge/Components-50+-2D3748?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1A202C)](https://github.com/masterfabric-mobile/osmea)
 
-**A powerful, mobile-first Flutter UI library built for e-commerce.**  
-**Modular. Themed. Ready to scale.**
+</div>
+
+<div align="center">
+
+**"50+ Production-Ready Flutter UI Components"**
 
 [🚀 Live Demo](https://osmea-app.web.app) • [📚 Documentation](https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components) • [🐛 Report Issues](https://github.com/masterfabric-mobile/osmea/issues)
 
@@ -15,227 +20,32 @@
 
 ---
 
-## 📦 What's Inside?
+## 🌟 What is OSMEA Components?
 
-### ✔️ 50+ Production-ready Components  
-From layout scaffolds to dynamic carousels and complex form controls.
+**OSMEA Components** is a comprehensive Flutter UI library with 50+ production-ready components. Built for e-commerce applications with mobile-first design, comprehensive theming, and extensive customization options.
 
-### ✔️ Built-in Theming System  
-Powered by design tokens and Material 3. Global consistency, effortless customization.
+### ✨ **Key Features**
 
-### ✔️ Mobile-first Design  
-Optimized for high-performance e-commerce interfaces.
-
-### ✔️ Variants, Sizes & Styles  
-Each component is fully customizable with sensible defaults.
-
----
-
-## 🗂️ Project Examples
-
-OSMEA provides two main example environments to help you get started:
-
-### 📖 Storybook Example
-**Path:** `packages/components/example_storybook/`
-
-Interactive playground for all OSMEA components with live property controls, code snippets, and design guidelines.
-
-**Key Features:**
-- Live component demos with real-time property changes
-- Code examples and copy-paste snippets
-- Design guidelines and best practices
-- Modular templates for new components
-- Device frame previews
-
-**Run it:**
-```bash
-cd packages/components/example_storybook
-flutter run
-```
-
-### 📱 Mobile Example
-**Path:** `packages/components/example_mobile/`
-
-Real-world mobile app examples using OSMEA components in practical, production-like flows.
-
-**Features:**
-- Complete app screens (login, product grid, checkout, etc.)
-- Asset and theme integration
-- Demonstrates best practices for app structure
-
-**Run it:**
-```bash
-cd packages/components/example_mobile
-flutter run
-```
-
----
-
-## 🏗️ Package Structure
-
-```
-packages/components/
-├── lib/
-│   ├── osmea_components.dart          # Main export file
-│   └── src/
-│       ├── components/                # Individual component implementations
-│       │   ├── align/                 # Alignment widget
-│       │   ├── appbar/                # AppBar components
-│       │   ├── avatar/                # Avatar components
-│       │   ├── badge/                 # Badge components
-│       │   ├── bottom_sheet/          # Bottom sheet components
-│       │   ├── buttons/               # Button components
-│       │   ├── cards/                 # Card components
-│       │   ├── carousel/              # Carousel/slider components
-│       │   ├── center/                # Center widget
-│       │   ├── checkbox/              # Checkbox components
-│       │   ├── chips/                 # Chips components
-│       │   ├── clip_r_rect/           # Clipping widgets
-│       │   ├── column/                # Column widget
-│       │   ├── container/             # Container widget
-│       │   ├── divider/               # Divider components
-│       │   ├── dropdown/              # Dropdown components
-│       │   ├── expanded/              # Expanded widget
-│       │   ├── fitted_box/            # FittedBox widget
-│       │   ├── flexible/              # Flexible widget
-│       │   ├── footer/                # Footer components
-│       │   ├── list_item/             # List item components
-│       │   ├── loading/               # Loading indicators
-│       │   ├── login_button/          # Login button with auth logic
-│       │   ├── navbar/                # Navigation bar components
-│       │   ├── padding/               # Padding widget
-│       │   ├── popup/                 # Popup/modal components
-│       │   ├── positioned/            # Positioned widget
-│       │   ├── progress/              # Progress indicators
-│       │   ├── radio_button/          # Radio button components
-│       │   ├── rich_text/             # Rich text and text span
-│       │   ├── row/                   # Row widget
-│       │   ├── scaffold/              # Scaffold/page layout
-│       │   ├── searchbar/             # Search bar components
-│       │   ├── single_child_scroll_view/ # Scroll view
-│       │   ├── sized_box/             # SizedBox widget
-│       │   ├── spacer/                # Spacer widget
-│       │   ├── stack/                 # Stack widget
-│       │   ├── stepper/               # Stepper components
-│       │   ├── switch_button/         # Switch components
-│       │   ├── tabbar/                # Tab bar components
-│       │   ├── text/                  # Text components
-│       │   ├── text_field/            # Text field, OTP, search
-│       │   ├── ticket_widget/         # Ticket creation widget
-│       │   ├── toast/                 # Toast/alert components
-│       │   └── wrap/                  # Wrap widget
-│       ├── core/                      # Core functionality and shared logic
-│       ├── enums/                     # Component variants, sizes, and state enums
-│       ├── styles/                    # Text styles and color definitions
-│       ├── theme/                     # Theme system and design tokens
-│       └── utils/                     # Extension methods and utility functions
-├── example_storybook/                 # Interactive component showcase
-└── example_mobile/                    # Mobile app examples
-```
-
----
-
-## 🎯 Component Categories
-
-### 🔲 Layout & Structure
-| Component           | Description                                              |
-|---------------------|----------------------------------------------------------|
-| `Container`         | Flexible box with styling capabilities                  |
-| `Row / Column`      | Arrange widgets horizontally or vertically              |
-| `Stack`             | Overlay widgets on top of each other                    |
-| `Scaffold`          | Provides page structure with app bar and body           |
-| `Padding / SizedBox`| Space and dimension helpers                             |
-| `Align / Center`    | Alignment and centering utilities                       |
-| `Expanded / Flexible / Spacer / Wrap` | Advanced layout and spacing           |
-
-### 🎨 UI Elements
-| Component   | Description                                      |
-|-------------|--------------------------------------------------|
-| `Avatar`    | User images with fallback and styling options     |
-| `Badge`     | Notification indicators and status tags           |
-| `Chips`     | Interactive tags or compact buttons               |
-| `Divider`   | Visual separators for content grouping            |
-| `Progress`  | Loading indicators and progress bars              |
-| `List Item` | Rich list rows with expansion/selection           |
-
-### 📝 Form Controls
-| Component       | Description                                           |
-|----------------|-------------------------------------------------------|
-| `Text Field`      | Basic input with validation support                |
-| `OTP Text Field`  | Input field for one-time passwords                 |
-| `Checkbox`        | Multi-select toggle option                         |
-| `Radio Button`    | Single-select input from a group                   |
-| `Switch`          | Binary toggle with on/off states                   |
-| `Dropdown`        | Select from a list of options                      |
-
-### 🔘 Interactive Elements
-| Component      | Description                                               |
-|----------------|-----------------------------------------------------------|
-| `Button`        | Action triggers: primary, secondary, icon-based, etc.    |
-| `Card`          | Content blocks with optional actions and visuals         |
-| `Carousel`      | Swipable image or content sliders                        |
-| `Bottom Sheet`  | Modal slide-up panel for actions or content              |
-| `Popup`         | Modal windows and overlays for dialogs                   |
-| `Toast`         | Temporary alert or success messages                      |
-
-### 🧭 Navigation
-| Component   | Description                                      |
-|-------------|--------------------------------------------------|
-| `AppBar`    | Top bar with title, actions, and navigation      |
-| `Navbar`    | Bottom or top navigation menus                   |
-| `Stepper`   | Visual step-based navigation flow                |
-| `TabBar`    | Tabbed navigation                                |
-| `Searchbar` | Search input with suggestions and history        |
-
-### 🎪 Specialized
-| Component       | Description                                          |
-|----------------|------------------------------------------------------ |
-| `Login Button`    | Auth-ready button with prebuilt logic              |
-| `Ticket Widget`   | Dynamic ticket creation UI for support flows       |
-
----
-
-### 🟦 Expandable & Collapsible Components
-
-| Component                | Description                                                       |
-|--------------------------|------------------------------------------------------------------ |
-| `Expandable List Item`   | Flexible list/menu item acting as expansion panel                 |
-| `Expandable Searchbar`   | Searchbar that expands from an icon/button into a full search UI  |
-
-**Key Features:**
-- Multi-level nesting and smooth animation
-- State control: `initiallyExpanded`, `expanded`, `onExpansionChanged`, `maintainState`
-- Customizable expand/collapse icons
-- Supports all standard searchbar features (suggestions, history, etc.)
-- Themeable and highly customizable
-
-
-
-**Expandable Searchbar:**
-```dart
-OsmeaComponents.expandableSearchbar(
-  onSearch: (query) => performSearch(query),
-  expandDirection: ExpandDirection.right,
-  expandWidth: 300,
-)
-```
+- **🎨 50+ Components** - From buttons to complex carousels and forms
+- **🎯 Mobile-First Design** - Optimized for high-performance e-commerce interfaces
+- **🎨 Built-in Theming** - Material Design 3 with design tokens
+- **⚡ Zero Configuration** - Get started in minutes with sensible defaults
+- **🔧 Highly Customizable** - Variants, sizes, and styles for every component
 
 ---
 
 ## 🚀 Quick Start
 
-### Installation
-Add the package to your `pubspec.yaml`:
+### 1. **Add to your `pubspec.yaml`:**
 ```yaml
 dependencies:
   osmea_components:
     git:
       url: https://github.com/masterfabric-mobile/osmea.git
-      ref: dev
       path: packages/components
 ```
 
-### Import and Usage
+### 2. **Import and Use:**
 ```dart
 import 'package:osmea_components/osmea_components.dart';
 
@@ -243,7 +53,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: OsmeaTheme.lightTheme, // Use OSMEA theme
+      theme: OsmeaTheme.lightTheme,
       home: MyHomePage(),
     );
   }
@@ -254,10 +64,10 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return OsmeaComponents.scaffold(
       appBar: OsmeaComponents.appBar(
-        title: OsmeaComponents.text('My E-commerce App'),
+        title: OsmeaComponents.text('My App'),
         actions: [
-          AppBarAction(
-            icon: Icon(Icons.search),
+          OsmeaComponents.appBarAction(
+            icon: OsmeaComponents.icon(Icons.search),
             onPressed: () => print('Search tapped'),
           ),
         ],
@@ -265,16 +75,16 @@ class MyHomePage extends StatelessWidget {
       body: OsmeaComponents.column(
         children: [
           OsmeaComponents.button(
-            text: 'Shop Now',
+            text: 'Get Started',
             variant: ButtonVariant.primary,
             size: ButtonSize.large,
-            onPressed: () => print('Shop button tapped'),
+            onPressed: () => print('Button tapped'),
           ),
           OsmeaComponents.spacer(),
           OsmeaComponents.basicCard(
-            title: 'Featured Product',
-            subtitle: 'Limited Time Offer',
-            content: 'Get 20% off on all electronics!',
+            title: 'Welcome',
+            subtitle: 'Get started with OSMEA',
+            content: 'Build amazing apps with our components!',
             onTap: () => print('Card tapped'),
           ),
         ],
@@ -284,18 +94,109 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
+### 3. **Size Extensions:**
+```dart
+// Size extensions for easy spacing
+OsmeaComponents.container(
+  padding: 16.w, // Width-based padding
+  margin: 8.h,   // Height-based margin
+  child: OsmeaComponents.column(
+    children: [
+      OsmeaComponents.text('Title'),
+      16.h, // Height spacer
+      OsmeaComponents.text('Subtitle'),
+    ],
+  ),
+)
+
+// Responsive sizing
+OsmeaComponents.button(
+  text: 'Responsive Button',
+  width: 200.w,  // Responsive width
+  height: 48.h,  // Responsive height
+  onPressed: () {},
+)
+```
+
 ---
 
-## 🧩 Core Architecture
+## 🛠️ Technology Stack
 
-- **Core (`lib/src/core/`)**: Abstract widgets, basic layout and behavior infrastructure for all components
-- **Enums (`lib/src/enums/`)**: Central enum definitions for size, variant, state, style options for all components
-- **Styles (`lib/src/styles/`)**: Color palettes, typography and other style constants
-- **Utils (`lib/src/utils/`)**: Frequently used helper functions, extensions and component-specific helpers
+- **Flutter 3.19+** - Cross-platform UI framework
+- **Dart 2.17+** - Type-safe programming language
+- **UI Kit** - Comprehensive component library
+- **Custom Theming** - Design tokens and color system
 
 ---
 
-## 💡 Basic Examples
+## 📦 Core Features
+
+### 🎨 **Component Library**
+- **50+ Production-ready components** for every use case
+- **Consistent API** across all components
+- **Multiple variants** for different contexts
+- **Responsive design** for all screen sizes
+- **Accessibility support** built-in
+
+### 🎯 **Layout & Structure**
+- **Container** - Flexible box with styling capabilities
+- **Row / Column** - Arrange widgets horizontally or vertically
+- **Stack** - Overlay widgets on top of each other
+- **Scaffold** - Provides page structure with app bar and body
+- **Padding / SizedBox** - Space and dimension helpers
+- **Align / Center** - Alignment and centering utilities
+
+### 🔘 **Interactive Elements**
+- **Button** - Action triggers with multiple variants
+- **Card** - Content blocks with optional actions
+- **Carousel** - Swipable image or content sliders
+- **Bottom Sheet** - Modal slide-up panels
+- **Popup** - Modal windows and overlays
+- **Toast** - Temporary alert messages
+
+### 📝 **Form Controls**
+- **Text Field** - Basic input with validation support
+- **OTP Text Field** - Input field for one-time passwords
+- **Checkbox** - Multi-select toggle option
+- **Radio Button** - Single-select input from a group
+- **Switch** - Binary toggle with on/off states
+- **Dropdown** - Select from a list of options
+
+### 🧭 **Navigation**
+- **AppBar** - Top bar with title, actions, and navigation
+- **Navbar** - Bottom or top navigation menus
+- **Stepper** - Visual step-based navigation flow
+- **TabBar** - Tabbed navigation
+- **Searchbar** - Search input with suggestions
+
+---
+
+## 📁 Project Structure
+
+```bash
+packages/components/
+├── 📦 lib/                          # Source code
+│   ├── osmea_components.dart        # Main export file
+│   └── src/
+│       ├── components/              # Individual component implementations
+│       │   ├── buttons/             # Button components
+│       │   ├── cards/               # Card components
+│       │   ├── text_field/          # Text field components
+│       │   ├── appbar/              # AppBar components
+│       │   ├── navbar/              # Navigation components
+│       │   └── ...                  # 50+ more components
+│       ├── core/                    # Core functionality
+│       ├── enums/                   # Component variants and states
+│       ├── styles/                  # Text styles and colors
+│       ├── theme/                   # Theme system
+│       └── utils/                   # Utility functions
+├── 📖 example_storybook/            # Interactive showcase
+└── 📱 example_mobile/               # Mobile app examples
+```
+
+---
+
+## 💡 Usage Examples
 
 ### Simple Login Form
 ```dart
@@ -311,7 +212,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return OsmeaComponents.container(
-      padding: EdgeInsets.all(24),
+      padding: 24.w,
       child: OsmeaComponents.column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -320,31 +221,26 @@ class _LoginFormState extends State<LoginForm> {
             variant: OsmeaTextVariant.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 32),
+          32.h, // Height spacer
           OsmeaComponents.textField(
             controller: _emailController,
             label: 'Email Address',
             keyboardType: TextInputType.emailAddress,
-            prefixIcon: Icon(Icons.email_outlined),
+            prefixIcon: OsmeaComponents.icon(Icons.email_outlined),
           ),
-          SizedBox(height: 16),
+          16.h, // Height spacer
           OsmeaComponents.textField(
             controller: _passwordController,
             label: 'Password',
             obscureText: true,
-            prefixIcon: Icon(Icons.lock_outlined),
+            prefixIcon: OsmeaComponents.icon(Icons.lock_outlined),
           ),
-          SizedBox(height: 24),
-          OsmeaComponents.loginButton(
+          24.h, // Height spacer
+          OsmeaComponents.button(
             text: 'Sign In',
             variant: ButtonVariant.primary,
             size: ButtonSize.large,
-            authService: MyAuthService(),
-            getUsername: () => _emailController.text,
-            getPassword: () => _passwordController.text,
-            onLoginSuccess: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
+            onPressed: () => _handleLogin(),
           ),
         ],
       ),
@@ -361,23 +257,21 @@ class ProductGrid extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: EdgeInsets.all(16),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-      ),
+    return OsmeaComponents.gridView(
+      padding: 16.w,
+      crossAxisCount: 2,
+      childAspectRatio: 0.8,
+      crossAxisSpacing: 16.w,
+      mainAxisSpacing: 16.h,
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
         return OsmeaComponents.imageCard(
           title: product.name,
-          subtitle: '\$${product.price}',
+          subtitle: OsmeaComponents.text('\$${product.price}'),
           imageUrl: product.imageUrl,
           variant: ComponentAppearance.elevated,
-          onTap: () => Navigator.pushNamed(
+          onTap: () => OsmeaComponents.navigateTo(
             context, 
             '/product', 
             arguments: product,
@@ -396,100 +290,82 @@ class ProductGrid extends StatelessWidget {
 }
 ```
 
-### Interactive Checkout Stepper
-```dart
-class CheckoutStepper extends StatefulWidget {
-  @override
-  _CheckoutStepperState createState() => _CheckoutStepperState();
-}
+---
 
-class _CheckoutStepperState extends State<CheckoutStepper> {
-  int currentStep = 0;
-  
-  @override
-  Widget build(BuildContext context) {
-    return OsmeaComponents.stepper(
-      currentStep: currentStep,
-      onStepChanged: (step) => setState(() => currentStep = step),
-      steps: [
-        OsmeaStep(
-          label: 'Cart Review',
-          content: CartReviewWidget(),
-          isActive: currentStep >= 0,
-          isCompleted: currentStep > 0,
-        ),
-        OsmeaStep(
-          label: 'Shipping Info',
-          content: ShippingFormWidget(),
-          isActive: currentStep >= 1,
-          isCompleted: currentStep > 1,
-        ),
-        OsmeaStep(
-          label: 'Payment',
-          content: PaymentFormWidget(),
-          isActive: currentStep >= 2,
-          isCompleted: currentStep > 2,
-        ),
-        OsmeaStep(
-          label: 'Confirmation',
-          content: OrderConfirmationWidget(),
-          isActive: currentStep >= 3,
-          isCompleted: currentStep > 3,
-        ),
-      ],
-    );
-  }
-}
-```
+## 🎯 Use Cases
+
+### 📱 **Mobile Apps**
+- **E-commerce Apps** - Product catalogs, shopping carts, checkout flows
+- **Social Apps** - User profiles, feeds, messaging interfaces
+- **Business Apps** - Dashboards, forms, data visualization
+- **Utility Apps** - Settings, preferences, configuration screens
+
+### 🌐 **Web Applications**
+- **Admin Dashboards** - Data tables, charts, management interfaces
+- **Landing Pages** - Hero sections, feature showcases, CTAs
+- **Forms** - Registration, contact, feedback forms
+- **Content Sites** - Article layouts, media galleries, navigation
+
+### 🖥️ **Desktop Applications**
+- **Desktop-optimized** - Larger touch targets, keyboard navigation
+- **Cross-platform** - Consistent experience across all platforms
+- **Responsive** - Adapts to different screen sizes and orientations
 
 ---
 
-## 🎨 Interactive Storybook
-
-Explore all components interactively in our comprehensive Storybook:
+## 🛠️ Development Setup
 
 ```bash
-cd packages/components/example_storybook
+# Install dependencies
+flutter pub get
+
+# Run the storybook example
+cd example_storybook
 flutter run
+
+# Run the mobile example
+cd example_mobile
+flutter run
+
+# Run tests
+flutter test
 ```
-
-**Storybook Features:**
-- **Live Component Demos** – See components in action with real-time property changes
-- **Code Examples** – Copy-paste ready code snippets
-- **Design Guidelines** – Best practices and usage recommendations
-- **Component Templates** – Easily scaffold new components
-
----
-
-## 📚 Additional Resources
-
-- **[Component Templates](example_storybook/lib/storybook_test/_templates/)** – Templates for creating new components
-- **[Examples](example_mobile/)** – Complete mobile app examples
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](../../CONTRIBUTING.md) for details on:
-- Adding new components
-- Following our coding standards  
-- Testing requirements
-- Documentation expectations
+We welcome contributions! Here's how you can help:
+
+1. **Fork the Repository**
+2. **Create a Feature Branch**
+3. **Make Your Changes**
+4. **Submit a Pull Request**
+
+### Development Guidelines
+
+- **Code Style**: Follow Dart/Flutter conventions
+- **Testing**: Write unit tests for new features
+- **Documentation**: Update docs for component changes
+- **Commit Messages**: Use conventional commits
 
 ---
 
 ## 📄 License
 
 > 🔐 **License:** GNU AGPL v3.0  
-> 📜 This project is protected under the **GNU Affero General Public License v3.0**.  
-> If you modify and deploy this project publicly, you must also **publish your changes** under the same license.
+> 📜 This project is protected under the **GNU Affero General Public License v3.0**.
 
-📎 Full details available in the [`LICENSE`](https://github.com/masterfabric-mobile/osmea/blob/dev/LICENSE) file.
+📎 Full details available in the [`LICENSE`](LICENSE) file.
 
 ---
+
+<div align="center">
 
 **Built with ❤️ by the OSMEA Team**
 
 © 2025 MasterFabric Mobile • Maintained by the OSMEA Engineering Team
 
+[⬆ Back to Top](#osmea-components-)
 
+</div>

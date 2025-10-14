@@ -17,11 +17,18 @@ _$AddCollectToCollectionByProductIdRequestImpl
         );
 
 Map<String, dynamic> _$$AddCollectToCollectionByProductIdRequestImplToJson(
-        _$AddCollectToCollectionByProductIdRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.customCollection?.toJson() case final value?)
-        'custom_collection': value,
-    };
+    _$AddCollectToCollectionByProductIdRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('custom_collection', instance.customCollection?.toJson());
+  return val;
+}
 
 _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
         Map<String, dynamic> json) =>
@@ -33,12 +40,19 @@ _$CustomCollectionImpl _$$CustomCollectionImplFromJson(
     );
 
 Map<String, dynamic> _$$CustomCollectionImplToJson(
-        _$CustomCollectionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.collects?.map((e) => e.toJson()).toList() case final value?)
-        'collects': value,
-    };
+    _$CustomCollectionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('collects', instance.collects?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$CollectImpl _$$CollectImplFromJson(Map<String, dynamic> json) =>
     _$CollectImpl(
@@ -46,8 +60,16 @@ _$CollectImpl _$$CollectImplFromJson(Map<String, dynamic> json) =>
       position: (json['position'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) =>
-    <String, dynamic>{
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.position case final value?) 'position': value,
-    };
+Map<String, dynamic> _$$CollectImplToJson(_$CollectImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('position', instance.position);
+  return val;
+}

@@ -16,11 +16,18 @@ _$RetrievesListOfShopPoliciesResponseImpl
         );
 
 Map<String, dynamic> _$$RetrievesListOfShopPoliciesResponseImplToJson(
-        _$RetrievesListOfShopPoliciesResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.policies?.map((e) => e.toJson()).toList() case final value?)
-        'policies': value,
-    };
+    _$RetrievesListOfShopPoliciesResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('policies', instance.policies?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$PolicyImpl _$$PolicyImplFromJson(Map<String, dynamic> json) => _$PolicyImpl(
       body: json['body'] as String?,
@@ -31,12 +38,20 @@ _$PolicyImpl _$$PolicyImplFromJson(Map<String, dynamic> json) => _$PolicyImpl(
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$PolicyImplToJson(_$PolicyImpl instance) =>
-    <String, dynamic>{
-      if (instance.body case final value?) 'body': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.url case final value?) 'url': value,
-    };
+Map<String, dynamic> _$$PolicyImplToJson(_$PolicyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('body', instance.body);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('title', instance.title);
+  writeNotNull('url', instance.url);
+  return val;
+}

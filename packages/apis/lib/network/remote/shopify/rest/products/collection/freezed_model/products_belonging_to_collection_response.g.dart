@@ -16,11 +16,18 @@ _$ProductsBelongingToCollectionResponseImpl
         );
 
 Map<String, dynamic> _$$ProductsBelongingToCollectionResponseImplToJson(
-        _$ProductsBelongingToCollectionResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.products?.map((e) => e.toJson()).toList() case final value?)
-        'products': value,
-    };
+    _$ProductsBelongingToCollectionResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('products', instance.products?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
@@ -49,29 +56,34 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
           : Image.fromJson(json['image'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.vendor case final value?) 'vendor': value,
-      if (instance.productType case final value?) 'product_type': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.publishedScope case final value?) 'published_scope': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.options?.map((e) => e.toJson()).toList() case final value?)
-        'options': value,
-      if (instance.images?.map((e) => e.toJson()).toList() case final value?)
-        'images': value,
-      if (instance.image?.toJson() case final value?) 'image': value,
-    };
+Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('vendor', instance.vendor);
+  writeNotNull('product_type', instance.productType);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('published_scope', instance.publishedScope);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('status', instance.status);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('options', instance.options?.map((e) => e.toJson()).toList());
+  writeNotNull('images', instance.images?.map((e) => e.toJson()).toList());
+  writeNotNull('image', instance.image?.toJson());
+  return val;
+}
 
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -86,20 +98,27 @@ _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       src: json['src'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.alt case final value?) 'alt': value,
-      if (instance.position case final value?) 'position': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.width case final value?) 'width': value,
-      if (instance.height case final value?) 'height': value,
-      if (instance.src case final value?) 'src': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('alt', instance.alt);
+  writeNotNull('position', instance.position);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('src', instance.src);
+  return val;
+}
 
 _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
       id: (json['id'] as num?)?.toInt(),
@@ -108,10 +127,18 @@ _$OptionImpl _$$OptionImplFromJson(Map<String, dynamic> json) => _$OptionImpl(
       position: (json['position'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.productId case final value?) 'product_id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.position case final value?) 'position': value,
-    };
+Map<String, dynamic> _$$OptionImplToJson(_$OptionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('product_id', instance.productId);
+  writeNotNull('name', instance.name);
+  writeNotNull('position', instance.position);
+  return val;
+}

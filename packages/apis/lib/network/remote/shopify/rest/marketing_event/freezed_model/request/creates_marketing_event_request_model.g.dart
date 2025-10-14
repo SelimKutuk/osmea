@@ -17,11 +17,18 @@ _$CreatesMarketingEventRequestModelImpl
         );
 
 Map<String, dynamic> _$$CreatesMarketingEventRequestModelImplToJson(
-        _$CreatesMarketingEventRequestModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.marketingEvent?.toJson() case final value?)
-        'marketing_event': value,
-    };
+    _$CreatesMarketingEventRequestModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('marketing_event', instance.marketingEvent?.toJson());
+  return val;
+}
 
 _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     _$MarketingEventImpl(
@@ -38,16 +45,22 @@ _$MarketingEventImpl _$$MarketingEventImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$MarketingEventImplToJson(
-        _$MarketingEventImpl instance) =>
-    <String, dynamic>{
-      if (instance.startedAt?.toIso8601String() case final value?)
-        'started_at': value,
-      if (instance.utmCampaign case final value?) 'utm_campaign': value,
-      if (instance.utmSource case final value?) 'utm_source': value,
-      if (instance.utmMedium case final value?) 'utm_medium': value,
-      if (instance.eventType case final value?) 'event_type': value,
-      if (instance.referringDomain case final value?) 'referring_domain': value,
-      if (instance.marketingChannel case final value?)
-        'marketing_channel': value,
-      if (instance.paid case final value?) 'paid': value,
-    };
+    _$MarketingEventImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('started_at', instance.startedAt?.toIso8601String());
+  writeNotNull('utm_campaign', instance.utmCampaign);
+  writeNotNull('utm_source', instance.utmSource);
+  writeNotNull('utm_medium', instance.utmMedium);
+  writeNotNull('event_type', instance.eventType);
+  writeNotNull('referring_domain', instance.referringDomain);
+  writeNotNull('marketing_channel', instance.marketingChannel);
+  writeNotNull('paid', instance.paid);
+  return val;
+}

@@ -15,18 +15,34 @@ _$CreatePageHtmlMarkupRequestImpl _$$CreatePageHtmlMarkupRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreatePageHtmlMarkupRequestImplToJson(
-        _$CreatePageHtmlMarkupRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$CreatePageHtmlMarkupRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       title: json['title'] as String?,
       bodyHtml: json['body_html'] as String?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('body_html', instance.bodyHtml);
+  return val;
+}

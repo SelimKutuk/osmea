@@ -24,12 +24,8 @@ mixin _$ListAllScriptTagsResponse {
   @JsonKey(name: "script_tags")
   List<ScriptTag>? get scriptTags => throw _privateConstructorUsedError;
 
-  /// Serializes this ListAllScriptTagsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListAllScriptTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListAllScriptTagsResponseCopyWith<ListAllScriptTagsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$ListAllScriptTagsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListAllScriptTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$ListAllScriptTagsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListAllScriptTagsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListAllScriptTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,14 +135,12 @@ class _$ListAllScriptTagsResponseImpl implements _ListAllScriptTagsResponse {
                 .equals(other._scriptTags, _scriptTags));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_scriptTags));
 
-  /// Create a copy of ListAllScriptTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListAllScriptTagsResponseImplCopyWith<_$ListAllScriptTagsResponseImpl>
@@ -176,11 +166,8 @@ abstract class _ListAllScriptTagsResponse implements ListAllScriptTagsResponse {
   @override
   @JsonKey(name: "script_tags")
   List<ScriptTag>? get scriptTags;
-
-  /// Create a copy of ListAllScriptTagsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListAllScriptTagsResponseImplCopyWith<_$ListAllScriptTagsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -206,12 +193,8 @@ mixin _$ScriptTag {
   @JsonKey(name: "cache")
   bool? get cache => throw _privateConstructorUsedError;
 
-  /// Serializes this ScriptTag to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ScriptTag
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ScriptTagCopyWith<ScriptTag> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -241,8 +224,6 @@ class _$ScriptTagCopyWithImpl<$Res, $Val extends ScriptTag>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ScriptTag
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -313,8 +294,6 @@ class __$$ScriptTagImplCopyWithImpl<$Res>
       _$ScriptTagImpl _value, $Res Function(_$ScriptTagImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ScriptTag
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -418,14 +397,12 @@ class _$ScriptTagImpl implements _ScriptTag {
             (identical(other.cache, cache) || other.cache == cache));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, src, event, createdAt, updatedAt, displayScope, cache);
 
-  /// Create a copy of ScriptTag
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ScriptTagImplCopyWith<_$ScriptTagImpl> get copyWith =>
@@ -473,11 +450,8 @@ abstract class _ScriptTag implements ScriptTag {
   @override
   @JsonKey(name: "cache")
   bool? get cache;
-
-  /// Create a copy of ScriptTag
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ScriptTagImplCopyWith<_$ScriptTagImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

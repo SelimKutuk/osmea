@@ -24,12 +24,8 @@ mixin _$ListAllArticleAuthorsResponse {
   @JsonKey(name: "authors")
   List<String>? get authors => throw _privateConstructorUsedError;
 
-  /// Serializes this ListAllArticleAuthorsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListAllArticleAuthorsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListAllArticleAuthorsResponseCopyWith<ListAllArticleAuthorsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$ListAllArticleAuthorsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListAllArticleAuthorsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$ListAllArticleAuthorsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListAllArticleAuthorsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListAllArticleAuthorsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,14 +138,12 @@ class _$ListAllArticleAuthorsResponseImpl
             const DeepCollectionEquality().equals(other._authors, _authors));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_authors));
 
-  /// Create a copy of ListAllArticleAuthorsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListAllArticleAuthorsResponseImplCopyWith<
@@ -181,11 +171,8 @@ abstract class _ListAllArticleAuthorsResponse
   @override
   @JsonKey(name: "authors")
   List<String>? get authors;
-
-  /// Create a copy of ListAllArticleAuthorsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListAllArticleAuthorsResponseImplCopyWith<
           _$ListAllArticleAuthorsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

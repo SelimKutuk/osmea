@@ -66,6 +66,21 @@ enum ApiCategory {
   woocommerceRefunds,
   woocommerceSetting,
   woocommerceTaxes,
+  //WooCommerce Store API
+  //TODO: Add other Store API categories here
+  woocommerceWishlist,
+  woocommerceCart,
+  woocommerceCheckout,
+  woocommerceCheckoutOrder,
+  woocommerceOrder,
+  woocommerceStoreProducts,
+  woocommerceStoreProductTags,
+  woocommerceStoreProductReviews,
+  woocommerceStoreProductCollectionData,
+  woocommerceStoreProductCategories,
+  woocommerceStoreProductBrands,
+  woocommerceStoreProductAttributes,
+  woocommerceStoreProductAttributeTerms,
 }
 
 extension ApiCategoryExtension on ApiCategory {
@@ -171,6 +186,33 @@ extension ApiCategoryExtension on ApiCategory {
         return 'Settings';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes APIs';
+      // WooCommerce Store API
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist APIs';
+      case ApiCategory.woocommerceCart:
+        return 'Cart API';
+      case ApiCategory.woocommerceCheckout:
+        return 'Checkout API';
+      case ApiCategory.woocommerceCheckoutOrder:
+        return 'Checkout Order API';
+      case ApiCategory.woocommerceOrder:
+        return 'WooCommerce Store Order API';
+      case ApiCategory.woocommerceStoreProducts:
+        return 'Products API';
+      case ApiCategory.woocommerceStoreProductTags:
+        return 'Product Tags API';
+      case ApiCategory.woocommerceStoreProductReviews:
+        return 'Product Reviews API';
+      case ApiCategory.woocommerceStoreProductCollectionData:
+        return 'Product Collection Data API';
+      case ApiCategory.woocommerceStoreProductCategories:
+        return 'Product Categories API';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'Product Brands API';
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return 'Product Attributes API';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms API';
     }
   }
 }
@@ -3919,6 +3961,437 @@ class ApiServiceRegistry {
       subcategory: 'Customers',
       handler: DisableCustomerGraphQLHandler(),
     ),
+
+    // 🔐 WooCommerce Authentication Services
+    ApiService(
+      name: 'User Login',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLoginHandler(),
+    ),
+    ApiService(
+      name: 'User Sign Up',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserSignUpHandler(),
+    ),
+    ApiService(
+      name: 'User Logout',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/logout',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: UserLogoutHandler(),
+    ),
+    ApiService(
+      name: 'Password Reset',
+      endpoint: '/wp-json/{brand_name}-auth-reset/v1/auth',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordResetHandler(),
+    ),
+    ApiService(
+      name: 'Password Update',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/user/reset_password',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: PasswordUpdateHandler(),
+    ),
+    ApiService(
+      name: 'Auth Status',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/status',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: AuthStatusHandler(),
+    ),
+    ApiService(
+      name: 'JWT Auth Test',
+      endpoint: '/wp-json/jwt-auth/v1/token',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: JwtAuthTestHandler(),
+    ),
+    ApiService(
+      name: 'Delete User',
+      endpoint: '/wp-json/{brand_name}-auth-login/v1/users',
+      category: ApiCategory.woocommerce,
+      subcategory: 'Authentication',
+      handler: DeleteUserHandler(),
+    ),
+
+    // 💖 WooCommerce Wishlist APIs
+    ApiService(
+      name: 'Create Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: CreateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get All Wishlist Groups',
+      endpoint: '/wp-json/custom-wishlist/v1/groups',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: GetAllWishlistGroupsHandler(),
+    ),
+    ApiService(
+      name: 'Update Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: UpdateWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Group',
+      endpoint: '/wp-json/custom-wishlist/v1/groups/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Groups',
+      handler: DeleteWishlistGroupHandler(),
+    ),
+    ApiService(
+      name: 'Get Wishlist Items',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: GetWishlistItemsHandler(),
+    ),
+    ApiService(
+      name: 'Add Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: AddWishlistItemHandler(),
+    ),
+    ApiService(
+      name: 'Delete Wishlist Item',
+      endpoint: '/wp-json/custom-wishlist/v1/items/:id',
+      category: ApiCategory.woocommerceWishlist,
+      subcategory: 'Wishlist Items',
+      handler: DeleteWishlistItemHandler(),
+    ),
+
+    // 🛒 WooCommerce Store API Cart
+    ApiService(
+      name: 'Get Cart',
+      endpoint: '/wp-json/wc/store/v1/cart',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: GetCartHandler(),
+    ),
+
+    // 🎟️ WooCommerce Store API Cart Coupons
+    ApiService(
+      name: 'Get Cart Coupons',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: GetCartCouponsHandler(),
+    ),
+    ApiService(
+      name: 'Get Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons/{coupon_code}',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: GetCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Add Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: AddCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Delete Cart Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons/{coupon_code}',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: DeleteCartCouponHandler(),
+    ),
+    ApiService(
+      name: 'Delete All Cart Coupons',
+      endpoint: '/wp-json/wc/store/v1/cart/coupons',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Coupons',
+      handler: DeleteAllCartCouponsHandler(),
+    ),
+
+    ApiService(
+      name: 'Add Item',
+      endpoint: '/wp-json/wc/store/v1/cart/add-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: AddItemHandler(),
+    ),
+    ApiService(
+      name: 'Remove Item',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveItemHandler(),
+    ),
+    ApiService(
+      name: 'Update Item',
+      endpoint: '/wp-json/wc/store/v1/cart/update-item',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateItemHandler(),
+    ),
+    ApiService(
+      name: 'Apply Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/apply-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: ApplyCouponHandler(),
+    ),
+    ApiService(
+      name: 'Remove Coupon',
+      endpoint: '/wp-json/wc/store/v1/cart/remove-coupon',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: RemoveCouponHandler(),
+    ),
+    ApiService(
+      name: 'Update Customer',
+      endpoint: '/wp-json/wc/store/v1/cart/update-customer',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: UpdateCartCustomerHandler(),
+    ),
+    ApiService(
+      name: 'Select Shipping Rate',
+      endpoint: '/wp-json/wc/store/v1/cart/select-shipping-rate',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart API',
+      handler: SelectShippingRateHandler(),
+    ),
+
+    // 🛒 WooCommerce Store API Checkout Data
+    ApiService(
+      name: 'Get Checkout Data',
+      endpoint: '/wp-json/wc/store/v1/checkout',
+      category: ApiCategory.woocommerceCheckout,
+      subcategory: 'Checkout Data',
+      handler: GetCheckoutDataHandler(),
+    ),
+    ApiService(
+      name: 'Update Checkout Data',
+      endpoint: '/wp-json/wc/store/v1/checkout',
+      category: ApiCategory.woocommerceCheckout,
+      subcategory: 'Checkout Data',
+      handler: UpdateCheckoutDataHandler(),
+    ),
+    ApiService(
+      name: 'Process Payment and Order',
+      endpoint: '/wp-json/wc/store/v1/checkout',
+      category: ApiCategory.woocommerceCheckout,
+      subcategory: 'Checkout Data',
+      handler: ProcessPaymentAndOrderHandler(),
+    ),
+    ApiService(
+      name: 'Process Payment and Order (Order API)',
+      endpoint: '/wp-json/wc/store/v1/checkout/order',
+      category: ApiCategory.woocommerceCheckoutOrder,
+      subcategory: 'Checkout Order API',
+      handler: ProcessPaymentAndOrderOrderHandler(),
+    ),
+
+    // 📦 WooCommerce Store API Order
+    ApiService(
+      name: 'Get Order',
+      endpoint: '/wp-json/wc/store/v1/order/{order_key}',
+      category: ApiCategory.woocommerceOrder,
+      subcategory: 'Order API',
+      handler: GetOrderHandler(),
+    ),
+
+    // 📋 WooCommerce Cart Items API Handler - Store API
+    ApiService(
+      name: 'List Cart Items',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: ListCartItemsHandler(),
+    ),
+    ApiService(
+      name: 'Single Cart Item',
+      endpoint: '/wp-json/wc/store/v1/cart/items?key=',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: GetSingleCartItemHandler(),
+    ),
+    ApiService(
+      name: 'Add Cart Item',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: AddCartItemHandler(),
+    ),
+    ApiService(
+      name: 'Edit Single Cart Item',
+      endpoint: '/wp-json/wc/store/v1/cart/items/{key}?quantity=',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: EditSingleCartItemHandler(),
+    ),
+    ApiService(
+      name: 'Delete All Cart Items',
+      endpoint: '/wp-json/wc/store/v1/cart/items',
+      category: ApiCategory.woocommerceCart,
+      subcategory: 'Cart Items API',
+      handler: DeleteAllCartItemsHandler(),
+    ),
+
+    // 🛍️ WooCommerce Store API Products
+    ApiService(
+      name: 'List All Products',
+      endpoint: '/wp-json/wc/store/v1/products',
+      category: ApiCategory.woocommerceStoreProducts,
+      subcategory: 'Products API',
+      handler: StoreListAllProductsHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Product',
+      endpoint: '/wp-json/wc/store/v1/products/{product_id}',
+      category: ApiCategory.woocommerceStoreProducts,
+      subcategory: 'Products API',
+      handler: StoreRetrieveProductHandler(),
+    ),
+    ApiService(
+      name: 'Retrieve Product By Slug',
+      endpoint: '/wp-json/wc/store/v1/products/{product_slug}',
+      category: ApiCategory.woocommerceStoreProducts,
+      subcategory: 'Products API',
+      handler: StoreRetrieveProductBySlugHandler(),
+    ),
+    ApiService(
+      name: 'List Variations By Type',
+      endpoint: '/wp-json/wc/store/v1/products?type={type}',
+      category: ApiCategory.woocommerceStoreProducts,
+      subcategory: 'Products API',
+      handler: StoreListVariationsByTypeHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Tags
+    ApiService(
+      name: 'Product Tags',
+      endpoint: '/wp-json/wc/store/{api_version}/products/tags',
+      category: ApiCategory.woocommerceStoreProductTags,
+      subcategory: 'Product Tags API',
+      handler: ProductTagsHandler(),
+    ),
+
+    // 📝 WooCommerce Store API Product Reviews
+    ApiService(
+      name: 'Product Reviews',
+      endpoint: '/wp-json/wc/store/{api_version}/products/reviews',
+      category: ApiCategory.woocommerceStoreProductReviews,
+      subcategory: 'Product Reviews API',
+      handler: ProductReviewsHandler(),
+    ),
+
+    // 📊 WooCommerce Store API Product Collection Data
+    ApiService(
+      name: 'Product Collection Data',
+      endpoint: '/wp-json/wc/store/{api_version}/products/collection-data',
+      category: ApiCategory.woocommerceStoreProductCollectionData,
+      subcategory: 'Product Collection Data API',
+      handler: ProductCollectionDataHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Categories
+    ApiService(
+      name: 'Product Categories',
+      endpoint: '/wp-json/wc/store/{api_version}/products/categories',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: ProductCategoriesHandler(),
+    ),
+
+    // 📋 WooCommerce Store API List Product Categories
+    ApiService(
+      name: 'List Product Categories',
+      endpoint: '/wp-json/wc/store/{api_version}/products/categories',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: StoreListProductCategoriesHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Category
+    ApiService(
+      name: 'Retrieve Product Category',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/categories/{category_id}',
+      category: ApiCategory.woocommerceStoreProductCategories,
+      subcategory: 'Product Categories API',
+      handler: StoreRetrieveProductCategoryHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Brands
+    ApiService(
+      name: 'Product Brands',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: ProductBrandsHandler(),
+    ),
+
+    // 📋 WooCommerce Store API List Product Brands
+    ApiService(
+      name: 'List Product Brands',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: StoreListProductBrandsHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Brand
+    ApiService(
+      name: 'Retrieve Product Brand',
+      endpoint: '/wp-json/wc/store/{api_version}/products/brands/{brand_id}',
+      category: ApiCategory.woocommerceStoreProductBrands,
+      subcategory: 'Product Brands API',
+      handler: StoreRetrieveProductBrandHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Attributes
+    ApiService(
+      name: 'Product Attributes',
+      endpoint: '/wp-json/wc/store/{api_version}/products/attributes',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: ProductAttributesHandler(),
+    ),
+
+    // 📋 WooCommerce Store API List Product Attributes
+    ApiService(
+      name: 'List Product Attributes',
+      endpoint: '/wp-json/wc/store/{api_version}/products/attributes',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: StoreListProductAttributesHandler(),
+    ),
+
+    // 🔍 WooCommerce Store API Retrieve Product Attribute
+    ApiService(
+      name: 'Retrieve Product Attribute',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/attributes/{attribute_id}',
+      category: ApiCategory.woocommerceStoreProductAttributes,
+      subcategory: 'Product Attributes API',
+      handler: StoreRetrieveProductAttributeHandler(),
+    ),
+
+    // 🏷️ WooCommerce Store API Product Attribute Terms
+    ApiService(
+      name: 'Product Attribute Terms',
+      endpoint:
+          '/wp-json/wc/store/{api_version}/products/attributes/{attribute_id}/terms',
+      category: ApiCategory.woocommerceStoreProductAttributeTerms,
+      subcategory: 'Product Attribute Terms API',
+      handler: ProductAttributeTermsHandler(),
+    ),
   ];
 
   static void initialize() {}
@@ -4000,6 +4473,51 @@ class ApiServiceRegistry {
       ApiCategory.woocommerceCurrencies,
       ApiCategory.woocommerceRefunds,
       ApiCategory.woocommerceTaxes,
+      ApiCategory.woocommerceWishlist,
+    ];
+  }
+
+  // Get WooCommerce Admin categories (all except customer-facing ones)
+  static List<ApiCategory> getWooCommerceAdminCategories() {
+    return [
+      ApiCategory.woocommerceCoupons,
+      ApiCategory.woocommerceProducts,
+      ApiCategory.woocommerceOrders,
+      ApiCategory.woocommerceCustomers,
+      ApiCategory.woocommerceCart,
+      ApiCategory.woocommerceWebhooks,
+      ApiCategory.woocommerceSystemStatus,
+      ApiCategory.woocommerceReports,
+      ApiCategory.woocommerceShippingMethods,
+      ApiCategory.woocommerceShippingZones,
+      ApiCategory.woocommerceShippingZoneMethods,
+      ApiCategory.woocommercePaymentGateways,
+      ApiCategory.woocommerceSetting,
+      ApiCategory.woocommerceData,
+      ApiCategory.woocommerceContinents,
+      ApiCategory.woocommerceCountries,
+      ApiCategory.woocommerceCurrencies,
+      ApiCategory.woocommerceRefunds,
+      ApiCategory.woocommerceTaxes,
+    ];
+  }
+
+  // Get WooCommerce Customer categories (customer-facing features)
+  static List<ApiCategory> getWooCommerceCustomerCategories() {
+    return [
+      ApiCategory.woocommerceOrder, // Move to top for testing
+      ApiCategory.woocommerceWishlist,
+      ApiCategory.woocommerceCart,
+      ApiCategory.woocommerceCheckout,
+      ApiCategory.woocommerceCheckoutOrder,
+      ApiCategory.woocommerceStoreProducts,
+      ApiCategory.woocommerceStoreProductTags,
+      ApiCategory.woocommerceStoreProductReviews,
+      ApiCategory.woocommerceStoreProductCollectionData,
+      ApiCategory.woocommerceStoreProductCategories,
+      ApiCategory.woocommerceStoreProductBrands,
+      ApiCategory.woocommerceStoreProductAttributes,
+      ApiCategory.woocommerceStoreProductAttributeTerms,
     ];
   }
 
@@ -4170,6 +4688,32 @@ class ApiServiceRegistry {
         return 'Refunds';
       case ApiCategory.woocommerceTaxes:
         return 'Taxes';
+      case ApiCategory.woocommerceWishlist:
+        return 'Wishlist';
+      case ApiCategory.woocommerceCart:
+        return 'Cart';
+      case ApiCategory.woocommerceCheckout:
+        return 'Checkout';
+      case ApiCategory.woocommerceCheckoutOrder:
+        return 'Checkout Order';
+      case ApiCategory.woocommerceOrder:
+        return 'Order';
+      case ApiCategory.woocommerceStoreProducts:
+        return 'Products';
+      case ApiCategory.woocommerceStoreProductTags:
+        return 'Product Tags';
+      case ApiCategory.woocommerceStoreProductReviews:
+        return 'Product Reviews';
+      case ApiCategory.woocommerceStoreProductCollectionData:
+        return 'Product Collection Data';
+      case ApiCategory.woocommerceStoreProductCategories:
+        return 'Product Categories';
+      case ApiCategory.woocommerceStoreProductBrands:
+        return 'Product Brands';
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return 'Product Attributes';
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return 'Product Attribute Terms';
     }
   }
 
@@ -4272,6 +4816,32 @@ class ApiServiceRegistry {
         return Icons.money_off_rounded;
       case ApiCategory.woocommerceTaxes:
         return Icons.receipt_long_rounded;
+      case ApiCategory.woocommerceWishlist:
+        return Icons.favorite_border_rounded;
+      case ApiCategory.woocommerceCart:
+        return Icons.shopping_cart_rounded;
+      case ApiCategory.woocommerceCheckout:
+        return Icons.shopping_cart_checkout_rounded;
+      case ApiCategory.woocommerceCheckoutOrder:
+        return Icons.payment_rounded;
+      case ApiCategory.woocommerceOrder:
+        return Icons.receipt_long_rounded;
+      case ApiCategory.woocommerceStoreProducts:
+        return Icons.store_rounded;
+      case ApiCategory.woocommerceStoreProductTags:
+        return Icons.label_outlined;
+      case ApiCategory.woocommerceStoreProductReviews:
+        return Icons.star_outline;
+      case ApiCategory.woocommerceStoreProductCollectionData:
+        return Icons.analytics_outlined;
+      case ApiCategory.woocommerceStoreProductCategories:
+        return Icons.category_outlined;
+      case ApiCategory.woocommerceStoreProductBrands:
+        return Icons.business_outlined;
+      case ApiCategory.woocommerceStoreProductAttributes:
+        return Icons.tune_outlined;
+      case ApiCategory.woocommerceStoreProductAttributeTerms:
+        return Icons.label_outlined;
     }
   }
 }

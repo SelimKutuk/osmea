@@ -15,10 +15,18 @@ _$UpdateBodyHtmlOfPageResponseImpl _$$UpdateBodyHtmlOfPageResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateBodyHtmlOfPageResponseImplToJson(
-        _$UpdateBodyHtmlOfPageResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.page?.toJson() case final value?) 'page': value,
-    };
+    _$UpdateBodyHtmlOfPageResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('page', instance.page?.toJson());
+  return val;
+}
 
 _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       shopId: (json['shop_id'] as num?)?.toInt(),
@@ -34,18 +42,25 @@ _$PageImpl _$$PageImplFromJson(Map<String, dynamic> json) => _$PageImpl(
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) =>
-    <String, dynamic>{
-      if (instance.shopId case final value?) 'shop_id': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.title case final value?) 'title': value,
-      if (instance.handle case final value?) 'handle': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.updatedAt case final value?) 'updated_at': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.templateSuffix case final value?) 'template_suffix': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$PageImplToJson(_$PageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('shop_id', instance.shopId);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('title', instance.title);
+  writeNotNull('handle', instance.handle);
+  writeNotNull('id', instance.id);
+  writeNotNull('author', instance.author);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('template_suffix', instance.templateSuffix);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}

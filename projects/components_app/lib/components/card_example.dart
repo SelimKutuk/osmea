@@ -184,7 +184,7 @@ class _CardExampleState extends State<CardExample> {
                 const Icon(Icons.landscape, color: OsmeaColors.white, size: 48),
           ),
           imageHeight: 200,
-          imagePosition: ComponentPosition.bottom,
+          imagePosition: ComponentPosition.top,
           imageFit: BoxFit.cover,
           imageAlignment: Alignment.center,
           variant: ComponentAppearance.elevated,
@@ -229,13 +229,163 @@ class _CardExampleState extends State<CardExample> {
         ),
         // ⭐ Premium Product Cards Section
         _buildSubsectionTitle('🌟 Premium Product Cards'),
+        OsmeaComponents.sizedBox(height: 8),
+
+        // Info about new features
+        OsmeaComponents.container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: OsmeaColors.azureWave.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+            border:
+                Border.all(color: OsmeaColors.azureWave.withValues(alpha: 0.3)),
+          ),
+          child: OsmeaComponents.column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OsmeaComponents.row(
+                children: [
+                  Icon(Icons.new_releases,
+                      color: OsmeaColors.azureWave, size: 20),
+                  OsmeaComponents.sizedBox(width: 8),
+                  OsmeaComponents.text(
+                    'New: Text Overflow Control',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: OsmeaColors.azureWave,
+                  ),
+                ],
+              ),
+              OsmeaComponents.sizedBox(height: 8),
+              OsmeaComponents.text(
+                'Image cards now support text overflow control with titleMaxLines, subtitleMaxLines, contentMaxLines, and textOverflow properties for consistent card heights.',
+                fontSize: 14,
+                color: OsmeaColors.slate,
+              ),
+            ],
+          ),
+        ),
         OsmeaComponents.sizedBox(height: 16),
 
-        // Wireless Earbuds - Premium with solid color
+        // 💰 Price Comparison Example with subtitle2
+        _buildSubsectionTitle('💰 Price Comparison with Dual Subtitles'),
+        OsmeaComponents.sizedBox(height: 12),
+
+        // Rose Pastel Dining Set - Price comparison example
         OsmeaComponents.imageCard(
-          title: 'Wireless Earbuds Pro',
-          subtitle: 'Premium Sound Quality',
-          content: '₺1,299',
+          title: 'Rose Pastel Dining Set',
+          subtitle: '\$49.99', // Old price (left side)
+          subtitle2: '\$33.33', // New price (right side)
+          imageWidget: OsmeaComponents.container(
+            width: double.infinity,
+            height: context.height176,
+            color: OsmeaColors.crystalBay,
+            child: OsmeaComponents.center(
+              child: Icon(
+                Icons.dining,
+                color: OsmeaColors.white,
+                size: context.iconSizeLarge,
+              ),
+            ),
+          ),
+          imageHeight: context.height176,
+          imagePosition: ComponentPosition.top,
+          variant: ComponentAppearance.elevated,
+          size: ComponentSize.medium,
+          margin: EdgeInsets.only(bottom: context.spacing20),
+          semanticLabel: 'Rose Pastel dining set with price comparison',
+          onTap: () => _showSnackBar('Rose Pastel Set - 33% discount!'),
+        ),
+        // 🎯 Text Overflow Comparison Cards
+        _buildSubsectionTitle('📏 Text Overflow Control Examples'),
+        OsmeaComponents.sizedBox(height: 12),
+
+        OsmeaComponents.row(
+          children: [
+            // Card 1 - Without text overflow control
+            OsmeaComponents.expanded(
+              child: OsmeaComponents.imageCard(
+                title: 'Standard Card Without Text Overflow Control Features',
+                subtitle:
+                    'This is a very long subtitle that might cause layout issues',
+                content:
+                    'This card demonstrates what happens when you have very long text content that exceeds the normal display area. Without proper text overflow control, this can cause inconsistent card heights and poor visual alignment in grid layouts.',
+                imageWidget: OsmeaComponents.container(
+                  width: double.infinity,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.pewter,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.warning,
+                      color: OsmeaColors.white, size: 40),
+                ),
+                imageHeight: 120,
+                imagePosition: ComponentPosition.top,
+                variant: ComponentAppearance.outlined,
+                size: ComponentSize.medium,
+                borderColor: OsmeaColors.pewter,
+                titleColor: OsmeaColors.thunder,
+                subtitleColor: OsmeaColors.pewter,
+                contentColor: OsmeaColors.slate,
+                spacing: 12.0,
+                margin: const EdgeInsets.only(right: 8, bottom: 16),
+                onTap: () =>
+                    _showSnackBar('Standard card tapped - No text control'),
+              ),
+            ),
+
+            // Card 2 - With text overflow control (when API supports it)
+            OsmeaComponents.expanded(
+              child: OsmeaComponents.imageCard(
+                title:
+                    'Controlled Card With Text Overflow Management and Consistent Height',
+                subtitle:
+                    'This subtitle is also very long but will be controlled properly',
+                content:
+                    'This card shows how text overflow control works to maintain consistent layouts. Even with very long text content, the card maintains a predictable height and clean appearance, making it perfect for grid layouts and uniform design systems.',
+                imageWidget: OsmeaComponents.container(
+                  width: double.infinity,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: OsmeaColors.forestHeart,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.check_circle,
+                      color: OsmeaColors.white, size: 40),
+                ),
+                imageHeight: 120,
+                imagePosition: ComponentPosition.top,
+                variant: ComponentAppearance.outlined,
+                size: ComponentSize.medium,
+                borderColor: OsmeaColors.forestHeart,
+                titleColor: OsmeaColors.thunder,
+                subtitleColor: OsmeaColors.forestHeart,
+                contentColor: OsmeaColors.slate,
+                spacing: 12.0,
+                margin: const EdgeInsets.only(left: 8, bottom: 16),
+                titleMaxLines: 2,
+                subtitleMaxLines: 1,
+                contentMaxLines: 3,
+                textOverflow: TextOverflow.ellipsis,
+                semanticLabel: 'Controlled card with text overflow management',
+                onTap: () =>
+                    _showSnackBar('Controlled card tapped - With text control'),
+              ),
+            ),
+          ],
+        ),
+
+        OsmeaComponents.sizedBox(height: 20),
+
+        // Wireless Earbuds - Premium with solid color and text overflow control
+        OsmeaComponents.imageCard(
+          title:
+              'Wireless Earbuds Pro - Advanced Noise Cancellation Technology',
+          subtitle: 'Premium Sound Quality with High-Fidelity Audio',
+          content:
+              '\$1,299 - Limited Time Offer with Free Shipping and 2-Year Warranty',
           imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 220,
@@ -297,14 +447,18 @@ class _CardExampleState extends State<CardExample> {
           shadowColor: OsmeaColors.nordicBlue.withValues(alpha: 0.3),
           margin: const EdgeInsets.only(bottom: 24),
           semanticLabel: 'Premium wireless earbuds product card',
-          onTap: () => _showSnackBar('Premium earbuds tapped - ₺1,299'),
+          onTap: () => _showSnackBar('Premium earbuds tapped - \$1,299'),
         ),
 
         // Smart Watch - Health focused with solid color
         OsmeaComponents.imageCard(
           title: 'Apple Watch Series 10',
           subtitle: 'Health & Fitness Tracking',
-          content: '₺2,499',
+          content: '\$2,499',
+          titleMaxLines: 2,
+          subtitleMaxLines: 1,
+          contentMaxLines: 2,
+          textOverflow: TextOverflow.ellipsis,
           imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 200,
@@ -382,7 +536,7 @@ class _CardExampleState extends State<CardExample> {
         OsmeaComponents.imageCard(
           title: 'iPhone 16 Pro Max',
           subtitle: 'Latest Technology • 1TB',
-          content: '₺15,999',
+          content: '\$15,999',
           imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 200,
@@ -486,7 +640,7 @@ class _CardExampleState extends State<CardExample> {
         OsmeaComponents.imageCard(
           title: 'Gaming Headset Pro',
           subtitle: '7.1 Surround Sound',
-          content: '₺899',
+          content: '\$899',
           imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 180,
@@ -576,7 +730,7 @@ class _CardExampleState extends State<CardExample> {
         OsmeaComponents.imageCard(
           title: 'Smart Home Hub',
           subtitle: 'Voice Control • WiFi 6',
-          content: '₺599',
+          content: '\$599',
           imageWidget: OsmeaComponents.container(
             width: double.infinity,
             height: 160,
@@ -718,7 +872,7 @@ class _CardExampleState extends State<CardExample> {
         // Premium Subscription with benefits
         OsmeaComponents.actionCard(
           title: 'Upgrade to OSMEA Pro',
-          subtitle: '₺29.99/month • First 7 days free',
+          subtitle: '\$29.99/month • First 7 days free',
           content:
               '✨ Premium components\n🚀 Priority support\n📊 Advanced analytics\n🎨 Custom themes\n📱 Multi-platform access',
           primaryAction: 'Start Free Trial',
@@ -754,10 +908,10 @@ class _CardExampleState extends State<CardExample> {
           title: 'Add to Shopping Cart',
           subtitle: 'iPhone 16 Pro Max • 1TB',
           content:
-              'Price: ₺15,999\nStock: 3 items left\nFree shipping available',
+              'Price: \$15,999\nStock: 3 items left\nFree shipping available',
           primaryAction: 'Add to Cart',
           secondaryAction: 'Add to Wishlist',
-          onPrimaryPressed: () => _showSnackBar('🛒 Added to cart - ₺15,999'),
+          onPrimaryPressed: () => _showSnackBar('🛒 Added to cart - \$15,999'),
           onSecondaryPressed: () => _showSnackBar('💖 Added to wishlist'),
           primaryVariant: ButtonVariant.primary,
           secondaryVariant: ButtonVariant.outlined,

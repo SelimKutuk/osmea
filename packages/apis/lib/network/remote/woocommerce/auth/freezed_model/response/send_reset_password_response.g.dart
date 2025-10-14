@@ -20,14 +20,23 @@ _$SendResetPasswordResponseImpl _$$SendResetPasswordResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$SendResetPasswordResponseImplToJson(
-        _$SendResetPasswordResponseImpl instance) =>
-    <String, dynamic>{
-      'success': instance.success,
-      if (instance.message case final value?) 'message': value,
-      if (instance.data?.toJson() case final value?) 'data': value,
-      if (instance.error case final value?) 'error': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$SendResetPasswordResponseImpl instance) {
+  final val = <String, dynamic>{
+    'success': instance.success,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message', instance.message);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('error', instance.error);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}
 
 _$SendResetPasswordDataImpl _$$SendResetPasswordDataImplFromJson(
         Map<String, dynamic> json) =>
@@ -43,13 +52,21 @@ _$SendResetPasswordDataImpl _$$SendResetPasswordDataImplFromJson(
     );
 
 Map<String, dynamic> _$$SendResetPasswordDataImplToJson(
-        _$SendResetPasswordDataImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      if (instance.resetToken case final value?) 'reset_token': value,
-      if (instance.expiresAt?.toIso8601String() case final value?)
-        'expires_at': value,
-      if (instance.emailSent case final value?) 'email_sent': value,
-      if (instance.resetUrl case final value?) 'reset_url': value,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$SendResetPasswordDataImpl instance) {
+  final val = <String, dynamic>{
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reset_token', instance.resetToken);
+  writeNotNull('expires_at', instance.expiresAt?.toIso8601String());
+  writeNotNull('email_sent', instance.emailSent);
+  writeNotNull('reset_url', instance.resetUrl);
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

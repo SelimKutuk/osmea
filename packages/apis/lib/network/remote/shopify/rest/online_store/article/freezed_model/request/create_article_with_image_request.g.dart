@@ -15,10 +15,18 @@ _$CreateArticleWithImageRequestImpl
         );
 
 Map<String, dynamic> _$$CreateArticleWithImageRequestImplToJson(
-        _$CreateArticleWithImageRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.article?.toJson() case final value?) 'article': value,
-    };
+    _$CreateArticleWithImageRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('article', instance.article?.toJson());
+  return val;
+}
 
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
@@ -32,23 +40,39 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
           : Image.fromJson(json['image'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-      if (instance.image?.toJson() case final value?) 'image': value,
-    };
+Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('author', instance.author);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published_at', instance.publishedAt);
+  writeNotNull('image', instance.image?.toJson());
+  return val;
+}
 
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       src: json['src'] as String?,
       alt: json['alt'] as String?,
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
-    <String, dynamic>{
-      if (instance.src case final value?) 'src': value,
-      if (instance.alt case final value?) 'alt': value,
-    };
+Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('src', instance.src);
+  writeNotNull('alt', instance.alt);
+  return val;
+}

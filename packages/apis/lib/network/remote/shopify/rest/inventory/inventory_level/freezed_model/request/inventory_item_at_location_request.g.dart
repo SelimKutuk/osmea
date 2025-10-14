@@ -15,11 +15,17 @@ _$InventoryItemAtLocationRequestImpl
         );
 
 Map<String, dynamic> _$$InventoryItemAtLocationRequestImplToJson(
-        _$InventoryItemAtLocationRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.inventoryItemId case final value?)
-        'inventory_item_id': value,
-      if (instance.availableAdjustment case final value?)
-        'available_adjustment': value,
-    };
+    _$InventoryItemAtLocationRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('inventory_item_id', instance.inventoryItemId);
+  writeNotNull('available_adjustment', instance.availableAdjustment);
+  return val;
+}

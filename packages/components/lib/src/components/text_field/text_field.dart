@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/src/core/text_field_widget.dart';
@@ -273,38 +274,39 @@ class _OsmeaTextFieldView extends StatelessWidget {
     final decoration = _buildInputDecoration(context, config, colors, state);
 
     return AnimatedContainer(
-      duration: textField.getEffectiveTransitionDuration(context),
-      curve: textField.transitionCurve,
-      constraints: BoxConstraints(
-        minHeight: config.height,
-        maxWidth: textField.fullWidth ? double.infinity : double.maxFinite,
-      ),
-      child: TextField(
-        controller: cubit.effectiveController,
-        focusNode: cubit.effectiveFocusNode,
-        decoration: decoration,
-        keyboardType: textField.effectiveKeyboardType,
-        textInputAction: textField.effectiveTextInputAction,
-        textCapitalization: textField.effectiveTextCapitalization,
-        style: _getInputTextStyle(context, config, colors, state),
-        maxLines: textField.maxLines,
-        minLines: textField.minLines,
-        maxLength: textField.maxLength,
-        obscureText: textField.shouldObscureText,
-        readOnly: textField.readOnly,
-        autofocus: textField.autofocus,
-        enabled: state.isEnabled && !textField.isEffectivelyDisabled,
-        textAlign: textField.textAlign,
-        inputFormatters: textField.inputFormatters,
-        canRequestFocus: true,
-        showCursor: true,
-        enableInteractiveSelection: true,
-        onTap: () => cubit.handleTap(),
-        onChanged: (value) => cubit.validate(),
-        onSubmitted: (value) => cubit.handleSubmitted(value),
-        onEditingComplete: () => cubit.handleEditingComplete(),
-      ),
-    );
+        duration: textField.getEffectiveTransitionDuration(context),
+        curve: textField.transitionCurve,
+        width: textField.fullWidth ? double.infinity : null,
+        child: ClipRect(
+          child: SizedBox(
+            height: math.min(config.height, 42.0),
+            child: TextField(
+              controller: cubit.effectiveController,
+              focusNode: cubit.effectiveFocusNode,
+              decoration: decoration,
+              keyboardType: textField.effectiveKeyboardType,
+              textInputAction: textField.effectiveTextInputAction,
+              textCapitalization: textField.effectiveTextCapitalization,
+              style: _getInputTextStyle(context, config, colors, state),
+              maxLines: textField.maxLines,
+              minLines: textField.minLines,
+              maxLength: textField.maxLength,
+              obscureText: textField.shouldObscureText,
+              readOnly: textField.readOnly,
+              autofocus: textField.autofocus,
+              enabled: state.isEnabled && !textField.isEffectivelyDisabled,
+              textAlign: textField.textAlign,
+              inputFormatters: textField.inputFormatters,
+              canRequestFocus: true,
+              showCursor: true,
+              enableInteractiveSelection: true,
+              onTap: () => cubit.handleTap(),
+              onChanged: (value) => cubit.validate(),
+              onSubmitted: (value) => cubit.handleSubmitted(value),
+              onEditingComplete: () => cubit.handleEditingComplete(),
+            ),
+          ),
+        ));
   }
 
   /// Build bottom section with helper text, error text, and character count
@@ -315,7 +317,7 @@ class _OsmeaTextFieldView extends StatelessWidget {
         textField.showCharacterCount && textField.maxLength != null;
 
     if (!shouldShowHelper && !shouldShowCount) {
-      return const SizedBox.shrink();
+      return const SizedBox(height: 0);
     }
 
     return Padding(
@@ -412,6 +414,7 @@ class _OsmeaTextFieldView extends StatelessWidget {
     TextFieldCubitState state,
   ) {
     return InputDecoration(
+      isDense: true,
       labelText: textField.hasFloatingLabel ? textField.label : null,
       labelStyle: textField.hasFloatingLabel
           ? textField.size.getLabelStyle(context).copyWith(color: colors.label)

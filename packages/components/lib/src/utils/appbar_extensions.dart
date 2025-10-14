@@ -115,6 +115,22 @@ class AppBarShapeConfig {
 
 /// 📏 **AppBar Size Extensions**
 extension AppBarSizeExtension on AppBarSize {
+  /// Get the height for this AppBar size
+  double get height {
+    switch (this) {
+      case AppBarSize.compact:
+        return 48.0;
+      case AppBarSize.standard:
+        return 56.0;
+      case AppBarSize.comfortable:
+        return 64.0;
+      case AppBarSize.large:
+        return 72.0;
+      case AppBarSize.extraLarge:
+        return 80.0;
+    }
+  }
+
   /// Get size configuration for this AppBar size
   AppBarSizeConfig getConfig(BuildContext context) {
     switch (this) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/core.dart';
-import 'package:storefront_woo/app/views/view_splash/splash_view.dart';
+import 'package:storefront_woo/app/views/view_home/home_view.dart';
+import 'package:storefront_woo/app/views/view_product_detail/product_detail_view.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -11,7 +12,17 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return SplashView();
+        return SplashView(
+          goRoute: (String path) {
+            if (path.contains(Routes.home.name)) {
+              context.go('/home');
+            } else if (path.contains(Routes.onboarding.name)) {
+              context.go('/onboarding');
+            } else {
+              context.go('/home'); // Default fallback
+            }
+          },
+        );
       },
     ),
 
@@ -19,7 +30,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/onboarding',
       builder: (BuildContext context, GoRouterState state) {
-        return OnboardingScreen(
+        return OnboardingView(
+          goRoute: (String path) {
+            if (path.contains(Routes.home.name)) {
+              context.go('/home');
+            } else {
+              context.go('/home'); // Default fallback
+            }
+          },
           onCompleted: () {
             debugPrint('🎉 Onboarding completed!');
             context.go('/home');
@@ -36,81 +54,44 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
-    // Home Page
+    // Home Page - Show products directly
     GoRoute(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
-        return const _MinimalistHomePage();
+        return HomeView(
+          arguments: const {'home': true},
+          goRoute: (String path) {
+            if (path.contains('products')) {
+              context.go('/products');
+            } else if (path.contains('product-detail')) {
+              context.go('/product-detail');
+            } else {
+              context.go('/home');
+            }
+          },
+        );
+      },
+    ),
+
+    // Product Detail Route
+    GoRoute(
+      path: '/product-detail/:productId',
+      builder: (BuildContext context, GoRouterState state) {
+        final productId = int.tryParse(
+          state.pathParameters['productId'] ?? '0',
+        );
+        return ProductDetailView(
+          productId: productId ?? 0,
+          arguments: const {'productDetail': true},
+          goRoute: (String path) {
+            if (path.contains('home')) {
+              context.go('/home');
+            } else {
+              context.go('/home');
+            }
+          },
+        );
       },
     ),
   ],
 );
-
-/// 🏠 Default Home Page
-class _MinimalistHomePage extends StatelessWidget {
-  const _MinimalistHomePage();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: OsmeaComponents.text(
-          'Storefront Woo',
-          color: OsmeaColors.black,
-          textStyle: OsmeaTextStyle.titleLarge(
-            context,
-          ).copyWith(fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: OsmeaComponents.container(
-            padding: const EdgeInsets.all(32),
-            child: OsmeaComponents.center(
-              child: OsmeaComponents.column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Welcome Title
-                  OsmeaComponents.text(
-                    'Welcome to Storefront Woo',
-                    color: OsmeaColors.black,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.headlineSmall(
-                      context,
-                    ).copyWith(fontWeight: FontWeight.w600),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 16),
-
-                  // Welcome Subtitle
-                  OsmeaComponents.text(
-                    'Your WooCommerce powered store',
-                    color: OsmeaColors.slate,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.bodyMedium(context),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 48),
-
-                  // Main Content
-                  OsmeaComponents.text(
-                    'This is the default home page. You can customize it according to your needs.',
-                    color: OsmeaColors.pewter,
-                    textAlign: TextAlign.center,
-                    textStyle: OsmeaTextStyle.bodyMedium(context),
-                  ),
-
-                  OsmeaComponents.sizedBox(height: 32),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}

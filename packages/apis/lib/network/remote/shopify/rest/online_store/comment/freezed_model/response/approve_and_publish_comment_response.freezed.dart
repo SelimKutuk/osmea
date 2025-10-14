@@ -42,12 +42,8 @@ mixin _$ApproveAndPublishCommentResponse {
   @JsonKey(name: "user_agent")
   dynamic get userAgent => throw _privateConstructorUsedError;
 
-  /// Serializes this ApproveAndPublishCommentResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ApproveAndPublishCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ApproveAndPublishCommentResponseCopyWith<ApproveAndPublishCommentResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -84,8 +80,6 @@ class _$ApproveAndPublishCommentResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ApproveAndPublishCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,8 +171,6 @@ class __$$ApproveAndPublishCommentResponseImplCopyWithImpl<$Res>
       $Res Function(_$ApproveAndPublishCommentResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ApproveAndPublishCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -316,7 +308,7 @@ class _$ApproveAndPublishCommentResponseImpl
             const DeepCollectionEquality().equals(other.userAgent, userAgent));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -331,9 +323,7 @@ class _$ApproveAndPublishCommentResponseImpl
       updatedAt,
       const DeepCollectionEquality().hash(userAgent));
 
-  /// Create a copy of ApproveAndPublishCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ApproveAndPublishCommentResponseImplCopyWith<
@@ -398,11 +388,8 @@ abstract class _ApproveAndPublishCommentResponse
   @override
   @JsonKey(name: "user_agent")
   dynamic get userAgent;
-
-  /// Create a copy of ApproveAndPublishCommentResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ApproveAndPublishCommentResponseImplCopyWith<
           _$ApproveAndPublishCommentResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

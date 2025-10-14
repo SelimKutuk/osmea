@@ -5,6 +5,7 @@ import 'package:api_explorer/styles/app_theme.dart';
 import 'package:apis/apis.dart';
 import 'package:api_explorer/widgets/store_management/store_setup_wizard.dart';
 import 'package:api_explorer/widgets/delete_account_widget.dart';
+import 'package:api_explorer/widgets/password_update_widget.dart';
 
 /// Modern IDE-style application header using Osmea components
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -17,6 +18,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onDebugTest;
   final VoidCallback? onProfileTap;
   final VoidCallback? onStoreChange;
+  final VoidCallback? onPasswordUpdate;
+  final bool isProfileEnabled;
 
   const AppHeader({
     super.key,
@@ -29,6 +32,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     this.onDebugTest,
     this.onProfileTap,
     this.onStoreChange,
+    this.onPasswordUpdate,
+    this.isProfileEnabled = false,
   });
 
   @override
@@ -145,6 +150,11 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
         // Store Profile - moved from actions
         _buildCompactStoreProfile(context),
+
+        OsmeaComponents.sizedBox(width: context.spacing12),
+
+        // Cart Token Display
+        _buildCartTokenDisplay(context),
 
         OsmeaComponents.sizedBox(width: context.spacing16),
       ],
@@ -349,6 +359,199 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     ];
   }
 
+  /// Build the cart token display widget for the header
+  Widget _buildCartTokenDisplay(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return FutureBuilder<WooCartToken?>(
+      future: WooCartTokenStorage.loadCartToken(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return OsmeaComponents.container(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.spacing8,
+              vertical: context.spacing6,
+            ),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? OsmeaColors.deepSea.withValues(alpha: 0.1)
+                  : OsmeaColors.snow,
+              borderRadius: context.borderRadiusMinStandard,
+              border: Border.all(
+                color: isDark
+                    ? OsmeaColors.deepSea.withValues(alpha: 0.2)
+                    : OsmeaColors.silver.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: OsmeaComponents.row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                OsmeaComponents.sizedBox(
+                  width: 12,
+                  height: 12,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1.5,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      isDark ? Colors.white : OsmeaColors.nordicBlue,
+                    ),
+                  ),
+                ),
+                OsmeaComponents.sizedBox(width: context.spacing6),
+                OsmeaComponents.text(
+                  'Loading...',
+                  variant: OsmeaTextVariant.labelSmall,
+                  fontSize: 10,
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.8)
+                      : OsmeaColors.steel.withValues(alpha: 0.8),
+                ),
+              ],
+            ),
+          );
+        }
+
+        final cartToken = snapshot.data;
+        if (cartToken == null) {
+          return OsmeaComponents.container(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.spacing8,
+              vertical: context.spacing6,
+            ),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? OsmeaColors.deepSea.withValues(alpha: 0.1)
+                  : OsmeaColors.snow,
+              borderRadius: context.borderRadiusMinStandard,
+              border: Border.all(
+                color: isDark
+                    ? OsmeaColors.deepSea.withValues(alpha: 0.2)
+                    : OsmeaColors.silver.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: OsmeaComponents.row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 14,
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.7)
+                      : OsmeaColors.steel.withValues(alpha: 0.7),
+                ),
+                OsmeaComponents.sizedBox(width: context.spacing6),
+                OsmeaComponents.text(
+                  'No Cart Token',
+                  variant: OsmeaTextVariant.labelSmall,
+                  fontSize: 10,
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.7)
+                      : OsmeaColors.steel.withValues(alpha: 0.7),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return OsmeaComponents.container(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.spacing8,
+            vertical: context.spacing6,
+          ),
+          decoration: OsmeaAppTheme.glassDecoration(
+            backgroundColor: isDark
+                ? OsmeaColors.deepSea.withValues(alpha: 0.1)
+                : OsmeaColors.snow,
+            borderColor: isDark
+                ? OsmeaColors.deepSea.withValues(alpha: 0.2)
+                : OsmeaColors.silver.withValues(alpha: 0.3),
+            borderRadius: OsmeaAppTheme.radiusMd,
+          ),
+          child: OsmeaComponents.row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Cart Icon
+              OsmeaComponents.container(
+                padding: EdgeInsets.all(context.spacing4),
+                decoration: BoxDecoration(
+                  color: OsmeaColors.forestHeart
+                      .withValues(alpha: isDark ? 0.15 : 0.1),
+                  borderRadius: context.borderRadiusMinStandard,
+                  border: Border.all(
+                    color: OsmeaColors.forestHeart
+                        .withValues(alpha: isDark ? 0.25 : 0.2),
+                    width: 1,
+                  ),
+                ),
+                child: Icon(
+                  Icons.shopping_cart,
+                  size: 12,
+                  color: OsmeaColors.forestHeart,
+                ),
+              ),
+              OsmeaComponents.sizedBox(width: context.spacing8),
+
+              // Cart Token Info
+              OsmeaComponents.column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  OsmeaComponents.text(
+                    'Cart Token',
+                    variant: OsmeaTextVariant.labelSmall,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : OsmeaColors.steel,
+                  ),
+                  OsmeaComponents.text(
+                    cartToken.cartToken.length > 12
+                        ? '${cartToken.cartToken.substring(0, 12)}...'
+                        : cartToken.cartToken,
+                    variant: OsmeaTextVariant.labelSmall,
+                    fontSize: 9,
+                    fontFamily: 'monospace',
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.7)
+                        : OsmeaColors.steel.withValues(alpha: 0.7),
+                  ),
+                ],
+              ),
+
+              OsmeaComponents.sizedBox(width: context.spacing8),
+
+              // Copy button
+              OsmeaComponents.container(
+                padding: EdgeInsets.all(context.spacing4),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : OsmeaColors.silver.withValues(alpha: 0.1),
+                  borderRadius: context.borderRadiusMinStandard,
+                ),
+                child: OsmeaComponents.iconButton(
+                  icon: Icon(
+                    Icons.content_copy_rounded,
+                    size: 12,
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.9)
+                        : OsmeaColors.steel,
+                  ),
+                  onPressed: () =>
+                      _copyCartTokenToClipboard(context, cartToken.cartToken),
+                  variant: ButtonVariant.ghost,
+                  size: ButtonSize.small,
+                  tooltip: 'Copy cart token',
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   /// Build the compact store profile widget for the header
   Widget _buildCompactStoreProfile(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -551,6 +754,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       },
       onChangeStore: onStoreChange,
       onProfileTap: onProfileTap,
+      isProfileEnabled: isProfileEnabled,
     );
   }
 
@@ -563,6 +767,37 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       }
     } catch (e) {
       debugPrint('❌ Failed to copy URL: $e');
+    }
+  }
+
+  /// Copy cart token to clipboard
+  Future<void> _copyCartTokenToClipboard(
+      BuildContext context, String cartToken) async {
+    try {
+      if (cartToken.isNotEmpty) {
+        await Clipboard.setData(ClipboardData(text: cartToken));
+
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: OsmeaComponents.text('✅ Cart token copied to clipboard'),
+              backgroundColor: OsmeaColors.forestHeart,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Failed to copy cart token: $e');
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: OsmeaComponents.text('❌ Failed to copy cart token'),
+            backgroundColor: OsmeaColors.slate,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
     }
   }
 
@@ -593,11 +828,13 @@ class _ActionMenuWidget extends StatefulWidget {
   final VoidCallback? onRefresh;
   final VoidCallback? onChangeStore;
   final VoidCallback? onProfileTap;
+  final bool isProfileEnabled;
 
   const _ActionMenuWidget({
     this.onRefresh,
     this.onChangeStore,
     this.onProfileTap,
+    this.isProfileEnabled = false,
   });
 
   @override
@@ -680,22 +917,32 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
           'Add a new store configuration',
           () => _showAddStoreDialog(context),
         ),
-        _buildMenuItem(
-          context,
-          'profile',
-          Icons.account_circle_rounded,
-          'Store Profile',
-          'View store details and settings',
-          widget.onProfileTap,
-        ),
-        _buildMenuItem(
-          context,
-          'delete_account',
-          Icons.delete_forever_rounded,
-          'Delete Account',
-          'Delete user account permanently',
-          () => _showDeleteAccountDialog(context),
-        ),
+        if (widget.isProfileEnabled) ...[
+          _buildMenuItem(
+            context,
+            'profile',
+            Icons.account_circle_rounded,
+            'Store Profile',
+            'View store details and settings',
+            widget.onProfileTap,
+          ),
+          _buildMenuItem(
+            context,
+            'password_update',
+            Icons.lock_reset_rounded,
+            'Update Password',
+            'Update your account password',
+            () => _showPasswordUpdateDialog(context),
+          ),
+          _buildMenuItem(
+            context,
+            'delete_account',
+            Icons.delete_forever_rounded,
+            'Delete Account',
+            'Delete user account permanently',
+            () => _showDeleteAccountDialog(context),
+          ),
+        ],
       ],
     ).then((_) {
       setState(() {
@@ -740,6 +987,20 @@ class _ActionMenuWidgetState extends State<_ActionMenuWidget> {
         );
       }
     }
+  }
+
+  /// Show password update dialog
+  void _showPasswordUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          width: 600,
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: const PasswordUpdateWidget(),
+        ),
+      ),
+    );
   }
 
   /// Show delete account dialog

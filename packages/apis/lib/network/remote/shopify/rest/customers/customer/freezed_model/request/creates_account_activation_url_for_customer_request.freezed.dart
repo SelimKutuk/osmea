@@ -22,7 +22,6 @@ CreatesAccountActivationUrlForCustomerRequest
 
 /// @nodoc
 mixin _$CreatesAccountActivationUrlForCustomerRequest {
-  /// Serializes this CreatesAccountActivationUrlForCustomerRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -46,9 +45,6 @@ class _$CreatesAccountActivationUrlForCustomerRequestCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of CreatesAccountActivationUrlForCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -71,9 +67,6 @@ class __$$CreatesAccountActivationUrlForCustomerRequestImplCopyWithImpl<$Res>
       _$CreatesAccountActivationUrlForCustomerRequestImpl _value,
       $Res Function(_$CreatesAccountActivationUrlForCustomerRequestImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CreatesAccountActivationUrlForCustomerRequest
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -98,7 +91,7 @@ class _$CreatesAccountActivationUrlForCustomerRequestImpl
             other is _$CreatesAccountActivationUrlForCustomerRequestImpl);
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 

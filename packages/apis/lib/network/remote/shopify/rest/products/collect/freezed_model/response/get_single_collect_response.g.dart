@@ -15,7 +15,15 @@ _$GetSingleCollectResponseImpl _$$GetSingleCollectResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetSingleCollectResponseImplToJson(
-        _$GetSingleCollectResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.collect?.toJson() case final value?) 'collect': value,
-    };
+    _$GetSingleCollectResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('collect', instance.collect?.toJson());
+  return val;
+}

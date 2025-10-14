@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 /// 🎯 **OSMEA Onboarding Models**
 ///
@@ -182,22 +183,58 @@ class OnboardingConfigModel {
 
   /// Create OnboardingConfigModel from JSON
   factory OnboardingConfigModel.fromJson(Map<String, dynamic> json) {
-    return OnboardingConfigModel(
-      pages: (json['pages'] as List<dynamic>)
-          .map((page) =>
-              OnboardingPageModel.fromJson(page as Map<String, dynamic>))
-          .toList(),
-      style: OnboardingStyle.values.firstWhere(
-        (style) => style.name == (json['style'] as String? ?? 'basic'),
-        orElse: () => OnboardingStyle.basic,
-      ),
-      autoAdvanceSeconds: json['auto_advance_seconds'] as int?,
-      showSkipButton: json['show_skip_button'] as bool? ?? true,
-      showPageIndicator: json['show_page_indicator'] as bool? ?? true,
-      animationDuration: json['animation_duration'] as int? ?? 300,
-      primaryColor: json['primary_color'] as String?,
-      secondaryColor: json['secondary_color'] as String?,
-    );
+    try {
+      // Pages parsing
+      List<OnboardingPageModel> pagesList = [];
+      final pagesData = json['pages'];
+
+      if (pagesData is List) {
+        for (var pageData in pagesData) {
+          if (pageData is Map<String, dynamic>) {
+            try {
+              pagesList.add(OnboardingPageModel.fromJson(pageData));
+            } catch (e) {
+              debugPrint('❌ Failed to parse page: $e');
+            }
+          }
+        }
+      } else if (pagesData is String) {
+        try {
+          final decoded = jsonDecode(pagesData);
+          if (decoded is List) {
+            final tempJson = Map<String, dynamic>.from(json);
+            tempJson['pages'] = decoded;
+            return OnboardingConfigModel.fromJson(tempJson);
+          }
+        } catch (e) {
+          debugPrint('❌ Failed to decode pages JSON string: $e');
+        }
+      }
+
+      return OnboardingConfigModel(
+        pages: pagesList,
+        style: OnboardingStyle.values.firstWhere(
+          (style) => style.name == (json['style'] as String? ?? 'basic'),
+          orElse: () => OnboardingStyle.basic,
+        ),
+        autoAdvanceSeconds: json['auto_advance_seconds'] as int?,
+        showSkipButton: json['show_skip_button'] as bool? ?? true,
+        showPageIndicator: json['show_page_indicator'] as bool? ?? true,
+        animationDuration: json['animation_duration'] as int? ?? 300,
+        primaryColor: json['primary_color'] as String?,
+        secondaryColor: json['secondary_color'] as String?,
+      );
+    } catch (e) {
+      debugPrint('❌ Error in OnboardingConfigModel.fromJson: $e');
+
+      // Fallback: Return with empty pages
+      return OnboardingConfigModel(
+        pages: [],
+        style: OnboardingStyle.basic,
+        showSkipButton: true,
+        showPageIndicator: true,
+      );
+    }
   }
 
   /// Convert OnboardingConfigModel to JSON
