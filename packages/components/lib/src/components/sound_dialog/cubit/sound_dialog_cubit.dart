@@ -4,15 +4,31 @@
 /// https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components
 ///
 /// Cubit for managing sound recording dialog state, including recording,
-/// pause, review, visibility, and simulated volume feedback.
+/// pause, review, visibility, and simulated volume feedback. It also handles
+/// behavioral configurations like maximum recording duration.
 ///
 /// {@category Cubit}
 /// {@subCategory Dialog}
 ///
-/// Example usage:
+/// ## Example Usage:
 /// ```dart
-/// final cubit = SoundDialogCubit(variant: SoundDialogVariant.feedbackRecorder);
+/// // Create a Cubit instance for the feedback variant with a 30-second limit.
+/// final cubit = SoundDialogCubit(
+///   variant: SoundDialogVariant.feedbackRecorder,
+///   maxRecordingDuration: const Duration(seconds: 30),
+///   autoStopOnMaxDuration: true,
+/// );
+///
+/// // Start the recording process.
 /// cubit.startRecording();
+///
+/// // Listen to state changes to update the UI.
+/// cubit.stream.listen((state) {
+///   print('Current duration: ${state.recordedDuration}');
+///   if (state.isReviewing) {
+///     print('Recording finished, now in review mode.');
+///   }
+/// });
 /// ```
 
 import 'dart:async';
@@ -26,9 +42,17 @@ class SoundDialogCubit extends Cubit<SoundDialogState> {
   Timer? _durationTimer;
   final _random = math.Random();
 
-  /// Creates a [SoundDialogCubit] with the given dialog [variant].
-  SoundDialogCubit({required SoundDialogVariant variant})
-      : super(SoundDialogState(variant: variant));
+  // Behavioral parameters
+  final Duration? maxRecordingDuration;
+  final bool autoStopOnMaxDuration;
+
+  /// Creates a [SoundDialogCubit] with the given dialog [variant] and
+  /// optional behavioral configurations.
+  SoundDialogCubit({
+    required SoundDialogVariant variant,
+    this.maxRecordingDuration,
+    this.autoStopOnMaxDuration = false,
+  }) : super(SoundDialogState(variant: variant));
 
   /// Starts the recording session and begins updating duration and volume.
   void startRecording() {
@@ -92,13 +116,37 @@ class SoundDialogCubit extends Cubit<SoundDialogState> {
   }
 
   /// Starts the duration ticker, incrementing the recorded time each second.
+  /// Also handles the logic for maximum recording duration.
   void _startDurationTicker() {
     _durationTimer?.cancel();
-    _durationTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!state.isRecording || state.isPaused) return;
-      emit(state.copyWith(
-        recordedDuration: state.recordedDuration + const Duration(seconds: 1),
-      ));
+    _durationTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!state.isRecording || state.isPaused) {
+        timer.cancel();
+        return;
+      }
+
+      final newDuration = state.recordedDuration + const Duration(seconds: 1);
+      emit(state.copyWith(recordedDuration: newDuration));
+
+      // Check if the maximum recording duration has been reached.
+      if (maxRecordingDuration != null &&
+          newDuration >= maxRecordingDuration!) {
+        timer.cancel(); // Stop the timer immediately.
+
+        if (autoStopOnMaxDuration) {
+          // Automatically finish the recording based on the variant.
+          const fakePath = "auto_stopped_record.wav";
+          if (state.variant == SoundDialogVariant.feedbackRecorder) {
+            finishRecordingForReview(fakePath);
+          } else {
+            // For other variants, finalize the recording.
+            stopRecording(fakePath);
+          }
+        } else {
+          // Just pause the recording, letting the user decide the next step.
+          pauseRecording();
+        }
+      }
     });
   }
 
