@@ -3,7 +3,7 @@
 /// Copyright (c) 2025, OSMEA Team
 /// https://github.com/masterfabric-mobile/osmea/tree/dev/packages/components
 ///
-/// A self-contained, interactive voice recording dialog with multiple variants.
+/// A highly customizable, self-contained, interactive voice recording dialog with multiple variants.
 /// Manages its own state via SoundDialogCubit, providing a simple "plug-and-play" API.
 ///
 /// {@category Components}
@@ -12,9 +12,9 @@
 /// ## 🎧 Key Features:
 /// * Encapsulated State: Creates and manages its own SoundDialogCubit.
 /// * Variants: `standard`, `expandable`, `inlineSearchBar`, and `feedbackRecorder` styles.
-/// * Full recording control: start, pause, resume, stop, cancel.
+/// * Highly Customizable: Control everything from colors and texts to icons and behavior.
 ///
-/// Example:
+/// ## Example Usage:
 /// ```dart
 /// showDialog(
 ///   context: context,
@@ -22,6 +22,21 @@
 ///     variant: SoundDialogVariant.feedbackRecorder,
 ///     onConfirm: (path) => print("Saved: $path"),
 ///     onCancel: () => print("Canceled"),
+///     // --- Customization Example ---
+///     primaryActionColor: OsmeaColors.purple,
+///     dialogBackgroundColor: OsmeaColors.snow,
+///     dialogBorderRadius: BorderRadius.circular(24),
+///     reviewTitleText: "Sesli Yorumunuzu Onaylayın",
+///     confirmButtonText: "Gönder",
+///     retryButtonText: "Yeniden Kaydet",
+///     defaultTitleStyle: TextStyle(
+///       fontFamily: 'Montserrat',
+///       fontWeight: FontWeight.bold,
+///       color: OsmeaColors.eclipse,
+///     ),
+///     maxRecordingDuration: Duration(seconds: 60),
+///     autoStopOnMaxDuration: true,
+///     stopRecordingIcon: Icon(Icons.check, color: Colors.white),
 ///   ),
 /// );
 /// ```
@@ -31,44 +46,189 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osmea_components/osmea_components.dart';
 
-/// The public-facing, self-contained sound dialog widget.
-///
-/// This widget is responsible for creating a [SoundDialogCubit] and providing
-/// it to the internal [_CoreSoundDialogWidget], encapsulating all state
-/// management logic.
+/// The public-facing, self-contained, and customizable sound dialog widget.
 class OsmeaSoundDialog extends StatelessWidget {
+  // --- Core Functionality ---
   final SoundDialogVariant variant;
   final void Function(String filePath)? onConfirm;
   final VoidCallback? onCancel;
+
+  // --- Customization Parameters ---
+
+  // 🎨 1. Theming & Styling
+  final Color? dialogBackgroundColor;
+  final BorderRadius? dialogBorderRadius;
+  final Color? primaryActionColor;
+  final Color? secondaryActionColor;
+  final Color? destructiveActionColor;
+  final Color? defaultTextColor;
+  final Color? statusTextColor;
+  final TextStyle? defaultTitleStyle;
+  final TextStyle? statusTextStyle;
+
+  // ✍️ 2. Text & Localization
+  final String? promptTitleText;
+  final String? recordingTitleText;
+  final String? pausedTitleText;
+  final String? reviewTitleText;
+  final String? okButtonText;
+  final String? cancelButtonText;
+  final String? confirmButtonText;
+  final String? retryButtonText;
+  final String? reviewPlayButtonText;
+
+  // ✨ 3. Icons
+  final Widget? startRecordingIcon;
+  final Widget? stopRecordingIcon;
+  final Widget? pauseRecordingIcon;
+  final Widget? resumeRecordingIcon;
+  final Widget? reviewPlayIcon;
+  final Widget? confirmCheckIcon;
+
+  // ⚙️ 4. Behavior
+  final Duration? maxRecordingDuration;
+  final bool autoStopOnMaxDuration;
 
   const OsmeaSoundDialog({
     super.key,
     this.variant = SoundDialogVariant.standard,
     this.onConfirm,
     this.onCancel,
+    // Theming & Styling
+    this.dialogBackgroundColor,
+    this.dialogBorderRadius,
+    this.primaryActionColor,
+    this.secondaryActionColor,
+    this.destructiveActionColor,
+    this.defaultTextColor,
+    this.statusTextColor,
+    this.defaultTitleStyle,
+    this.statusTextStyle,
+    // Text & Localization
+    this.promptTitleText,
+    this.recordingTitleText,
+    this.pausedTitleText,
+    this.reviewTitleText,
+    this.okButtonText,
+    this.cancelButtonText,
+    this.confirmButtonText,
+    this.retryButtonText,
+    this.reviewPlayButtonText,
+    // Icons
+    this.startRecordingIcon,
+    this.stopRecordingIcon,
+    this.pauseRecordingIcon,
+    this.resumeRecordingIcon,
+    this.reviewPlayIcon,
+    this.confirmCheckIcon,
+    // Behavior
+    this.maxRecordingDuration,
+    this.autoStopOnMaxDuration = false,
   });
 
   @override
   Widget build(BuildContext context) {
     // The BlocProvider creates and manages the lifecycle of the SoundDialogCubit.
-    // This is the core of the component's self-contained state management.
+    // Behavioral parameters are passed directly to the Cubit.
     return BlocProvider(
-      create: (_) => SoundDialogCubit(variant: variant),
+      create: (_) => SoundDialogCubit(
+        variant: variant,
+        maxRecordingDuration: maxRecordingDuration,
+        autoStopOnMaxDuration: autoStopOnMaxDuration,
+      ),
+      // All UI-related parameters are passed down to the core widget.
       child: _CoreSoundDialogWidget(
         onConfirm: onConfirm,
         onCancel: onCancel,
+        dialogBackgroundColor: dialogBackgroundColor,
+        dialogBorderRadius: dialogBorderRadius,
+        primaryActionColor: primaryActionColor,
+        secondaryActionColor: secondaryActionColor,
+        destructiveActionColor: destructiveActionColor,
+        defaultTextColor: defaultTextColor,
+        statusTextColor: statusTextColor,
+        defaultTitleStyle: defaultTitleStyle,
+        statusTextStyle: statusTextStyle,
+        promptTitleText: promptTitleText,
+        recordingTitleText: recordingTitleText,
+        pausedTitleText: pausedTitleText,
+        reviewTitleText: reviewTitleText,
+        okButtonText: okButtonText,
+        cancelButtonText: cancelButtonText,
+        confirmButtonText: confirmButtonText,
+        retryButtonText: retryButtonText,
+        reviewPlayButtonText: reviewPlayButtonText,
+        startRecordingIcon: startRecordingIcon,
+        stopRecordingIcon: stopRecordingIcon,
+        pauseRecordingIcon: pauseRecordingIcon,
+        resumeRecordingIcon: resumeRecordingIcon,
+        reviewPlayIcon: reviewPlayIcon,
+        confirmCheckIcon: confirmCheckIcon,
       ),
     );
   }
 }
 
-/// The internal widget that builds the UI based on the state from the Cubit.
-/// It accesses the cubit via `context.watch` or `context.read`.
+/// The internal widget that builds the UI based on the state from the Cubit
+/// and the customization parameters passed to it.
 class _CoreSoundDialogWidget extends StatelessWidget {
   final void Function(String filePath)? onConfirm;
   final VoidCallback? onCancel;
 
-  const _CoreSoundDialogWidget({this.onConfirm, this.onCancel});
+  // All customization parameters are received here.
+  final Color? dialogBackgroundColor;
+  final BorderRadius? dialogBorderRadius;
+  final Color? primaryActionColor;
+  final Color? secondaryActionColor;
+  final Color? destructiveActionColor;
+  final Color? defaultTextColor;
+  final Color? statusTextColor;
+  final TextStyle? defaultTitleStyle;
+  final TextStyle? statusTextStyle;
+  final String? promptTitleText;
+  final String? recordingTitleText;
+  final String? pausedTitleText;
+  final String? reviewTitleText;
+  final String? okButtonText;
+  final String? cancelButtonText;
+  final String? confirmButtonText;
+  final String? retryButtonText;
+  final String? reviewPlayButtonText;
+  final Widget? startRecordingIcon;
+  final Widget? stopRecordingIcon;
+  final Widget? pauseRecordingIcon;
+  final Widget? resumeRecordingIcon;
+  final Widget? reviewPlayIcon;
+  final Widget? confirmCheckIcon;
+
+  const _CoreSoundDialogWidget({
+    this.onConfirm,
+    this.onCancel,
+    this.dialogBackgroundColor,
+    this.dialogBorderRadius,
+    this.primaryActionColor,
+    this.secondaryActionColor,
+    this.destructiveActionColor,
+    this.defaultTextColor,
+    this.statusTextColor,
+    this.defaultTitleStyle,
+    this.statusTextStyle,
+    this.promptTitleText,
+    this.recordingTitleText,
+    this.pausedTitleText,
+    this.reviewTitleText,
+    this.okButtonText,
+    this.cancelButtonText,
+    this.confirmButtonText,
+    this.retryButtonText,
+    this.reviewPlayButtonText,
+    this.startRecordingIcon,
+    this.stopRecordingIcon,
+    this.pauseRecordingIcon,
+    this.resumeRecordingIcon,
+    this.reviewPlayIcon,
+    this.confirmCheckIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +247,29 @@ class _CoreSoundDialogWidget extends StatelessWidget {
     }
   }
 
+  // Merges user-provided text style with a default style.
+  TextStyle _getTitleStyle(BuildContext context) {
+    final defaultStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: defaultTextColor ?? OsmeaColors.eclipse,
+    );
+    return defaultTitleStyle != null
+        ? defaultStyle.merge(defaultTitleStyle)
+        : defaultStyle;
+  }
+
+  TextStyle _getStatusStyle(BuildContext context) {
+    final defaultStyle = TextStyle(
+      fontSize: 13,
+      color: statusTextColor ?? OsmeaColors.pewter,
+      fontFeatures: const [FontFeature.tabularFigures()],
+    );
+    return statusTextStyle != null
+        ? defaultStyle.merge(statusTextStyle)
+        : defaultStyle;
+  }
+
   Widget _buildStandardDialog(BuildContext context, SoundDialogState state) {
     final cubit = context.read<SoundDialogCubit>();
     return Dialog(
@@ -96,8 +279,8 @@ class _CoreSoundDialogWidget extends StatelessWidget {
         child: Container(
             width: 320,
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                color: dialogBackgroundColor ?? OsmeaColors.white,
+                borderRadius: dialogBorderRadius ?? BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black.withValues(alpha: 0.08),
@@ -112,18 +295,19 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                      state.isRecording
-                          ? (state.isPaused
-                              ? "Recording paused"
-                              : "Listening...")
-                          : "I'm ready, talk!",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87)),
+                    state.isRecording
+                        ? (state.isPaused
+                            ? (pausedTitleText ?? "Recording paused")
+                            : (recordingTitleText ?? "Listening..."))
+                        : (promptTitleText ?? "I'm ready, talk!"),
+                    textAlign: TextAlign.center,
+                    style: _getTitleStyle(context),
+                  ),
                   const SizedBox(height: 24),
                   _MicWithWaveEffect(
+                      primaryActionColor:
+                          primaryActionColor ?? OsmeaColors.nordicBlue,
+                      accentColor: primaryActionColor ?? OsmeaColors.amberFlame,
                       isActive: state.isRecording && !state.isPaused,
                       onTap: () {
                         if (!state.isRecording) {
@@ -136,14 +320,11 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                       }),
                   const SizedBox(height: 16),
                   Text(_formatDuration(state.recordedDuration),
-                      style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey[600],
-                          fontFeatures: const [FontFeature.tabularFigures()])),
+                      style: _getStatusStyle(context)),
                   const SizedBox(height: 20),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     OsmeaComponents.button(
-                        text: 'Cancel',
+                        text: cancelButtonText ?? 'Cancel',
                         variant: ButtonVariant.outlined,
                         size: ButtonSize.small,
                         onPressed: () {
@@ -153,9 +334,10 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                         }),
                     const SizedBox(width: 8),
                     OsmeaComponents.button(
-                        text: 'OK',
+                        text: okButtonText ?? 'OK',
                         variant: ButtonVariant.primary,
                         size: ButtonSize.small,
+                        backgroundColor: primaryActionColor,
                         onPressed: () {
                           const fakePath = "voice_input.wav";
                           cubit.stopRecording(fakePath);
@@ -168,20 +350,19 @@ class _CoreSoundDialogWidget extends StatelessWidget {
 
   Widget _buildExpandableDialog(BuildContext context, SoundDialogState state) {
     final cubit = context.read<SoundDialogCubit>();
-    final dialogBorderRadius = BorderRadius.circular(24);
     return Dialog(
         backgroundColor: Colors.transparent,
         insetPadding: const EdgeInsets.all(24),
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: dialogBorderRadius),
+        shape: RoundedRectangleBorder(
+            borderRadius: dialogBorderRadius ?? BorderRadius.circular(24)),
         child: Container(
             width: 340,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: dialogBorderRadius,
-                border: Border.all(
-                    color: Colors.grey.withValues(alpha: 0.3), width: 1),
+                color: dialogBackgroundColor ?? OsmeaColors.white,
+                borderRadius: dialogBorderRadius ?? BorderRadius.circular(24),
+                border: Border.all(color: OsmeaColors.silver, width: 1),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black.withValues(alpha: 0.08),
@@ -201,25 +382,21 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                   child: Text(
                       state.isRecording
                           ? (state.isPaused
-                              ? "Recording Paused"
-                              : "Recording...")
-                          : "Ready to Record",
+                              ? (pausedTitleText ?? "Recording Paused")
+                              : (recordingTitleText ?? "Recording..."))
+                          : (promptTitleText ?? "Ready to Record"),
                       key: ValueKey("${state.isRecording}-${state.isPaused}"),
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600))),
+                      style: _getTitleStyle(context))),
               const SizedBox(height: 16),
               Text(_formatDuration(state.recordedDuration),
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: OsmeaColors.grey,
-                      fontFeatures: const [FontFeature.tabularFigures()])),
+                  style: _getStatusStyle(context).copyWith(fontSize: 14)),
               const SizedBox(height: 16),
               AnimatedOpacity(
                   opacity: state.isRecording && !state.isPaused ? 1.0 : 0.3,
                   duration: const Duration(milliseconds: 300),
-                  child: _SoundWave(volume: state.volumeLevel)),
+                  child: _SoundWave(
+                      color: primaryActionColor ?? OsmeaColors.nordicBlue,
+                      volume: state.volumeLevel)),
               const SizedBox(height: 28),
               Wrap(
                   alignment: WrapAlignment.center,
@@ -228,32 +405,35 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                   children: [
                     if (!state.isRecording)
                       OsmeaComponents.button(
-                          icon: const Icon(Icons.mic),
+                          icon: startRecordingIcon ?? const Icon(Icons.mic),
                           iconPosition: IconPosition.only,
                           size: ButtonSize.small,
                           variant: ButtonVariant.primary,
                           onPressed: cubit.startRecording,
-                          backgroundColor: OsmeaColors.nordicBlue),
+                          backgroundColor: primaryActionColor),
                     if (state.isRecording && !state.isPaused)
                       OsmeaComponents.button(
-                          icon: const Icon(Icons.pause),
+                          icon: pauseRecordingIcon ?? const Icon(Icons.pause),
                           iconPosition: IconPosition.only,
                           size: ButtonSize.small,
                           variant: ButtonVariant.outlined,
                           onPressed: cubit.pauseRecording),
                     if (state.isPaused)
                       OsmeaComponents.button(
-                          icon: const Icon(Icons.play_arrow),
+                          icon: resumeRecordingIcon ??
+                              const Icon(Icons.play_arrow),
                           iconPosition: IconPosition.only,
                           size: ButtonSize.small,
                           variant: ButtonVariant.secondary,
+                          backgroundColor: secondaryActionColor,
                           onPressed: cubit.resumeRecording),
                     if (state.isRecording)
                       OsmeaComponents.button(
-                          icon: const Icon(Icons.stop),
+                          icon: stopRecordingIcon ?? const Icon(Icons.stop),
                           iconPosition: IconPosition.only,
                           size: ButtonSize.small,
                           variant: ButtonVariant.secondary,
+                          backgroundColor: secondaryActionColor,
                           onPressed: () {
                             const path = "fake_record.wav";
                             cubit.stopRecording(path);
@@ -265,6 +445,7 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                         iconPosition: IconPosition.only,
                         size: ButtonSize.small,
                         variant: ButtonVariant.danger,
+                        backgroundColor: destructiveActionColor,
                         onPressed: () {
                           cubit.cancelRecording();
                           onCancel?.call();
@@ -278,13 +459,14 @@ class _CoreSoundDialogWidget extends StatelessWidget {
   Widget _buildInlineSearchBar(BuildContext context, SoundDialogState state) {
     final cubit = context.read<SoundDialogCubit>();
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       alignment: Alignment.topCenter,
       insetPadding: const EdgeInsets.only(top: 60, left: 20, right: 20),
       child: Material(
-        color: Colors.white,
+        color: dialogBackgroundColor ?? OsmeaColors.white,
         elevation: 4.0,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: dialogBorderRadius ?? BorderRadius.circular(30),
+        shadowColor: Colors.black26,
         child: Container(
           height: 52,
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -292,18 +474,21 @@ class _CoreSoundDialogWidget extends StatelessWidget {
             children: [
               Icon(Icons.search,
                   color: state.isRecording
-                      ? OsmeaColors.amberFlame
-                      : OsmeaColors.grey),
+                      ? (primaryActionColor ?? OsmeaColors.amberFlame)
+                      : (statusTextColor ?? OsmeaColors.pewter)),
               const SizedBox(width: 12),
               Expanded(
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   child: state.isRecording
-                      ? _SoundWave(volume: state.volumeLevel, barCount: 20)
+                      ? _SoundWave(
+                          color: primaryActionColor ?? OsmeaColors.nordicBlue,
+                          volume: state.volumeLevel,
+                          barCount: 20)
                       : Text(
-                          "Listening for your search...",
+                          promptTitleText ?? "Listening for your search...",
                           key: const ValueKey('text'),
-                          style: TextStyle(color: OsmeaColors.slate),
+                          style: _getStatusStyle(context),
                         ),
                 ),
               ),
@@ -319,13 +504,14 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                     cubit.startRecording();
                   }
                 },
-                child: Icon(
-                  state.isRecording ? Icons.check_circle : Icons.mic_none,
-                  color: state.isRecording
-                      ? OsmeaColors.meadow
-                      : OsmeaColors.thunder,
-                  size: 28,
-                ),
+                child: confirmCheckIcon ??
+                    Icon(
+                      state.isRecording ? Icons.check_circle : Icons.mic_none,
+                      color: state.isRecording
+                          ? (primaryActionColor ?? OsmeaColors.meadow)
+                          : (defaultTextColor ?? OsmeaColors.thunder),
+                      size: 28,
+                    ),
               )
             ],
           ),
@@ -337,8 +523,9 @@ class _CoreSoundDialogWidget extends StatelessWidget {
   /// Builds the UI for the feedback recorder variant.
   Widget _buildFeedbackDialog(BuildContext context, SoundDialogState state) {
     return Dialog(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      backgroundColor: dialogBackgroundColor ?? OsmeaColors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: dialogBorderRadius ?? BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: AnimatedSwitcher(
@@ -360,13 +547,15 @@ class _CoreSoundDialogWidget extends StatelessWidget {
       key: const ValueKey('recording'),
       children: [
         Text(
-          state.isRecording ? 'Recording Feedback...' : 'Ready to Record',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          state.isRecording
+              ? (recordingTitleText ?? 'Recording Feedback...')
+              : (promptTitleText ?? 'Ready to Record'),
+          style: _getTitleStyle(context),
         ),
         const SizedBox(height: 16),
         Text(
           _formatDuration(state.recordedDuration),
-          style: TextStyle(fontSize: 14, color: OsmeaColors.slate),
+          style: _getStatusStyle(context).copyWith(fontSize: 14),
         ),
         const SizedBox(height: 24),
         GestureDetector(
@@ -382,8 +571,8 @@ class _CoreSoundDialogWidget extends StatelessWidget {
             height: 72,
             decoration: BoxDecoration(
               color: state.isRecording
-                  ? OsmeaColors.sunsetGlow
-                  : OsmeaColors.nordicBlue,
+                  ? (destructiveActionColor ?? OsmeaColors.sunsetGlow)
+                  : (primaryActionColor ?? OsmeaColors.nordicBlue),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -392,17 +581,16 @@ class _CoreSoundDialogWidget extends StatelessWidget {
                     offset: const Offset(0, 2))
               ],
             ),
-            child: Icon(
-              state.isRecording ? Icons.stop : Icons.mic,
-              color: Colors.white,
-              size: 36,
-            ),
+            child: state.isRecording
+                ? (stopRecordingIcon ??
+                    const Icon(Icons.stop, color: Colors.white, size: 36))
+                : (startRecordingIcon ??
+                    const Icon(Icons.mic, color: Colors.white, size: 36)),
           ),
         ),
         const SizedBox(height: 24),
         OsmeaComponents.button(
-          text: "Cancel",
-          // ## HATA DÜZELTİLDİ: ButtonVariant.text -> ButtonVariant.outlined ##
+          text: cancelButtonText ?? "Cancel",
           variant: ButtonVariant.outlined,
           onPressed: () {
             cubit.cancelRecording();
@@ -421,9 +609,9 @@ class _CoreSoundDialogWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       key: const ValueKey('reviewing'),
       children: [
-        const Text(
-          "Confirm Your Feedback",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        Text(
+          reviewTitleText ?? "Confirm Your Feedback",
+          style: _getTitleStyle(context),
         ),
         const SizedBox(height: 16),
         Container(
@@ -435,12 +623,14 @@ class _CoreSoundDialogWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // TODO: Implement audio playback functionality here.
-              const Icon(Icons.play_arrow, color: Colors.black54),
+              reviewPlayIcon ??
+                  const Icon(Icons.play_arrow, color: OsmeaColors.transparent),
               const SizedBox(width: 8),
               Text(
-                "Play Recording (${_formatDuration(state.recordedDuration)})",
-                style: const TextStyle(color: Colors.black54),
+                "${reviewPlayButtonText ?? "Play Recording"} (${_formatDuration(state.recordedDuration)})",
+                style: TextStyle(
+                    color: defaultTextColor?.withValues(alpha: 0.7) ??
+                        OsmeaColors.slate),
               ),
             ],
           ),
@@ -451,8 +641,9 @@ class _CoreSoundDialogWidget extends StatelessWidget {
           children: [
             Expanded(
               child: OsmeaComponents.button(
-                text: "Try Again",
+                text: retryButtonText ?? "Try Again",
                 variant: ButtonVariant.outlined,
+                backgroundColor: secondaryActionColor,
                 onPressed:
                     cubit.cancelRecording, // Resets state for a new recording
               ),
@@ -460,7 +651,8 @@ class _CoreSoundDialogWidget extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: OsmeaComponents.button(
-                text: "Confirm",
+                text: confirmButtonText ?? "Confirm",
+                backgroundColor: primaryActionColor,
                 onPressed: () {
                   cubit.stopRecording(state.filePath!); // Finalize
                   onConfirm?.call(state.filePath!);
@@ -485,7 +677,14 @@ String _formatDuration(Duration d) {
 class _MicWithWaveEffect extends StatefulWidget {
   final bool isActive;
   final VoidCallback onTap;
-  const _MicWithWaveEffect({required this.isActive, required this.onTap});
+  final Color primaryActionColor;
+  final Color accentColor;
+
+  const _MicWithWaveEffect(
+      {required this.isActive,
+      required this.onTap,
+      required this.primaryActionColor,
+      required this.accentColor});
   @override
   State<_MicWithWaveEffect> createState() => _MicWithWaveEffectState();
 }
@@ -529,7 +728,7 @@ class _MicWithWaveEffectState extends State<_MicWithWaveEffect>
   @override
   Widget build(BuildContext context) {
     final Color micColor =
-        widget.isActive ? OsmeaColors.amberFlame : OsmeaColors.nordicBlue;
+        widget.isActive ? widget.accentColor : widget.primaryActionColor;
     return GestureDetector(
         onTap: widget.onTap,
         child: SizedBox(
@@ -602,34 +801,46 @@ class _WavePainter extends CustomPainter {
       oldDelegate.ringCount != ringCount;
 }
 
+/// A responsive sound wave widget that adapts to its parent's width.
 class _SoundWave extends StatelessWidget {
   final double volume;
   final int barCount;
-  const _SoundWave({required this.volume, this.barCount = 16});
+  final Color color;
+  const _SoundWave(
+      {required this.volume, this.barCount = 16, required this.color});
+
   @override
   Widget build(BuildContext context) {
     const maxHeight = 40.0;
-    final bars = List.generate(barCount, (i) {
-      final pos = i / (barCount - 1);
-      final envelope = math.sin(pos * math.pi);
-      final randomFactor =
-          0.7 + (i.isEven ? 0.3 : 0.1) * math.Random().nextDouble();
-      final height =
-          (volume * maxHeight * envelope * randomFactor).clamp(2.0, maxHeight);
-      return AnimatedContainer(
-          duration: const Duration(milliseconds: 90),
-          curve: Curves.easeOut,
-          width: (150 / barCount), // Adjust width to fit space
-          height: height,
-          decoration: BoxDecoration(
-              color: OsmeaColors.nordicBlue,
-              borderRadius: BorderRadius.circular(3)));
-    });
-    return SizedBox(
-        height: maxHeight,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: bars));
+    // Use a LayoutBuilder to make the widget responsive.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableWidth = constraints.maxWidth;
+        // Calculate bar width to fit the available space, leaving a small gap.
+        final barWidth = (availableWidth / barCount) * 0.7;
+
+        final bars = List.generate(barCount, (i) {
+          final pos = i / (barCount - 1);
+          final envelope = math.sin(pos * math.pi);
+          final randomFactor =
+              0.7 + (i.isEven ? 0.3 : 0.1) * math.Random().nextDouble();
+          final height = (volume * maxHeight * envelope * randomFactor)
+              .clamp(2.0, maxHeight);
+          return AnimatedContainer(
+              duration: const Duration(milliseconds: 90),
+              curve: Curves.easeOut,
+              width: barWidth,
+              height: height,
+              decoration: BoxDecoration(
+                  color: color, borderRadius: BorderRadius.circular(3)));
+        });
+        return SizedBox(
+            height: maxHeight,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: bars));
+      },
+    );
   }
 }
