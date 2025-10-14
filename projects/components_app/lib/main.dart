@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import './routes/app_routes.dart';
 import './widgets/device_frame_wrapper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   // Ensure Flutter bindings are initialized
@@ -9,6 +10,7 @@ void main() async {
 
   // Initialize core components before running the app
   await MasterApp.runBefore(allowCollectDataTelemetry: true);
+  await dotenv.load(fileName: ".env");
 
   runApp(const MyApp());
 }
@@ -31,3 +33,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
