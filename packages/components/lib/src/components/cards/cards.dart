@@ -452,6 +452,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     super.height,
     this.title,
     this.subtitle,
+    this.subtitle2,
     this.content,
     this.imageUrl,
     this.imageAsset,
@@ -464,9 +465,11 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     this.overlayGradient,
     this.titleStyle,
     this.subtitleStyle,
+    this.subtitle2Style,
     this.contentStyle,
     this.titleColor,
     this.subtitleColor,
+    this.subtitle2Color,
     this.contentColor,
     this.spacing,
     this.loadingWidget,
@@ -479,6 +482,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     // 📏 Text overflow control parameters
     this.titleMaxLines = 2,
     this.subtitleMaxLines = 1,
+    this.subtitle2MaxLines = 1,
     this.contentMaxLines = 3,
     this.textOverflow = TextOverflow.ellipsis,
     this.textAreaHeight,
@@ -491,7 +495,10 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   /// 📄 Subtitle text
   final String? subtitle;
 
-  /// 📝 Content description
+  /// � Second subtitle text (for price comparison)
+  final String? subtitle2;
+
+  /// �📝 Content description
   final String? content;
 
   /// 🌐 Network image URL
@@ -527,6 +534,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   /// 🎨 Custom subtitle text style
   final TextStyle? subtitleStyle;
 
+  /// 🎨 Custom subtitle2 text style
+  final TextStyle? subtitle2Style;
+
   /// 🎨 Custom content text style
   final TextStyle? contentStyle;
 
@@ -535,6 +545,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
 
   /// 🎯 Custom subtitle color
   final Color? subtitleColor;
+
+  /// 🎯 Custom subtitle2 color
+  final Color? subtitle2Color;
 
   /// 🎯 Custom content color
   final Color? contentColor;
@@ -566,6 +579,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
 
   /// 📝 Maximum lines for subtitle text
   final int? subtitleMaxLines;
+
+  /// 📝 Maximum lines for subtitle2 text
+  final int? subtitle2MaxLines;
 
   /// 📝 Maximum lines for content text
   final int? contentMaxLines;
@@ -807,27 +823,72 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     }
 
     // Add spacing after title
-    if (title != null && (subtitle != null || content != null)) {
+    if (title != null &&
+        (subtitle != null || subtitle2 != null || content != null)) {
       children.add(SizedBox(height: effectiveSpacing));
     }
 
-    // Add subtitle with maxLines control
-    if (subtitle != null) {
-      children.add(
-        OsmeaText(
-          subtitle!,
-          variant: _getSubtitleVariant(),
-          color: subtitleColor ??
-              (showOverlay ? Colors.white70 : OsmeaColors.pewter),
-          style: subtitleStyle,
-          maxLines: subtitleMaxLines,
-          overflow: textOverflow,
-        ),
-      );
+    // Add subtitle(s) with maxLines control - side by side if both exist
+    if (subtitle != null || subtitle2 != null) {
+      if (subtitle != null && subtitle2 != null) {
+        // Both subtitles exist - display side by side
+        children.add(
+          OsmeaRow(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              OsmeaText(
+                subtitle!,
+                variant: _getSubtitleVariant(),
+                color: subtitleColor ??
+                    (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+                style: subtitleStyle,
+                maxLines: subtitleMaxLines,
+                overflow: textOverflow,
+              ),
+              SizedBox(width: effectiveSpacing),
+              OsmeaText(
+                subtitle2!,
+                variant: _getSubtitleVariant(),
+                color: subtitle2Color ??
+                    (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+                style: subtitle2Style,
+                maxLines: subtitle2MaxLines,
+                overflow: textOverflow,
+              ),
+            ],
+          ),
+        );
+      } else if (subtitle != null) {
+        // Only first subtitle exists
+        children.add(
+          OsmeaText(
+            subtitle!,
+            variant: _getSubtitleVariant(),
+            color: subtitleColor ??
+                (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+            style: subtitleStyle,
+            maxLines: subtitleMaxLines,
+            overflow: textOverflow,
+          ),
+        );
+      } else if (subtitle2 != null) {
+        // Only second subtitle exists
+        children.add(
+          OsmeaText(
+            subtitle2!,
+            variant: _getSubtitleVariant(),
+            color: subtitle2Color ??
+                (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+            style: subtitle2Style,
+            maxLines: subtitle2MaxLines,
+            overflow: textOverflow,
+          ),
+        );
+      }
     }
 
-    // Add spacing after subtitle
-    if (subtitle != null && content != null) {
+    // Add spacing after subtitle(s)
+    if ((subtitle != null || subtitle2 != null) && content != null) {
       children.add(SizedBox(height: effectiveSpacing));
     }
 

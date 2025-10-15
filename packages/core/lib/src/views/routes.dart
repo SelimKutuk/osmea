@@ -1,1 +1,1 @@
-enum Routes { splash, onboarding, home }
+enum Routes { splash, onboarding, home, errorHandling, loading }

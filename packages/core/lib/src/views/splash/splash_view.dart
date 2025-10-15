@@ -22,14 +22,25 @@ import 'package:core/src/views/routes.dart';
 /// {@subCategory SplashView}
 
 class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
+  /// Callback triggered when splash begins
+  final VoidCallback? onStart;
+
+  /// Callback triggered when splash ends
+  final VoidCallback? onComplete;
+
   SplashView({
     required super.goRoute,
     super.arguments = const {'splash': true},
+    this.onStart,
+    this.onComplete,
   });
 
   @override
   Future<void> initialContent(viewModel, BuildContext context) async {
     debugPrint('🚀 Splash View Start!');
+
+    // Trigger onStart callback
+    onStart?.call();
 
     // Initialize the splash cubit with app configuration
     await viewModel.initializeSplash();
@@ -42,16 +53,16 @@ class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
         configHelper.getInt('splash_configuration.duration_milliseconds', 3000);
     final shouldAutoNavigate =
         configHelper.getBool('splash_configuration.auto_navigate', true);
-    final navigationTarget = configHelper.getString(
-        'splash_configuration.navigation_target', 'home');
 
     // Setup auto-navigation if enabled
     if (shouldAutoNavigate) {
       Timer(Duration(milliseconds: durationMs), () {
-        debugPrint('🚀 Auto-navigating to $navigationTarget');
-        // Convert string route to Routes enum
-        final Routes route = _getRouteFromString(navigationTarget);
-        goRoute(route.name); // Use the enum name for navigation
+        // Trigger onComplete callback
+        onComplete?.call();
+
+        final currentState = viewModel.state;
+        final target = currentState.navigationTarget ?? '/home';
+        goRoute(target);
       });
     }
   }
@@ -122,19 +133,6 @@ class SplashView extends MasterViewCubit<SplashCubit, SplashState> {
       case SplashStyle.enterprise:
         return SplashEnterpriseWidget(
             onLogoTap: () => goRoute(Routes.home.name));
-    }
-  }
-
-  /// Convert string route name to Routes enum
-  Routes _getRouteFromString(String routeName) {
-    switch (routeName.toLowerCase()) {
-      case 'onboarding':
-        return Routes.onboarding;
-      case 'home':
-        return Routes.home;
-      case 'splash':
-      default:
-        return Routes.splash;
     }
   }
 }

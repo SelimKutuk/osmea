@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:core/core.dart';
 import 'package:core/src/models/error_handling_models.dart';
 import 'package:core/src/helper/asset_config_helper.dart';
 import 'package:core/src/views/error_handling/cubit/error_handling_state.dart';
@@ -15,7 +15,7 @@ import 'package:core/src/views/error_handling/cubit/error_handling_state.dart';
 /// {@category ViewModels}
 /// {@subCategory ErrorHandlingCubit}
 
-class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
+class ErrorHandlingCubit extends BaseViewModelCubit<ErrorHandlingState> {
   ErrorHandlingCubit() : super(const ErrorHandlingState());
 
   final AssetConfigHelper _configHelper = AssetConfigHelper();
@@ -29,7 +29,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
     return super.close();
   }
 
-  /// 📱 Load error handling configuration
+  /// 📱 Load error handling configuration with dynamic style support
   Future<void> loadErrorHandlingConfig() async {
     try {
       emit(state.copyWith(status: ErrorHandlingStatus.loading));
@@ -37,7 +37,8 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
       debugPrint("📱 Loading error handling configuration...");
 
       // Load app config (project-specific first, then core fallback)
-      final configLoaded = await _configHelper.loadConfig('assets/app_config.json');
+      final configLoaded =
+          await _configHelper.loadConfig('assets/app_config.json');
       if (!configLoaded) {
         debugPrint("❌ Failed to load configuration file, using default config");
         _useDefaultConfig();
@@ -46,7 +47,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
 
       // Get error handling data from app config
       final configData = _configHelper.getAllConfig();
-      
+
       if (configData == null) {
         debugPrint("❌ Configuration data not found, using default config");
         _useDefaultConfig();
@@ -56,22 +57,35 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
       // Parse error handling config
       final errorHandlingData = configData['error_handling_configuration'];
       if (errorHandlingData == null) {
-        debugPrint("❌ Error handling configuration not found, using default config");
+        debugPrint(
+            "❌ Error handling configuration not found, using default config");
         _useDefaultConfig();
         return;
       }
 
-      final errorHandlingConfig = ErrorHandlingConfigModel.fromJson(errorHandlingData);
+      final errorHandlingConfig =
+          ErrorHandlingConfigModel.fromJson(errorHandlingData);
 
-      debugPrint("✅ Error handling configuration loaded successfully. Error pages: ${errorHandlingConfig.errorPages.length}");
+      debugPrint(
+          "✅ Error handling configuration loaded successfully. Style: ${errorHandlingConfig.style.name}, Error pages: ${errorHandlingConfig.errorPages.length}");
+
+      // Log basic configuration
+      debugPrint("🎨 Error handling style: ${errorHandlingConfig.style.name}");
+      debugPrint("⚙️ Configuration details:");
+      debugPrint(
+          "   - Animation duration: ${errorHandlingConfig.animationDuration}ms");
+      debugPrint(
+          "   - Show retry button: ${errorHandlingConfig.showRetryButton}");
+      debugPrint(
+          "   - Primary color: ${errorHandlingConfig.primaryColor ?? 'default'}");
 
       emit(state.copyWith(
         status: ErrorHandlingStatus.initial,
         config: errorHandlingConfig,
       ));
-
     } catch (e) {
-      debugPrint("❌ Error occurred while loading error handling configuration: $e");
+      debugPrint(
+          "❌ Error occurred while loading error handling configuration: $e");
       _useDefaultConfig();
     }
   }
@@ -85,7 +99,8 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
     Exception? originalException,
   }) async {
     try {
-      debugPrint("🚨 Showing error: $errorType, message: $errorMessage, code: $errorCode");
+      debugPrint(
+          "🚨 Showing error: $errorType, message: $errorMessage, code: $errorCode");
 
       // Load config if not loaded
       if (!state.hasConfig) {
@@ -93,7 +108,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
       }
 
       // Get error page for this error type
-      final errorPage = state.config?.getErrorPage(errorType);
+      final errorPage = state.config?.errorPages[errorType];
 
       emit(state.copyWith(
         status: ErrorHandlingStatus.showingError,
@@ -108,7 +123,6 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
 
       // Start auto retry if configured
       _startAutoRetryIfConfigured();
-
     } catch (e) {
       debugPrint("❌ Error occurred while showing error: $e");
       // Fallback to basic error display
@@ -146,9 +160,9 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// 🏠 Go to home/main screen
   void goHome() {
     debugPrint("🏠 Going to home screen");
-    
+
     _cancelTimers();
-    
+
     emit(state.copyWith(
       status: ErrorHandlingStatus.resolved,
       isAutoRetryActive: false,
@@ -159,7 +173,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// 📞 Contact support
   void contactSupport() {
     debugPrint("📞 Contacting support");
-    
+
     // This will be handled by the UI layer
     // Email or phone call will be initiated
   }
@@ -167,9 +181,9 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// ❌ Dismiss error
   void dismissError() {
     debugPrint("❌ Dismissing error");
-    
+
     _cancelTimers();
-    
+
     emit(state.copyWith(
       status: ErrorHandlingStatus.resolved,
       isAutoRetryActive: false,
@@ -180,9 +194,9 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// ⬅️ Go back
   void goBack() {
     debugPrint("⬅️ Going back");
-    
+
     _cancelTimers();
-    
+
     emit(state.copyWith(
       status: ErrorHandlingStatus.resolved,
       isAutoRetryActive: false,
@@ -193,9 +207,9 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// 🔄 Mark operation as successful (after retry)
   void markResolved() {
     debugPrint("✅ Error resolved successfully");
-    
+
     _cancelTimers();
-    
+
     emit(state.copyWith(
       status: ErrorHandlingStatus.resolved,
       isAutoRetryActive: false,
@@ -206,10 +220,10 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   /// 🕐 Start auto retry timer if configured
   void _startAutoRetryIfConfigured() {
     final autoRetrySeconds = state.config?.autoRetrySeconds;
-    
+
     if (autoRetrySeconds != null && autoRetrySeconds > 0 && state.canRetry) {
       debugPrint("🕐 Starting auto retry timer: $autoRetrySeconds seconds");
-      
+
       emit(state.copyWith(
         isAutoRetryActive: true,
         autoRetryCountdown: autoRetrySeconds,
@@ -218,7 +232,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
       // Start countdown timer
       _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
         final newCountdown = state.autoRetryCountdown - 1;
-        
+
         if (newCountdown <= 0) {
           timer.cancel();
           if (!isClosed && state.canRetry) {
@@ -239,8 +253,10 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
     _countdownTimer = null;
   }
 
-  /// 🛠️ Use default configuration
+  /// 🛠️ Use default configuration (simple like loading and onboarding)
   void _useDefaultConfig() {
+    debugPrint("🔧 Creating default error handling configuration");
+
     final defaultConfig = ErrorHandlingConfigModel(
       errorPages: {
         ErrorType.general: const ErrorPageModel(
@@ -265,6 +281,10 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
           homeButtonText: 'Home',
         ),
       },
+      style: ErrorHandlingStyle.startup,
+      animationDuration: 400,
+      primaryColor: '#EF4444',
+      secondaryColor: '#F59E0B',
     );
 
     emit(state.copyWith(
@@ -292,14 +312,16 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
           'is_auto_retry_active': state.isAutoRetryActive,
           'auto_retry_countdown': state.autoRetryCountdown,
         },
-        'config_info': state.config != null ? {
-          'error_pages_count': state.config!.errorPages.length,
-          'style': state.config!.style.toString(),
-          'auto_retry_seconds': state.config!.autoRetrySeconds,
-          'show_retry_button': state.config!.showRetryButton,
-          'show_home_button': state.config!.showHomeButton,
-          'show_support_button': state.config!.showSupportButton,
-        } : null,
+        'config_info': state.config != null
+            ? {
+                'error_pages_count': state.config!.errorPages.length,
+                'style': state.config!.style.toString(),
+                'auto_retry_seconds': state.config!.autoRetrySeconds,
+                'show_retry_button': state.config!.showRetryButton,
+                'show_home_button': state.config!.showHomeButton,
+                'show_support_button': state.config!.showSupportButton,
+              }
+            : null,
         'current_error_page': state.currentErrorPage?.toString(),
         'original_exception': state.originalException?.toString(),
         'stack_trace': state.stackTrace,
@@ -309,7 +331,7 @@ class ErrorHandlingCubit extends Cubit<ErrorHandlingState> {
   }
 
   /// 🎯 Quick error methods for common error types
-  
+
   Future<void> showNetworkError([String? message]) async {
     await showError(
       errorType: ErrorType.network,

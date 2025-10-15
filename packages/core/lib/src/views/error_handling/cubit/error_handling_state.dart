@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:core/src/models/error_handling_models.dart';
 
@@ -15,37 +16,37 @@ import 'package:core/src/models/error_handling_models.dart';
 class ErrorHandlingState extends Equatable {
   /// Current status
   final ErrorHandlingStatus status;
-  
+
   /// Error handling configuration
   final ErrorHandlingConfigModel? config;
-  
+
   /// Current error type
   final ErrorType currentErrorType;
-  
+
   /// Current error page
   final ErrorPageModel? currentErrorPage;
-  
+
   /// Error message
   final String? errorMessage;
-  
+
   /// Error code
   final String? errorCode;
-  
+
   /// Stack trace
   final String? stackTrace;
-  
+
   /// Retry count
   final int retryCount;
-  
+
   /// Max retry count
   final int maxRetryCount;
-  
+
   /// Auto retry timer active
   final bool isAutoRetryActive;
-  
+
   /// Auto retry countdown
   final int autoRetryCountdown;
-  
+
   /// Original exception
   final Exception? originalException;
 
@@ -145,12 +146,24 @@ class ErrorHandlingState extends Equatable {
 
   /// Error title getter
   String get errorTitle {
-    return currentErrorPage?.title ?? _getDefaultErrorTitle();
+    // Priority: error page > config > default
+    final title = currentErrorPage?.title ??
+        config?.errorTitle ??
+        _getDefaultErrorTitle();
+
+    debugPrint(
+        '📝 Error title source: ${currentErrorPage?.title != null ? "error page" : config?.errorTitle != null ? "config" : "default"}');
+    debugPrint('📝 Final error title: "$title"');
+
+    return title;
   }
 
   /// Error description getter
   String get errorDescription {
-    return currentErrorPage?.description ?? _getDefaultErrorDescription();
+    // Priority: error page > config > default
+    return currentErrorPage?.description ??
+        config?.errorDescription ??
+        _getDefaultErrorDescription();
   }
 
   /// Retry button text getter
@@ -168,60 +181,15 @@ class ErrorHandlingState extends Equatable {
     return currentErrorPage?.supportButtonText ?? 'Support';
   }
 
-  /// Get default error title based on error type
+  /// Get default error title - generic message
   String _getDefaultErrorTitle() {
-    switch (currentErrorType) {
-      case ErrorType.network:
-        return 'Connection Error';
-      case ErrorType.server:
-        return 'Server Error';
-      case ErrorType.authentication:
-        return 'Authentication Error';
-      case ErrorType.authorization:
-        return 'Authorization Error';
-      case ErrorType.notFound:
-        return 'Page Not Found';
-      case ErrorType.timeout:
-        return 'Timeout';
-      case ErrorType.maintenance:
-        return 'Maintenance Mode';
-      case ErrorType.versionMismatch:
-        return 'Version Mismatch';
-      case ErrorType.localStorage:
-        return 'Local Storage Error';
-      case ErrorType.permission:
-        return 'Permission Error';
-      default:
-        return 'An Error Occurred';
-    }
+    return 'Something went wrong';
   }
 
-  /// Get default error description based on error type
+  /// Get default error description - generic message
   String _getDefaultErrorDescription() {
-    switch (currentErrorType) {
-      case ErrorType.network:
-        return 'Check your internet connection and try again.';
-      case ErrorType.server:
-        return 'A server problem occurred. Please try again later.';
-      case ErrorType.authentication:
-        return 'Check your login credentials and try again.';
-      case ErrorType.authorization:
-        return 'You do not have permission to perform this operation.';
-      case ErrorType.notFound:
-        return 'The page you are looking for was not found.';
-      case ErrorType.timeout:
-        return 'The operation timed out. Please try again.';
-      case ErrorType.maintenance:
-        return 'System is under maintenance. Please try again later.';
-      case ErrorType.versionMismatch:
-        return 'The application needs to be updated.';
-      case ErrorType.localStorage:
-        return 'An error occurred while saving local data.';
-      case ErrorType.permission:
-        return 'Required permissions have not been granted for this operation.';
-      default:
-        return errorMessage ?? 'An unknown error occurred.';
-    }
+    return errorMessage ??
+        'Please try again or contact support if the problem persists.';
   }
 
   @override

@@ -16,7 +16,7 @@ import 'package:osmea_components/src/components/text/text.dart';
 /// - Interactive tap feedback with ripple effect
 /// - Selection state management
 /// - Closable/removable chip capability
-/// - Support for icons and avatars
+/// - Support for icons (IconData, custom Widget, or asset image path) and avatars
 /// - Various visual styles and states
 /// - Dynamic width based on content, preventing layout overflows.
 ///
@@ -26,8 +26,11 @@ class OsmeaChips extends CoreContainer {
   /// Text to display on the chip
   final String? text;
 
-  /// Icon data to display in the chip
-  final IconData? icon;
+  /// Icon data or widget to display in the chip (IconData or Widget)
+  final dynamic icon;
+
+  /// Position of the icon within the chip
+  final ChipsIconPosition iconPosition;
 
   /// Custom action widget (usually at the end)
   final Widget? actionWidget;
@@ -68,6 +71,18 @@ class OsmeaChips extends CoreContainer {
   /// Custom border color (overrides variant)
   final Color? borderColor;
 
+  /// Thickness of the chip border
+  final double? borderWidth;
+
+  /// Background color for selected state
+  final Color? activeColor;
+
+  /// Background color for unselected state
+  final Color? inactiveColor;
+
+  /// Custom border radius for the chip
+  final double? radius;
+
   /// Custom text style (fontSize, fontWeight, etc.)
   final TextStyle? textStyle;
 
@@ -92,11 +107,19 @@ class OsmeaChips extends CoreContainer {
   /// Creates an OSMEA Chip.
   ///
   /// At minimum, [text] or [icon] should be provided.
+  /// [icon] can be IconData, Widget, or String (asset path).
+  /// [iconPosition] sets where the icon appears (start or end).
+  /// [activeColor] sets background color for selected state.
+  /// [inactiveColor] sets background color for unselected state.
+  /// [borderWidth] sets thickness of the chip border.
+  /// [height] sets custom height for the chip.
+  /// [radius] sets custom border radius for the chip.ets custom border radius for the chip.
   const OsmeaChips({
     super.key,
     super.customTheme,
     this.text,
     this.icon,
+    this.iconPosition = ChipsIconPosition.start,
     this.actionWidget,
     this.variant = ChipsVariant.neutral,
     this.size = ChipsSize.medium,
@@ -109,6 +132,10 @@ class OsmeaChips extends CoreContainer {
     this.backgroundColor,
     this.textColor,
     this.borderColor,
+    this.borderWidth,
+    this.activeColor,
+    this.inactiveColor,
+    this.radius,
     EdgeInsetsGeometry? padding,
     this.textStyle,
     this.customShape,
@@ -119,6 +146,7 @@ class OsmeaChips extends CoreContainer {
     this.tooltip,
     this.fitContent = true,
     super.margin,
+    super.height,
     super.clipBehavior,
   })  : assert(text != null || icon != null || avatar != null,
             'At least one of text, icon, or avatar must be provided'),
@@ -138,8 +166,8 @@ class OsmeaChips extends CoreContainer {
         (isDisabled
             ? styleConfig.disabledBackgroundColor!
             : isSelected
-                ? styleConfig.selectedBackgroundColor!
-                : styleConfig.backgroundColor);
+                ? (activeColor ?? styleConfig.selectedBackgroundColor!)
+                : (inactiveColor ?? styleConfig.backgroundColor));
 
     final Color finalTextColor = textColor ??
         (isDisabled
@@ -182,7 +210,9 @@ class OsmeaChips extends CoreContainer {
       isDisabled,
     );
 
-    final borderRadius = shape.getBorderRadius(context);
+    final borderRadius = radius != null
+        ? BorderRadius.circular(radius!)
+        : shape.getBorderRadius(context);
     final chipWidget = Material(
       color: OsmeaColors.transparent,
       shape: customShape ??
@@ -202,23 +232,27 @@ class OsmeaChips extends CoreContainer {
         hoverColor: finalTextColor.withValues(alpha: 0.05),
         customBorder: customShape ??
             RoundedRectangleBorder(
-              borderRadius: shape.getBorderRadius(context),
+              borderRadius: radius != null
+                  ? BorderRadius.circular(radius!)
+                  : shape.getBorderRadius(context),
             ),
         child: AnimatedContainer(
           duration: animationDuration,
-          height: sizeConfig.height,
+          height: height ?? sizeConfig.height,
           decoration: ShapeDecoration(
             color: finalBackgroundColor,
             shape: customShape ??
                 RoundedRectangleBorder(
-                  borderRadius: shape.getBorderRadius(context),
+                  borderRadius: radius != null
+                      ? BorderRadius.circular(radius!)
+                      : shape.getBorderRadius(context),
                   side: BorderSide(
                     color: finalBorderColor,
                     width: finalBorderColor != OsmeaColors.transparent &&
                             (style == ChipsStyle.outlined ||
                                 style == ChipsStyle.soft ||
                                 isSelected)
-                        ? sizeConfig.borderWidth
+                        ? (borderWidth ?? sizeConfig.borderWidth)
                         : 0.0,
                   ),
                 ),
@@ -254,6 +288,7 @@ class OsmeaChips extends CoreContainer {
     bool hasAvatar,
     bool hasAction,
   ) {
+    // Default padding calculation
     final double horizontalPadding = config.padding.horizontal / 2;
     double left = hasText ? horizontalPadding : 0;
     double right = hasText ? horizontalPadding : 0;
@@ -287,35 +322,65 @@ class OsmeaChips extends CoreContainer {
     bool isSelected,
     bool isDisabled,
   ) {
+    final List<Widget> content = [];
+
+    // Avatar always comes first
+    if (hasAvatar) {
+      content.add(_buildAvatar(config));
+      if (hasText || hasIcon) {
+        content.add(SizedBox(width: config.spacing));
+      }
+    }
+
+    // Icon at start position (and no avatar)
+    if (hasIcon && !hasAvatar && iconPosition == ChipsIconPosition.start) {
+      content.add(_buildIcon(config, iconColor));
+      if (hasText) {
+        content.add(SizedBox(width: config.spacing));
+      }
+    }
+
+    // Text content
+    if (hasText) {
+      content.add(_buildText(config, textColor, isSelected));
+    }
+
+    // Icon at end position (and no avatar)
+    if (hasIcon && !hasAvatar && iconPosition == ChipsIconPosition.end) {
+      if (hasText) {
+        content.add(SizedBox(width: config.spacing));
+      }
+      content.add(_buildIcon(config, iconColor));
+    }
+
+    // Action widget (closable button)
+    if (hasAction) {
+      if (hasText || hasIcon) {
+        content.add(SizedBox(width: config.spacing));
+      }
+      content.add(_buildAction(
+        context,
+        config,
+        textColor,
+        backgroundColor,
+        isDisabled,
+      ));
+    }
+
+    // Selection indicator (only if no action widget)
+    if (isSelected && !hasAction) {
+      if (hasText || hasIcon) {
+        content.add(SizedBox(width: config.spacing));
+      }
+      content.add(_buildSelectionIndicator(
+          config, iconColor, backgroundColor, hasIcon));
+    }
+
     return Row(
-      mainAxisSize: min,
-      mainAxisAlignment: centerMain,
-      crossAxisAlignment: crossCenter,
-      children: [
-        if (hasAvatar) ...[
-          _buildAvatar(config),
-          SizedBox(width: config.spacing),
-        ],
-        if (hasIcon && !hasAvatar) ...[
-          _buildIcon(config, iconColor),
-          if (hasText) SizedBox(width: config.spacing),
-        ],
-        if (hasText) _buildText(config, textColor, isSelected),
-        if (selected && !hasAction) ...[
-          SizedBox(width: config.spacing),
-          _buildSelectionIndicator(config, iconColor, backgroundColor, hasIcon),
-        ],
-        if (hasAction) ...[
-          if (hasText) SizedBox(width: config.spacing),
-          _buildAction(
-            context,
-            config,
-            textColor,
-            backgroundColor,
-            isDisabled,
-          ),
-        ],
-      ],
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: content,
     );
   }
 
@@ -328,17 +393,45 @@ class OsmeaChips extends CoreContainer {
   }
 
   Widget _buildIcon(ChipsSizeConfig config, Color iconColor) {
-    return Icon(icon, size: config.iconSize, color: iconColor);
+    if (icon is IconData) {
+      return Icon(icon as IconData, size: config.iconSize, color: iconColor);
+    } else if (icon is Widget) {
+      return SizedBox(
+        width: config.iconSize,
+        height: config.iconSize,
+        child: icon as Widget,
+      );
+    } else if (icon is String) {
+      return SizedBox(
+        width: config.iconSize,
+        height: config.iconSize,
+        child: Image.asset(
+          icon as String,
+          width: config.iconSize,
+          height: config.iconSize,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            // Fallback to a default icon if image fails to load
+            return Icon(
+              Icons.image_not_supported,
+              size: config.iconSize,
+              color: iconColor,
+            );
+          },
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 
   Widget _buildText(ChipsSizeConfig config, Color textColor, bool isSelected) {
     return Flexible(
-      child: OsmeaLabel(
+      child: OsmeaText(
         text!,
-        size: LabelSize.medium,
         color: textColor,
         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-        textAlign: textCenter,
+        textAlign: TextAlign.center,
+        style: textStyle,
       ),
     );
   }
@@ -382,7 +475,7 @@ class OsmeaChips extends CoreContainer {
       height: config.iconSize * sizeFactor,
       decoration: BoxDecoration(
         color: iconColor,
-        shape: circleShape,
+        shape: BoxShape.circle,
       ),
       child: Icon(
         Icons.check,
