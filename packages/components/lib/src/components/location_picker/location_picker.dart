@@ -126,13 +126,27 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
             ],
             if (widget.picker.variant != LocationPickerVariant.map)
               _buildSearchField(context, state, sizeConfig),
-            if (state.suggestions.isNotEmpty)
-              _buildSuggestionsList(context, state),
-            if (widget.picker.variant != LocationPickerVariant.input &&
-                state.isMapVisible) ...[
-              const SizedBox(height: 8),
-              _buildMapView(context, state, sizeConfig),
-            ],
+            if (state.suggestions.isNotEmpty ||
+                (widget.picker.variant != LocationPickerVariant.input &&
+                    state.isMapVisible)) ...[
+              const SizedBox(height: 4),
+              Material(
+                elevation: 4,
+                borderRadius: BorderRadius.circular(8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (state.suggestions.isNotEmpty)
+                      _buildSuggestionsListView(context, state),
+                    if (widget.picker.variant != LocationPickerVariant.input &&
+                        state.isMapVisible) ...[
+                      if (state.suggestions.isNotEmpty) const Divider(height: 1),
+                      _buildMapView(context, state, sizeConfig),
+                    ]
+                  ],
+                ),
+              ),
+            ]
           ],
         );
       },
@@ -178,25 +192,22 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
     );
   }
 
-  Widget _buildSuggestionsList(
+  Widget _buildSuggestionsListView(
       BuildContext context, LocationPickerState state) {
-    return Material(
-      elevation: 4,
-      borderRadius: BorderRadius.circular(8),
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: state.suggestions.length,
-        itemBuilder: (context, index) {
-          final location = state.suggestions[index];
-          return ListTile(
-            title: Text(location.name ?? location.address),
-            subtitle: location.name != null ? Text(location.address) : null,
-            onTap: () {
-              context.read<LocationPickerCubit>().selectLocation(location);
-            },
-          );
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: state.suggestions.length,
+      itemBuilder: (context, index) {
+        final location = state.suggestions[index];
+        return ListTile(
+          title: Text(location.name ?? location.address),
+          subtitle: location.name != null ? Text(location.address) : null,
+          onTap: () {
+            context.read<LocationPickerCubit>().selectLocation(location);
+          },
+        );
+      },
     );
   }
 
