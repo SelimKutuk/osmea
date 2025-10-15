@@ -13,11 +13,22 @@ class LocationPickerExample extends StatefulWidget {
 }
 
 class _LocationPickerExampleState extends State<LocationPickerExample> {
-  LocationData? _selectedLocation;
   final _locationController = TextEditingController();
 
   // TODO: Add your Google Maps API Key here for the location picker to work.
   final String _apiKey = dotenv.env['API_KEY']!;
+
+  LocationData? _combinedLocation;
+  LocationData? _inputOnlyLocation;
+  LocationData? _noCurrentLocation;
+  LocationData? _mapOnlyLocation;
+
+  LocationData? _smallSizeLocation;
+  LocationData? _mediumSizeLocation;
+  LocationData? _largeSizeLocation;
+
+  LocationData? _outlinedStyleLocation;
+  LocationData? _filledStyleLocation;
 
   @override
   void dispose() {
@@ -25,16 +36,12 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     super.dispose();
   }
 
-  void _onLocationChanged(LocationData? location) {
-    setState(() {
-      _selectedLocation = location;
-      if (location != null) {
-        _locationController.text =
-            'Address: ${location.address}\nCoordinates: (${location.latitude.toStringAsFixed(4)}, ${location.longitude.toStringAsFixed(4)})';
-      } else {
-        _locationController.text = '';
-      }
-    });
+  void _updateSelectedLocationText(LocationData? location) {
+    if (location != null) {
+      _locationController.text = location.address;
+    } else {
+      _locationController.text = '';
+    }
   }
 
   @override
@@ -94,9 +101,16 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _combinedLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           label: 'Delivery Address',
           variant: LocationPickerVariant.combined,
+          initialLocation: _combinedLocation,
+          showCurrentLocation: true,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text(
@@ -106,9 +120,35 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _inputOnlyLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           label: 'Search Location',
           variant: LocationPickerVariant.input,
+          initialLocation: _inputOnlyLocation,
+          showCurrentLocation: true,
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        OsmeaComponents.text(
+          'Without Current Location Button',
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.locationPicker(
+          apiKey: _apiKey,
+          onLocationChanged: (location) {
+            setState(() {
+              _noCurrentLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
+          label: 'Search Location',
+          variant: LocationPickerVariant.input,
+          initialLocation: _noCurrentLocation,
+          showCurrentLocation: false,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text(
@@ -118,8 +158,15 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _mapOnlyLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           variant: LocationPickerVariant.map,
+          initialLocation: _mapOnlyLocation,
+          showCurrentLocation: true,
         ),
       ],
     );
@@ -133,9 +180,15 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _smallSizeLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           size: LocationPickerSize.small,
           hintText: 'Small size picker',
+          initialLocation: _smallSizeLocation,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text(
@@ -145,18 +198,30 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _mediumSizeLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           size: LocationPickerSize.medium,
           hintText: 'Medium size picker',
+          initialLocation: _mediumSizeLocation,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Large', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _largeSizeLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           size: LocationPickerSize.large,
           hintText: 'Large size picker',
+          initialLocation: _largeSizeLocation,
         ),
       ],
     );
@@ -173,18 +238,30 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _outlinedStyleLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           style: LocationPickerStyle.outlined,
           label: 'Outlined Style',
+          initialLocation: _outlinedStyleLocation,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Filled', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey,
-          onLocationChanged: _onLocationChanged,
+          onLocationChanged: (location) {
+            setState(() {
+              _filledStyleLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
           style: LocationPickerStyle.filled,
           label: 'Filled Style',
+          initialLocation: _filledStyleLocation,
         ),
       ],
     );
