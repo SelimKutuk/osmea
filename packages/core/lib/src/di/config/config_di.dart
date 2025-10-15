@@ -8,6 +8,11 @@ import 'package:core/src/views/loading/cubit/loading_cubit.dart';
 
 import 'package:core/src/views/onboarding/cubit/onboarding_cubit.dart';
 import 'package:core/src/views/splash/cubit/splash_cubit.dart';
+<<<<<<< HEAD
+=======
+import 'package:core/src/views/error_handling/cubit/error_handling_cubit.dart';
+import 'package:core/src/views/image_detail/cubit/image_detail_cubit.dart';
+>>>>>>> origin/dev
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -36,9 +41,15 @@ Future<GetIt> configureDependencies() async {
   getIt.registerFactory<SignInCubit>(() => SignInCubit());
   getIt.registerFactory<LoadingViewCubit>(() => LoadingViewCubit());
   getIt.registerFactory<ErrorHandlingCubit>(() => ErrorHandlingCubit());
+<<<<<<< HEAD
 
   // 🔄 Run the generated initialization and return the configured GetIt instance
   await getIt.init();
 
   return getIt;
 }
+=======
+  getIt.registerFactory<ImageDetailCubit>(() => ImageDetailCubit());
+  return result;
+}
+>>>>>>> origin/dev
