@@ -18,7 +18,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
 
   /// Called when the search query changes.
   void onSearchChanged(String query) {
-    emit(state.copyWith(searchQuery: query, isLoading: true, error: null));
+    emit(state.copyWith(searchQuery: query, isLoading: true, error: null, clearSelectedLocation: query.isEmpty));
 
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
@@ -74,6 +74,15 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
     ));
   }
 
+  /// Clears the currently selected location.
+  void clearLocation() {
+    emit(state.copyWith(
+      clearSelectedLocation: true,
+      searchQuery: '',
+      suggestions: [],
+    ));
+  }
+
   /// Toggles the visibility of the map view.
   void toggleMapVisibility() {
     emit(state.copyWith(isMapVisible: !state.isMapVisible));
@@ -92,10 +101,11 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
           address: 'Current Location, Istanbul',
           name: 'Current Location');
       selectLocation(location);
-      emit(state.copyWith(isLoading: false));
     } catch (e) {
       emit(state.copyWith(
           error: 'Failed to get current location.', isLoading: false));
+    } finally {
+      emit(state.copyWith(isLoading: false));
     }
   }
 

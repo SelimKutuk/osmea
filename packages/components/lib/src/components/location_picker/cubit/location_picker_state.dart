@@ -35,6 +35,7 @@ class LocationPickerState extends Equatable {
   /// Creates a copy of the state with updated values.
   LocationPickerState copyWith({
     LocationData? selectedLocation,
+    bool? clearSelectedLocation,
     String? searchQuery,
     List<LocationData>? suggestions,
     bool? isLoading,
@@ -42,7 +43,9 @@ class LocationPickerState extends Equatable {
     bool? isMapVisible,
   }) {
     return LocationPickerState(
-      selectedLocation: selectedLocation ?? this.selectedLocation,
+      selectedLocation: (clearSelectedLocation ?? false)
+          ? null
+          : selectedLocation ?? this.selectedLocation,
       searchQuery: searchQuery ?? this.searchQuery,
       suggestions: suggestions ?? this.suggestions,
       isLoading: isLoading ?? this.isLoading,

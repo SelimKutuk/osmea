@@ -23,8 +23,9 @@ import 'models/location_model.dart';
 /// )
 /// ```
 class OsmeaLocationPicker extends CoreContainer {
+  final LocationData? location;
   final LocationData? initialLocation;
-  final ValueChanged<LocationData> onLocationChanged;
+  final ValueChanged<LocationData?> onLocationChanged;
   final LocationPickerVariant variant;
   final LocationPickerSize size;
   final LocationPickerStyle style;
@@ -32,9 +33,11 @@ class OsmeaLocationPicker extends CoreContainer {
   final String? hintText;
   final bool isRequired;
   final String apiKey;
+  final bool showCurrentLocation;
 
   const OsmeaLocationPicker({
     super.key,
+    this.location,
     this.initialLocation,
     required this.onLocationChanged,
     required this.apiKey,
@@ -44,6 +47,7 @@ class OsmeaLocationPicker extends CoreContainer {
     this.label,
     this.hintText,
     this.isRequired = false,
+    this.showCurrentLocation = true,
   });
 
   @override
@@ -57,57 +61,96 @@ class OsmeaLocationPicker extends CoreContainer {
   }
 }
 
-class _LocationPickerView extends StatelessWidget {
+class _LocationPickerView extends StatefulWidget {
   final OsmeaLocationPicker picker;
 
   const _LocationPickerView({required this.picker});
 
   @override
-  Widget build(BuildContext context) {
-    final sizeConfig = picker.size.getConfig(context);
+  State<_LocationPickerView> createState() => _LocationPickerViewState();
+}
 
-    return BlocListener<LocationPickerCubit, LocationPickerState>(
+class _LocationPickerViewState extends State<_LocationPickerView> {
+  final TextEditingController _searchController = TextEditingController();
+  late final LocationPickerCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<LocationPickerCubit>();
+    if (widget.picker.initialLocation != null) {
+      _cubit.selectLocation(widget.picker.initialLocation!);
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant _LocationPickerView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.picker.initialLocation != oldWidget.picker.initialLocation) {
+      if (widget.picker.initialLocation != null) {
+        _cubit.selectLocation(widget.picker.initialLocation!);
+      } else {
+        _cubit.clearLocation();
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final sizeConfig = widget.picker.size.getConfig(context);
+
+    return BlocConsumer<LocationPickerCubit, LocationPickerState>(
       listener: (context, state) {
-        if (state.selectedLocation != null) {
-          picker.onLocationChanged(state.selectedLocation!);
+        widget.picker.onLocationChanged(state.selectedLocation);
+
+        if (_searchController.text != state.searchQuery) {
+          _searchController.text = state.searchQuery;
         }
       },
-      child: BlocBuilder<LocationPickerCubit, LocationPickerState>(
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (picker.label != null) ...[
-                Text(
-                  picker.label!,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                const SizedBox(height: 8),
-              ],
-              if (picker.variant != LocationPickerVariant.map)
-                _buildSearchField(context, state, sizeConfig),
-              if (state.suggestions.isNotEmpty)
-                _buildSuggestionsList(context, state),
-              if (picker.variant != LocationPickerVariant.input &&
-                  state.isMapVisible) ...[
-                const SizedBox(height: 8),
-                _buildMapView(context, state, sizeConfig),
-              ],
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.picker.label != null) ...[
+              Text(
+                widget.picker.label!,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 8),
             ],
-          );
-        },
-      ),
+            if (widget.picker.variant != LocationPickerVariant.map)
+              _buildSearchField(context, state, sizeConfig),
+            if (state.suggestions.isNotEmpty)
+              _buildSuggestionsList(context, state),
+            if (widget.picker.variant != LocationPickerVariant.input &&
+                state.isMapVisible) ...[
+              const SizedBox(height: 8),
+              _buildMapView(context, state, sizeConfig),
+            ],
+          ],
+        );
+      },
     );
   }
 
   Widget _buildSearchField(BuildContext context, LocationPickerState state,
       LocationPickerSizeConfig sizeConfig) {
-    final cubit = context.read<LocationPickerCubit>();
     return OsmeaComponents.textField(
-      hint: picker.hintText ?? 'Search for a location...',
-      onChanged: (query) => cubit.onSearchChanged(query),
-      size: _mapToTextFieldSize(picker.size),
-      variant: _mapToTextFieldVariant(picker.style),
+      controller: _searchController,
+      hint: widget.picker.hintText ?? 'Search for a location...',
+      onChanged: (query) {
+        if (query != state.searchQuery) {
+          _cubit.onSearchChanged(query);
+        }
+      },
+      size: _mapToTextFieldSize(widget.picker.size),
+      variant: _mapToTextFieldVariant(widget.picker.style),
       prefixIcon: const Icon(Icons.search),
       suffixIcon: Row(
         mainAxisSize: MainAxisSize.min,
@@ -118,16 +161,16 @@ class _LocationPickerView extends StatelessWidget {
               height: 20,
               child: CircularProgressIndicator(strokeWidth: 2),
             )
-          else
+          else if (widget.picker.showCurrentLocation)
             IconButton(
               icon: const Icon(Icons.my_location),
-              onPressed: () => cubit.getCurrentLocation(),
+              onPressed: () => _cubit.getCurrentLocation(),
               tooltip: 'Use current location',
             ),
-          if (picker.variant == LocationPickerVariant.combined)
+          if (widget.picker.variant == LocationPickerVariant.combined)
             IconButton(
               icon: Icon(state.isMapVisible ? Icons.map_outlined : Icons.map),
-              onPressed: () => cubit.toggleMapVisibility(),
+              onPressed: () => _cubit.toggleMapVisibility(),
               tooltip: state.isMapVisible ? 'Hide map' : 'Show map',
             ),
         ],

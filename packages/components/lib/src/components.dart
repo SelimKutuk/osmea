@@ -929,7 +929,7 @@ class OsmeaComponents {
   static Widget locationPicker({
     Key? key,
     LocationData? initialLocation,
-    required ValueChanged<LocationData> onLocationChanged,
+    required ValueChanged<LocationData?> onLocationChanged,
     required String apiKey,
     LocationPickerVariant variant = LocationPickerVariant.combined,
     LocationPickerSize size = LocationPickerSize.medium,
@@ -937,6 +937,7 @@ class OsmeaComponents {
     String? label,
     String? hintText,
     bool isRequired = false,
+    bool showCurrentLocation = true,
   }) {
     return OsmeaLocationPicker(
       key: key,
@@ -949,6 +950,7 @@ class OsmeaComponents {
       label: label,
       hintText: hintText,
       isRequired: isRequired,
+      showCurrentLocation: showCurrentLocation,
     );
   }
 
