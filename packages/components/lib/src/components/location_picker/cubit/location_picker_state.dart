@@ -23,6 +23,9 @@ class LocationPickerState extends Equatable {
   /// Controls the visibility of the map view in the `combined` variant.
   final bool isMapVisible;
 
+  /// Indicates if the selected location has changed (used for callbacks).
+  final bool locationChanged;
+
   const LocationPickerState({
     this.selectedLocation,
     this.searchQuery = '',
@@ -30,6 +33,7 @@ class LocationPickerState extends Equatable {
     this.isLoading = false,
     this.error,
     this.isMapVisible = false,
+    this.locationChanged = false,
   });
 
   /// Creates a copy of the state with updated values.
@@ -41,6 +45,7 @@ class LocationPickerState extends Equatable {
     bool? isLoading,
     String? error,
     bool? isMapVisible,
+    bool? locationChanged,
   }) {
     return LocationPickerState(
       selectedLocation: (clearSelectedLocation ?? false)
@@ -51,6 +56,7 @@ class LocationPickerState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       error: error,
       isMapVisible: isMapVisible ?? this.isMapVisible,
+      locationChanged: locationChanged ?? false,
     );
   }
 
@@ -62,5 +68,6 @@ class LocationPickerState extends Equatable {
         isLoading,
         error,
         isMapVisible,
+        locationChanged,
       ];
 }

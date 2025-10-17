@@ -5,22 +5,27 @@ import 'dart:async';
 
 /// 📍 **Location Picker Cubit**
 ///
-/// Manages the state for the `OsmeaLocationPicker` component, handling
-/// location searches, suggestions, and selections.
+/// Manages the state for the `OsmeaLocationPicker` component,
+/// handling location searches, suggestions, and selections.
 class LocationPickerCubit extends Cubit<LocationPickerState> {
-  // In a real app, you would inject a location service.
-  // final LocationService _locationService;
   final String apiKey;
-
   Timer? _debounce;
 
   LocationPickerCubit(this.apiKey) : super(const LocationPickerState());
 
   /// Called when the search query changes.
   void onSearchChanged(String query) {
-    emit(state.copyWith(searchQuery: query, isLoading: true, error: null, clearSelectedLocation: query.isEmpty));
+    // Clear selected location if query is emptied
+    final clearSelection = query.isEmpty;
 
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    emit(state.copyWith(
+      searchQuery: query,
+      isLoading: true,
+      error: null,
+      clearSelectedLocation: clearSelection,
+    ));
+
+    _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       if (query.isEmpty) {
         emit(state.copyWith(suggestions: [], isLoading: false));
@@ -33,9 +38,9 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
   /// Fetches location suggestions based on the query.
   Future<void> _fetchSuggestions(String query) async {
     try {
-      // final results = await _locationService.search(query);
-      // Simulate API call
+      // Simulate API call (replace with real API call using apiKey)
       await Future.delayed(const Duration(milliseconds: 300));
+
       final results = [
         const LocationData(
             latitude: 41.0082,
@@ -52,10 +57,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
             longitude: 27.1428,
             address: 'Izmir, Turkey',
             name: 'Izmir'),
-      ]
-          .where(
-              (loc) => loc.address.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      ].where((loc) => loc.address.toLowerCase().contains(query.toLowerCase())).toList();
 
       emit(state.copyWith(suggestions: results, isLoading: false));
     } catch (e) {
@@ -71,15 +73,18 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
       searchQuery: location.address,
       suggestions: [],
       isMapVisible: false,
+      locationChanged: true, // Important for listener callback
     ));
   }
 
   /// Clears the currently selected location.
   void clearLocation() {
     emit(state.copyWith(
-      clearSelectedLocation: true,
+      selectedLocation: null,
       searchQuery: '',
       suggestions: [],
+      clearSelectedLocation: true,
+      locationChanged: true,
     ));
   }
 
@@ -90,10 +95,9 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
 
   /// Fetches the user's current location.
   Future<void> getCurrentLocation() async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, error: null));
     try {
-      // final location = await _locationService.getCurrentLocation();
-      // Simulate API call
+      // Simulate API call (replace with real current location logic)
       await Future.delayed(const Duration(seconds: 1));
       const location = LocationData(
           latitude: 41.0082,

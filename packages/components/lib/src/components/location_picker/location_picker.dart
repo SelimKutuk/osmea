@@ -9,19 +9,6 @@ import 'cubit/location_picker_state.dart';
 import 'models/location_model.dart';
 
 /// 📍 **OSMEA Location Picker**
-///
-/// A component for selecting a location using a search input and an optional map view.
-///
-/// {@category Components}
-/// {@subCategory Forms}
-///
-/// ```dart
-/// OsmeaLocationPicker(
-///   onLocationChanged: (location) {
-///     print('Selected: ${location.address}');
-///   },
-/// )
-/// ```
 class OsmeaLocationPicker extends CoreContainer {
   final LocationData? location;
   final LocationData? initialLocation;
@@ -75,6 +62,7 @@ class _LocationPickerView extends StatefulWidget {
 class _LocationPickerViewState extends State<_LocationPickerView> {
   final TextEditingController _searchController = TextEditingController();
   late final LocationPickerCubit _cubit;
+  LocationData? _lastNotifiedLocation; // Track last notified location
 
   @override
   void initState() {
@@ -82,6 +70,7 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
     _cubit = context.read<LocationPickerCubit>();
     if (widget.picker.initialLocation != null) {
       _cubit.selectLocation(widget.picker.initialLocation!);
+      _lastNotifiedLocation = widget.picker.initialLocation;
     } else if (widget.picker.autofocusCurrentLocation) {
       _cubit.getCurrentLocation();
     }
@@ -93,8 +82,10 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
     if (widget.picker.initialLocation != oldWidget.picker.initialLocation) {
       if (widget.picker.initialLocation != null) {
         _cubit.selectLocation(widget.picker.initialLocation!);
+        _lastNotifiedLocation = widget.picker.initialLocation;
       } else {
         _cubit.clearLocation();
+        _lastNotifiedLocation = null;
       }
     }
   }
@@ -111,7 +102,12 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
 
     return BlocConsumer<LocationPickerCubit, LocationPickerState>(
       listener: (context, state) {
-        widget.picker.onLocationChanged(state.selectedLocation);
+        // ✅ ÖNEMLI: Sadece location gerçekten değişirse callback çağır
+        if (state.locationChanged &&
+            state.selectedLocation != _lastNotifiedLocation) {
+          _lastNotifiedLocation = state.selectedLocation;
+          widget.picker.onLocationChanged(state.selectedLocation);
+        }
 
         if (_searchController.text != state.searchQuery) {
           _searchController.text = state.searchQuery;
@@ -144,7 +140,8 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
                       _buildSuggestionsListView(context, state),
                     if (widget.picker.variant != LocationPickerVariant.input &&
                         state.isMapVisible) ...[
-                      if (state.suggestions.isNotEmpty) const Divider(height: 1),
+                      if (state.suggestions.isNotEmpty)
+                        const Divider(height: 1),
                       _buildMapView(context, state, sizeConfig),
                     ]
                   ],
