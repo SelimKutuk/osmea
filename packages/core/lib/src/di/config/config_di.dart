@@ -39,18 +39,12 @@ Future<GetIt> configureDependencies() async {
   getIt.registerFactory<SignInCubit>(() => SignInCubit());
   getIt.registerFactory<LoadingViewCubit>(() => LoadingViewCubit());
   getIt.registerFactory<ErrorHandlingCubit>(() => ErrorHandlingCubit());
-<<<<<<< HEAD
+  getIt.registerFactory<ImageDetailCubit>(() => ImageDetailCubit());
+  // Register PermissionsCubit in core package
+  getIt.registerFactory<PermissionsCubit>(() => PermissionsCubit());
 
   // 🔄 Run the generated initialization and return the configured GetIt instance
   await getIt.init();
 
   return getIt;
 }
-=======
-  getIt.registerFactory<ImageDetailCubit>(() => ImageDetailCubit());
-  // Register PermissionsCubit in core package
-  getIt.registerFactory<PermissionsCubit>(() => PermissionsCubit());
-
-  return result;
-}
->>>>>>> origin/dev
