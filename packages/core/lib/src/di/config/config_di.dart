@@ -22,9 +22,9 @@ GetIt getIt = GetIt.instance;
 @InjectableInit()
 Future<GetIt> configureDependencies() async {
   // Register Logger first
-  // getIt.registerFactory<Logger>(() => Logger());
+  getIt.registerFactory<Logger>(() => Logger());
 
-  // // Register ICommonLogger
+  // Register ICommonLogger
   // getIt.registerLazySingleton<ICommonLogger>(
   //   () => CommonLogger(logger: Logger()),
   // );
