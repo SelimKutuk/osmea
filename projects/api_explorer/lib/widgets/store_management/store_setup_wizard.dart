@@ -4,6 +4,7 @@ import 'package:apis/apis.dart';
 import 'package:core/core.dart';
 import '../../services/handlers/woocommerce/auth_handlers/jwt_auth_test_handler.dart';
 import '../../services/handlers/woocommerce/auth_handlers/user_signup_handler.dart';
+import '../../services/handlers/woocommerce/auth_handlers/send_reset_password_handler.dart';
 
 class StoreSetupWizard extends StatefulWidget {
   final Function(StoreConfiguration)? onStoreAdded;
@@ -97,7 +98,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   // Authentication testing state
   bool _isTestingAuth = false;
   bool _isSigningUp = false;
+  bool _isResettingPassword = false;
   String? _authTestResult;
+  String? _resetPasswordResult;
 
   // Controllers for form fields
   final _storeNameController = TextEditingController();
@@ -116,6 +119,9 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
   final _signupEmailController = TextEditingController();
   final _signupPasswordController = TextEditingController();
   final _signupAuthKeyController = TextEditingController();
+  
+  // Reset password email field
+  final _resetPasswordEmailController = TextEditingController();
 
   // Password visibility states
   bool _isAccessTokenVisible = false;
@@ -1038,6 +1044,7 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
     _signupEmailController.dispose();
     _signupPasswordController.dispose();
     _signupAuthKeyController.dispose();
+    _resetPasswordEmailController.dispose();
     super.dispose();
   }
 
@@ -1581,6 +1588,12 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
               ? TextInputType.datetime
               : TextInputType.text,
         ),
+
+        // Reset Password Button for WooCommerce
+        if (_selectedPlatform == 'woocommerce') ...[
+          OsmeaComponents.sizedBox(height: context.spacing24),
+          _buildResetPasswordButton(),
+        ],
       ],
     );
   }
@@ -2004,6 +2017,139 @@ class _StoreSetupWizardState extends State<StoreSetupWizard>
         return 'WooCommerce';
       default:
         return 'Unknown Platform';
+    }
+  }
+
+  /// 📧 Build Reset Password Button for WooCommerce
+  Widget _buildResetPasswordButton() {
+    return OsmeaComponents.column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Email field for reset password
+        _buildTextField(
+          controller: _resetPasswordEmailController,
+          label: 'Email for Password Reset',
+          hint: 'Enter email address to reset password',
+          errorText: null,
+          icon: Icons.email,
+          keyboardType: TextInputType.emailAddress,
+        ),
+        
+        OsmeaComponents.sizedBox(height: 16),
+        
+        // Reset Password Button
+        OsmeaComponents.button(
+          text: _isResettingPassword 
+              ? 'Sending Reset Email...' 
+              : 'Send Reset Password Email',
+          variant: ButtonVariant.secondary,
+          size: ButtonSize.medium,
+          onPressed: _isResettingPassword ? null : _sendResetPasswordEmail,
+        ),
+        
+        // Reset password result message
+        if (_resetPasswordResult != null) ...[
+          OsmeaComponents.sizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: _resetPasswordResult!.contains('successfully') 
+                  ? Colors.green.withOpacity(0.1)
+                  : Colors.red.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _resetPasswordResult!.contains('successfully')
+                    ? Colors.green.withOpacity(0.3)
+                    : Colors.red.withOpacity(0.3),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  _resetPasswordResult!.contains('successfully') 
+                      ? Icons.check_circle 
+                      : Icons.error,
+                  color: _resetPasswordResult!.contains('successfully')
+                      ? Colors.green
+                      : Colors.red,
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    _resetPasswordResult!,
+                    style: TextStyle(
+                      color: _resetPasswordResult!.contains('successfully')
+                          ? Colors.green[700]
+                          : Colors.red[700],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// 📧 Send Reset Password Email
+  Future<void> _sendResetPasswordEmail() async {
+    if (_resetPasswordEmailController.text.trim().isEmpty) {
+      setState(() {
+        _resetPasswordResult = 'Please enter an email address';
+      });
+      return;
+    }
+
+    // Email validation
+    if (!_emailRegex.hasMatch(_resetPasswordEmailController.text.trim())) {
+      setState(() {
+        _resetPasswordResult = 'Please enter a valid email address';
+      });
+      return;
+    }
+
+    setState(() {
+      _isResettingPassword = true;
+      _resetPasswordResult = null;
+    });
+
+    try {
+      debugPrint('📧 Starting reset password process...');
+      
+      // Get brand name - use store name or default to 'osmea'
+      final brandName = _storeNameController.text.trim().isNotEmpty 
+          ? _storeNameController.text.trim()
+          : 'osmea';
+      
+      debugPrint('📧 Using brand name: $brandName');
+      
+      final handler = SendResetPasswordHandler();
+      final response = await handler.handleRequest('POST', {
+        'email': _resetPasswordEmailController.text.trim(),
+        'brand_name': brandName,
+      });
+
+      setState(() {
+        _isResettingPassword = false;
+        if (response['status'] == 'success') {
+          _resetPasswordResult = 'Reset password email sent successfully! Please check your inbox.';
+          // Clear the email field after successful send
+          _resetPasswordEmailController.clear();
+        } else {
+          _resetPasswordResult = response['message'] ?? 'Failed to send reset password email';
+        }
+      });
+
+      debugPrint('📧 Reset password result: ${response['status']}');
+      
+    } catch (e) {
+      setState(() {
+        _isResettingPassword = false;
+        _resetPasswordResult = 'Error occurred while sending reset email: ${e.toString()}';
+      });
+      debugPrint('❌ Reset password error: $e');
     }
   }
 
