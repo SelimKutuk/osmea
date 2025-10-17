@@ -147,3 +147,11 @@ export 'package:core/src/views/routes.dart';
 export 'package:core/src/views/image_detail/image_detail_view.dart';
 export 'package:core/src/views/image_detail/cubit/image_detail_cubit.dart';
 export 'package:core/src/views/image_detail/cubit/image_detail_state.dart';
+
+// 🔐 Exports the auth storage helper
+export 'package:core/src/helper/auth_storage_helper.dart';
+
+// 🔐 Exports the sign in view, cubit and state
+export 'package:core/src/views/auth/sign_in/sign_in_view.dart';
+export 'package:core/src/views/auth/sign_in/cubit/sign_in_cubit.dart';
+export 'package:core/src/views/auth/sign_in/cubit/sign_in_state.dart';
