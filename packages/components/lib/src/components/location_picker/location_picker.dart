@@ -34,6 +34,7 @@ class OsmeaLocationPicker extends CoreContainer {
   final bool isRequired;
   final String apiKey;
   final bool showCurrentLocation;
+  final bool autofocusCurrentLocation;
 
   const OsmeaLocationPicker({
     super.key,
@@ -48,6 +49,7 @@ class OsmeaLocationPicker extends CoreContainer {
     this.hintText,
     this.isRequired = false,
     this.showCurrentLocation = true,
+    this.autofocusCurrentLocation = false,
   });
 
   @override
@@ -80,6 +82,8 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
     _cubit = context.read<LocationPickerCubit>();
     if (widget.picker.initialLocation != null) {
       _cubit.selectLocation(widget.picker.initialLocation!);
+    } else if (widget.picker.autofocusCurrentLocation) {
+      _cubit.getCurrentLocation();
     }
   }
 

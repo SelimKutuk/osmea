@@ -938,6 +938,7 @@ class OsmeaComponents {
     String? hintText,
     bool isRequired = false,
     bool showCurrentLocation = true,
+    bool autofocusCurrentLocation = false,
   }) {
     return OsmeaLocationPicker(
       key: key,
@@ -951,6 +952,7 @@ class OsmeaComponents {
       hintText: hintText,
       isRequired: isRequired,
       showCurrentLocation: showCurrentLocation,
+      autofocusCurrentLocation: autofocusCurrentLocation,
     );
   }
 
