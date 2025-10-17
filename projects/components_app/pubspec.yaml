@@ -26,6 +26,8 @@ dependencies:
   device_frame: ^1.2.0             # Device frame for web preview
   share_plus: ^10.1.4              # Sharing utilities used by ApplicationShareHelper via core
   google_maps_flutter: ^2.6.1
+  geolocator: ^12.0.0
+  geocoding: ^2.0.6           # Geolocation services
         # Google Maps for Flutter
 
   # ────────────────────────────────
