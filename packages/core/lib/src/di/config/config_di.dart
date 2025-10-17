@@ -22,12 +22,12 @@ GetIt getIt = GetIt.instance;
 @InjectableInit()
 Future<GetIt> configureDependencies() async {
   // Register Logger first
-  getIt.registerFactory<Logger>(() => Logger());
+  // getIt.registerFactory<Logger>(() => Logger());
 
-  // Register ICommonLogger
-  getIt.registerLazySingleton<ICommonLogger>(
-    () => CommonLogger(logger: Logger()),
-  );
+  // // Register ICommonLogger
+  // getIt.registerLazySingleton<ICommonLogger>(
+  //   () => CommonLogger(logger: Logger()),
+  // );
 
   // Register SplashCubit in core package
   getIt.registerFactory<SplashCubit>(() => SplashCubit());
