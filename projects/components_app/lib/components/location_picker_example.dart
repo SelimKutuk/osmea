@@ -22,6 +22,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
   LocationData? _noCurrentLocation;
   LocationData? _mapOnlyLocation;
 
+  LocationData? _autofocusLocation;
+
   LocationData? _smallSizeLocation;
   LocationData? _mediumSizeLocation;
   LocationData? _largeSizeLocation;
@@ -170,6 +172,26 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text(
+          'Autofocus Current Location',
+          variant: OsmeaTextVariant.bodyMedium,
+        ),
+        OsmeaComponents.sizedBox(height: 8),
+        OsmeaComponents.locationPicker(
+          apiKey: _apiKey!,
+          onLocationChanged: (location) {
+            setState(() {
+              _autofocusLocation = location;
+            });
+            _updateSelectedLocationText(location);
+          },
+          label: 'Autofocus Location',
+          variant: LocationPickerVariant.combined,
+          initialLocation: _autofocusLocation,
+          showCurrentLocation: true,
+          autofocusCurrentLocation: true,
+        ),
+        OsmeaComponents.sizedBox(height: 16),
+        OsmeaComponents.text(
           'Map Only',
           variant: OsmeaTextVariant.bodyMedium,
         ),
@@ -185,6 +207,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           variant: LocationPickerVariant.map,
           initialLocation: _mapOnlyLocation,
           showCurrentLocation: true,
+          autofocusCurrentLocation: true,
         ),
       ],
     );

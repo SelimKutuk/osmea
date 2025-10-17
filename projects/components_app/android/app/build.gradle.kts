@@ -6,7 +6,7 @@ plugins {
 }
 
 // Read the .env file
-val envFile = rootProject.file(".env")
+val envFile = rootProject.file("../.env")
 val env = if (envFile.exists()) {
     envFile.readLines().mapNotNull { line ->
         val parts = line.split("=", limit = 2)
