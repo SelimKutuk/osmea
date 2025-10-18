@@ -31,26 +31,29 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
   LocationData? _filledStyleLocation;
 
   final Map<String, bool> _isPickerOpen = {};
+  bool _autofocusInitialized = false;
 
   @override
-  void dispose() {
-    _locationController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeAutofocus();
+    });
   }
 
-  void _updateSelectedLocationText(LocationData? location) {
-    if (location != null) {
-      _locationController.text = location.address;
-    } else {
-      _locationController.text = '';
-    }
-  }
-
-  Future<void> _getCurrentLocationDirectly() async {
+  Future<void> _initializeAutofocus() async {
+    if (_autofocusInitialized) return;
+    
     try {
-      final permission = await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        await Geolocator.requestPermission();
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (permission == LocationPermission.deniedForever ||
+          permission == LocationPermission.denied) {
+        _autofocusInitialized = true;
+        return;
       }
 
       final position = await Geolocator.getCurrentPosition(
@@ -77,22 +80,32 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         address: address,
       );
 
-      setState(() {
-        _combinedLocation = locationData;
-      });
-      _updateSelectedLocationText(locationData);
-
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Konumunuz kaydedildi: $address')),
-        );
+        setState(() {
+          _autofocusLocation = locationData;
+          _combinedLocation = locationData;
+          _autofocusInitialized = true;
+        });
+        _updateSelectedLocationText(locationData);
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Konum alınamadı: $e')),
-        );
+        _autofocusInitialized = true;
       }
+    }
+  }
+
+  @override
+  void dispose() {
+    _locationController.dispose();
+    super.dispose();
+  }
+
+  void _updateSelectedLocationText(LocationData? location) {
+    if (location != null) {
+      _locationController.text = location.address;
+    } else {
+      _locationController.text = '';
     }
   }
 
@@ -117,14 +130,9 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
             case 'combined':
               _combinedLocation = selected;
               break;
-            case 'input':
-              _inputOnlyLocation = selected;
-              break;
-            case 'no_current':
-              _noCurrentLocation = selected;
-              break;
             case 'autofocus':
               _autofocusLocation = selected;
+              _combinedLocation = selected; // Autofocus ve selected location senkron
               break;
             case 'map':
               _mapOnlyLocation = selected;
@@ -146,21 +154,18 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               break;
           }
         });
-        _updateSelectedLocationText(selected);
+        if (pickerId == 'combined' || pickerId == 'autofocus') {
+          _updateSelectedLocationText(selected);
+        }
       } else {
         setState(() {
           switch (pickerId) {
             case 'combined':
               _combinedLocation = null;
               break;
-            case 'input':
-              _inputOnlyLocation = null;
-              break;
-            case 'no_current':
-              _noCurrentLocation = null;
-              break;
             case 'autofocus':
               _autofocusLocation = null;
+              _combinedLocation = null;
               break;
             case 'map':
               _mapOnlyLocation = null;
@@ -182,10 +187,50 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               break;
           }
         });
-        _updateSelectedLocationText(null);
+        if (pickerId == 'combined' || pickerId == 'autofocus') {
+          _updateSelectedLocationText(null);
+        }
       }
     } else {
       _isPickerOpen[pickerId] = false;
+    }
+  }
+
+  void _handleInputOnlyLocationChange(
+    LocationData? location,
+    String pickerId,
+  ) async {
+    if (_isPickerOpen[pickerId] == true) {
+      return;
+    }
+
+    if (_inputOnlyLocation != null && pickerId == 'input') {
+      return; // Konum zaten seçilmişse değişmesin (input)
+    }
+
+    if (_noCurrentLocation != null && pickerId == 'no_current') {
+      return; // Konum zaten seçilmişse değişmesin (no_current)
+    }
+
+    _isPickerOpen[pickerId] = true;
+
+    final selected = await _openMapPicker(initialLocation: location);
+
+    if (mounted) {
+      _isPickerOpen[pickerId] = false;
+
+      if (selected != null) {
+        setState(() {
+          switch (pickerId) {
+            case 'input':
+              _inputOnlyLocation = selected;
+              break;
+            case 'no_current':
+              _noCurrentLocation = selected;
+              break;
+          }
+        });
+      }
     }
   }
 
@@ -241,9 +286,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           _combinedLocation = selectedLocation;
         });
         _updateSelectedLocationText(selectedLocation);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location Saved: ${selectedLocation.address}')),
-        );
       }
     } catch (e) {
       if (mounted) {
@@ -305,23 +347,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               readOnly: true,
               maxLines: 3,
             ),
-            if (_combinedLocation != null) ...[
-              OsmeaComponents.sizedBox(height: 12),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () => _showLocationMap(_combinedLocation!),
-                  icon: const Icon(Icons.map),
-                  label: const Text('Haritada Göster'),
-                ),
-              ),
-            ],
-            OsmeaComponents.sizedBox(height: 16),
-            ElevatedButton.icon(
-              onPressed: _getCurrentLocationAndOpenMap,
-              icon: const Icon(Icons.my_location),
-              label: const Text('Use Current Location & Pick on Map'),
-            ),
             OsmeaComponents.sizedBox(height: 32),
             _buildSectionTitle('Variants'),
             _buildVariantExamples(),
@@ -349,7 +374,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        OsmeaComponents.text('Combined (Input + Map)',
+                    OsmeaComponents.text('Combined (Input + Map)',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
@@ -361,10 +386,10 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_combinedLocation!);
             }
           },
-          label: 'Delivery Address',
           variant: LocationPickerVariant.combined,
           initialLocation: _combinedLocation,
           showCurrentLocation: true,
+          showMapButtonInSearch: true,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Input Only', variant: OsmeaTextVariant.bodyMedium),
@@ -372,16 +397,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.locationPicker(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
-              _handleLocationChanged(location, 'input'),
-          onShowMapPressed: () {
-            if (_inputOnlyLocation != null) {
-              _showLocationMap(_inputOnlyLocation!);
-            }
-          },
-          label: 'Search Location',
+              _handleInputOnlyLocationChange(location, 'input'),
           variant: LocationPickerVariant.input,
           initialLocation: _inputOnlyLocation,
           showCurrentLocation: true,
+          showMapButtonInSearch: false,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Without Current Location Button',
@@ -390,7 +410,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.locationPicker(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
-              _handleLocationChanged(location, 'no_current'),
+              _handleInputOnlyLocationChange(location, 'no_current'),
           label: 'Search Location',
           variant: LocationPickerVariant.input,
           initialLocation: _noCurrentLocation,
@@ -454,17 +474,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           size: LocationPickerSize.small,
           hintText: 'Small size picker',
           initialLocation: _smallSizeLocation,
+          showMapButtonInSearch: true,
         ),
-        OsmeaComponents.sizedBox(height: 8),
-        if (_smallSizeLocation != null)
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () => _showLocationMap(_smallSizeLocation!),
-              icon: const Icon(Icons.map),
-              label: const Text('Konum Detayları'),
-            ),
-          ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Medium (Default)',
             variant: OsmeaTextVariant.bodyMedium),
@@ -481,17 +492,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           size: LocationPickerSize.medium,
           hintText: 'Medium size picker',
           initialLocation: _mediumSizeLocation,
+          showMapButtonInSearch: true,
         ),
-        OsmeaComponents.sizedBox(height: 8),
-        if (_mediumSizeLocation != null)
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () => _showLocationMap(_mediumSizeLocation!),
-              icon: const Icon(Icons.map),
-              label: const Text('Konum Detayları'),
-            ),
-          ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Large', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
@@ -507,17 +509,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           size: LocationPickerSize.large,
           hintText: 'Large size picker',
           initialLocation: _largeSizeLocation,
+          showMapButtonInSearch: true,
         ),
-        OsmeaComponents.sizedBox(height: 8),
-        if (_largeSizeLocation != null)
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () => _showLocationMap(_largeSizeLocation!),
-              icon: const Icon(Icons.map),
-              label: const Text('Konum Detayları'),
-            ),
-          ),
       ],
     );
   }
@@ -541,17 +534,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           style: LocationPickerStyle.outlined,
           label: 'Outlined Style',
           initialLocation: _outlinedStyleLocation,
+          showMapButtonInSearch: true,
         ),
-        OsmeaComponents.sizedBox(height: 8),
-        if (_outlinedStyleLocation != null)
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () => _showLocationMap(_outlinedStyleLocation!),
-              icon: const Icon(Icons.map),
-              label: const Text('Konum Detayları'),
-            ),
-          ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Filled', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
@@ -567,17 +551,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           style: LocationPickerStyle.filled,
           label: 'Filled Style',
           initialLocation: _filledStyleLocation,
+          showMapButtonInSearch: true,
         ),
-        OsmeaComponents.sizedBox(height: 8),
-        if (_filledStyleLocation != null)
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () => _showLocationMap(_filledStyleLocation!),
-              icon: const Icon(Icons.map),
-              label: const Text('Konum Detayları'),
-            ),
-          ),
       ],
     );
   }
