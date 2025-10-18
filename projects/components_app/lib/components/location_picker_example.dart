@@ -46,7 +46,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
   }
 
-  /// Anlık konumu al ve direkt olarak kabul et
   Future<void> _getCurrentLocationDirectly() async {
     try {
       final permission = await Geolocator.checkPermission();
@@ -101,11 +100,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     LocationData? location,
     String pickerId,
   ) async {
-    if (location == null) {
-      return;
-    }
-
-    // Picker zaten açıksa, aynı anda bir daha açılmasını önle
     if (_isPickerOpen[pickerId] == true) {
       return;
     }
@@ -114,45 +108,85 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
 
     final selected = await _openMapPicker(initialLocation: location);
 
-    if (selected != null && mounted) {
-      setState(() {
-        switch (pickerId) {
-          case 'combined':
-            _combinedLocation = selected;
-            break;
-          case 'input':
-            _inputOnlyLocation = selected;
-            break;
-          case 'no_current':
-            _noCurrentLocation = selected;
-            break;
-          case 'autofocus':
-            _autofocusLocation = selected;
-            break;
-          case 'map':
-            _mapOnlyLocation = selected;
-            break;
-          case 'small':
-            _smallSizeLocation = selected;
-            break;
-          case 'medium':
-            _mediumSizeLocation = selected;
-            break;
-          case 'large':
-            _largeSizeLocation = selected;
-            break;
-          case 'outlined':
-            _outlinedStyleLocation = selected;
-            break;
-          case 'filled':
-            _filledStyleLocation = selected;
-            break;
-        }
-      });
-      _updateSelectedLocationText(selected);
-    }
+    if (mounted) {
+      _isPickerOpen[pickerId] = false;
 
-    _isPickerOpen[pickerId] = false;
+      if (selected != null) {
+        setState(() {
+          switch (pickerId) {
+            case 'combined':
+              _combinedLocation = selected;
+              break;
+            case 'input':
+              _inputOnlyLocation = selected;
+              break;
+            case 'no_current':
+              _noCurrentLocation = selected;
+              break;
+            case 'autofocus':
+              _autofocusLocation = selected;
+              break;
+            case 'map':
+              _mapOnlyLocation = selected;
+              break;
+            case 'small':
+              _smallSizeLocation = selected;
+              break;
+            case 'medium':
+              _mediumSizeLocation = selected;
+              break;
+            case 'large':
+              _largeSizeLocation = selected;
+              break;
+            case 'outlined':
+              _outlinedStyleLocation = selected;
+              break;
+            case 'filled':
+              _filledStyleLocation = selected;
+              break;
+          }
+        });
+        _updateSelectedLocationText(selected);
+      } else {
+        setState(() {
+          switch (pickerId) {
+            case 'combined':
+              _combinedLocation = null;
+              break;
+            case 'input':
+              _inputOnlyLocation = null;
+              break;
+            case 'no_current':
+              _noCurrentLocation = null;
+              break;
+            case 'autofocus':
+              _autofocusLocation = null;
+              break;
+            case 'map':
+              _mapOnlyLocation = null;
+              break;
+            case 'small':
+              _smallSizeLocation = null;
+              break;
+            case 'medium':
+              _mediumSizeLocation = null;
+              break;
+            case 'large':
+              _largeSizeLocation = null;
+              break;
+            case 'outlined':
+              _outlinedStyleLocation = null;
+              break;
+            case 'filled':
+              _filledStyleLocation = null;
+              break;
+          }
+        });
+        _updateSelectedLocationText(null);
+      }
+    } else {
+      _isPickerOpen[pickerId] = false;
+    }
   }
 
   Future<LocationData?> _openMapPicker({LocationData? initialLocation}) async {
@@ -161,8 +195,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
       MaterialPageRoute(
         builder: (_) => _GoogleMapPickerScreen(
           initialPosition: LatLng(
-            initialLocation?.latitude ?? 37.422,
-            initialLocation?.longitude ?? -122.084,
+            initialLocation?.latitude ?? 41.0082,
+            initialLocation?.longitude ?? 28.9784,
           ),
         ),
       ),
@@ -173,14 +207,16 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
 
   Future<void> _getCurrentLocationAndOpenMap() async {
     try {
-      final permission = await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        await Geolocator.requestPermission();
-        final newPermission = await Geolocator.checkPermission();
-        if (newPermission == LocationPermission.denied || newPermission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied ||
+            permission == LocationPermission.deniedForever) {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Location permission is required to use this feature.')),
+              const SnackBar(
+                  content: Text(
+                      'Location permission is required to use this feature.')),
             );
           }
           return;
@@ -197,7 +233,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         address: 'Loading address...',
       );
 
-      final selectedLocation = await _openMapPicker(initialLocation: initialLocation);
+      final selectedLocation =
+          await _openMapPicker(initialLocation: initialLocation);
 
       if (selectedLocation != null && mounted) {
         setState(() {
@@ -215,6 +252,15 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         );
       }
     }
+  }
+
+  void _showLocationMap(LocationData location) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => _LocationMapViewScreen(location: location),
+      ),
+    );
   }
 
   @override
@@ -259,6 +305,17 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               readOnly: true,
               maxLines: 3,
             ),
+            if (_combinedLocation != null) ...[
+              OsmeaComponents.sizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => _showLocationMap(_combinedLocation!),
+                  icon: const Icon(Icons.map),
+                  label: const Text('Haritada Göster'),
+                ),
+              ),
+            ],
             OsmeaComponents.sizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: _getCurrentLocationAndOpenMap,
@@ -299,6 +356,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'combined'),
+          onShowMapPressed: () {
+            if (_combinedLocation != null) {
+              _showLocationMap(_combinedLocation!);
+            }
+          },
           label: 'Delivery Address',
           variant: LocationPickerVariant.combined,
           initialLocation: _combinedLocation,
@@ -311,6 +373,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'input'),
+          onShowMapPressed: () {
+            if (_inputOnlyLocation != null) {
+              _showLocationMap(_inputOnlyLocation!);
+            }
+          },
           label: 'Search Location',
           variant: LocationPickerVariant.input,
           initialLocation: _inputOnlyLocation,
@@ -337,6 +404,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'autofocus'),
+          onShowMapPressed: () {
+            if (_autofocusLocation != null) {
+              _showLocationMap(_autofocusLocation!);
+            }
+          },
           label: 'Autofocus Location',
           variant: LocationPickerVariant.combined,
           initialLocation: _autofocusLocation,
@@ -350,6 +422,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'map'),
+          onShowMapPressed: () {
+            if (_mapOnlyLocation != null) {
+              _showLocationMap(_mapOnlyLocation!);
+            }
+          },
           variant: LocationPickerVariant.map,
           initialLocation: _mapOnlyLocation,
           showCurrentLocation: true,
@@ -369,21 +446,52 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'small'),
+          onShowMapPressed: () {
+            if (_smallSizeLocation != null) {
+              _showLocationMap(_smallSizeLocation!);
+            }
+          },
           size: LocationPickerSize.small,
           hintText: 'Small size picker',
           initialLocation: _smallSizeLocation,
         ),
+        OsmeaComponents.sizedBox(height: 8),
+        if (_smallSizeLocation != null)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () => _showLocationMap(_smallSizeLocation!),
+              icon: const Icon(Icons.map),
+              label: const Text('Konum Detayları'),
+            ),
+          ),
         OsmeaComponents.sizedBox(height: 16),
-        OsmeaComponents.text('Medium (Default)', variant: OsmeaTextVariant.bodyMedium),
+        OsmeaComponents.text('Medium (Default)',
+            variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'medium'),
+          onShowMapPressed: () {
+            if (_mediumSizeLocation != null) {
+              _showLocationMap(_mediumSizeLocation!);
+            }
+          },
           size: LocationPickerSize.medium,
           hintText: 'Medium size picker',
           initialLocation: _mediumSizeLocation,
         ),
+        OsmeaComponents.sizedBox(height: 8),
+        if (_mediumSizeLocation != null)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () => _showLocationMap(_mediumSizeLocation!),
+              icon: const Icon(Icons.map),
+              label: const Text('Konum Detayları'),
+            ),
+          ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Large', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
@@ -391,10 +499,25 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'large'),
+          onShowMapPressed: () {
+            if (_largeSizeLocation != null) {
+              _showLocationMap(_largeSizeLocation!);
+            }
+          },
           size: LocationPickerSize.large,
           hintText: 'Large size picker',
           initialLocation: _largeSizeLocation,
         ),
+        OsmeaComponents.sizedBox(height: 8),
+        if (_largeSizeLocation != null)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () => _showLocationMap(_largeSizeLocation!),
+              icon: const Icon(Icons.map),
+              label: const Text('Konum Detayları'),
+            ),
+          ),
       ],
     );
   }
@@ -403,16 +526,32 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        OsmeaComponents.text('Outlined (Default)', variant: OsmeaTextVariant.bodyMedium),
+        OsmeaComponents.text('Outlined (Default)',
+            variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'outlined'),
+          onShowMapPressed: () {
+            if (_outlinedStyleLocation != null) {
+              _showLocationMap(_outlinedStyleLocation!);
+            }
+          },
           style: LocationPickerStyle.outlined,
           label: 'Outlined Style',
           initialLocation: _outlinedStyleLocation,
         ),
+        OsmeaComponents.sizedBox(height: 8),
+        if (_outlinedStyleLocation != null)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () => _showLocationMap(_outlinedStyleLocation!),
+              icon: const Icon(Icons.map),
+              label: const Text('Konum Detayları'),
+            ),
+          ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Filled', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
@@ -420,10 +559,25 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'filled'),
+          onShowMapPressed: () {
+            if (_filledStyleLocation != null) {
+              _showLocationMap(_filledStyleLocation!);
+            }
+          },
           style: LocationPickerStyle.filled,
           label: 'Filled Style',
           initialLocation: _filledStyleLocation,
         ),
+        OsmeaComponents.sizedBox(height: 8),
+        if (_filledStyleLocation != null)
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () => _showLocationMap(_filledStyleLocation!),
+              icon: const Icon(Icons.map),
+              label: const Text('Konum Detayları'),
+            ),
+          ),
       ],
     );
   }
@@ -483,7 +637,6 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
   }
 
   void _confirmLocation() {
-    // Çift klik önlemek için flag kontrol et
     if (_isConfirming) {
       return;
     }
@@ -508,7 +661,8 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: (_isProcessing || _isConfirming) ? null : _confirmLocation,
+            onPressed:
+                (_isProcessing || _isConfirming) ? null : _confirmLocation,
           )
         ],
       ),
@@ -573,6 +727,91 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+/// Location Map View Screen - Seçilen konumu haritada göster
+class _LocationMapViewScreen extends StatefulWidget {
+  final LocationData location;
+  const _LocationMapViewScreen({required this.location});
+
+  @override
+  State<_LocationMapViewScreen> createState() => _LocationMapViewScreenState();
+}
+
+class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
+  late GoogleMapController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Konum Haritası'),
+      ),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(widget.location.latitude, widget.location.longitude),
+          zoom: 16,
+        ),
+        onMapCreated: (controller) => _controller = controller,
+        markers: {
+          Marker(
+            markerId: const MarkerId('selected_location'),
+            position:
+                LatLng(widget.location.latitude, widget.location.longitude),
+            infoWindow: InfoWindow(
+              title: 'Seçilen Konum',
+              snippet: widget.location.address,
+            ),
+          )
+        },
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        zoomControlsEnabled: true,
+      ),
+      bottomSheet: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, -2),
+            )
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Konum Detayları',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              widget.location.address,
+              style: const TextStyle(fontSize: 14),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Enlem: ${widget.location.latitude.toStringAsFixed(6)}\nBoylam: ${widget.location.longitude.toStringAsFixed(6)}',
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Kapat'),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
