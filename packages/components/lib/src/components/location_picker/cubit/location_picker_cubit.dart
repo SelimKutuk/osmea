@@ -23,6 +23,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
       error: null,
       clearSelectedLocation: clearSelection,
     ));
+
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       if (query.isEmpty) {
@@ -58,6 +59,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
           .where((loc) =>
               loc.address.toLowerCase().contains(query.toLowerCase()))
           .toList();
+
       emit(state.copyWith(suggestions: results, isLoading: false));
     } catch (e) {
       emit(state.copyWith(
@@ -83,7 +85,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
       searchQuery: '',
       suggestions: [],
       clearSelectedLocation: true,
-      locationChanged: true,
+      locationChanged: false, // Don't trigger callback when clearing
     ));
   }
 
@@ -92,11 +94,11 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
     emit(state.copyWith(isMapVisible: !state.isMapVisible));
   }
 
-  /// Called when the show map button (sağ taraftaki bayrak) is pressed.
+  /// Called when the show map button in search bar is pressed.
   void onShowMapPressed() {
-    emit(state.copyWith(onShowMapPressed: true));
+    emit(state.copyWith(showMapButtonInSearch: true));
     // Reset flag immediately so it can be triggered again
-    emit(state.copyWith(onShowMapPressed: false));
+    emit(state.copyWith(showMapButtonInSearch: false));
   }
 
   /// Fetches the user's current location.
@@ -110,12 +112,18 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
           longitude: 28.9784,
           address: 'Current Location, Istanbul',
           name: 'Current Location');
-      selectLocation(location);
+      // Direkt selectLocation çağrısı yapma, sadece state'i emit et
+      emit(state.copyWith(
+        selectedLocation: location,
+        searchQuery: location.address,
+        suggestions: [],
+        isMapVisible: false,
+        locationChanged: true,
+        isLoading: false,
+      ));
     } catch (e) {
       emit(state.copyWith(
           error: 'Failed to get current location.', isLoading: false));
-    } finally {
-      emit(state.copyWith(isLoading: false));
     }
   }
 

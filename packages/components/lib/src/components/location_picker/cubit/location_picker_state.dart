@@ -26,8 +26,8 @@ class LocationPickerState extends Equatable {
   /// Indicates if the selected location has changed (used for callbacks).
   final bool locationChanged;
 
-  /// Indicates if the show map button was pressed.
-  final bool onShowMapPressed;
+  /// Indicates if the show map button in search bar was pressed.
+  final bool showMapButtonInSearch;
 
   const LocationPickerState({
     this.selectedLocation,
@@ -37,7 +37,7 @@ class LocationPickerState extends Equatable {
     this.error,
     this.isMapVisible = false,
     this.locationChanged = false,
-    this.onShowMapPressed = false,
+    this.showMapButtonInSearch = false,
   });
 
   /// Creates a copy of the state with updated values.
@@ -50,7 +50,7 @@ class LocationPickerState extends Equatable {
     String? error,
     bool? isMapVisible,
     bool? locationChanged,
-    bool? onShowMapPressed,
+    bool? showMapButtonInSearch,
   }) {
     return LocationPickerState(
       selectedLocation: (clearSelectedLocation ?? false)
@@ -62,7 +62,7 @@ class LocationPickerState extends Equatable {
       error: error,
       isMapVisible: isMapVisible ?? this.isMapVisible,
       locationChanged: locationChanged ?? false,
-      onShowMapPressed: onShowMapPressed ?? false,
+      showMapButtonInSearch: showMapButtonInSearch ?? false,
     );
   }
 
@@ -75,6 +75,6 @@ class LocationPickerState extends Equatable {
     error,
     isMapVisible,
     locationChanged,
-    onShowMapPressed,
+    showMapButtonInSearch,
   ];
 }

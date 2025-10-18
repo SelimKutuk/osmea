@@ -940,6 +940,7 @@ class OsmeaComponents {
   bool isRequired = false,
   bool showCurrentLocation = true,
   bool autofocusCurrentLocation = false,
+  bool showMapButtonInSearch = false,
 }) {
   return OsmeaLocationPicker(
     key: key,
@@ -955,6 +956,7 @@ class OsmeaComponents {
     isRequired: isRequired,
     showCurrentLocation: showCurrentLocation,
     autofocusCurrentLocation: autofocusCurrentLocation,
+    showMapButtonInSearch: showMapButtonInSearch,
   );
 }
 

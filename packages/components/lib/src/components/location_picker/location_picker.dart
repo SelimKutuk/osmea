@@ -23,6 +23,7 @@ class OsmeaLocationPicker extends CoreContainer {
   final String apiKey;
   final bool showCurrentLocation;
   final bool autofocusCurrentLocation;
+  final bool showMapButtonInSearch;
 
   const OsmeaLocationPicker({
     super.key,
@@ -39,6 +40,7 @@ class OsmeaLocationPicker extends CoreContainer {
     this.isRequired = false,
     this.showCurrentLocation = true,
     this.autofocusCurrentLocation = false,
+    this.showMapButtonInSearch = false,
   });
 
   @override
@@ -114,7 +116,8 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
           _searchController.text = state.searchQuery;
         }
 
-        if (state.onShowMapPressed && widget.picker.onShowMapPressed != null) {
+        if (state.showMapButtonInSearch &&
+            widget.picker.onShowMapPressed != null) {
           widget.picker.onShowMapPressed!.call();
         }
       },
@@ -187,7 +190,8 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
               onPressed: () => _cubit.getCurrentLocation(),
               tooltip: 'Use current location',
             ),
-          if (state.selectedLocation != null)
+          if (widget.picker.showMapButtonInSearch &&
+              state.selectedLocation != null)
             IconButton(
               icon: const Icon(Icons.map),
               onPressed: () => _cubit.onShowMapPressed(),
