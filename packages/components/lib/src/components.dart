@@ -927,34 +927,36 @@ class OsmeaComponents {
   /// )
   /// ```
   static Widget locationPicker({
-    Key? key,
-    LocationData? initialLocation,
-    required ValueChanged<LocationData?> onLocationChanged,
-    required String apiKey,
-    LocationPickerVariant variant = LocationPickerVariant.combined,
-    LocationPickerSize size = LocationPickerSize.medium,
-    LocationPickerStyle style = LocationPickerStyle.outlined,
-    String? label,
-    String? hintText,
-    bool isRequired = false,
-    bool showCurrentLocation = true,
-    bool autofocusCurrentLocation = false,
-  }) {
-    return OsmeaLocationPicker(
-      key: key,
-      initialLocation: initialLocation,
-      onLocationChanged: onLocationChanged,
-      apiKey: apiKey,
-      variant: variant,
-      size: size,
-      style: style,
-      label: label,
-      hintText: hintText,
-      isRequired: isRequired,
-      showCurrentLocation: showCurrentLocation,
-      autofocusCurrentLocation: autofocusCurrentLocation,
-    );
-  }
+  Key? key,
+  LocationData? initialLocation,
+  required ValueChanged<LocationData?> onLocationChanged,
+  VoidCallback? onShowMapPressed,
+  required String apiKey,
+  LocationPickerVariant variant = LocationPickerVariant.combined,
+  LocationPickerSize size = LocationPickerSize.medium,
+  LocationPickerStyle style = LocationPickerStyle.outlined,
+  String? label,
+  String? hintText,
+  bool isRequired = false,
+  bool showCurrentLocation = true,
+  bool autofocusCurrentLocation = false,
+}) {
+  return OsmeaLocationPicker(
+    key: key,
+    initialLocation: initialLocation,
+    onLocationChanged: onLocationChanged,
+    onShowMapPressed: onShowMapPressed,
+    apiKey: apiKey,
+    variant: variant,
+    size: size,
+    style: style,
+    label: label,
+    hintText: hintText,
+    isRequired: isRequired,
+    showCurrentLocation: showCurrentLocation,
+    autofocusCurrentLocation: autofocusCurrentLocation,
+  );
+}
 
   /// 🔽 **OSMEA Dropdown** - A comprehensive dropdown component
   ///

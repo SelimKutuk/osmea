@@ -13,6 +13,7 @@ class OsmeaLocationPicker extends CoreContainer {
   final LocationData? location;
   final LocationData? initialLocation;
   final ValueChanged<LocationData?> onLocationChanged;
+  final VoidCallback? onShowMapPressed;
   final LocationPickerVariant variant;
   final LocationPickerSize size;
   final LocationPickerStyle style;
@@ -28,6 +29,7 @@ class OsmeaLocationPicker extends CoreContainer {
     this.location,
     this.initialLocation,
     required this.onLocationChanged,
+    this.onShowMapPressed,
     required this.apiKey,
     this.variant = LocationPickerVariant.combined,
     this.size = LocationPickerSize.medium,
@@ -62,7 +64,7 @@ class _LocationPickerView extends StatefulWidget {
 class _LocationPickerViewState extends State<_LocationPickerView> {
   final TextEditingController _searchController = TextEditingController();
   late final LocationPickerCubit _cubit;
-  LocationData? _lastNotifiedLocation; // Track last notified location
+  LocationData? _lastNotifiedLocation;
 
   @override
   void initState() {
@@ -102,7 +104,6 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
 
     return BlocConsumer<LocationPickerCubit, LocationPickerState>(
       listener: (context, state) {
-        // ✅ ÖNEMLI: Sadece location gerçekten değişirse callback çağır
         if (state.locationChanged &&
             state.selectedLocation != _lastNotifiedLocation) {
           _lastNotifiedLocation = state.selectedLocation;
@@ -111,6 +112,10 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
 
         if (_searchController.text != state.searchQuery) {
           _searchController.text = state.searchQuery;
+        }
+
+        if (state.onShowMapPressed && widget.picker.onShowMapPressed != null) {
+          widget.picker.onShowMapPressed!.call();
         }
       },
       builder: (context, state) {
@@ -182,11 +187,11 @@ class _LocationPickerViewState extends State<_LocationPickerView> {
               onPressed: () => _cubit.getCurrentLocation(),
               tooltip: 'Use current location',
             ),
-          if (widget.picker.variant == LocationPickerVariant.combined)
+          if (state.selectedLocation != null)
             IconButton(
-              icon: Icon(state.isMapVisible ? Icons.map_outlined : Icons.map),
-              onPressed: () => _cubit.toggleMapVisibility(),
-              tooltip: state.isMapVisible ? 'Hide map' : 'Show map',
+              icon: const Icon(Icons.map),
+              onPressed: () => _cubit.onShowMapPressed(),
+              tooltip: 'Show on map',
             ),
         ],
       ),

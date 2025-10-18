@@ -17,14 +17,12 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
   void onSearchChanged(String query) {
     // Clear selected location if query is emptied
     final clearSelection = query.isEmpty;
-
     emit(state.copyWith(
       searchQuery: query,
       isLoading: true,
       error: null,
       clearSelectedLocation: clearSelection,
     ));
-
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       if (query.isEmpty) {
@@ -40,7 +38,6 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
     try {
       // Simulate API call (replace with real API call using apiKey)
       await Future.delayed(const Duration(milliseconds: 300));
-
       final results = [
         const LocationData(
             latitude: 41.0082,
@@ -57,8 +54,10 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
             longitude: 27.1428,
             address: 'Izmir, Turkey',
             name: 'Izmir'),
-      ].where((loc) => loc.address.toLowerCase().contains(query.toLowerCase())).toList();
-
+      ]
+          .where((loc) =>
+              loc.address.toLowerCase().contains(query.toLowerCase()))
+          .toList();
       emit(state.copyWith(suggestions: results, isLoading: false));
     } catch (e) {
       emit(state.copyWith(
@@ -91,6 +90,13 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
   /// Toggles the visibility of the map view.
   void toggleMapVisibility() {
     emit(state.copyWith(isMapVisible: !state.isMapVisible));
+  }
+
+  /// Called when the show map button (sağ taraftaki bayrak) is pressed.
+  void onShowMapPressed() {
+    emit(state.copyWith(onShowMapPressed: true));
+    // Reset flag immediately so it can be triggered again
+    emit(state.copyWith(onShowMapPressed: false));
   }
 
   /// Fetches the user's current location.
