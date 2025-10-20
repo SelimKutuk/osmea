@@ -4,18 +4,15 @@ import '../models/location_model.dart';
 import 'dart:async';
 
 /// 📍 **Location Picker Cubit**
-///
-/// Manages the state for the `OsmeaLocationPicker` component,
-/// handling location searches, suggestions, and selections.
 class LocationPickerCubit extends Cubit<LocationPickerState> {
   final String apiKey;
   Timer? _debounce;
+  bool _autofocusUsed = false; // Autofocus'u sadece bir kez kullan
 
   LocationPickerCubit(this.apiKey) : super(const LocationPickerState());
 
   /// Called when the search query changes.
   void onSearchChanged(String query) {
-    // Clear selected location if query is emptied
     final clearSelection = query.isEmpty;
     emit(state.copyWith(
       searchQuery: query,
@@ -37,7 +34,6 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
   /// Fetches location suggestions based on the query.
   Future<void> _fetchSuggestions(String query) async {
     try {
-      // Simulate API call (replace with real API call using apiKey)
       await Future.delayed(const Duration(milliseconds: 300));
       final results = [
         const LocationData(
@@ -74,7 +70,7 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
       searchQuery: location.address,
       suggestions: [],
       isMapVisible: false,
-      locationChanged: true, // Important for listener callback
+      locationChanged: true,
     ));
   }
 
@@ -84,8 +80,9 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
       selectedLocation: null,
       searchQuery: '',
       suggestions: [],
+      isMapVisible: false,
       clearSelectedLocation: true,
-      locationChanged: false, // Don't trigger callback when clearing
+      locationChanged: false,
     ));
   }
 
@@ -97,22 +94,32 @@ class LocationPickerCubit extends Cubit<LocationPickerState> {
   /// Called when the show map button in search bar is pressed.
   void onShowMapPressed() {
     emit(state.copyWith(showMapButtonInSearch: true));
-    // Reset flag immediately so it can be triggered again
     emit(state.copyWith(showMapButtonInSearch: false));
   }
 
-  /// Fetches the user's current location.
+  /// Açılır haritayı aç (Her seferinde çalışmalı - Current Location butonu için)
+  void openMapForCurrentLocation() {
+    emit(state.copyWith(openMapForLocation: true));
+    emit(state.copyWith(openMapForLocation: false));
+  }
+
+  /// Fetches the user's current location (sadece ilk kez çalışır - autofocus için).
   Future<void> getCurrentLocation() async {
+    // Autofocus zaten kullanıldıysa tekrar çalışmasın
+    if (_autofocusUsed) {
+      return;
+    }
+    
+    _autofocusUsed = true;
+    
     emit(state.copyWith(isLoading: true, error: null));
     try {
-      // Simulate API call (replace with real current location logic)
       await Future.delayed(const Duration(seconds: 1));
       const location = LocationData(
           latitude: 41.0082,
           longitude: 28.9784,
-          address: 'Current Location, Istanbul',
-          name: 'Current Location');
-      // Direkt selectLocation çağrısı yapma, sadece state'i emit et
+          address: 'Istanbul, Turkey',
+          name: 'Istanbul');
       emit(state.copyWith(
         selectedLocation: location,
         searchQuery: location.address,
