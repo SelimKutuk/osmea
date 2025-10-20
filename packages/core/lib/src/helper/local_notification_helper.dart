@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
+import 'permission_handler_helper/permission_handler_helper.dart';
+import 'permission_handler_helper/models/permission_models.dart';
 
 /// 🔔 **OSMEA Local Notification Helper**
 ///
@@ -12,6 +13,7 @@ import 'package:timezone/data/latest.dart' as tz;
 ///
 /// Comprehensive local notification management system for Flutter applications
 /// with cross-platform support, advanced scheduling, and rich notification features.
+/// Integrates with PermissionHandlerHelper for unified permission management.
 ///
 /// ## Features
 /// - **Cross-Platform Support**: iOS and Android native notifications
@@ -19,7 +21,8 @@ import 'package:timezone/data/latest.dart' as tz;
 /// - **Scheduled Notifications**: Schedule notifications for future dates/times
 /// - **Repeating Notifications**: Daily, weekly, monthly recurring notifications
 /// - **Rich Notifications**: Big text, custom sounds, action buttons, colors
-/// - **Permission Management**: Request and handle notification permissions
+/// - **Integrated Permission Management**: Uses PermissionHandlerHelper for unified permission handling
+/// - **Automatic Permission Checks**: Optional permission validation before showing notifications
 /// - **Notification Actions**: Interactive buttons with custom callbacks
 /// - **Custom Sounds**: Platform-specific custom notification sounds
 /// - **Timezone Support**: Accurate scheduling across timezones
@@ -30,6 +33,8 @@ import 'package:timezone/data/latest.dart' as tz;
 /// - **Notification Cancellation**: Cancel individual or all notifications
 /// - **Active Monitoring**: Track pending and active notifications
 /// - **Error Handling**: Comprehensive error handling with debug logging
+/// - **Permission Caching**: Leverages permission caching from PermissionHandlerHelper
+/// - **Settings Integration**: Direct access to app settings for permission management
 ///
 /// ## Supported Notification Types
 /// - **Simple Notifications**: Basic title + body notifications
@@ -52,16 +57,17 @@ import 'package:timezone/data/latest.dart' as tz;
 ///     print('Notification tapped: ${response.payload}');
 ///     // Handle notification tap
 ///   },
-///   onNotificationBackground: (NotificationResponse response) {
-///     print('Background notification: ${response.payload}');
-///     // Handle background notifications
-///   },
 /// );
 ///
-/// // Request permissions (required for iOS, recommended for Android 13+)
+/// // Request permissions using integrated PermissionHandlerHelper (required for iOS, recommended for Android 13+)
 /// bool granted = await NotificationHelper.requestPermissions();
 /// if (!granted) {
 ///   print('Notification permissions denied');
+///   // Check if permission is permanently denied and redirect to settings
+///   final status = await NotificationHelper.getNotificationPermissionStatus();
+///   if (status.isPermanentlyDenied) {
+///     await NotificationHelper.openAppSettings();
+///   }
 ///   return;
 /// }
 ///
@@ -151,12 +157,14 @@ class NotificationHelper {
   factory NotificationHelper() => _instance;
   NotificationHelper._internal();
 
+  /// Permission handler helper instance for unified permission management
+  static final PermissionHandlerHelper _permissionHelper = PermissionHandlerHelper.instance;
+
   static final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   static bool _isInitialized = false;
   static Function(NotificationResponse)? _onNotificationTap;
-  static Function(NotificationResponse)? _onNotificationBackground;
 
   // ============================================================================
   // 🚀 INITIALIZATION METHODS
@@ -170,7 +178,6 @@ class NotificationHelper {
   /// **Parameters:**
   /// - `androidIcon`: Android notification icon (default: '@mipmap/ic_launcher')
   /// - `onNotificationTap`: Callback when notification is tapped (foreground)
-  /// - `onNotificationBackground`: Callback when notification is tapped (background)
   ///
   /// **Returns:** True if initialization successful, false otherwise
   ///
@@ -189,7 +196,6 @@ class NotificationHelper {
   static Future<bool> initialize({
     String androidIcon = '@mipmap/ic_launcher',
     Function(NotificationResponse)? onNotificationTap,
-    Function(NotificationResponse)? onNotificationBackground,
   }) async {
     if (_isInitialized) return true;
 
@@ -198,7 +204,6 @@ class NotificationHelper {
       tz.initializeTimeZones();
       
       _onNotificationTap = onNotificationTap;
-      _onNotificationBackground = onNotificationBackground;
 
       // Android initialization
       final AndroidInitializationSettings initializationSettingsAndroid =
@@ -223,7 +228,8 @@ class NotificationHelper {
       final bool? result = await _flutterLocalNotificationsPlugin.initialize(
         initializationSettings,
         onDidReceiveNotificationResponse: _onNotificationTap,
-        onDidReceiveBackgroundNotificationResponse: _onNotificationBackground,
+        // Note: Background handler removed as it needs to be a top-level function
+        // Background notifications can be handled through the main app lifecycle
       );
 
       _isInitialized = result ?? false;
@@ -236,8 +242,9 @@ class NotificationHelper {
 
   /// 🔐 **Request Notification Permissions**
   ///
-  /// Requests notification permissions from the user on both platforms.
-  /// Required for iOS notifications and recommended for Android 13+.
+  /// Requests notification permissions from the user on both platforms using
+  /// the integrated permission handler helper. Required for iOS notifications 
+  /// and recommended for Android 13+.
   ///
   /// **Returns:** True if permissions granted, false if denied
   ///
@@ -257,32 +264,181 @@ class NotificationHelper {
   /// }
   /// ```
   static Future<bool> requestPermissions() async {
-    if (Platform.isAndroid) {
-      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-          _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+    try {
+      // Use the permission handler helper to request notification permissions
+      final granted = await _permissionHelper.requestPermission(AppPermission.notifications);
+      
+      if (granted) {
+        debugPrint('✅ Notification permissions granted via PermissionHandlerHelper');
+        return true;
+      } else {
+        debugPrint('❌ Notification permissions denied via PermissionHandlerHelper');
+        
+        // Fallback to direct flutter_local_notifications permission request
+        // for cases where permission_handler might not cover all scenarios
+        if (Platform.isAndroid) {
+          final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+              _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin>();
 
-      if (androidImplementation != null) {
-        final bool? granted = await androidImplementation.requestNotificationsPermission();
-        return granted ?? false;
-      }
-    } else if (Platform.isIOS) {
-      final IOSFlutterLocalNotificationsPlugin? iosImplementation =
-          _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>();
+          if (androidImplementation != null) {
+            final bool? fallbackGranted = await androidImplementation.requestNotificationsPermission();
+            debugPrint('🔄 Fallback Android permission result: ${fallbackGranted ?? false}');
+            return fallbackGranted ?? false;
+          }
+        } else if (Platform.isIOS) {
+          final IOSFlutterLocalNotificationsPlugin? iosImplementation =
+              _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                  IOSFlutterLocalNotificationsPlugin>();
 
-      if (iosImplementation != null) {
-        final bool? granted = await iosImplementation.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-          critical: false,
-          provisional: false,
-        );
-        return granted ?? false;
+          if (iosImplementation != null) {
+            final bool? fallbackGranted = await iosImplementation.requestPermissions(
+              alert: true,
+              badge: true,
+              sound: true,
+              critical: false,
+              provisional: false,
+            );
+            debugPrint('🔄 Fallback iOS permission result: ${fallbackGranted ?? false}');
+            return fallbackGranted ?? false;
+          }
+        }
+        
+        return false;
       }
+    } catch (e) {
+      debugPrint('🔴 Error requesting notification permissions: $e');
+      
+      // Fallback to direct permission request in case of error
+      if (Platform.isAndroid) {
+        final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+            _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>();
+
+        if (androidImplementation != null) {
+          final bool? fallbackGranted = await androidImplementation.requestNotificationsPermission();
+          return fallbackGranted ?? false;
+        }
+      } else if (Platform.isIOS) {
+        final IOSFlutterLocalNotificationsPlugin? iosImplementation =
+            _flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                IOSFlutterLocalNotificationsPlugin>();
+
+        if (iosImplementation != null) {
+          final bool? fallbackGranted = await iosImplementation.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+            critical: false,
+            provisional: false,
+          );
+          return fallbackGranted ?? false;
+        }
+      }
+      
+      return true; // Default to true for older Android versions
     }
-    return true;
+  }
+
+  /// 🔍 **Check Notification Permissions**
+  ///
+  /// Checks if notification permissions are currently granted using the
+  /// integrated permission handler helper.
+  ///
+  /// **Returns:** True if permissions are granted, false otherwise
+  ///
+  /// **Use Cases:**
+  /// - Check permissions before showing notifications
+  /// - Determine if permission request is needed
+  /// - Validate permission status in settings
+  ///
+  /// Example: 
+  /// ```dart
+  /// bool hasPermission = await NotificationHelper.checkNotificationPermissions();
+  /// if (!hasPermission) {
+  ///   // Request permissions or show alternative UI
+  ///   await NotificationHelper.requestPermissions();
+  /// }
+  /// ```
+  static Future<bool> checkNotificationPermissions() async {
+    try {
+      // Use the permission handler helper to check notification permissions
+      final hasPermission = await _permissionHelper.checkPermission(AppPermission.notifications);
+      
+      debugPrint('🔍 Notification permission check result: $hasPermission');
+      return hasPermission;
+    } catch (e) {
+      debugPrint('🔴 Error checking notification permissions: $e');
+      return false;
+    }
+  }
+
+  /// 📊 **Get Detailed Notification Permission Status**
+  ///
+  /// Gets detailed information about notification permission status using
+  /// the integrated permission handler helper.
+  ///
+  /// **Returns:** PermissionResult with detailed status information
+  ///
+  /// **Use Cases:**
+  /// - Check if permission is permanently denied
+  /// - Determine if settings redirect is needed
+  /// - Get comprehensive permission information
+  ///
+  /// Example: 
+  /// ```dart
+  /// final result = await NotificationHelper.getNotificationPermissionStatus();
+  /// if (result.isPermanentlyDenied) {
+  ///   // Show dialog to redirect to settings
+  ///   await NotificationHelper.openAppSettings();
+  /// }
+  /// ```
+  static Future<PermissionResult> getNotificationPermissionStatus() async {
+    try {
+      // Use the permission handler helper to get detailed permission status
+      final result = await _permissionHelper.getPermissionStatus(AppPermission.notifications);
+      
+      debugPrint('📊 Notification permission status: ${result.statusDescription}');
+      return result;
+    } catch (e) {
+      debugPrint('🔴 Error getting notification permission status: $e');
+      return PermissionResult.error(AppPermission.notifications, 'Error getting notification permission status: $e');
+    }
+  }
+
+  /// ⚙️ **Open App Settings**
+  ///
+  /// Opens the app settings page for manual permission management.
+  /// Useful when permissions are permanently denied.
+  ///
+  /// **Returns:** True if settings page was opened successfully, false otherwise
+  ///
+  /// **Use Cases:**
+  /// - Redirect users when permissions are permanently denied
+  /// - Allow manual permission management
+  /// - Provide alternative to permission request dialogs
+  ///
+  /// Example: 
+  /// ```dart
+  /// final status = await NotificationHelper.getNotificationPermissionStatus();
+  /// if (status.isPermanentlyDenied) {
+  ///   final opened = await NotificationHelper.openAppSettings();
+  ///   if (opened) {
+  ///     // Settings opened successfully
+  ///   }
+  /// }
+  /// ```
+  static Future<bool> openAppSettings() async {
+    try {
+      // Use the permission handler helper to open app settings
+      final opened = await _permissionHelper.openAppSettings();
+      
+      debugPrint('⚙️ App settings opened: $opened');
+      return opened;
+    } catch (e) {
+      debugPrint('🔴 Error opening app settings: $e');
+      return false;
+    }
   }
 
   // ============================================================================
@@ -338,10 +494,20 @@ class NotificationHelper {
     bool playSound = true,
     bool enableVibration = true,
     String? soundFileName,
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) {
       debugPrint('NotificationHelper: Not initialized');
       return;
+    }
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping notification');
+        return;
+      }
     }
 
     try {
@@ -436,10 +602,20 @@ class NotificationHelper {
     Color? color,
     bool playSound = true,
     bool enableVibration = true,
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) {
       debugPrint('NotificationHelper: Not initialized');
       return;
+    }
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping scheduled notification');
+        return;
+      }
     }
 
     try {
@@ -536,10 +712,20 @@ class NotificationHelper {
     Color? color,
     bool playSound = true,
     bool enableVibration = true,
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) {
       debugPrint('NotificationHelper: Not initialized');
       return;
+    }
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping repeating notification');
+        return;
+      }
     }
 
     try {
@@ -625,8 +811,18 @@ class NotificationHelper {
     NotificationImportance importance = NotificationImportance.defaultImportance,
     String channelId = 'custom_sound_channel',
     String channelName = 'Custom Sound Notifications',
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) return;
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping custom sound notification');
+        return;
+      }
+    }
 
     try {
       final AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
@@ -697,8 +893,18 @@ class NotificationHelper {
     String? payload,
     String channelId = 'big_text_channel',
     String channelName = 'Big Text Notifications',
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) return;
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping big text notification');
+        return;
+      }
+    }
 
     try {
       final BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
@@ -786,8 +992,18 @@ class NotificationHelper {
     String? payload,
     String channelId = 'action_channel',
     String channelName = 'Action Notifications',
+    bool checkPermissions = true,
   }) async {
     if (!_isInitialized) return;
+
+    // Check notification permissions if requested
+    if (checkPermissions) {
+      final hasPermission = await checkNotificationPermissions();
+      if (!hasPermission) {
+        debugPrint('🔔 Notification permission not granted, skipping action notification');
+        return;
+      }
+    }
 
     try {
       final AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
@@ -1101,28 +1317,71 @@ class NotificationAction {
 ///     // Navigate to specific screen based on payload
 ///     handleNotificationNavigation(response.payload);
 ///   },
-///   onNotificationBackground: (NotificationResponse response) {
-///     print('Background notification: ${response.payload}');
-///     // Handle background notification logic
-///   },
 /// );
 ///
-/// // 2. Request permissions (important for iOS and Android 13+)
+/// // 2. Request permissions using integrated PermissionHandlerHelper (important for iOS and Android 13+)
 /// bool granted = await NotificationHelper.requestPermissions();
 /// if (!granted) {
 ///   print('Notification permissions denied');
-///   // Show explanation dialog or disable notifications
+///   // Check detailed permission status
+///   final status = await NotificationHelper.getNotificationPermissionStatus();
+///   if (status.isPermanentlyDenied) {
+///     // Show dialog explaining the permission and offer to open settings
+///     final shouldOpenSettings = await showPermissionDialog();
+///     if (shouldOpenSettings) {
+///       await NotificationHelper.openAppSettings();
+///     }
+///   } else {
+///     // Show explanation dialog or disable notifications
+///     showPermissionExplanationDialog();
+///   }
 ///   return;
+/// }
+/// ```
+///
+/// ## **Permission Management**
+/// ```dart
+/// // Check notification permissions
+/// bool hasPermission = await NotificationHelper.checkNotificationPermissions();
+/// if (!hasPermission) {
+///   // Request permissions
+///   bool granted = await NotificationHelper.requestPermissions();
+///   if (!granted) {
+///     // Handle permission denial
+///     return;
+///   }
+/// }
+///
+/// // Get detailed permission status
+/// final status = await NotificationHelper.getNotificationPermissionStatus();
+/// if (status.isPermanentlyDenied) {
+///   // Redirect to settings
+///   await NotificationHelper.openAppSettings();
+/// } else if (status.isGranted) {
+///   // Proceed with notifications
+///   await NotificationHelper.showNotification(
+///     id: 1,
+///     title: 'Permission Granted',
+///     body: 'You can now receive notifications',
+///   );
 /// }
 /// ```
 ///
 /// ## **Simple Notifications**
 /// ```dart
-/// // Basic notification
+/// // Basic notification (automatically checks permissions by default)
 /// await NotificationHelper.showNotification(
 ///   id: 1,
 ///   title: 'Welcome!',
 ///   body: 'Thanks for downloading our app',
+/// );
+///
+/// // Notification without permission check (for internal use)
+/// await NotificationHelper.showNotification(
+///   id: 2,
+///   title: 'System Message',
+///   body: 'This is a system notification',
+///   checkPermissions: false, // Skip permission check
 /// );
 ///
 /// // Notification with custom styling
