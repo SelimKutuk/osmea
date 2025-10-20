@@ -109,6 +109,58 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
   }
 
+  /// Use Current Location - Konum seç
+  void _handleCurrentLocationPressed(String pickerId) async {
+    if (_isPickerOpen[pickerId] == true) {
+      return;
+    }
+
+    _isPickerOpen[pickerId] = true;
+
+    final selected = await _openMapPicker();
+
+    if (mounted) {
+      _isPickerOpen[pickerId] = false;
+
+      if (selected != null) {
+        setState(() {
+          switch (pickerId) {
+            case 'combined':
+              _combinedLocation = selected;
+              break;
+            case 'autofocus':
+              _autofocusLocation = selected;
+              _combinedLocation = selected;
+              break;
+            case 'map':
+              _mapOnlyLocation = selected;
+              break;
+            case 'small':
+              _smallSizeLocation = selected;
+              break;
+            case 'medium':
+              _mediumSizeLocation = selected;
+              break;
+            case 'large':
+              _largeSizeLocation = selected;
+              break;
+            case 'outlined':
+              _outlinedStyleLocation = selected;
+              break;
+            case 'filled':
+              _filledStyleLocation = selected;
+              break;
+          }
+        });
+        if (pickerId == 'combined' || pickerId == 'autofocus') {
+          _updateSelectedLocationText(selected);
+        }
+      }
+    } else {
+      _isPickerOpen[pickerId] = false;
+    }
+  }
+
   void _handleLocationChanged(
     LocationData? location,
     String pickerId,
@@ -132,7 +184,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               break;
             case 'autofocus':
               _autofocusLocation = selected;
-              _combinedLocation = selected; // Autofocus ve selected location senkron
+              _combinedLocation = selected;
               break;
             case 'map':
               _mapOnlyLocation = selected;
@@ -205,11 +257,11 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
 
     if (_inputOnlyLocation != null && pickerId == 'input') {
-      return; // Konum zaten seçilmişse değişmesin (input)
+      return;
     }
 
     if (_noCurrentLocation != null && pickerId == 'no_current') {
-      return; // Konum zaten seçilmişse değişmesin (no_current)
+      return;
     }
 
     _isPickerOpen[pickerId] = true;
@@ -248,52 +300,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     );
 
     return result as LocationData?;
-  }
-
-  Future<void> _getCurrentLocationAndOpenMap() async {
-    try {
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied ||
-            permission == LocationPermission.deniedForever) {
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text(
-                      'Location permission is required to use this feature.')),
-            );
-          }
-          return;
-        }
-      }
-
-      final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-
-      final initialLocation = LocationData(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        address: 'Loading address...',
-      );
-
-      final selectedLocation =
-          await _openMapPicker(initialLocation: initialLocation);
-
-      if (selectedLocation != null && mounted) {
-        setState(() {
-          _combinedLocation = selectedLocation;
-        });
-        _updateSelectedLocationText(selectedLocation);
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to get location: $e')),
-        );
-      }
-    }
   }
 
   void _showLocationMap(LocationData location) {
@@ -374,7 +380,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     return OsmeaComponents.column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-                    OsmeaComponents.text('Combined (Input + Map)',
+        OsmeaComponents.text('Combined (Input + Map)',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
         OsmeaComponents.locationPicker(
@@ -385,6 +391,9 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
             if (_combinedLocation != null) {
               _showLocationMap(_combinedLocation!);
             }
+          },
+          onCurrentLocationPressed: () {
+            _handleCurrentLocationPressed('combined');
           },
           variant: LocationPickerVariant.combined,
           initialLocation: _combinedLocation,
@@ -398,6 +407,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleInputOnlyLocationChange(location, 'input'),
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('combined'),
           variant: LocationPickerVariant.input,
           initialLocation: _inputOnlyLocation,
           showCurrentLocation: true,
@@ -429,6 +440,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_autofocusLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('autofocus'),
           label: 'Autofocus Location',
           variant: LocationPickerVariant.combined,
           initialLocation: _autofocusLocation,
@@ -447,6 +460,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_mapOnlyLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('map'),
           variant: LocationPickerVariant.map,
           initialLocation: _mapOnlyLocation,
           showCurrentLocation: true,
@@ -471,6 +486,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_smallSizeLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('small'),
           size: LocationPickerSize.small,
           hintText: 'Small size picker',
           initialLocation: _smallSizeLocation,
@@ -489,6 +506,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_mediumSizeLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('medium'),
           size: LocationPickerSize.medium,
           hintText: 'Medium size picker',
           initialLocation: _mediumSizeLocation,
@@ -506,6 +525,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_largeSizeLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('large'),
           size: LocationPickerSize.large,
           hintText: 'Large size picker',
           initialLocation: _largeSizeLocation,
@@ -531,6 +552,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_outlinedStyleLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('outlined'),
           style: LocationPickerStyle.outlined,
           label: 'Outlined Style',
           initialLocation: _outlinedStyleLocation,
@@ -548,6 +571,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
               _showLocationMap(_filledStyleLocation!);
             }
           },
+          onCurrentLocationPressed: () =>
+              _handleCurrentLocationPressed('filled'),
           style: LocationPickerStyle.filled,
           label: 'Filled Style',
           initialLocation: _filledStyleLocation,
@@ -707,7 +732,8 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
   }
 }
 
-/// Location Map View Screen - Seçilen konumu haritada göster
+/// Location Map View Screen
+/// Location Map View Screen
 class _LocationMapViewScreen extends StatefulWidget {
   final LocationData location;
   const _LocationMapViewScreen({required this.location});
@@ -723,7 +749,7 @@ class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Konum Haritası'),
+        title: const Text('Location Map'),
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
@@ -737,7 +763,7 @@ class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
             position:
                 LatLng(widget.location.latitude, widget.location.longitude),
             infoWindow: InfoWindow(
-              title: 'Seçilen Konum',
+              title: 'Selected Location',
               snippet: widget.location.address,
             ),
           )
@@ -764,7 +790,7 @@ class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Konum Detayları',
+              'Location Details',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -774,7 +800,7 @@ class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Enlem: ${widget.location.latitude.toStringAsFixed(6)}\nBoylam: ${widget.location.longitude.toStringAsFixed(6)}',
+              'Latitude: ${widget.location.latitude.toStringAsFixed(6)}\nLongitude: ${widget.location.longitude.toStringAsFixed(6)}',
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
             const SizedBox(height: 16),
@@ -782,7 +808,7 @@ class _LocationMapViewScreenState extends State<_LocationMapViewScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Kapat'),
+                child: const Text('Close'),
               ),
             )
           ],
