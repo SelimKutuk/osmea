@@ -117,6 +117,7 @@ class HelpersScreen extends StatelessWidget {
         'icon': Icons.notifications,
         'description': 'Test local notification functionality with scheduling and rich features',
         'route': () => const LocalNotificationHelperExample(),
+        'isComingSoon': false,
       }
     ];
 
