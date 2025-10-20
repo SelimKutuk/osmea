@@ -18,6 +18,7 @@ class _LocalNotificationHelperExampleState
     extends State<LocalNotificationHelperExample> {
   bool _isInitialized = false;
   bool _hasPermissions = false;
+  PermissionResult? _permissionStatus;
   int _notificationCounter = 1;
 
   @override
@@ -37,30 +38,47 @@ class _LocalNotificationHelperExampleState
             Colors.green,
           );
         },
-        onNotificationBackground: (NotificationResponse response) {
-          debugPrint('Background notification: ${response.payload}');
-        },
       );
 
       if (success) {
-        // Request permissions
-        final permissions = await NotificationHelper.requestPermissions();
+        // Check current permission status
+        await _checkPermissionStatus();
+        
+        // Request permissions if not granted
+        if (!_hasPermissions) {
+          final permissions = await NotificationHelper.requestPermissions();
+          await _checkPermissionStatus();
+          
+          if (!permissions) {
+            _showSnackBar(
+              'Notification permissions denied. Some features may not work.',
+              Colors.orange,
+            );
+          }
+        }
+        
         setState(() {
           _isInitialized = success;
-          _hasPermissions = permissions;
         });
-
-        if (!permissions) {
-          _showSnackBar(
-            'Notification permissions denied. Some features may not work.',
-            Colors.orange,
-          );
-        }
       } else {
         _showSnackBar('Failed to initialize notifications', Colors.red);
       }
     } catch (e) {
       _showSnackBar('Error initializing notifications: $e', Colors.red);
+    }
+  }
+
+  Future<void> _checkPermissionStatus() async {
+    try {
+      final hasPermission = await NotificationHelper.checkNotificationPermissions();
+      final status = await NotificationHelper.getNotificationPermissionStatus();
+      
+      setState(() {
+        _hasPermissions = hasPermission;
+        _permissionStatus = status;
+      });
+    } catch (e) {
+      debugPrint('Error checking permission status: $e');
     }
   }
 
@@ -113,6 +131,8 @@ class _LocalNotificationHelperExampleState
             padding: const EdgeInsets.all(20),
             child: OsmeaComponents.column(
               children: [
+                _buildPermissionManagementSection(),
+                OsmeaComponents.sizedBox(height: 24),
                 _buildBasicNotificationsSection(),
                 OsmeaComponents.sizedBox(height: 24),
                 _buildScheduledNotificationsSection(),
@@ -179,10 +199,47 @@ class _LocalNotificationHelperExampleState
     if (!_isInitialized) {
       return 'Notification service is not initialized';
     } else if (!_hasPermissions) {
+      if (_permissionStatus != null) {
+        return 'Permissions: ${_permissionStatus!.statusDescription}';
+      }
       return 'Initialized but permissions denied';
     } else {
       return 'Initialized and ready to use';
     }
+  }
+
+  Widget _buildPermissionManagementSection() {
+    return _buildSection(
+      title: '🔐 Permission Management',
+      description: 'Manage notification permissions using integrated PermissionHandlerHelper',
+      children: [
+        _buildActionButton(
+          title: 'Check Permission Status',
+          description: 'Get detailed permission information',
+          icon: Icons.info_outline,
+          onPressed: _checkPermissionStatus,
+        ),
+        _buildActionButton(
+          title: 'Request Permissions',
+          description: 'Request notification permissions from user',
+          icon: Icons.security,
+          onPressed: _requestPermissions,
+        ),
+        if (_permissionStatus?.isPermanentlyDenied == true)
+          _buildActionButton(
+            title: 'Open App Settings',
+            description: 'Redirect to app settings for manual permission management',
+            icon: Icons.settings,
+            onPressed: _openAppSettings,
+          ),
+        _buildActionButton(
+          title: 'Refresh Status',
+          description: 'Update permission status and UI',
+          icon: Icons.refresh,
+          onPressed: _refreshPermissionStatus,
+        ),
+      ],
+    );
   }
 
   Widget _buildBasicNotificationsSection() {
@@ -207,6 +264,12 @@ class _LocalNotificationHelperExampleState
           description: 'Quiet notification without sound or vibration',
           icon: Icons.notifications_off,
           onPressed: _showSilentNotification,
+        ),
+        _buildActionButton(
+          title: 'System Notification',
+          description: 'Notification that bypasses permission checks (for internal use)',
+          icon: Icons.system_update,
+          onPressed: _showSystemNotification,
         ),
       ],
     );
@@ -384,6 +447,43 @@ class _LocalNotificationHelperExampleState
   }
 
   // ============================================================================
+  // Permission Management Methods
+  // ============================================================================
+
+  Future<void> _requestPermissions() async {
+    try {
+      final granted = await NotificationHelper.requestPermissions();
+      await _checkPermissionStatus();
+      
+      if (granted) {
+        _showSnackBar('Notification permissions granted!', Colors.green);
+      } else {
+        _showSnackBar('Notification permissions denied', Colors.orange);
+      }
+    } catch (e) {
+      _showSnackBar('Error requesting permissions: $e', Colors.red);
+    }
+  }
+
+  Future<void> _openAppSettings() async {
+    try {
+      final opened = await NotificationHelper.openAppSettings();
+      if (opened) {
+        _showSnackBar('App settings opened', Colors.blue);
+      } else {
+        _showSnackBar('Failed to open app settings', Colors.red);
+      }
+    } catch (e) {
+      _showSnackBar('Error opening app settings: $e', Colors.red);
+    }
+  }
+
+  Future<void> _refreshPermissionStatus() async {
+    await _checkPermissionStatus();
+    _showSnackBar('Permission status refreshed', Colors.blue);
+  }
+
+  // ============================================================================
   // Notification Action Methods
   // ============================================================================
 
@@ -393,6 +493,7 @@ class _LocalNotificationHelperExampleState
       title: 'Simple Notification',
       body: 'This is a basic notification with title and body text',
       payload: 'simple_notification',
+      checkPermissions: true, // Automatically check permissions before showing
     );
     _showSnackBar('Simple notification sent!', Colors.green);
   }
@@ -423,6 +524,18 @@ class _LocalNotificationHelperExampleState
     _showSnackBar('Silent notification sent!', Colors.green);
   }
 
+  Future<void> _showSystemNotification() async {
+    await NotificationHelper.showNotification(
+      id: _notificationCounter++,
+      title: 'System Notification',
+      body: 'This notification bypasses permission checks (internal use only)',
+      payload: 'system',
+      importance: NotificationImportance.defaultImportance,
+      checkPermissions: false, // Skip permission check for system notifications
+    );
+    _showSnackBar('System notification sent!', Colors.blue);
+  }
+
   Future<void> _scheduleNotificationIn10Seconds() async {
     await NotificationHelper.scheduleNotification(
       id: _notificationCounter++,
@@ -430,6 +543,7 @@ class _LocalNotificationHelperExampleState
       body: 'This notification was scheduled for 10 seconds ago',
       scheduledDate: DateTime.now().add(const Duration(seconds: 10)),
       payload: 'scheduled_10s',
+      checkPermissions: true, // Check permissions before scheduling
     );
     _showSnackBar('Notification scheduled for 10 seconds!', Colors.blue);
   }
@@ -469,6 +583,7 @@ class _LocalNotificationHelperExampleState
           'or any content that needs more space than a regular notification can provide. '
           'The OSMEA notification helper makes it easy to create these rich experiences.',
       payload: 'big_text',
+      checkPermissions: true, // Check permissions before showing big text notification
     );
     _showSnackBar('Big text notification sent!', Colors.green);
   }
@@ -496,6 +611,7 @@ class _LocalNotificationHelperExampleState
           cancelNotification: true,
         ),
       ],
+      checkPermissions: true, // Check permissions before showing action notification
     );
     _showSnackBar('Action notification sent!', Colors.green);
   }
