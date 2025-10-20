@@ -5,6 +5,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:osmea_components/osmea_components.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../widgets/common_appbar.dart';
 
@@ -29,6 +31,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
   LocationData? _largeSizeLocation;
   LocationData? _outlinedStyleLocation;
   LocationData? _filledStyleLocation;
+  LocationData? _searchOnlyLocation;
 
   final Map<String, bool> _isPickerOpen = {};
   bool _autofocusInitialized = false;
@@ -109,7 +112,6 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
   }
 
-  /// Use Current Location - Konum seç
   void _handleCurrentLocationPressed(String pickerId) async {
     if (_isPickerOpen[pickerId] == true) {
       return;
@@ -161,10 +163,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
   }
 
-  void _handleLocationChanged(
-    LocationData? location,
-    String pickerId,
-  ) async {
+  void _handleLocationChanged(LocationData? location, String pickerId) async {
     if (_isPickerOpen[pickerId] == true) {
       return;
     }
@@ -248,42 +247,23 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
     }
   }
 
-  void _handleInputOnlyLocationChange(
-    LocationData? location,
-    String pickerId,
-  ) async {
-    if (_isPickerOpen[pickerId] == true) {
-      return;
-    }
-
-    if (_inputOnlyLocation != null && pickerId == 'input') {
-      return;
-    }
-
-    if (_noCurrentLocation != null && pickerId == 'no_current') {
-      return;
-    }
-
-    _isPickerOpen[pickerId] = true;
-
-    final selected = await _openMapPicker(initialLocation: location);
-
-    if (mounted) {
-      _isPickerOpen[pickerId] = false;
-
-      if (selected != null) {
-        setState(() {
-          switch (pickerId) {
-            case 'input':
-              _inputOnlyLocation = selected;
-              break;
-            case 'no_current':
-              _noCurrentLocation = selected;
-              break;
-          }
-        });
+  void _handleInputOnlyLocationChange(LocationData? location, String pickerId) {
+    setState(() {
+      switch (pickerId) {
+        case 'input':
+          _inputOnlyLocation = location;
+          break;
+        case 'no_current':
+          _noCurrentLocation = location;
+          break;
       }
-    }
+    });
+  }
+
+  void _handleSearchOnlyLocationChange(LocationData? location) {
+    setState(() {
+      _searchOnlyLocation = location;
+    });
   }
 
   Future<LocationData?> _openMapPicker({LocationData? initialLocation}) async {
@@ -291,10 +271,8 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
       context,
       MaterialPageRoute(
         builder: (_) => _GoogleMapPickerScreen(
-          initialPosition: LatLng(
-            initialLocation?.latitude ?? 41.0082,
-            initialLocation?.longitude ?? 28.9784,
-          ),
+          // Her zaman İstanbul'u başlangıç noktası olarak kullan
+          initialPosition: const LatLng(41.0082, 28.9784),
         ),
       ),
     );
@@ -383,7 +361,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.text('Combined (Input + Map)',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'combined'),
@@ -403,22 +381,20 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Input Only', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleInputOnlyLocationChange(location, 'input'),
-          onCurrentLocationPressed: () =>
-              _handleCurrentLocationPressed('combined'),
           variant: LocationPickerVariant.input,
           initialLocation: _inputOnlyLocation,
-          showCurrentLocation: true,
+          showCurrentLocation: false,
           showMapButtonInSearch: false,
         ),
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Without Current Location Button',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleInputOnlyLocationChange(location, 'no_current'),
@@ -431,7 +407,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.text('Autofocus Current Location',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'autofocus'),
@@ -467,6 +443,14 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
           showCurrentLocation: true,
           autofocusCurrentLocation: true,
         ),
+        OsmeaComponents.sizedBox(height: 16),
+        OsmeaComponents.text('Search Only (No Suggestions)',
+            variant: OsmeaTextVariant.bodyMedium),
+        OsmeaComponents.sizedBox(height: 8),
+        LocationPickerSearchOnly(
+          onLocationChanged: _handleSearchOnlyLocationChange,
+          initialLocation: _searchOnlyLocation,
+        ),
       ],
     );
   }
@@ -477,7 +461,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
       children: [
         OsmeaComponents.text('Small', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'small'),
@@ -497,7 +481,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.text('Medium (Default)',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'medium'),
@@ -516,7 +500,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Large', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'large'),
@@ -543,7 +527,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.text('Outlined (Default)',
             variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'outlined'),
@@ -562,7 +546,7 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
         OsmeaComponents.sizedBox(height: 16),
         OsmeaComponents.text('Filled', variant: OsmeaTextVariant.bodyMedium),
         OsmeaComponents.sizedBox(height: 8),
-        OsmeaComponents.locationPicker(
+        LocationPickerWithSuggestions(
           apiKey: _apiKey!,
           onLocationChanged: (location) =>
               _handleLocationChanged(location, 'filled'),
@@ -583,6 +567,330 @@ class _LocationPickerExampleState extends State<LocationPickerExample> {
   }
 }
 
+/// Location Picker with Suggestions Widget
+class LocationPickerWithSuggestions extends StatefulWidget {
+  final String apiKey;
+  final Function(LocationData?) onLocationChanged;
+  final Function()? onShowMapPressed;
+  final Function()? onCurrentLocationPressed;
+  final LocationData? initialLocation;
+  final String? label;
+  final String? hintText;
+  final bool showCurrentLocation;
+  final bool showMapButtonInSearch;
+  final LocationPickerVariant variant;
+  final LocationPickerSize? size;
+  final LocationPickerStyle? style;
+  final bool autofocusCurrentLocation;
+
+  const LocationPickerWithSuggestions({
+    required this.apiKey,
+    required this.onLocationChanged,
+    this.onShowMapPressed,
+    this.onCurrentLocationPressed,
+    this.initialLocation,
+    this.label,
+    this.hintText,
+    this.showCurrentLocation = true,
+    this.showMapButtonInSearch = false,
+    this.variant = LocationPickerVariant.combined,
+    this.size,
+    this.style,
+    this.autofocusCurrentLocation = false,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<LocationPickerWithSuggestions> createState() =>
+      _LocationPickerWithSuggestionsState();
+}
+
+class _LocationPickerWithSuggestionsState
+    extends State<LocationPickerWithSuggestions> {
+  final TextEditingController _searchController = TextEditingController();
+  List<PlaceSuggestion> _predictions = [];
+  bool _showSuggestions = false;
+  bool _isSearching = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.initialLocation != null) {
+      _searchController.text = widget.initialLocation!.address;
+    }
+
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  Future<void> _onSearchChanged() async {
+    final query = _searchController.text.trim();
+
+    if (query.isEmpty) {
+      setState(() {
+        _predictions = [];
+        _showSuggestions = false;
+      });
+      return;
+    }
+
+    if (query.length < 2) return;
+
+    setState(() => _isSearching = true);
+
+    try {
+      final suggestions = await _getPlacePredictions(query);
+
+      if (mounted) {
+        setState(() {
+          _predictions = suggestions;
+          _showSuggestions = _predictions.isNotEmpty;
+          _isSearching = false;
+        });
+      }
+    } catch (e) {
+      print('Error fetching suggestions: $e');
+      if (mounted) {
+        setState(() => _isSearching = false);
+      }
+    }
+  }
+
+  Future<List<PlaceSuggestion>> _getPlacePredictions(String input) async {
+    try {
+      final String url =
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+          '?input=$input'
+          '&components=country:tr'
+          '&key=${widget.apiKey}';
+
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final predictions = json['predictions'] as List;
+
+        return predictions
+            .map((p) => PlaceSuggestion(
+                  placeId: p['place_id'],
+                  description: p['description'],
+                  mainText: p['main_text'] ?? p['description'],
+                  secondaryText: p['secondary_text'] ?? '',
+                ))
+            .toList();
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+    return [];
+  }
+
+  Future<void> _onSuggestionSelected(PlaceSuggestion suggestion) async {
+    _searchController.text = suggestion.description;
+
+    setState(() {
+      _showSuggestions = false;
+      _isSearching = true;
+    });
+
+    try {
+      final locationData = await _getPlaceDetails(suggestion.placeId);
+
+      if (locationData != null && mounted) {
+        setState(() => _isSearching = false);
+        widget.onLocationChanged(locationData);
+      }
+
+      if (mounted) {
+        setState(() => _isSearching = false);
+      }
+    } catch (e) {
+      print('Error fetching place details: $e');
+      if (mounted) {
+        setState(() => _isSearching = false);
+      }
+    }
+  }
+
+  Future<LocationData?> _getPlaceDetails(String placeId) async {
+    try {
+      final String url =
+          'https://maps.googleapis.com/maps/api/place/details/json'
+          '?place_id=$placeId'
+          '&key=${widget.apiKey}';
+
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final result = json['result'];
+        final geometry = result['geometry'];
+        final location = geometry['location'];
+
+        return LocationData(
+          latitude: location['lat'],
+          longitude: location['lng'],
+          address: result['formatted_address'] ?? '',
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+    return null;
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OsmeaComponents.locationPicker(
+          apiKey: widget.apiKey,
+          onLocationChanged: widget.onLocationChanged,
+          onShowMapPressed: widget.onShowMapPressed,
+          onCurrentLocationPressed: widget.onCurrentLocationPressed,
+          initialLocation: widget.initialLocation,
+          label: widget.label,
+          hintText: widget.hintText,
+          showCurrentLocation: widget.showCurrentLocation,
+          showMapButtonInSearch: widget.showMapButtonInSearch,
+          variant: widget.variant,
+          size: LocationPickerSize.medium,
+          style: LocationPickerStyle.outlined,
+          autofocusCurrentLocation: widget.autofocusCurrentLocation,
+        ),
+        if (_showSuggestions && _predictions.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey[300]!),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+              ),
+              constraints: const BoxConstraints(maxHeight: 250),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: _predictions.length,
+                itemBuilder: (context, index) {
+                  final prediction = _predictions[index];
+                  return ListTile(
+                    leading: const Icon(Icons.location_on_outlined, size: 20),
+                    title: Text(
+                      prediction.mainText,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    subtitle: prediction.secondaryText.isNotEmpty
+                        ? Text(
+                            prediction.secondaryText,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[600],
+                            ),
+                          )
+                        : null,
+                    onTap: () => _onSuggestionSelected(prediction),
+                    dense: true,
+                  );
+                },
+              ),
+            ),
+          ),
+        if (_isSearching)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SizedBox(
+              height: 4,
+              child: LinearProgressIndicator(
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class PlaceSuggestion {
+  final String placeId;
+  final String description;
+  final String mainText;
+  final String secondaryText;
+
+  PlaceSuggestion({
+    required this.placeId,
+    required this.description,
+    required this.mainText,
+    required this.secondaryText,
+  });
+}
+
+/// Location Picker Search Only Widget (No Suggestions)
+class LocationPickerSearchOnly extends StatefulWidget {
+  final Function(LocationData?) onLocationChanged;
+  final LocationData? initialLocation;
+
+  const LocationPickerSearchOnly({
+    required this.onLocationChanged,
+    this.initialLocation,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<LocationPickerSearchOnly> createState() =>
+      _LocationPickerSearchOnlyState();
+}
+
+class _LocationPickerSearchOnlyState extends State<LocationPickerSearchOnly> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialLocation != null) {
+      _searchController.text = widget.initialLocation!.address;
+    }
+  }
+
+  void _handleTextChange(String value) {
+    final locationData = LocationData(
+      latitude: 0.0,
+      longitude: 0.0,
+      address: value,
+    );
+    widget.onLocationChanged(locationData);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OsmeaComponents.textField(
+      controller: _searchController,
+      label: 'Search Location',
+      hint: 'Enter location manually...',
+      onChanged: _handleTextChange,
+    );
+  }
+}
+
 /// Google Map Picker Screen
 class _GoogleMapPickerScreen extends StatefulWidget {
   final LatLng initialPosition;
@@ -594,16 +902,16 @@ class _GoogleMapPickerScreen extends StatefulWidget {
 
 class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
   late GoogleMapController _controller;
-  late LatLng _pickedLatLng;
-  String _address = 'Loading...';
+  LatLng? _pickedLatLng;
+  String _address = 'Select a location on the map';
   bool _isProcessing = false;
   bool _isConfirming = false;
 
   @override
   void initState() {
     super.initState();
-    _pickedLatLng = widget.initialPosition;
-    _updateAddress(_pickedLatLng);
+    // Başlangıçta hiçbir konum seçili değil
+    _pickedLatLng = null;
   }
 
   Future<void> _updateAddress(LatLng pos) async {
@@ -624,7 +932,7 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _address = 'Lat: ${pos.latitude}, Lng: ${pos.longitude}';
+          _address = 'Lat: ${pos.latitude.toStringAsFixed(6)}, Lng: ${pos.longitude.toStringAsFixed(6)}';
         });
       }
     } finally {
@@ -637,7 +945,7 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
   }
 
   void _confirmLocation() {
-    if (_isConfirming) {
+    if (_isConfirming || _pickedLatLng == null) {
       return;
     }
 
@@ -646,8 +954,8 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
     Navigator.pop(
       context,
       LocationData(
-        latitude: _pickedLatLng.latitude,
-        longitude: _pickedLatLng.longitude,
+        latitude: _pickedLatLng!.latitude,
+        longitude: _pickedLatLng!.longitude,
         address: _address,
       ),
     );
@@ -661,8 +969,9 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed:
-                (_isProcessing || _isConfirming) ? null : _confirmLocation,
+            onPressed: (_isProcessing || _isConfirming || _pickedLatLng == null) 
+                ? null 
+                : _confirmLocation,
           )
         ],
       ),
@@ -670,21 +979,23 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
         children: [
           GoogleMap(
             initialCameraPosition:
-                CameraPosition(target: widget.initialPosition, zoom: 16),
+                CameraPosition(target: widget.initialPosition, zoom: 12),
             onMapCreated: (controller) => _controller = controller,
-            markers: {
-              Marker(
-                markerId: const MarkerId('picked'),
-                position: _pickedLatLng,
-                draggable: true,
-                onDragEnd: (newPos) {
-                  setState(() {
-                    _pickedLatLng = newPos;
-                  });
-                  _updateAddress(newPos);
-                },
-              )
-            },
+            markers: _pickedLatLng != null
+                ? {
+                    Marker(
+                      markerId: const MarkerId('picked'),
+                      position: _pickedLatLng!,
+                      draggable: true,
+                      onDragEnd: (newPos) {
+                        setState(() {
+                          _pickedLatLng = newPos;
+                        });
+                        _updateAddress(newPos);
+                      },
+                    )
+                  }
+                : {},
             onTap: (pos) {
               setState(() {
                 _pickedLatLng = pos;
@@ -702,7 +1013,7 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.85),
+                color: Colors.white.withOpacity(0.95),
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: const [
                   BoxShadow(
@@ -715,9 +1026,23 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
                   Text(
                     _address,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: _pickedLatLng == null ? Colors.grey : Colors.black,
+                    ),
                   ),
+                  if (_pickedLatLng == null) ...[
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Tap on the map to select a location',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
                   if (_isProcessing) ...[
                     const SizedBox(height: 8),
                     const LinearProgressIndicator(),
@@ -732,7 +1057,6 @@ class _GoogleMapPickerScreenState extends State<_GoogleMapPickerScreen> {
   }
 }
 
-/// Location Map View Screen
 /// Location Map View Screen
 class _LocationMapViewScreen extends StatefulWidget {
   final LocationData location;
