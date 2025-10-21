@@ -111,7 +111,6 @@ class _IntroScreenState extends State<IntroScreen>
     }
   }
 
-
   void _goToLogin() {
     context.go('/'); // Go to main page (with ShellRoute)
   }
