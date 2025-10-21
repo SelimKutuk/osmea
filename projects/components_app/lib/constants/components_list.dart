@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../components/align_example.dart';
 import '../components/appbar_example.dart';
+import '../components/appbar_searchbar_example.dart';
 import '../components/avatar_example.dart';
 import '../components/badge_example.dart';
 import '../components/bottom_sheet_example.dart';
@@ -47,11 +48,15 @@ import '../components/switch_button_example.dart';
 import '../components/tabbar_example.dart';
 import '../components/text_example.dart';
 import '../components/text_field_example.dart';
+import '../components/phone_picker_example.dart';
 import '../components/ticket_widget_example.dart';
 import '../components/toast_example.dart';
 import '../components/url_launcher_example.dart';
+import '../components/viewer_helper_example.dart';
 import '../components/wrap_example.dart';
-// FileDownloadHelperExample is shown in Helpers, not in Display list
+import '../components/application_share_helper_example.dart';
+import '../components/file_download_helper_example.dart';
+import '../components/sound_dialog_example.dart';
 
 final List<Map<String, dynamic>> components = [
   {
@@ -63,6 +68,11 @@ final List<Map<String, dynamic>> components = [
     'title': 'AppBar',
     'icon': Icons.view_headline_outlined,
     'route': () => const AppbarShowcase(),
+  },
+  {
+    'title': 'AppBar with SearchBar',
+    'icon': Icons.search_outlined,
+    'route': () => const AppBarSearchBarExample(),
   },
   {
     'title': 'Avatar',
@@ -250,6 +260,11 @@ final List<Map<String, dynamic>> components = [
     'route': () => const SnackbarExample(),
   },
   {
+    'title': 'Sound Dialog',
+    'icon': Icons.mic_none_outlined,
+    'route': () => const SoundDialogExample(),
+  },
+  {
     'title': 'Spacer',
     'icon': Icons.space_bar_outlined,
     'route': () => const SpacerExample(),
@@ -280,9 +295,14 @@ final List<Map<String, dynamic>> components = [
     'route': () => const TextExample(),
   },
   {
-    'title': 'Input',
+    'title': 'TextField',
     'icon': Icons.input_outlined,
     'route': () => const TextFieldExample(),
+  },
+  {
+    'title': 'Phone Picker',
+    'icon': Icons.phone_outlined,
+    'route': () => const PhonePickerExample(),
   },
   {
     'title': 'Ticket',
@@ -304,5 +324,20 @@ final List<Map<String, dynamic>> components = [
     'title': 'Wrap',
     'icon': Icons.wrap_text_outlined,
     'route': () => const WrapExample(),
+  },
+  {
+    'title': 'Application Share Helper',
+    'icon': Icons.share_outlined,
+    'route': () => const ApplicationShareHelperExample(),
+  },
+  {
+    'title': 'File Download Helper',
+    'icon': Icons.download_outlined,
+    'route': () => const FileDownloadHelperExample(),
+  },
+  {
+    'title': 'Viewer Helper',
+    'icon': Icons.web_outlined,
+    'route': () => const ViewerHelperExample(),
   },
 ];

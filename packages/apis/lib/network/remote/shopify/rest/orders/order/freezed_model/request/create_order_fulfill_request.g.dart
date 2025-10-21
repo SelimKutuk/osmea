@@ -15,10 +15,18 @@ _$CreateOrderFulfillRequestImpl _$$CreateOrderFulfillRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateOrderFulfillRequestImplToJson(
-        _$CreateOrderFulfillRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.order?.toJson() case final value?) 'order': value,
-    };
+    _$CreateOrderFulfillRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('order', instance.order?.toJson());
+  return val;
+}
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       email: json['email'] as String?,
@@ -31,27 +39,41 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
           .toList(),
     );
 
-Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.email case final value?) 'email': value,
-      if (instance.fulfillmentStatus case final value?)
-        'fulfillment_status': value,
-      if (instance.fulfillments?.map((e) => e.toJson()).toList()
-          case final value?)
-        'fulfillments': value,
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-    };
+Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('email', instance.email);
+  writeNotNull('fulfillment_status', instance.fulfillmentStatus);
+  writeNotNull(
+      'fulfillments', instance.fulfillments?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$FulfillmentImpl _$$FulfillmentImplFromJson(Map<String, dynamic> json) =>
     _$FulfillmentImpl(
       locationId: (json['location_id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$FulfillmentImplToJson(_$FulfillmentImpl instance) =>
-    <String, dynamic>{
-      if (instance.locationId case final value?) 'location_id': value,
-    };
+Map<String, dynamic> _$$FulfillmentImplToJson(_$FulfillmentImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location_id', instance.locationId);
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -59,8 +81,16 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
       quantity: (json['quantity'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.variantId case final value?) 'variant_id': value,
-      if (instance.quantity case final value?) 'quantity': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('variant_id', instance.variantId);
+  writeNotNull('quantity', instance.quantity);
+  return val;
+}

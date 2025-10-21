@@ -24,12 +24,8 @@ mixin _$UpdateBlogTitleRequest {
   @JsonKey(name: "blog")
   Blog? get blog => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateBlogTitleRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateBlogTitleRequestCopyWith<UpdateBlogTitleRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$UpdateBlogTitleRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,8 +65,6 @@ class _$UpdateBlogTitleRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BlogCopyWith<$Res>? get blog {
@@ -111,8 +103,6 @@ class __$$UpdateBlogTitleRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateBlogTitleRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,13 +142,11 @@ class _$UpdateBlogTitleRequestImpl implements _UpdateBlogTitleRequest {
             (identical(other.blog, blog) || other.blog == blog));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, blog);
 
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateBlogTitleRequestImplCopyWith<_$UpdateBlogTitleRequestImpl>
@@ -183,11 +171,8 @@ abstract class _UpdateBlogTitleRequest implements UpdateBlogTitleRequest {
   @override
   @JsonKey(name: "blog")
   Blog? get blog;
-
-  /// Create a copy of UpdateBlogTitleRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateBlogTitleRequestImplCopyWith<_$UpdateBlogTitleRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -203,12 +188,8 @@ mixin _$Blog {
   @JsonKey(name: "title")
   String? get title => throw _privateConstructorUsedError;
 
-  /// Serializes this Blog to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $BlogCopyWith<Blog> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -231,8 +212,6 @@ class _$BlogCopyWithImpl<$Res, $Val extends Blog>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -270,8 +249,6 @@ class __$$BlogImplCopyWithImpl<$Res>
   __$$BlogImplCopyWithImpl(_$BlogImpl _value, $Res Function(_$BlogImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -321,13 +298,11 @@ class _$BlogImpl implements _Blog {
             (identical(other.title, title) || other.title == title));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title);
 
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BlogImplCopyWith<_$BlogImpl> get copyWith =>
@@ -354,11 +329,8 @@ abstract class _Blog implements Blog {
   @override
   @JsonKey(name: "title")
   String? get title;
-
-  /// Create a copy of Blog
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$BlogImplCopyWith<_$BlogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

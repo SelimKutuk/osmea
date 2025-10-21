@@ -16,12 +16,19 @@ _$CreatesMarketingEngagementsRequestModelImpl
         );
 
 Map<String, dynamic> _$$CreatesMarketingEngagementsRequestModelImplToJson(
-        _$CreatesMarketingEngagementsRequestModelImpl instance) =>
-    <String, dynamic>{
-      if (instance.engagements?.map((e) => e.toJson()).toList()
-          case final value?)
-        'engagements': value,
-    };
+    _$CreatesMarketingEngagementsRequestModelImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'engagements', instance.engagements?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$EngagementImpl _$$EngagementImplFromJson(Map<String, dynamic> json) =>
     _$EngagementImpl(
@@ -35,13 +42,20 @@ _$EngagementImpl _$$EngagementImplFromJson(Map<String, dynamic> json) =>
       isCumulative: json['is_cumulative'] as bool?,
     );
 
-Map<String, dynamic> _$$EngagementImplToJson(_$EngagementImpl instance) =>
-    <String, dynamic>{
-      if (instance.occurredOn?.toIso8601String() case final value?)
-        'occurred_on': value,
-      if (instance.viewsCount case final value?) 'views_count': value,
-      if (instance.clicksCount case final value?) 'clicks_count': value,
-      if (instance.favoritesCount case final value?) 'favorites_count': value,
-      if (instance.adSpend case final value?) 'ad_spend': value,
-      if (instance.isCumulative case final value?) 'is_cumulative': value,
-    };
+Map<String, dynamic> _$$EngagementImplToJson(_$EngagementImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('occurred_on', instance.occurredOn?.toIso8601String());
+  writeNotNull('views_count', instance.viewsCount);
+  writeNotNull('clicks_count', instance.clicksCount);
+  writeNotNull('favorites_count', instance.favoritesCount);
+  writeNotNull('ad_spend', instance.adSpend);
+  writeNotNull('is_cumulative', instance.isCumulative);
+  return val;
+}

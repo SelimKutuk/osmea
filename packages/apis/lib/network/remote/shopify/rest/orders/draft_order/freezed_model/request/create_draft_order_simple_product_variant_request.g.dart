@@ -17,10 +17,18 @@ _$CreateDraftOrderSimpleProductVariantRequestImpl
         );
 
 Map<String, dynamic> _$$CreateDraftOrderSimpleProductVariantRequestImplToJson(
-        _$CreateDraftOrderSimpleProductVariantRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.draftOrder?.toJson() case final value?) 'draft_order': value,
-    };
+    _$CreateDraftOrderSimpleProductVariantRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('draft_order', instance.draftOrder?.toJson());
+  return val;
+}
 
 _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
     _$DraftOrderImpl(
@@ -29,11 +37,19 @@ _$DraftOrderImpl _$$DraftOrderImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) =>
-    <String, dynamic>{
-      if (instance.lineItems?.map((e) => e.toJson()).toList() case final value?)
-        'line_items': value,
-    };
+Map<String, dynamic> _$$DraftOrderImplToJson(_$DraftOrderImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'line_items', instance.lineItems?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
     _$LineItemImpl(
@@ -41,8 +57,16 @@ _$LineItemImpl _$$LineItemImplFromJson(Map<String, dynamic> json) =>
       quantity: (json['quantity'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) =>
-    <String, dynamic>{
-      if (instance.variantId case final value?) 'variant_id': value,
-      if (instance.quantity case final value?) 'quantity': value,
-    };
+Map<String, dynamic> _$$LineItemImplToJson(_$LineItemImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('variant_id', instance.variantId);
+  writeNotNull('quantity', instance.quantity);
+  return val;
+}

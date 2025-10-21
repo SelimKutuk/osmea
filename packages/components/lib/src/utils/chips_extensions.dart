@@ -280,11 +280,14 @@ extension ChipsShapeExtension on ChipsShape {
   BorderRadius getBorderRadius(BuildContext context) {
     switch (this) {
       case ChipsShape.rounded:
-        // Fully rounded pill shape
+        // Moderate rounded corners
         return context.borderRadiusMaxStandard / 2;
       case ChipsShape.square:
         // Modern subtle rounding for a "squircle" look
         return context.borderRadiusMaxStandard;
+      case ChipsShape.pill:
+        // Fully rounded pill shape - perfect capsule
+        return BorderRadius.circular(999.0);
     }
   }
 }

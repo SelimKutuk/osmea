@@ -30,11 +30,20 @@ _$ApplicationChargeImpl _$$ApplicationChargeImplFromJson(
     );
 
 Map<String, dynamic> _$$ApplicationChargeImplToJson(
-        _$ApplicationChargeImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      if (instance.price case final value?) 'price': value,
-      'return_url': instance.returnUrl,
-      if (instance.test case final value?) 'test': value,
-      if (instance.currency case final value?) 'currency': value,
-    };
+    _$ApplicationChargeImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('price', instance.price);
+  val['return_url'] = instance.returnUrl;
+  writeNotNull('test', instance.test);
+  writeNotNull('currency', instance.currency);
+  return val;
+}

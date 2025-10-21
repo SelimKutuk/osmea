@@ -2,7 +2,7 @@
 // ignore: unused_import
 import 'package:core/core.dart';
 // 📦 Importing generated dependency injection config
-import 'package:core/src/di/config/config_di.config.dart';
+// import 'package:core/src/di/config/config_di.config.dart';
 import 'package:core/src/helper/common_logger_helper/abstract/common_logger.dart';
 import 'package:core/src/helper/common_logger_helper/common_logger_helper.dart';
 // 🛠️ Importing GetIt for service locator pattern
@@ -16,12 +16,10 @@ import 'package:logger/logger.dart';
 GetIt getIt = GetIt.instance;
 
 // 🚀 This annotation generates the code for dependency injection initialization
-@InjectableInit(preferRelativeImports: false)
+@InjectableInit()
 Future<GetIt> configureDependencies() async {
-  // 🔄 Initialize core dependencies and assign to getIt
-
   // ⚙️ Initialize and return all registered dependencies
   getIt.registerLazySingleton<ICommonLogger>(
       () => CommonLogger(logger: Logger()));
-  return getIt.init();
+  return getIt;
 }

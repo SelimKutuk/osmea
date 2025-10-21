@@ -24,12 +24,8 @@ mixin _$UpdateInventoryItemUnitCostRequest {
   @JsonKey(name: "inventory_item")
   InventoryItem? get inventoryItem => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateInventoryItemUnitCostRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateInventoryItemUnitCostRequestCopyWith<
           UpdateInventoryItemUnitCostRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -59,8 +55,6 @@ class _$UpdateInventoryItemUnitCostRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,8 +68,6 @@ class _$UpdateInventoryItemUnitCostRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InventoryItemCopyWith<$Res>? get inventoryItem {
@@ -114,8 +106,6 @@ class __$$UpdateInventoryItemUnitCostRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateInventoryItemUnitCostRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,13 +149,11 @@ class _$UpdateInventoryItemUnitCostRequestImpl
                 other.inventoryItem == inventoryItem));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, inventoryItem);
 
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateInventoryItemUnitCostRequestImplCopyWith<
@@ -195,11 +183,8 @@ abstract class _UpdateInventoryItemUnitCostRequest
   @override
   @JsonKey(name: "inventory_item")
   InventoryItem? get inventoryItem;
-
-  /// Create a copy of UpdateInventoryItemUnitCostRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateInventoryItemUnitCostRequestImplCopyWith<
           _$UpdateInventoryItemUnitCostRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -216,12 +201,8 @@ mixin _$InventoryItem {
   @JsonKey(name: "cost")
   String? get cost => throw _privateConstructorUsedError;
 
-  /// Serializes this InventoryItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $InventoryItemCopyWith<InventoryItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -246,8 +227,6 @@ class _$InventoryItemCopyWithImpl<$Res, $Val extends InventoryItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -287,8 +266,6 @@ class __$$InventoryItemImplCopyWithImpl<$Res>
       _$InventoryItemImpl _value, $Res Function(_$InventoryItemImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -338,13 +315,11 @@ class _$InventoryItemImpl implements _InventoryItem {
             (identical(other.cost, cost) || other.cost == cost));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, cost);
 
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
@@ -372,11 +347,8 @@ abstract class _InventoryItem implements InventoryItem {
   @override
   @JsonKey(name: "cost")
   String? get cost;
-
-  /// Create a copy of InventoryItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

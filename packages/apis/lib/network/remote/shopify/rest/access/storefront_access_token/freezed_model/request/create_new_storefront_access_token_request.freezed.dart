@@ -25,12 +25,8 @@ mixin _$CreateNewStorefrontAccessTokenRequest {
   CreateNewStorefrontAccessTokenRequestBody? get storefrontAccessToken =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this CreateNewStorefrontAccessTokenRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateNewStorefrontAccessTokenRequestCopyWith<
           CreateNewStorefrontAccessTokenRequest>
       get copyWith => throw _privateConstructorUsedError;
@@ -63,8 +59,6 @@ class _$CreateNewStorefrontAccessTokenRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,8 +72,6 @@ class _$CreateNewStorefrontAccessTokenRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CreateNewStorefrontAccessTokenRequestBodyCopyWith<$Res>?
@@ -123,8 +115,6 @@ class __$$CreateNewStorefrontAccessTokenRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateNewStorefrontAccessTokenRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -168,13 +158,11 @@ class _$CreateNewStorefrontAccessTokenRequestImpl
                 other.storefrontAccessToken == storefrontAccessToken));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, storefrontAccessToken);
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateNewStorefrontAccessTokenRequestImplCopyWith<
@@ -204,11 +192,8 @@ abstract class _CreateNewStorefrontAccessTokenRequest
   @override
   @JsonKey(name: "storefront_access_token")
   CreateNewStorefrontAccessTokenRequestBody? get storefrontAccessToken;
-
-  /// Create a copy of CreateNewStorefrontAccessTokenRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateNewStorefrontAccessTokenRequestImplCopyWith<
           _$CreateNewStorefrontAccessTokenRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -225,12 +210,8 @@ mixin _$CreateNewStorefrontAccessTokenRequestBody {
   @JsonKey(name: "title")
   String? get title => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateNewStorefrontAccessTokenRequestBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateNewStorefrontAccessTokenRequestBody
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateNewStorefrontAccessTokenRequestBodyCopyWith<
           CreateNewStorefrontAccessTokenRequestBody>
       get copyWith => throw _privateConstructorUsedError;
@@ -259,8 +240,6 @@ class _$CreateNewStorefrontAccessTokenRequestBodyCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequestBody
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,8 +276,6 @@ class __$$CreateNewStorefrontAccessTokenRequestBodyImplCopyWithImpl<$Res>
       $Res Function(_$CreateNewStorefrontAccessTokenRequestBodyImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequestBody
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -341,13 +318,11 @@ class _$CreateNewStorefrontAccessTokenRequestBodyImpl
             (identical(other.title, title) || other.title == title));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title);
 
-  /// Create a copy of CreateNewStorefrontAccessTokenRequestBody
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateNewStorefrontAccessTokenRequestBodyImplCopyWith<
@@ -378,11 +353,8 @@ abstract class _CreateNewStorefrontAccessTokenRequestBody
   @override
   @JsonKey(name: "title")
   String? get title;
-
-  /// Create a copy of CreateNewStorefrontAccessTokenRequestBody
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateNewStorefrontAccessTokenRequestBodyImplCopyWith<
           _$CreateNewStorefrontAccessTokenRequestBodyImpl>
       get copyWith => throw _privateConstructorUsedError;

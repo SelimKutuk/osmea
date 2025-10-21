@@ -15,18 +15,34 @@ _$UpdateBlogTitleRequestImpl _$$UpdateBlogTitleRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateBlogTitleRequestImplToJson(
-        _$UpdateBlogTitleRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.blog?.toJson() case final value?) 'blog': value,
-    };
+    _$UpdateBlogTitleRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('blog', instance.blog?.toJson());
+  return val;
+}
 
 _$BlogImpl _$$BlogImplFromJson(Map<String, dynamic> json) => _$BlogImpl(
       id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
     );
 
-Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.title case final value?) 'title': value,
-    };
+Map<String, dynamic> _$$BlogImplToJson(_$BlogImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  return val;
+}

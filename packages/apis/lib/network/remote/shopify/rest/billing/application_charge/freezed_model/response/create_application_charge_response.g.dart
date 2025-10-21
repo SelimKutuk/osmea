@@ -16,8 +16,15 @@ _$CreateApplicationChargeResponseImpl
         );
 
 Map<String, dynamic> _$$CreateApplicationChargeResponseImplToJson(
-        _$CreateApplicationChargeResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.applicationCharge?.toJson() case final value?)
-        'application_charge': value,
-    };
+    _$CreateApplicationChargeResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('application_charge', instance.applicationCharge?.toJson());
+  return val;
+}

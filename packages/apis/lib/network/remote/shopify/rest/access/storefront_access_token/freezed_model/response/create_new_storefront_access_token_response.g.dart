@@ -18,12 +18,20 @@ _$CreateNewStorefrontAccessTokenResponseImpl
         );
 
 Map<String, dynamic> _$$CreateNewStorefrontAccessTokenResponseImplToJson(
-        _$CreateNewStorefrontAccessTokenResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.storefrontAccessToken?.toJson() case final value?)
-        'storefront_access_token': value,
-      if (instance.errors case final value?) 'errors': value,
-    };
+    _$CreateNewStorefrontAccessTokenResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'storefront_access_token', instance.storefrontAccessToken?.toJson());
+  writeNotNull('errors', instance.errors);
+  return val;
+}
 
 _$StorefrontAccessTokenImpl _$$StorefrontAccessTokenImplFromJson(
         Map<String, dynamic> json) =>
@@ -39,14 +47,20 @@ _$StorefrontAccessTokenImpl _$$StorefrontAccessTokenImplFromJson(
     );
 
 Map<String, dynamic> _$$StorefrontAccessTokenImplToJson(
-        _$StorefrontAccessTokenImpl instance) =>
-    <String, dynamic>{
-      if (instance.accessToken case final value?) 'access_token': value,
-      if (instance.accessScope case final value?) 'access_scope': value,
-      if (instance.createdAt?.toIso8601String() case final value?)
-        'created_at': value,
-      if (instance.id case final value?) 'id': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-      if (instance.title case final value?) 'title': value,
-    };
+    _$StorefrontAccessTokenImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('access_token', instance.accessToken);
+  writeNotNull('access_scope', instance.accessScope);
+  writeNotNull('created_at', instance.createdAt?.toIso8601String());
+  writeNotNull('id', instance.id);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  writeNotNull('title', instance.title);
+  return val;
+}

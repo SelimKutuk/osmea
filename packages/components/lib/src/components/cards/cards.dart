@@ -26,7 +26,6 @@ import 'package:osmea_components/src/utils/card_extensions.dart';
 /// **Features:**
 /// * 🎨 Material Design 3 styling
 /// * 📱 Responsive design
-/// * ♿ Accessibility support
 /// * 🌗 Theme-aware colors
 /// * 🎭 Hover and focus states
 /// * 🔄 Animation support
@@ -75,6 +74,7 @@ class _OsmeaBaseCard extends CoreContainer {
     this.shadowColor,
     this.isClickable = false,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     this.height,
     super.child,
@@ -203,7 +203,6 @@ class _OsmeaBaseCard extends CoreContainer {
 /// * 🏷️ Title and subtitle support
 /// * 📝 Rich content area
 /// * 🎨 Customizable styling
-/// * ♿ Accessibility support
 /// * 🖱️ Optional click interaction
 ///
 /// **Example:**
@@ -231,6 +230,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
@@ -418,7 +418,7 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
 /// * 🎭 Image fit and alignment options
 /// * 🔄 Loading and error states
 /// * 🎨 Gradient overlay support
-/// * ♿ Accessibility support
+/// * 📏 Text overflow control for consistent heights
 ///
 /// **Example:**
 /// ```dart
@@ -428,6 +428,8 @@ class OsmeaBasicCard extends _OsmeaBaseCard {
 ///   imageUrl: 'https://example.com/image.jpg',
 ///   height: 250,
 ///   imageHeight: 200,
+///   titleMaxLines: 2,
+///   textOverflow: TextOverflow.ellipsis,
 ///   imagePosition: ComponentPosition.top,
 ///   onTap: () => print('Image card tapped'),
 /// )
@@ -445,10 +447,12 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
     this.subtitle,
+    this.subtitle2,
     this.content,
     this.imageUrl,
     this.imageAsset,
@@ -461,9 +465,11 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     this.overlayGradient,
     this.titleStyle,
     this.subtitleStyle,
+    this.subtitle2Style,
     this.contentStyle,
     this.titleColor,
     this.subtitleColor,
+    this.subtitle2Color,
     this.contentColor,
     this.spacing,
     this.loadingWidget,
@@ -473,6 +479,14 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     this.badgePosition = BadgePosition.topRight,
     this.imageBorderRadius,
     this.child,
+    // 📏 Text overflow control parameters
+    this.titleMaxLines = 2,
+    this.subtitleMaxLines = 1,
+    this.subtitle2MaxLines = 1,
+    this.contentMaxLines = 3,
+    this.textOverflow = TextOverflow.ellipsis,
+    this.textAreaHeight,
+    this.maintainAspectRatio = false,
   }) : super(isClickable: onTap != null);
 
   /// 🏷️ Main title text
@@ -481,7 +495,10 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   /// 📄 Subtitle text
   final String? subtitle;
 
-  /// 📝 Content description
+  /// � Second subtitle text (for price comparison)
+  final String? subtitle2;
+
+  /// �📝 Content description
   final String? content;
 
   /// 🌐 Network image URL
@@ -517,6 +534,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   /// 🎨 Custom subtitle text style
   final TextStyle? subtitleStyle;
 
+  /// 🎨 Custom subtitle2 text style
+  final TextStyle? subtitle2Style;
+
   /// 🎨 Custom content text style
   final TextStyle? contentStyle;
 
@@ -525,6 +545,9 @@ class OsmeaImageCard extends _OsmeaBaseCard {
 
   /// 🎯 Custom subtitle color
   final Color? subtitleColor;
+
+  /// 🎯 Custom subtitle2 color
+  final Color? subtitle2Color;
 
   /// 🎯 Custom content color
   final Color? contentColor;
@@ -548,6 +571,29 @@ class OsmeaImageCard extends _OsmeaBaseCard {
   /// 🎨 Custom child widget to display alongside content
   @override
   final Widget? child;
+
+  // 📏 **TEXT OVERFLOW CONTROL PARAMETERS**
+
+  /// 📝 Maximum lines for title text (prevents height inconsistency)
+  final int? titleMaxLines;
+
+  /// 📝 Maximum lines for subtitle text
+  final int? subtitleMaxLines;
+
+  /// 📝 Maximum lines for subtitle2 text
+  final int? subtitle2MaxLines;
+
+  /// 📝 Maximum lines for content text
+  final int? contentMaxLines;
+
+  /// ✂️ Text overflow behavior (ellipsis, fade, clip, visible)
+  final TextOverflow textOverflow;
+
+  /// 📏 Fixed height for text area (ensures consistent card heights)
+  final double? textAreaHeight;
+
+  /// 🔄 Whether to maintain aspect ratio for consistent sizing
+  final bool maintainAspectRatio;
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -577,15 +623,17 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     if (imagePosition.isVerticalImage) {
       return OsmeaColumn(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: maintainAspectRatio ? MainAxisSize.max : MainAxisSize.min,
         children: [
           if (imagePosition == ComponentPosition.top) ...[
             if (imageWidget != null) imageWidget,
             if (imageWidget != null && textContent != null)
               SizedBox(height: spacing ?? 16.0),
-            if (textContent != null) textContent,
+            if (textContent != null)
+              maintainAspectRatio ? Expanded(child: textContent) : textContent,
           ] else ...[
-            if (textContent != null) textContent,
+            if (textContent != null)
+              maintainAspectRatio ? Expanded(child: textContent) : textContent,
             if (textContent != null && imageWidget != null)
               SizedBox(height: spacing ?? 16.0),
             if (imageWidget != null) imageWidget,
@@ -646,12 +694,13 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     // Fallback for other positions
     return OsmeaColumn(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: maintainAspectRatio ? MainAxisSize.max : MainAxisSize.min,
       children: [
         if (imageWidget != null) imageWidget,
         if (imageWidget != null && textContent != null)
           SizedBox(height: spacing ?? 16.0),
-        if (textContent != null) textContent,
+        if (textContent != null)
+          maintainAspectRatio ? Expanded(child: textContent) : textContent,
         if (child != null) child!,
       ],
     );
@@ -759,7 +808,7 @@ class OsmeaImageCard extends _OsmeaBaseCard {
     final effectiveSpacing = spacing ?? 8.0;
     final children = <Widget>[];
 
-    // Add title
+    // Add title with maxLines control
     if (title != null) {
       children.add(
         OsmeaText(
@@ -767,34 +816,83 @@ class OsmeaImageCard extends _OsmeaBaseCard {
           variant: _getTitleVariant(),
           color: titleColor ?? (showOverlay ? Colors.white : null),
           style: titleStyle,
+          maxLines: titleMaxLines,
+          overflow: textOverflow,
         ),
       );
     }
 
     // Add spacing after title
-    if (title != null && (subtitle != null || content != null)) {
+    if (title != null &&
+        (subtitle != null || subtitle2 != null || content != null)) {
       children.add(SizedBox(height: effectiveSpacing));
     }
 
-    // Add subtitle
-    if (subtitle != null) {
-      children.add(
-        OsmeaText(
-          subtitle!,
-          variant: _getSubtitleVariant(),
-          color: subtitleColor ??
-              (showOverlay ? Colors.white70 : OsmeaColors.pewter),
-          style: subtitleStyle,
-        ),
-      );
+    // Add subtitle(s) with maxLines control - side by side if both exist
+    if (subtitle != null || subtitle2 != null) {
+      if (subtitle != null && subtitle2 != null) {
+        // Both subtitles exist - display side by side
+        children.add(
+          OsmeaRow(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              OsmeaText(
+                subtitle!,
+                variant: _getSubtitleVariant(),
+                color: subtitleColor ??
+                    (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+                style: subtitleStyle,
+                maxLines: subtitleMaxLines,
+                overflow: textOverflow,
+              ),
+              SizedBox(width: effectiveSpacing),
+              OsmeaText(
+                subtitle2!,
+                variant: _getSubtitleVariant(),
+                color: subtitle2Color ??
+                    (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+                style: subtitle2Style,
+                maxLines: subtitle2MaxLines,
+                overflow: textOverflow,
+              ),
+            ],
+          ),
+        );
+      } else if (subtitle != null) {
+        // Only first subtitle exists
+        children.add(
+          OsmeaText(
+            subtitle!,
+            variant: _getSubtitleVariant(),
+            color: subtitleColor ??
+                (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+            style: subtitleStyle,
+            maxLines: subtitleMaxLines,
+            overflow: textOverflow,
+          ),
+        );
+      } else if (subtitle2 != null) {
+        // Only second subtitle exists
+        children.add(
+          OsmeaText(
+            subtitle2!,
+            variant: _getSubtitleVariant(),
+            color: subtitle2Color ??
+                (showOverlay ? Colors.white70 : OsmeaColors.pewter),
+            style: subtitle2Style,
+            maxLines: subtitle2MaxLines,
+            overflow: textOverflow,
+          ),
+        );
+      }
     }
 
-    // Add spacing after subtitle
-    if (subtitle != null && content != null) {
+    // Add spacing after subtitle(s)
+    if ((subtitle != null || subtitle2 != null) && content != null) {
       children.add(SizedBox(height: effectiveSpacing));
     }
 
-    // Add content
+    // Add content with maxLines control
     if (content != null) {
       children.add(
         OsmeaText(
@@ -802,15 +900,32 @@ class OsmeaImageCard extends _OsmeaBaseCard {
           variant: _getContentVariant(),
           color: contentColor ?? (showOverlay ? Colors.white : null),
           style: contentStyle,
+          maxLines: contentMaxLines,
+          overflow: textOverflow,
         ),
       );
     }
 
-    return OsmeaColumn(
+    Widget textContent = OsmeaColumn(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: maintainAspectRatio ? MainAxisSize.max : MainAxisSize.min,
       children: children,
     );
+
+    // Apply fixed text area height if specified
+    if (textAreaHeight != null) {
+      textContent = SizedBox(
+        height: textAreaHeight,
+        child: textContent,
+      );
+    } else if (maintainAspectRatio) {
+      // Force consistent height when maintainAspectRatio is true
+      textContent = Expanded(
+        child: textContent,
+      );
+    }
+
+    return textContent;
   }
 
   Widget _buildOverlay() {
@@ -909,7 +1024,6 @@ class OsmeaImageCard extends _OsmeaBaseCard {
 /// * 📝 Title, subtitle, and content areas
 /// * 🎭 Button customization options
 /// * 🎨 Action area styling
-/// * ♿ Accessibility support
 /// * 📱 Responsive button layout
 ///
 /// **Example:**
@@ -938,6 +1052,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     super.borderColor,
     super.shadowColor,
     super.margin,
+    super.padding, // 🔧 Added missing padding parameter
     super.width,
     super.height,
     this.title,
@@ -1214,7 +1329,7 @@ class OsmeaActionCard extends _OsmeaBaseCard {
     if (buttons.isEmpty) return [];
 
     final List<Widget> result = [];
-    
+
     // Add primary button first (if exists)
     if (primaryAction != null) {
       result.add(
@@ -1230,12 +1345,12 @@ class OsmeaActionCard extends _OsmeaBaseCard {
         ),
       );
     }
-    
+
     // Add spacing between buttons
     if (primaryAction != null && secondaryAction != null) {
       result.add(SizedBox(height: spacing));
     }
-    
+
     // Add secondary button second (if exists)
     if (secondaryAction != null) {
       result.add(

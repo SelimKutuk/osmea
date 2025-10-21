@@ -1,7 +1,7 @@
 # OSMEA Components - Cursor Rules
 
 ## 📦 Package Overview
-OSMEA Components is a comprehensive UI component library for building beautiful, accessible Flutter applications with 50+ components.
+OSMEA Components is a comprehensive UI component library for building beautiful Flutter applications with 50+ components.
 
 ## 🎯 Development Guidelines
 
@@ -166,9 +166,8 @@ static const double desktopBreakpoint = 1024.0;
 1. **Consistency**: Follow established patterns and conventions
 2. **Reusability**: Design components to be flexible and reusable
 3. **Performance**: Optimize for smooth animations and fast rendering
-4. **Accessibility**: Ensure all components are accessible
-5. **Documentation**: Provide clear documentation and examples
-6. **Testing**: Write comprehensive tests for all components
+4. **Documentation**: Provide clear documentation and examples
+5. **Testing**: Write comprehensive tests for all components
 
 ### 🔍 Code Review Checklist
 

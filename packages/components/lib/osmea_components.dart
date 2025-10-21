@@ -27,11 +27,18 @@ export 'src/components/text_field/controllers/text_field_controller.dart';
 export 'src/components/radio_button/radio_button.dart';
 export 'src/components/login_button/login_button.dart';
 
+// 📱 AppBar with SearchBar
+export 'src/components/appbar_searchbar/appbar_searchbar_action.dart';
+
 // 🔢 Counter
 export 'src/utils/counter_extensions.dart';
 
 // 🧩 Components
 export 'src/components.dart';
+// 📱 Phone Picker (public API)
+export 'src/components/phone_picker/models/country.dart';
+export 'src/components/phone_picker/cubit/phone_picker_cubit.dart';
+export 'src/components/phone_picker/cubit/phone_picker_state.dart';
 
 // 📏 FittedBox Components
 export 'src/components/fitted_box/fitted_box.dart';
@@ -88,6 +95,8 @@ export 'src/core/cubit_button/cubit/core_button_state.dart';
 export 'src/core/cubit_button/cubit/core_button_cubit.dart';
 export 'src/components/collapse/cubit/collapse_cubit.dart';
 export 'src/components/collapse/cubit/collapse_state.dart';
+export 'src/components/sound_dialog/cubit/sound_dialog_cubit.dart';
+export 'src/components/sound_dialog/cubit/sound_dialog_state.dart';
 
 // 🌀 Loading
 export 'src/utils/loading_extensions.dart';

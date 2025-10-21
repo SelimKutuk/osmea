@@ -24,12 +24,8 @@ mixin _$ListAllLocationsResponse {
   @JsonKey(name: "locations")
   List<Location>? get locations => throw _privateConstructorUsedError;
 
-  /// Serializes this ListAllLocationsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListAllLocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListAllLocationsResponseCopyWith<ListAllLocationsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$ListAllLocationsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListAllLocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,8 +86,6 @@ class __$$ListAllLocationsResponseImplCopyWithImpl<$Res>
       $Res Function(_$ListAllLocationsResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListAllLocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,14 +135,12 @@ class _$ListAllLocationsResponseImpl implements _ListAllLocationsResponse {
                 .equals(other._locations, _locations));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_locations));
 
-  /// Create a copy of ListAllLocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListAllLocationsResponseImplCopyWith<_$ListAllLocationsResponseImpl>
@@ -176,11 +166,8 @@ abstract class _ListAllLocationsResponse implements ListAllLocationsResponse {
   @override
   @JsonKey(name: "locations")
   List<Location>? get locations;
-
-  /// Create a copy of ListAllLocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListAllLocationsResponseImplCopyWith<_$ListAllLocationsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -230,12 +217,8 @@ mixin _$Location {
   @JsonKey(name: "localized_province_name")
   dynamic get localizedProvinceName => throw _privateConstructorUsedError;
 
-  /// Serializes this Location to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LocationCopyWith<Location> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -277,8 +260,6 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -421,8 +402,6 @@ class __$$LocationImplCopyWithImpl<$Res>
       _$LocationImpl _value, $Res Function(_$LocationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -653,7 +632,7 @@ class _$LocationImpl implements _Location {
                 .equals(other.localizedProvinceName, localizedProvinceName));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -678,9 +657,7 @@ class _$LocationImpl implements _Location {
         const DeepCollectionEquality().hash(localizedProvinceName)
       ]);
 
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
@@ -778,11 +755,8 @@ abstract class _Location implements Location {
   @override
   @JsonKey(name: "localized_province_name")
   dynamic get localizedProvinceName;
-
-  /// Create a copy of Location
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

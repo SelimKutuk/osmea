@@ -24,12 +24,8 @@ mixin _$UpdateNoteAttributesRequest {
   @JsonKey(name: "order")
   Order? get order => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateNoteAttributesRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateNoteAttributesRequestCopyWith<UpdateNoteAttributesRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -58,8 +54,6 @@ class _$UpdateNoteAttributesRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +67,6 @@ class _$UpdateNoteAttributesRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OrderCopyWith<$Res>? get order {
@@ -113,8 +105,6 @@ class __$$UpdateNoteAttributesRequestImplCopyWithImpl<$Res>
       $Res Function(_$UpdateNoteAttributesRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,13 +146,11 @@ class _$UpdateNoteAttributesRequestImpl
             (identical(other.order, order) || other.order == order));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, order);
 
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateNoteAttributesRequestImplCopyWith<_$UpdateNoteAttributesRequestImpl>
@@ -189,11 +177,8 @@ abstract class _UpdateNoteAttributesRequest
   @override
   @JsonKey(name: "order")
   Order? get order;
-
-  /// Create a copy of UpdateNoteAttributesRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateNoteAttributesRequestImplCopyWith<_$UpdateNoteAttributesRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -209,12 +194,8 @@ mixin _$Order {
   @JsonKey(name: "note_attributes")
   List<NoteAttribute>? get noteAttributes => throw _privateConstructorUsedError;
 
-  /// Serializes this Order to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Order
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $OrderCopyWith<Order> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -238,8 +219,6 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Order
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -279,8 +258,6 @@ class __$$OrderImplCopyWithImpl<$Res>
       _$OrderImpl _value, $Res Function(_$OrderImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Order
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -341,14 +318,12 @@ class _$OrderImpl implements _Order {
                 .equals(other._noteAttributes, _noteAttributes));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_noteAttributes));
 
-  /// Create a copy of Order
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
@@ -376,11 +351,8 @@ abstract class _Order implements Order {
   @override
   @JsonKey(name: "note_attributes")
   List<NoteAttribute>? get noteAttributes;
-
-  /// Create a copy of Order
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -396,12 +368,8 @@ mixin _$NoteAttribute {
   @JsonKey(name: "value")
   String? get value => throw _privateConstructorUsedError;
 
-  /// Serializes this NoteAttribute to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of NoteAttribute
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $NoteAttributeCopyWith<NoteAttribute> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -427,8 +395,6 @@ class _$NoteAttributeCopyWithImpl<$Res, $Val extends NoteAttribute>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of NoteAttribute
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -469,8 +435,6 @@ class __$$NoteAttributeImplCopyWithImpl<$Res>
       _$NoteAttributeImpl _value, $Res Function(_$NoteAttributeImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of NoteAttribute
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -520,13 +484,11 @@ class _$NoteAttributeImpl implements _NoteAttribute {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, value);
 
-  /// Create a copy of NoteAttribute
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$NoteAttributeImplCopyWith<_$NoteAttributeImpl> get copyWith =>
@@ -554,11 +516,8 @@ abstract class _NoteAttribute implements NoteAttribute {
   @override
   @JsonKey(name: "value")
   String? get value;
-
-  /// Create a copy of NoteAttribute
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$NoteAttributeImplCopyWith<_$NoteAttributeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

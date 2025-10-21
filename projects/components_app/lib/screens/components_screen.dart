@@ -18,7 +18,7 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _filteredComponents = components;
   }
 
@@ -72,6 +72,10 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
                             'Input Components', _getInputComponents()),
                         _buildComponentsGrid(
                             'Display Components', _getDisplayComponents()),
+                        _buildComponentsGrid('Navigation Components',
+                            _getNavigationComponents()),
+                        _buildComponentsGrid(
+                            'Feedback Components', _getFeedbackComponents()),
                       ],
                     ),
             ),
@@ -146,24 +150,31 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
   }
 
   Widget _buildModernTabBar() {
-    return OsmeaComponents.padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: OsmeaComponents.tabBar(
-        tabs: [
-          const TabItem(text: 'Layout'),
-          const TabItem(text: 'Input'),
-          const TabItem(text: 'Display'),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: TabBar(
+        controller: _tabController,
+        isScrollable: true, // Enable horizontal scrolling
+        tabs: const [
+          Tab(text: 'Layout'),
+          Tab(text: 'Input'),
+          Tab(text: 'Display'),
+          Tab(text: 'Navigation'),
+          Tab(text: 'Feedback'),
         ],
-        variant: TabBarVariant.transparent,
-        size: TabBarSize.large,
-        currentIndex: _tabController.index,
-        onTabTap: (index) {
-          _tabController.animateTo(index);
-        },
-        textColor: OsmeaColors.black,
-        activeTextColor: OsmeaColors.black,
-        inactiveTextColor: OsmeaColors.black,
+        labelColor: OsmeaColors.black,
+        unselectedLabelColor: OsmeaColors.black.withValues(alpha: 0.6),
         indicatorColor: OsmeaColors.black,
+        indicatorWeight: 2,
+        labelStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+        tabAlignment: TabAlignment.start,
       ),
     );
   }
@@ -211,7 +222,13 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
               'Padding',
               'Expanded',
               'Flexible',
-              'FittedBox'
+              'FittedBox',
+              'Spacer',
+              'Positioned',
+              'ClipRRect',
+              'Scaffold',
+              'SingleChildScrollView',
+              'SoundDialog'
             ].contains(c['title']))
         .toList();
   }
@@ -222,30 +239,78 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
               'TextField',
               'Checkbox',
               'Radio Button',
+              'RadioButton',
+              'Switch',
               'Switch Button',
               'Dropdown',
-              'Searchbar'
+              'Searchbar',
+              'Phone Picker'
             ].contains(c['title']))
         .toList();
   }
 
   List<Map<String, dynamic>> _getDisplayComponents() {
-      return _filteredComponents
-          .where((c) => [
-                'Text',
-                'Rich Text',
-                'Image',
-                'Avatar',
-                'Badge',
-                'Card',
-                'Chips',
-                'Progress',
-                'Loading',
-                'Toast',
-                'Snackbar'
-              ].contains(c['title']))
-          .toList();
-    }
+    return _filteredComponents
+        .where((c) => [
+              'Text',
+              'RichText',
+              'Rich Text',
+              'Image',
+              'Avatar',
+              'Badge',
+              'Card',
+              'Chips',
+              'Progress',
+              'Loading',
+              'Toast',
+              'Snackbar',
+              'SoundDialog',
+              'Colors',
+              'Divider',
+              'ListItem',
+              'Footer',
+              'Ticket'
+            ].contains(c['title']))
+        .toList();
+  }
+
+  List<Map<String, dynamic>> _getNavigationComponents() {
+    return _filteredComponents
+        .where((c) => [
+              'AppBar',
+              'AppBar with SearchBar',
+              'Tabs',
+              'TabBar',
+              'BottomSheet',
+              'Bottom Sheet',
+              'Stepper',
+              'Carousel',
+              'DotIndicator',
+              'Dot Indicator',
+              'Collapse',
+              'Popup'
+            ].contains(c['title']))
+        .toList();
+  }
+
+  List<Map<String, dynamic>> _getFeedbackComponents() {
+    return _filteredComponents
+        .where((c) => [
+              'Toast',
+              'Snackbar',
+              'Loading',
+              'Progress',
+              'Sound Dialog',
+              'Badge',
+              'Counter',
+              'Button',
+              'URL Launcher',
+              'Application Share Helper',
+              'File Download Helper',
+              'Viewer Helper'
+            ].contains(c['title']))
+        .toList();
+  }
 
   Widget _buildSearchResults() {
     if (_filteredComponents.isEmpty) {
@@ -448,6 +513,7 @@ class _ModernComponentsScreenState extends State<ModernComponentsScreen>
       'SingleChildScrollView': 'Scrollable content',
       'SizedBox': 'Fixed size container',
       'Snackbar': 'Brief message display',
+      'Sound Dialog': 'Record and play audio with dialog interface',
       'Spacer': 'Flexible space element',
       'Stack': 'Layered widget positioning',
       'Stepper': 'Step-by-step process',

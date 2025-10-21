@@ -25,12 +25,8 @@ mixin _$GetAllApplicationChargesResponse {
   List<ApplicationCharge>? get applicationCharges =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this GetAllApplicationChargesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GetAllApplicationChargesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GetAllApplicationChargesResponseCopyWith<GetAllApplicationChargesResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -59,8 +55,6 @@ class _$GetAllApplicationChargesResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllApplicationChargesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,8 +93,6 @@ class __$$GetAllApplicationChargesResponseImplCopyWithImpl<$Res>
       $Res Function(_$GetAllApplicationChargesResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllApplicationChargesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,14 +146,12 @@ class _$GetAllApplicationChargesResponseImpl
                 .equals(other._applicationCharges, _applicationCharges));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_applicationCharges));
 
-  /// Create a copy of GetAllApplicationChargesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAllApplicationChargesResponseImplCopyWith<
@@ -191,11 +181,8 @@ abstract class _GetAllApplicationChargesResponse
   @override
   @JsonKey(name: "application_charges")
   List<ApplicationCharge>? get applicationCharges;
-
-  /// Create a copy of GetAllApplicationChargesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GetAllApplicationChargesResponseImplCopyWith<
           _$GetAllApplicationChargesResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

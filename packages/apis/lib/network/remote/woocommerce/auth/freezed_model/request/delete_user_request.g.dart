@@ -17,11 +17,20 @@ _$DeleteUserRequestImpl _$$DeleteUserRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$DeleteUserRequestImplToJson(
-        _$DeleteUserRequestImpl instance) =>
-    <String, dynamic>{
-      'user_id': instance.userId,
-      if (instance.reason case final value?) 'reason': value,
-      'delete_orders': instance.deleteOrders,
-      'delete_reviews': instance.deleteReviews,
-      if (instance.metadata case final value?) 'metadata': value,
-    };
+    _$DeleteUserRequestImpl instance) {
+  final val = <String, dynamic>{
+    'user_id': instance.userId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('reason', instance.reason);
+  val['delete_orders'] = instance.deleteOrders;
+  val['delete_reviews'] = instance.deleteReviews;
+  writeNotNull('metadata', instance.metadata);
+  return val;
+}

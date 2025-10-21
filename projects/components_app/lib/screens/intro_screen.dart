@@ -85,7 +85,26 @@ class _IntroScreenState extends State<IntroScreen>
         curve: Curves.easeInOut,
       );
     } else {
-      _goToLogin();
+      _handleProceed();
+    }
+  }
+
+  Future<void> _handleProceed() async {
+    try {
+      await _markOnboardingCompleted();
+    } catch (_) {
+      // Ignore errors; continue navigation regardless
+    }
+    _goToLogin();
+  }
+
+  Future<void> _markOnboardingCompleted() async {
+    try {
+      final onboardingHelper = OnboardingStorageHelper();
+      await onboardingHelper.markOnboardingSeen();
+      debugPrint('✅ Onboarding marked as completed');
+    } catch (e) {
+      debugPrint('❌ Error marking onboarding as completed: $e');
     }
   }
 
@@ -119,7 +138,7 @@ class _IntroScreenState extends State<IntroScreen>
                     OsmeaComponents.button(
                       text: 'Skip',
                       variant: ButtonVariant.ghost,
-                      onPressed: _goToLogin,
+                      onPressed: _handleProceed,
                       textColor: OsmeaColors.black,
                     ),
                   ],

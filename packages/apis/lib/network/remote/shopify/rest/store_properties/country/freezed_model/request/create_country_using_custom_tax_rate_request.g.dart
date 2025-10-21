@@ -16,10 +16,18 @@ _$CreateCountryUsingCustomTaxRateRequestImpl
         );
 
 Map<String, dynamic> _$$CreateCountryUsingCustomTaxRateRequestImplToJson(
-        _$CreateCountryUsingCustomTaxRateRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.country?.toJson() case final value?) 'country': value,
-    };
+    _$CreateCountryUsingCustomTaxRateRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('country', instance.country?.toJson());
+  return val;
+}
 
 _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
     _$CountryImpl(
@@ -31,12 +39,20 @@ _$CountryImpl _$$CountryImplFromJson(Map<String, dynamic> json) =>
       provinces: json['provinces'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$CountryImplToJson(_$CountryImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.tax case final value?) 'tax': value,
-      if (instance.code case final value?) 'code': value,
-      if (instance.taxName case final value?) 'tax_name': value,
-      if (instance.provinces case final value?) 'provinces': value,
-    };
+Map<String, dynamic> _$$CountryImplToJson(_$CountryImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('tax', instance.tax);
+  writeNotNull('code', instance.code);
+  writeNotNull('tax_name', instance.taxName);
+  writeNotNull('provinces', instance.provinces);
+  return val;
+}

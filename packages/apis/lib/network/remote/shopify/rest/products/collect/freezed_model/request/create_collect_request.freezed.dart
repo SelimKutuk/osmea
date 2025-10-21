@@ -22,12 +22,8 @@ CreateCollectRequest _$CreateCollectRequestFromJson(Map<String, dynamic> json) {
 mixin _$CreateCollectRequest {
   CollectToCreate get collect => throw _privateConstructorUsedError;
 
-  /// Serializes this CreateCollectRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CreateCollectRequestCopyWith<CreateCollectRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$CreateCollectRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,8 +63,6 @@ class _$CreateCollectRequestCopyWithImpl<$Res,
     ) as $Val);
   }
 
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CollectToCreateCopyWith<$Res> get collect {
@@ -102,8 +94,6 @@ class __$$CreateCollectRequestImplCopyWithImpl<$Res>
       $Res Function(_$CreateCollectRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,13 +132,11 @@ class _$CreateCollectRequestImpl implements _CreateCollectRequest {
             (identical(other.collect, collect) || other.collect == collect));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, collect);
 
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateCollectRequestImplCopyWith<_$CreateCollectRequestImpl>
@@ -173,11 +161,8 @@ abstract class _CreateCollectRequest implements CreateCollectRequest {
 
   @override
   CollectToCreate get collect;
-
-  /// Create a copy of CreateCollectRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CreateCollectRequestImplCopyWith<_$CreateCollectRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -203,12 +188,8 @@ mixin _$CollectToCreate {
   @JsonKey(name: 'sort_value')
   String? get sortValue => throw _privateConstructorUsedError;
 
-  /// Serializes this CollectToCreate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of CollectToCreate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CollectToCreateCopyWith<CollectToCreate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -236,8 +217,6 @@ class _$CollectToCreateCopyWithImpl<$Res, $Val extends CollectToCreate>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CollectToCreate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -290,8 +269,6 @@ class __$$CollectToCreateImplCopyWithImpl<$Res>
       _$CollectToCreateImpl _value, $Res Function(_$CollectToCreateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CollectToCreate
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -372,14 +349,12 @@ class _$CollectToCreateImpl implements _CollectToCreate {
                 other.sortValue == sortValue));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, productId, collectionId, position, sortValue);
 
-  /// Create a copy of CollectToCreate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CollectToCreateImplCopyWith<_$CollectToCreateImpl> get copyWith =>
@@ -405,29 +380,27 @@ abstract class _CollectToCreate implements CollectToCreate {
   factory _CollectToCreate.fromJson(Map<String, dynamic> json) =
       _$CollectToCreateImpl.fromJson;
 
-  /// Product ID to associate with the collection
   @override
+
+  /// Product ID to associate with the collection
   @JsonKey(name: 'product_id')
   int get productId;
+  @override
 
   /// Collection ID to associate with the product
-  @override
   @JsonKey(name: 'collection_id')
   int get collectionId;
+  @override
 
   /// Position of the collect within the collection (optional)
-  @override
   int? get position;
+  @override
 
   /// Sort value for the collect (optional)
-  @override
   @JsonKey(name: 'sort_value')
   String? get sortValue;
-
-  /// Create a copy of CollectToCreate
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CollectToCreateImplCopyWith<_$CollectToCreateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

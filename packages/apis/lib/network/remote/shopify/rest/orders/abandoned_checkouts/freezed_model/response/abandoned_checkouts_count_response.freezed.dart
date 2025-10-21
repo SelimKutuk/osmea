@@ -24,12 +24,8 @@ mixin _$AbandonedCheckoutsCountResponse {
   @JsonKey(name: "count")
   int? get count => throw _privateConstructorUsedError;
 
-  /// Serializes this AbandonedCheckoutsCountResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AbandonedCheckoutsCountResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AbandonedCheckoutsCountResponseCopyWith<AbandonedCheckoutsCountResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$AbandonedCheckoutsCountResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AbandonedCheckoutsCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,8 +88,6 @@ class __$$AbandonedCheckoutsCountResponseImplCopyWithImpl<$Res>
       $Res Function(_$AbandonedCheckoutsCountResponseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AbandonedCheckoutsCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,13 +130,11 @@ class _$AbandonedCheckoutsCountResponseImpl
             (identical(other.count, count) || other.count == count));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, count);
 
-  /// Create a copy of AbandonedCheckoutsCountResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AbandonedCheckoutsCountResponseImplCopyWith<
@@ -172,11 +162,8 @@ abstract class _AbandonedCheckoutsCountResponse
   @override
   @JsonKey(name: "count")
   int? get count;
-
-  /// Create a copy of AbandonedCheckoutsCountResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AbandonedCheckoutsCountResponseImplCopyWith<
           _$AbandonedCheckoutsCountResponseImpl>
       get copyWith => throw _privateConstructorUsedError;

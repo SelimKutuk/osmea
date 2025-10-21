@@ -15,10 +15,18 @@ _$UpdateMetafieldRequestImpl _$$UpdateMetafieldRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$UpdateMetafieldRequestImplToJson(
-        _$UpdateMetafieldRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.metafield?.toJson() case final value?) 'metafield': value,
-    };
+    _$UpdateMetafieldRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('metafield', instance.metafield?.toJson());
+  return val;
+}
 
 _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
     _$MetafieldImpl(
@@ -27,9 +35,17 @@ _$MetafieldImpl _$$MetafieldImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.value case final value?) 'value': value,
-      if (instance.type case final value?) 'type': value,
-    };
+Map<String, dynamic> _$$MetafieldImplToJson(_$MetafieldImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('value', instance.value);
+  writeNotNull('type', instance.type);
+  return val;
+}

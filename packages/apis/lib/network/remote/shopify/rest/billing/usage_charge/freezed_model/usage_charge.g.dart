@@ -18,15 +18,23 @@ _$UsageChargeImpl _$$UsageChargeImplFromJson(Map<String, dynamic> json) =>
       riskLevel: (json['risk_level'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$UsageChargeImplToJson(_$UsageChargeImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'description': instance.description,
-      'price': instance.price,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.balanceUsed case final value?) 'balance_used': value,
-      if (instance.balanceRemaining case final value?)
-        'balance_remaining': value,
-      if (instance.riskLevel case final value?) 'risk_level': value,
-    };
+Map<String, dynamic> _$$UsageChargeImplToJson(_$UsageChargeImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'description': instance.description,
+    'price': instance.price,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('balance_used', instance.balanceUsed);
+  writeNotNull('balance_remaining', instance.balanceRemaining);
+  writeNotNull('risk_level', instance.riskLevel);
+  return val;
+}

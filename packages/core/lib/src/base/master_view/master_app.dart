@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:core/src/layout/grid.dart';
+import 'package:core/src/base/master_view_hydrated_cubit/hydrated/hydrated_bloc_init.dart';
+import 'package:core/src/helper/permission_handler_helper/permission_handler_helper.dart';
 
 // Global variable for dev mode spacer control
 bool globalDevModeSpacer = true;
@@ -70,6 +72,7 @@ class MasterApp extends StatelessWidget {
     bool allowCollectDataTelemetry = true,
     bool enableRemoteConfig = true,
     String assetConfigPath = 'assets/app_config.json',
+    bool hydrated = false,
   }) async {
     // 🛠️ Initialize necessary components before running the app
     final LocalStorageHelper _localStorageHelper = LocalStorageHelper();
@@ -326,6 +329,14 @@ class MasterApp extends StatelessWidget {
 
     // Set the locale settings to use the device's locale
     LocaleSettings.useDeviceLocale();
+
+    // Initialize HydratedBloc if requested
+    if (hydrated) {
+      await initializeHydratedBlocStorage();
+    }
+
+    // Initialize permission handler for real devices
+    await PermissionHandlerHelper.instance.initializeForRealDevice();
 
     /// Log the initialization status
     debugPrint("MasterApp at runBefore Local Storage Initialized");

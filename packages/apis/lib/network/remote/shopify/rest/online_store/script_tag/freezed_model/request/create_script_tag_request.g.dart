@@ -15,10 +15,18 @@ _$CreateScriptTagRequestImpl _$$CreateScriptTagRequestImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateScriptTagRequestImplToJson(
-        _$CreateScriptTagRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.scriptTag?.toJson() case final value?) 'script_tag': value,
-    };
+    _$CreateScriptTagRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('script_tag', instance.scriptTag?.toJson());
+  return val;
+}
 
 _$ScriptTagImpl _$$ScriptTagImplFromJson(Map<String, dynamic> json) =>
     _$ScriptTagImpl(
@@ -26,8 +34,16 @@ _$ScriptTagImpl _$$ScriptTagImplFromJson(Map<String, dynamic> json) =>
       src: json['src'] as String?,
     );
 
-Map<String, dynamic> _$$ScriptTagImplToJson(_$ScriptTagImpl instance) =>
-    <String, dynamic>{
-      if (instance.event case final value?) 'event': value,
-      if (instance.src case final value?) 'src': value,
-    };
+Map<String, dynamic> _$$ScriptTagImplToJson(_$ScriptTagImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('event', instance.event);
+  writeNotNull('src', instance.src);
+  return val;
+}

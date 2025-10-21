@@ -76,6 +76,9 @@ enum ChipsShape {
 
   /// Square shape - minimal rounded corners.
   square,
+
+  /// Pill shape - fully rounded ends for capsule effect.
+  pill,
 }
 
 /// 🪨 **Chips State**
@@ -90,4 +93,15 @@ enum ChipsState {
 
   /// Selected state - highlighted as chosen.
   selected,
+}
+
+/// 🪨 **Chips Icon Position**
+///
+/// Defines where the icon should be positioned within the chip.
+enum ChipsIconPosition {
+  /// Icon positioned at the start (left in LTR, right in RTL).
+  start,
+
+  /// Icon positioned at the end (right in LTR, left in RTL).
+  end,
 }

@@ -15,11 +15,18 @@ _$GetTransactionSingleResponseImpl _$$GetTransactionSingleResponseImplFromJson(
     );
 
 Map<String, dynamic> _$$GetTransactionSingleResponseImplToJson(
-        _$GetTransactionSingleResponseImpl instance) =>
-    <String, dynamic>{
-      if (instance.transaction?.toJson() case final value?)
-        'transaction': value,
-    };
+    _$GetTransactionSingleResponseImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('transaction', instance.transaction?.toJson());
+  return val;
+}
 
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
@@ -61,39 +68,43 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       adminGraphqlApiId: json['admin_graphql_api_id'] as String?,
     );
 
-Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) =>
-    <String, dynamic>{
-      if (instance.id case final value?) 'id': value,
-      if (instance.orderId case final value?) 'order_id': value,
-      if (instance.kind case final value?) 'kind': value,
-      if (instance.gateway case final value?) 'gateway': value,
-      if (instance.status case final value?) 'status': value,
-      if (instance.message case final value?) 'message': value,
-      if (instance.createdAt case final value?) 'created_at': value,
-      if (instance.test case final value?) 'test': value,
-      if (instance.authorization case final value?) 'authorization': value,
-      if (instance.locationId case final value?) 'location_id': value,
-      if (instance.userId case final value?) 'user_id': value,
-      if (instance.parentId case final value?) 'parent_id': value,
-      if (instance.processedAt case final value?) 'processed_at': value,
-      if (instance.deviceId case final value?) 'device_id': value,
-      if (instance.errorCode case final value?) 'error_code': value,
-      if (instance.sourceName case final value?) 'source_name': value,
-      if (instance.receipt?.toJson() case final value?) 'receipt': value,
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currency case final value?) 'currency': value,
-      if (instance.authorizationExpiresAt case final value?)
-        'authorization_expires_at': value,
-      if (instance.extendedAuthorizationAttributes?.toJson() case final value?)
-        'extended_authorization_attributes': value,
-      if (instance.paymentId case final value?) 'payment_id': value,
-      if (instance.totalUnsettledSet?.toJson() case final value?)
-        'total_unsettled_set': value,
-      if (instance.manualPaymentGateway case final value?)
-        'manual_payment_gateway': value,
-      if (instance.adminGraphqlApiId case final value?)
-        'admin_graphql_api_id': value,
-    };
+Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('order_id', instance.orderId);
+  writeNotNull('kind', instance.kind);
+  writeNotNull('gateway', instance.gateway);
+  writeNotNull('status', instance.status);
+  writeNotNull('message', instance.message);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('test', instance.test);
+  writeNotNull('authorization', instance.authorization);
+  writeNotNull('location_id', instance.locationId);
+  writeNotNull('user_id', instance.userId);
+  writeNotNull('parent_id', instance.parentId);
+  writeNotNull('processed_at', instance.processedAt);
+  writeNotNull('device_id', instance.deviceId);
+  writeNotNull('error_code', instance.errorCode);
+  writeNotNull('source_name', instance.sourceName);
+  writeNotNull('receipt', instance.receipt?.toJson());
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency', instance.currency);
+  writeNotNull('authorization_expires_at', instance.authorizationExpiresAt);
+  writeNotNull('extended_authorization_attributes',
+      instance.extendedAuthorizationAttributes?.toJson());
+  writeNotNull('payment_id', instance.paymentId);
+  writeNotNull('total_unsettled_set', instance.totalUnsettledSet?.toJson());
+  writeNotNull('manual_payment_gateway', instance.manualPaymentGateway);
+  writeNotNull('admin_graphql_api_id', instance.adminGraphqlApiId);
+  return val;
+}
 
 _$ExtendedAuthorizationAttributesImpl
     _$$ExtendedAuthorizationAttributesImplFromJson(Map<String, dynamic> json) =>
@@ -115,20 +126,35 @@ _$TotalUnsettledSetImpl _$$TotalUnsettledSetImplFromJson(
     );
 
 Map<String, dynamic> _$$TotalUnsettledSetImplToJson(
-        _$TotalUnsettledSetImpl instance) =>
-    <String, dynamic>{
-      if (instance.presentmentMoney?.toJson() case final value?)
-        'presentment_money': value,
-      if (instance.shopMoney?.toJson() case final value?) 'shop_money': value,
-    };
+    _$TotalUnsettledSetImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('presentment_money', instance.presentmentMoney?.toJson());
+  writeNotNull('shop_money', instance.shopMoney?.toJson());
+  return val;
+}
 
 _$MoneyImpl _$$MoneyImplFromJson(Map<String, dynamic> json) => _$MoneyImpl(
       amount: json['amount'] as String?,
       currency: json['currency'] as String?,
     );
 
-Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) =>
-    <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
-      if (instance.currency case final value?) 'currency': value,
-    };
+Map<String, dynamic> _$$MoneyImplToJson(_$MoneyImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('amount', instance.amount);
+  writeNotNull('currency', instance.currency);
+  return val;
+}

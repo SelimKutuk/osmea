@@ -114,14 +114,14 @@ class _ApiWooAuthService implements ApiWooAuthService {
   }
 
   @override
-  Future<SendResetPasswordResponse> sendResetPasswordMail(
+  Future<SendResetPasswordResponse> sendResetPassword(
     String brandName,
-    SendResetPasswordRequest request,
+    String email,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
-    final _data = request;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SendResetPasswordResponse>(Options(
       method: 'POST',
@@ -130,7 +130,7 @@ class _ApiWooAuthService implements ApiWooAuthService {
     )
             .compose(
               _dio.options,
-              '/?rest_route=/${brandName}-auth-reset/v1/auth',
+              '/?rest_route=/${brandName}-auth-login/v1/user/reset_password',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -140,6 +140,36 @@ class _ApiWooAuthService implements ApiWooAuthService {
               baseUrl,
             ))));
     final _value = SendResetPasswordResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<PasswordUpdateResponse> updatePassword(
+    String brandName,
+    PasswordUpdateRequest request,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PasswordUpdateResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/?rest_route=/${brandName}-auth-login/v1/user/reset_password',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = PasswordUpdateResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -174,6 +204,43 @@ class _ApiWooAuthService implements ApiWooAuthService {
               baseUrl,
             ))));
     final _value = UserLoginResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<PasswordUpdateResponse> updatePasswordPutQuery(
+    String brandName,
+    String email,
+    String newPassword,
+    String? jwt,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'email': email,
+      r'new_password': newPassword,
+      r'jwt': jwt,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PasswordUpdateResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/?rest_route=/${brandName}-auth-login/v1/user/reset_password',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = PasswordUpdateResponse.fromJson(_result.data!);
     return _value;
   }
 

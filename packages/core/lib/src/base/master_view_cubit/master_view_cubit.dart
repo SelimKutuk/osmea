@@ -2,8 +2,8 @@ library master_view_cubit;
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:core/src/base/widgets/master_scaffold_widget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:core/src/helper/grid_helper.dart';
 
 part 'master_view_cubit_enums.dart';
 part 'master_view_cubit_mixins.dart';
@@ -17,6 +17,25 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
   final PreferredSizeWidget Function(BuildContext, V)? coreAppBar;
   final Widget? Function(BuildContext, V)? coreBottomBar;
   final bool showDevGrid;
+  final Function(String path) goRoute;
+  final bool? extendBody;
+  final bool? extendBodyBehindAppBar;
+
+  // Layout configuration - external values
+  final SpacerVisibility? navbarSpacer;
+  final SpacerVisibility? footerSpacer;
+  final PaddingVisibility? horizontalPadding;
+  final bool? useSafeArea;
+
+  // Spacer types - custom overrides default
+  final CoreSpacerType? customNavbarSpacerType;
+  final CoreSpacerType? customFooterSpacerType;
+  final CoreSpacerType defaultNavbarSpacerType;
+  final CoreSpacerType defaultFooterSpacerType;
+
+  // Padding values - custom overrides default
+  final double? customHorizontalPadding;
+  final double defaultHorizontalPadding;
 
   /// Optional bottom navigation bar widget for the Scaffold.
   final Widget? bottomNavigationBar;
@@ -30,7 +49,20 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     this.coreBottomBar,
     this.showDevGrid = true,
     this.bottomNavigationBar,
-  })  : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
+    this.extendBody,
+    this.extendBodyBehindAppBar,
+    this.navbarSpacer,
+    this.footerSpacer,
+    this.horizontalPadding,
+    this.useSafeArea,
+    this.customNavbarSpacerType,
+    this.customFooterSpacerType,
+    this.defaultNavbarSpacerType = CoreSpacerType.navbar,
+    this.defaultFooterSpacerType = CoreSpacerType.footer,
+    this.customHorizontalPadding,
+    this.defaultHorizontalPadding = 16.0,
+    required this.goRoute,
+  }) : assert(arguments.isNotEmpty, 'Arguments must not be empty') {
     FlutterError.onError = (FlutterErrorDetails details) {
       debugPrint('FlutterError: ${details.exception}');
       debugPrintStack(stackTrace: details.stack);
@@ -51,7 +83,7 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('MasterViewCubit build. -> View Type: $currentView');
+    debugPrint('🔍 [MasterViewCubit] build() called');
 
     if (currentView != MasterViewCubitTypes.content) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -59,7 +91,7 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
           final snackBar = _createSnackBar(currentView);
           _showSnackBar(context, snackBar);
         } catch (e) {
-          debugPrint('Error creating or showing Snackbar: $e');
+          debugPrint('🔴 [MasterViewCubit] Error creating or showing Snackbar: $e');
         }
       });
     }
@@ -67,11 +99,11 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     try {
       return _scaffold(context);
     } on Exception catch (e, s) {
-      debugPrint('Exception in MasterViewCubit build: $e');
+      debugPrint('🔴 [MasterViewCubit] Exception in build: $e');
       debugPrintStack(stackTrace: s);
       return _buildErrorScaffold(context, 'Exception: $e');
     } catch (e, s) {
-      debugPrint('Unknown error in MasterViewCubit build: $e');
+      debugPrint('🔴 [MasterViewCubit] Unknown error in build: $e');
       debugPrintStack(stackTrace: s);
       return _buildErrorScaffold(context, 'Unknown error: $e');
     }
@@ -87,13 +119,12 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
               if (!_didCallInitial.value) {
                 try {
                   // Use the closest available context from the builder phase
-                  final ctx = _scaffoldMessengerKey.currentContext ??
-                      BaseViewCubit.navigatorKey.currentContext;
+                  final ctx = _scaffoldMessengerKey.currentContext;
                   if (ctx != null) {
                     initialContent(viewModel, ctx);
                   }
                 } catch (e, s) {
-                  debugPrint('initialContent error: $e');
+                  debugPrint('🔴 [MasterViewCubit] initialContent error: $e');
                   debugPrintStack(stackTrace: s);
                 } finally {
                   _didCallInitial.value = true;
@@ -103,36 +134,33 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
           }
         },
         builder: (viewModel, context, state) {
-          return Scaffold(
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            key: _scaffoldMessengerKey,
+          return MasterScaffoldWidget(
+            scaffoldMessengerKey: _scaffoldMessengerKey,
             appBar: coreAppBar?.call(context, viewModel),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  const CoreSpacer(CoreSpacerType.navbar),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: GridHelper.defaultMargin),
-                      child: viewContent(context, viewModel, state),
-                    ),
-                  ),
-                  const CoreSpacer(CoreSpacerType.footer),
-                ],
-              ),
-            ),
+            body: viewContent(context, viewModel, state),
             bottomNavigationBar: coreBottomBar != null
                 ? coreBottomBar!.call(context, viewModel)
                 : bottomNavigationBar,
+            extendBody: extendBody,
+            extendBodyBehindAppBar: extendBodyBehindAppBar,
+            navbarSpacer: navbarSpacer,
+            footerSpacer: footerSpacer,
+            horizontalPadding: horizontalPadding,
+            useSafeArea: useSafeArea,
+            customNavbarSpacerType: customNavbarSpacerType,
+            customFooterSpacerType: customFooterSpacerType,
+            defaultNavbarSpacerType: defaultNavbarSpacerType,
+            defaultFooterSpacerType: defaultFooterSpacerType,
+            customHorizontalPadding: customHorizontalPadding,
+            defaultHorizontalPadding: defaultHorizontalPadding,
           );
         },
       );
     }, context);
   }
 
-  Widget _handleScaffoldErrors(Function() scaffoldBuilder, BuildContext context) {
+  Widget _handleScaffoldErrors(
+      Function() scaffoldBuilder, BuildContext context) {
     try {
       return scaffoldBuilder();
     } catch (e, s) {
@@ -222,23 +250,3 @@ abstract class MasterViewCubit<V extends BaseViewModelCubit<S>, S>
     GoRouter.of(context).go(path, extra: arguments);
   }
 }
-
-class FooterArea extends StatelessWidget {
-  const FooterArea({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CoreSpacer(CoreSpacerType.footer);
-  }
-}
-
-class NavbarArea extends StatelessWidget {
-  const NavbarArea({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CoreSpacer(CoreSpacerType.navbar);
-  }
-}
-
-

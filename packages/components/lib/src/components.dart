@@ -7,6 +7,8 @@ import 'package:osmea_components/src/components/toast/toast.dart'
 // Component imports
 import 'package:osmea_components/src/components/align/align.dart';
 import 'package:osmea_components/src/components/appbar/appbar.dart';
+import 'package:osmea_components/src/components/appbar_searchbar/appbar_searchbar.dart';
+import 'package:osmea_components/src/components/appbar_searchbar/appbar_searchbar_action.dart';
 import 'package:osmea_components/src/components/avatar/avatar.dart';
 import 'package:osmea_components/src/components/badge/badge.dart';
 import 'package:osmea_components/src/components/bottom_sheet/bottom_sheet.dart';
@@ -34,16 +36,18 @@ import 'package:osmea_components/src/components/stack/stack.dart';
 import 'package:osmea_components/src/components/switch_button/switch_button.dart';
 import 'package:osmea_components/src/components/text_field/text_field.dart';
 import 'package:osmea_components/src/components/text_field/otp_text_field.dart';
+import 'package:osmea_components/src/components/phone_picker/phone_picker.dart';
 import 'package:osmea_components/src/components/wrap/wrap.dart';
 import 'package:osmea_components/src/components/text/text.dart';
 import 'package:osmea_components/src/components/carousel/carousel.dart';
 import 'package:osmea_components/src/components/counter/counter.dart';
 import 'package:osmea_components/src/components/list_item/list_item.dart';
 import 'package:osmea_components/src/components/ticket_widget/ticket_widget.dart';
-import 'package:osmea_components/src/components/ticket_widget/models/ticket_models.dart';
 import 'package:osmea_components/src/components/popup/popup.dart';
 import 'package:osmea_components/src/components/searchbar/searchbar.dart';
 import 'package:osmea_components/src/components/searchbar/expandable_searchbar.dart';
+import 'package:osmea_components/src/components/sound_dialog/sound_dialog.dart';
+import 'package:osmea_components/src/enums/sound_dialog_enums.dart';
 
 import 'components/collapse/collapse.dart';
 import 'components/dropdown/dropdown.dart';
@@ -82,6 +86,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.primary,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     Widget? icon,
     IconPosition iconPosition = IconPosition.leading,
     TextStyle? textStyle,
@@ -120,6 +126,8 @@ class OsmeaComponents {
       size: size,
       variant: variant,
       state: state,
+      borderRadius: borderRadius,
+      elevation: elevation,
       icon: icon,
       iconPosition: iconPosition,
       textStyle: textStyle,
@@ -169,6 +177,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.primary,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     VoidCallback? onLongPress,
     String? tooltip,
     bool autofocus = false,
@@ -183,6 +193,8 @@ class OsmeaComponents {
       size: size,
       variant: variant,
       state: state,
+      borderRadius: borderRadius,
+      elevation: elevation,
       onLongPress: onLongPress,
       tooltip: tooltip,
       autofocus: autofocus,
@@ -211,6 +223,8 @@ class OsmeaComponents {
     ButtonSize size = ButtonSize.medium,
     ButtonVariant variant = ButtonVariant.ghost,
     ButtonState state = ButtonState.enabled,
+    double? borderRadius,
+    double elevation = 0.0,
     VoidCallback? onLongPress,
     String? tooltip,
     bool autofocus = false,
@@ -228,6 +242,8 @@ class OsmeaComponents {
       tooltip: tooltip,
       autofocus: autofocus,
       backgroundColor: backgroundColor,
+      borderRadius: borderRadius,
+      elevation: elevation,
     );
   }
 
@@ -1914,6 +1930,199 @@ class OsmeaComponents {
     );
   }
 
+  /// 🎯 **OSMEA AppBar with SearchBar** - Comprehensive application bar with integrated search
+  ///
+  /// Creates a complete AppBar component with integrated SearchBar functionality.
+  /// Perfect for apps that need both navigation and search in a unified interface.
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.appBarWithSearchBar(
+  ///   title: Text('My App'),
+  ///   searchHint: 'Search products...',
+  ///   onSearch: (query) => performSearch(query),
+  ///   actions: [
+  ///     AppBarWithSearchBarAction(
+  ///       icon: Icon(Icons.notifications),
+  ///       onPressed: () => showNotifications(),
+  ///     ),
+  ///   ],
+  /// )
+  /// ```
+  static PreferredSizeWidget appBarWithSearchBar({
+    Key? key,
+    Widget? title,
+    Widget? subtitle,
+    Widget? leading,
+    List<AppBarWithSearchBarAction> actions = const [],
+    AppBarSize appBarSize = AppBarSize.standard,
+    AppBarVariant appBarVariant = AppBarVariant.standard,
+    AppBarType appBarType = AppBarType.fixed,
+    AppBarStyle appBarStyle = AppBarStyle.sharp,
+    SearchbarVariant searchBarVariant = SearchbarVariant.outlined,
+    SearchbarStyle searchBarStyle = SearchbarStyle.standard,
+    Color? appBarBackgroundColor,
+    Color? appBarForegroundColor,
+    Color? appBarShadowColor,
+    Color? appBarSurfaceTintColor,
+    Color? appBarTitleTextColor,
+    Color? appBarSubtitleTextColor,
+    Color? appBarIconColor,
+    Color? appBarActionColor,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Duration? appBarAnimationDuration,
+    double? appBarElevation,
+    BorderRadius? appBarBorderRadius,
+    bool centerTitle = false,
+    AppBarTitleAlignment titleAlignment = AppBarTitleAlignment.left,
+    double? titleSpacing,
+    double toolbarOpacity = 1.0,
+    double bottomOpacity = 1.0,
+    double? leadingWidth,
+    bool automaticallyImplyLeading = true,
+    bool excludeHeaderSemantics = false,
+    bool primary = true,
+    double? scrolledUnderElevation,
+    ScrollNotificationPredicate? notificationPredicate,
+    VoidCallback? onTitleTap,
+    VoidCallback? onLeadingTap,
+    PreferredSizeWidget? appBarBottom,
+    Widget? flexibleSpace,
+    // SearchBar specific properties
+    String? searchHint,
+    TextEditingController? searchController,
+    FocusNode? searchFocusNode,
+    ValueChanged<String>? onSearch,
+    ValueChanged<String>? onSearchChanged,
+    ValueChanged<String>? onSearchSubmitted,
+    VoidCallback? onSearchClear,
+    VoidCallback? onSearchBack,
+    Future<List<String>> Function(String query)? searchSuggestionProvider,
+    Future<List<dynamic>> Function(String query)? searchProvider,
+    int maxHistoryItems = 10,
+    int minQueryLength = 2,
+    Duration debounceDuration = const Duration(milliseconds: 300),
+    bool showClearButton = true,
+    bool showBackButton = false,
+    bool showSearchIcon = true,
+    bool showSuggestions = true,
+    Widget? searchIcon,
+    Widget? clearIcon,
+    Widget? backIcon,
+    BorderRadius? searchBarBorderRadius,
+    Duration? transitionDuration,
+    Curve transitionCurve = Curves.easeInOut,
+    ValueChanged<bool>? onSearchFocusChanged,
+    ValueChanged<bool>? onSearchHoverChanged,
+    List<String> initialHistory = const [],
+    bool enableHoverEffect = true,
+    Duration? hoverAnimationDuration,
+    EdgeInsetsGeometry searchBarPadding =
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    EdgeInsetsGeometry searchBarMargin = EdgeInsets.zero,
+    Color? searchBarBackgroundColor,
+    Color? searchBarBorderColor,
+    Color? searchBarFocusColor,
+    Color? searchBarErrorColor,
+    Color? searchBarHintColor,
+    Color? searchBarTextColor,
+    TextStyle? searchBarTextStyle,
+    TextFieldSize searchBarSize = TextFieldSize.medium,
+    TextFieldState searchBarState = TextFieldState.enabled,
+    TextAlign searchBarTextAlign = TextAlign.start,
+    TextCapitalization searchBarTextCapitalization = TextCapitalization.none,
+    TextInputType searchBarKeyboardType = TextInputType.text,
+    TextInputAction searchBarTextInputAction = TextInputAction.search,
+    bool searchBarFullWidth = true,
+    Duration? searchBarAnimationDuration,
+  }) {
+    return OsmeaAppBarWithSearchBar(
+      key: key,
+      title: title,
+      subtitle: subtitle,
+      leading: leading,
+      actions: actions,
+      appBarSize: appBarSize,
+      appBarVariant: appBarVariant,
+      appBarType: appBarType,
+      appBarStyle: appBarStyle,
+      searchBarVariant: searchBarVariant,
+      searchBarStyle: searchBarStyle,
+      appBarBackgroundColor: appBarBackgroundColor,
+      appBarForegroundColor: appBarForegroundColor,
+      appBarShadowColor: appBarShadowColor,
+      appBarSurfaceTintColor: appBarSurfaceTintColor,
+      appBarTitleTextColor: appBarTitleTextColor,
+      appBarSubtitleTextColor: appBarSubtitleTextColor,
+      appBarIconColor: appBarIconColor,
+      appBarActionColor: appBarActionColor,
+      appBarAnimationDuration: appBarAnimationDuration,
+      appBarElevation: appBarElevation,
+      appBarBorderRadius: appBarBorderRadius,
+      centerTitle: centerTitle,
+      titleAlignment: titleAlignment,
+      titleSpacing: titleSpacing,
+      toolbarOpacity: toolbarOpacity,
+      bottomOpacity: bottomOpacity,
+      leadingWidth: leadingWidth,
+      automaticallyImplyLeading: automaticallyImplyLeading,
+      excludeHeaderSemantics: excludeHeaderSemantics,
+      primary: primary,
+      scrolledUnderElevation: scrolledUnderElevation,
+      notificationPredicate: notificationPredicate,
+      onTitleTap: onTitleTap,
+      onLeadingTap: onLeadingTap,
+      appBarBottom: appBarBottom,
+      flexibleSpace: flexibleSpace,
+      searchHint: searchHint,
+      searchController: searchController,
+      searchFocusNode: searchFocusNode,
+      onSearch: onSearch,
+      onSearchChanged: onSearchChanged,
+      onSearchSubmitted: onSearchSubmitted,
+      onSearchClear: onSearchClear,
+      onSearchBack: onSearchBack,
+      searchSuggestionProvider: searchSuggestionProvider,
+      searchProvider: searchProvider,
+      maxHistoryItems: maxHistoryItems,
+      minQueryLength: minQueryLength,
+      debounceDuration: debounceDuration,
+      showClearButton: showClearButton,
+      showBackButton: showBackButton,
+      showSearchIcon: showSearchIcon,
+      showSuggestions: showSuggestions,
+      searchIcon: searchIcon,
+      clearIcon: clearIcon,
+      backIcon: backIcon,
+      searchBarBorderRadius: searchBarBorderRadius,
+      transitionDuration: transitionDuration,
+      transitionCurve: transitionCurve,
+      onSearchFocusChanged: onSearchFocusChanged,
+      onSearchHoverChanged: onSearchHoverChanged,
+      initialHistory: initialHistory,
+      enableHoverEffect: enableHoverEffect,
+      hoverAnimationDuration: hoverAnimationDuration,
+      searchBarPadding: searchBarPadding,
+      searchBarMargin: searchBarMargin,
+      searchBarBackgroundColor: searchBarBackgroundColor,
+      searchBarBorderColor: searchBarBorderColor,
+      searchBarFocusColor: searchBarFocusColor,
+      searchBarErrorColor: searchBarErrorColor,
+      searchBarHintColor: searchBarHintColor,
+      searchBarTextColor: searchBarTextColor,
+      searchBarTextStyle: searchBarTextStyle,
+      searchBarSize: searchBarSize,
+      searchBarState: searchBarState,
+      searchBarTextAlign: searchBarTextAlign,
+      searchBarTextCapitalization: searchBarTextCapitalization,
+      searchBarKeyboardType: searchBarKeyboardType,
+      searchBarTextInputAction: searchBarTextInputAction,
+      searchBarFullWidth: searchBarFullWidth,
+      searchBarAnimationDuration: searchBarAnimationDuration,
+    );
+  }
+
   /// 🔤 **OSMEA TextField** - Comprehensive text input component
   ///
   /// Creates a fully-featured text input field with support for:
@@ -2029,7 +2238,98 @@ class OsmeaComponents {
     );
   }
 
-  /// 🔢 **OSMEA OTP TextField** - One-Time Password input component
+  /// � **OSMEA Phone Picker** - Phone number input with country selection
+  ///
+  /// Creates a specialized phone number input field with:
+  /// - Country flag dropdown
+  /// - Automatic dial code insertion
+  /// - Phone number validation
+  /// - Customizable appearance and behavior
+  ///
+  /// Example:
+  /// ```dart
+  /// OsmeaComponents.phonePicker(
+  ///   controller: phoneController,
+  ///   label: 'Phone Number',
+  ///   hint: 'Enter your phone number',
+  ///   variant: TextFieldVariant.outlined,
+  ///   size: TextFieldSize.medium,
+  ///   onCountryChanged: (country) => handleCountryChange(country),
+  /// )
+  /// ```
+  static Widget phonePicker({
+    Key? key,
+    TextEditingController? controller,
+    String? label,
+    String? hint,
+    String? helperText,
+    String? errorText,
+    Widget? suffixIcon,
+    TextFieldSize size = TextFieldSize.medium,
+    TextFieldVariant variant = TextFieldVariant.outlined,
+    TextFieldState state = TextFieldState.enabled,
+    bool isRequired = false,
+    String? Function(String?)? validator,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    GestureTapCallback? onTap,
+    String initialCountryCode = 'US',
+    ValueChanged<String>? onCountryChanged,
+    ValueChanged<String>? onPhoneChanged,
+    bool showCountryFlag = true,
+    double countryDropdownWidth = 120.0,
+    double flagSize = 20.0,
+    String searchHint = 'Search country',
+    bool enableSearch = true,
+    double maxDropdownHeight = 300.0,
+    List<Country>? customCountries,
+    BoxDecoration? dropdownDecoration,
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? focusColor,
+    Color? errorColor,
+    Color? hintColor,
+    Color? labelColor,
+    bool fullWidth = true,
+  }) {
+    return OsmeaPhonePicker(
+      key: key,
+      controller: controller,
+      label: label,
+      hint: hint,
+      helperText: helperText,
+      errorText: errorText,
+      suffixIcon: suffixIcon,
+      size: size,
+      variant: variant,
+      state: state,
+      isRequired: isRequired,
+      validator: validator,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      onTap: onTap,
+      initialCountryCode: initialCountryCode,
+      onCountryChanged: onCountryChanged,
+      onPhoneChanged: onPhoneChanged,
+      showCountryFlag: showCountryFlag,
+      countryDropdownWidth: countryDropdownWidth,
+      flagSize: flagSize,
+      searchHint: searchHint,
+      enableSearch: enableSearch,
+      maxDropdownHeight: maxDropdownHeight,
+      customCountries: customCountries,
+      dropdownDecoration: dropdownDecoration,
+      backgroundColor: backgroundColor,
+      borderColor: borderColor,
+      focusColor: focusColor,
+      errorColor: errorColor,
+      hintColor: hintColor,
+      labelColor: labelColor,
+      fullWidth: fullWidth,
+    );
+  }
+
+  /// �🔢 **OSMEA OTP TextField** - One-Time Password input component
   ///
   /// Creates a specialized input for OTP codes with:
   /// - Individual digit fields with auto-navigation
@@ -2217,24 +2517,31 @@ class OsmeaComponents {
   /// - All 3 style variants (normal, outlined, soft)
   /// - All states (normal, disabled, selected)
   /// - Interactive selection and deletion support
+  /// - Flexible icon support (IconData, Widget, or asset path)
   /// - Full customization options
   ///
   /// Example:
   /// ```dart
+  /// // With IconData
   /// OsmeaComponents.chips(
   ///   text: 'Technology',
+  ///   icon: Icons.tech_icon,
+  ///   iconPosition: ChipsIconPosition.start,
   ///   variant: ChipsVariant.primary,
-  ///   size: ChipsSize.medium,
-  ///   selected: true,
-  ///   onTap: () => print('Chip tapped'),
-  ///   closable: true,
-  ///   onClose: () => print('Chip removed'),
+  /// )
+  ///
+  /// // With Widget
+  /// OsmeaComponents.chips(
+  ///   text: 'Custom',
+  ///   icon: SvgPicture.asset('assets/icons/custom.svg'),
+  ///   iconPosition: ChipsIconPosition.end,
   /// )
   /// ```
   static Widget chips({
     Key? key,
     String? text,
-    IconData? icon,
+    dynamic icon, // IconData, Widget, or String (asset path)
+    ChipsIconPosition iconPosition = ChipsIconPosition.start,
     Widget? actionWidget,
     Widget? avatar,
     ChipsVariant variant = ChipsVariant.neutral,
@@ -2248,6 +2555,10 @@ class OsmeaComponents {
     Color? backgroundColor,
     Color? textColor,
     Color? borderColor,
+    double? borderWidth,
+    Color? activeColor,
+    Color? inactiveColor,
+    double? radius,
     EdgeInsetsGeometry? padding,
     TextStyle? textStyle,
     ShapeBorder? customShape,
@@ -2261,6 +2572,7 @@ class OsmeaComponents {
       key: key,
       text: text,
       icon: icon,
+      iconPosition: iconPosition,
       actionWidget: actionWidget,
       avatar: avatar,
       variant: variant,
@@ -2274,6 +2586,10 @@ class OsmeaComponents {
       backgroundColor: backgroundColor,
       textColor: textColor,
       borderColor: borderColor,
+      borderWidth: borderWidth,
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      radius: radius,
       padding: padding,
       textStyle: textStyle,
       customShape: customShape,
@@ -2321,6 +2637,7 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
@@ -2347,6 +2664,7 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,
@@ -2379,6 +2697,9 @@ class OsmeaComponents {
   ///   subtitle: 'Nature Photography',
   ///   imageUrl: 'https://example.com/image.jpg',
   ///   height: 200,
+  ///   titleMaxLines: 2,
+  ///   textOverflow: TextOverflow.ellipsis,
+  ///   maintainAspectRatio: true,
   ///   imagePosition: ImagePosition.top,
   ///   onTap: () => print('Image card tapped'),
   /// )
@@ -2388,6 +2709,7 @@ class OsmeaComponents {
     CoreTheme? customTheme,
     String? title,
     String? subtitle,
+    String? subtitle2,
     String? content,
     String? imageUrl,
     String? imageAsset,
@@ -2407,13 +2729,16 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
+    TextStyle? subtitle2Style,
     TextStyle? contentStyle,
     Color? titleColor,
     Color? subtitleColor,
+    Color? subtitle2Color,
     Color? contentColor,
     double? spacing,
     Widget? loadingWidget,
@@ -2423,12 +2748,21 @@ class OsmeaComponents {
     BadgePosition badgePosition = BadgePosition.topRight,
     BorderRadius? imageBorderRadius,
     Widget? child,
+    // Text overflow control parameters
+    int? titleMaxLines = 2,
+    int? subtitleMaxLines = 1,
+    int? subtitle2MaxLines = 1,
+    int? contentMaxLines = 3,
+    TextOverflow textOverflow = TextOverflow.ellipsis,
+    double? textAreaHeight,
+    bool maintainAspectRatio = false,
   }) {
     return OsmeaImageCard(
       key: key,
       customTheme: customTheme,
       title: title,
       subtitle: subtitle,
+      subtitle2: subtitle2,
       content: content,
       imageUrl: imageUrl,
       imageAsset: imageAsset,
@@ -2448,13 +2782,16 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,
       subtitleStyle: subtitleStyle,
+      subtitle2Style: subtitle2Style,
       contentStyle: contentStyle,
       titleColor: titleColor,
       subtitleColor: subtitleColor,
+      subtitle2Color: subtitle2Color,
       contentColor: contentColor,
       spacing: spacing,
       loadingWidget: loadingWidget,
@@ -2464,6 +2801,12 @@ class OsmeaComponents {
       badgePosition: badgePosition,
       imageBorderRadius: imageBorderRadius,
       child: child,
+      titleMaxLines: titleMaxLines,
+      subtitleMaxLines: subtitleMaxLines,
+      contentMaxLines: contentMaxLines,
+      textOverflow: textOverflow,
+      textAreaHeight: textAreaHeight,
+      maintainAspectRatio: maintainAspectRatio,
     );
   }
 
@@ -2518,6 +2861,7 @@ class OsmeaComponents {
     Color? borderColor,
     Color? shadowColor,
     EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding, // 🔧 Added missing padding parameter
     double? width,
     double? height,
     TextStyle? titleStyle,
@@ -2558,6 +2902,7 @@ class OsmeaComponents {
       borderColor: borderColor,
       shadowColor: shadowColor,
       margin: margin,
+      padding: padding, // 🔧 Added missing padding parameter
       width: width,
       height: height,
       titleStyle: titleStyle,
@@ -2624,6 +2969,14 @@ class OsmeaComponents {
     CarouselIndicatorType indicatorType = CarouselIndicatorType.dot,
     Widget Function(BuildContext, int, int)? customIndicator,
     Widget Function(BuildContext, bool isLeft)? customArrowBuilder,
+    bool useDotIndicatorWidget = false,
+    DotIndicatorVariant? dotVariant,
+    DotIndicatorSize? dotIndicatorSize,
+    DotIndicatorShape? dotShape,
+    DotIndicatorStyle? dotStyle,
+    DotIndicatorAnimation? dotAnimation,
+    Color? dotCustomActiveColor,
+    Color? dotCustomInactiveColor,
   }) {
     return OsmeaCarousel(
       key: key,
@@ -2662,6 +3015,14 @@ class OsmeaComponents {
       indicatorType: indicatorType,
       customIndicator: customIndicator,
       customArrowBuilder: customArrowBuilder,
+      useDotIndicatorWidget: useDotIndicatorWidget,
+      dotVariant: dotVariant,
+      dotIndicatorSize: dotIndicatorSize,
+      dotShape: dotShape,
+      dotStyle: dotStyle,
+      dotAnimation: dotAnimation,
+      dotCustomActiveColor: dotCustomActiveColor,
+      dotCustomInactiveColor: dotCustomInactiveColor,
     );
   }
 
@@ -3878,6 +4239,194 @@ class OsmeaComponents {
       validator: validator,
       animationDuration: animationDuration,
       debounceDuration: debounceDuration,
+    );
+  }
+
+  // ... Diğer component metodlarınız burada yer alabilir (image, footer, vs.)
+
+  // ==================== SOUND DIALOG (GÜNCELLENDİ) ====================
+
+  /// 🎤 **Show OSMEA Sound Dialog**
+  ///
+  /// Opens a highly customizable, self-contained sound recording dialog as a modal pop-up.
+  ///
+  /// **Features:**
+  /// - Manages its own state internally via `SoundDialogCubit`.
+  /// - Supports multiple variants (`standard`, `expandable`, `inlineSearchBar`, `feedbackRecorder`).
+  /// - Provides extensive customization for colors, texts, icons, and behavior.
+  ///
+  /// **Example:**
+  /// ```dart
+  /// OsmeaComponents.soundDialog(
+  ///   context,
+  ///   variant: SoundDialogVariant.feedbackRecorder,
+  ///   onConfirm: (path) => print("Saved: $path"),
+  ///   onCancel: () => print("Canceled"),
+  ///   // --- Customization ---
+  ///   primaryActionColor: Colors.blueAccent,
+  ///   dialogBackgroundColor: Colors.white,
+  ///   reviewTitleText: "Confirm your recording",
+  ///   confirmButtonText: "Submit",
+  ///   maxRecordingDuration: const Duration(seconds: 30),
+  ///   autoStopOnMaxDuration: true,
+  /// );
+  /// ```
+  static Future<void> soundDialog(
+    BuildContext context, {
+    // Core Functionality
+    SoundDialogVariant variant = SoundDialogVariant.standard,
+    void Function(String filePath)? onConfirm,
+    VoidCallback? onCancel,
+
+    // 🎨 Theming & Styling
+    Color? dialogBackgroundColor,
+    BorderRadius? dialogBorderRadius,
+    Color? primaryActionColor,
+    Color? secondaryActionColor,
+    Color? destructiveActionColor,
+    Color? defaultTextColor,
+    Color? statusTextColor,
+    TextStyle? defaultTitleStyle,
+    TextStyle? statusTextStyle,
+
+    // ✍️ Text & Localization
+    String? promptTitleText,
+    String? recordingTitleText,
+    String? pausedTitleText,
+    String? reviewTitleText,
+    String? okButtonText,
+    String? cancelButtonText,
+    String? confirmButtonText,
+    String? retryButtonText,
+    String? reviewPlayButtonText,
+
+    // ✨ Icons
+    Widget? startRecordingIcon,
+    Widget? stopRecordingIcon,
+    Widget? pauseRecordingIcon,
+    Widget? resumeRecordingIcon,
+    Widget? reviewPlayIcon,
+    Widget? confirmCheckIcon,
+
+    // ⚙️ Behavior
+    Duration? maxRecordingDuration,
+    bool autoStopOnMaxDuration = false,
+  }) async {
+    return showDialog(
+      context: context,
+      builder: (_) => OsmeaSoundDialog(
+        variant: variant,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        dialogBackgroundColor: dialogBackgroundColor,
+        dialogBorderRadius: dialogBorderRadius,
+        primaryActionColor: primaryActionColor,
+        secondaryActionColor: secondaryActionColor,
+        destructiveActionColor: destructiveActionColor,
+        defaultTextColor: defaultTextColor,
+        statusTextColor: statusTextColor,
+        defaultTitleStyle: defaultTitleStyle,
+        statusTextStyle: statusTextStyle,
+        promptTitleText: promptTitleText,
+        recordingTitleText: recordingTitleText,
+        pausedTitleText: pausedTitleText,
+        reviewTitleText: reviewTitleText,
+        okButtonText: okButtonText,
+        cancelButtonText: cancelButtonText,
+        confirmButtonText: confirmButtonText,
+        retryButtonText: retryButtonText,
+        reviewPlayButtonText: reviewPlayButtonText,
+        startRecordingIcon: startRecordingIcon,
+        stopRecordingIcon: stopRecordingIcon,
+        pauseRecordingIcon: pauseRecordingIcon,
+        resumeRecordingIcon: resumeRecordingIcon,
+        reviewPlayIcon: reviewPlayIcon,
+        confirmCheckIcon: confirmCheckIcon,
+        maxRecordingDuration: maxRecordingDuration,
+        autoStopOnMaxDuration: autoStopOnMaxDuration,
+      ),
+    );
+  }
+
+  /// 🔊 **OSMEA Sound Dialog Widget**
+  ///
+  /// Returns a highly customizable, self-contained sound recording dialog widget.
+  /// This can be used directly inside custom layouts.
+  ///
+  /// **Note:** For most cases, using the `OsmeaComponents.soundDialog()` helper
+  /// to show a modal dialog is recommended.
+  static Widget soundDialogWidget({
+    Key? key,
+    // Core Functionality
+    SoundDialogVariant variant = SoundDialogVariant.standard,
+    void Function(String filePath)? onConfirm,
+    VoidCallback? onCancel,
+
+    // 🎨 Theming & Styling
+    Color? dialogBackgroundColor,
+    BorderRadius? dialogBorderRadius,
+    Color? primaryActionColor,
+    Color? secondaryActionColor,
+    Color? destructiveActionColor,
+    Color? defaultTextColor,
+    Color? statusTextColor,
+    TextStyle? defaultTitleStyle,
+    TextStyle? statusTextStyle,
+
+    // ✍️ Text & Localization
+    String? promptTitleText,
+    String? recordingTitleText,
+    String? pausedTitleText,
+    String? reviewTitleText,
+    String? okButtonText,
+    String? cancelButtonText,
+    String? confirmButtonText,
+    String? retryButtonText,
+    String? reviewPlayButtonText,
+
+    // ✨ Icons
+    Widget? startRecordingIcon,
+    Widget? stopRecordingIcon,
+    Widget? pauseRecordingIcon,
+    Widget? resumeRecordingIcon,
+    Widget? reviewPlayIcon,
+    Widget? confirmCheckIcon,
+
+    // ⚙️ Behavior
+    Duration? maxRecordingDuration,
+    bool autoStopOnMaxDuration = false,
+  }) {
+    return OsmeaSoundDialog(
+      key: key,
+      variant: variant,
+      onConfirm: onConfirm,
+      onCancel: onCancel,
+      dialogBackgroundColor: dialogBackgroundColor,
+      dialogBorderRadius: dialogBorderRadius,
+      primaryActionColor: primaryActionColor,
+      secondaryActionColor: secondaryActionColor,
+      destructiveActionColor: destructiveActionColor,
+      defaultTextColor: defaultTextColor,
+      statusTextColor: statusTextColor,
+      defaultTitleStyle: defaultTitleStyle,
+      statusTextStyle: statusTextStyle,
+      promptTitleText: promptTitleText,
+      recordingTitleText: recordingTitleText,
+      pausedTitleText: pausedTitleText,
+      reviewTitleText: reviewTitleText,
+      okButtonText: okButtonText,
+      cancelButtonText: cancelButtonText,
+      confirmButtonText: confirmButtonText,
+      retryButtonText: retryButtonText,
+      reviewPlayButtonText: reviewPlayButtonText,
+      startRecordingIcon: startRecordingIcon,
+      stopRecordingIcon: stopRecordingIcon,
+      pauseRecordingIcon: pauseRecordingIcon,
+      resumeRecordingIcon: resumeRecordingIcon,
+      reviewPlayIcon: reviewPlayIcon,
+      confirmCheckIcon: confirmCheckIcon,
+      maxRecordingDuration: maxRecordingDuration,
+      autoStopOnMaxDuration: autoStopOnMaxDuration,
     );
   }
 }

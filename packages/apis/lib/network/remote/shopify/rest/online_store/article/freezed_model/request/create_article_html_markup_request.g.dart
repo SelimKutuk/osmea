@@ -15,10 +15,18 @@ _$CreateArticleHtmlMarkupRequestImpl
         );
 
 Map<String, dynamic> _$$CreateArticleHtmlMarkupRequestImplToJson(
-        _$CreateArticleHtmlMarkupRequestImpl instance) =>
-    <String, dynamic>{
-      if (instance.article?.toJson() case final value?) 'article': value,
-    };
+    _$CreateArticleHtmlMarkupRequestImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('article', instance.article?.toJson());
+  return val;
+}
 
 _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
     _$ArticleImpl(
@@ -29,11 +37,19 @@ _$ArticleImpl _$$ArticleImplFromJson(Map<String, dynamic> json) =>
       publishedAt: json['published_at'] as String?,
     );
 
-Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) =>
-    <String, dynamic>{
-      if (instance.title case final value?) 'title': value,
-      if (instance.author case final value?) 'author': value,
-      if (instance.tags case final value?) 'tags': value,
-      if (instance.bodyHtml case final value?) 'body_html': value,
-      if (instance.publishedAt case final value?) 'published_at': value,
-    };
+Map<String, dynamic> _$$ArticleImplToJson(_$ArticleImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('author', instance.author);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('body_html', instance.bodyHtml);
+  writeNotNull('published_at', instance.publishedAt);
+  return val;
+}
